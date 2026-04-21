@@ -1,107 +1,119 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-04-21T16:34:48Z",
-  "git_sha": "2d5c931aea1c48cf07ec342d2d746e7a7423d229",
-  "run_id": "24734333760",
+  "generated_at": "2026-04-21T16:40:35Z",
+  "git_sha": "6591e2e9fbc1f8be418633f797cea2ae3f69c115",
+  "run_id": "24734607101",
   "attestations": {
     "near-ai": [
       {
         "provider": "near-ai",
         "model": "openai/gpt-oss-120b",
-        "valid": false,
-        "verified_at": "2026-04-21T16:34:48Z",
+        "valid": true,
+        "verified_at": "2026-04-21T16:40:40Z",
         "attestation_type": "tdx+gpu",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
+        "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
           "catalog_serves": null
         },
-        "details": {},
-        "error": "nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH",
-        "latency_s": 0.0
+        "details": {
+          "inner_models": 1,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 5.5
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5.1-FP8",
-        "valid": false,
-        "verified_at": "2026-04-21T16:34:48Z",
+        "valid": true,
+        "verified_at": "2026-04-21T16:40:44Z",
         "attestation_type": "tdx+gpu",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
+        "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
           "catalog_serves": null
         },
-        "details": {},
-        "error": "nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH",
-        "latency_s": 0.0
+        "details": {
+          "inner_models": 1,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 8.56
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5-FP8",
-        "valid": false,
-        "verified_at": "2026-04-21T16:34:48Z",
+        "valid": true,
+        "verified_at": "2026-04-21T16:40:39Z",
         "attestation_type": "tdx+gpu",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0xa774243d3310a5165edb6628f56a4eeb48189ad1",
+        "signing_public_key": "59e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
           "catalog_serves": null
         },
-        "details": {},
-        "error": "nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH",
-        "latency_s": 0.0
+        "details": {
+          "inner_models": 1,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 3.65
       },
       {
         "provider": "near-ai",
         "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
-        "valid": false,
-        "verified_at": "2026-04-21T16:34:48Z",
+        "valid": true,
+        "verified_at": "2026-04-21T16:40:45Z",
         "attestation_type": "tdx+gpu",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0xc03b0cfc81531eb9cffca4c65aabfaf9b181ac63",
+        "signing_public_key": "d33af782492ec889abc0b0a30a065bb7c06d898c0982dbd27e10d7eb9640f169f76d6ffbef9562583b225367d0262ff06750ad710aa6bc1c557662c8905783d6",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
           "catalog_serves": null
         },
-        "details": {},
-        "error": "nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH",
-        "latency_s": 0.0
+        "details": {
+          "inner_models": 1,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 9.67
       },
       {
         "provider": "near-ai",
         "model": "deepseek-ai/DeepSeek-V3-0324",
         "valid": false,
-        "verified_at": "2026-04-21T16:34:48Z",
+        "verified_at": "2026-04-21T16:40:39Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -117,14 +129,14 @@
           "catalog_serves": null
         },
         "details": {},
-        "error": "nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH",
-        "latency_s": 0.0
+        "error": "HTTP 503: {\"error\":\"Provider error: Model 'deepseek-ai/DeepSeek-V3-0324' not found. It's not a valid model name or alias.\"}",
+        "latency_s": 0.22
       },
       {
         "provider": "near-ai",
         "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
         "valid": false,
-        "verified_at": "2026-04-21T16:34:48Z",
+        "verified_at": "2026-04-21T16:40:39Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -140,8 +152,8 @@
           "catalog_serves": null
         },
         "details": {},
-        "error": "nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH",
-        "latency_s": 0.0
+        "error": "HTTP 503: {\"error\":\"Provider error: Model 'meta-llama/Llama-4-Scout-17B-16E-Instruct' not found. It's not a valid model name or alias.\"}",
+        "latency_s": 0.23
       }
     ],
     "redpill": [
@@ -149,7 +161,7 @@
         "provider": "redpill",
         "model": "phala/gpt-oss-20b",
         "valid": true,
-        "verified_at": "2026-04-21T16:34:50Z",
+        "verified_at": "2026-04-21T16:40:46Z",
         "attestation_type": "phala-simple",
         "signing_address": "0x3B65B57A9072264cD335Ff0F6611830eA6e70360",
         "signing_public_key": "16ad736a7c5d1e5ebe2365575a582b313bd5fc36cc2786f763ffa73406db036d3c96f26bb5369c31fc088173d15d0db2e051adffab24174a582c242e698902f4",
@@ -169,13 +181,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.2
+        "latency_s": 1.83
       },
       {
         "provider": "redpill",
         "model": "phala/gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-04-21T16:34:50Z",
+        "verified_at": "2026-04-21T16:40:47Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -184,7 +196,7 @@
           "nonce_bound": true,
           "tdx_verified": true,
           "report_data_binds_key": true,
-          "gpu_attested": false,
+          "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": null,
           "backend_attested": false,
@@ -193,16 +205,16 @@
         "details": {
           "shape": "near-relay",
           "inner_models": 1,
-          "gpu_verdict": false
+          "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.1
+        "latency_s": 2.05
       },
       {
         "provider": "redpill",
         "model": "phala/qwen-2.5-7b-instruct",
         "valid": true,
-        "verified_at": "2026-04-21T16:34:50Z",
+        "verified_at": "2026-04-21T16:40:47Z",
         "attestation_type": "phala-simple",
         "signing_address": "0xc4045be3413B0B30ad0295985fe5e037Dc0EeB0c",
         "signing_public_key": "7de1be03f128d34feaf30c6ea815e80fb292105984c64e2efa1dd952bfe63c4c9373c34b9a0a001c5bf2123c10d456daef6059cd104685a93d56093804d4ecca",
@@ -222,13 +234,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.19
+        "latency_s": 2.67
       },
       {
         "provider": "redpill",
         "model": "phala/glm-4.7",
         "valid": false,
-        "verified_at": "2026-04-21T16:34:50Z",
+        "verified_at": "2026-04-21T16:40:47Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "59e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
@@ -237,7 +249,7 @@
           "nonce_bound": true,
           "tdx_verified": false,
           "report_data_binds_key": true,
-          "gpu_attested": false,
+          "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": null,
           "backend_attested": false,
@@ -246,16 +258,16 @@
         "details": {
           "shape": "near-relay",
           "inner_models": 1,
-          "gpu_verdict": false
+          "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.35
+        "latency_s": 2.72
       },
       {
         "provider": "redpill",
         "model": "phala/deepseek-v3.2",
         "valid": true,
-        "verified_at": "2026-04-21T16:35:22Z",
+        "verified_at": "2026-04-21T16:41:18Z",
         "attestation_type": "chutes",
         "signing_address": "5 instances",
         "signing_public_key": "",
@@ -275,13 +287,13 @@
           "instance_count": 5
         },
         "error": null,
-        "latency_s": 32.67
+        "latency_s": 31.58
       },
       {
         "provider": "redpill",
         "model": "phala/kimi-k2.5",
         "valid": true,
-        "verified_at": "2026-04-21T16:36:09Z",
+        "verified_at": "2026-04-21T16:42:08Z",
         "attestation_type": "chutes",
         "signing_address": "5 instances",
         "signing_public_key": "",
@@ -301,107 +313,77 @@
           "instance_count": 5
         },
         "error": null,
-        "latency_s": 79.33
+        "latency_s": 80.89
       }
     ],
     "venice": [
       {
         "provider": "venice",
         "model": "e2ee-glm-5",
-        "valid": false,
-        "verified_at": "2026-04-21T16:36:11Z",
+        "valid": true,
+        "verified_at": "2026-04-21T16:42:10Z",
         "attestation_type": "venice",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0xa774243d3310a5165edb6628f56a4eeb48189ad1",
+        "signing_public_key": "0459e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
           "catalog_serves": null
         },
         "details": {
-          "keys": [
-            "candidates_available",
-            "candidates_evaluated",
-            "compose_manager_attestation",
-            "event_log",
-            "info",
-            "intel_quote",
-            "model",
-            "model_name",
-            "nonce",
-            "nonce_source",
-            "nvidia_payload",
-            "ohttp_key_config",
-            "request_nonce",
-            "server_verification",
-            "signing_address",
-            "signing_algo",
-            "signing_key",
-            "signing_public_key",
-            "tee_hardware",
-            "tee_provider"
-          ]
+          "tee_provider": "near-ai",
+          "tee_hardware": "intel-tdx",
+          "nonce_source": "client",
+          "candidates_available": 1,
+          "candidates_evaluated": 1,
+          "model_name": "zai-org/GLM-5-FP8",
+          "gpu_verdict": true
         },
-        "error": "no TDX quote in response",
-        "latency_s": 2.11
+        "error": null,
+        "latency_s": 2.29
       },
       {
         "provider": "venice",
         "model": "e2ee-qwen3-5-122b-a10b",
-        "valid": false,
-        "verified_at": "2026-04-21T16:36:10Z",
+        "valid": true,
+        "verified_at": "2026-04-21T16:42:41Z",
         "attestation_type": "venice",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0x6525e128afcffebf7eed05d485d7be983cdae934",
+        "signing_public_key": "041d9bbc96671c3fbc983867bd7a6b5c83298e040801764b7085352d84f3f095125db36956caed8c84bfefca635c3c455f409c79a3889d679af688f4aded542fd5",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
           "catalog_serves": null
         },
         "details": {
-          "keys": [
-            "candidates_available",
-            "candidates_evaluated",
-            "compose_manager_attestation",
-            "event_log",
-            "info",
-            "intel_quote",
-            "model",
-            "model_name",
-            "nonce",
-            "nonce_source",
-            "nvidia_payload",
-            "ohttp_key_config",
-            "request_nonce",
-            "server_verification",
-            "signing_address",
-            "signing_algo",
-            "signing_key",
-            "signing_public_key",
-            "tee_hardware",
-            "tee_provider"
-          ]
+          "tee_provider": "near-ai",
+          "tee_hardware": "intel-tdx",
+          "nonce_source": "client",
+          "candidates_available": 1,
+          "candidates_evaluated": 1,
+          "model_name": "Qwen/Qwen3.5-122B-A10B",
+          "gpu_verdict": true
         },
-        "error": "no TDX quote in response",
-        "latency_s": 0.99
+        "error": null,
+        "latency_s": 33.46
       },
       {
         "provider": "venice",
         "model": "e2ee-uncensored-24b-p",
         "valid": false,
-        "verified_at": "2026-04-21T16:36:09Z",
+        "verified_at": "2026-04-21T16:42:08Z",
         "attestation_type": "venice",
         "signing_address": "",
         "signing_public_key": "",
@@ -418,30 +400,38 @@
         },
         "details": {},
         "error": "no TEE attestation available for this model (404)",
-        "latency_s": 0.16
+        "latency_s": 0.15
       },
       {
         "provider": "venice",
         "model": "e2ee-gpt-oss-120b-p",
-        "valid": false,
-        "verified_at": "2026-04-21T16:36:11Z",
+        "valid": true,
+        "verified_at": "2026-04-21T16:42:11Z",
         "attestation_type": "venice",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
+        "signing_public_key": "04a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
           "catalog_serves": null
         },
-        "details": {},
-        "error": "HTTP 502: {\"model_name\":\"openai/gpt-oss-120b\",\"signing_address\":\"0x56d070df1c6be444b007839ef9cf67cec7c12b8b\",\"signing_algo\":\"ecdsa\",\"signing_public_key\":\"04a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f8",
-        "latency_s": 1.9
+        "details": {
+          "tee_provider": "phala",
+          "tee_hardware": "intel-tdx",
+          "nonce_source": "client",
+          "candidates_available": 1,
+          "candidates_evaluated": 1,
+          "model_name": "openai/gpt-oss-120b",
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 3.23
       }
     ]
   },
