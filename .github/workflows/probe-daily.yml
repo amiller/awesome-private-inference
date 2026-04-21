@@ -1,0 +1,96 @@
+name: Daily attestation probe
+
+on:
+  workflow_dispatch:
+    inputs:
+      pricing:
+        description: "also run pricing sweep (costs real $)"
+        type: boolean
+        default: false
+  schedule:
+    - cron: '17 13 * * *'   # daily rolling evidence
+  push:
+    branches:
+      - main
+    paths:
+      - 'verifiers/**'
+      - 'probes/**'
+      - 'site/templates/**'
+      - '.github/workflows/probe-daily.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python 3.11
+        run: uv python install 3.11
+
+      - name: Install deps
+        run: |
+          uv venv .venv --python 3.11
+          source .venv/bin/activate
+          uv pip install -e ".[nearai]"
+
+      - name: Clone NEAR AI verifier
+        run: git clone --depth 1 https://github.com/nearai/nearai-cloud-verifier.git _nearai-verifier
+
+      - name: Install verifier deps
+        run: |
+          source .venv/bin/activate
+          uv pip install -r _nearai-verifier/requirements.txt
+
+      - name: Run attestation probe
+        env:
+          NEAR_API_KEY: ${{ secrets.NEAR_API_KEY }}
+          REDPILL_API_KEY: ${{ secrets.REDPILL_API_KEY }}
+          VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          NEARAI_VERIFIER_PATH: ${{ github.workspace }}/_nearai-verifier/py
+          PYTHONUNBUFFERED: '1'
+        run: |
+          source .venv/bin/activate
+          FLAGS=""
+          if [ "${{ github.event.inputs.pricing }}" = "true" ]; then
+            FLAGS="--pricing"
+          fi
+          python -m probes.collect $FLAGS
+
+      - name: Render dashboard
+        run: |
+          source .venv/bin/activate
+          python -m probes.render
+
+      - name: Upload snapshot artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshot-${{ github.run_id }}
+          path: |
+            data/snapshots/*.json
+            data/latest.json
+            docs/*.html
+          retention-days: 30
+
+      - name: Commit snapshot + dashboard
+        if: github.event_name != 'pull_request' && success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/snapshots/ data/latest.json docs/
+          if ! git diff --staged --quiet; then
+            git commit -m "ci: refresh snapshot + dashboard [skip ci]"
+            git push
+          fi

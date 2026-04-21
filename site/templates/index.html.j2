@@ -1,0 +1,122 @@
+{% extends "_base.html.j2" %}
+{% block content %}
+
+<section class="mb-10">
+  <h1 class="text-3xl font-bold tracking-tight">Is private inference real yet?</h1>
+  <p class="mt-3 text-slate-700 max-w-3xl">
+    A public, automated registry of TEE-verified inference. Every day, we re-verify the attestation
+    bundles each provider exposes, and score them across eight capability layers.
+    <a class="underline" href="./methodology.html">See methodology →</a>
+  </p>
+</section>
+
+<section class="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-900">
+  <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 0 banner</h2>
+  <p class="mt-2 text-sm leading-relaxed">
+    <strong>Every provider below is Stage 0.</strong> The cryptographic primitives work — TDX quotes verify,
+    GPU attestation passes, keys derive correctly — but well-documented architectural gaps mean
+    <em>none</em> of these providers currently deliver end-to-end verifiable private inference. The
+    central issue: <strong>gateways fetch backend attestation but don't cryptographically verify it</strong>,
+    so the signing key we encrypt to is trust-on-first-use from unverified JSON.
+    See <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">NEAR cloud-api #224</a>
+    (open since 2025-12-03) and
+    <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
+  </p>
+</section>
+
+{% if provider_summary %}
+<section class="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+  {% for p, s in provider_summary.items() %}
+  <div class="rounded-lg border border-slate-200 bg-white p-4">
+    <div class="text-xs uppercase tracking-wider text-slate-500">{{ p }}</div>
+    <div class="text-2xl font-semibold mt-1">{{ s.passed }} / {{ s.total }}</div>
+    <div class="text-xs text-slate-500">models with valid attestation bundles</div>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+<section class="mb-8">
+  <h2 class="text-xl font-semibold mb-3">Attestation matrix</h2>
+  <p class="text-sm text-slate-600 mb-4">
+    One row per model. A ✅ means that layer re-verified at the last run. A ❌ means the verifier rejected it
+    (hover for why). A — means the layer does not apply to this provider's attestation shape.
+  </p>
+
+  <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="min-w-full text-sm">
+      <thead class="bg-slate-100 text-slate-700">
+        <tr>
+          <th class="text-left p-2">Provider</th>
+          <th class="text-left p-2">Model</th>
+          <th class="text-left p-2">Shape</th>
+          {% for key, label in SCORECARD_LABELS.items() %}
+          <th class="p-2 text-center" title="{{ SCORECARD_TOOLTIPS[key] }}">{{ label }}</th>
+          {% endfor %}
+          <th class="p-2 text-right">lat</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for r in rows %}
+        <tr class="border-t border-slate-100 {% if not r.valid %}bg-rose-50/30{% endif %}">
+          <td class="p-2 font-medium">{{ r.provider }}</td>
+          <td class="p-2 font-mono text-xs">{{ r.model }}</td>
+          <td class="p-2 text-xs text-slate-500">{{ r.attestation_type or "—" }}</td>
+          {% for key in SCORECARD_LABELS %}
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs {{ r.cells[key].class }}">{{ r.cells[key].mark }}</span>
+          </td>
+          {% endfor %}
+          <td class="p-2 text-right text-xs text-slate-500">{{ r.latency_s }}s</td>
+        </tr>
+        {% if r.error %}
+        <tr class="bg-rose-50/20 text-xs text-rose-700">
+          <td colspan="{{ 4 + SCORECARD_LABELS|length }}" class="p-2 pl-4 font-mono">
+            {{ r.error }}
+          </td>
+        </tr>
+        {% endif %}
+      {% else %}
+        <tr><td colspan="100" class="p-4 text-center text-slate-400">no snapshot data</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="mb-8">
+  <h2 class="text-xl font-semibold mb-2">Known limitations</h2>
+  <p class="text-sm text-slate-600 mb-3">
+    Reasons why green rows above don't imply end-to-end private inference. Pulled from
+    <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
+  </p>
+  <ul class="space-y-2 text-sm text-slate-800">
+    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Inner-boundary gap.</strong>
+      NEAR's cloud-api gateway fetches backend attestation JSON but throws it away without verifying.
+      Known since <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">Issue #224</a>
+      (open 4+ months). The signing key we encrypt to is trust-on-first-use from unverified JSON.</li>
+    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Operator-controlled routing.</strong>
+      The gateway selects backends by reading <code>inference_url</code> from its database.
+      An operator (or DB-compromiser) can point it at a logging relay that forwards to a real model.</li>
+    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Upstream verifier TODOs.</strong>
+      Phala's <code>private-ai-verifier</code> still decodes NVIDIA and Intel Trust Authority JWTs
+      with <code>verify_signature=False</code>. We inherit this.</li>
+    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>KMS opacity.</strong>
+      Phala KMS and most dstack-hosted gateways are themselves Stage 0: mutable image tags,
+      no upgrade log, no third-party review.</li>
+    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Catalog ≠ served.</strong>
+      Some entries (e.g. Tinfoil-routed models in RedPill's /models) 404 on real calls.</li>
+  </ul>
+</section>
+
+<section class="text-sm text-slate-600">
+  <h2 class="text-xl font-semibold mb-2 text-slate-900">How this page is generated</h2>
+  <p>
+    Every day at 13:17 UTC, <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/workflows/probe-daily.yml"><code>probe-daily.yml</code></a>
+    runs <code>python -m probes.collect</code> against each provider, writes a JSON snapshot to
+    <code>data/snapshots/YYYY-MM-DD.json</code>, re-renders this page, and commits.
+    All data and code are reproducible — see <a class="underline" href="https://github.com/amiller/awesome-private-inference#run-a-probe-locally">run a probe locally</a>.
+  </p>
+</section>
+
+{% endblock %}

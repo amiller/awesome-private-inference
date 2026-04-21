@@ -1,0 +1,69 @@
+{% extends "_base.html.j2" %}
+{% block title %}Pricing · awesome-private-inference{% endblock %}
+{% block content %}
+
+<h1 class="text-3xl font-bold">Pricing</h1>
+<p class="text-slate-700 mt-2 max-w-3xl">
+  List prices ($ per million tokens) scraped from each provider's public catalog, plus a live "What's 2+2?"
+  probe that confirms the published rate matches the billed usage.
+</p>
+
+<section class="mt-8">
+  <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="min-w-full text-sm">
+      <thead class="bg-slate-100 text-slate-700">
+        <tr>
+          <th class="text-left p-2">Provider</th>
+          <th class="text-left p-2">Model</th>
+          <th class="text-right p-2">$/M in</th>
+          <th class="text-right p-2">$/M out</th>
+          <th class="text-right p-2">prompt tok</th>
+          <th class="text-right p-2">compl tok</th>
+          <th class="text-right p-2">this call $</th>
+          <th class="text-right p-2">lat</th>
+          <th class="p-2">err</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for r in pricing_rows %}
+        <tr class="border-t border-slate-100 {% if r.error %}bg-rose-50/30{% endif %}">
+          <td class="p-2 font-medium">{{ r.provider }}</td>
+          <td class="p-2 font-mono text-xs">{{ r.model }}</td>
+          <td class="p-2 text-right">{% if r.list_in_per_m is not none %}{{ '%.3f' % r.list_in_per_m }}{% else %}—{% endif %}</td>
+          <td class="p-2 text-right">{% if r.list_out_per_m is not none %}{{ '%.3f' % r.list_out_per_m }}{% else %}—{% endif %}</td>
+          <td class="p-2 text-right text-xs">{{ r.prompt_tokens or "—" }}</td>
+          <td class="p-2 text-right text-xs">{{ r.completion_tokens or "—" }}</td>
+          <td class="p-2 text-right text-xs">{% if r.list_cost is not none %}${{ '%.5f' % r.list_cost }}{% else %}—{% endif %}</td>
+          <td class="p-2 text-right text-xs">{{ r.latency_s or "—" }}s</td>
+          <td class="p-2 text-xs text-rose-700 font-mono">{{ r.error or "" }}</td>
+        </tr>
+      {% else %}
+        <tr><td colspan="9" class="p-4 text-center text-slate-400">
+          no pricing snapshot — run <code>python -m probes.collect --pricing</code> to populate
+        </td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="mt-10 text-sm text-slate-700 space-y-3">
+  <h2 class="text-xl font-semibold text-slate-900">Subscription math</h2>
+  <p>Several providers offer flat-rate subscriptions that don't map cleanly onto $/M:</p>
+  <ul class="list-disc ml-5 space-y-1">
+    <li><strong>RedPill Pro ($50/mo).</strong> Used to be a credit pool; 2026-04-21 measurement gave a
+      <code>sub/list ratio = 0.998</code> — effectively no discount vs the pay-as-you-go rates above.</li>
+    <li><strong>Venice Pro ($18/mo).</strong> Chat-UI only for API — provides $1 of API credit.
+      Pro+ ($68/mo) gives $75 credit (~10% bonus). Max ($200/mo) gives $225 (~12.5% bonus).</li>
+    <li><strong>Z.AI GLM Coding Plan.</strong> Separate coding endpoint (not TEE-attested). Pro $30/mo
+      works out to roughly $0.08–0.15 $/M on GLM-5.1 — about 30× cheaper than RedPill's list GLM-5.1
+      but with no attestation.</li>
+  </ul>
+  <p class="text-xs text-slate-500">
+    These rates are observations from manual runs; they are intentionally not scraped into the daily
+    table above because they require subscription authentication and the math is sensitive to the
+    reference workload.
+  </p>
+</section>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}awesome-private-inference{% endblock %}</title>
+  <meta name="description" content="Public automated registry of TEE-verified inference providers. Daily-refreshed scorecard of attestation layers and pricing across RedPill, Venice, NEAR AI, and more.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .dot { display:inline-block; width:0.5rem; height:0.5rem; border-radius:9999px; margin-right:0.4rem; vertical-align:middle; }
+  </style>
+</head>
+<body class="h-full text-slate-900">
+<header class="border-b border-slate-200 bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="./index.html" class="flex items-baseline gap-2">
+      <span class="text-xl font-bold tracking-tight">awesome-private-inference</span>
+      <span class="text-xs text-slate-500">a registry of TEE-verified inference</span>
+    </a>
+    <nav class="text-sm flex gap-4 text-slate-600">
+      <a href="./index.html" class="hover:text-slate-900">Dashboard</a>
+      <a href="./pricing.html" class="hover:text-slate-900">Pricing</a>
+      <a href="./methodology.html" class="hover:text-slate-900">Methodology</a>
+      <a href="https://github.com/amiller/awesome-private-inference" class="hover:text-slate-900">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="border-t border-slate-200 bg-white mt-16">
+  <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
+    <span>Snapshot {{ generated_at or "(none)" }} · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/{{ run_id }}">{{ run_id }}</a> {% if git_sha %}· <code>{{ git_sha[:8] }}</code>{% endif %}</span>
+    <span>Code MIT · Data CC-BY 4.0</span>
+  </div>
+</footer>
+</body>
+</html>

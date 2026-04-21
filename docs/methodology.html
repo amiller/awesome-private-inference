@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Methodology · awesome-private-inference</title>
+  <meta name="description" content="Public automated registry of TEE-verified inference providers. Daily-refreshed scorecard of attestation layers and pricing across RedPill, Venice, NEAR AI, and more.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .dot { display:inline-block; width:0.5rem; height:0.5rem; border-radius:9999px; margin-right:0.4rem; vertical-align:middle; }
+  </style>
+</head>
+<body class="h-full text-slate-900">
+<header class="border-b border-slate-200 bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="./index.html" class="flex items-baseline gap-2">
+      <span class="text-xl font-bold tracking-tight">awesome-private-inference</span>
+      <span class="text-xs text-slate-500">a registry of TEE-verified inference</span>
+    </a>
+    <nav class="text-sm flex gap-4 text-slate-600">
+      <a href="./index.html" class="hover:text-slate-900">Dashboard</a>
+      <a href="./pricing.html" class="hover:text-slate-900">Pricing</a>
+      <a href="./methodology.html" class="hover:text-slate-900">Methodology</a>
+      <a href="https://github.com/amiller/awesome-private-inference" class="hover:text-slate-900">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+  
+
+<section class="prose prose-slate max-w-none">
+
+<h1 class="text-3xl font-bold">Methodology</h1>
+
+<p class="text-slate-700">
+  The dashboard scores each (provider × model) pair across eight capability layers. This page
+  explains exactly what each layer means and how we re-verify it.
+</p>
+
+<h2 class="mt-8 text-xl font-semibold">Scorecard layers</h2>
+
+<dl class="space-y-4 mt-3">
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">Nonce bound</dt>
+    <dd class="text-sm text-slate-700">Client-supplied nonce appears in TDX report_data</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">TDX quote</dt>
+    <dd class="text-sm text-slate-700">Intel TDX quote accepted by Phala's public verifier</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">report_data binds key</dt>
+    <dd class="text-sm text-slate-700">report_data commits to signing address + nonce</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">GPU attested</dt>
+    <dd class="text-sm text-slate-700">NVIDIA NRAS returned PASS on the GPU payload</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">Key derives to addr</dt>
+    <dd class="text-sm text-slate-700">keccak(signing_public_key) == signing_address</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">compose_hash committed</dt>
+    <dd class="text-sm text-slate-700">mr_config starts with 0x01 || sha256(app_compose)</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">Backend attested</dt>
+    <dd class="text-sm text-slate-700">Gateway cryptographically verified the backend TDX quote</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">Catalog serves</dt>
+    <dd class="text-sm text-slate-700">Model advertised in /models returns 2xx on chat completion</dd>
+  </div>
+  
+</dl>
+
+<h2 class="mt-8 text-xl font-semibold">Independent re-verification</h2>
+<p>We intentionally do <em>not</em> trust the provider's own "server_verification" field when
+the provider exposes one (e.g. Venice). We forward the TDX quote to
+<a class="underline" href="https://cloud-api.phala.network/api/v1/attestations/verify">Phala's public TDX verifier</a>
+and the NVIDIA payload to
+<a class="underline" href="https://nras.attestation.nvidia.com/v3/attest/gpu">NVIDIA NRAS</a>.
+We then recompute the key-derivation and the report_data binding in-process. This means a
+compromised provider cannot fake a ✅ by lying about its own verification result.</p>
+
+<h2 class="mt-8 text-xl font-semibold">Known upstream TODOs</h2>
+<p>
+  The Phala verifier itself decodes NRAS and Intel Trust Authority JWTs with
+  <code>verify_signature=False</code>. We inherit that limitation. See
+  <a class="underline" href="https://github.com/amiller/devproof-audits-guide/blob/main/LEARNINGS.md">devproof-audits-guide/LEARNINGS.md</a>.
+</p>
+
+<h2 class="mt-8 text-xl font-semibold">Why "Stage 0" on every provider</h2>
+<p>
+  Even when every layer in the matrix shows ✅, the provider is Stage 0 in the
+  <a class="underline" href="https://github.com/amiller/devproof-audits-guide">ERC-733 / devproof sense</a>
+  for at least one of:
+</p>
+<ul>
+  <li><strong>Backend not attested.</strong> Gateway fetches the backend's attestation JSON but
+    does not cryptographically verify it — <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">NEAR Issue #224</a>.</li>
+  <li><strong>Operator-mutable routing.</strong> Database field controls which backend a gateway calls.</li>
+  <li><strong>KMS opacity.</strong> Mutable image tags, no upgrade log on the KMS providing key material.</li>
+</ul>
+
+<h2 class="mt-8 text-xl font-semibold">Reproduce</h2>
+<pre class="bg-slate-100 rounded p-3 text-xs overflow-x-auto"><code>git clone https://github.com/amiller/awesome-private-inference
+cd awesome-private-inference
+uv venv && source .venv/bin/activate
+uv pip install -e .
+
+git clone https://github.com/nearai/nearai-cloud-verifier _nearai-verifier
+export NEARAI_VERIFIER_PATH="$(pwd)/_nearai-verifier/py"
+
+export NEAR_API_KEY=...
+export REDPILL_API_KEY=...
+export VENICE_API_KEY=...
+
+python -m probes.collect
+python -m probes.render
+</code></pre>
+
+</section>
+
+
+</main>
+
+<footer class="border-t border-slate-200 bg-white mt-16">
+  <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
+    <span>Snapshot 2026-04-21T12:00:00Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/local">local</a> · <code>00000000</code></span>
+    <span>Code MIT · Data CC-BY 4.0</span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,107 @@
+{
+  "schema_version": "0.1",
+  "generated_at": "2026-04-21T12:00:00Z",
+  "git_sha": "0000000000000000",
+  "run_id": "local",
+  "attestations": {
+    "redpill": [
+      {
+        "provider": "redpill", "model": "phala/gpt-oss-20b", "valid": true,
+        "verified_at": "2026-04-21T12:00:00Z", "attestation_type": "phala-simple",
+        "signing_address": "0x1234abcd…", "signing_public_key": "04…",
+        "signing_algo": "ecdsa", "latency_s": 0.8,
+        "scorecard": {
+          "nonce_bound": true, "tdx_verified": true,
+          "report_data_binds_key": true, "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": null, "catalog_serves": true
+        },
+        "details": {"shape": "phala-simple"}, "error": null
+      },
+      {
+        "provider": "redpill", "model": "phala/deepseek-v3.2", "valid": true,
+        "verified_at": "2026-04-21T12:00:00Z", "attestation_type": "near-relay",
+        "signing_address": "0x5678dead…", "signing_public_key": "04…",
+        "signing_algo": "ecdsa", "latency_s": 1.4,
+        "scorecard": {
+          "nonce_bound": true, "tdx_verified": true,
+          "report_data_binds_key": true, "gpu_attested": true,
+          "key_derives_to_address": true, "compose_hash_committed": null,
+          "backend_attested": false, "catalog_serves": true
+        },
+        "details": {"shape": "near-relay"}, "error": null
+      },
+      {
+        "provider": "redpill", "model": "moonshotai/kimi-k2.5", "valid": true,
+        "verified_at": "2026-04-21T12:00:00Z", "attestation_type": "chutes",
+        "signing_address": "5 instances", "signing_public_key": "",
+        "signing_algo": "ecdsa", "latency_s": 2.7,
+        "scorecard": {
+          "nonce_bound": true, "tdx_verified": true,
+          "report_data_binds_key": true, "gpu_attested": null,
+          "key_derives_to_address": null, "compose_hash_committed": null,
+          "backend_attested": null, "catalog_serves": true
+        },
+        "details": {"shape": "chutes", "instance_count": 5}, "error": null
+      },
+      {
+        "provider": "redpill", "model": "qwen/qwen3-coder-480b-a35b-instruct", "valid": false,
+        "verified_at": "2026-04-21T12:00:00Z", "attestation_type": "redpill",
+        "signing_address": "", "signing_public_key": "",
+        "signing_algo": "ecdsa", "latency_s": 0.7,
+        "scorecard": {
+          "nonce_bound": null, "tdx_verified": null, "report_data_binds_key": null,
+          "gpu_attested": null, "key_derives_to_address": null,
+          "compose_hash_committed": null, "backend_attested": null,
+          "catalog_serves": false
+        },
+        "details": {}, "error": "catalog-only (404 on attestation endpoint)"
+      }
+    ],
+    "near-ai": [
+      {
+        "provider": "near-ai", "model": "openai/gpt-oss-120b", "valid": true,
+        "verified_at": "2026-04-21T12:00:00Z", "attestation_type": "tdx+gpu",
+        "signing_address": "0xabcd…", "signing_public_key": "04…",
+        "signing_algo": "ecdsa", "latency_s": 3.2,
+        "scorecard": {
+          "nonce_bound": true, "tdx_verified": true,
+          "report_data_binds_key": true, "gpu_attested": true,
+          "key_derives_to_address": true, "compose_hash_committed": true,
+          "backend_attested": false, "catalog_serves": true
+        },
+        "details": {"inner_models": 2}, "error": null
+      }
+    ],
+    "venice": [
+      {
+        "provider": "venice", "model": "e2ee-glm-5", "valid": true,
+        "verified_at": "2026-04-21T12:00:00Z", "attestation_type": "venice",
+        "signing_address": "0xface…", "signing_public_key": "04…",
+        "signing_algo": "ecdsa", "latency_s": 1.9,
+        "scorecard": {
+          "nonce_bound": true, "tdx_verified": true,
+          "report_data_binds_key": true, "gpu_attested": true,
+          "key_derives_to_address": true, "compose_hash_committed": true,
+          "backend_attested": false, "catalog_serves": true
+        },
+        "details": {"tee_provider": "nearai"}, "error": null
+      },
+      {
+        "provider": "venice", "model": "e2ee-uncensored-24b-p", "valid": true,
+        "verified_at": "2026-04-21T12:00:00Z", "attestation_type": "venice",
+        "signing_address": "0xbeef…", "signing_public_key": "04…",
+        "signing_algo": "ecdsa", "latency_s": 1.1,
+        "scorecard": {
+          "nonce_bound": true, "tdx_verified": true,
+          "report_data_binds_key": true, "gpu_attested": true,
+          "key_derives_to_address": true, "compose_hash_committed": true,
+          "backend_attested": false, "catalog_serves": true
+        },
+        "details": {"tee_provider": "phala"}, "error": null
+      }
+    ]
+  },
+  "pricing": {}
+}

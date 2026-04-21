@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing · awesome-private-inference</title>
+  <meta name="description" content="Public automated registry of TEE-verified inference providers. Daily-refreshed scorecard of attestation layers and pricing across RedPill, Venice, NEAR AI, and more.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .dot { display:inline-block; width:0.5rem; height:0.5rem; border-radius:9999px; margin-right:0.4rem; vertical-align:middle; }
+  </style>
+</head>
+<body class="h-full text-slate-900">
+<header class="border-b border-slate-200 bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="./index.html" class="flex items-baseline gap-2">
+      <span class="text-xl font-bold tracking-tight">awesome-private-inference</span>
+      <span class="text-xs text-slate-500">a registry of TEE-verified inference</span>
+    </a>
+    <nav class="text-sm flex gap-4 text-slate-600">
+      <a href="./index.html" class="hover:text-slate-900">Dashboard</a>
+      <a href="./pricing.html" class="hover:text-slate-900">Pricing</a>
+      <a href="./methodology.html" class="hover:text-slate-900">Methodology</a>
+      <a href="https://github.com/amiller/awesome-private-inference" class="hover:text-slate-900">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+  
+
+<h1 class="text-3xl font-bold">Pricing</h1>
+<p class="text-slate-700 mt-2 max-w-3xl">
+  List prices ($ per million tokens) scraped from each provider's public catalog, plus a live "What's 2+2?"
+  probe that confirms the published rate matches the billed usage.
+</p>
+
+<section class="mt-8">
+  <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="min-w-full text-sm">
+      <thead class="bg-slate-100 text-slate-700">
+        <tr>
+          <th class="text-left p-2">Provider</th>
+          <th class="text-left p-2">Model</th>
+          <th class="text-right p-2">$/M in</th>
+          <th class="text-right p-2">$/M out</th>
+          <th class="text-right p-2">prompt tok</th>
+          <th class="text-right p-2">compl tok</th>
+          <th class="text-right p-2">this call $</th>
+          <th class="text-right p-2">lat</th>
+          <th class="p-2">err</th>
+        </tr>
+      </thead>
+      <tbody>
+      
+        <tr><td colspan="9" class="p-4 text-center text-slate-400">
+          no pricing snapshot — run <code>python -m probes.collect --pricing</code> to populate
+        </td></tr>
+      
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="mt-10 text-sm text-slate-700 space-y-3">
+  <h2 class="text-xl font-semibold text-slate-900">Subscription math</h2>
+  <p>Several providers offer flat-rate subscriptions that don't map cleanly onto $/M:</p>
+  <ul class="list-disc ml-5 space-y-1">
+    <li><strong>RedPill Pro ($50/mo).</strong> Used to be a credit pool; 2026-04-21 measurement gave a
+      <code>sub/list ratio = 0.998</code> — effectively no discount vs the pay-as-you-go rates above.</li>
+    <li><strong>Venice Pro ($18/mo).</strong> Chat-UI only for API — provides $1 of API credit.
+      Pro+ ($68/mo) gives $75 credit (~10% bonus). Max ($200/mo) gives $225 (~12.5% bonus).</li>
+    <li><strong>Z.AI GLM Coding Plan.</strong> Separate coding endpoint (not TEE-attested). Pro $30/mo
+      works out to roughly $0.08–0.15 $/M on GLM-5.1 — about 30× cheaper than RedPill's list GLM-5.1
+      but with no attestation.</li>
+  </ul>
+  <p class="text-xs text-slate-500">
+    These rates are observations from manual runs; they are intentionally not scraped into the daily
+    table above because they require subscription authentication and the math is sensitive to the
+    reference workload.
+  </p>
+</section>
+
+
+</main>
+
+<footer class="border-t border-slate-200 bg-white mt-16">
+  <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
+    <span>Snapshot 2026-04-21T12:00:00Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/local">local</a> · <code>00000000</code></span>
+    <span>Code MIT · Data CC-BY 4.0</span>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "awesome-private-inference snapshot",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "attestations"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "git_sha": {"type": "string"},
+    "run_id": {"type": "string"},
+    "attestations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/attestationRow" }
+      }
+    },
+    "pricing": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/priceRow" }
+      }
+    }
+  },
+  "$defs": {
+    "attestationRow": {
+      "type": "object",
+      "required": ["provider", "model", "valid", "verified_at"],
+      "properties": {
+        "provider": {"type": "string"},
+        "model": {"type": "string"},
+        "valid": {"type": "boolean"},
+        "verified_at": {"type": "string"},
+        "attestation_type": {"type": "string"},
+        "signing_address": {"type": "string"},
+        "signing_public_key": {"type": "string"},
+        "scorecard": {
+          "type": "object",
+          "properties": {
+            "nonce_bound": {"type": ["boolean", "null"]},
+            "tdx_verified": {"type": ["boolean", "null"]},
+            "report_data_binds_key": {"type": ["boolean", "null"]},
+            "gpu_attested": {"type": ["boolean", "null"]},
+            "key_derives_to_address": {"type": ["boolean", "null"]},
+            "compose_hash_committed": {"type": ["boolean", "null"]},
+            "backend_attested": {"type": ["boolean", "null"]},
+            "catalog_serves": {"type": ["boolean", "null"]}
+          }
+        },
+        "details": {"type": "object"},
+        "error": {"type": ["string", "null"]},
+        "latency_s": {"type": "number"}
+      }
+    },
+    "priceRow": {
+      "type": "object",
+      "required": ["provider", "model"],
+      "properties": {
+        "provider": {"type": "string"},
+        "model": {"type": "string"},
+        "list_in_per_m": {"type": ["number", "null"]},
+        "list_out_per_m": {"type": ["number", "null"]},
+        "prompt_tokens": {"type": ["integer", "null"]},
+        "completion_tokens": {"type": ["integer", "null"]},
+        "latency_s": {"type": ["number", "null"]},
+        "list_cost": {"type": ["number", "null"]},
+        "reply_ok": {"type": "boolean"},
+        "error": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
