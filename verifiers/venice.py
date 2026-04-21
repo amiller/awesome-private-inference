@@ -76,14 +76,16 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         "tee_provider": att.get("tee_provider"),
         "tee_hardware": att.get("tee_hardware"),
         "nonce_source": att.get("nonce_source"),
+        "candidates_available": att.get("candidates_available"),
+        "candidates_evaluated": att.get("candidates_evaluated"),
+        "model_name": att.get("model_name"),
     }
 
-    # Nonce binding — Venice should report nonce_source == "client" when we sent one.
+    # Nonce binding — Venice reports nonce_source == "client" when we sent one.
     sc.nonce_bound = att.get("nonce_source") == "client"
 
-    quote_hex = att.get("quote") or ""
+    quote_hex = att.get("intel_quote") or att.get("quote") or ""
     if isinstance(quote_hex, dict):
-        # Some responses may nest; handle defensively.
         quote_hex = quote_hex.get("hex") or quote_hex.get("intel_quote") or ""
     if not quote_hex:
         return _fail("no TDX quote in response", keys=sorted(att.keys())[:20])

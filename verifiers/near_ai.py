@@ -11,13 +11,19 @@ import contextlib
 import hashlib
 import io
 import json
+import os
 import secrets
+import sys
 import threading
 import time
 from typing import Any, Dict, Optional
 from urllib.parse import urlparse
 
 import requests
+
+_vendor = os.environ.get("NEARAI_VERIFIER_PATH")
+if _vendor and _vendor not in sys.path:
+    sys.path.insert(0, _vendor)
 
 from .common import (
     AttestationReport,
