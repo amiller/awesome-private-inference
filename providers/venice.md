@@ -20,6 +20,15 @@ at an (undocumented) `GET /api/v1/tee/attestation` endpoint.
 
 Non-`e2ee-*` models on Venice are *not* TEE-attested — treat them as any regular API.
 
+## Wire protocol (confirmed 2026-04-24)
+
+The E2EE wire is **ECIES on SECP256K1** (ECDH → HKDF-SHA256 → AES-GCM), identical to
+NEAR AI upstream, differing only in header names: `X-Venice-TEE-Signing-Algo: ecdsa`,
+`X-Venice-TEE-Client-Pub-Key` (uncompressed 04-prefix, 130-hex), `X-Venice-TEE-Model-Pub-Key`.
+Live roundtrip against `e2ee-venice-uncensored-24b-p` confirmed the gateway is
+transparent — ciphertext flows through and decrypts inside the enclave; Venice does
+not see plaintext on the ECIES path.
+
 ## Scorecard
 
 See the [live matrix](https://amiller.github.io/awesome-private-inference). The attestation
@@ -31,6 +40,24 @@ bundle contains everything needed for independent re-verification:
 
 ## Known gaps
 
+- **Skill-text backdoor.** [`veniceai/skills`](https://github.com/veniceai/skills)
+  (the agent-facing catalog) misnames the protocol as "HPKE / Noise handshake",
+  cites `docs.venice.ai/e2ee` which 404s, and teaches **zero of the six** standard
+  TDX-verification steps (fetch quote, verify signature, check `report_data`
+  binding, derive address from `signing_public_key`, pin TLS, check debug flag).
+  An agent following the skill as written builds a TOFU connection — the crypto
+  is correct but the anchor is never checked. Full analysis:
+  [venice-private-inference case study](https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/venice-private-inference/DEVPROOF-REPORT.md).
+- **`supportsE2EE: true` flag is inconsistent.** `e2ee-gpt-oss-20b-p` attests
+  successfully but returns no `signing_public_key` in the attestation body —
+  the flag does not imply a usable ECIES path.
+- **HPKE/OHTTP stub.** Attestation bundle publishes an `ohttp_key_config`
+  (RFC 9458, DHKEM-X25519, AES-128-GCM / ChaCha20Poly1305), but no `/ohttp*`
+  endpoint responds. Either unused infrastructure or a future plan. Agents
+  following the skill's "HPKE" guidance hit nothing.
+- **Attestation endpoint flaky.** `/tee/attestation` times out consistently on
+  `e2ee-glm-5` and `e2ee-qwen3-5-122b-a10b` across retries; works quickly on
+  `e2ee-venice-uncensored-24b-p` and others. Not transient.
 - **Reseller markup.** Venice's Phala-backed models cost ~22% more than RedPill's equivalents
   on identical enclaves. The enclave is the same; Venice is paying per-token to a downstream
   Phala aggregator.
