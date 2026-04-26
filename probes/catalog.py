@@ -27,4 +27,12 @@ MODELS: dict[str, list[str]] = {
         "e2ee-uncensored-24b-p",
         "e2ee-gpt-oss-120b-p",
     ],
+    "tinfoil": [
+        "router",
+        "gpt-oss-120b",
+        "llama3-3-70b",
+        "gemma4-31b",
+        "deepseek-v4-pro",
+        "kimi-k2-6",
+    ],
 }

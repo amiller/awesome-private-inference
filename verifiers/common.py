@@ -25,6 +25,11 @@ class ScoreCard:
     compose_hash_committed: Optional[bool] = None  # mr_config starts with 0x01||sha256(app_compose)
     backend_attested: Optional[bool] = None  # gateway verified model backend's quote
     catalog_serves: Optional[bool] = None    # model returns 2xx on a chat call
+    code_measurement_reproducible: Optional[bool] = None  # sigstore-signed measurement matches enclave
+    tls_pubkey_pinned: Optional[bool] = None  # report_data binds to a live TLS SPKI hash
+    hpke_pubkey_attested: Optional[bool] = None  # report_data carries a non-zero HPKE pubkey
+    client_nonce_supported: Optional[bool] = None  # provider accepts a client-supplied nonce
+    runtime_config_fully_attested: Optional[bool] = None  # no env/secret values come from unattested external config
 
     def as_dict(self) -> Dict[str, Optional[bool]]:
         return asdict(self)

@@ -6,26 +6,32 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Dict, List
 
 from verifiers.common import AttestationReport, now_iso, ScoreCard
-from verifiers import near_ai, redpill, venice
+from verifiers import near_ai, redpill, tinfoil, venice
 
 
 PROVIDERS: Dict[str, Callable[[str, str, str], AttestationReport]] = {
     "near-ai": near_ai.verify,
     "redpill": redpill.verify,
+    "tinfoil": tinfoil.verify,
     "venice": venice.verify,
 }
 
 PROVIDER_BASE_URLS: Dict[str, str] = {
     "near-ai": near_ai.DEFAULT_BASE_URL,
     "redpill": redpill.DEFAULT_BASE_URL,
+    "tinfoil": tinfoil.DEFAULT_BASE_URL,
     "venice": venice.DEFAULT_BASE_URL,
 }
 
 PROVIDER_ENV_KEYS: Dict[str, str] = {
     "near-ai": "NEAR_API_KEY",
     "redpill": "REDPILL_API_KEY",
+    "tinfoil": "TINFOIL_API_KEY",
     "venice": "VENICE_API_KEY",
 }
+
+
+PUBLIC_ATTESTATION_PROVIDERS = {"tinfoil"}
 
 
 def probe_provider(
@@ -35,7 +41,7 @@ def probe_provider(
     base_url = PROVIDER_BASE_URLS[provider]
     verify = PROVIDERS[provider]
 
-    if not api_key:
+    if not api_key and provider not in PUBLIC_ATTESTATION_PROVIDERS:
         return [_missing_key_report(provider, m) for m in models]
 
     def _one(model: str) -> AttestationReport:
