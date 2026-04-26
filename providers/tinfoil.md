@@ -72,7 +72,7 @@ prompt path."
 | HPKE pubkey attested in `report_data` | ✅ |
 | Debug-mode (SNP guest policy bit 19) enforced | ✅ |
 | Container image pinned by digest in attested config | ✅ |
-| Model weights pinned by dm-verity rootHash in attested config | ✅ |
+| Model weights pinned by dm-verity rootHash + HF commit pin in attested config | ✅ — uniquely strong in this registry; reads enforced byte-by-byte at runtime, no HF-by-name fetch |
 | Runtime config fully attested | ⚠️ *partial* — see audit below |
 | Client-supplied nonce in `report_data` | ❌ (no nonce slot — freshness is via live TLS pin) |
 | Live GPU attestation (NRAS) | ❌ (Tinfoil checks GPU at boot inside the CVM, not per-request) |
