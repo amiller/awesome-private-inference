@@ -58,19 +58,19 @@
   
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">near-ai</div>
-    <div class="text-2xl font-semibold mt-1">3 / 6</div>
+    <div class="text-2xl font-semibold mt-1">2 / 6</div>
     <div class="text-xs text-slate-500">models with valid attestation bundles</div>
   </div>
   
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">redpill</div>
-    <div class="text-2xl font-semibold mt-1">4 / 6</div>
+    <div class="text-2xl font-semibold mt-1">3 / 6</div>
     <div class="text-xs text-slate-500">models with valid attestation bundles</div>
   </div>
   
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">venice</div>
-    <div class="text-2xl font-semibold mt-1">3 / 4</div>
+    <div class="text-2xl font-semibold mt-1">1 / 4</div>
     <div class="text-xs text-slate-500">models with valid attestation bundles</div>
   </div>
   
@@ -113,22 +113,10 @@
       </thead>
       <tbody>
       
-        <tr class="border-t border-slate-100 ">
+        <tr class="border-t border-slate-100 bg-rose-50/30">
           <td class="p-2 font-medium">near-ai</td>
           <td class="p-2 font-mono text-xs">openai/gpt-oss-120b</td>
           <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
@@ -147,10 +135,22 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">❌</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">4.37s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.2s</td>
         </tr>
         
       
@@ -191,60 +191,13 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">5.62s</td>
-        </tr>
-        
-      
-        <tr class="border-t border-slate-100 bg-rose-50/30">
-          <td class="p-2 font-medium">near-ai</td>
-          <td class="p-2 font-mono text-xs">zai-org/GLM-5-FP8</td>
-          <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
-          </td>
-          
-          <td class="p-2 text-right text-xs text-slate-500">0.57s</td>
-        </tr>
-        
-        <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
-            HTTP 503: {"error":"Provider error: Failed to fetch attestation report: Failed to fetch attestation report: HTTP 500 Internal Server Error: {\"error\":{\"code\":null,\"message\":\"Internal server error\",\"para
-          </td>
+          <td class="p-2 text-right text-xs text-slate-500">3.69s</td>
         </tr>
         
       
         <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">near-ai</td>
-          <td class="p-2 font-mono text-xs">Qwen/Qwen3-30B-A3B-Instruct-2507</td>
+          <td class="p-2 font-mono text-xs">zai-org/GLM-5-FP8</td>
           <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
           
           <td class="p-2 text-center">
@@ -279,7 +232,54 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.41s</td>
+          <td class="p-2 text-right text-xs text-slate-500">5.29s</td>
+        </tr>
+        
+      
+        <tr class="border-t border-slate-100 bg-rose-50/30">
+          <td class="p-2 font-medium">near-ai</td>
+          <td class="p-2 font-mono text-xs">Qwen/Qwen3-30B-A3B-Instruct-2507</td>
+          <td class="p-2 text-xs text-slate-500">error</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">0.0s</td>
+        </tr>
+        
+        <tr class="bg-rose-50/20 text-xs text-rose-700">
+          <td colspan="12" class="p-2 pl-4 font-mono">
+            ReadTimeout: HTTPSConnectionPool(host='cloud-api.near.ai', port=443): Read timed out. (read timeout=30)
+          </td>
         </tr>
         
       
@@ -320,7 +320,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.43s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.34s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
@@ -367,7 +367,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.06s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.33s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
@@ -414,7 +414,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.55s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.7s</td>
         </tr>
         
       
@@ -436,7 +436,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">❌</span>
           </td>
           
           <td class="p-2 text-center">
@@ -455,7 +455,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.65s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.56s</td>
         </tr>
         
       
@@ -496,11 +496,11 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.6s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.37s</td>
         </tr>
         
       
-        <tr class="border-t border-slate-100 ">
+        <tr class="border-t border-slate-100 bg-rose-50/30">
           <td class="p-2 font-medium">redpill</td>
           <td class="p-2 font-mono text-xs">phala/glm-4.7</td>
           <td class="p-2 text-xs text-slate-500">near-relay</td>
@@ -510,7 +510,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">❌</span>
           </td>
           
           <td class="p-2 text-center">
@@ -537,7 +537,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.93s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.0s</td>
         </tr>
         
       
@@ -578,7 +578,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">27.03s</td>
+          <td class="p-2 text-right text-xs text-slate-500">30.34s</td>
         </tr>
         
       
@@ -619,48 +619,54 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">79.24s</td>
+          <td class="p-2 text-right text-xs text-slate-500">74.94s</td>
         </tr>
         
       
-        <tr class="border-t border-slate-100 ">
+        <tr class="border-t border-slate-100 bg-rose-50/30">
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-glm-5</td>
           <td class="p-2 text-xs text-slate-500">venice</td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.43s</td>
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">18.0s</td>
+        </tr>
+        
+        <tr class="bg-rose-50/20 text-xs text-rose-700">
+          <td colspan="12" class="p-2 pl-4 font-mono">
+            HTTP 502: {"error":"TEE attestation request failed. The Trusted Execution Environment provider may be temporarily unavailable."}
+          </td>
         </tr>
         
       
@@ -701,7 +707,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.32s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.18s</td>
         </tr>
         
       
@@ -742,7 +748,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.1s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.08s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
@@ -752,44 +758,50 @@
         </tr>
         
       
-        <tr class="border-t border-slate-100 ">
+        <tr class="border-t border-slate-100 bg-rose-50/30">
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-gpt-oss-120b-p</td>
           <td class="p-2 text-xs text-slate-500">venice</td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.19s</td>
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400">—</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">1.4s</td>
+        </tr>
+        
+        <tr class="bg-rose-50/20 text-xs text-rose-700">
+          <td colspan="12" class="p-2 pl-4 font-mono">
+            HTTP 502: {"model_name":"openai/gpt-oss-120b","signing_address":"0x56d070df1c6be444b007839ef9cf67cec7c12b8b","signing_algo":"ecdsa","signing_public_key":"04a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f8
+          </td>
         </tr>
         
       
@@ -838,7 +850,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-04-25T13:42:28Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/24932241148">24932241148</a> · <code>2817c7fe</code></span>
+    <span>Snapshot 2026-04-26T13:44:01Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/24958100449">24958100449</a> · <code>a248d39f</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
