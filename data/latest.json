@@ -1,93 +1,15 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-04-26T13:44:01Z",
-  "git_sha": "a248d39ff703f7fa24dacddb73235c1b326a082c",
-  "run_id": "24958100449",
+  "generated_at": "2026-04-26T22:43:04Z",
+  "git_sha": "e708546cf247f16f89127017ded69ab66cb00aa8",
+  "run_id": "24968927206",
   "attestations": {
     "near-ai": [
       {
         "provider": "near-ai",
         "model": "openai/gpt-oss-120b",
         "valid": false,
-        "verified_at": "2026-04-26T13:44:03Z",
-        "attestation_type": "tdx+gpu",
-        "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
-        "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": true,
-          "tdx_verified": true,
-          "report_data_binds_key": true,
-          "gpu_attested": false,
-          "key_derives_to_address": true,
-          "compose_hash_committed": true,
-          "backend_attested": false,
-          "catalog_serves": null
-        },
-        "details": {
-          "inner_models": 1,
-          "gpu_verdict": false
-        },
-        "error": null,
-        "latency_s": 2.2
-      },
-      {
-        "provider": "near-ai",
-        "model": "zai-org/GLM-5.1-FP8",
-        "valid": true,
-        "verified_at": "2026-04-26T13:44:04Z",
-        "attestation_type": "tdx+gpu",
-        "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
-        "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": true,
-          "tdx_verified": true,
-          "report_data_binds_key": true,
-          "gpu_attested": true,
-          "key_derives_to_address": true,
-          "compose_hash_committed": true,
-          "backend_attested": false,
-          "catalog_serves": null
-        },
-        "details": {
-          "inner_models": 1,
-          "gpu_verdict": true
-        },
-        "error": null,
-        "latency_s": 3.69
-      },
-      {
-        "provider": "near-ai",
-        "model": "zai-org/GLM-5-FP8",
-        "valid": true,
-        "verified_at": "2026-04-26T13:44:06Z",
-        "attestation_type": "tdx+gpu",
-        "signing_address": "0xa774243d3310a5165edb6628f56a4eeb48189ad1",
-        "signing_public_key": "59e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": true,
-          "tdx_verified": true,
-          "report_data_binds_key": true,
-          "gpu_attested": true,
-          "key_derives_to_address": true,
-          "compose_hash_committed": true,
-          "backend_attested": false,
-          "catalog_serves": null
-        },
-        "details": {
-          "inner_models": 1,
-          "gpu_verdict": true
-        },
-        "error": null,
-        "latency_s": 5.29
-      },
-      {
-        "provider": "near-ai",
-        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
-        "valid": false,
-        "verified_at": "2026-04-26T13:44:31Z",
+        "verified_at": "2026-04-26T22:43:34Z",
         "attestation_type": "error",
         "signing_address": "",
         "signing_public_key": "",
@@ -100,7 +22,12 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {},
         "error": "ReadTimeout: HTTPSConnectionPool(host='cloud-api.near.ai', port=443): Read timed out. (read timeout=30)",
@@ -108,9 +35,102 @@
       },
       {
         "provider": "near-ai",
+        "model": "zai-org/GLM-5.1-FP8",
+        "valid": true,
+        "verified_at": "2026-04-26T22:43:11Z",
+        "attestation_type": "tdx+gpu",
+        "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
+        "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "inner_models": 1,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 6.52
+      },
+      {
+        "provider": "near-ai",
+        "model": "zai-org/GLM-5-FP8",
+        "valid": true,
+        "verified_at": "2026-04-26T22:43:10Z",
+        "attestation_type": "tdx+gpu",
+        "signing_address": "0xa774243d3310a5165edb6628f56a4eeb48189ad1",
+        "signing_public_key": "59e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "inner_models": 1,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 5.48
+      },
+      {
+        "provider": "near-ai",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "valid": true,
+        "verified_at": "2026-04-26T22:43:07Z",
+        "attestation_type": "tdx+gpu",
+        "signing_address": "0xc03b0cfc81531eb9cffca4c65aabfaf9b181ac63",
+        "signing_public_key": "d33af782492ec889abc0b0a30a065bb7c06d898c0982dbd27e10d7eb9640f169f76d6ffbef9562583b225367d0262ff06750ad710aa6bc1c557662c8905783d6",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "inner_models": 1,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 2.93
+      },
+      {
+        "provider": "near-ai",
         "model": "deepseek-ai/DeepSeek-V3-0324",
         "valid": false,
-        "verified_at": "2026-04-26T13:44:03Z",
+        "verified_at": "2026-04-26T22:43:07Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -123,17 +143,22 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {},
         "error": "HTTP 503: {\"error\":\"Provider error: Model 'deepseek-ai/DeepSeek-V3-0324' not found. It's not a valid model name or alias.\"}",
-        "latency_s": 0.34
+        "latency_s": 0.16
       },
       {
         "provider": "near-ai",
         "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
         "valid": false,
-        "verified_at": "2026-04-26T13:44:04Z",
+        "verified_at": "2026-04-26T22:43:08Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -146,11 +171,16 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {},
         "error": "HTTP 503: {\"error\":\"Provider error: Model 'meta-llama/Llama-4-Scout-17B-16E-Instruct' not found. It's not a valid model name or alias.\"}",
-        "latency_s": 0.33
+        "latency_s": 0.18
       }
     ],
     "redpill": [
@@ -158,7 +188,7 @@
         "provider": "redpill",
         "model": "phala/gpt-oss-20b",
         "valid": false,
-        "verified_at": "2026-04-26T13:44:33Z",
+        "verified_at": "2026-04-26T22:43:39Z",
         "attestation_type": "phala-simple",
         "signing_address": "0x21eeEce0aED2d61986425cBaA821c3995c407d65",
         "signing_public_key": "",
@@ -171,47 +201,57 @@
           "key_derives_to_address": null,
           "compose_hash_committed": true,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {
           "shape": "phala-simple",
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.7
+        "latency_s": 4.48
       },
       {
         "provider": "redpill",
         "model": "phala/gpt-oss-120b",
-        "valid": true,
-        "verified_at": "2026-04-26T13:44:34Z",
+        "valid": false,
+        "verified_at": "2026-04-26T22:43:42Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
-          "tdx_verified": true,
+          "tdx_verified": false,
           "report_data_binds_key": true,
-          "gpu_attested": false,
+          "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": null,
           "backend_attested": false,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {
           "shape": "near-relay",
           "inner_models": 1,
-          "gpu_verdict": false
+          "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.56
+        "latency_s": 7.36
       },
       {
         "provider": "redpill",
         "model": "phala/qwen-2.5-7b-instruct",
         "valid": false,
-        "verified_at": "2026-04-26T13:44:33Z",
+        "verified_at": "2026-04-26T22:43:37Z",
         "attestation_type": "phala-simple",
         "signing_address": "0x3E6900B04b75e068B52304803Ce6013a12C8Fe0f",
         "signing_public_key": "",
@@ -224,33 +264,43 @@
           "key_derives_to_address": null,
           "compose_hash_committed": true,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {
           "shape": "phala-simple",
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.37
+        "latency_s": 2.57
       },
       {
         "provider": "redpill",
         "model": "phala/glm-4.7",
-        "valid": false,
-        "verified_at": "2026-04-26T13:44:34Z",
+        "valid": true,
+        "verified_at": "2026-04-26T22:43:37Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "59e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
-          "tdx_verified": false,
+          "tdx_verified": true,
           "report_data_binds_key": true,
           "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": null,
           "backend_attested": false,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {
           "shape": "near-relay",
@@ -258,13 +308,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.0
+        "latency_s": 2.53
       },
       {
         "provider": "redpill",
         "model": "phala/deepseek-v3.2",
         "valid": true,
-        "verified_at": "2026-04-26T13:45:04Z",
+        "verified_at": "2026-04-26T22:43:59Z",
         "attestation_type": "chutes",
         "signing_address": "5 instances",
         "signing_public_key": "",
@@ -277,20 +327,25 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {
           "shape": "chutes",
           "instance_count": 5
         },
         "error": null,
-        "latency_s": 30.34
+        "latency_s": 21.81
       },
       {
         "provider": "redpill",
         "model": "phala/kimi-k2.5",
         "valid": true,
-        "verified_at": "2026-04-26T13:45:48Z",
+        "verified_at": "2026-04-26T22:44:49Z",
         "attestation_type": "chutes",
         "signing_address": "5 instances",
         "signing_public_key": "",
@@ -303,23 +358,294 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {
           "shape": "chutes",
           "instance_count": 5
         },
         "error": null,
-        "latency_s": 74.94
+        "latency_s": 72.38
       }
     ],
-    "venice": [
+    "tinfoil": [
       {
-        "provider": "venice",
-        "model": "e2ee-glm-5",
+        "provider": "tinfoil",
+        "model": "router",
+        "valid": true,
+        "verified_at": "2026-04-26T22:44:50Z",
+        "attestation_type": "tinfoil-sev-snp-v2",
+        "signing_address": "",
+        "signing_public_key": "942f639c9315e167ab97181f1102497f74eca26fb5be38f6384c53bbbd154a7e",
+        "signing_algo": "hpke",
+        "scorecard": {
+          "nonce_bound": null,
+          "tdx_verified": null,
+          "report_data_binds_key": null,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": true,
+          "tls_pubkey_pinned": true,
+          "hpke_pubkey_attested": true,
+          "client_nonce_supported": false,
+          "runtime_config_fully_attested": false
+        },
+        "details": {
+          "domain": "inference.tinfoil.sh",
+          "digest": "a7a8750deb5131eb9b38292946e0858330d62bbfdd7698bb8426b3719658d6cb",
+          "predicate": "https://tinfoil.sh/predicate/sev-snp-guest/v2",
+          "repo": "tinfoilsh/confidential-model-router",
+          "sev": {
+            "version": 3,
+            "policy_hex": "0x30000",
+            "debug": false,
+            "vmpl": 0,
+            "measurement": "a556afbcb97cab8b31606df387c5267e6b420fdd032cdb5681d1b2119155ed70ab936c906aaa4b8993f4947fa92aa006",
+            "report_data": "df1f499962a80be7ce920bfe426596dca91b4cbbd9d9eb5dca56293dd8599963942f639c9315e167ab97181f1102497f74eca26fb5be38f6384c53bbbd154a7e"
+          },
+          "sigstore_predicate_type": "https://tinfoil.sh/predicate/snp-tdx-multiplatform/v1",
+          "sigstore_measurement": "a556afbcb97cab8b31606df387c5267e6b420fdd032cdb5681d1b2119155ed70ab936c906aaa4b8993f4947fa92aa006",
+          "attested_config": {
+            "cvm_version": "0.7.5",
+            "container_count": 1,
+            "total_env_external": 1,
+            "total_secrets_external": 1,
+            "containers": [
+              {
+                "name": "proxy",
+                "image": "ghcr.io/tinfoilsh/confidential-model-router@sha256:13faf11e24e8bccad9010b32f9e50df97739d0d33032250b14776d0d183de7bf",
+                "image_pinned_by_digest": true,
+                "env_external": [
+                  "DOMAIN"
+                ],
+                "env_attested": [
+                  "REFRESH_INTERVAL",
+                  "USAGE_REPORTER_ID",
+                  "CONTROL_PLANE_URL"
+                ],
+                "secrets_external": [
+                  "USAGE_REPORTER_SECRET"
+                ]
+              }
+            ]
+          },
+          "enclave_cert_sans_count": 7,
+          "enclave_cert_spki_sha256": "df1f499962a80be7ce920bfe426596dca91b4cbbd9d9eb5dca56293dd8599963",
+          "hpke_pubkey": "942f639c9315e167ab97181f1102497f74eca26fb5be38f6384c53bbbd154a7e",
+          "att_doc_hash": "5322da18e88a01ae87fde4a89590d034819f120dfb0fc907487ac5003296602c",
+          "live_tls_spki_sha256": "df1f499962a80be7ce920bfe426596dca91b4cbbd9d9eb5dca56293dd8599963"
+        },
+        "error": null,
+        "latency_s": 0.42
+      },
+      {
+        "provider": "tinfoil",
+        "model": "gpt-oss-120b",
+        "valid": true,
+        "verified_at": "2026-04-26T22:44:51Z",
+        "attestation_type": "tinfoil-sev-snp-v2",
+        "signing_address": "",
+        "signing_public_key": "097a995935992ad7e280edb7c6a24d687c4aa698c51ba6256fbbba9448c36149",
+        "signing_algo": "hpke",
+        "scorecard": {
+          "nonce_bound": null,
+          "tdx_verified": null,
+          "report_data_binds_key": null,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": true,
+          "tls_pubkey_pinned": true,
+          "hpke_pubkey_attested": true,
+          "client_nonce_supported": false,
+          "runtime_config_fully_attested": true
+        },
+        "details": {
+          "domain": "gpt-oss-120b-0.inf6.tinfoil.sh",
+          "digest": "0a865c9d4410d9a32e9259d13a7abd8b5de4cb2585977aab196b3325b1ca8601",
+          "predicate": "https://tinfoil.sh/predicate/sev-snp-guest/v2",
+          "repo": "tinfoilsh/confidential-gpt-oss-120b",
+          "sev": {
+            "version": 3,
+            "policy_hex": "0x30000",
+            "debug": false,
+            "vmpl": 0,
+            "measurement": "def59672e45a61a9cbc9744e57d4bc8f6168496a7d40f205ebfd03a3ae201a559ada3a85bf6b0373a24f50de3b67bf38",
+            "report_data": "93cfdc32df3468f1012f0f74a81faf151f6a84bdc54815cc3c08aa445981920e097a995935992ad7e280edb7c6a24d687c4aa698c51ba6256fbbba9448c36149"
+          },
+          "sigstore_predicate_type": "https://tinfoil.sh/predicate/snp-tdx-multiplatform/v1",
+          "sigstore_measurement": "def59672e45a61a9cbc9744e57d4bc8f6168496a7d40f205ebfd03a3ae201a559ada3a85bf6b0373a24f50de3b67bf38",
+          "attested_config": {
+            "cvm_version": "0.7.3",
+            "container_count": 1,
+            "total_env_external": 0,
+            "total_secrets_external": 0,
+            "containers": [
+              {
+                "name": "gpt-oss-120b",
+                "image": "vllm/vllm-openai:v0.17.0-cu130@sha256:de06f6d78a2ce86856094a643d6c914d8bd7109f73c2e30f38097197b2f2bba1",
+                "image_pinned_by_digest": true,
+                "env_external": [],
+                "env_attested": [
+                  "PYTORCH_CUDA_ALLOC_CONF"
+                ],
+                "secrets_external": []
+              }
+            ]
+          },
+          "enclave_cert_sans_count": 6,
+          "enclave_cert_spki_sha256": "93cfdc32df3468f1012f0f74a81faf151f6a84bdc54815cc3c08aa445981920e",
+          "hpke_pubkey": "097a995935992ad7e280edb7c6a24d687c4aa698c51ba6256fbbba9448c36149",
+          "att_doc_hash": "e98d44af4062e66cdf7e2512bcb365887c01d47e630c6ab71aac9dbaef28be4f",
+          "live_tls_spki_sha256": "93cfdc32df3468f1012f0f74a81faf151f6a84bdc54815cc3c08aa445981920e"
+        },
+        "error": null,
+        "latency_s": 0.1
+      },
+      {
+        "provider": "tinfoil",
+        "model": "llama3-3-70b",
+        "valid": true,
+        "verified_at": "2026-04-26T22:44:51Z",
+        "attestation_type": "tinfoil-sev-snp-v2",
+        "signing_address": "",
+        "signing_public_key": "31714c4ecb8dcd07a0b1320dd54f0deb72f59e8c47ca8c6abbb9c523741f332c",
+        "signing_algo": "hpke",
+        "scorecard": {
+          "nonce_bound": null,
+          "tdx_verified": null,
+          "report_data_binds_key": null,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": true,
+          "tls_pubkey_pinned": true,
+          "hpke_pubkey_attested": true,
+          "client_nonce_supported": false,
+          "runtime_config_fully_attested": true
+        },
+        "details": {
+          "domain": "llama3-3-70b.tinfoil.containers.tinfoil.dev",
+          "digest": "fcb26934790b392a71dafff6886d483181dfb797bfd9ed66838c817e7d4fd3bb",
+          "predicate": "https://tinfoil.sh/predicate/sev-snp-guest/v2",
+          "repo": "tinfoilsh/confidential-llama3-3-70b",
+          "sev": {
+            "version": 3,
+            "policy_hex": "0x30000",
+            "debug": false,
+            "vmpl": 0,
+            "measurement": "afa6ae23c17453c9b978bc1df27ee77b14adf70ec6496e2d540ef951cc924b3f6114fa297788b739440aa1b72b6ce36a",
+            "report_data": "aa63bdddcaf5c0ae4119a7445c18227389b458d8629c4ef64806982ca0a43b9c31714c4ecb8dcd07a0b1320dd54f0deb72f59e8c47ca8c6abbb9c523741f332c"
+          },
+          "sigstore_predicate_type": "https://tinfoil.sh/predicate/snp-tdx-multiplatform/v1",
+          "sigstore_measurement": "afa6ae23c17453c9b978bc1df27ee77b14adf70ec6496e2d540ef951cc924b3f6114fa297788b739440aa1b72b6ce36a",
+          "attested_config": {
+            "cvm_version": "0.7.3",
+            "container_count": 1,
+            "total_env_external": 0,
+            "total_secrets_external": 0,
+            "containers": [
+              {
+                "name": "llama3-3-70b-fp8",
+                "image": "vllm/vllm-openai:v0.17.1-cu130@sha256:bbeaaf81ba5704c30f6b87a5df5b10b930d97e916fc98c825d3ad30806e9638b",
+                "image_pinned_by_digest": true,
+                "env_external": [],
+                "env_attested": [],
+                "secrets_external": []
+              }
+            ]
+          },
+          "enclave_cert_sans_count": 6,
+          "enclave_cert_spki_sha256": "aa63bdddcaf5c0ae4119a7445c18227389b458d8629c4ef64806982ca0a43b9c",
+          "hpke_pubkey": "31714c4ecb8dcd07a0b1320dd54f0deb72f59e8c47ca8c6abbb9c523741f332c",
+          "att_doc_hash": "2f8cc26c93576e3562705a66778d35bdcb2e9e6c008d5172a481d102ad86cf3e",
+          "live_tls_spki_sha256": "aa63bdddcaf5c0ae4119a7445c18227389b458d8629c4ef64806982ca0a43b9c"
+        },
+        "error": null,
+        "latency_s": 0.09
+      },
+      {
+        "provider": "tinfoil",
+        "model": "gemma4-31b",
+        "valid": true,
+        "verified_at": "2026-04-26T22:44:51Z",
+        "attestation_type": "tinfoil-sev-snp-v2",
+        "signing_address": "",
+        "signing_public_key": "df94c0137c117f6d73a3270e1556c7afa5d21252edf72658576ad35903b75919",
+        "signing_algo": "hpke",
+        "scorecard": {
+          "nonce_bound": null,
+          "tdx_verified": null,
+          "report_data_binds_key": null,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": true,
+          "tls_pubkey_pinned": true,
+          "hpke_pubkey_attested": true,
+          "client_nonce_supported": false,
+          "runtime_config_fully_attested": true
+        },
+        "details": {
+          "domain": "gemma4-31b-inf6.tinfoil.containers.tinfoil.dev",
+          "digest": "3a3c6b549df45cf85df4d94ac58e2c20535aa94700e07d98fdf858b7d63b2ead",
+          "predicate": "https://tinfoil.sh/predicate/sev-snp-guest/v2",
+          "repo": "tinfoilsh/confidential-gemma4-31b",
+          "sev": {
+            "version": 3,
+            "policy_hex": "0x30000",
+            "debug": false,
+            "vmpl": 0,
+            "measurement": "217f6e0c554e70d917c25066de5724859301dd332179d277a45588f3ff57e0a0992c96f302144c4c0949660a8844a4c7",
+            "report_data": "e814b0495321244d33382f5767bf5a6bd482480fb5643c4431264f1fa71f719ddf94c0137c117f6d73a3270e1556c7afa5d21252edf72658576ad35903b75919"
+          },
+          "sigstore_predicate_type": "https://tinfoil.sh/predicate/snp-tdx-multiplatform/v1",
+          "sigstore_measurement": "217f6e0c554e70d917c25066de5724859301dd332179d277a45588f3ff57e0a0992c96f302144c4c0949660a8844a4c7",
+          "attested_config": {
+            "cvm_version": "0.7.5",
+            "container_count": 1,
+            "total_env_external": 0,
+            "total_secrets_external": 0,
+            "containers": [
+              {
+                "name": "gemma4-31b",
+                "image": "ghcr.io/tinfoilsh/confidential-gemma4-31b@sha256:d3ccc2562a23cbef843db335005a13204af3a51ea0af7ba776a0857585ba1e48",
+                "image_pinned_by_digest": true,
+                "env_external": [],
+                "env_attested": [],
+                "secrets_external": []
+              }
+            ]
+          },
+          "enclave_cert_sans_count": 6,
+          "enclave_cert_spki_sha256": "e814b0495321244d33382f5767bf5a6bd482480fb5643c4431264f1fa71f719d",
+          "hpke_pubkey": "df94c0137c117f6d73a3270e1556c7afa5d21252edf72658576ad35903b75919",
+          "att_doc_hash": "e0ba7c69042afc3e964ab725d483c3b3d4b1ca08769a73cdb3098f7d96bc447d",
+          "live_tls_spki_sha256": "e814b0495321244d33382f5767bf5a6bd482480fb5643c4431264f1fa71f719d"
+        },
+        "error": null,
+        "latency_s": 0.09
+      },
+      {
+        "provider": "tinfoil",
+        "model": "deepseek-v4-pro",
         "valid": false,
-        "verified_at": "2026-04-26T13:46:06Z",
-        "attestation_type": "venice",
+        "verified_at": "2026-04-26T22:44:50Z",
+        "attestation_type": "error",
         "signing_address": "",
         "signing_public_key": "",
         "signing_algo": "ecdsa",
@@ -331,17 +657,88 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {},
-        "error": "HTTP 502: {\"error\":\"TEE attestation request failed. The Trusted Execution Environment provider may be temporarily unavailable.\"}",
-        "latency_s": 18.0
+        "error": "SSLError: HTTPSConnectionPool(host='deepseek-v4-pro.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)')))",
+        "latency_s": 0.0
+      },
+      {
+        "provider": "tinfoil",
+        "model": "kimi-k2-6",
+        "valid": false,
+        "verified_at": "2026-04-26T22:44:51Z",
+        "attestation_type": "error",
+        "signing_address": "",
+        "signing_public_key": "",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": null,
+          "tdx_verified": null,
+          "report_data_binds_key": null,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {},
+        "error": "SSLError: HTTPSConnectionPool(host='kimi-k2-6.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)')))",
+        "latency_s": 0.0
+      }
+    ],
+    "venice": [
+      {
+        "provider": "venice",
+        "model": "e2ee-glm-5",
+        "valid": true,
+        "verified_at": "2026-04-26T22:44:54Z",
+        "attestation_type": "venice",
+        "signing_address": "0xa774243d3310a5165edb6628f56a4eeb48189ad1",
+        "signing_public_key": "0459e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "tee_provider": "near-ai",
+          "tee_hardware": "intel-tdx",
+          "nonce_source": "client",
+          "candidates_available": 1,
+          "candidates_evaluated": 1,
+          "model_name": "zai-org/GLM-5-FP8",
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 3.46
       },
       {
         "provider": "venice",
         "model": "e2ee-qwen3-5-122b-a10b",
         "valid": true,
-        "verified_at": "2026-04-26T13:45:52Z",
+        "verified_at": "2026-04-26T22:44:54Z",
         "attestation_type": "venice",
         "signing_address": "0x6525e128afcffebf7eed05d485d7be983cdae934",
         "signing_public_key": "041d9bbc96671c3fbc983867bd7a6b5c83298e040801764b7085352d84f3f095125db36956caed8c84bfefca635c3c455f409c79a3889d679af688f4aded542fd5",
@@ -354,7 +751,12 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "backend_attested": false,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {
           "tee_provider": "near-ai",
@@ -366,13 +768,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.18
+        "latency_s": 3.37
       },
       {
         "provider": "venice",
         "model": "e2ee-uncensored-24b-p",
         "valid": false,
-        "verified_at": "2026-04-26T13:45:49Z",
+        "verified_at": "2026-04-26T22:44:51Z",
         "attestation_type": "venice",
         "signing_address": "",
         "signing_public_key": "",
@@ -385,34 +787,52 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "backend_attested": null,
-          "catalog_serves": null
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
         "details": {},
         "error": "no TEE attestation available for this model (404)",
-        "latency_s": 0.08
+        "latency_s": 0.2
       },
       {
         "provider": "venice",
         "model": "e2ee-gpt-oss-120b-p",
-        "valid": false,
-        "verified_at": "2026-04-26T13:45:50Z",
+        "valid": true,
+        "verified_at": "2026-04-26T22:44:54Z",
         "attestation_type": "venice",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
+        "signing_public_key": "04a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
-          "catalog_serves": null
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "backend_attested": false,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
         },
-        "details": {},
-        "error": "HTTP 502: {\"model_name\":\"openai/gpt-oss-120b\",\"signing_address\":\"0x56d070df1c6be444b007839ef9cf67cec7c12b8b\",\"signing_algo\":\"ecdsa\",\"signing_public_key\":\"04a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f8",
-        "latency_s": 1.4
+        "details": {
+          "tee_provider": "phala",
+          "tee_hardware": "intel-tdx",
+          "nonce_source": "client",
+          "candidates_available": 1,
+          "candidates_evaluated": 1,
+          "model_name": "openai/gpt-oss-120b",
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 3.36
       }
     ]
   },
