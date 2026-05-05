@@ -43,12 +43,17 @@
   <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 0 banner</h2>
   <p class="mt-2 text-sm leading-relaxed">
     <strong>Every provider below is Stage 0.</strong> The cryptographic primitives work — TDX quotes verify,
-    GPU attestation passes, keys derive correctly — but well-documented architectural gaps mean
-    <em>none</em> of these providers currently deliver end-to-end verifiable private inference. The
-    central issue: <strong>gateways fetch backend attestation but don't cryptographically verify it</strong>,
-    so the signing key we encrypt to is trust-on-first-use from unverified JSON.
-    See <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">NEAR cloud-api #224</a>
-    (open since 2025-12-03) and
+    GPU attestation passes, keys derive correctly — but the architectural gaps that keep this Stage 0 are:
+    <strong>(a)</strong> NEAR's gateway now inline-verifies backends (closed via cloud-api PR
+    <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a>, Apr 2026)
+    but server-side <code>ALLOWED_COMPOSE_HASHES</code> enforcement is still missing and
+    <code>DstackKms.kmsInfo</code> is empty on chain;
+    <strong>(b)</strong> RedPill's Phala-direct fleet runs <code>dstack-nvidia-dev</code> images
+    with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05);
+    <strong>(c)</strong> Phala's upstream verifier decodes Intel/NVIDIA JWTs with
+    <code>verify_signature=False</code>.
+    <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">NEAR cloud-api #224</a>
+    is still open. Full audits at
     <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
   </p>
 </section>
@@ -1063,19 +1068,34 @@
     <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
   </p>
   <ul class="space-y-2 text-sm text-slate-800">
-    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Inner-boundary gap.</strong>
-      NEAR's cloud-api gateway fetches backend attestation JSON but throws it away without verifying.
-      Known since <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">Issue #224</a>
-      (open 4+ months). The signing key we encrypt to is trust-on-first-use from unverified JSON.</li>
-    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Operator-controlled routing.</strong>
-      The gateway selects backends by reading <code>inference_url</code> from its database.
-      An operator (or DB-compromiser) can point it at a logging relay that forwards to a real model.</li>
+    <li class="flex gap-2"><span class="text-amber-600">◐</span><strong>NEAR gateway-side: narrowed, not closed.</strong>
+      cloud-api PRs <a class="underline" href="https://github.com/nearai/cloud-api/pull/485">#485</a> /
+      <a class="underline" href="https://github.com/nearai/cloud-api/pull/513">#513</a> /
+      <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a> /
+      <a class="underline" href="https://github.com/nearai/cloud-api/pull/558">#558</a>
+      (Mar–Apr 2026) deleted the operator-rewritable discovery URL and now inline-verify
+      each backend's TDX/RTMR3/NRAS before serving. <em>Still open:</em> server-side
+      <code>ALLOWED_COMPOSE_HASHES</code> is unset, so any TCB-current TDX TD passes —
+      and <code>DstackKms.kmsInfo</code> on Base is empty (no on-chain anchor for the KMS root
+      pubkey). <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
+      closes the client-side leg via a strict static anchor pinning
+      <code>(model → app_id, compose_hashes, os_image_hash, kms_pubkey)</code>.</li>
+    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>RedPill phala-simple: dev OS image with operator host-SSH (live 2026-05-05).</strong>
+      Every <code>phala/*</code> model on RedPill boots
+      <code>dstack-nvidia-dev-0.5.{5,8}-*</code> (ships sshd + debug-tweaks + tools-profile),
+      with <code>DSTACK_AUTHORIZED_KEYS</code> in <code>allowed_envs</code> and a measured
+      <code>pre_launch_script</code> that writes the operator-supplied key to root's
+      <code>authorized_keys</code> at boot. Switching to the prod
+      <code>dstack-nvidia-0.5.{5,6,8}</code> image (no sshd, runs <code>disable_login()</code>)
+      neutralizes the path without compose changes — but it hasn't been done.</li>
     <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Upstream verifier TODOs.</strong>
       Phala's <code>private-ai-verifier</code> still decodes NVIDIA and Intel Trust Authority JWTs
       with <code>verify_signature=False</code>. We inherit this.</li>
     <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>KMS opacity.</strong>
       Phala KMS and most dstack-hosted gateways are themselves Stage 0: mutable image tags,
-      no upgrade log, no third-party review.</li>
+      no upgrade log, no third-party review. NEAR's KMS contract on Base also has empty
+      <code>kmsInfo</code> across all four fields, so the KMS root pubkey provenance is
+      not on-chain auditable.</li>
     <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Catalog ≠ served.</strong>
       Some entries (e.g. Tinfoil-routed models in RedPill's /models) 404 on real calls.</li>
   </ul>
