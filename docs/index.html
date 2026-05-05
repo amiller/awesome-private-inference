@@ -42,19 +42,25 @@
 <section class="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-900">
   <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 0 banner</h2>
   <p class="mt-2 text-sm leading-relaxed">
-    <strong>Every provider below is Stage 0.</strong> The cryptographic primitives work — TDX quotes verify,
-    GPU attestation passes, keys derive correctly — but the architectural gaps that keep this Stage 0 are:
-    <strong>(a)</strong> NEAR's gateway now inline-verifies backends (closed via cloud-api PR
-    <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a>, Apr 2026)
-    but server-side <code>ALLOWED_COMPOSE_HASHES</code> enforcement is still missing and
-    <code>DstackKms.kmsInfo</code> is empty on chain;
+    <strong>Every provider below is Stage 0.</strong> Reading this page assumes a steelman client doing the full
+    closed-chain E2EE verification (TDX/GPU → on-chain or static-pinned anchor → inner compose → encrypt to TD-bound key).
+    Even under that strong assumption, the residual gaps are:
+    <strong>(a)</strong> NEAR: gateway inline-verifies backends since cloud-api PR
+    <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a>
+    and <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
+    static-pins <code>(model → app_id, compose_hash, os_image_hash, kms_pubkey)</code>, but
+    <strong>inner-compose closure is unimplemented</strong> — the outer compose is one shell shared by
+    GLM / DeepSeek / gpt-oss with per-model selection via env into vllm-proxy/sglang, so "I requested model X"
+    isn't cryptographically tied to "X served the request" until a verifier reaches the inner compose.
     <strong>(b)</strong> RedPill's Phala-direct fleet runs <code>dstack-nvidia-dev</code> images
-    with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05);
+    with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05).
     <strong>(c)</strong> Phala's upstream verifier decodes Intel/NVIDIA JWTs with
-    <code>verify_signature=False</code>.
-    <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">NEAR cloud-api #224</a>
-    is still open. Full audits at
+    <code>verify_signature=False</code> — every TDX validation downstream inherits this.
+    Full audits at
     <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
+    Off-dashboard items (KMS root provenance via <code>setKmsInfo</code>, EOA upgrade authority, governance,
+    reproducible builds) are anchor-refresh discipline under the steelman, not runtime crypto gaps —
+    see provider pages.
   </p>
 </section>
 
