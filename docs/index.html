@@ -42,30 +42,28 @@
 <section class="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-900">
   <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 0 banner</h2>
   <p class="mt-2 text-sm leading-relaxed">
-    <strong>Every provider below is Stage 0.</strong> Reading this page assumes a steelman client doing the full
-    closed-chain E2EE verification (TDX/GPU → static-pinned anchor → inner compose → encrypt to TD-bound key).
-    Even under that strong assumption:
-    <strong>(a)</strong> NEAR: gateway inline-verifies backends since cloud-api PR
-    <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a>
-    and <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
-    now closes the chain end-to-end — Block B-static pins
-    <code>(model → app_id, compose_hash, os_image_hash, kms_pubkey)</code>, Block C-static pins per-model
+    Reading this page assumes a steelman client doing the full closed-chain E2EE verification — TDX/GPU →
+    static-pinned anchor → inner compose → encrypt to TD-bound key. The
+    <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
+    branch (one of this registry's deliverables) is that client.
+    <strong>(a)</strong> <strong>NEAR with hermes is Stage 1 today.</strong>
+    Cloud-api PR <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a> inline-verifies
+    backends; hermes' static anchor closes the chain end-to-end — Block B pins
+    <code>(model → app_id, compose_hash, os_image_hash, kms_pubkey)</code>, Block C pins per-model
     <code>(inner_yaml file, commit, file_sha256)</code> against the TDX-bound
-    <code>compose_manager_attestation</code>, plus a <code>model_name == requested_model</code> check that
-    catches the live-observed silent gateway substitution
-    <code>deepseek-ai/DeepSeek-V3.1 → Qwen/Qwen3.5-122B-A10B</code>. Residual under steelman is
-    <strong>anchor-refresh discipline</strong> (NEAR rotates outer composes and inner YAMLs often;
-    hermes refuses until a maintainer reviews the rotation) and the upstream
-    Phala verifier issue in (c). The default <code>nearai-cloud-verifier</code> still runs only Block A.
-    <strong>(b)</strong> RedPill's Phala-direct fleet runs <code>dstack-nvidia-dev</code> images
-    with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05) — a
-    backdoor that no client-side check can close.
-    <strong>(c)</strong> Phala's upstream verifier decodes Intel/NVIDIA JWTs with
-    <code>verify_signature=False</code> — every TDX validation downstream inherits this.
+    <code>compose_manager_attestation</code>, plus a <code>model_name == requested_model</code> check that already
+    caught a live silent gateway substitution
+    (<code>deepseek-ai/DeepSeek-V3.1 → Qwen/Qwen3.5-122B-A10B</code>) on 2026-05-05. The inference path has no private
+    persistent state (E2EE keeps prompts/responses ephemeral; the conversations table is metadata-only), so the
+    framework's "withdraw before changes" criterion collapses to anchor-refresh PR review — which hermes enforces by
+    failing closed on rotation until a maintainer merges.
+    <strong>(b)</strong> <strong>RedPill's Phala-direct fleet is still Stage 0.</strong> Every <code>phala/*</code>
+    model boots <code>dstack-nvidia-dev</code> images with operator host-SSH wired through
+    <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05) — a backdoor that no client-side check can close.
+    <strong>(c)</strong> <strong>Phala's upstream verifier</strong> decodes Intel/NVIDIA JWTs with
+    <code>verify_signature=False</code>; every TDX validation downstream (hermes included) inherits this.
     Full audits at
     <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
-    Off-dashboard items (KMS root provenance via <code>setKmsInfo</code>, EOA upgrade authority, governance,
-    reproducible builds) collapse to anchor-refresh discipline under the steelman — see provider pages.
   </p>
 </section>
 
