@@ -43,24 +43,29 @@
   <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 0 banner</h2>
   <p class="mt-2 text-sm leading-relaxed">
     <strong>Every provider below is Stage 0.</strong> Reading this page assumes a steelman client doing the full
-    closed-chain E2EE verification (TDX/GPU → on-chain or static-pinned anchor → inner compose → encrypt to TD-bound key).
-    Even under that strong assumption, the residual gaps are:
+    closed-chain E2EE verification (TDX/GPU → static-pinned anchor → inner compose → encrypt to TD-bound key).
+    Even under that strong assumption:
     <strong>(a)</strong> NEAR: gateway inline-verifies backends since cloud-api PR
     <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a>
     and <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
-    static-pins <code>(model → app_id, compose_hash, os_image_hash, kms_pubkey)</code>, but
-    <strong>inner-compose closure is unimplemented</strong> — the outer compose is one shell shared by
-    GLM / DeepSeek / gpt-oss with per-model selection via env into vllm-proxy/sglang, so "I requested model X"
-    isn't cryptographically tied to "X served the request" until a verifier reaches the inner compose.
+    now closes the chain end-to-end — Block B-static pins
+    <code>(model → app_id, compose_hash, os_image_hash, kms_pubkey)</code>, Block C-static pins per-model
+    <code>(inner_yaml file, commit, file_sha256)</code> against the TDX-bound
+    <code>compose_manager_attestation</code>, plus a <code>model_name == requested_model</code> check that
+    catches the live-observed silent gateway substitution
+    <code>deepseek-ai/DeepSeek-V3.1 → Qwen/Qwen3.5-122B-A10B</code>. Residual under steelman is
+    <strong>anchor-refresh discipline</strong> (NEAR rotates outer composes and inner YAMLs often;
+    hermes refuses until a maintainer reviews the rotation) and the upstream
+    Phala verifier issue in (c). The default <code>nearai-cloud-verifier</code> still runs only Block A.
     <strong>(b)</strong> RedPill's Phala-direct fleet runs <code>dstack-nvidia-dev</code> images
-    with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05).
+    with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05) — a
+    backdoor that no client-side check can close.
     <strong>(c)</strong> Phala's upstream verifier decodes Intel/NVIDIA JWTs with
     <code>verify_signature=False</code> — every TDX validation downstream inherits this.
     Full audits at
     <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
     Off-dashboard items (KMS root provenance via <code>setKmsInfo</code>, EOA upgrade authority, governance,
-    reproducible builds) are anchor-refresh discipline under the steelman, not runtime crypto gaps —
-    see provider pages.
+    reproducible builds) collapse to anchor-refresh discipline under the steelman — see provider pages.
   </p>
 </section>
 
@@ -1209,12 +1214,17 @@
       <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a> /
       <a class="underline" href="https://github.com/nearai/cloud-api/pull/558">#558</a>
       (Mar–Apr 2026) deleted the operator-rewritable discovery URL and now inline-verify
-      each backend's TDX/RTMR3/NRAS before serving. <em>Still open:</em> server-side
-      <code>ALLOWED_COMPOSE_HASHES</code> is unset, so any TCB-current TDX TD passes —
+      each backend's TDX/RTMR3/NRAS before serving. <em>Still open server-side:</em>
+      <code>ALLOWED_COMPOSE_HASHES</code> is unset, so any TCB-current TDX TD passes the gateway —
       and <code>DstackKms.kmsInfo</code> on Base is empty (no on-chain anchor for the KMS root
-      pubkey). <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
-      closes the client-side leg via a strict static anchor pinning
-      <code>(model → app_id, compose_hashes, os_image_hash, kms_pubkey)</code>.</li>
+      pubkey). <em>Closed client-side:</em>
+      <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
+      strict-pins <code>(model → app_id, compose_hashes, os_image_hash, kms_pubkey)</code>
+      <strong>and</strong> per-model inner-compose closure
+      (<code>compose_manager_attestation.actions[]</code> →
+      <code>(file, commit, file_sha256)</code>), plus
+      <code>model_name == requested_model</code> which caught a live silent
+      substitution (<code>deepseek-ai/DeepSeek-V3.1 → Qwen/Qwen3.5-122B-A10B</code>) on 2026-05-05.</li>
     <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>RedPill phala-simple: dev OS image with operator host-SSH (live 2026-05-05).</strong>
       Every <code>phala/*</code> model on RedPill boots
       <code>dstack-nvidia-dev-0.5.{5,8}-*</code> (ships sshd + debug-tweaks + tools-profile),
