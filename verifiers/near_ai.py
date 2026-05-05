@@ -36,6 +36,18 @@ from .common import (
 DEFAULT_BASE_URL = "https://cloud-api.near.ai"
 _STDOUT_LOCK = threading.Lock()
 
+# cloud-api gateway compose hashes that include inline backend verification
+# (PR #552 merged 2026-04-27 + #558 2026-05-01). Confirmed by code reading in
+# devproof-audits-guide/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md
+# and a follow-up live capture 2026-05-05. Refresh when prod rotates: probe
+# https://cloud-api.near.ai/v1/attestation/report?model=...&nonce=... and add
+# the new gateway_attestation.info.compose_hash after auditing the
+# nearaidev/cloud-api image digest in the new compose.
+_INLINE_VERIFY_GATEWAY_COMPOSE_HASHES = {
+    "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",  # 2026-05-02 capture
+    "75e65dc88b3c2369161054b35ddde27ee43c764d7ae1af65b944c462a6c7147b",  # 2026-05-05 capture
+}
+
 
 def _sync(coro):
     try:
@@ -166,10 +178,32 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     sc.key_derives_to_address = key_ok
     sc.gpu_attested = gpu_ok
     sc.compose_hash_committed = compose_ok
-    # Inner-boundary: gateway does not verify model attestations cryptographically.
-    # See NEAR Issue #224. We mark this False explicitly — per our scorecard,
-    # backend_attested means "gateway cryptographically verified the backend quote."
-    sc.backend_attested = False
+
+    # backend_attested = "gateway is running cloud-api code that inline-verifies
+    # each backend's TDX/RTMR3/NRAS before serving" (cloud-api PR #552 + #558,
+    # Apr/May 2026). The gateway's deployed code is itself attested via its TDX
+    # quote; we confirm we're talking to that code by checking the gateway's
+    # measured compose_hash matches a known-good post-#552 release.
+    gw_app_compose = ""
+    gw_tcb = (gateway.get("info") or {}).get("tcb_info") or {}
+    if isinstance(gw_tcb, str):
+        try:
+            gw_tcb = json.loads(gw_tcb)
+        except Exception:
+            gw_tcb = {}
+    gw_app_compose = gw_tcb.get("app_compose") or ""
+    gw_mr_config = (gw_intel.get("quote", {}).get("body", {}) or {}).get("mrconfig", "") or ""
+    gw_compose_hash = sha256_hex(gw_app_compose) if gw_app_compose else ""
+    gw_self_consistent = bool(
+        gw_compose_hash
+        and gw_mr_config
+        and gw_mr_config.lower().startswith(("01" + gw_compose_hash).lower())
+    )
+    sc.backend_attested = (
+        gw_self_consistent
+        and gw_compose_hash in _INLINE_VERIFY_GATEWAY_COMPOSE_HASHES
+    )
+    details["gateway_compose_hash"] = gw_compose_hash
 
     valid = (
         sc.tdx_verified is True
