@@ -10,7 +10,74 @@ import hashlib
 import json
 import time
 from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
+
+
+# Per attestation-shape Stage-1-required layers. A null cell on a required layer
+# fails Stage 1 the same way ❌ does — the provider's protocol elects not to
+# expose the check, so the audit surface is too thin. A null on an unrequired
+# layer is benign ("architecturally not applicable" — e.g. backend_attested for
+# a single-TD direct-TEE provider with no gateway hop).
+#
+# To onboard a new shape: enumerate which scorecard fields the provider's
+# attestation response *should* let a verifier check, given what the provider
+# claims (GPU inference → gpu_attested required; gateway+backend hop →
+# backend_attested required; OHTTP/HPKE E2EE → hpke_pubkey_attested required).
+REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
+    # NEAR-direct: cloud-api gateway + per-model TDX+GPU. Stage 1 needs every
+    # hop attested and the model-CVM compose committed in mr_config.
+    "tdx+gpu": {
+        "tdx_verified", "nonce_bound", "report_data_binds_key",
+        "gpu_attested", "key_derives_to_address", "compose_hash_committed",
+        "backend_attested",
+    },
+    # RedPill phala-direct: single-TD, no gateway hop.
+    "phala-simple": {
+        "tdx_verified", "nonce_bound", "report_data_binds_key",
+        "gpu_attested", "key_derives_to_address", "compose_hash_committed",
+    },
+    # RedPill via NEAR: same shape as NEAR-direct.
+    "near-relay": {
+        "tdx_verified", "nonce_bound", "report_data_binds_key",
+        "gpu_attested", "key_derives_to_address", "compose_hash_committed",
+        "backend_attested",
+    },
+    # RedPill via Chutes: TDX-only shape. The provider claims GPU inference
+    # per the catalog, so missing NRAS evidence and compose binding are fails,
+    # not architectural N/As.
+    "chutes": {
+        "tdx_verified", "nonce_bound", "report_data_binds_key",
+        "gpu_attested", "compose_hash_committed",
+    },
+    # Venice: TDX+GPU+compose; sits downstream of Phala/NEAR (no own
+    # gateway→backend hop to attest from this side).
+    "venice": {
+        "tdx_verified", "nonce_bound", "report_data_binds_key",
+        "gpu_attested", "key_derives_to_address", "compose_hash_committed",
+    },
+    # Tinfoil SEV-SNP: different attestation flavor (no Intel TDX). Stage 1
+    # surface is OHTTP/HPKE binding + measured-config + live TLS pinning +
+    # client-supplied nonce + no operator-injected runtime config.
+    "tinfoil-sev-snp-v2": {
+        "code_measurement_reproducible", "tls_pubkey_pinned",
+        "hpke_pubkey_attested", "client_nonce_supported",
+        "runtime_config_fully_attested",
+    },
+}
+
+
+def is_stage1_ready(scorecard: Dict[str, Optional[bool]], shape: str) -> bool:
+    """A row passes Stage 1 iff every required layer for its shape is True.
+    Unknown shapes return False — we can't claim Stage 1 for something we
+    haven't characterized."""
+    required = REQUIRED_LAYERS_BY_SHAPE.get(shape, set())
+    if not required:
+        return False
+    return all(scorecard.get(layer) is True for layer in required)
+
+
+def is_layer_required(layer: str, shape: str) -> bool:
+    return layer in REQUIRED_LAYERS_BY_SHAPE.get(shape, set())
 
 
 @dataclass

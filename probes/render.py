@@ -13,6 +13,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+from verifiers.common import is_layer_required, is_stage1_ready
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_LATEST = REPO_ROOT / "data" / "latest.json"
 DOCS_DIR = REPO_ROOT / "docs"
@@ -42,13 +44,25 @@ SCORECARD_TOOLTIPS = {
 }
 
 
-def cell(value):
-    """Render a scorecard cell: ✅ / ❌ / — (None = not applicable / not tested)."""
+def cell(value, required: bool = False):
+    """Render a scorecard cell.
+
+    ✅ — checked, passed.
+    ❌ — checked, rejected.
+    — (red) — required for this shape's Stage 1 surface but not exposed; fails the same as ❌.
+    — (grey) — not applicable to this shape; benign.
+    """
     if value is True:
-        return {"mark": "✅", "class": "bg-emerald-500/20 text-emerald-700"}
+        return {"mark": "✅", "class": "bg-emerald-500/20 text-emerald-700",
+                "title": "Verified"}
     if value is False:
-        return {"mark": "❌", "class": "bg-rose-500/20 text-rose-700"}
-    return {"mark": "—", "class": "text-slate-400"}
+        return {"mark": "❌", "class": "bg-rose-500/20 text-rose-700",
+                "title": "Rejected by verifier"}
+    if required:
+        return {"mark": "—", "class": "bg-rose-500/10 text-rose-700 ring-1 ring-rose-200",
+                "title": "Required for this shape but not exposed by the attestation response"}
+    return {"mark": "—", "class": "text-slate-400",
+            "title": "Not applicable to this attestation shape"}
 
 
 def _render(snapshot):
@@ -57,15 +71,17 @@ def _render(snapshot):
     for provider, reports in snapshot.get("attestations", {}).items():
         for r in reports:
             sc = r.get("scorecard") or {}
+            shape = r.get("attestation_type", "")
             rows.append({
                 "provider": provider,
                 "model": r["model"],
                 "valid": r.get("valid", False),
                 "error": r.get("error"),
-                "attestation_type": r.get("attestation_type", ""),
+                "attestation_type": shape,
                 "signing_address": r.get("signing_address", ""),
                 "latency_s": r.get("latency_s", 0),
-                "cells": {k: cell(sc.get(k)) for k in SCORECARD_LABELS},
+                "cells": {k: cell(sc.get(k), is_layer_required(k, shape)) for k in SCORECARD_LABELS},
+                "stage1_ready": is_stage1_ready(sc, shape),
             })
 
     provider_summary = {}
