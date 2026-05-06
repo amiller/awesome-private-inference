@@ -29,7 +29,6 @@ SCORECARD_LABELS = {
     "key_derives_to_address": "Key derives to addr",
     "compose_hash_committed": "compose_hash committed",
     "backend_attested": "Backend attested",
-    "catalog_serves": "Catalog serves",
 }
 
 SCORECARD_TOOLTIPS = {
@@ -40,7 +39,6 @@ SCORECARD_TOOLTIPS = {
     "key_derives_to_address": "keccak(signing_public_key) == signing_address",
     "compose_hash_committed": "mr_config starts with 0x01 || sha256(app_compose)",
     "backend_attested": "Gateway cryptographically verified the backend TDX quote",
-    "catalog_serves": "Model advertised in /models returns 2xx on chat completion",
 }
 
 
