@@ -44,8 +44,8 @@
       </tr>
       <tr class="border-t border-amber-200/50">
         <td class="py-1 pr-3 font-medium">tinfoil</td>
-        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">Stage 0</span></td>
-        <td class="py-1">§4 (no operator access to secrets): <code>runtime_config_fully_attested=false</code>, plus <code>client_nonce_supported=false</code> weakens freshness binding.</td>
+        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-500/30 text-amber-900">Stage 0 (schema)</span></td>
+        <td class="py-1">§4 fails at the <em>schema</em> layer: the attested <code>/config.yml</code> permits env slots whose values come from an unmeasured boot disk. Live deployment has 2 such slots — both on the router CVM (<code>DOMAIN</code>, <code>USAGE_REPORTER_SECRET</code>), both code-traced off the prompt path. Per-model enclaves (<code>gpt-oss-120b</code>, <code>llama3-3-70b</code>, <code>gemma4-31b</code>) have <strong>zero</strong> unattested slots. Active-state Stage 1 today; schema is one rename from regression. (<code>client_nonce_supported=false</code> is a non-finding — Tinfoil uses live TLS pinning to a SEV-bound cert for freshness instead of a <code>report_data</code> nonce.)</td>
       </tr>
       <tr class="border-t border-amber-200/50">
         <td class="py-1 pr-3 font-medium">venice</td>

@@ -11,7 +11,7 @@ Think L2Beat, for confidential AI.
 > | near-ai (with hermes) | ✅ Stage 1 | On-chain `ComposeHashAdded` events (§1) + no private persistent state collapses §5 (notice period) to anchor-PR review |
 > | redpill (phala-simple) | ❌ Stage 0 | §7 (no backdoors): `dstack-nvidia-dev` + `DSTACK_AUTHORIZED_KEYS` host-SSH (live 2026-05-05) |
 > | redpill (chutes) | ❌ Stage 0 | §3 (reproducible measurement): shape doesn't expose GPU NRAS or compose hash |
-> | tinfoil | ❌ Stage 0 | §4 (no operator secrets): `runtime_config_fully_attested=false` |
+> | tinfoil | ⚠ Stage 0 (schema) | §4 fails at the schema layer: attested `/config.yml` permits unattested env slots. Live deployment has 2 (`DOMAIN`, `USAGE_REPORTER_SECRET`) — router-only, code-traced off the prompt path. Per-model enclaves have zero. Active-state Stage 1, schema one rename from regression. |
 > | venice | ❌ Stage 0 | Inherits upstream (Phala/NEAR) status without its own gateway-attest hop |
 >
 > **Caveat affecting every row:** Phala's `private-ai-verifier` decodes Intel/NVIDIA JWTs with `verify_signature=False` — not a checklist failure but weakens Block A for every downstream client. Full audit trail in [Known limitations](#known-limitations).
