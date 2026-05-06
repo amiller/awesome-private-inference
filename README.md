@@ -11,7 +11,7 @@ Think L2Beat, for confidential AI.
 > | near-ai (with hermes) | ✅ Stage 1 | On-chain `ComposeHashAdded` events (§1) + no private persistent state collapses §5 (notice period) to anchor-PR review |
 > | redpill (phala-simple) | ❌ Stage 0 | §7 (no backdoors): `dstack-nvidia-dev` + `DSTACK_AUTHORIZED_KEYS` host-SSH (live 2026-05-05) |
 > | redpill (chutes) | ❌ Stage 0 | §3 (reproducible measurement): shape doesn't expose GPU NRAS or compose hash |
-> | tinfoil | ✅ Stage 1 | Per-model enclaves declare zero operator-controllable env vars or secrets. Router has `DOMAIN` (hostname filter, can't redirect TLS-pinned traffic) and `USAGE_REPORTER_SECRET` (HMACs billing telemetry, no prompt content in payload). Neither touches plaintext. |
+> | tinfoil | ✅ Stage 1 | Audit verified all operator-controllable inputs in the attested config are off the prompt path. |
 > | venice | Stage 0 (skill) / 0–1 (infra) | Two-layer audit. **Infra:** depends on backend — `e2ee-glm-5` NEAR-backed (inherits NEAR's verdict), `e2ee-venice-uncensored-24b-p` Phala-backed (per-deployment review). **Skill story:** Stage 0 — `veniceai/skills` misnames protocol, 404 URL, no verification steps; agents that follow the skill build TOFU connections. Closed-chain clients (e.g. hermes) don't load Venice skills. |
 >
 > Full audit trail in [Known limitations](#known-limitations).

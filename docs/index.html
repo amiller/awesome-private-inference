@@ -74,7 +74,7 @@
       <tr class="border-t border-amber-200/50">
         <td class="py-1 pr-3 font-medium">tinfoil</td>
         <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">Stage 1</span></td>
-        <td class="py-1">Per-model enclaves declare zero operator-controllable env vars or secrets. The router has two — <code>DOMAIN</code> (a hostname filter that can't redirect TLS-pinned traffic) and <code>USAGE_REPORTER_SECRET</code> (HMACs billing telemetry; payload contains no prompt content). Neither touches plaintext. Freshness comes from the live TLS handshake to a SEV-bound cert.</td>
+        <td class="py-1">Audit verified all operator-controllable inputs in the attested config are off the prompt path.</td>
       </tr>
       <tr class="border-t border-amber-200/50">
         <td class="py-1 pr-3 font-medium">venice</td>
