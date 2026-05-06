@@ -46,6 +46,7 @@ _STDOUT_LOCK = threading.Lock()
 _INLINE_VERIFY_GATEWAY_COMPOSE_HASHES = {
     "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",  # 2026-05-02 capture
     "75e65dc88b3c2369161054b35ddde27ee43c764d7ae1af65b944c462a6c7147b",  # 2026-05-05 capture
+    "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f",  # 2026-05-06 capture; diff vs 75e65dc88b is +INFERENCE_API_KEY in allowed_envs (renamed MODEL_DISCOVERY_API_KEY, gateway-internal auth)
 }
 
 
