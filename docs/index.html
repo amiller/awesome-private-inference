@@ -40,29 +40,53 @@
 </section>
 
 <section class="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-900">
-  <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 0 banner</h2>
+  <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 1 verdict</h2>
   <p class="mt-2 text-sm leading-relaxed">
-    Reading this page assumes a steelman client doing the full closed-chain E2EE verification — TDX/GPU →
-    static-pinned anchor → inner compose → encrypt to TD-bound key. The
-    <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
-    branch (one of this registry's deliverables) is that client.
-    <strong>(a)</strong> <strong>NEAR with hermes is Stage 1 today.</strong>
-    Cloud-api PR <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a> inline-verifies
-    backends; hermes' static anchor closes the chain end-to-end — Block B pins
-    <code>(model → app_id, compose_hash, os_image_hash, kms_pubkey)</code>, Block C pins per-model
-    <code>(inner_yaml file, commit, file_sha256)</code> against the TDX-bound
-    <code>compose_manager_attestation</code>, plus a <code>model_name == requested_model</code> check that already
-    caught a live silent gateway substitution
-    (<code>deepseek-ai/DeepSeek-V3.1 → Qwen/Qwen3.5-122B-A10B</code>) on 2026-05-05. The inference path has no private
-    persistent state (E2EE keeps prompts/responses ephemeral; the conversations table is metadata-only), so the
-    framework's "withdraw before changes" criterion collapses to anchor-refresh PR review — which hermes enforces by
-    failing closed on rotation until a maintainer merges.
-    <strong>(b)</strong> <strong>RedPill's Phala-direct fleet is still Stage 0.</strong> Every <code>phala/*</code>
-    model boots <code>dstack-nvidia-dev</code> images with operator host-SSH wired through
-    <code>DSTACK_AUTHORIZED_KEYS</code> (live 2026-05-05) — a backdoor that no client-side check can close.
-    <strong>(c)</strong> <strong>Phala's upstream verifier</strong> decodes Intel/NVIDIA JWTs with
-    <code>verify_signature=False</code>; every TDX validation downstream (hermes included) inherits this.
-    Full audits at
+    Each row's automated cryptographic surface is in the matrix's <strong>Surface&nbsp;✅</strong> column.
+    The verdicts below add the framework checklist items the dashboard can't auto-check (governance, backdoors,
+    upgrade transparency) and assume a closed-chain E2EE client like
+    <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent&nbsp;#12201</a>.
+  </p>
+  <table class="mt-3 text-sm w-full">
+    <thead class="text-amber-800">
+      <tr>
+        <th class="text-left py-1 pr-3">Provider</th>
+        <th class="text-left py-1 pr-3">Verdict</th>
+        <th class="text-left py-1">Load-bearing reason</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="border-t border-amber-200/50">
+        <td class="py-1 pr-3 font-medium">near-ai (with hermes)</td>
+        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">Stage 1</span></td>
+        <td class="py-1">Compose-hash rotations are public on-chain (<code>DstackApp.ComposeHashAdded</code> events on Base), satisfying §1 (on-chain attestation). Inference holds no private persistent state, so §5 (upgrade with notice period) collapses to anchor-PR review — hermes fails closed on rotation until merged.</td>
+      </tr>
+      <tr class="border-t border-amber-200/50">
+        <td class="py-1 pr-3 font-medium">redpill (phala-simple)</td>
+        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">Stage 0</span></td>
+        <td class="py-1">§7 (no backdoors / debug paths) fails: every <code>phala/*</code> model boots <code>dstack-nvidia-dev</code> images with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> in the measured <code>pre_launch_script</code> (live 2026-05-05). No client-side check can close this.</td>
+      </tr>
+      <tr class="border-t border-amber-200/50">
+        <td class="py-1 pr-3 font-medium">redpill (chutes)</td>
+        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">Stage 0</span></td>
+        <td class="py-1">Audit surface too thin — Chutes attestation shape doesn't expose GPU NRAS or compose hash, so the §3 (reproducible code measurement) floor is unverifiable.</td>
+      </tr>
+      <tr class="border-t border-amber-200/50">
+        <td class="py-1 pr-3 font-medium">tinfoil</td>
+        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">Stage 0</span></td>
+        <td class="py-1">§4 (no operator access to secrets): <code>runtime_config_fully_attested=false</code>, plus <code>client_nonce_supported=false</code> weakens freshness binding.</td>
+      </tr>
+      <tr class="border-t border-amber-200/50">
+        <td class="py-1 pr-3 font-medium">venice</td>
+        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">Stage 0</span></td>
+        <td class="py-1">Sits downstream of Phala/NEAR; inherits whatever upstream's status is and adds reseller-side trust on routing without its own gateway-attest hop.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="mt-3 text-sm leading-relaxed">
+    <strong>Caveat affecting every row:</strong> Phala's <code>private-ai-verifier</code> decodes Intel/NVIDIA JWTs with
+    <code>verify_signature=False</code>. Not a checklist failure but it weakens Block A for every downstream client.
+    Full per-provider analysis at
     <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
   </p>
 </section>
