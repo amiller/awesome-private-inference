@@ -74,7 +74,7 @@
       <tr class="border-t border-amber-200/50">
         <td class="py-1 pr-3 font-medium">tinfoil</td>
         <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">Stage 1</span></td>
-        <td class="py-1">Audit applied the <a class="underline" href="https://github.com/amiller/devproof-audits-guide/blob/main/framework/AUDIT-GUIDE.md#the-prompt-path-test">prompt-path test</a> to every operator-controllable slot. Per-model enclaves have zero unattested entries; router slots (<code>DOMAIN</code>, <code>USAGE_REPORTER_SECRET</code>) code-traced off the prompt path. Inference is ephemeral — no persistent encrypted data, so §5's withdraw-before-upgrade requirement is vacuous. (<code>client_nonce_supported=false</code> on the scorecard is a non-finding — freshness via live TLS pin to SEV-bound SPKI.)</td>
+        <td class="py-1">Per-model enclaves declare zero operator-controllable env vars or secrets. The router has two — <code>DOMAIN</code> (a hostname filter that can't redirect TLS-pinned traffic) and <code>USAGE_REPORTER_SECRET</code> (HMACs billing telemetry; payload contains no prompt content). Neither touches plaintext. Freshness comes from the live TLS handshake to a SEV-bound cert.</td>
       </tr>
       <tr class="border-t border-amber-200/50">
         <td class="py-1 pr-3 font-medium">venice</td>
