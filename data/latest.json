@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-05-06T18:12:27Z",
-  "git_sha": "f1014e6db1cc2705706cc229f9a38ba13cae4090",
-  "run_id": "25452796769",
+  "generated_at": "2026-05-06T18:35:02Z",
+  "git_sha": "d8a7458f636003c95cc43f89a0f9079013c1ca62",
+  "run_id": "25453874392",
   "attestations": {
     "near-ai": [
       {
         "provider": "near-ai",
         "model": "openai/gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-05-06T18:12:32Z",
+        "verified_at": "2026-05-06T18:35:10Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -35,13 +35,13 @@
           "gateway_compose_hash": "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f"
         },
         "error": null,
-        "latency_s": 5.62
+        "latency_s": 8.58
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5.1-FP8",
         "valid": true,
-        "verified_at": "2026-05-06T18:12:31Z",
+        "verified_at": "2026-05-06T18:35:08Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
@@ -67,13 +67,13 @@
           "gateway_compose_hash": "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f"
         },
         "error": null,
-        "latency_s": 4.33
+        "latency_s": 5.77
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5-FP8",
         "valid": true,
-        "verified_at": "2026-05-06T18:12:29Z",
+        "verified_at": "2026-05-06T18:35:09Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xa774243d3310a5165edb6628f56a4eeb48189ad1",
         "signing_public_key": "59e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
@@ -99,13 +99,13 @@
           "gateway_compose_hash": "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f"
         },
         "error": null,
-        "latency_s": 1.99
+        "latency_s": 6.78
       },
       {
         "provider": "near-ai",
         "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
         "valid": true,
-        "verified_at": "2026-05-06T18:12:30Z",
+        "verified_at": "2026-05-06T18:35:05Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xc03b0cfc81531eb9cffca4c65aabfaf9b181ac63",
         "signing_public_key": "d33af782492ec889abc0b0a30a065bb7c06d898c0982dbd27e10d7eb9640f169f76d6ffbef9562583b225367d0262ff06750ad710aa6bc1c557662c8905783d6",
@@ -131,13 +131,13 @@
           "gateway_compose_hash": "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f"
         },
         "error": null,
-        "latency_s": 3.09
+        "latency_s": 3.37
       },
       {
         "provider": "near-ai",
         "model": "deepseek-ai/DeepSeek-V3-0324",
         "valid": false,
-        "verified_at": "2026-05-06T18:12:29Z",
+        "verified_at": "2026-05-06T18:35:05Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -159,13 +159,13 @@
         },
         "details": {},
         "error": "HTTP 503: {\"error\":\"Provider error: Model 'deepseek-ai/DeepSeek-V3-0324' not found. It's not a valid model name or alias.\"}",
-        "latency_s": 0.44
+        "latency_s": 0.16
       },
       {
         "provider": "near-ai",
         "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
         "valid": false,
-        "verified_at": "2026-05-06T18:12:30Z",
+        "verified_at": "2026-05-06T18:35:06Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -187,7 +187,7 @@
         },
         "details": {},
         "error": "HTTP 503: {\"error\":\"Provider error: Model 'meta-llama/Llama-4-Scout-17B-16E-Instruct' not found. It's not a valid model name or alias.\"}",
-        "latency_s": 0.42
+        "latency_s": 0.15
       }
     ],
     "redpill": [
@@ -195,7 +195,7 @@
         "provider": "redpill",
         "model": "phala/gpt-oss-20b",
         "valid": false,
-        "verified_at": "2026-05-06T18:12:35Z",
+        "verified_at": "2026-05-06T18:35:13Z",
         "attestation_type": "phala-simple",
         "signing_address": "0x21eeEce0aED2d61986425cBaA821c3995c407d65",
         "signing_public_key": "",
@@ -220,20 +220,20 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.93
+        "latency_s": 2.33
       },
       {
         "provider": "redpill",
         "model": "phala/gpt-oss-120b",
-        "valid": true,
-        "verified_at": "2026-05-06T18:12:35Z",
+        "valid": false,
+        "verified_at": "2026-05-06T18:35:13Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
-          "tdx_verified": true,
+          "tdx_verified": false,
           "report_data_binds_key": true,
           "gpu_attested": true,
           "key_derives_to_address": true,
@@ -252,13 +252,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.69
+        "latency_s": 2.86
       },
       {
         "provider": "redpill",
         "model": "phala/qwen-2.5-7b-instruct",
         "valid": false,
-        "verified_at": "2026-05-06T18:12:35Z",
+        "verified_at": "2026-05-06T18:35:13Z",
         "attestation_type": "phala-simple",
         "signing_address": "0x3E6900B04b75e068B52304803Ce6013a12C8Fe0f",
         "signing_public_key": "",
@@ -283,20 +283,20 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.79
+        "latency_s": 2.27
       },
       {
         "provider": "redpill",
         "model": "phala/glm-4.7",
-        "valid": false,
-        "verified_at": "2026-05-06T18:12:36Z",
+        "valid": true,
+        "verified_at": "2026-05-06T18:35:19Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "59e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
-          "tdx_verified": false,
+          "tdx_verified": true,
           "report_data_binds_key": true,
           "gpu_attested": true,
           "key_derives_to_address": true,
@@ -315,44 +315,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.33
+        "latency_s": 8.33
       },
       {
         "provider": "redpill",
         "model": "phala/deepseek-v3.2",
         "valid": true,
-        "verified_at": "2026-05-06T18:12:59Z",
-        "attestation_type": "chutes",
-        "signing_address": "4 instances",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": true,
-          "tdx_verified": true,
-          "report_data_binds_key": true,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {
-          "shape": "chutes",
-          "instance_count": 4
-        },
-        "error": null,
-        "latency_s": 24.11
-      },
-      {
-        "provider": "redpill",
-        "model": "phala/kimi-k2.5",
-        "valid": true,
-        "verified_at": "2026-05-06T18:13:45Z",
+        "verified_at": "2026-05-06T18:35:39Z",
         "attestation_type": "chutes",
         "signing_address": "5 instances",
         "signing_public_key": "",
@@ -377,7 +346,38 @@
           "instance_count": 5
         },
         "error": null,
-        "latency_s": 69.85
+        "latency_s": 26.03
+      },
+      {
+        "provider": "redpill",
+        "model": "phala/kimi-k2.5",
+        "valid": true,
+        "verified_at": "2026-05-06T18:36:26Z",
+        "attestation_type": "chutes",
+        "signing_address": "5 instances",
+        "signing_public_key": "",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "shape": "chutes",
+          "instance_count": 5
+        },
+        "error": null,
+        "latency_s": 73.19
       }
     ],
     "tinfoil": [
@@ -385,7 +385,7 @@
         "provider": "tinfoil",
         "model": "router",
         "valid": true,
-        "verified_at": "2026-05-06T18:13:46Z",
+        "verified_at": "2026-05-06T18:36:27Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "6a1f1a79a1b9b87b3e71228d16eeefb785e9bc7c391e634807887013c3158856",
@@ -451,13 +451,13 @@
           "live_tls_spki_sha256": "57ec5ce4c6a7e96b0e05d96aebf65d73b784974fa93753dfe49aea461f832dce"
         },
         "error": null,
-        "latency_s": 0.3
+        "latency_s": 0.46
       },
       {
         "provider": "tinfoil",
         "model": "gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-05-06T18:13:47Z",
+        "verified_at": "2026-05-06T18:36:27Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "097a995935992ad7e280edb7c6a24d687c4aa698c51ba6256fbbba9448c36149",
@@ -517,13 +517,13 @@
           "live_tls_spki_sha256": "93cfdc32df3468f1012f0f74a81faf151f6a84bdc54815cc3c08aa445981920e"
         },
         "error": null,
-        "latency_s": 0.16
+        "latency_s": 0.13
       },
       {
         "provider": "tinfoil",
         "model": "llama3-3-70b",
         "valid": true,
-        "verified_at": "2026-05-06T18:13:47Z",
+        "verified_at": "2026-05-06T18:36:27Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "31714c4ecb8dcd07a0b1320dd54f0deb72f59e8c47ca8c6abbb9c523741f332c",
@@ -581,13 +581,13 @@
           "live_tls_spki_sha256": "aa63bdddcaf5c0ae4119a7445c18227389b458d8629c4ef64806982ca0a43b9c"
         },
         "error": null,
-        "latency_s": 0.16
+        "latency_s": 0.11
       },
       {
         "provider": "tinfoil",
         "model": "gemma4-31b",
         "valid": true,
-        "verified_at": "2026-05-06T18:13:47Z",
+        "verified_at": "2026-05-06T18:36:27Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "f47758ae521fa882a6f5ca788f9ac2cba369ca5105e4236b7656c7e35a81024d",
@@ -645,13 +645,13 @@
           "live_tls_spki_sha256": "796dc0f356294c9f909a66cd5aec79fb0f6f93115170d5a696bc31154695f9c4"
         },
         "error": null,
-        "latency_s": 0.17
+        "latency_s": 0.16
       },
       {
         "provider": "tinfoil",
         "model": "deepseek-v4-pro",
         "valid": false,
-        "verified_at": "2026-05-06T18:13:46Z",
+        "verified_at": "2026-05-06T18:36:27Z",
         "attestation_type": "error",
         "signing_address": "",
         "signing_public_key": "",
@@ -679,7 +679,7 @@
         "provider": "tinfoil",
         "model": "kimi-k2-6",
         "valid": false,
-        "verified_at": "2026-05-06T18:13:46Z",
+        "verified_at": "2026-05-06T18:36:27Z",
         "attestation_type": "error",
         "signing_address": "",
         "signing_public_key": "",
@@ -709,7 +709,7 @@
         "provider": "venice",
         "model": "e2ee-glm-5",
         "valid": true,
-        "verified_at": "2026-05-06T18:13:50Z",
+        "verified_at": "2026-05-06T18:36:31Z",
         "attestation_type": "venice",
         "signing_address": "0xa774243d3310a5165edb6628f56a4eeb48189ad1",
         "signing_public_key": "0459e5d3f743827f2bea3fe5da358e00a522f2e184814489662a15cb216c72cbf852188eb7e32da89ecd56f05871c9bc2a836d1f5ecea8a810f59dfeeb9f09856d",
@@ -745,7 +745,7 @@
         "provider": "venice",
         "model": "e2ee-qwen3-5-122b-a10b",
         "valid": true,
-        "verified_at": "2026-05-06T18:13:49Z",
+        "verified_at": "2026-05-06T18:36:32Z",
         "attestation_type": "venice",
         "signing_address": "0x6525e128afcffebf7eed05d485d7be983cdae934",
         "signing_public_key": "041d9bbc96671c3fbc983867bd7a6b5c83298e040801764b7085352d84f3f095125db36956caed8c84bfefca635c3c455f409c79a3889d679af688f4aded542fd5",
@@ -775,13 +775,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.26
+        "latency_s": 4.75
       },
       {
         "provider": "venice",
         "model": "e2ee-uncensored-24b-p",
         "valid": false,
-        "verified_at": "2026-05-06T18:13:47Z",
+        "verified_at": "2026-05-06T18:36:27Z",
         "attestation_type": "venice",
         "signing_address": "",
         "signing_public_key": "",
@@ -803,13 +803,13 @@
         },
         "details": {},
         "error": "no TEE attestation available for this model (404)",
-        "latency_s": 0.08
+        "latency_s": 0.16
       },
       {
         "provider": "venice",
         "model": "e2ee-gpt-oss-120b-p",
         "valid": true,
-        "verified_at": "2026-05-06T18:13:50Z",
+        "verified_at": "2026-05-06T18:36:30Z",
         "attestation_type": "venice",
         "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
         "signing_public_key": "04a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -839,7 +839,7 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.19
+        "latency_s": 3.04
       }
     ]
   },
