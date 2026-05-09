@@ -33,9 +33,10 @@ See [live matrix](https://amiller.github.io/awesome-private-inference).
 - NVIDIA GPU: re-verifiable via NRAS.
 - Signing-key-to-address derivation: re-verifiable.
 - Backend-attested-by-gateway: ✅ since cloud-api PR [#552](https://github.com/nearai/cloud-api/pull/552) (Apr 2026) — gateway verifies each backend's TDX/RTMR3/NRAS inline before serving.
-- **Server-side compose_hash anchoring**: ❌ (allowlist empty; see gaps below).
-- **Client-side on-chain anchoring**: ❌ (PR open; see gaps below).
-- **Client-side model→app_id / compose pin**: ✅ in [hermes-agent](https://github.com/amiller/hermes-agent/tree/feat/near-ai-attestation) via static anchor (`hermes_cli/anchors/nearai_mainnet.json`); ❌ in `nearai-cloud-verifier`.
+- **AppAuth Solidity verified**: ✅ as of 2026-05-09 — DstackKms impl `0x2e99ade1…` and DstackApp impl `0x7e5192c0…` (shared by every NEAR per-app proxy) have `exact_match` on Sourcify, Basescan, and Blockscout. Source = `Dstack-TEE/dstack@771f3c9e`, solc 0.8.22 / opt 200.
+- **Server-side compose_hash anchoring**: ❌ (`ALLOWED_COMPOSE_HASHES` empty on cloud-api; see gaps below). N/A under closed-chain verification.
+- **Client-side on-chain anchoring**: ✅ in [`verifiers/near_ai_lightclient.py`](../verifiers/near_ai_lightclient.py) (this repo) and [hermes-agent](https://github.com/amiller/hermes-agent/tree/feat/near-ai-attestation); upstream `nearai-cloud-verifier` PR [#24](https://github.com/nearai/nearai-cloud-verifier/pull/24) still open.
+- **Client-side model→app_id / compose pin**: ✅ in hermes (static anchor) and in this repo's light client (per-model `(yaml, commit, file_sha256)` pin against `compose_manager_attestation.actions[]`); ❌ in upstream `nearai-cloud-verifier`.
 
 ## Known gaps
 
@@ -72,11 +73,11 @@ E2EE). Full trace:
   [#552](https://github.com/nearai/cloud-api/pull/552) /
   [#558](https://github.com/nearai/cloud-api/pull/558).
 - **compose-manager in-memory action log wipes on restart.** Block C2 refuses
-  on `actions=[]`. A liveness regression for the operator, not a leak.
+  on `actions=[]`. A liveness regression for the operator, not a leak. Closed
+  upstream by [compose-manager#11](https://github.com/nearai/compose-manager/pull/11)
+  (merged 2026-05-08); awaiting NEAR's next outer-compose rotation to roll.
 - **`/evidences/quote.json` 0 bytes after 2026-05-02 cert renewal.** Binds
   path A's dstack-ingress TLS cert; path B / C don't depend on it.
-- **AppAuth contracts unverified on Basescan.** `eth_call` against the proxy
-  ABI works regardless of source verification — only blocks human review.
 
 ### Actively enforced by hermes' static pin
 
@@ -88,7 +89,7 @@ substitutes for every Block B1–B5 read:
 
 | Verifier-design block | On-chain authority | hermes static pin |
 |---|---|---|
-| B1: `kmsInfo.k256Pubkey` ↔ `info.key_provider_info.id` | `DstackKms.kmsInfo` (empty on NEAR — see below) | direct pin of `info.key_provider_info.id` |
+| B1: `kmsInfo.k256Pubkey` ↔ `info.key_provider_info.id` | `DstackKms.kmsInfo` (empty on NEAR; closed-chain clients pin `info.key_provider_info.id` directly — populating `kmsInfo` would be belt-and-suspenders) | direct pin of `info.key_provider_info.id` |
 | B2: `allowedOsImages(os_image_hash)` | `DstackKms` (EOA-upgradeable) | `os_image_hashes[]` |
 | B3: `registeredApps(app_id)` | `DstackKms` (EOA-upgradeable) | per-model `app_id` |
 | B4: `model → app_id` map | (no on-chain map) | `models[M].app_id` |
@@ -110,39 +111,47 @@ concrete substitution surface the static pin catches, and the upper bound on
 legitimate refresh cadence: hermes-anchor staleness is bounded by operator
 rotation rate.
 
-### Still requires NEAR action (or further client work)
+### Residual (belt-and-suspenders / further upstream work)
 
-Not blocked by the closed-chain client design, but limit how mechanically
-auditable the chain is for clients that don't ship a static anchor:
+Real but not blocking under closed-chain verification — closed-chain clients
+sidestep these via static-anchor / on-chain reads / inner-compose closure
+they perform themselves.
 
 - **`DstackKms.kmsInfo` is empty on `0x8fa1593fac…`.** All four fields
   (`k256Pubkey`, `caPubkey`, `quote`, `eventlog`) return zero-length bytes;
-  Phala's canonical KMS at `0x2f83172A…` populates them. Without
-  `setKmsInfo(...)`, an external verifier without a static pin has no on-chain
-  anchor for the KMS root pubkey. Fix: NEAR populates `kmsInfo` once.
-- **NEAR-published manifest missing.** No `cloud-api.near.ai/v1/apps/...`
-  route, no signed JSON anchoring `(model → app_id, compose_hashes,
-  os_image_hash, kms_pubkey)`. We've stitched one together as the hermes
-  anchor; an authoritative source-of-truth from NEAR would let other clients
-  align without re-doing the capture.
+  Phala's canonical KMS at `0x2f83172A…` populates them. Each per-CVM
+  attestation already carries `info.key_provider_info.id` (the asserted KMS
+  pubkey), so a closed-chain client can pin it across attestations and trust
+  dstack's now-verified source for `OsRng`-inside-TD root generation. The
+  on-chain `kmsInfo.quote` would be public TEE-attested proof of that fact
+  rather than a transitive trust chain — useful but not load-bearing.
+  Fix: NEAR populates `kmsInfo` once.
+- **NEAR-published manifest is partial.** Per-proxy `app_id` IS in the
+  attestation response (`info.app_id`, `gateway_attestation.info.app_id`).
+  Missing: chain ID (it's Base 8453), KMS factory address, signed
+  `model → app_id` map. We've stitched a complete one together as the hermes
+  anchor + this repo's `MODEL_PINS`; an authoritative source-of-truth from
+  NEAR would let other clients align without re-doing the capture.
 - **AppAuth proxies have `_upgradesDisabled=false`, owner is a single EOA
-  `0x21e6b7ef…`** controlling all six DstackApps. UUPS upgrades are
-  retroactively logged (`Upgraded(address)` events) — auditable but not
-  active-refused unless clients pin the impl too.
-- **Inner-compose closure (Block C) still missing.** `deepseek-ai/DeepSeek-V3.1`,
-  `openai/gpt-oss-120b`, and the rotated GLM all share outer `compose_hash`
-  `0x242a6272…` — the outer compose is one shell; per-model selection happens
-  inside via env into vllm-proxy/sglang. Static anchor proves "an authorized
-  NEAR-AI CVM"; closing on a per-model claim requires reaching the inner compose.
-- **`nearai-cloud-verifier` doesn't yet enforce Block B / Block C.** Still
-  runs only Block A + the model_name check from PR #23; PR
+  `0x21e6b7ef…`.** UUPS upgrades are retroactively logged
+  (`Upgraded(address)` events) — auditable. Closed-chain clients can pin
+  `expected_impl` at slot `0x360894…e103` and reject if the proxy ever
+  delegates elsewhere; this repo's light client does NOT yet do this
+  (deferred — see `near-lightclient-todo.md`). Impl source itself is now
+  publicly verified, so the impl bytecode is auditable, not just the proxy
+  shell.
+- **`nearai-cloud-verifier` upstream doesn't yet enforce Block B / Block C.**
+  Still runs only Block A + model_name check (PR #23). PR
   [#24](https://github.com/nearai/nearai-cloud-verifier/pull/24) for Block B
-  is the natural follow-up.
+  is open; closed-chain reference impl shipped in this repo as
+  `verifiers/near_ai_lightclient.py`.
 - **Verifier JWT signatures unchecked.** Phala's `private-ai-verifier`
   decodes NRAS / Intel Trust Authority JWTs with `verify_signature=False`.
   Acknowledged TODO; affects every downstream that uses it as the TDX oracle.
 
 ## Reproduce
+
+**Block-A only (dashboard verifier — TDX/GPU/report_data, no on-chain or inner-compose):**
 
 ```bash
 export NEAR_API_KEY=...
@@ -152,6 +161,22 @@ python -c "from verifiers.near_ai import verify; \
            r = verify('$NEAR_API_KEY', 'https://cloud-api.near.ai', 'openai/gpt-oss-120b'); \
            import json; print(json.dumps(r.as_dict(), indent=2, default=str))"
 ```
+
+**Closed-chain (Block A + on-chain compose-hash anchor + inner-compose pin):**
+
+```bash
+# Same NEARAI_VERIFIER_PATH as above
+python -m verifiers.near_ai_lightclient --model "zai-org/GLM-5.1-FP8" --onchain live
+```
+
+`--onchain live` queries Base via Blockscout for `addComposeHash` events and
+checks the live `info.compose_hash` is in the authorized set; `--min-age-hours
+24` adds an effective ERC-733 §5 upgrade-notice window. The inner-compose pin
+in `MODEL_PINS` ties the running TD to a specific
+`(yaml, commit, file_sha256)` in `nearai/cvm-compose-files`, which after
+[#30](https://github.com/nearai/cvm-compose-files/pull/30) (HF revision
+pinning, merged 2026-05-06) transitively commits the HuggingFace weight
+checkpoint.
 
 ## History
 
@@ -164,4 +189,5 @@ External case-study artifacts (devproof-audits-guide):
 - Earlier scope (closed): [near-private-chat ATTESTATION-GAP-ANALYSIS](https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-private-chat/ATTESTATION-GAP-ANALYSIS.md).
 
 Client integration:
-- [hermes-agent `feat/near-ai-attestation`](https://github.com/amiller/hermes-agent/tree/feat/near-ai-attestation) — strict per-model attestation for near-ai inside hermes (PR upstream to NousResearch/hermes-agent #12201). Adds an `attestation_status` tool so the agent can introspect verified TEE state from the in-process cache. As of May 2026 also strict-mode pins `(model → app_id, compose_hashes[], os_image_hash, kms_pubkey)` via a static anchor file (Block B-static); on-chain RPC reader (Block B) and inner-compose closure (Block C) are the natural follow-ups.
+- [hermes-agent `feat/near-ai-attestation`](https://github.com/amiller/hermes-agent/tree/feat/near-ai-attestation) — strict per-model attestation for near-ai inside hermes (PR upstream to NousResearch/hermes-agent #12201). Adds an `attestation_status` tool so the agent can introspect verified TEE state from the in-process cache. Strict-mode pins `(model → app_id, compose_hashes[], os_image_hash, kms_pubkey)` via a static anchor file plus per-model inner-compose closure (`compose_manager_attestation.actions[] → file, commit, file_sha256`).
+- [`verifiers/near_ai_lightclient.py`](../verifiers/near_ai_lightclient.py) — closed-chain reference verifier in this repo. Block A primitives (TDX/GPU/report_data) + Block-B-via-on-chain (`addComposeHash` event log on Base, with optional age-filter) + Block-C inner-compose pin (`(yaml, commit, file_sha256)` per model, transitively committing HF revision after `cvm-compose-files#30`).
