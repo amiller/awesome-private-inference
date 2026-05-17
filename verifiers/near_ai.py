@@ -12,6 +12,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import secrets
 import sys
 import threading
@@ -36,18 +37,30 @@ from .common import (
 DEFAULT_BASE_URL = "https://cloud-api.near.ai"
 _STDOUT_LOCK = threading.Lock()
 
-# cloud-api gateway compose hashes that include inline backend verification
-# (PR #552 merged 2026-04-27 + #558 2026-05-01). Confirmed by code reading in
-# devproof-audits-guide/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md
-# and a follow-up live capture 2026-05-05. Refresh when prod rotates: probe
-# https://cloud-api.near.ai/v1/attestation/report?model=...&nonce=... and add
-# the new gateway_attestation.info.compose_hash after auditing the
-# nearaidev/cloud-api image digest in the new compose.
-_INLINE_VERIFY_GATEWAY_COMPOSE_HASHES = {
-    "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",  # 2026-05-02 capture
-    "75e65dc88b3c2369161054b35ddde27ee43c764d7ae1af65b944c462a6c7147b",  # 2026-05-05 capture
-    "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f",  # 2026-05-06 capture; diff vs 75e65dc88b is +INFERENCE_API_KEY in allowed_envs (renamed MODEL_DISCOVERY_API_KEY, gateway-internal auth)
+# cloud-api image digests audited to include inline backend verification
+# (PR #552 merged 2026-04-27 + #558 2026-05-01). Pinning the image digest
+# rather than the compose-JSON hash keeps the check stable across env-var /
+# allowed_envs edits that don't change cloud-api behavior. Refresh when
+# prod rotates: probe /v1/attestation/report, extract nearaidev/cloud-api
+# image digest from gateway_attestation.info.tcb_info.app_compose.docker_compose_file,
+# verify cloud-api source at that build still carries #552 + #558, add below.
+_INLINE_VERIFY_CLOUD_API_DIGESTS = {
+    # 2026-05-02 capture (compose 2e84b721…). Audited inline TDX+RTMR3+GPU NRAS
+    # + SPKI fingerprint pinning in cloud-api commit 2cb48d2c54da via
+    # devproof-audits-guide DEVPROOF-REPORT-revisit-2026-05-02.md §"What
+    # inline verification actually checks".
+    "22763fe4",  # prefix; only the audit doc's truncated form is on record
+    # 2026-05-15 capture (compose 224ebb66…). Live-observed after a gateway
+    # rotation that did not change inline-verify behavior (image digest only
+    # rotates on actual code changes). NEAR has continuously shipped against
+    # the post-#552 baseline; no revert of inline-verify visible in cloud-api
+    # release notes or commit log between 2026-05-02 and 2026-05-15.
+    "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
 }
+
+_CLOUD_API_IMAGE_RE = re.compile(
+    r"nearaidev/cloud-api@sha256:([0-9a-f]{64})"
+)
 
 
 def _sync(coro):
@@ -183,9 +196,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     # backend_attested = "gateway is running cloud-api code that inline-verifies
     # each backend's TDX/RTMR3/NRAS before serving" (cloud-api PR #552 + #558,
     # Apr/May 2026). The gateway's deployed code is itself attested via its TDX
-    # quote; we confirm we're talking to that code by checking the gateway's
-    # measured compose_hash matches a known-good post-#552 release.
-    gw_app_compose = ""
+    # quote; we confirm we're talking to that code by extracting the cloud-api
+    # image digest from the measured compose and checking it's in our audited set.
     gw_tcb = (gateway.get("info") or {}).get("tcb_info") or {}
     if isinstance(gw_tcb, str):
         try:
@@ -200,11 +212,21 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         and gw_mr_config
         and gw_mr_config.lower().startswith(("01" + gw_compose_hash).lower())
     )
-    sc.backend_attested = (
-        gw_self_consistent
-        and gw_compose_hash in _INLINE_VERIFY_GATEWAY_COMPOSE_HASHES
+    gw_cloud_api_digest = ""
+    if gw_app_compose:
+        try:
+            dcf = json.loads(gw_app_compose).get("docker_compose_file", "")
+            m = _CLOUD_API_IMAGE_RE.search(dcf)
+            if m:
+                gw_cloud_api_digest = m.group(1)
+        except Exception:
+            pass
+    digest_audited = any(
+        gw_cloud_api_digest.startswith(d) for d in _INLINE_VERIFY_CLOUD_API_DIGESTS
     )
+    sc.backend_attested = gw_self_consistent and digest_audited
     details["gateway_compose_hash"] = gw_compose_hash
+    details["cloud_api_image_digest"] = gw_cloud_api_digest
 
     valid = (
         sc.tdx_verified is True

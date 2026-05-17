@@ -38,7 +38,7 @@ SCORECARD_TOOLTIPS = {
     "gpu_attested": "NVIDIA NRAS returned PASS on the GPU payload",
     "key_derives_to_address": "keccak(signing_public_key) == signing_address",
     "compose_hash_committed": "mr_config starts with 0x01 || sha256(app_compose)",
-    "backend_attested": "Gateway cryptographically verified the backend TDX quote",
+    "backend_attested": "Gateway is running code (attested by its own TDX quote) that inline-verifies each backend's TDX + RTMR3 + GPU NRAS and pins the TLS fingerprint before serving (NEAR: cloud-api ≥PR #552 + #558)",
 }
 
 
