@@ -94,7 +94,7 @@
   
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">near-ai</div>
-    <div class="text-2xl font-semibold mt-1">4 / 6</div>
+    <div class="text-2xl font-semibold mt-1">3 / 6</div>
     <div class="text-xs text-slate-500">models with valid attestation bundles</div>
   </div>
   
@@ -152,7 +152,7 @@
           
           <th class="p-2 text-center" title="mr_config starts with 0x01 || sha256(app_compose)">compose_hash committed</th>
           
-          <th class="p-2 text-center" title="Gateway cryptographically verified the backend TDX quote">Backend attested</th>
+          <th class="p-2 text-center" title="Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.">Backend attested</th>
           
           <th class="p-2 text-center" title="All required layers for this shape are ✅. Necessary but not sufficient for framework Stage 1 — see provider pages for KMS provenance, governance, reproducibility, etc.">Surface ✅</th>
           <th class="p-2 text-right">lat</th>
@@ -190,15 +190,15 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
             
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
+              <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">6.74s</td>
+          <td class="p-2 text-right text-xs text-slate-500">4.48s</td>
         </tr>
         
       
@@ -232,49 +232,49 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
             
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
+              <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">8.7s</td>
+          <td class="p-2 text-right text-xs text-slate-500">5.21s</td>
         </tr>
         
       
-        <tr class="border-t border-slate-100 ">
+        <tr class="border-t border-slate-100 bg-rose-50/30">
           <td class="p-2 font-medium">near-ai</td>
           <td class="p-2 font-mono text-xs">zai-org/GLM-5-FP8</td>
           <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
@@ -282,7 +282,13 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">6.57s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.75s</td>
+        </tr>
+        
+        <tr class="bg-rose-50/20 text-xs text-rose-700">
+          <td colspan="12" class="p-2 pl-4 font-mono">
+            HTTP 503: {"error":"Provider error: Failed to fetch attestation report: Failed to fetch attestation report: error sending request for url (https://glm-5-1.completions.near.ai/v1/attestation/report?model=zai-org
+          </td>
         </tr>
         
       
@@ -316,15 +322,15 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
             
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
+              <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">4.7s</td>
+          <td class="p-2 text-right text-xs text-slate-500">7.53s</td>
         </tr>
         
       
@@ -366,7 +372,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.25s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.09s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
@@ -414,7 +420,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.27s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.44s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
@@ -1179,7 +1185,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-05-17T13:53:09Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/25992749922">25992749922</a> · <code>5ac06bb1</code></span>
+    <span>Snapshot 2026-05-17T23:31:47Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/25992749922">25992749922</a> · <code>5ac06bb1</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>

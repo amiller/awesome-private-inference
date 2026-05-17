@@ -53,6 +53,11 @@ jobs:
           source .venv/bin/activate
           uv pip install -r _nearai-verifier/requirements.txt
 
+      - name: Sweep on-chain authorized compose hashes
+        run: |
+          source .venv/bin/activate
+          python -m probes.onchain_sweep || true   # drift-alert exit code 1 is informational, not fatal
+
       - name: Run attestation probe
         env:
           NEAR_API_KEY: ${{ secrets.NEAR_API_KEY }}
@@ -89,7 +94,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/snapshots/ data/latest.json docs/
+          git add data/snapshots/ data/latest.json data/onchain-status.json docs/
           if ! git diff --staged --quiet; then
             git commit -m "ci: refresh snapshot + dashboard [skip ci]"
             git push

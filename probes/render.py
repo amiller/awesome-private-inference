@@ -38,7 +38,12 @@ SCORECARD_TOOLTIPS = {
     "gpu_attested": "NVIDIA NRAS returned PASS on the GPU payload",
     "key_derives_to_address": "keccak(signing_public_key) == signing_address",
     "compose_hash_committed": "mr_config starts with 0x01 || sha256(app_compose)",
-    "backend_attested": "Gateway is running code (attested by its own TDX quote) that inline-verifies each backend's TDX + RTMR3 + GPU NRAS and pins the TLS fingerprint before serving (NEAR: cloud-api ≥PR #552 + #558)",
+    "backend_attested": (
+        "Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + "
+        "image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent "
+        "but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). "
+        "❌ quote not self-consistent or compose not on the on-chain authorized set."
+    ),
 }
 
 
@@ -46,6 +51,8 @@ def cell(value, required: bool = False):
     """Render a scorecard cell.
 
     ✅ — checked, passed.
+    ○ — chain-authorized and self-consistent, but the analyst pair hasn't audited
+        this image revision yet (our backlog, not the provider's fault).
     ❌ — checked, rejected.
     — (red) — required for this shape's Stage 1 surface but not exposed; fails the same as ❌.
     — (grey) — not applicable to this shape; benign.
@@ -53,6 +60,11 @@ def cell(value, required: bool = False):
     if value is True:
         return {"mark": "✅", "class": "bg-emerald-500/20 text-emerald-700",
                 "title": "Verified"}
+    if value == "audit_pending":
+        return {"mark": "○", "class": "bg-amber-100 text-amber-800 ring-1 ring-amber-300",
+                "title": "Provider's code is chain-authorized and the gateway quote self-attests, "
+                         "but the analyst pair hasn't reviewed this revision yet. This is our "
+                         "backlog, not a provider fault."}
     if value is False:
         return {"mark": "❌", "class": "bg-rose-500/20 text-rose-700",
                 "title": "Rejected by verifier"}
