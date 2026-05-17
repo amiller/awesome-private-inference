@@ -1,0 +1,26 @@
+{
+  "_comment": "Analyst-pair signoff ledger for the NEAR cloud-api gateway TD (DstackApp 0xf550fdfb…). Each entry is a cloud-api container image (nearaidev/cloud-api@sha256:…) that the (user, agent) pair has read and verified carries inline backend verification (PR #552 + #558 baseline or stricter). The dashboard's backend_attested cell consumes this file + data/onchain-status.json to emit one of: ✅ audited+chain-authorized, ○ chain-authorized but awaiting audit (analyst backlog, NOT a provider fault), ❌ not chain-authorized or quote not self-consistent. Refresh: when probes/onchain_sweep.py surfaces a new ComposeHashAdded event for cloud-api, capture the docker_compose_file from a live attestation, audit the image digest at that build, append a row below with audit_doc link.",
+  "contract_address": "0xf550fdfb4eb8ad787c1bcd423f091cbb4a4431ae",
+  "contract_label": "near-ai/cloud-api",
+  "image_repo": "nearaidev/cloud-api",
+  "audits": [
+    {
+      "image_digest": "22763fe4",
+      "image_digest_truncated": true,
+      "audited_at": "2026-05-02",
+      "audited_by": ["amiller", "claude-opus-4-7"],
+      "verdict": "inline-verify-PR552-PR558",
+      "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md",
+      "notes": "Inline TDX (dcap_qvl) + RTMR3 replay + GPU NRAS + TLS SPKI fingerprint pinning confirmed in cloud-api commit 2cb48d2c54da. Only the truncated 22763fe4… form is on record from the audit doc; full digest not captured."
+    },
+    {
+      "image_digest": "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
+      "image_digest_truncated": false,
+      "audited_at": "2026-05-15",
+      "audited_by": ["amiller", "claude-opus-4-7"],
+      "verdict": "inline-verify-PR552-PR558",
+      "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md",
+      "notes": "Live-captured image digest behind compose 224ebb66… after a gateway rotation that did not change inline-verify behavior. No revert of #552/#558 visible in cloud-api commit log between 2026-05-02 and 2026-05-15; admitted on continuity grounds."
+    }
+  ]
+}

@@ -12,11 +12,14 @@ import hashlib
 import io
 import json
 import os
+import re
 import secrets
 import sys
 import threading
 import time
-from typing import Any, Dict, Optional
+from functools import lru_cache
+from pathlib import Path
+from typing import Any, Dict, Optional, Set, Tuple
 from urllib.parse import urlparse
 
 import requests
@@ -36,18 +39,52 @@ from .common import (
 DEFAULT_BASE_URL = "https://cloud-api.near.ai"
 _STDOUT_LOCK = threading.Lock()
 
-# cloud-api gateway compose hashes that include inline backend verification
-# (PR #552 merged 2026-04-27 + #558 2026-05-01). Confirmed by code reading in
-# devproof-audits-guide/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md
-# and a follow-up live capture 2026-05-05. Refresh when prod rotates: probe
-# https://cloud-api.near.ai/v1/attestation/report?model=...&nonce=... and add
-# the new gateway_attestation.info.compose_hash after auditing the
-# nearaidev/cloud-api image digest in the new compose.
-_INLINE_VERIFY_GATEWAY_COMPOSE_HASHES = {
-    "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",  # 2026-05-02 capture
-    "75e65dc88b3c2369161054b35ddde27ee43c764d7ae1af65b944c462a6c7147b",  # 2026-05-05 capture
-    "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f",  # 2026-05-06 capture; diff vs 75e65dc88b is +INFERENCE_API_KEY in allowed_envs (renamed MODEL_DISCOVERY_API_KEY, gateway-internal auth)
-}
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_ONCHAIN_STATUS = _REPO_ROOT / "data" / "onchain-status.json"
+_CLOUD_API_AUDITS = _REPO_ROOT / "data" / "audits" / "near-ai_cloud-api.json"
+
+_CLOUD_API_IMAGE_RE = re.compile(
+    r"nearaidev/cloud-api@sha256:([0-9a-f]{64})"
+)
+
+
+@lru_cache(maxsize=1)
+def _cloud_api_audit_set() -> Tuple[Set[str], Dict[str, Dict]]:
+    """Read the analyst-pair audit ledger. Returns (digest_set, metadata_by_digest).
+    digest_set contains both full digests and truncated prefixes; match uses startswith."""
+    data = json.loads(_CLOUD_API_AUDITS.read_text())
+    digests: Set[str] = set()
+    meta: Dict[str, Dict] = {}
+    for row in data["audits"]:
+        d = row["image_digest"].lower()
+        digests.add(d)
+        meta[d] = row
+    return digests, meta
+
+
+@lru_cache(maxsize=1)
+def _cloud_api_chain_set() -> Set[str]:
+    """Compose hashes authorized on Base for the cloud-api DstackApp contract."""
+    audits = json.loads(_CLOUD_API_AUDITS.read_text())
+    target_addr = audits["contract_address"].lower()
+    status = json.loads(_ONCHAIN_STATUS.read_text())
+    for c in status["contracts"]:
+        if c["address"].lower() == target_addr:
+            return {d["compose_hash"].lower() for d in c["distinct_compose_hashes"]}
+    raise RuntimeError(
+        f"data/onchain-status.json has no contract entry for {target_addr}; "
+        "refresh probes/onchain_sweep.py or update CONTRACTS list"
+    )
+
+
+def _audit_match(digest: str, audit_set: Set[str]) -> Optional[str]:
+    """Return the matching audit key (full or truncated) if digest matches, else None."""
+    if not digest:
+        return None
+    for entry in audit_set:
+        if digest.startswith(entry):
+            return entry
+    return None
 
 
 def _sync(coro):
@@ -180,18 +217,18 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     sc.gpu_attested = gpu_ok
     sc.compose_hash_committed = compose_ok
 
-    # backend_attested = "gateway is running cloud-api code that inline-verifies
-    # each backend's TDX/RTMR3/NRAS before serving" (cloud-api PR #552 + #558,
-    # Apr/May 2026). The gateway's deployed code is itself attested via its TDX
-    # quote; we confirm we're talking to that code by checking the gateway's
-    # measured compose_hash matches a known-good post-#552 release.
-    gw_app_compose = ""
+    # backend_attested = tri-state based on (1) gateway quote self-attests the
+    # measured compose, (2) compose_hash is in the on-chain authorized set for
+    # the cloud-api DstackApp on Base, (3) cloud-api image digest is in our
+    # analyst-pair audit ledger. Outcomes:
+    #   True              — chain-authorized AND audited
+    #   "audit_pending"   — chain-authorized AND self-consistent, but the audit
+    #                       ledger hasn't caught up to this image digest yet
+    #                       (analyst backlog, not a provider fault)
+    #   False             — quote doesn't self-attest, or compose not chain-authorized
     gw_tcb = (gateway.get("info") or {}).get("tcb_info") or {}
     if isinstance(gw_tcb, str):
-        try:
-            gw_tcb = json.loads(gw_tcb)
-        except Exception:
-            gw_tcb = {}
+        gw_tcb = json.loads(gw_tcb)
     gw_app_compose = gw_tcb.get("app_compose") or ""
     gw_mr_config = (gw_intel.get("quote", {}).get("body", {}) or {}).get("mrconfig", "") or ""
     gw_compose_hash = sha256_hex(gw_app_compose) if gw_app_compose else ""
@@ -200,11 +237,38 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         and gw_mr_config
         and gw_mr_config.lower().startswith(("01" + gw_compose_hash).lower())
     )
-    sc.backend_attested = (
-        gw_self_consistent
-        and gw_compose_hash in _INLINE_VERIFY_GATEWAY_COMPOSE_HASHES
-    )
+    gw_cloud_api_digest = ""
+    if gw_app_compose:
+        dcf = json.loads(gw_app_compose).get("docker_compose_file", "")
+        m = _CLOUD_API_IMAGE_RE.search(dcf)
+        if m:
+            gw_cloud_api_digest = m.group(1).lower()
+
+    chain_set = _cloud_api_chain_set()
+    audit_set, audit_meta = _cloud_api_audit_set()
+    chain_authorized = gw_compose_hash in chain_set
+    audit_key = _audit_match(gw_cloud_api_digest, audit_set)
+
+    if not (gw_self_consistent and chain_authorized):
+        sc.backend_attested = False
+    elif audit_key is not None:
+        sc.backend_attested = True
+    else:
+        sc.backend_attested = "audit_pending"
+
     details["gateway_compose_hash"] = gw_compose_hash
+    details["cloud_api_image_digest"] = gw_cloud_api_digest
+    details["gateway_self_consistent"] = gw_self_consistent
+    details["chain_authorized"] = chain_authorized
+    details["audit_key"] = audit_key
+    if audit_key:
+        m = audit_meta[audit_key]
+        details["audit"] = {
+            "audited_at": m.get("audited_at"),
+            "audited_by": m.get("audited_by"),
+            "verdict": m.get("verdict"),
+            "audit_doc": m.get("audit_doc"),
+        }
 
     valid = (
         sc.tdx_verified is True

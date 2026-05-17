@@ -75,7 +75,7 @@
   
   <div class="border-l-4 border-emerald-500/40 pl-4">
     <dt class="font-semibold">Backend attested</dt>
-    <dd class="text-sm text-slate-700">Gateway cryptographically verified the backend TDX quote</dd>
+    <dd class="text-sm text-slate-700">Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.</dd>
   </div>
   
 </dl>
@@ -103,10 +103,42 @@ compromised provider cannot fake a ✅ by lying about its own verification resul
   for at least one of:
 </p>
 <ul>
-  <li><strong>Backend not attested.</strong> Gateway fetches the backend's attestation JSON but
-    does not cryptographically verify it — <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">NEAR Issue #224</a>.</li>
-  <li><strong>Operator-mutable routing.</strong> Database field controls which backend a gateway calls.</li>
+  <li><strong>Backend code not pinned at the gateway.</strong> NEAR's cloud-api now inline-verifies
+    each backend's TDX quote + RTMR3 + GPU NRAS and pins the TLS fingerprint before serving
+    (<a class="underline" href="https://github.com/nearai/cloud-api/pull/552">PR #552</a> /
+    <a class="underline" href="https://github.com/nearai/cloud-api/pull/558">#558</a>, Apr–May 2026) —
+    the dashboard's <code>Backend attested</code> column reflects this. But
+    <code>ALLOWED_COMPOSE_HASHES</code> is still unset server-side, so any TCB-current TDX TD the
+    operator points the gateway at passes. Closed-chain clients close the gap by pulling
+    <code>compose_hash</code> out of the attestation themselves and checking it against the on-chain
+    <code>addComposeHash</code> set on Base. Tracking issue:
+    <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">nearai/cloud-api#224</a>.</li>
+  <li><strong>Operator-mutable routing.</strong> Database field controls which backend a gateway calls
+    (admin-gated; bounded but not eliminated by the inline-verify hop above).</li>
   <li><strong>KMS opacity.</strong> Mutable image tags, no upgrade log on the KMS providing key material.</li>
+</ul>
+
+<h2 class="mt-8 text-xl font-semibold">How <code>Backend attested</code> is decided</h2>
+<p>
+  For providers with a gateway→backend hop, we cross-reference three signals before marking the
+  column. The cell is tri-state, and the middle state is deliberate: we want to distinguish
+  "provider shipped code we haven't audited yet" from "provider is doing something wrong."
+</p>
+<ul>
+  <li><strong>✅ Verified.</strong> The gateway's TDX quote self-attests its measured compose
+    (<code>mr_config = 0x01 ‖ sha256(app_compose)</code>), the compose_hash appears in the
+    <code>ComposeHashAdded(bytes32)</code> set on the gateway's DstackApp contract on Base
+    (<code>probes/onchain_sweep.py</code> enumerates these), AND the cloud-api container image
+    digest pulled from the measured docker-compose is in our analyst-pair audit ledger
+    (<code>data/audits/near-ai_cloud-api.json</code>), with a link to the audit doc.</li>
+  <li><strong>○ Audit pending</strong> (amber outline). All the chain + self-consistency checks
+    pass, but the image digest is new — we haven't read the diff yet. Treat as "queue
+    grew faster than the analyst pair did," not a provider regression. The
+    <code>details.cloud_api_image_digest</code> in the snapshot identifies what's waiting to be
+    reviewed.</li>
+  <li><strong>❌ Rejected.</strong> Either the gateway quote doesn't self-attest the compose it
+    claims, or the compose isn't in the on-chain authorized set — meaning someone deployed code
+    the EOA owner never signed into the DstackApp.</li>
 </ul>
 
 <h2 class="mt-8 text-xl font-semibold">Reproduce</h2>
@@ -133,7 +165,7 @@ python -m probes.render
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-05-17T13:53:09Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/25992749922">25992749922</a> · <code>5ac06bb1</code></span>
+    <span>Snapshot 2026-05-17T23:31:47Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/25992749922">25992749922</a> · <code>5ac06bb1</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>

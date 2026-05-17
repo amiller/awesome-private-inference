@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-05-17T13:53:09Z",
+  "generated_at": "2026-05-17T23:31:47Z",
   "git_sha": "5ac06bb162c1f6775790e2f08296887ea0be2333",
   "run_id": "25992749922",
   "attestations": {
@@ -9,7 +9,7 @@
         "provider": "near-ai",
         "model": "openai/gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-05-17T13:53:16Z",
+        "verified_at": "2026-05-17T23:31:44Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -21,7 +21,7 @@
           "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": true,
-          "backend_attested": false,
+          "backend_attested": true,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
           "tls_pubkey_pinned": null,
@@ -32,16 +32,29 @@
         "details": {
           "inner_models": 1,
           "gpu_verdict": true,
-          "gateway_compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064"
+          "gateway_compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064",
+          "cloud_api_image_digest": "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
+          "gateway_self_consistent": true,
+          "chain_authorized": true,
+          "audit_key": "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
+          "audit": {
+            "audited_at": "2026-05-15",
+            "audited_by": [
+              "amiller",
+              "claude-opus-4-7"
+            ],
+            "verdict": "inline-verify-PR552-PR558",
+            "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md"
+          }
         },
         "error": null,
-        "latency_s": 6.74
+        "latency_s": 4.48
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5.1-FP8",
         "valid": true,
-        "verified_at": "2026-05-17T13:53:18Z",
+        "verified_at": "2026-05-17T23:31:45Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
@@ -53,7 +66,7 @@
           "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": true,
-          "backend_attested": false,
+          "backend_attested": true,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
           "tls_pubkey_pinned": null,
@@ -64,28 +77,41 @@
         "details": {
           "inner_models": 1,
           "gpu_verdict": true,
-          "gateway_compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064"
+          "gateway_compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064",
+          "cloud_api_image_digest": "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
+          "gateway_self_consistent": true,
+          "chain_authorized": true,
+          "audit_key": "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
+          "audit": {
+            "audited_at": "2026-05-15",
+            "audited_by": [
+              "amiller",
+              "claude-opus-4-7"
+            ],
+            "verdict": "inline-verify-PR552-PR558",
+            "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md"
+          }
         },
         "error": null,
-        "latency_s": 8.7
+        "latency_s": 5.21
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5-FP8",
-        "valid": true,
-        "verified_at": "2026-05-17T13:53:15Z",
+        "valid": false,
+        "verified_at": "2026-05-17T23:31:40Z",
         "attestation_type": "tdx+gpu",
-        "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
-        "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
+        "signing_address": "",
+        "signing_public_key": "",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": true,
-          "tdx_verified": true,
-          "report_data_binds_key": true,
-          "gpu_attested": true,
-          "key_derives_to_address": true,
-          "compose_hash_committed": true,
-          "backend_attested": false,
+          "nonce_bound": null,
+          "tdx_verified": null,
+          "report_data_binds_key": null,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
           "tls_pubkey_pinned": null,
@@ -93,19 +119,15 @@
           "client_nonce_supported": null,
           "runtime_config_fully_attested": null
         },
-        "details": {
-          "inner_models": 1,
-          "gpu_verdict": true,
-          "gateway_compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064"
-        },
-        "error": null,
-        "latency_s": 6.57
+        "details": {},
+        "error": "HTTP 503: {\"error\":\"Provider error: Failed to fetch attestation report: Failed to fetch attestation report: error sending request for url (https://glm-5-1.completions.near.ai/v1/attestation/report?model=zai-org",
+        "latency_s": 0.75
       },
       {
         "provider": "near-ai",
         "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
         "valid": true,
-        "verified_at": "2026-05-17T13:53:14Z",
+        "verified_at": "2026-05-17T23:31:47Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xc03b0cfc81531eb9cffca4c65aabfaf9b181ac63",
         "signing_public_key": "d33af782492ec889abc0b0a30a065bb7c06d898c0982dbd27e10d7eb9640f169f76d6ffbef9562583b225367d0262ff06750ad710aa6bc1c557662c8905783d6",
@@ -117,7 +139,7 @@
           "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": true,
-          "backend_attested": false,
+          "backend_attested": true,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
           "tls_pubkey_pinned": null,
@@ -128,16 +150,29 @@
         "details": {
           "inner_models": 1,
           "gpu_verdict": true,
-          "gateway_compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064"
+          "gateway_compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064",
+          "cloud_api_image_digest": "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
+          "gateway_self_consistent": true,
+          "chain_authorized": true,
+          "audit_key": "67dac8134ca6d048098e40a8faff0b44a5c34e96d4c00fba56a80c2d147a8e9c",
+          "audit": {
+            "audited_at": "2026-05-15",
+            "audited_by": [
+              "amiller",
+              "claude-opus-4-7"
+            ],
+            "verdict": "inline-verify-PR552-PR558",
+            "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md"
+          }
         },
         "error": null,
-        "latency_s": 4.7
+        "latency_s": 7.53
       },
       {
         "provider": "near-ai",
         "model": "deepseek-ai/DeepSeek-V3-0324",
         "valid": false,
-        "verified_at": "2026-05-17T13:53:14Z",
+        "verified_at": "2026-05-17T23:31:40Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -159,13 +194,13 @@
         },
         "details": {},
         "error": "HTTP 503: {\"error\":\"Provider error: Model 'deepseek-ai/DeepSeek-V3-0324' not found. It's not a valid model name or alias.\"}",
-        "latency_s": 0.25
+        "latency_s": 0.09
       },
       {
         "provider": "near-ai",
         "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
         "valid": false,
-        "verified_at": "2026-05-17T13:53:14Z",
+        "verified_at": "2026-05-17T23:31:41Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "",
         "signing_public_key": "",
@@ -187,7 +222,7 @@
         },
         "details": {},
         "error": "HTTP 503: {\"error\":\"Provider error: Model 'meta-llama/Llama-4-Scout-17B-16E-Instruct' not found. It's not a valid model name or alias.\"}",
-        "latency_s": 0.27
+        "latency_s": 0.44
       }
     ],
     "redpill": [
