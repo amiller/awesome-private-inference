@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-29T14:20:17Z",
+  "generated_at": "2026-05-30T13:59:12Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 44637395,
-  "to_block": 46637395,
+  "from_block": 44679970,
+  "to_block": 46679970,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,13 +11,13 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 24,
+      "event_count": 23,
       "distinct_compose_hashes": [
         {
           "compose_hash": "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
-          "first_seen_block": 44651894,
-          "first_seen_timestamp": 1776093135,
-          "first_seen_date": "2026-04-13T15:12:15Z"
+          "first_seen_block": 44777337,
+          "first_seen_timestamp": 1776344021,
+          "first_seen_date": "2026-04-16T12:53:41Z"
         },
         {
           "compose_hash": "700adbf53ad4a14e58d2eae65776d451b914b1f5d377c20c7a4e6cca681446ec",
@@ -87,11 +87,6 @@
         }
       ],
       "events": [
-        {
-          "block": 44651894,
-          "compose_hash": "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
-          "tx": "0x49598c88334119155f08fbce2da7a2361962a7c2cc9717043f5ddf6effa2ef05"
-        },
         {
           "block": 44777337,
           "compose_hash": "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
@@ -267,12 +262,6 @@
       "event_count": 124,
       "distinct_compose_hashes": [
         {
-          "compose_hash": "439d4b5bf89485b6e4568cab8fd5aab6c22b6909559f6e4cc853fe8424659bd6",
-          "first_seen_block": 44673440,
-          "first_seen_timestamp": 1776136227,
-          "first_seen_date": "2026-04-14T03:10:27Z"
-        },
-        {
           "compose_hash": "e0ec83b8ee253be0d6a2451eb424c1b3b130477ef19943aa3f40931c9115d20b",
           "first_seen_block": 44716639,
           "first_seen_timestamp": 1776222625,
@@ -370,16 +359,6 @@
         }
       ],
       "events": [
-        {
-          "block": 44673440,
-          "compose_hash": "439d4b5bf89485b6e4568cab8fd5aab6c22b6909559f6e4cc853fe8424659bd6",
-          "tx": "0x072b9f509473686c66dcbcee07c53d93715070d7f789b4bb1aee55e48050e791"
-        },
-        {
-          "block": 44673455,
-          "compose_hash": "439d4b5bf89485b6e4568cab8fd5aab6c22b6909559f6e4cc853fe8424659bd6",
-          "tx": "0x446f3d91f8bb51f4510051f60d78b1bde80b9eb34e438fc157ea109c38879a34"
-        },
         {
           "block": 44716639,
           "compose_hash": "e0ec83b8ee253be0d6a2451eb424c1b3b130477ef19943aa3f40931c9115d20b",
@@ -989,6 +968,16 @@
           "block": 46617607,
           "compose_hash": "00a2639fb294b0ade5fa2047c2873f273f96680bb505103cf99ec97ca5047bbe",
           "tx": "0xc55fff0a441395bab205a0e0cd77749094b7f873a91a8584f6a9c69c40c51ad7"
+        },
+        {
+          "block": 46660713,
+          "compose_hash": "00a2639fb294b0ade5fa2047c2873f273f96680bb505103cf99ec97ca5047bbe",
+          "tx": "0x4b3b7d5ea3e87a69a89fd8167b4afe480455d8186f86fe26f5aca616a8652916"
+        },
+        {
+          "block": 46660728,
+          "compose_hash": "00a2639fb294b0ade5fa2047c2873f273f96680bb505103cf99ec97ca5047bbe",
+          "tx": "0x6f94d16e2598c7eee8e4490d10b5e1ae26b8357b0f8c044866c245514429f897"
         }
       ],
       "new_since_anchor": null
