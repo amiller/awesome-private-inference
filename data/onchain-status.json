@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-01T15:32:31Z",
+  "generated_at": "2026-06-02T14:42:20Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 44769127,
-  "to_block": 46769127,
+  "from_block": 44810862,
+  "to_block": 46810862,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,19 +11,13 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 23,
+      "event_count": 24,
       "distinct_compose_hashes": [
         {
           "compose_hash": "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
-          "first_seen_block": 44777337,
-          "first_seen_timestamp": 1776344021,
-          "first_seen_date": "2026-04-16T12:53:41Z"
-        },
-        {
-          "compose_hash": "700adbf53ad4a14e58d2eae65776d451b914b1f5d377c20c7a4e6cca681446ec",
-          "first_seen_block": 44791240,
-          "first_seen_timestamp": 1776371827,
-          "first_seen_date": "2026-04-16T20:37:07Z"
+          "first_seen_block": 44851056,
+          "first_seen_timestamp": 1776491459,
+          "first_seen_date": "2026-04-18T05:50:59Z"
         },
         {
           "compose_hash": "409193986088efa406a283dfb8f9a542190a5957b9e928432890a46c76a74ce9",
@@ -84,19 +78,21 @@
           "first_seen_block": 46520585,
           "first_seen_timestamp": 1779830517,
           "first_seen_date": "2026-05-26T21:21:57Z"
+        },
+        {
+          "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
+          "first_seen_block": 46802529,
+          "first_seen_timestamp": 1780394405,
+          "first_seen_date": "2026-06-02T10:00:05Z"
+        },
+        {
+          "compose_hash": "bdabc1ea194db60a0134214ffb7d6f7baeded797c9e228388fb28f4cd618bf29",
+          "first_seen_block": 46806749,
+          "first_seen_timestamp": 1780402845,
+          "first_seen_date": "2026-06-02T12:20:45Z"
         }
       ],
       "events": [
-        {
-          "block": 44777337,
-          "compose_hash": "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
-          "tx": "0xadbdf202a73747aa0e5ddeae6187b3d93ac0536609e7d3afea037678dcd9899d"
-        },
-        {
-          "block": 44791240,
-          "compose_hash": "700adbf53ad4a14e58d2eae65776d451b914b1f5d377c20c7a4e6cca681446ec",
-          "tx": "0x532ff2275978b73a1332f75dc6ebd8de8a37bb09d3ed1c1d0ff90ad112386504"
-        },
         {
           "block": 44851056,
           "compose_hash": "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
@@ -201,6 +197,21 @@
           "block": 46539528,
           "compose_hash": "5ebba2067c7358bd120b438bbe0b6127c24d7ebf9780c3d14cf0d1c872d81fcf",
           "tx": "0x11f31c93bc2f91520b05523a293b1e08358a5b37d8a0547be329254fbe4bd539"
+        },
+        {
+          "block": 46802529,
+          "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
+          "tx": "0xb932c5e19d062370e5cfb1f86710e9ab0654c0a9e14a73387ad823dee4cba1fd"
+        },
+        {
+          "block": 46806749,
+          "compose_hash": "bdabc1ea194db60a0134214ffb7d6f7baeded797c9e228388fb28f4cd618bf29",
+          "tx": "0xc2a9a665fc7f08b01b1b2c74c9c552d4c07b88a9ef6f0c25e412e3ce6e72880a"
+        },
+        {
+          "block": 46809539,
+          "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
+          "tx": "0xc8064c74730c3e715320414fa497298897f1482eeed764f6715b7746bb96f17d"
         }
       ],
       "new_since_anchor": [
@@ -251,6 +262,18 @@
           "first_seen_block": 46520585,
           "first_seen_timestamp": 1779830517,
           "first_seen_date": "2026-05-26T21:21:57Z"
+        },
+        {
+          "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
+          "first_seen_block": 46802529,
+          "first_seen_timestamp": 1780394405,
+          "first_seen_date": "2026-06-02T10:00:05Z"
+        },
+        {
+          "compose_hash": "bdabc1ea194db60a0134214ffb7d6f7baeded797c9e228388fb28f4cd618bf29",
+          "first_seen_block": 46806749,
+          "first_seen_timestamp": 1780402845,
+          "first_seen_date": "2026-06-02T12:20:45Z"
         }
       ]
     },
@@ -259,26 +282,8 @@
       "label": "near-ai/cloud-api",
       "anchor_relevant": false,
       "_note": "gateway TD; pinned in awesome-private-inference verifier for backend_attested",
-      "event_count": 124,
+      "event_count": 114,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "first_seen_block": 44803041,
-          "first_seen_timestamp": 1776395429,
-          "first_seen_date": "2026-04-17T03:10:29Z"
-        },
-        {
-          "compose_hash": "59f8d1299078b09aacb19648c99edb4e5cd2a471df3490fbae8e1f83d3b39be8",
-          "first_seen_block": 44808905,
-          "first_seen_timestamp": 1776407157,
-          "first_seen_date": "2026-04-17T06:25:57Z"
-        },
-        {
-          "compose_hash": "9773f8a1328797941cc76ec8f42e6e0cd83624514bf1fc0733c58292913f6f70",
-          "first_seen_block": 44810807,
-          "first_seen_timestamp": 1776410961,
-          "first_seen_date": "2026-04-17T07:29:21Z"
-        },
         {
           "compose_hash": "3a5b9747bc6731c5de6c6d6740c3c37cc4522a935b1655e2b757d81089df31f0",
           "first_seen_block": 44813266,
@@ -353,56 +358,6 @@
         }
       ],
       "events": [
-        {
-          "block": 44803041,
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "tx": "0x82769041c649afcea867b5eb05cbb8ae19ff891d97bb12ca540a5e5fb98f2350"
-        },
-        {
-          "block": 44803056,
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "tx": "0x9cb697d3f8985ade771e84f64e1770774e31eed879ab46be604d20c128f34b6c"
-        },
-        {
-          "block": 44806499,
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "tx": "0xad63dcfb317ba85ae0e7b8a86cdb3d5d8d1dee86f13a3ebe3144638410c648d7"
-        },
-        {
-          "block": 44806514,
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "tx": "0xdafefcffc3e726e07e90f7e7115aa4b7f7732fb77c373c831f8d242023005098"
-        },
-        {
-          "block": 44807750,
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "tx": "0x973b92b4bde2b52151255e04587001df6f816723d8f72e8c49951e268eb1388f"
-        },
-        {
-          "block": 44807764,
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "tx": "0x01eeee30f3a4e2a7d653d81fa5b5f21a789d3d35c6790ca1d1c47454ad7f1843"
-        },
-        {
-          "block": 44808905,
-          "compose_hash": "59f8d1299078b09aacb19648c99edb4e5cd2a471df3490fbae8e1f83d3b39be8",
-          "tx": "0xb8b36d7d9a41c851663c4f91180b3740e1326f6843026eb2d597c43c7cf50d07"
-        },
-        {
-          "block": 44808919,
-          "compose_hash": "59f8d1299078b09aacb19648c99edb4e5cd2a471df3490fbae8e1f83d3b39be8",
-          "tx": "0xcf97ae89adf8c60c29f0850cb27b9d41aa1b15bb35bbb6e8f0d24531292dd0ef"
-        },
-        {
-          "block": 44810807,
-          "compose_hash": "9773f8a1328797941cc76ec8f42e6e0cd83624514bf1fc0733c58292913f6f70",
-          "tx": "0x89536aa83837fd30d67208ec67b4d3ce21067ac47d1876a1f812cb7e57069ad8"
-        },
-        {
-          "block": 44810822,
-          "compose_hash": "9773f8a1328797941cc76ec8f42e6e0cd83624514bf1fc0733c58292913f6f70",
-          "tx": "0x6f69b81df519f1f6a6b9ca527c79704456b2dfde79c66ef9b7feb10bef85ffa3"
-        },
         {
           "block": 44813266,
           "compose_hash": "3a5b9747bc6731c5de6c6d6740c3c37cc4522a935b1655e2b757d81089df31f0",
