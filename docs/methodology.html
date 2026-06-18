@@ -74,6 +74,11 @@
   </div>
   
   <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">Prod OS image</dt>
+    <dd class="text-sm text-slate-700">vm_config.image is the production dstack OS image, not dstack-nvidia-dev. The dev image ships sshd + debug-tweaks + tools-profile; with DSTACK_AUTHORIZED_KEYS it gives the operator host-network-namespace root SSH inside the CVM (prompts in /proc/<vllm>/mem exfiltratable). Flips ✅ when the fleet runs dstack-nvidia-* prod.</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
     <dt class="font-semibold">Backend attested</dt>
     <dd class="text-sm text-slate-700">Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.</dd>
   </div>
@@ -165,7 +170,7 @@ python -m probes.render
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-06-17T14:30:55Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27696239050">27696239050</a> · <code>f558c9e5</code></span>
+    <span>Snapshot 2026-06-18T13:32:17Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27762806975">27762806975</a> · <code>1b2dc1f5</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>

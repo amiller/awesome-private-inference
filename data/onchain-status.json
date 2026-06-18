@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-17T14:30:54Z",
+  "generated_at": "2026-06-18T13:32:16Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 45458518,
-  "to_block": 47458518,
+  "from_block": 45499956,
+  "to_block": 47499956,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,7 +11,7 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 40,
+      "event_count": 41,
       "distinct_compose_hashes": [
         {
           "compose_hash": "95cbf0a83038191232da507282e3df1e944f079249e4735786e99cf62f891cf9",
@@ -180,6 +180,12 @@
           "first_seen_block": 47442202,
           "first_seen_timestamp": 1781673751,
           "first_seen_date": "2026-06-17T05:22:31Z"
+        },
+        {
+          "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
+          "first_seen_block": 47483435,
+          "first_seen_timestamp": 1781756217,
+          "first_seen_date": "2026-06-18T04:16:57Z"
         }
       ],
       "events": [
@@ -382,6 +388,11 @@
           "block": 47442202,
           "compose_hash": "002b406e4770df733eba8f7dfce066f1c8e8d041d972cc02da8b9e3756ebca9a",
           "tx": "0x63296e4f29278e789da220bf1693bbd4966a0b7e7d43d21cda553b2e8e88abbd"
+        },
+        {
+          "block": 47483435,
+          "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
+          "tx": "0xc1dc0f6f047ac24ad01447b547bcd57e452cb7e9173faeec43a1d841eb769628"
         }
       ],
       "new_since_anchor": [
@@ -540,6 +551,12 @@
           "first_seen_block": 47442202,
           "first_seen_timestamp": 1781673751,
           "first_seen_date": "2026-06-17T05:22:31Z"
+        },
+        {
+          "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
+          "first_seen_block": 47483435,
+          "first_seen_timestamp": 1781756217,
+          "first_seen_date": "2026-06-18T04:16:57Z"
         }
       ]
     },
@@ -548,13 +565,13 @@
       "label": "near-ai/cloud-api",
       "anchor_relevant": false,
       "_note": "gateway TD; pinned in awesome-private-inference verifier for backend_attested",
-      "event_count": 101,
+      "event_count": 100,
       "distinct_compose_hashes": [
         {
           "compose_hash": "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",
-          "first_seen_block": 45494301,
-          "first_seen_timestamp": 1777777949,
-          "first_seen_date": "2026-05-03T03:12:29Z"
+          "first_seen_block": 45537533,
+          "first_seen_timestamp": 1777864413,
+          "first_seen_date": "2026-05-04T03:13:33Z"
         },
         {
           "compose_hash": "75e65dc88b3c2369161054b35ddde27ee43c764d7ae1af65b944c462a6c7147b",
@@ -681,19 +698,15 @@
           "first_seen_block": 47364882,
           "first_seen_timestamp": 1781519111,
           "first_seen_date": "2026-06-15T10:25:11Z"
+        },
+        {
+          "compose_hash": "a986df434d8f06fba080a3ad4aae7095afeaf8c5a2a336c12763c14b00a1ce91",
+          "first_seen_block": 47458590,
+          "first_seen_timestamp": 1781706527,
+          "first_seen_date": "2026-06-17T14:28:47Z"
         }
       ],
       "events": [
-        {
-          "block": 45494301,
-          "compose_hash": "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",
-          "tx": "0x69ea9048b9455e2e7e74e8430a28725456265498774c474fa58fa3666bd174e4"
-        },
-        {
-          "block": 45494316,
-          "compose_hash": "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",
-          "tx": "0xd15cdd40267f7a3cf1602df34ba7a0e89ada555351cd4b3994309cfae478aae0"
-        },
         {
           "block": 45537533,
           "compose_hash": "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",
@@ -1188,6 +1201,11 @@
           "block": 47364882,
           "compose_hash": "03e1e0d8bc896ff398a219949a1edfcf3ccf028c208ebca3f180b8925c956de0",
           "tx": "0x577538c3846a6064fca2bb0129889a194d0d6ae1f60549e7ed7123c9fcf68604"
+        },
+        {
+          "block": 47458590,
+          "compose_hash": "a986df434d8f06fba080a3ad4aae7095afeaf8c5a2a336c12763c14b00a1ce91",
+          "tx": "0x09a1a2287a3947a6950500f581e3460316c29d0a26bf70e2e32aca838528e6ab"
         }
       ],
       "new_since_anchor": null

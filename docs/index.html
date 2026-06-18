@@ -94,13 +94,13 @@
   
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">near-ai</div>
-    <div class="text-2xl font-semibold mt-1">2 / 6</div>
+    <div class="text-2xl font-semibold mt-1">4 / 6</div>
     <div class="text-xs text-slate-500">models with valid attestation bundles</div>
   </div>
   
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">redpill</div>
-    <div class="text-2xl font-semibold mt-1">3 / 6</div>
+    <div class="text-2xl font-semibold mt-1">6 / 6</div>
     <div class="text-xs text-slate-500">models with valid attestation bundles</div>
   </div>
   
@@ -152,6 +152,8 @@
           
           <th class="p-2 text-center" title="mr_config starts with 0x01 || sha256(app_compose)">compose_hash committed</th>
           
+          <th class="p-2 text-center" title="vm_config.image is the production dstack OS image, not dstack-nvidia-dev. The dev image ships sshd + debug-tweaks + tools-profile; with DSTACK_AUTHORIZED_KEYS it gives the operator host-network-namespace root SSH inside the CVM (prompts in /proc/<vllm>/mem exfiltratable). Flips ✅ when the fleet runs dstack-nvidia-* prod.">Prod OS image</th>
+          
           <th class="p-2 text-center" title="Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.">Backend attested</th>
           
           <th class="p-2 text-center" title="All required layers for this shape are ✅. Necessary but not sufficient for framework Stage 1 — see provider pages for KMS provenance, governance, reproducibility, etc.">Surface ✅</th>
@@ -160,13 +162,33 @@
       </thead>
       <tbody>
       
-        <tr class="border-t border-slate-100 bg-rose-50/30">
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">near-ai</td>
           <td class="p-2 font-mono text-xs">openai/gpt-oss-120b</td>
-          <td class="p-2 text-xs text-slate-500">error</td>
+          <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
@@ -174,23 +196,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300" title="Provider's code is chain-authorized and the gateway quote self-attests, but the analyst pair hasn't reviewed this revision yet. This is our backlog, not a provider fault.">○</span>
           </td>
           
           <td class="p-2 text-center">
@@ -198,23 +204,37 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.0s</td>
-        </tr>
-        
-        <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
-            ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
-          </td>
+          <td class="p-2 text-right text-xs text-slate-500">4.21s</td>
         </tr>
         
       
-        <tr class="border-t border-slate-100 bg-rose-50/30">
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">near-ai</td>
           <td class="p-2 font-mono text-xs">zai-org/GLM-5.1-FP8</td>
-          <td class="p-2 text-xs text-slate-500">error</td>
+          <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
@@ -222,23 +242,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300" title="Provider's code is chain-authorized and the gateway quote self-attests, but the analyst pair hasn't reviewed this revision yet. This is our backlog, not a provider fault.">○</span>
           </td>
           
           <td class="p-2 text-center">
@@ -246,13 +250,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.0s</td>
-        </tr>
-        
-        <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
-            ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
-          </td>
+          <td class="p-2 text-right text-xs text-slate-500">3.09s</td>
         </tr>
         
       
@@ -286,6 +284,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300" title="Provider's code is chain-authorized and the gateway quote self-attests, but the analyst pair hasn't reviewed this revision yet. This is our backlog, not a provider fault.">○</span>
           </td>
           
@@ -294,7 +296,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">2.86s</td>
+          <td class="p-2 text-right text-xs text-slate-500">6.08s</td>
         </tr>
         
       
@@ -328,6 +330,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300" title="Provider's code is chain-authorized and the gateway quote self-attests, but the analyst pair hasn't reviewed this revision yet. This is our backlog, not a provider fault.">○</span>
           </td>
           
@@ -336,7 +342,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">4.76s</td>
+          <td class="p-2 text-right text-xs text-slate-500">6.76s</td>
         </tr>
         
       
@@ -370,6 +376,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
@@ -378,11 +388,11 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.38s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.05s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
+          <td colspan="13" class="p-2 pl-4 font-mono">
             HTTP 503: {"error":{"message":"Provider error: Model 'deepseek-ai/DeepSeek-V3-0324' not found. It's not a valid model name or alias.","type":"provider_error","param":null,"code":null}}
           </td>
         </tr>
@@ -418,6 +428,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
@@ -426,110 +440,24 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.22s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.6s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
+          <td colspan="13" class="p-2 pl-4 font-mono">
             HTTP 503: {"error":{"message":"Provider error: Model 'meta-llama/Llama-4-Scout-17B-16E-Instruct' not found. It's not a valid model name or alias.","type":"provider_error","param":null,"code":null}}
           </td>
         </tr>
         
       
-        <tr class="border-t border-slate-100 bg-rose-50/30">
-          <td class="p-2 font-medium">redpill</td>
-          <td class="p-2 font-mono text-xs">phala/gpt-oss-20b</td>
-          <td class="p-2 text-xs text-slate-500">redpill</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
-            
-          </td>
-          <td class="p-2 text-right text-xs text-slate-500">5.16s</td>
-        </tr>
-        
-        <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
-            HTTP 502: {"error":{"message":"The upstream provider returned an error","type":"upstream_error","code":502,"param":null}}
-          </td>
-        </tr>
-        
-      
-        <tr class="border-t border-slate-100 bg-rose-50/30">
-          <td class="p-2 font-medium">redpill</td>
-          <td class="p-2 font-mono text-xs">phala/gpt-oss-120b</td>
-          <td class="p-2 text-xs text-slate-500">near-relay</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
-            
-          </td>
-          <td class="p-2 text-right text-xs text-slate-500">81.73s</td>
-        </tr>
-        
-      
         <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">redpill</td>
-          <td class="p-2 font-mono text-xs">phala/qwen-2.5-7b-instruct</td>
+          <td class="p-2 font-mono text-xs">phala/gpt-oss-20b</td>
           <td class="p-2 text-xs text-slate-500">phala-simple</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
@@ -564,17 +492,37 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">1.56s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.19s</td>
         </tr>
         
       
-        <tr class="border-t border-slate-100 bg-rose-50/30">
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">redpill</td>
-          <td class="p-2 font-mono text-xs">phala/glm-4.7</td>
-          <td class="p-2 text-xs text-slate-500">redpill</td>
+          <td class="p-2 font-mono text-xs">phala/gpt-oss-120b</td>
+          <td class="p-2 text-xs text-slate-500">near-relay</td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
@@ -582,23 +530,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
           </td>
           
           <td class="p-2 text-center">
@@ -606,13 +538,99 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">10.42s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.99s</td>
         </tr>
         
-        <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
-            HTTP 503: {"error":{"message":"The model is currently unavailable. Please try again later.","type":"service_unavailable","code":503,"param":null}}
+      
+        <tr class="border-t border-slate-100 ">
+          <td class="p-2 font-medium">redpill</td>
+          <td class="p-2 font-mono text-xs">phala/qwen-2.5-7b-instruct</td>
+          <td class="p-2 text-xs text-slate-500">phala-simple</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            
+              <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
+            
+          </td>
+          <td class="p-2 text-right text-xs text-slate-500">2.54s</td>
+        </tr>
+        
+      
+        <tr class="border-t border-slate-100 ">
+          <td class="p-2 font-medium">redpill</td>
+          <td class="p-2 font-mono text-xs">phala/glm-4.7</td>
+          <td class="p-2 text-xs text-slate-500">near-relay</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            
+              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
+            
+          </td>
+          <td class="p-2 text-right text-xs text-slate-500">2.98s</td>
         </tr>
         
       
@@ -650,11 +668,15 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">10.85s</td>
+          <td class="p-2 text-right text-xs text-slate-500">12.78s</td>
         </tr>
         
       
@@ -692,11 +714,15 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">13.15s</td>
+          <td class="p-2 text-right text-xs text-slate-500">11.05s</td>
         </tr>
         
       
@@ -734,11 +760,15 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.24s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.36s</td>
         </tr>
         
       
@@ -776,11 +806,15 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.03s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.15s</td>
         </tr>
         
       
@@ -818,11 +852,15 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.02s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.16s</td>
         </tr>
         
       
@@ -860,11 +898,15 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.02s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.16s</td>
         </tr>
         
       
@@ -872,6 +914,10 @@
           <td class="p-2 font-medium">tinfoil</td>
           <td class="p-2 font-mono text-xs">deepseek-v4-pro</td>
           <td class="p-2 text-xs text-slate-500">error</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
@@ -910,7 +956,7 @@
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
+          <td colspan="13" class="p-2 pl-4 font-mono">
             ConnectionError: HTTPSConnectionPool(host='deepseek-v4-pro.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by NameResolutionError("HTTPSConnection(host='deepseek-v4-pro.tinfoil.containers.tinfoil.dev', port=443): Failed to resolve 'deepseek-v4-pro.tinfoil.containers.tinfoil.dev' ([Errno -2] Name or service not known)"))
           </td>
         </tr>
@@ -950,6 +996,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
@@ -958,7 +1008,7 @@
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
+          <td colspan="13" class="p-2 pl-4 font-mono">
             ConnectionError: HTTPSConnectionPool(host='kimi-k2-6.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by NameResolutionError("HTTPSConnection(host='kimi-k2-6.tinfoil.containers.tinfoil.dev', port=443): Failed to resolve 'kimi-k2-6.tinfoil.containers.tinfoil.dev' ([Errno -2] Name or service not known)"))
           </td>
         </tr>
@@ -994,6 +1044,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
           </td>
           
@@ -1002,7 +1056,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">1.96s</td>
+          <td class="p-2 text-right text-xs text-slate-500">1.98s</td>
         </tr>
         
       
@@ -1036,6 +1090,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
           </td>
           
@@ -1044,7 +1102,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">2.8s</td>
+          <td class="p-2 text-right text-xs text-slate-500">1.98s</td>
         </tr>
         
       
@@ -1082,15 +1140,19 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.16s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.13s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="12" class="p-2 pl-4 font-mono">
+          <td colspan="13" class="p-2 pl-4 font-mono">
             no TEE attestation available for this model (404)
           </td>
         </tr>
@@ -1126,6 +1188,10 @@
           </td>
           
           <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
           </td>
           
@@ -1134,7 +1200,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">2.99s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.65s</td>
         </tr>
         
       
@@ -1203,7 +1269,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-06-17T14:30:55Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27696239050">27696239050</a> · <code>f558c9e5</code></span>
+    <span>Snapshot 2026-06-18T13:32:17Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27762806975">27762806975</a> · <code>1b2dc1f5</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
