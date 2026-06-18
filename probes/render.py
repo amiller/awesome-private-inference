@@ -29,6 +29,7 @@ SCORECARD_LABELS = {
     "key_derives_to_address": "Key derives to addr",
     "compose_hash_committed": "compose_hash committed",
     "prod_os_image": "Prod OS image",
+    "model_bound_to_quote": "Model bound to quote",
     "backend_attested": "Backend attested",
 }
 
@@ -45,6 +46,13 @@ SCORECARD_TOOLTIPS = {
         "DSTACK_AUTHORIZED_KEYS it gives the operator host-network-namespace root SSH "
         "inside the CVM (prompts in /proc/<vllm>/mem exfiltratable). Flips ✅ when the "
         "fleet runs dstack-nvidia-* prod."
+    ),
+    "model_bound_to_quote": (
+        "The served model + serving code are committed to a measured register "
+        "(RTMR or report_data). Red on Chutes: MRTD/RTMRs are identical across "
+        "different -TEE models and serve.py is CFSV-excluded, so a verified quote "
+        "proves a genuine TDX+GPU running a Chutes base image, not which model on "
+        "which code (chutesai/chutes#75)."
     ),
     "backend_attested": (
         "Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + "

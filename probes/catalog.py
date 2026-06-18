@@ -29,4 +29,11 @@ MODELS: dict[str, list[str]] = {
         "llama3-3-70b",
         "gemma4-31b",
     ],
+    "chutes": [
+        "Qwen3-32B-TEE",
+        "gemma-4-31B-TEE",
+        "GLM-5-TEE",
+        "DeepSeek-V3.2-TEE",
+        "Kimi-K2.6-TEE",
+    ],
 }

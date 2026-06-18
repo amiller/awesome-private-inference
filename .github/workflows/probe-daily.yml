@@ -64,6 +64,7 @@ jobs:
           NEAR_API_KEY: ${{ secrets.NEAR_API_KEY }}
           REDPILL_API_KEY: ${{ secrets.REDPILL_API_KEY }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          CHUTES_API_KEY: ${{ secrets.CHUTES_API_KEY }}
           NEARAI_VERIFIER_PATH: ${{ github.workspace }}/_nearai-verifier/py
           PYTHONUNBUFFERED: '1'
         run: |

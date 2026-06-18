@@ -52,6 +52,13 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "compose_hash_committed",
     },
+    # Chutes direct (api.chutes.ai): crypto core is sound, but the served model
+    # and serve.py are unmeasured, so model_bound_to_quote is False by construction
+    # and the shape never reaches Stage 1 (verified quote != verified code/model).
+    "chutes-tee": {
+        "tdx_verified", "nonce_bound", "report_data_binds_key",
+        "model_bound_to_quote",
+    },
     # Venice: TDX+GPU+compose; sits downstream of Phala/NEAR (no own
     # gateway→backend hop to attest from this side).
     "venice": {
@@ -94,6 +101,7 @@ class ScoreCard:
     key_derives_to_address: Optional[bool] = None  # keccak(pubkey) == signing_address
     compose_hash_committed: Optional[bool] = None  # mr_config starts with 0x01||sha256(app_compose)
     prod_os_image: Optional[bool] = None     # vm_config.image is the prod dstack OS image, not dstack-nvidia-dev (no host-SSH/debug-tweaks)
+    model_bound_to_quote: Optional[bool] = None  # the served model+serving code are committed in a measured register (RTMR/report_data)
     backend_attested: Optional[bool] = None  # gateway verified model backend's quote
     catalog_serves: Optional[bool] = None    # model returns 2xx on a chat call
     code_measurement_reproducible: Optional[bool] = None  # sigstore-signed measurement matches enclave
