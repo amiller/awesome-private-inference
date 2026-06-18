@@ -21,6 +21,15 @@
       "verdict": "inline-verify-PR552-PR558",
       "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md",
       "notes": "Live-captured image digest behind compose 224ebb66… after a gateway rotation that did not change inline-verify behavior. No revert of #552/#558 visible in cloud-api commit log between 2026-05-02 and 2026-05-15; admitted on continuity grounds."
+    },
+    {
+      "image_digest": "23ee3d3ee5be4c5760156adc051b83ed8952a246b784fea5c1e14f3de0cbf7f0",
+      "image_digest_truncated": false,
+      "audited_at": "2026-06-18",
+      "audited_by": ["amiller", "claude-opus-4-8"],
+      "verdict": "inline-verify-PR552-PR558",
+      "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md",
+      "notes": "Live-captured from the gateway attestation (compose a986df43…, on-chain authorized for cloud-api DstackApp 0xf550fdfb…). Serves both openai/gpt-oss-120b and zai-org/GLM-5.1-FP8, which were ○ audit_pending on this rotation. Admitted on continuity grounds: the 100 cloud-api commits between 2026-05-15 and 2026-06-18 show no revert of #552/#558 — inline verification was strengthened, not weakened (#748 strict report_data binding removing the padded-address fallback; #745/#746/#749 per-provider fail-closed MeasurementPolicy + GPU-evidence requirement; #709 byte-exact SSE forwarding). Digest not reproduced from a build."
     }
   ]
 }
