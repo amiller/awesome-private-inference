@@ -28,6 +28,7 @@ SCORECARD_LABELS = {
     "gpu_attested": "GPU attested",
     "key_derives_to_address": "Key derives to addr",
     "compose_hash_committed": "compose_hash committed",
+    "prod_os_image": "Prod OS image",
     "backend_attested": "Backend attested",
 }
 
@@ -38,6 +39,13 @@ SCORECARD_TOOLTIPS = {
     "gpu_attested": "NVIDIA NRAS returned PASS on the GPU payload",
     "key_derives_to_address": "keccak(signing_public_key) == signing_address",
     "compose_hash_committed": "mr_config starts with 0x01 || sha256(app_compose)",
+    "prod_os_image": (
+        "vm_config.image is the production dstack OS image, not dstack-nvidia-dev. "
+        "The dev image ships sshd + debug-tweaks + tools-profile; with "
+        "DSTACK_AUTHORIZED_KEYS it gives the operator host-network-namespace root SSH "
+        "inside the CVM (prompts in /proc/<vllm>/mem exfiltratable). Flips ✅ when the "
+        "fleet runs dstack-nvidia-* prod."
+    ),
     "backend_attested": (
         "Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + "
         "image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent "

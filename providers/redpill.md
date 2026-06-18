@@ -31,14 +31,22 @@ See the [live matrix](https://amiller.github.io/awesome-private-inference). On 2
 - `phala-simple` shape *re-verifies cryptographically*, but the verifier accepts a
   CVM running the `dstack-nvidia-dev` OS image with an operator-controlled host-SSH
   path (see Known gaps). Stage 0.
-- `chutes` shape re-verifies end-to-end (the layers we can check).
+- `chutes` shape re-verifies the quote + key binding (the layers we can check), but the
+  backend code/model are unmeasured — see Known gaps and [Chutes](./chutes.md).
 - `near-relay` inherits NEAR's inner-boundary gap.
 - Tinfoil-routed entries 404 on attestation.
 
 ## Known gaps
 
-- **Phala-simple: dev OS image with operator host-SSH backdoor — load-bearing,
-  still live as of 2026-05-05.** Every `phala/*` model on RedPill boots
+- **Phala-simple: dev OS image with operator host-SSH backdoor — RESOLVED as of
+  2026-06-18; now auto-tracked.** Live probe 2026-06-18: both phala-simple models
+  (`phala/qwen-2.5-7b-instruct`, `phala/gpt-oss-20b`) boot the **production** image
+  `dstack-nvidia-0.5.9-806a352e` — no sshd, no `debug-tweaks`. The host-SSH path
+  below is closed. This is now a checked layer: the verifier reads `vm_config.image`
+  and the dashboard's **Prod OS image** column flips ✅/❌, so a regression to a
+  `dstack-nvidia-dev-*` image would surface automatically. The historical finding,
+  for the record:
+  Every `phala/*` model on RedPill booted
   `dstack-nvidia-dev-0.5.{5,6,8}-*`. Live probe 2026-05-05:
   `phala/gpt-oss-20b` → `dstack-nvidia-dev-0.5.8-e3e677dd`,
   `phala/glm-4.7-flash` → `dstack-nvidia-dev-0.5.5-021bf66a`,
@@ -69,6 +77,11 @@ See the [live matrix](https://amiller.github.io/awesome-private-inference). On 2
   `/api/models` but return 404 on real calls.
 - **No NVIDIA payload on Chutes shape.** Chutes publishes TDX-only attestation; GPU
   posture is not cryptographically attested.
+- **Chutes shape re-verifies the quote but not the code or model.** The `chutes` rows show
+  `valid` because TDX + the `SHA256(nonce‖pubkey)` key binding check out, but the Chutes
+  backend's in-enclave `serve.py` and model are unmeasured — a verified quote proves a genuine
+  TDX+GPU running *a* Chutes base image, not which model on which code. RedPill inherits this in
+  full. See [Chutes](./chutes.md) and [chutesai/chutes#75](https://github.com/chutesai/chutes/issues/75).
 - **Subscription arbitrage.** "RedPill Pro $50/mo" is effectively a pay-as-you-go credit
   pool (2026-04-21 sub/list ratio = 0.998).
 - **Independent of the dev image, on phala-simple:** mutable tags

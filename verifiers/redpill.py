@@ -101,6 +101,13 @@ def _verify_phala_simple(
             sc.key_derives_to_address = False
 
     info = att.get("info", {})
+    vm_config = info.get("vm_config") or att.get("vm_config") or {}
+    if isinstance(vm_config, str):
+        vm_config = json.loads(vm_config)
+    os_image = vm_config.get("image", "")
+    if os_image:
+        sc.prod_os_image = "dstack-nvidia-dev" not in os_image
+        details["os_image"] = os_image
     tcb_info = info.get("tcb_info") or {}
     if isinstance(tcb_info, str):
         try:
@@ -125,7 +132,7 @@ def _verify_phala_simple(
             details["gpu_error"] = str(exc)
             sc.gpu_attested = False
 
-    required = [sc.tdx_verified, sc.report_data_binds_key, sc.key_derives_to_address]
+    required = [sc.tdx_verified, sc.report_data_binds_key, sc.key_derives_to_address, sc.prod_os_image]
     if nvidia_payload:
         required.append(sc.gpu_attested)
     valid = all(required) and sc.tdx_verified is True

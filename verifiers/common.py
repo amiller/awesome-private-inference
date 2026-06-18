@@ -31,10 +31,13 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
         "backend_attested",
     },
-    # RedPill phala-direct: single-TD, no gateway hop.
+    # RedPill phala-direct: single-TD, no gateway hop. prod_os_image is the
+    # load-bearing layer: the dstack-nvidia-dev image ships sshd + debug-tweaks
+    # and, with DSTACK_AUTHORIZED_KEYS, gives the operator host-SSH root in the CVM.
     "phala-simple": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
+        "prod_os_image",
     },
     # RedPill via NEAR: same shape as NEAR-direct.
     "near-relay": {
@@ -90,6 +93,7 @@ class ScoreCard:
     gpu_attested: Optional[bool] = None      # NRAS returned PASS
     key_derives_to_address: Optional[bool] = None  # keccak(pubkey) == signing_address
     compose_hash_committed: Optional[bool] = None  # mr_config starts with 0x01||sha256(app_compose)
+    prod_os_image: Optional[bool] = None     # vm_config.image is the prod dstack OS image, not dstack-nvidia-dev (no host-SSH/debug-tweaks)
     backend_attested: Optional[bool] = None  # gateway verified model backend's quote
     catalog_serves: Optional[bool] = None    # model returns 2xx on a chat call
     code_measurement_reproducible: Optional[bool] = None  # sigstore-signed measurement matches enclave
