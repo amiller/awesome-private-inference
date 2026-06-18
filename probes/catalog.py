@@ -28,7 +28,5 @@ MODELS: dict[str, list[str]] = {
         "gpt-oss-120b",
         "llama3-3-70b",
         "gemma4-31b",
-        "deepseek-v4-pro",
-        "kimi-k2-6",
     ],
 }
