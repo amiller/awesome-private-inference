@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  actions: write   # dispatch deploy-pages.yml after committing the refreshed dashboard
 
 concurrency:
   group: probe-${{ github.ref }}
@@ -99,3 +100,9 @@ jobs:
             git commit -m "ci: refresh snapshot + dashboard [skip ci]"
             git push
           fi
+
+      - name: Deploy dashboard to Pages
+        if: github.event_name != 'pull_request' && success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy-pages.yml --ref main
