@@ -10,10 +10,11 @@ Per `-TEE` chute, we verify the crypto core (live-confirmed sound):
   - MRTD ∈ published /servers/tee/measurements golden set
   - TDX quote accepted by Phala's DCAP verifier
 
-…and the headline gap: nothing binds *which model* or *which serving code* to the
-quote (MRTD/RTMRs are identical across different models; serve.py is CFSV-excluded,
-in no RTMR). So `model_bound_to_quote` is False by construction — a verified quote
-proves a genuine TDX+GPU running a Chutes base image, not which model on which code.
+…and the headline gap: the serve.py on the prompt-plaintext path is unmeasured
+(CFSV-excluded, in no RTMR), and nothing binds which model runs (MRTD/RTMRs are
+identical across different -TEE models). So `serving_code_attested` is False by
+construction — the operator (or Chutes) can read/exfiltrate the decrypted prompt
+AND substitute the model, neither detectable from the quote.
 See providers/chutes.md and chutesai/chutes#75.
 
 Quote offsets per chutes-api/api/server/quote.py (td_report = quote[48:]).
@@ -111,10 +112,12 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     tdx = phala_tdx.verify_tdx_quote(base64.b64decode(ev["quote"]).hex())
     sc.tdx_verified = phala_tdx.is_verified(tdx)
 
-    # Headline gap: model + serving code are in no measured register. MRTD/RTMRs are
-    # shared across different -TEE models, and serve.py is CFSV-excluded. A verified
-    # quote cannot establish which model or code answered. False by construction.
-    sc.model_bound_to_quote = False
+    # Headline gap: the serve.py on the prompt-plaintext path is unmeasured
+    # (CFSV-excluded, in no RTMR), so the operator can read/exfiltrate the decrypted
+    # prompt; and with the model in no measured register (MRTD/RTMRs identical across
+    # -TEE models) it can also substitute the model. Neither is detectable from the
+    # quote. False by construction.
+    sc.serving_code_attested = False
 
     valid = bool(
         sc.tdx_verified and sc.report_data_binds_key
