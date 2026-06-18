@@ -100,7 +100,7 @@
   
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">redpill</div>
-    <div class="text-2xl font-semibold mt-1">4 / 6</div>
+    <div class="text-2xl font-semibold mt-1">5 / 6</div>
     <div class="text-xs text-slate-500">models with valid attestation bundles</div>
   </div>
   
@@ -160,7 +160,7 @@
           
           <th class="p-2 text-center" title="vm_config.image is the production dstack OS image, not dstack-nvidia-dev. The dev image ships sshd + debug-tweaks + tools-profile; with DSTACK_AUTHORIZED_KEYS it gives the operator host-network-namespace root SSH inside the CVM (prompts in /proc/<vllm>/mem exfiltratable). Flips ✅ when the fleet runs dstack-nvidia-* prod.">Prod OS image</th>
           
-          <th class="p-2 text-center" title="The served model + serving code are committed to a measured register (RTMR or report_data). Red on Chutes: MRTD/RTMRs are identical across different -TEE models and serve.py is CFSV-excluded, so a verified quote proves a genuine TDX+GPU running a Chutes base image, not which model on which code (chutesai/chutes#75).">Model bound to quote</th>
+          <th class="p-2 text-center" title="The code on the prompt-plaintext path (serve.py) and the served model are committed to a measured register. Red on Chutes: serve.py is CFSV-excluded and in no RTMR, so the operator (or Chutes) can read or exfiltrate the decrypted prompt AND silently substitute the model — neither detectable from the quote. Live proof: all -TEE models share one MRTD. chutesai/chutes#75.">Serving code attested</th>
           
           <th class="p-2 text-center" title="Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.">Backend attested</th>
           
@@ -216,7 +216,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">2.89s</td>
+          <td class="p-2 text-right text-xs text-slate-500">1.89s</td>
         </tr>
         
       
@@ -266,61 +266,67 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">1.74s</td>
-        </tr>
-        
-      
-        <tr class="border-t border-slate-100 ">
-          <td class="p-2 font-medium">redpill</td>
-          <td class="p-2 font-mono text-xs">phala/gpt-oss-20b</td>
-          <td class="p-2 text-xs text-slate-500">phala-simple</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
-            
-          </td>
-          <td class="p-2 text-right text-xs text-slate-500">8.23s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.02s</td>
         </tr>
         
       
         <tr class="border-t border-slate-100 bg-rose-50/30">
+          <td class="p-2 font-medium">redpill</td>
+          <td class="p-2 font-mono text-xs">phala/gpt-oss-20b</td>
+          <td class="p-2 text-xs text-slate-500">redpill</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            
+              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
+            
+          </td>
+          <td class="p-2 text-right text-xs text-slate-500">5.45s</td>
+        </tr>
+        
+        <tr class="bg-rose-50/20 text-xs text-rose-700">
+          <td colspan="14" class="p-2 pl-4 font-mono">
+            HTTP 502: {"error":{"message":"The upstream provider returned an error","type":"upstream_error","code":502,"param":null}}
+          </td>
+        </tr>
+        
+      
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">redpill</td>
           <td class="p-2 font-mono text-xs">phala/gpt-oss-120b</td>
           <td class="p-2 text-xs text-slate-500">near-relay</td>
@@ -330,7 +336,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
@@ -366,7 +372,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">9.91s</td>
+          <td class="p-2 text-right text-xs text-slate-500">5.83s</td>
         </tr>
         
       
@@ -416,11 +422,11 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">7.97s</td>
+          <td class="p-2 text-right text-xs text-slate-500">13.97s</td>
         </tr>
         
       
-        <tr class="border-t border-slate-100 bg-rose-50/30">
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">redpill</td>
           <td class="p-2 font-mono text-xs">phala/glm-4.7</td>
           <td class="p-2 text-xs text-slate-500">near-relay</td>
@@ -430,7 +436,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
@@ -466,7 +472,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">10.3s</td>
+          <td class="p-2 text-right text-xs text-slate-500">5.82s</td>
         </tr>
         
       
@@ -516,7 +522,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">28.27s</td>
+          <td class="p-2 text-right text-xs text-slate-500">23.81s</td>
         </tr>
         
       
@@ -566,7 +572,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">23.47s</td>
+          <td class="p-2 text-right text-xs text-slate-500">23.18s</td>
         </tr>
         
       
@@ -666,7 +672,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.16s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.31s</td>
         </tr>
         
       
@@ -716,7 +722,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.26s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.17s</td>
         </tr>
         
       
@@ -816,7 +822,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">1.89s</td>
+          <td class="p-2 text-right text-xs text-slate-500">4.81s</td>
         </tr>
         
       
@@ -866,7 +872,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">2.93s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.05s</td>
         </tr>
         
       
@@ -916,7 +922,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">0.07s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.08s</td>
         </tr>
         
         <tr class="bg-rose-50/20 text-xs text-rose-700">
@@ -972,7 +978,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">12.47s</td>
+          <td class="p-2 text-right text-xs text-slate-500">12.57s</td>
         </tr>
         
       
@@ -1022,7 +1028,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">5.63s</td>
+          <td class="p-2 text-right text-xs text-slate-500">4.43s</td>
         </tr>
         
       
@@ -1072,7 +1078,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">4.84s</td>
+          <td class="p-2 text-right text-xs text-slate-500">9.59s</td>
         </tr>
         
       
@@ -1122,7 +1128,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">4.06s</td>
+          <td class="p-2 text-right text-xs text-slate-500">7.99s</td>
         </tr>
         
       
@@ -1172,7 +1178,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">6.24s</td>
+          <td class="p-2 text-right text-xs text-slate-500">7.35s</td>
         </tr>
         
       
@@ -1222,7 +1228,7 @@
               <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
             
           </td>
-          <td class="p-2 text-right text-xs text-slate-500">7.24s</td>
+          <td class="p-2 text-right text-xs text-slate-500">5.74s</td>
         </tr>
         
       
@@ -1291,7 +1297,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-06-18T14:35:51Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27766653808">27766653808</a> · <code>4d518ea4</code></span>
+    <span>Snapshot 2026-06-18T16:49:45Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27775007797">27775007797</a> · <code>f9e6bd7e</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
