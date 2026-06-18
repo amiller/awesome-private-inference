@@ -8,10 +8,6 @@ MODELS: dict[str, list[str]] = {
     "near-ai": [
         "openai/gpt-oss-120b",
         "zai-org/GLM-5.1-FP8",
-        "zai-org/GLM-5-FP8",
-        "Qwen/Qwen3-30B-A3B-Instruct-2507",
-        "deepseek-ai/DeepSeek-V3-0324",
-        "meta-llama/Llama-4-Scout-17B-16E-Instruct",
     ],
     "redpill": [
         "phala/gpt-oss-20b",
