@@ -1,15 +1,15 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-06-18T13:53:29Z",
-  "git_sha": "d047643ddc45db224ce6a33b66838792a1c0210e",
-  "run_id": "27764104348",
+  "generated_at": "2026-06-18T14:35:51Z",
+  "git_sha": "4d518ea48e919aaef89893a57cd74df4708d0d0e",
+  "run_id": "27766653808",
   "attestations": {
     "near-ai": [
       {
         "provider": "near-ai",
         "model": "openai/gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-06-18T13:53:34Z",
+        "verified_at": "2026-06-18T14:35:54Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -22,6 +22,7 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": "audit_pending",
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -40,13 +41,13 @@
           "audit_key": null
         },
         "error": null,
-        "latency_s": 4.75
+        "latency_s": 2.89
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5.1-FP8",
         "valid": true,
-        "verified_at": "2026-06-18T13:53:32Z",
+        "verified_at": "2026-06-18T14:35:53Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
@@ -59,6 +60,7 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": "audit_pending",
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -77,7 +79,7 @@
           "audit_key": null
         },
         "error": null,
-        "latency_s": 2.84
+        "latency_s": 1.74
       }
     ],
     "redpill": [
@@ -85,7 +87,7 @@
         "provider": "redpill",
         "model": "phala/gpt-oss-20b",
         "valid": true,
-        "verified_at": "2026-06-18T13:53:47Z",
+        "verified_at": "2026-06-18T14:36:03Z",
         "attestation_type": "phala-simple",
         "signing_address": "0x7692bCD4878a1e78dCb12DE24faDe38aB067C9D1",
         "signing_public_key": "988e612131dfa4ca95dc0a6255b823595d49a3a2ea72ae79ce04cd3e73dad6d97dc95488f59d7a2f13cb11dd0010dd7975df0c14732d9e0431077a8e3cad7fcd",
@@ -98,6 +100,7 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "prod_os_image": true,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -112,25 +115,26 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 12.69
+        "latency_s": 8.23
       },
       {
         "provider": "redpill",
         "model": "phala/gpt-oss-120b",
-        "valid": true,
-        "verified_at": "2026-06-18T13:53:50Z",
+        "valid": false,
+        "verified_at": "2026-06-18T14:36:04Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
-          "tdx_verified": true,
+          "tdx_verified": false,
           "report_data_binds_key": true,
           "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": false,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -145,16 +149,16 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 15.97
+        "latency_s": 9.91
       },
       {
         "provider": "redpill",
         "model": "phala/qwen-2.5-7b-instruct",
         "valid": true,
-        "verified_at": "2026-06-18T13:53:47Z",
+        "verified_at": "2026-06-18T14:36:02Z",
         "attestation_type": "phala-simple",
-        "signing_address": "0x1CeA8c783B4E29964d372fb0c8e87fdA98a86e54",
-        "signing_public_key": "bb28c163ef313fee2a2bd7d35da55b8e52aad2068326b1e0cf65a6fe8a850d59bb9f24e7bd9c6be309c5694df755690d5017bb56ac819b4d62329e3b1bc72e1c",
+        "signing_address": "0x04B66abA5A34779E659E9Be7CC5056aE3a52606B",
+        "signing_public_key": "e5c7ef59436793523c68c4b5c1c376c978d17ec662888e1055390ae1073b983da8458cdbe44f34b5b2b0257a1fb63e037ae6ea57e07d938332de67dec1c7f0d5",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -164,6 +168,7 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "prod_os_image": true,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -178,25 +183,26 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 12.86
+        "latency_s": 7.97
       },
       {
         "provider": "redpill",
         "model": "phala/glm-4.7",
-        "valid": true,
-        "verified_at": "2026-06-18T13:53:50Z",
+        "valid": false,
+        "verified_at": "2026-06-18T14:36:05Z",
         "attestation_type": "near-relay",
         "signing_address": "cb6fc58f6bd685919fa42fb54d3fcfe03222e324bdda91f0bac6d5c73dc4f1c6",
         "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
-          "tdx_verified": true,
+          "tdx_verified": false,
           "report_data_binds_key": true,
           "gpu_attested": true,
           "key_derives_to_address": true,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": false,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -211,13 +217,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 16.17
+        "latency_s": 10.3
       },
       {
         "provider": "redpill",
         "model": "phala/deepseek-v3.2",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:14Z",
+        "verified_at": "2026-06-18T14:36:31Z",
         "attestation_type": "chutes",
         "signing_address": "5 instances",
         "signing_public_key": "",
@@ -230,6 +236,7 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -243,15 +250,15 @@
           "instance_count": 5
         },
         "error": null,
-        "latency_s": 27.01
+        "latency_s": 28.27
       },
       {
         "provider": "redpill",
         "model": "phala/kimi-k2.5",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:10Z",
+        "verified_at": "2026-06-18T14:36:26Z",
         "attestation_type": "chutes",
-        "signing_address": "2 instances",
+        "signing_address": "3 instances",
         "signing_public_key": "",
         "signing_algo": "ecdsa",
         "scorecard": {
@@ -262,6 +269,7 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -272,10 +280,10 @@
         },
         "details": {
           "shape": "chutes",
-          "instance_count": 2
+          "instance_count": 3
         },
         "error": null,
-        "latency_s": 23.3
+        "latency_s": 23.47
       }
     ],
     "tinfoil": [
@@ -283,7 +291,7 @@
         "provider": "tinfoil",
         "model": "router",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:15Z",
+        "verified_at": "2026-06-18T14:36:31Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "1d4e65f73ec3b363827a51ae5898d7d3a35c7681d8892e46b1312ac3391cde22",
@@ -296,6 +304,7 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": true,
@@ -351,13 +360,13 @@
           "live_tls_spki_sha256": "add8c424a4a084e7afed6fbf4048fb9d3c45a46381ce9186a6fb03bb515b8c30"
         },
         "error": null,
-        "latency_s": 0.28
+        "latency_s": 0.39
       },
       {
         "provider": "tinfoil",
         "model": "gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:15Z",
+        "verified_at": "2026-06-18T14:36:32Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "af7c09dc79754a6861b61fd7fa49e30544bfd1e2286746dd3654e7019722fe6b",
@@ -370,6 +379,7 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": true,
@@ -418,13 +428,13 @@
           "live_tls_spki_sha256": "2de3171e506035c82a87d88246a7b5c0bc6ca72fbcce578ebdd4375ffc666149"
         },
         "error": null,
-        "latency_s": 0.06
+        "latency_s": 0.16
       },
       {
         "provider": "tinfoil",
         "model": "llama3-3-70b",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:15Z",
+        "verified_at": "2026-06-18T14:36:32Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "0e1d011d09c176637d27a2c2b62406d2d0795f88c0c452b4a9d561d3bbaaea3d",
@@ -437,6 +447,7 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": true,
@@ -485,13 +496,13 @@
           "live_tls_spki_sha256": "281ad7bea31b1c428d5100ee142478e76ab48f091b84e4f9505df75b1cde6884"
         },
         "error": null,
-        "latency_s": 0.07
+        "latency_s": 0.26
       },
       {
         "provider": "tinfoil",
         "model": "gemma4-31b",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:16Z",
+        "verified_at": "2026-06-18T14:36:32Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "e2dfcfabc1316a445f11da387cb528b2006da1063c296d46fdb93b0f7b8f1a32",
@@ -504,6 +515,7 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": true,
@@ -552,65 +564,7 @@
           "live_tls_spki_sha256": "61c2e85dc68b454f47b5fed26c7bead9caf764c81e938a38c4087a4564227a11"
         },
         "error": null,
-        "latency_s": 0.14
-      },
-      {
-        "provider": "tinfoil",
-        "model": "deepseek-v4-pro",
-        "valid": false,
-        "verified_at": "2026-06-18T13:54:15Z",
-        "attestation_type": "error",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "ConnectionError: HTTPSConnectionPool(host='deepseek-v4-pro.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by NameResolutionError(\"HTTPSConnection(host='deepseek-v4-pro.tinfoil.containers.tinfoil.dev', port=443): Failed to resolve 'deepseek-v4-pro.tinfoil.containers.tinfoil.dev' ([Errno -2] Name or service not known)\"))",
-        "latency_s": 0.0
-      },
-      {
-        "provider": "tinfoil",
-        "model": "kimi-k2-6",
-        "valid": false,
-        "verified_at": "2026-06-18T13:54:15Z",
-        "attestation_type": "error",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "ConnectionError: HTTPSConnectionPool(host='kimi-k2-6.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by NameResolutionError(\"HTTPSConnection(host='kimi-k2-6.tinfoil.containers.tinfoil.dev', port=443): Failed to resolve 'kimi-k2-6.tinfoil.containers.tinfoil.dev' ([Errno -2] Name or service not known)\"))",
-        "latency_s": 0.0
+        "latency_s": 0.17
       }
     ],
     "venice": [
@@ -618,7 +572,7 @@
         "provider": "venice",
         "model": "e2ee-glm-5",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:18Z",
+        "verified_at": "2026-06-18T14:36:34Z",
         "attestation_type": "venice",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "042a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
@@ -631,6 +585,7 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": false,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -649,13 +604,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.29
+        "latency_s": 1.89
       },
       {
         "provider": "venice",
         "model": "e2ee-qwen3-5-122b-a10b",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:18Z",
+        "verified_at": "2026-06-18T14:36:35Z",
         "attestation_type": "venice",
         "signing_address": "0x6525e128afcffebf7eed05d485d7be983cdae934",
         "signing_public_key": "041d9bbc96671c3fbc983867bd7a6b5c83298e040801764b7085352d84f3f095125db36956caed8c84bfefca635c3c455f409c79a3889d679af688f4aded542fd5",
@@ -668,6 +623,7 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": false,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -686,13 +642,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.26
+        "latency_s": 2.93
       },
       {
         "provider": "venice",
         "model": "e2ee-uncensored-24b-p",
         "valid": false,
-        "verified_at": "2026-06-18T13:54:16Z",
+        "verified_at": "2026-06-18T14:36:32Z",
         "attestation_type": "venice",
         "signing_address": "",
         "signing_public_key": "",
@@ -705,6 +661,7 @@
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -715,13 +672,13 @@
         },
         "details": {},
         "error": "no TEE attestation available for this model (404)",
-        "latency_s": 0.2
+        "latency_s": 0.07
       },
       {
         "provider": "venice",
         "model": "e2ee-gpt-oss-120b-p",
         "valid": true,
-        "verified_at": "2026-06-18T13:54:32Z",
+        "verified_at": "2026-06-18T14:36:44Z",
         "attestation_type": "venice",
         "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
         "signing_public_key": "04a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -734,6 +691,7 @@
           "key_derives_to_address": true,
           "compose_hash_committed": true,
           "prod_os_image": null,
+          "model_bound_to_quote": null,
           "backend_attested": false,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
@@ -752,7 +710,199 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 15.82
+        "latency_s": 12.47
+      }
+    ],
+    "chutes": [
+      {
+        "provider": "chutes",
+        "model": "Qwen3-32B-TEE",
+        "valid": true,
+        "verified_at": "2026-06-18T14:36:50Z",
+        "attestation_type": "chutes-tee",
+        "signing_address": "5b67b97a-941d-42c4-b834-93ec85557195",
+        "signing_public_key": "bJsd5dsvMoYniyVTmWoEoGd2BecN29edVwarU8gFFWREHMC4wma3qcMP9JgswdY2nIW9J1p1oLcmStQbvmlYB8pGUbSc/qsy96KI7EWuQ2xGhDormzqUH/m+egGIkggfFeNLwtRLHYMPxvSLYaSqWnSlGhbLVVXNEPifMQNwEos7zcS0WNhEvQqgIihG2lx9HUADYcx0DIRwyOJkIGp2mwiI54spopC6NqqJYRZ+dFMjiEwww1WzrNq4dGeqOVlp6xQ5XgbLJFpXG/QYLyRIa/qbw+GU5oVYxjuozRFw6wlyV6dmYepe3uRmhXMHbFt1ujmKyabB4HCmWjuQzni1TRfP62aYmduGgpSqriiQHpcaC2IZCdQFytZjDNEQsOeA1rURM2QzaZSrC5kyDCTFK4yPVsuCvrm3A6qVl+cRXkbDeEzO7gF0GiuUNFJjhZILCwiCWSAfIgQx0LCIshfO7cpulNJQlhu7FDkm1bWKkzU7+cMpEVaVOVzBg2MdL4RBLHcdTRdbzsI9V6FQUsS04KMPjDGG8gOy30iJ5FB5bCe65uCJ/7W6yXtec9CIXamwEYWhtrW3BtkdCxmKJOZ4M2t9MLEYA6mQz/GKx+dsEHKAPTOhgSxYoSXNQZtBewzFhkCcjLQX0oh96KTHjUqEGlgQcOYEoQuFNPQWbCPNd/A8cXC9aWQrwWG/skkrOvcgTofK+DXMueNvDatJLmYgcBWqM5Nf6PVglKkTPXWYX+hv13KFzABMxErLChx8pAE3hnIw8KY3mDmG1NHDoFxSd9MDYWnErpcNyVFCFDOBhtEHRUGbn+V5lRGb6sk6j1stGaiOWVk+REljO1uprVw7DaentnQ4n6sFc7QugGWLpTxWYIiejhMwIOdf5cKiVejI92aP4LQhVdS8vhcYbjkC+FNuHDWm8rmCJTYkU1DIGQmEAUQaBiRB9kkvdGmeywmqasx+ueNmASaQyhYbdjVMm0ULFHOcF7RlpbPMlKagrAOgGvmAhNZVmTQ3eJQW5fQGqAlDXBly/xizPYmJ3Ma+17ZUD8MN8wJ7XdVTm8EmjCAYC0u0etuna2iI7HZ63McvGQwsFdGQbppGL6ZwSKVhV6xaSdZZogtaVkgsAKqHIVeHJHWdGJmuL5KgFaE9/sWQLomZvTafvoS1v+yjUOdp75ij4TC561sco+iR10miLkuSHvesQxE8EAOIbBHDJ5WpajVm5IJxubBAKIFcg0VDn4AF5kmP4XIlfWVn+XmxcEm05xiZuIdOKZF2oNHM7PsB/IVbMuAN/1PPl5hPNRJjODZP9MAXjEmEJeiTxIhjcyu8m1lRLRFS/RuwcZkNbUJo7vGZhNktGitsphQShHyf5/Y+ulyDaZoHmnRdIhcetyYfYDEV7sU7CwKtpkC7OpoMf7PLz0pOw6AE8pRveHgKOOQfEiSuf/KoNFKiiWEfheShi8eOHLuDHdmFDmkWF7yXdnE3Z7eKP9EE9mC/oxFsWwBwJ2Y/1VM3RiBK2eeglfeFUwJ5nXjN5vFQ1SBLEbyvxXlgDqL7Bp9sTmoLDe8nV46L9WF7caGDlDn/PH7EbDc=",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "model_bound_to_quote": false,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "shape": "chutes-tee",
+          "instance_id": "5b67b97a-941d-42c4-b834-93ec85557195",
+          "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
+          "gpu_evidence_count": 8,
+          "cert_spki_bound": true,
+          "debug_disabled": true,
+          "mrtd_in_golden_set": true
+        },
+        "error": null,
+        "latency_s": 5.63
+      },
+      {
+        "provider": "chutes",
+        "model": "gemma-4-31B-TEE",
+        "valid": true,
+        "verified_at": "2026-06-18T14:36:49Z",
+        "attestation_type": "chutes-tee",
+        "signing_address": "617793ce-87b7-4135-902a-4528cb9fb809",
+        "signing_public_key": "s7IOKKUSTEZ0JjwmA1KTXXULWUakyyt+iBBefJeeztJBH8UPqaSH86nIkskKRbUA6cQ3i7OSvmS3O9jD56QmcTxsJdcGsSgmVHlAKNAFzJKhkwcqlSDEE+BEWHddapc0ZTcVpIbJnkFIUXVyRzUcqrCewcwN4rIxGHRKH+py+us2+RXPEOJwI+MGMTo1LqOKNZCDbaxQiHVgQNaE2XuzM5e6gumC3jZxMKYIH7Ky6imwOpag5Mp7yzeavxh9IzYZeJjKHOBdRaQn98JEnPR2N/prIygzamISiyLA9pQajWFVtJiMGjJuFSYz7xYfBLcwMgUT+uVnBmNGz0gORRcccZvP/VMwu/V0rHhI7heNfeIXfDl0RzkRCZqtdOskNhBZuljOZ8tpUrW+LXUIU3CFZLhQdRSqPpFm7Oqax2cUrul9F5S4+wRGg0EzuER/amtuWUtyOcN81zEycsc2uOkR4UFk9WejUwR2eFoxLLxi7hpemuFU69VQWBlnGFhRrpGTI/GWCxzIRcQoLlGs3qC8Z6gw3DU4adY7UfElRJsw+rGedCAyYJaKK4pUSvWaI6atSDDIJdOFq1d3B2OZUnYW1/VZGOqQ7MDHenQ2NTALUrw9i9DET9ollkM/hLRv8kiyWMMw+jcEY7uE4zUQLCGLaektdxNCrQchNkIzYsWro6iJSQRunZpQj+WpbXBPy+kv3JZoy/JNh0sxKoy/SwCqlHNupFB27fxnPwW8CkYb44TGGqs7H1O1kCaTiJd4DZqNV6M/tVeLgusb6rOm5po2GcsOUvmN6vJv48waaXWIVgOz3vOawquBCMDJcYtSCaF0h9gR4mGrzoaiZxU3NnCFPuWIsIB9Wrx/EpCP1qqT16yPGPKEDPFFtCsOySFQviAOToBMXrkH3IrPVlbCiVyhSFyUXXaDP4AnJDgPr5UzpqW41oqSncmOxIeKHWi5+dMvzjFI3CGC0uYbH1VdPBhr3RY5nbNMOTeYwJy2C9jA4yowgOk8ILoED+c9a8OSxCh3wvaBfFi6GCspRNQOT3eCT/ijvFCI94mTsTt6KXBQI0iuLkMUJyUykPBI/WDPZJyUsWkzyKCX8VSE0TwmKPBaVKGVt3mEh6l7q2nCriqiI6FWg+mBuTir+4vG4TWvoetbW8dbDUujAowjgrZu/kqpBjs/f3M/R8hKOvFIcdlffgO8N0mPlIRCH9RPSkc9+8hBfgKEs5cPCEg1puA08QeMnHRaXMnE5/a7CMOc6tR6zRWGWrh+aHVvfwaVAH2Mw1Y4NGGTLXS9Ljepw9N+TyN2BrAkxRwk43GX9FwUT1AH8cE7/tEHESonOvQZvfqxCThOiBEh5+ELtlIBo/R7KcwANBTC/coDOJbAJLCF++eimJzEOtM2+2pUclY1scCYVSyGH6eHTOw1gMSrWzMkQ/YHJ6HEEkAMueTPKph+lrW3VrOefMU7PGZrUAHLdIkeY3l9T5M0a9qD3SM35sJffNZm12DDWQarOBo/4YR2GSxel8SsxjUzQDtDBXzGwmc443Ko0BS7jEIca7KxtJWh0ddgJMvIe9plD9a2U9qZhEnWlTY=",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "model_bound_to_quote": false,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "shape": "chutes-tee",
+          "instance_id": "617793ce-87b7-4135-902a-4528cb9fb809",
+          "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
+          "gpu_evidence_count": 1,
+          "cert_spki_bound": true,
+          "debug_disabled": true,
+          "mrtd_in_golden_set": true
+        },
+        "error": null,
+        "latency_s": 4.84
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5-TEE",
+        "valid": true,
+        "verified_at": "2026-06-18T14:36:48Z",
+        "attestation_type": "chutes-tee",
+        "signing_address": "3be2e4e7-6599-41ca-932b-7ca15cf52d67",
+        "signing_public_key": "gNxDuBlPATNcDNQ/x7haCTeukxBC4AUwPhweenFwIHRhkZdTC/SbGfONU3QvF3NK3SEGELG+aFbGadUqjiFAlJRfDAIAbIIJIOk+H+JzZ2xjBxMMMFbJyLUoPpmqLlEk+vxf4xgDJFVEN3FMQCUv93I64IInk7oe/uVtVSSDPLJg99BTurVjwBWDVFKAKgExAunHOPJXgxyVjWBc5CzAKpG8iEqey5tTFeezLmU/B6aAljpChFCpjdtpUcyOJRs1L1NhPXth9cBNHAiTKyiXcfIo30JVkitdfZUoFqGlraV3GsHDZEKbWcpWycOhpsDKtXwVwdy590NR4dVxHmof2mQYaHhW6KCgJmqENhyjkLhDbBACB1wuGHauIoFr3jzKlQJEvMUapTFctURLtukDilyhz3CY5xccycYTsrRfHIZzeRuMfNpbDOwnA4uCZ0YVqGARfWDOL1KzJ5tmUBSsUWGxq+CjIgEKHSYvWBIxcqqR6UgW3XpCWCaW9rIkwUCcHjCBl9tq6SOMecGuXQqPEnTNfDWeLTLBy3diBcl59iIYJFNcyQiLNdUXxCG4cBV59eF1gXZ52sJl0cU/LxhkYECpvVhKRWOT+rgn3tIfi+c7v5OBtERPt3i/Q0rDmlIoNjFdOhtzK1AGLxZEWkqYGUlcSDYEyhVvMvQQ4ksPkQtTtwx7nNGNMqQaprUZT6B+D2zGsFsUSpM+NOBZkfSu/imG2GLIEkUWCfbLIIIPkOZxgHyYdrNCppO2M1GqKKaWzWrL5Quv3Dhg9MgJASJGUWltBbEo+us/tntGz8u/CwisrucKrEgBfBrFgVogOLLPgkCw9nsgTognazNVHDg2Wla5XgzEJSp65oF3m4M62th/3vMF8NXK2PUzKVVmLhyNGTi+yXiIEMhKzpbKN8UIYMtHWrEcxAluoolfrspPOUlwpWdstWloiJyK/UYJczJRz9jIfQFKMbclx5UEBAwTt8KceKUBRWyJV/p6WdARv9sDhER4QkgnVWRuPzFkCkMMHWlQFmp/JMgOUmPI6ZiUkEFMGrEOf8Ic6LUVbsHL3RJVH0lqePsWMQq0fNEj6KkdfPKGmhynCaWSj+K94Hh+l1dJr3uyo1N28LW0delLKLkpv1Sgb4klJeFT0QQfO4EWecJ+lMa76TSQxcZGeKyh+zLAxobF5YyS9dYKghFV28yXeNq5qfBECBJqS4J3Cggva9wRlYsPKokJnEu7/IfHu4tHsyBofQVCukAngLpO8hY3T9dOmTjM0WGGnPXOtflqboAfZaZoABQZocQG4zWHbId8SzlQmcUb2FI8P0C6gxa4grFVZnKevQKixuA06EFtGTWpjQOhqsCuSDBo4OmlxIzCzaq+/WYkpgjD/kgcvfZYPDFGZCNXarpmnQEmHdmnjkJN+daRjqq7XcFpSthWrjtwQ1SS+EAuUBgI1QOMvoslzwMwLFlG4qyS0SJDUiI930KLcZidNAUdF/FOlMm/HgK2H8RR2rdG+8sjVvJV9Dmw9CxgNRfHUpENC0MnVJU6osAKw0WxA4dyl/56CHecU5eNMG7UAnNw1IP/+KsevcM=",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "model_bound_to_quote": false,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "shape": "chutes-tee",
+          "instance_id": "3be2e4e7-6599-41ca-932b-7ca15cf52d67",
+          "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
+          "gpu_evidence_count": 8,
+          "cert_spki_bound": true,
+          "debug_disabled": true,
+          "mrtd_in_golden_set": true
+        },
+        "error": null,
+        "latency_s": 4.06
+      },
+      {
+        "provider": "chutes",
+        "model": "DeepSeek-V3.2-TEE",
+        "valid": true,
+        "verified_at": "2026-06-18T14:36:50Z",
+        "attestation_type": "chutes-tee",
+        "signing_address": "95814c58-9535-4ba9-975a-13e01ac43d0b",
+        "signing_public_key": "iHK0t5BGDrszxTJew9CT8kyRzdCGxdK0bpZhnmtI2OMv8QiitaZ7NhlvmgGwLKB5iQYd2hLJD1xGExiHvxibVlg5QZGquaB1nbpz2uy8tLEYrWouA3lLWOqPy1fPtjOCgzNjmbYesjDLL7jHP0FVwnxKCecNNYhxKjAifSVRo9RdUMujWvTHPik2YgbHf8pJfSd22SBQccRFIaqd7DbAF3OrQpU8X3KxswhwHHN5PZgfvBGtw2Jht1SLmSCOTLkDWlk+iXPOzNYyY/MvKSFHayytHuq3Nts+5eTCnUF9nyOxvYrHSpV9cDwhnUZ42+BhnZS8IXU4ZvUyiHsrRcUUPDCBhUaTeKOay4NGNFkQzQapxpkDbgIo0YNGBZeRGkA6SwAEN7A2dZFqwGog7NaS0bSW++dRnrg0eAubTqZOOFBnQAWl2mLNSnE7/hJBb9W4ZLLGGlkWPWNGoiZLLhiSeoYmnDFiBAE4m7cA1uLIPPxNKdgWnsgw23edHxTA+yqU2zxzgrotQGmrS+watVRbdfCJdiCXKVI9mfp40VQog4Sc9aBfs3OYGemVxEisIiEFx2oYz9gi7ciuLoFvaIAKMjRrrvKJIYeZDAmqJaYviYTKF3UeJwx1qyIqYBwdOaHCHgM+ZRcHD7sFUYK6bZk7VLJv5FeyabAQ28FJ8hdfvvahFFMjjdclHtFK+MQRkNOpl/IAjqsZAeK/DpmzK/azK1hho6E3e9su5/sydOYz1oCiyYO0jeIOkjq+KsDFfOFePNJjzHV/K1S1fJOnAkYhdbdOWpW7srk3nUWJ64rJvZSJOYYc3EBHFrcxWNqvsYGJ+SEtvjQm2miTA1VT7nd0mhMImxW48JAh20YDQ5F3G2PAmZcAfwFnxemPrMI/cuV0ftYu6LsyyEmbGIZwKKVECVFp6jElHFVD96M7dOxiYZIgcBkDJ7G3HolCyVaf9VQ5lyWv+hsIWkukTomxJywwlBDJzfcMvhyUW8utMzmCU1tFK2bEVXxyIBQJLRI3qwaoArrAVVSEfbMNMXhJGeGcPGQ4Y/sahzQo4EYhDuiUUFyJMYhZgEobCAd0DUNub2wMkZwiSqAbqlVPkUl/EVGsDTO/t1AUIXaIwnAlgmg9CixFKBaXCFVFX8xrHFFN51t9kHo0KQktTmUXKZg20XWnyzZi5jCTpGRdPqm9YjbEg9uBFHuJrseXrWkC6aFN67pUFddpBDUTuxwNDXydIaXBmSbJwwoWH1mLfRyWmKqicsPEIGkZ7YHIRrAIpjQ+mONVAZdVNPx7mAcEFKrLauyyC8SbU0qleJyIOSm7q0sp9zZaZYhZ3kpzx4deJRe2PAVh23Ku7qIktLlgnay/tcZvqhxlE6ZzV1SkBVkI+RnDFARoJQypTJAIVdifQzLFIsxJfNrBMydqMkefSGg12ltg0adu7kNWy0WAQUl0tBxdHPchazmYuyhdlNxZTUluPKFf+pq/DZePiVSV3qCePGGXN7siZTtvP/AFqCUFpkgKMlyoftRZgYZ2PWfFL6PPFEcAOpDVNpF3R/thfh+jIJxiBZf3GvfoRsy2VqgawaS8RPM=",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "model_bound_to_quote": false,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "shape": "chutes-tee",
+          "instance_id": "95814c58-9535-4ba9-975a-13e01ac43d0b",
+          "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
+          "gpu_evidence_count": 8,
+          "cert_spki_bound": true,
+          "debug_disabled": true,
+          "mrtd_in_golden_set": true
+        },
+        "error": null,
+        "latency_s": 6.24
+      },
+      {
+        "provider": "chutes",
+        "model": "Kimi-K2.6-TEE",
+        "valid": true,
+        "verified_at": "2026-06-18T14:36:55Z",
+        "attestation_type": "chutes-tee",
+        "signing_address": "14420ec9-b6ea-44df-9ecc-892124ed4cc7",
+        "signing_public_key": "chO46yOSDhqQmvBG5Ed6k4rK31mYwUt+hzkEqUV45sGMSdY5POK6/9Q3XKdRDRocElR9ShY/3aYmm8lkQByYjBQDhVAjxiqVEOx7hjRwP5p/OzqsUxks8gs893gT7qhk1QVNcfMofBbA6Owk4udJJQEKXASzU4ArDmltb0lplTvL8vOp6ceAPVFUNkgxq7Yx/QHLyvVUkxLP0kVShNpPGeFAE0mWhHpah1zEPfCU+TJ9L9pn1oym//al4bFMAZKXUWa/cxTMZju+G+G2Q7G2urRSnOm+1ouEF6aJpHNkyStBibiPvoRtAKhddGtcoTfN8BNI4rlVfRc/tQBqMWdM6/O22+xN1uO7hbePgyg8epTIuAuss5iV91iP6rVwS5Eu0qtIvqO/oQK/fxxC3EtoV9y+kXC5yDVvqjOmokQtoNwCkfR67EOx3Sek++Jloww/ZBY7RLN3moNEQNO729C8vjyNWkdXzvxYxAI28qID1TpxKpQMdqDATQi9MRWe3gAdASYdU7QAa6QRFLB63qqjO3OcddCP8fwPrCS1HGcfJZQIjIOabZKRzrubh6bKPdx4gZkCuvzKCzNQJnkOvKJZxBDN3Gh8tUsEDOOkK3pa2RV3UohmEnRrcUlTUmdB4ItSARk/DkIWwnI57MytsoaeIpNBSEGuZgC5zYoNdTSVa8Ge52JYfgSZuxRO8oohgkjNxms864e5tHArz6yMXMKQCkQpvXVRUPfIX0A32BhwMkhm4ZNoOWUfc4ZzsLAx1qvN+UyKBLMnhGqNevQV77A4CvI4sTapcUKGkkV3/XUo+0NiqlJ1pTY6zHylEVoVG/ldqlMxhYwWzeR7bgLN4JO6ADBU0VIuRgJ1pToCdXBptuylpBoaVBAnGwQ8f+oalYQIJbW3i1lWTnd8gFmF0ba5e0iFSTfGFoAK5zwYgfyBZ6ez7MKQjdUtY3NVThR/1aQmEYBU37Fhl0AO0Ec7oRdCy+BkwgqNzEEBXVMWJ7FOFhgrJPp+XAjBk2daYwMYFJiTJoaTWtULxDB3XprNXFKMteQnJ9wzuHJtEUeUxaU2t0MD43B5k4iIHxfM6ZKZMcNAOSCyZja/QIY8n8FD/PuA/olMjiVIyzapgLoyQwAypXXID8Fv5ThqWroBoAJUpEh1J0OxCfEgQ6sEo8CTIOaRbvCBofyktxZ8zOEaKIi3ett80CshpasGgPEHyueWaUoSjDRn1wW2J/ElFCBSCiUzOBmLJLpdTPU43iMlnNY5+UND/ZBLedHNIeJ7BWYnkkkGbbJ/mSNNGfbKnEA7elt3EgVCPtgb6Luua+EIaFQ7qSxHD9EjDEObsEepsDIcu/RVZNFBruoPpPsocxkDvSyd+xRNONCUzwptButEXMaGmPF/iaHOZ7YZznwhrIhwOfpOZ6UynGEooBhKi1aO2gCMuYiLapxM00UYqQh/uwtyZLFfIusv4UJYNSPE8ldg+Lsgi1YE2HhucgA9yXthugaoXhpaKtUzvextudo3esm36/gy0ZUq3eia/UqL/uyqEBEvNTnWYT/20JUnJ7VmltqDXTg1Q5xUfBzrfHx3oVxc690=",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "model_bound_to_quote": false,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {
+          "shape": "chutes-tee",
+          "instance_id": "14420ec9-b6ea-44df-9ecc-892124ed4cc7",
+          "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
+          "gpu_evidence_count": 8,
+          "cert_spki_bound": true,
+          "debug_disabled": true,
+          "mrtd_in_golden_set": true
+        },
+        "error": null,
+        "latency_s": 7.24
       }
     ]
   },

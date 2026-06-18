@@ -79,6 +79,11 @@
   </div>
   
   <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">Model bound to quote</dt>
+    <dd class="text-sm text-slate-700">The served model + serving code are committed to a measured register (RTMR or report_data). Red on Chutes: MRTD/RTMRs are identical across different -TEE models and serve.py is CFSV-excluded, so a verified quote proves a genuine TDX+GPU running a Chutes base image, not which model on which code (chutesai/chutes#75).</dd>
+  </div>
+  
+  <div class="border-l-4 border-emerald-500/40 pl-4">
     <dt class="font-semibold">Backend attested</dt>
     <dd class="text-sm text-slate-700">Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.</dd>
   </div>
@@ -170,7 +175,7 @@ python -m probes.render
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-06-18T13:53:29Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27764104348">27764104348</a> · <code>d047643d</code></span>
+    <span>Snapshot 2026-06-18T14:35:51Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/27766653808">27766653808</a> · <code>4d518ea4</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
