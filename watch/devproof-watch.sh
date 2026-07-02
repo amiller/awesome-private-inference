@@ -10,6 +10,9 @@ cd "$(dirname "$(readlink -f "$0")")/.."
 source .venv/bin/activate
 STATE="$HOME/.config/devproof-watch.state.json"
 
+# our own sweep dirties this tracked file every run; CI also updates it daily,
+# so an unrestored copy makes every pull fail (near-watch was stuck on this for days)
+git restore data/onchain-status.json
 git pull --ff-only
 python -m probes.onchain_sweep || echo "onchain_sweep exit $? (drift is informational; RPC errors above)"
 
