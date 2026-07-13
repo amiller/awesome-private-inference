@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-12T13:55:13Z",
+  "generated_at": "2026-07-13T14:02:22Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 46537448,
-  "to_block": 48537448,
+  "from_block": 46580868,
+  "to_block": 48580868,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,14 +11,8 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 29,
+      "event_count": 28,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "5ebba2067c7358bd120b438bbe0b6127c24d7ebf9780c3d14cf0d1c872d81fcf",
-          "first_seen_block": 46539528,
-          "first_seen_timestamp": 1779868403,
-          "first_seen_date": "2026-05-27T07:53:23Z"
-        },
         {
           "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
           "first_seen_block": 46802529,
@@ -172,11 +166,6 @@
       ],
       "events": [
         {
-          "block": 46539528,
-          "compose_hash": "5ebba2067c7358bd120b438bbe0b6127c24d7ebf9780c3d14cf0d1c872d81fcf",
-          "tx": "0x11f31c93bc2f91520b05523a293b1e08358a5b37d8a0547be329254fbe4bd539"
-        },
-        {
           "block": 46802529,
           "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
           "tx": "0xb932c5e19d062370e5cfb1f86710e9ab0654c0a9e14a73387ad823dee4cba1fd"
@@ -318,12 +307,6 @@
         }
       ],
       "new_since_anchor": [
-        {
-          "compose_hash": "5ebba2067c7358bd120b438bbe0b6127c24d7ebf9780c3d14cf0d1c872d81fcf",
-          "first_seen_block": 46539528,
-          "first_seen_timestamp": 1779868403,
-          "first_seen_date": "2026-05-27T07:53:23Z"
-        },
         {
           "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
           "first_seen_block": 46802529,
@@ -481,14 +464,8 @@
       "label": "near-ai/cloud-api",
       "anchor_relevant": false,
       "_note": "gateway TD; pinned in awesome-private-inference verifier for backend_attested",
-      "event_count": 46,
+      "event_count": 44,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "f966165727f1015c4eed2f171c7807f165da0bc15981e0bcaf92e6dd90a5b628",
-          "first_seen_block": 46574433,
-          "first_seen_timestamp": 1779938213,
-          "first_seen_date": "2026-05-28T03:16:53Z"
-        },
         {
           "compose_hash": "00a2639fb294b0ade5fa2047c2873f273f96680bb505103cf99ec97ca5047bbe",
           "first_seen_block": 46617592,
@@ -629,16 +606,6 @@
         }
       ],
       "events": [
-        {
-          "block": 46574433,
-          "compose_hash": "f966165727f1015c4eed2f171c7807f165da0bc15981e0bcaf92e6dd90a5b628",
-          "tx": "0x8c20508d87c1bfde91fe55ff508954e348f579621452a9cf202cbf1dbc839d86"
-        },
-        {
-          "block": 46574449,
-          "compose_hash": "f966165727f1015c4eed2f171c7807f165da0bc15981e0bcaf92e6dd90a5b628",
-          "tx": "0x0db188405441b7ce179691bf5a55e67c13c1ea48b50b3dbee19fb020690caa63"
-        },
         {
           "block": 46617592,
           "compose_hash": "00a2639fb294b0ade5fa2047c2873f273f96680bb505103cf99ec97ca5047bbe",
@@ -867,13 +834,13 @@
       "label": "near-ai/chat-api",
       "anchor_relevant": false,
       "_note": null,
-      "event_count": 3,
+      "event_count": 2,
       "distinct_compose_hashes": [
         {
           "compose_hash": "1232eb4a3298c299ddf54166fbfd05c269471130a6940796f3d637781038d164",
-          "first_seen_block": 46557499,
-          "first_seen_timestamp": 1779904345,
-          "first_seen_date": "2026-05-27T17:52:25Z"
+          "first_seen_block": 46925795,
+          "first_seen_timestamp": 1780640937,
+          "first_seen_date": "2026-06-05T06:28:57Z"
         },
         {
           "compose_hash": "41f70a49929b2e5b7a7aa302d1483a5b25b51c856e084e7cf330bc9e5edeec6b",
@@ -883,11 +850,6 @@
         }
       ],
       "events": [
-        {
-          "block": 46557499,
-          "compose_hash": "1232eb4a3298c299ddf54166fbfd05c269471130a6940796f3d637781038d164",
-          "tx": "0x56b423cab0133ad04f7475f84f438c7d156bcad225a552cfe8830f8b1d8789e0"
-        },
         {
           "block": 46925795,
           "compose_hash": "1232eb4a3298c299ddf54166fbfd05c269471130a6940796f3d637781038d164",
