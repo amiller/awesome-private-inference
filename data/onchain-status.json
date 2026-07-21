@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-20T14:01:09Z",
+  "generated_at": "2026-07-21T13:59:52Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 46883226,
-  "to_block": 48883226,
+  "from_block": 46926389,
+  "to_block": 48926389,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,14 +11,8 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 18,
+      "event_count": 17,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "4676ec04ecaff0303142bd3b76205ffc7bc218adaa91b92c10863d4fa6463a3f",
-          "first_seen_block": 46886514,
-          "first_seen_timestamp": 1780562375,
-          "first_seen_date": "2026-06-04T08:39:35Z"
-        },
         {
           "compose_hash": "c445f29994165e94e85bdfc4824f4bcba89b0a883f45e7912f1bfd7c2634a698",
           "first_seen_block": 46926785,
@@ -124,11 +118,6 @@
       ],
       "events": [
         {
-          "block": 46886514,
-          "compose_hash": "4676ec04ecaff0303142bd3b76205ffc7bc218adaa91b92c10863d4fa6463a3f",
-          "tx": "0x8df2de019379172dde5ed25c741c6a965a78d00ab0bf09cae06f36281909da9f"
-        },
-        {
           "block": 46926785,
           "compose_hash": "c445f29994165e94e85bdfc4824f4bcba89b0a883f45e7912f1bfd7c2634a698",
           "tx": "0x8865151121724883b9d912d168a228b94c8ebb6a896bb19415bb645a1743cbe9"
@@ -215,12 +204,6 @@
         }
       ],
       "new_since_anchor": [
-        {
-          "compose_hash": "4676ec04ecaff0303142bd3b76205ffc7bc218adaa91b92c10863d4fa6463a3f",
-          "first_seen_block": 46886514,
-          "first_seen_timestamp": 1780562375,
-          "first_seen_date": "2026-06-04T08:39:35Z"
-        },
         {
           "compose_hash": "c445f29994165e94e85bdfc4824f4bcba89b0a883f45e7912f1bfd7c2634a698",
           "first_seen_block": 46926785,
@@ -330,37 +313,13 @@
       "label": "near-ai/cloud-api",
       "anchor_relevant": false,
       "_note": "gateway TD; pinned in awesome-private-inference verifier for backend_attested",
-      "event_count": 33,
+      "event_count": 19,
       "distinct_compose_hashes": [
         {
-          "compose_hash": "1bff8094b483915606e7d0e185de2ef0bb126f241415bf43f1dd172ad4136fbc",
-          "first_seen_block": 46887641,
-          "first_seen_timestamp": 1780564629,
-          "first_seen_date": "2026-06-04T09:17:09Z"
-        },
-        {
-          "compose_hash": "6df1fd801e20def9d6bbd1773a0463f864e2c8ff9a730e68e1c35c7366aa4a78",
-          "first_seen_block": 46890625,
-          "first_seen_timestamp": 1780570597,
-          "first_seen_date": "2026-06-04T10:56:37Z"
-        },
-        {
-          "compose_hash": "341c4170ef6fbf1501ec2b813b32f85216cfd7545317dfe23774d8e594af287e",
-          "first_seen_block": 46891150,
-          "first_seen_timestamp": 1780571647,
-          "first_seen_date": "2026-06-04T11:14:07Z"
-        },
-        {
-          "compose_hash": "9d99ec7b89464a6d726878f61dcd2d96aefa08676832fdad649797451148367c",
-          "first_seen_block": 46897008,
-          "first_seen_timestamp": 1780583363,
-          "first_seen_date": "2026-06-04T14:29:23Z"
-        },
-        {
           "compose_hash": "86e289a4dda88a70d16e2804d4bd592d7c37845888d82e34956e1f4d48e63841",
-          "first_seen_block": 46920008,
-          "first_seen_timestamp": 1780629363,
-          "first_seen_date": "2026-06-05T03:16:03Z"
+          "first_seen_block": 46929285,
+          "first_seen_timestamp": 1780647917,
+          "first_seen_date": "2026-06-05T08:25:17Z"
         },
         {
           "compose_hash": "b748d15f2a69abeffd33f32a12dadb2616adfd2a230887d13ba5707d3f4bea41",
@@ -467,76 +426,6 @@
       ],
       "events": [
         {
-          "block": 46887641,
-          "compose_hash": "1bff8094b483915606e7d0e185de2ef0bb126f241415bf43f1dd172ad4136fbc",
-          "tx": "0xbbe774d94c59cbd7862d48e84ea422b759d74c4a8e34d2fd49baef1de8003dee"
-        },
-        {
-          "block": 46887655,
-          "compose_hash": "1bff8094b483915606e7d0e185de2ef0bb126f241415bf43f1dd172ad4136fbc",
-          "tx": "0xc5d54fb4a740d50fc8ab8ad59cd82d05e0f12d596c2280ac6eb9f63b3e4ed77b"
-        },
-        {
-          "block": 46889178,
-          "compose_hash": "1bff8094b483915606e7d0e185de2ef0bb126f241415bf43f1dd172ad4136fbc",
-          "tx": "0xbbffd607e540f4398c294aaed765d1d8294d197784ce56386aa0abe046bb0f26"
-        },
-        {
-          "block": 46889193,
-          "compose_hash": "1bff8094b483915606e7d0e185de2ef0bb126f241415bf43f1dd172ad4136fbc",
-          "tx": "0xb5e002790302f5ae10f2a1ce0997364f236130da418db36ef5f156beff24bfe9"
-        },
-        {
-          "block": 46890625,
-          "compose_hash": "6df1fd801e20def9d6bbd1773a0463f864e2c8ff9a730e68e1c35c7366aa4a78",
-          "tx": "0x153f22b381d03e8d0a6ddd6a3538f28ae71274700c98fbfc8c6c9d3951e3a59c"
-        },
-        {
-          "block": 46890640,
-          "compose_hash": "6df1fd801e20def9d6bbd1773a0463f864e2c8ff9a730e68e1c35c7366aa4a78",
-          "tx": "0x5211058167ffde47b21a5fccc88efead29758117da6a2c9eb00f8639ff4cf54a"
-        },
-        {
-          "block": 46891150,
-          "compose_hash": "341c4170ef6fbf1501ec2b813b32f85216cfd7545317dfe23774d8e594af287e",
-          "tx": "0xb1d0110b32f4bfcbd005b18cfd98f49c6c3fe472f6de28b079ec1f4e0caef925"
-        },
-        {
-          "block": 46891165,
-          "compose_hash": "341c4170ef6fbf1501ec2b813b32f85216cfd7545317dfe23774d8e594af287e",
-          "tx": "0x58bded110a72e2409d59b3ad34fd05bb3e193378683c0c6cb8df2f71709104bb"
-        },
-        {
-          "block": 46897008,
-          "compose_hash": "9d99ec7b89464a6d726878f61dcd2d96aefa08676832fdad649797451148367c",
-          "tx": "0x8591453d4dd00c2d71dba459ee7c25ca710b65674cb1c8470eed34c644831482"
-        },
-        {
-          "block": 46897023,
-          "compose_hash": "9d99ec7b89464a6d726878f61dcd2d96aefa08676832fdad649797451148367c",
-          "tx": "0x2b63812f141479929e833db7eb7c9c985d902baad5583aeb959214e71cef36ac"
-        },
-        {
-          "block": 46898946,
-          "compose_hash": "9d99ec7b89464a6d726878f61dcd2d96aefa08676832fdad649797451148367c",
-          "tx": "0xa1a463079074a532118984807c35008dec1079d477d01acd38f90fa9e0c22355"
-        },
-        {
-          "block": 46898962,
-          "compose_hash": "9d99ec7b89464a6d726878f61dcd2d96aefa08676832fdad649797451148367c",
-          "tx": "0x6aed1321fb27e60487e449163cb0ad8fe91c300ac40e383d19f1596db54822b2"
-        },
-        {
-          "block": 46920008,
-          "compose_hash": "86e289a4dda88a70d16e2804d4bd592d7c37845888d82e34956e1f4d48e63841",
-          "tx": "0x3ea31fb7bb47698f57dab81b16a8b16be41f1c2de4f7f90b9eef295ffb361599"
-        },
-        {
-          "block": 46920023,
-          "compose_hash": "86e289a4dda88a70d16e2804d4bd592d7c37845888d82e34956e1f4d48e63841",
-          "tx": "0x7f1ef294fecc7c3a3fd164479028b6554ce6fb50df15c875f4c82dfa526dd115"
-        },
-        {
           "block": 46929285,
           "compose_hash": "86e289a4dda88a70d16e2804d4bd592d7c37845888d82e34956e1f4d48e63841",
           "tx": "0x7c98bf1e0530947f94c25efc16d194fd83b6b14ad99c3650f01cd2536c399014"
@@ -639,14 +528,8 @@
       "label": "near-ai/chat-api",
       "anchor_relevant": false,
       "_note": null,
-      "event_count": 3,
+      "event_count": 2,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "1232eb4a3298c299ddf54166fbfd05c269471130a6940796f3d637781038d164",
-          "first_seen_block": 46925795,
-          "first_seen_timestamp": 1780640937,
-          "first_seen_date": "2026-06-05T06:28:57Z"
-        },
         {
           "compose_hash": "41f70a49929b2e5b7a7aa302d1483a5b25b51c856e084e7cf330bc9e5edeec6b",
           "first_seen_block": 47369613,
@@ -661,11 +544,6 @@
         }
       ],
       "events": [
-        {
-          "block": 46925795,
-          "compose_hash": "1232eb4a3298c299ddf54166fbfd05c269471130a6940796f3d637781038d164",
-          "tx": "0x6c21db92ec2c7dc0bc66f3c82ee9793c9cace6aa018aefb32c5b2e6ba7fe9cc3"
-        },
         {
           "block": 47369613,
           "compose_hash": "41f70a49929b2e5b7a7aa302d1483a5b25b51c856e084e7cf330bc9e5edeec6b",
@@ -694,26 +572,8 @@
       "label": "near-ai/postgres",
       "anchor_relevant": false,
       "_note": null,
-      "event_count": 6,
+      "event_count": 3,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "cf4d10f45b82397004eac27707e6bcc60262ced05b7dd5b92cea9f83ad64ce6b",
-          "first_seen_block": 46897947,
-          "first_seen_timestamp": 1780585241,
-          "first_seen_date": "2026-06-04T15:00:41Z"
-        },
-        {
-          "compose_hash": "34b2d433af67c3e80a315507de366ba8528fb21f187e85392113a1e94db2bc16",
-          "first_seen_block": 46899521,
-          "first_seen_timestamp": 1780588389,
-          "first_seen_date": "2026-06-04T15:53:09Z"
-        },
-        {
-          "compose_hash": "1ff7dd8d2b34ac468a041f5acd294de57f42da11138ab8c0c8c54502707381ec",
-          "first_seen_block": 46900280,
-          "first_seen_timestamp": 1780589907,
-          "first_seen_date": "2026-06-04T16:18:27Z"
-        },
         {
           "compose_hash": "d2bde6a3df69acc0c3f36a7184ffae5cb2fb223f1bf03089acc8b825cef4e423",
           "first_seen_block": 47369964,
@@ -734,21 +594,6 @@
         }
       ],
       "events": [
-        {
-          "block": 46897947,
-          "compose_hash": "cf4d10f45b82397004eac27707e6bcc60262ced05b7dd5b92cea9f83ad64ce6b",
-          "tx": "0x26a346fad26aebb1c6c0acb079d66020e61a0aba8a67444f24b2f623d9aff518"
-        },
-        {
-          "block": 46899521,
-          "compose_hash": "34b2d433af67c3e80a315507de366ba8528fb21f187e85392113a1e94db2bc16",
-          "tx": "0x77cebb132601574d647812b1e11fa83545b287ef39a17a547a8e620dffa50488"
-        },
-        {
-          "block": 46900280,
-          "compose_hash": "1ff7dd8d2b34ac468a041f5acd294de57f42da11138ab8c0c8c54502707381ec",
-          "tx": "0xc670242b1822d344219f5f84de388e581ef19ab850a28258d07436c996535275"
-        },
         {
           "block": 47369964,
           "compose_hash": "d2bde6a3df69acc0c3f36a7184ffae5cb2fb223f1bf03089acc8b825cef4e423",
