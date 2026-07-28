@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-27T14:05:11Z",
+  "generated_at": "2026-07-28T14:01:01Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 47185749,
-  "to_block": 49185749,
+  "from_block": 47228825,
+  "to_block": 49228825,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -438,7 +438,7 @@
       "label": "near-ai/chat-api",
       "anchor_relevant": false,
       "_note": null,
-      "event_count": 2,
+      "event_count": 3,
       "distinct_compose_hashes": [
         {
           "compose_hash": "41f70a49929b2e5b7a7aa302d1483a5b25b51c856e084e7cf330bc9e5edeec6b",
@@ -451,6 +451,12 @@
           "first_seen_block": 48723696,
           "first_seen_timestamp": 1784236739,
           "first_seen_date": "2026-07-16T21:18:59Z"
+        },
+        {
+          "compose_hash": "de037e3394bab47bae6006badcc82dad64eb5ff411efeb09a803158a6c271dbd",
+          "first_seen_block": 49188517,
+          "first_seen_timestamp": 1785166381,
+          "first_seen_date": "2026-07-27T15:33:01Z"
         }
       ],
       "events": [
@@ -463,6 +469,11 @@
           "block": 48723696,
           "compose_hash": "fd1848ca8d34134be79eb82a3d946c93aa30327944f6fa40b7c1e341d4f8d67a",
           "tx": "0xea958bec2857dddf6f616d9dbd620a4e09da3717f5c8a755d77638a9c4a20ca7"
+        },
+        {
+          "block": 49188517,
+          "compose_hash": "de037e3394bab47bae6006badcc82dad64eb5ff411efeb09a803158a6c271dbd",
+          "tx": "0x1abf90710870598e6a2c826384a499e3c44610d31ed08b57fed4e3472d38382a"
         }
       ],
       "new_since_anchor": null
