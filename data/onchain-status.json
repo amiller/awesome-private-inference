@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-01T13:54:36Z",
+  "generated_at": "2026-08-02T13:54:36Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 47401431,
-  "to_block": 49401431,
+  "from_block": 47444630,
+  "to_block": 49444630,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,14 +11,8 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 10,
+      "event_count": 9,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "002b406e4770df733eba8f7dfce066f1c8e8d041d972cc02da8b9e3756ebca9a",
-          "first_seen_block": 47442202,
-          "first_seen_timestamp": 1781673751,
-          "first_seen_date": "2026-06-17T05:22:31Z"
-        },
         {
           "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
           "first_seen_block": 47483435,
@@ -76,11 +70,6 @@
       ],
       "events": [
         {
-          "block": 47442202,
-          "compose_hash": "002b406e4770df733eba8f7dfce066f1c8e8d041d972cc02da8b9e3756ebca9a",
-          "tx": "0x63296e4f29278e789da220bf1693bbd4966a0b7e7d43d21cda553b2e8e88abbd"
-        },
-        {
           "block": 47483435,
           "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
           "tx": "0xc1dc0f6f047ac24ad01447b547bcd57e452cb7e9173faeec43a1d841eb769628"
@@ -127,12 +116,6 @@
         }
       ],
       "new_since_anchor": [
-        {
-          "compose_hash": "002b406e4770df733eba8f7dfce066f1c8e8d041d972cc02da8b9e3756ebca9a",
-          "first_seen_block": 47442202,
-          "first_seen_timestamp": 1781673751,
-          "first_seen_date": "2026-06-17T05:22:31Z"
-        },
         {
           "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
           "first_seen_block": 47483435,
@@ -194,7 +177,7 @@
       "label": "near-ai/cloud-api",
       "anchor_relevant": false,
       "_note": "gateway TD; pinned in awesome-private-inference verifier for backend_attested",
-      "event_count": 14,
+      "event_count": 16,
       "distinct_compose_hashes": [
         {
           "compose_hash": "a986df434d8f06fba080a3ad4aae7095afeaf8c5a2a336c12763c14b00a1ce91",
@@ -239,6 +222,12 @@
           "first_seen_date": "2026-06-30T03:13:31Z"
         },
         {
+          "compose_hash": "d74fc5a5442957a5922705796804dc84bf8cce72ab77123220a1f39bb04e0e49",
+          "first_seen_block": 48086280,
+          "first_seen_timestamp": 1782961907,
+          "first_seen_date": "2026-07-02T03:11:47Z"
+        },
+        {
           "compose_hash": "15a350fb4dcbf46be795da16f4e906c985ec8a1998a8b998db5454ae2baa413b",
           "first_seen_block": 48274481,
           "first_seen_timestamp": 1783338309,
@@ -255,6 +244,12 @@
           "first_seen_block": 48431822,
           "first_seen_timestamp": 1783652991,
           "first_seen_date": "2026-07-10T03:09:51Z"
+        },
+        {
+          "compose_hash": "f7f0fac4d61926e2588416c86bb6b7d16772a20f732dde79b02c786d4a5215bd",
+          "first_seen_block": 48690939,
+          "first_seen_timestamp": 1784171225,
+          "first_seen_date": "2026-07-16T03:07:05Z"
         },
         {
           "compose_hash": "520cfd6cf9693dac2d1cf88ecc174007c3a31c9f5107cc8238885b9be98478b8",
@@ -318,6 +313,11 @@
           "tx": "0x83aba863f168cb8d2328e1f8a1796d6c390a52b8ac3003697147582286ec02d6"
         },
         {
+          "block": 48086280,
+          "compose_hash": "d74fc5a5442957a5922705796804dc84bf8cce72ab77123220a1f39bb04e0e49",
+          "tx": "0xf231cd14968d7676cbf3a8fa25f9a16f6ba3c70a80f5e8fc21c17bda20bc0343"
+        },
+        {
           "block": 48274481,
           "compose_hash": "15a350fb4dcbf46be795da16f4e906c985ec8a1998a8b998db5454ae2baa413b",
           "tx": "0x1d85daa4a347faac90b214734cf1e2b36fe8772cb08fda3cc2fa11c317e3a232"
@@ -331,6 +331,11 @@
           "block": 48431822,
           "compose_hash": "508e35f578835e00da7f923b6c4195f777cfd27ac7fa69b9080cd3ed83513e4b",
           "tx": "0x7b8f70f1f3219b9d2be6660ead31a66432e30aa817110d08a9f1e9cc017f4c4c"
+        },
+        {
+          "block": 48690939,
+          "compose_hash": "f7f0fac4d61926e2588416c86bb6b7d16772a20f732dde79b02c786d4a5215bd",
+          "tx": "0xee1a080cf3d636b794645318c5b5e6849a34f13fc1f6030e157d7d8a8d4cb833"
         },
         {
           "block": 48993353,
