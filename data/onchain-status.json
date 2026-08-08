@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-07T14:23:03Z",
+  "generated_at": "2026-08-08T14:00:46Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 47661485,
-  "to_block": 49661485,
+  "from_block": 47704017,
+  "to_block": 49704017,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,14 +11,8 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 4,
+      "event_count": 3,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "4e7018393a66b624dd95d22344fe0eae140fcbb03e7ee65d0962f72c12906783",
-          "first_seen_block": 47697702,
-          "first_seen_timestamp": 1782184751,
-          "first_seen_date": "2026-06-23T03:19:11Z"
-        },
         {
           "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
           "first_seen_block": 47794092,
@@ -40,11 +34,6 @@
       ],
       "events": [
         {
-          "block": 47697702,
-          "compose_hash": "4e7018393a66b624dd95d22344fe0eae140fcbb03e7ee65d0962f72c12906783",
-          "tx": "0x22c4af376cea8fa4544cc9bb3b32d3ca75d3a7b1f3009e04c71db6486191b6a2"
-        },
-        {
           "block": 47794092,
           "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
           "tx": "0x85c73e12b6c34ee1f0cc1bc3bd5491df0c3452eff6e9d4135e3d23e423b307ee"
@@ -61,12 +50,6 @@
         }
       ],
       "new_since_anchor": [
-        {
-          "compose_hash": "4e7018393a66b624dd95d22344fe0eae140fcbb03e7ee65d0962f72c12906783",
-          "first_seen_block": 47697702,
-          "first_seen_timestamp": 1782184751,
-          "first_seen_date": "2026-06-23T03:19:11Z"
-        },
         {
           "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
           "first_seen_block": 47794092,
@@ -92,14 +75,8 @@
       "label": "near-ai/cloud-api",
       "anchor_relevant": false,
       "_note": "gateway TD; pinned in awesome-private-inference verifier for backend_attested",
-      "event_count": 15,
+      "event_count": 14,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "2665f2ed82bb23acef8f3e61973488d9d6d96f84773b3b440d8e7a6dc502c168",
-          "first_seen_block": 47666646,
-          "first_seen_timestamp": 1782122639,
-          "first_seen_date": "2026-06-22T10:03:59Z"
-        },
         {
           "compose_hash": "ae7943e51a5d59d91f8a5996f3f8613356ce8be1a9b9a67da41bb09490cc5096",
           "first_seen_block": 47750831,
@@ -186,11 +163,6 @@
         }
       ],
       "events": [
-        {
-          "block": 47666646,
-          "compose_hash": "2665f2ed82bb23acef8f3e61973488d9d6d96f84773b3b440d8e7a6dc502c168",
-          "tx": "0x29e6b50d1ec0c034256da118c6d275abe21f13c7dfd540182a841df12269ffda"
-        },
         {
           "block": 47750831,
           "compose_hash": "ae7943e51a5d59d91f8a5996f3f8613356ce8be1a9b9a67da41bb09490cc5096",
