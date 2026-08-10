@@ -5,7 +5,11 @@
 # after the spawn succeeds so a failed spawn re-fires next run.
 # Usage: devproof-watch.sh [--dry]
 set -euo pipefail
-export PATH="$HOME/.local/bin:$PATH"
+# paseo needs node >= 21 (--disable-warning); /usr/bin/node on zed is v20.9.0.
+# Without the nvm bin dir first, `paseo` is either missing or dies on startup —
+# which silently wedged this watcher from 2026-07-02 to 2026-08-10.
+export PATH="$HOME/.nvm/versions/node/v22.23.1/bin:$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
+command -v paseo >/dev/null || { echo "FATAL: paseo CLI not on PATH; agent spawn impossible"; exit 127; }
 cd "$(dirname "$(readlink -f "$0")")/.."
 source .venv/bin/activate
 STATE="$HOME/.config/devproof-watch.state.json"
