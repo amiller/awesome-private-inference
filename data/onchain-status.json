@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-10T14:36:11Z",
+  "generated_at": "2026-08-10T17:30:13Z",
   "rpc": "https://mainnet.base.org",
-  "from_block": 47791480,
-  "to_block": 49791480,
+  "from_block": 47796700,
+  "to_block": 49796700,
   "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
   "anchored_compose_hash_count": 4,
   "contracts": [
@@ -11,14 +11,8 @@
       "label": "near-ai/models",
       "anchor_relevant": true,
       "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "event_count": 3,
+      "event_count": 2,
       "distinct_compose_hashes": [
-        {
-          "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
-          "first_seen_block": 47794092,
-          "first_seen_timestamp": 1782377531,
-          "first_seen_date": "2026-06-25T08:52:11Z"
-        },
         {
           "compose_hash": "9385918de0a73b861ae833d99fb5be6f7e1c8a50487a835df4f277497c206825",
           "first_seen_block": 48721649,
@@ -34,11 +28,6 @@
       ],
       "events": [
         {
-          "block": 47794092,
-          "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
-          "tx": "0x85c73e12b6c34ee1f0cc1bc3bd5491df0c3452eff6e9d4135e3d23e423b307ee"
-        },
-        {
           "block": 48721649,
           "compose_hash": "9385918de0a73b861ae833d99fb5be6f7e1c8a50487a835df4f277497c206825",
           "tx": "0x251a0163264a4adfb5395df6a803de98810ce6b9b7d3f2f20232d55d7931bdc3"
@@ -50,12 +39,6 @@
         }
       ],
       "new_since_anchor": [
-        {
-          "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
-          "first_seen_block": 47794092,
-          "first_seen_timestamp": 1782377531,
-          "first_seen_date": "2026-06-25T08:52:11Z"
-        },
         {
           "compose_hash": "9385918de0a73b861ae833d99fb5be6f7e1c8a50487a835df4f277497c206825",
           "first_seen_block": 48721649,
