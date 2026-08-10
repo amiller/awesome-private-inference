@@ -1,90 +1,198 @@
 {% extends "_base.html.j2" %}
 {% block content %}
 
-<section class="mb-10">
-  <h1 class="text-3xl font-bold tracking-tight">Is private inference real yet?</h1>
-  <p class="mt-3 text-slate-700 max-w-3xl">
-    A public, automated registry of TEE-verified inference. Every day, we re-verify the attestation
-    bundles each provider exposes, and score them across eight capability layers.
-    <a class="underline" href="./methodology.html">See methodology →</a>
-  </p>
-</section>
-
-<section class="mb-8 rounded-xl border border-amber-300 bg-amber-50 p-5 text-amber-900">
-  <h2 class="text-sm uppercase font-semibold tracking-wider text-amber-800">Stage 1 verdict</h2>
-  <p class="mt-2 text-sm leading-relaxed">
-    Each row's automated cryptographic surface is in the matrix's <strong>Surface&nbsp;✅</strong> column.
-    The verdicts below add the framework checklist items the dashboard can't auto-check (governance, backdoors,
-    upgrade transparency) and assume a closed-chain E2EE client like
-    <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent&nbsp;#12201</a>.
-  </p>
-  <table class="mt-3 text-sm w-full">
-    <thead class="text-amber-800">
-      <tr>
-        <th class="text-left py-1 pr-3">Provider</th>
-        <th class="text-left py-1 pr-3">Verdict</th>
-        <th class="text-left py-1">Load-bearing reason</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="border-t border-amber-200/50">
-        <td class="py-1 pr-3 font-medium">near-ai (with hermes)</td>
-        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">Stage 1</span></td>
-        <td class="py-1">Compose-hash rotations are public on-chain (<code>DstackApp.ComposeHashAdded</code> events on Base), satisfying §1 (on-chain attestation). Inference holds no private persistent state, so §5 (upgrade with notice period) collapses to anchor-PR review — hermes fails closed on rotation until merged.</td>
-      </tr>
-      <tr class="border-t border-amber-200/50">
-        <td class="py-1 pr-3 font-medium">redpill (phala-simple)</td>
-        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">Stage 0</span></td>
-        <td class="py-1">§7 (no backdoors / debug paths) fails: every <code>phala/*</code> model boots <code>dstack-nvidia-dev</code> images with operator host-SSH wired through <code>DSTACK_AUTHORIZED_KEYS</code> in the measured <code>pre_launch_script</code> (live 2026-05-05). No client-side check can close this.</td>
-      </tr>
-      <tr class="border-t border-amber-200/50">
-        <td class="py-1 pr-3 font-medium">redpill (chutes)</td>
-        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700">Stage 0</span></td>
-        <td class="py-1">Audit surface too thin — Chutes attestation shape doesn't expose GPU NRAS or compose hash, so the §3 (reproducible code measurement) floor is unverifiable.</td>
-      </tr>
-      <tr class="border-t border-amber-200/50">
-        <td class="py-1 pr-3 font-medium">tinfoil</td>
-        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">Stage 1</span></td>
-        <td class="py-1">Audit verified all operator-controllable inputs in the attested config are off the prompt path.</td>
-      </tr>
-      <tr class="border-t border-amber-200/50">
-        <td class="py-1 pr-3 font-medium">venice</td>
-        <td class="py-1 pr-3"><span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-500/30 text-amber-900">Stage 0 (skill-side)<br/>0–1 (infra)</span></td>
-        <td class="py-1">Audit (<a class="underline" href="https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/venice-private-inference/DEVPROOF-REPORT.md#stage-assessment"><code>venice-private-inference</code> §Stage Assessment</a>) splits two ways: <strong>infrastructure: Stage 0–1</strong> per backend operator — <code>e2ee-glm-5</code> is NEAR-backed (inherits NEAR's verdict above), <code>e2ee-venice-uncensored-24b-p</code> is Phala-backed (per-deployment review needed); weakened by intermittent <code>/tee/attestation</code> reachability. <strong>Skill story: Stage 0</strong> — <code>veniceai/skills</code> misnames the protocol ("HPKE/Noise" vs actual ECIES), cites a 404 URL, teaches none of the standard verification steps; an agent following the skill builds a TOFU connection. Closed-chain hermes-class clients don't load Venice skills, so the skill-side gap doesn't apply to them; but for any agent loading <code>veniceai/skills</code> directly, this is a "backdoor by inattention."</td>
-      </tr>
-    </tbody>
-  </table>
-  <p class="mt-3 text-sm leading-relaxed">
-    Full per-provider analysis at
-    <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
-  </p>
-</section>
-
-{% if provider_summary %}
-<section class="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-  {% for p, s in provider_summary.items() %}
-  <div class="rounded-lg border border-slate-200 bg-white p-4">
-    <div class="text-xs uppercase tracking-wider text-slate-500">{{ p }}</div>
-    <div class="text-2xl font-semibold mt-1">{{ s.passed }} / {{ s.total }}</div>
-    <div class="text-xs text-slate-500">models with valid attestation bundles</div>
-  </div>
-  {% endfor %}
-</section>
-{% endif %}
-
 <section class="mb-8">
-  <h2 class="text-xl font-semibold mb-3">Attestation matrix</h2>
+  <h1 class="text-3xl font-bold tracking-tight">What can these providers actually prove?</h1>
+  <p class="mt-3 text-slate-700 max-w-3xl">
+    Every day we ask each confidential-inference provider for an attestation and check what it
+    contains. A row is <strong>verified</strong> only when every layer that provider's architecture
+    <em>should</em> be able to prove, it proves. Anything we could not reach is marked as such
+    rather than scored — an unreachable endpoint is not a privacy finding.
+    <a class="underline" href="./methodology.html">Methodology →</a>
+  </p>
+</section>
+
+{# ------------------------------------------------------------------ #}
+{# Calibration. A detector that has never fired is the first thing a   #}
+{# reader should know about, not something to bury.                    #}
+{# ------------------------------------------------------------------ #}
+<section class="mb-8 rounded-xl border border-slate-300 bg-white p-5">
+  <h2 class="text-sm uppercase font-semibold tracking-wider text-slate-500">How much to trust this page</h2>
+  <p class="mt-2 text-sm leading-relaxed text-slate-800">
+    Over <strong>{{ quality.window.days }} days</strong> and
+    <strong>{{ quality.calibration.observations }} observations</strong>, this instrument has
+    produced <strong>{{ quality.calibration['verification-failure'] }} verification failures</strong>.
+    Every failing observation in its history was a transport error
+    ({{ quality.calibration.transport }}) or an invalid response with no recorded reason
+    ({{ quality.calibration['no-error-invalid'] }}).
+    {% if quality.calibration['verification-failure'] == 0 %}
+    By the rule of three, zero events in {{ quality.calibration.observations }} trials puts the
+    95% upper bound on the per-observation verification-failure rate at
+    <strong>{{ quality.calibration.rate_upper_bound_95 }}%</strong>. That is the honest reading:
+    not "providers are safe", but "if this check fails, it fails less often than about once in
+    {{ (quality.calibration.observations // 3) }} observations — or it is not wired to anything."
+    We cannot yet distinguish those two cases.
+    {% endif %}
+  </p>
+</section>
+
+<section class="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+  <div class="rounded-lg border border-slate-200 bg-white p-4">
+    <div class="text-xs uppercase tracking-wider text-slate-500">Targets verified</div>
+    <div class="text-2xl font-semibold mt-1">{{ quality.coverage_summary.get('verified', 0) }} / {{ quality.coverage|length }}</div>
+    <div class="text-xs text-slate-500">{{ quality.coverage_summary.get('partial', 0) }} partial ·
+      {{ quality.coverage_summary.get('unreachable', 0) + quality.coverage_summary.get('invalid', 0) }} unreachable</div>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4">
+    <div class="text-xs uppercase tracking-wider text-slate-500">Builds reviewed</div>
+    <div class="text-2xl font-semibold mt-1 {% if quality.audit_debt.backlog > 5 %}text-rose-700{% endif %}">
+      {{ quality.audit_debt.builds_reviewed }} / {{ quality.audit_debt.builds_observed }}</div>
+    <div class="text-xs text-slate-500">backlog {{ quality.audit_debt.backlog }} ·
+      last {{ quality.audit_debt.days_since_last_audit }}d ago</div>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4">
+    <div class="text-xs uppercase tracking-wider text-slate-500">Cells carrying signal</div>
+    <div class="text-2xl font-semibold mt-1">{{ (quality.density.signal_fraction * 100)|round|int }}%</div>
+    <div class="text-xs text-slate-500">{{ quality.density.dashes }} of
+      {{ quality.density.published_cells }} matrix cells are dashes</div>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4">
+    <div class="text-xs uppercase tracking-wider text-slate-500">Unmeasurable providers</div>
+    <div class="text-2xl font-semibold mt-1">{{ quality.unmeasurable_providers|length }}</div>
+    <div class="text-xs text-slate-500">{{ quality.unmeasurable_providers|join(", ") }} expose no
+      stable version identity</div>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ #}
+{# Primary readout: one line per target, a fraction, and what's missing #}
+{# ------------------------------------------------------------------ #}
+<section class="mb-8">
+  <h2 class="text-xl font-semibold mb-3">Coverage by target</h2>
   <p class="text-sm text-slate-600 mb-4">
-    One row per model. Cells:
+    <strong>Proven</strong> counts the layers this provider's shape is expected to prove — the
+    expectation is set per architecture in
+    <code>REQUIRED_LAYERS_BY_SHAPE</code>, and that bar is an editorial judgment, not a
+    measurement. Different providers have different denominators, so compare the
+    <em>missing</em> column, not the fraction alone.
+  </p>
+  <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="min-w-full text-sm">
+      <thead class="bg-slate-100 text-slate-700">
+        <tr>
+          <th class="text-left p-2">Provider</th>
+          <th class="text-left p-2">Model</th>
+          <th class="text-left p-2">Status</th>
+          <th class="text-center p-2">Proven</th>
+          <th class="text-left p-2">Unproven / reason</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for r in rows %}
+        <tr class="border-t border-slate-100">
+          <td class="p-2 font-medium">{{ r.provider }}</td>
+          <td class="p-2 font-mono text-xs">{{ r.model }}</td>
+          <td class="p-2">
+            <span class="inline-block rounded px-2 py-0.5 text-xs {{ r.status_class }}"
+                  title="{{ r.status_title }}">{{ r.status_label }}</span>
+          </td>
+          <td class="p-2 text-center font-mono text-xs">
+            {% if r.status in ("unreachable", "invalid") %}—
+            {% else %}{{ r.proven }}/{{ r.required }}
+              {% if r.bar.disputed %}<span class="text-rose-700" title="{{ r.bar.note }}">⚠</span>{% endif %}
+            {% endif %}
+          </td>
+          <td class="p-2 text-xs text-slate-600">
+            {% if r.status in ("unreachable", "invalid") %}
+              <span class="font-mono">{{ (r.error or "no response")[:90] }}</span>
+            {% elif r.missing %}
+              <span class="font-mono">{{ r.missing|join(", ") }}</span>
+            {% else %}—{% endif %}
+            {% if r.hidden_layers %}
+              <div class="mt-1 text-amber-700">not shown on the matrix below:
+                <span class="font-mono">{{ r.hidden_layers|join(", ") }}</span></div>
+            {% endif %}
+            {% if r.bar.disputed and r.status not in ("unreachable", "invalid") %}
+              <div class="mt-1 text-rose-700">{{ r.bar.note }}</div>
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="5" class="p-4 text-center text-slate-400">no snapshot data</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ #}
+{# The dataset that was collected for 111 days and never published.    #}
+{# ------------------------------------------------------------------ #}
+<section class="mb-8">
+  <h2 class="text-xl font-semibold mb-3">How often does the attested code change?</h2>
+  <p class="text-sm text-slate-600 mb-4">
+    Any client that pins an enclave measurement is betting the measurement holds still. It does not.
+    <strong>Deploys</strong> counts transitions to a version string never seen before.
+    <strong>Corrected</strong> accounts for deploys that begin and end between two probes:
+    with T deploys seen over n−1 daily intervals the rate estimate is −ln(1−T/(n−1))/Δ.
+  </p>
+  <p class="text-sm text-slate-600 mb-4">
+    Read <strong>revisits</strong> only on <code>instance-sampled</code> rows. There the version
+    comes from whichever backend answered, so a return to an earlier value means we reached a
+    different instance — Chutes' 19 revisits are one deploy plus a fleet that never finished
+    draining, not 19 rollouts. On <code>control-plane</code> rows the version is read from a
+    single document (NEAR from the gateway's compose, Tinfoil from the release feed), so it
+    cannot show fleet structure at all and zero revisits there is guaranteed by construction
+    rather than observed. Fleet size is not identifiable from once-a-day sampling on any row.
+  </p>
+  <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <table class="min-w-full text-sm">
+      <thead class="bg-slate-100 text-slate-700">
+        <tr>
+          <th class="text-left p-2">Target</th>
+          <th class="text-left p-2">Version source</th>
+          <th class="text-right p-2">Observations</th>
+          <th class="text-right p-2">Distinct versions</th>
+          <th class="text-right p-2">Deploys</th>
+          <th class="text-right p-2">Revisits</th>
+          <th class="text-right p-2">Days per deploy</th>
+          <th class="text-right p-2">Corrected</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for c in quality.cadence %}
+        <tr class="border-t border-slate-100">
+          <td class="p-2 font-mono text-xs">{{ c.provider }}/{{ c.model }}</td>
+          <td class="p-2 text-xs {% if c.version_source == 'control-plane' %}text-slate-400{% endif %}">{{ c.version_source }}</td>
+          <td class="p-2 text-right">{{ c.observations }}</td>
+          <td class="p-2 text-right">{{ c.distinct }}</td>
+          <td class="p-2 text-right font-semibold">{{ c.novel }}</td>
+          <td class="p-2 text-right {% if c.version_source != 'instance-sampled' %}text-slate-300{% elif c.revisit > c.novel %}text-amber-700{% endif %}"
+              {% if c.version_source != 'instance-sampled' %}title="control-plane version string — revisits are not meaningful here"{% endif %}>{{ c.revisit }}</td>
+          <td class="p-2 text-right">{{ c.days_per_deploy or "—" }}</td>
+          <td class="p-2 text-right font-semibold">{{ c.days_per_deploy_corrected or "—" }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{# ------------------------------------------------------------------ #}
+{# The per-layer matrix, demoted to detail.                            #}
+{# ------------------------------------------------------------------ #}
+<section class="mb-8">
+  <h2 class="text-xl font-semibold mb-3">Per-layer detail</h2>
+  <p class="text-sm text-slate-600 mb-4">
+    Cells:
     <span class="inline-block rounded px-1.5 py-0.5 text-xs bg-emerald-500/20 text-emerald-700">✅</span> verified,
     <span class="inline-block rounded px-1.5 py-0.5 text-xs bg-rose-500/20 text-rose-700">❌</span> rejected,
-    <span class="inline-block rounded px-1.5 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200">—</span> required for this shape but not exposed (counts as a fail),
-    <span class="inline-block rounded px-1.5 py-0.5 text-xs text-slate-400">—</span> architecturally N/A (e.g. no gateway hop for a single-TD provider).
-    The <strong>Surface&nbsp;✅</strong> column is green only when every required layer for that shape is ✅. This is <em>necessary but not sufficient</em>
-    for framework Stage 1 — KMS root provenance, governance, image-digest pinning, and reproducible builds aren't in the automated matrix.
-    See provider pages for the full Stage-0/1 verdict.
+    <span class="inline-block rounded px-1.5 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300">○</span> awaiting our review,
+    <span class="inline-block rounded px-1.5 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200">—</span> required but not exposed,
+    <span class="inline-block rounded px-1.5 py-0.5 text-xs text-slate-400">—</span> not applicable to this architecture.
+    This matrix shows {{ SCORECARD_LABELS|length }} of the 15 layers the probe records; the
+    remainder are listed per row in the coverage table above.
   </p>
-
   <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
     <table class="min-w-full text-sm">
       <thead class="bg-slate-100 text-slate-700">
@@ -95,13 +203,12 @@
           {% for key, label in SCORECARD_LABELS.items() %}
           <th class="p-2 text-center" title="{{ SCORECARD_TOOLTIPS[key] }}">{{ label }}</th>
           {% endfor %}
-          <th class="p-2 text-center" title="All required layers for this shape are ✅. Necessary but not sufficient for framework Stage 1 — see provider pages for KMS provenance, governance, reproducibility, etc.">Surface ✅</th>
           <th class="p-2 text-right">lat</th>
         </tr>
       </thead>
       <tbody>
       {% for r in rows %}
-        <tr class="border-t border-slate-100 {% if not r.valid %}bg-rose-50/30{% endif %}">
+        <tr class="border-t border-slate-100 {% if r.status in ('unreachable', 'invalid') %}bg-slate-50 text-slate-400{% endif %}">
           <td class="p-2 font-medium">{{ r.provider }}</td>
           <td class="p-2 font-mono text-xs">{{ r.model }}</td>
           <td class="p-2 text-xs text-slate-500">{{ r.attestation_type or "—" }}</td>
@@ -110,82 +217,43 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs {{ r.cells[key].class }}" title="{{ r.cells[key].title }}">{{ r.cells[key].mark }}</span>
           </td>
           {% endfor %}
-          <td class="p-2 text-center">
-            {% if r.stage1_ready %}
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Every required layer for this shape passes">✅</span>
-            {% else %}
-              <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="At least one required layer is missing or rejected">gap</span>
-            {% endif %}
-          </td>
           <td class="p-2 text-right text-xs text-slate-500">{{ r.latency_s }}s</td>
         </tr>
-        {% if r.error %}
-        <tr class="bg-rose-50/20 text-xs text-rose-700">
-          <td colspan="{{ 5 + SCORECARD_LABELS|length }}" class="p-2 pl-4 font-mono">
-            {{ r.error }}
-          </td>
-        </tr>
-        {% endif %}
-      {% else %}
-        <tr><td colspan="100" class="p-4 text-center text-slate-400">no snapshot data</td></tr>
       {% endfor %}
       </tbody>
     </table>
   </div>
 </section>
 
+{# ------------------------------------------------------------------ #}
+{# Editorial. Hand-written, therefore dated and labelled as such.      #}
+{# ------------------------------------------------------------------ #}
 <section class="mb-8">
-  <h2 class="text-xl font-semibold mb-2">Known limitations</h2>
+  <h2 class="text-xl font-semibold mb-2">Editorial notes</h2>
   <p class="text-sm text-slate-600 mb-3">
-    Reasons why green rows above don't imply end-to-end private inference. Pulled from
-    <a class="underline" href="https://github.com/amiller/devproof-audits-guide">devproof-audits-guide</a>.
+    Hand-written, not computed, and therefore able to go stale. Each carries the date it was last
+    checked against the data. Anything not on this list that you see above is machine-derived.
   </p>
   <ul class="space-y-2 text-sm text-slate-800">
-    <li class="flex gap-2"><span class="text-amber-600">◐</span><strong>NEAR gateway-side: narrowed, not closed.</strong>
-      cloud-api PRs <a class="underline" href="https://github.com/nearai/cloud-api/pull/485">#485</a> /
-      <a class="underline" href="https://github.com/nearai/cloud-api/pull/513">#513</a> /
-      <a class="underline" href="https://github.com/nearai/cloud-api/pull/552">#552</a> /
-      <a class="underline" href="https://github.com/nearai/cloud-api/pull/558">#558</a>
-      (Mar–Apr 2026) deleted the operator-rewritable discovery URL and now inline-verify
-      each backend's TDX/RTMR3/NRAS before serving. <em>Still open server-side:</em>
-      <code>ALLOWED_COMPOSE_HASHES</code> is unset, so any TCB-current TDX TD passes the gateway —
-      and <code>DstackKms.kmsInfo</code> on Base is empty (no on-chain anchor for the KMS root
-      pubkey). <em>Closed client-side:</em>
-      <a class="underline" href="https://github.com/NousResearch/hermes-agent/pull/12201">hermes-agent #12201</a>
-      strict-pins <code>(model → app_id, compose_hashes, os_image_hash, kms_pubkey)</code>
-      <strong>and</strong> per-model inner-compose closure
-      (<code>compose_manager_attestation.actions[]</code> →
-      <code>(file, commit, file_sha256)</code>), plus
-      <code>model_name == requested_model</code> which caught a live silent
-      substitution (<code>deepseek-ai/DeepSeek-V3.1 → Qwen/Qwen3.5-122B-A10B</code>) on 2026-05-05.</li>
-    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>RedPill phala-simple: dev OS image with operator host-SSH (live 2026-05-05).</strong>
-      Every <code>phala/*</code> model on RedPill boots
-      <code>dstack-nvidia-dev-0.5.{5,8}-*</code> (ships sshd + debug-tweaks + tools-profile),
-      with <code>DSTACK_AUTHORIZED_KEYS</code> in <code>allowed_envs</code> and a measured
-      <code>pre_launch_script</code> that writes the operator-supplied key to root's
-      <code>authorized_keys</code> at boot. Switching to the prod
-      <code>dstack-nvidia-0.5.{5,6,8}</code> image (no sshd, runs <code>disable_login()</code>)
-      neutralizes the path without compose changes — but it hasn't been done.</li>
-    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Upstream verifier TODOs.</strong>
-      Phala's <code>private-ai-verifier</code> still decodes NVIDIA and Intel Trust Authority JWTs
-      with <code>verify_signature=False</code>. We inherit this.</li>
-    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>KMS opacity.</strong>
-      Phala KMS and most dstack-hosted gateways are themselves Stage 0: mutable image tags,
-      no upgrade log, no third-party review. NEAR's KMS contract on Base also has empty
-      <code>kmsInfo</code> across all four fields, so the KMS root pubkey provenance is
-      not on-chain auditable.</li>
-    <li class="flex gap-2"><span class="text-rose-600">◉</span><strong>Catalog ≠ served.</strong>
-      Some entries (e.g. Tinfoil-routed models in RedPill's /models) 404 on real calls.</li>
+    {% for note in EDITORIAL_NOTES %}
+    <li class="flex gap-2">
+      <span class="text-slate-400 font-mono text-xs whitespace-nowrap pt-0.5">{{ note.checked }}</span>
+      <span><strong>{{ note.title }}</strong> {{ note.body }}</span>
+    </li>
+    {% endfor %}
   </ul>
 </section>
 
 <section class="text-sm text-slate-600">
   <h2 class="text-xl font-semibold mb-2 text-slate-900">How this page is generated</h2>
   <p>
-    Every day at 13:17 UTC, <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/workflows/probe-daily.yml"><code>probe-daily.yml</code></a>
-    runs <code>python -m probes.collect</code> against each provider, writes a JSON snapshot to
-    <code>data/snapshots/YYYY-MM-DD.json</code>, re-renders this page, and commits.
-    All data and code are reproducible — see <a class="underline" href="https://github.com/amiller/awesome-private-inference#run-a-probe-locally">run a probe locally</a>.
+    Daily at 13:17 UTC,
+    <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/workflows/probe-daily.yml"><code>probe-daily.yml</code></a>
+    runs <code>python -m probes.collect</code>, writes <code>data/snapshots/YYYY-MM-DD.json</code>,
+    recomputes <code>data/quality.json</code> (the self-check driving the four tiles above),
+    re-renders this page, and commits. Reproduce with
+    <a class="underline" href="https://github.com/amiller/awesome-private-inference#run-a-probe-locally">run a probe locally</a>;
+    grade this page with <code>python -m probes.quality</code>.
   </p>
 </section>
 

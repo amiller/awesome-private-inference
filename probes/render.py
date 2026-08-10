@@ -13,7 +13,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from verifiers.common import is_layer_required, is_stage1_ready
+from probes.quality import compute as compute_quality
+from verifiers.common import bar_note, is_layer_required, is_stage1_ready
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_LATEST = REPO_ROOT / "data" / "latest.json"
@@ -63,6 +64,34 @@ SCORECARD_TOOLTIPS = {
 }
 
 
+# Hand-written claims. Each carries the date it was last checked against the data,
+# so a reader can tell how much of the page is measurement and how much is opinion.
+# A claim here that the probe can check belongs in a scorecard column instead.
+EDITORIAL_NOTES = [
+    {"checked": "2026-06-18", "title": "RedPill phala-simple host-SSH path is closed.",
+     "body": "The fleet moved off dstack-nvidia-dev to prod dstack-nvidia-0.5.9, removing the "
+             "operator host-SSH route. Now machine-tracked by the Prod OS image column, which "
+             "flips on any regression. Residual gaps (mutable image tags, unpinned runtime "
+             "weights) are unaddressed."},
+    {"checked": "2026-06-18", "title": "Chutes' serving code is not measured.",
+     "body": "serve.py on the prompt-plaintext path is CFSV-excluded and in no RTMR, and the "
+             "model name is not bound to the quote. A passing quote proves genuine TDX running "
+             "a Chutes base image, not which model on which code."},
+    {"checked": "2026-05-09", "title": "NEAR's gateway gap depends on the client.",
+     "body": "ALLOWED_COMPOSE_HASHES is unset server-side, so the gateway alone does not pin "
+             "code. A closed-chain client that checks compose_hash against the on-chain set on "
+             "Base closes it; a client that trusts the gateway does not."},
+    {"checked": "2026-04-26", "title": "Upstream verifier decodes JWTs without checking signatures.",
+     "body": "Phala's private-ai-verifier passes verify_signature=False on NVIDIA and Intel "
+             "Trust Authority tokens, and every reseller routing through it inherits that."},
+    {"checked": "2026-08-10", "title": "The bar itself is unaudited.",
+     "body": "REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog, and it is uneven: "
+             "Venice's required set omits the layers it would fail, so Venice can score a full "
+             "row while Chutes is capped below full by construction. Treat cross-provider "
+             "fraction comparisons as unsound until this is rebuilt from provider claims."},
+]
+
+
 def cell(value, required: bool = False):
     """Render a scorecard cell.
 
@@ -91,13 +120,31 @@ def cell(value, required: bool = False):
             "title": "Not applicable to this attestation shape"}
 
 
+STATUS_STYLE = {
+    "verified": ("verified", "bg-emerald-500/20 text-emerald-700",
+                 "Every layer this provider's architecture should be able to prove, it proves."),
+    "partial": ("partial", "bg-amber-100 text-amber-800 ring-1 ring-amber-300",
+                "Reachable and internally consistent, but at least one required layer is unproven."),
+    "unreachable": ("unreachable", "bg-slate-200 text-slate-600",
+                    "We could not get a response. This says nothing about the provider's privacy properties."),
+    "invalid": ("invalid", "bg-rose-500/20 text-rose-700",
+                "A response arrived but did not verify."),
+    "uncharacterized": ("uncharacterized", "bg-slate-200 text-slate-600",
+                        "We have not defined what this attestation shape should be able to prove."),
+}
+
+
 def _render(snapshot):
-    # Aggregate: per-provider summary
+    quality = compute_quality(snapshot)
+    status_by_target = {(c["provider"], c["model"]): c for c in quality["coverage"]}
+
     rows = []
     for provider, reports in snapshot.get("attestations", {}).items():
         for r in reports:
             sc = r.get("scorecard") or {}
             shape = r.get("attestation_type", "")
+            cov = status_by_target[(provider, r["model"])]
+            label, css, tip = STATUS_STYLE[cov["status"]]
             rows.append({
                 "provider": provider,
                 "model": r["model"],
@@ -108,13 +155,32 @@ def _render(snapshot):
                 "latency_s": r.get("latency_s", 0),
                 "cells": {k: cell(sc.get(k), is_layer_required(k, shape)) for k in SCORECARD_LABELS},
                 "stage1_ready": is_stage1_ready(sc, shape),
+                "status": cov["status"],
+                "status_label": label,
+                "status_class": css,
+                "status_title": tip,
+                "proven": cov["proven"],
+                "required": cov["required"],
+                "missing": cov["missing"],
+                # required layers with no column on the matrix — invisible to a reader
+                "hidden_layers": cov["hidden_layers"],
+                "bar": bar_note(shape),
             })
+    # disputed bars sort below sound ones at the same status, so a contested full row
+    # never sits at the top of the page looking like the best provider on offer
+    rows.sort(key=lambda r: (r["status"] != "verified", bool(r["bar"]["disputed"]),
+                             r["status"] == "unreachable", r["provider"], r["model"]))
 
     provider_summary = {}
     for p, reports in snapshot.get("attestations", {}).items():
-        total = len(reports)
-        passed = sum(1 for r in reports if r.get("valid"))
-        provider_summary[p] = {"total": total, "passed": passed}
+        targets = [status_by_target[(p, r["model"])] for r in reports]
+        provider_summary[p] = {
+            "total": len(targets),
+            "verified": sum(1 for t in targets if t["status"] == "verified"),
+            "partial": sum(1 for t in targets if t["status"] == "partial"),
+            "unreachable": sum(1 for t in targets if t["status"] in ("unreachable", "invalid")),
+            "measurable": next(t["version_identity"] for t in targets) == "content-hash",
+        }
 
     pricing_rows = []
     for p, rows_ in snapshot.get("pricing", {}).items():
@@ -127,7 +193,13 @@ def _render(snapshot):
     env.globals.update({
         "SCORECARD_LABELS": SCORECARD_LABELS,
         "SCORECARD_TOOLTIPS": SCORECARD_TOOLTIPS,
+        "EDITORIAL_NOTES": EDITORIAL_NOTES,
     })
+
+    # Rule of three: with zero events in n trials, the 95% upper bound on the
+    # per-observation rate is 3/n. Turns "never fired" into a quantified claim.
+    n = quality["calibration"]["observations"]
+    quality["calibration"]["rate_upper_bound_95"] = round(100 * 3 / n, 3) if n else None
 
     ctx = {
         "snapshot": snapshot,
@@ -137,6 +209,7 @@ def _render(snapshot):
         "rows": rows,
         "provider_summary": provider_summary,
         "pricing_rows": pricing_rows,
+        "quality": quality,
     }
 
     DOCS_DIR.mkdir(exist_ok=True)

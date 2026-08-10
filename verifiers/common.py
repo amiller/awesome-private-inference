@@ -77,6 +77,43 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
 }
 
 
+# Every required set is a judgment about what a provider *should* be able to prove,
+# and the dangerous edit is an exclusion, not an inclusion — omitting a layer silently
+# raises a provider's score. Each shape therefore has to say out loud what it leaves
+# out and why, and whether that reasoning is currently contested. `disputed` rows are
+# rendered with a warning and must not be compared across providers.
+BAR_NOTES: Dict[str, Dict[str, object]] = {
+    "tdx+gpu": {"disputed": False, "note":
+        "Gateway plus per-model TD, so every hop is required. Excludes the Tinfoil-specific "
+        "SEV layers, which do not exist in this architecture."},
+    "phala-simple": {"disputed": False, "note":
+        "Single TD, no gateway hop, so backend_attested is genuinely N/A. prod_os_image is "
+        "required because the dev OS image carries an operator host-SSH path."},
+    "near-relay": {"disputed": False, "note": "Same architecture as tdx+gpu."},
+    "chutes": {"disputed": False, "note":
+        "TDX-only shape. GPU and compose binding are required because the catalog claims GPU "
+        "inference, so their absence is a failure rather than an N/A."},
+    "chutes-tee": {"disputed": False, "note":
+        "serving_code_attested is required and is False by construction, so this shape cannot "
+        "reach a full row. That is the intended reading, not a scoring bug."},
+    "venice": {"disputed": True, "note":
+        "DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and "
+        "backend_attested on the grounds that Venice resells NEAR and Phala backends and has "
+        "no hop of its own to attest. The effect is that Venice can score a full row while "
+        "providers that expose more of their stack score less. The exclusions were derived "
+        "from what the API happens to expose rather than from what Venice claims, which is "
+        "backwards. Do not compare this row's fraction against other providers."},
+    "tinfoil-sev-snp-v2": {"disputed": False, "note":
+        "SEV-SNP rather than TDX, so the Intel-specific layers are N/A and the bar is the "
+        "OHTTP/HPKE binding, measured config, live TLS pinning and client nonce."},
+}
+
+
+def bar_note(shape: str) -> Dict[str, object]:
+    return BAR_NOTES.get(shape, {"disputed": True, "note":
+        "No required-layer set is defined for this shape, so nothing is scored."})
+
+
 def is_stage1_ready(scorecard: Dict[str, Optional[bool]], shape: str) -> bool:
     """A row passes Stage 1 iff every required layer for its shape is True.
     Unknown shapes return False — we can't claim Stage 1 for something we

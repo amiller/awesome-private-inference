@@ -75,6 +75,11 @@ jobs:
           fi
           python -m probes.collect $FLAGS
 
+      - name: Grade the registry
+        run: |
+          source .venv/bin/activate
+          python -m probes.quality --write
+
       - name: Render dashboard
         run: |
           source .venv/bin/activate
@@ -96,7 +101,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/snapshots/ data/latest.json data/onchain-status.json docs/
+          git add data/snapshots/ data/latest.json data/onchain-status.json data/quality.json docs/
           if ! git diff --staged --quiet; then
             git commit -m "ci: refresh snapshot + dashboard [skip ci]"
             git push

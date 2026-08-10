@@ -1,0 +1,534 @@
+{
+  "generated_at": "2026-08-10T14:36:12Z",
+  "window": {
+    "first": "2026-04-21",
+    "last": "2026-08-10",
+    "days": 111
+  },
+  "calibration": {
+    "observations": 2358,
+    "pass": 1656,
+    "transport": 572,
+    "no-error-invalid": 130,
+    "verification-failure": 0,
+    "red_cells_that_were_verification_failures": 0,
+    "note": "Every red cell in the registry's history was a transport error. The verification path has never rejected a provider."
+  },
+  "coverage": [
+    {
+      "provider": "near-ai",
+      "model": "openai/gpt-oss-120b",
+      "shape": "tdx+gpu",
+      "status": "partial",
+      "proven": 6,
+      "required": 7,
+      "missing": [
+        "backend_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "near-ai",
+      "model": "zai-org/GLM-5.1-FP8",
+      "shape": "tdx+gpu",
+      "status": "partial",
+      "proven": 6,
+      "required": 7,
+      "missing": [
+        "backend_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/gpt-oss-20b",
+      "shape": "redpill",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "mutable-tag",
+      "version_source": "control-plane",
+      "error": "HTTP 502: <html>",
+      "hidden_layers": []
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/gpt-oss-120b",
+      "shape": "redpill",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "mutable-tag",
+      "version_source": "control-plane",
+      "error": "HTTP 502: <html>",
+      "hidden_layers": []
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/qwen-2.5-7b-instruct",
+      "shape": "redpill",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "mutable-tag",
+      "version_source": "control-plane",
+      "error": "HTTP 502: <html>",
+      "hidden_layers": []
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/glm-4.7",
+      "shape": "redpill",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "mutable-tag",
+      "version_source": "control-plane",
+      "error": "HTTP 502: <html>",
+      "hidden_layers": []
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/deepseek-v3.2",
+      "shape": "redpill",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "mutable-tag",
+      "version_source": "control-plane",
+      "error": "HTTP 502: <html>",
+      "hidden_layers": []
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/kimi-k2.5",
+      "shape": "redpill",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "mutable-tag",
+      "version_source": "control-plane",
+      "error": "HTTP 502: <html>",
+      "hidden_layers": []
+    },
+    {
+      "provider": "tinfoil",
+      "model": "router",
+      "shape": "tinfoil-sev-snp-v2",
+      "status": "partial",
+      "proven": 3,
+      "required": 5,
+      "missing": [
+        "client_nonce_supported",
+        "runtime_config_fully_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": null,
+      "hidden_layers": [
+        "client_nonce_supported",
+        "code_measurement_reproducible",
+        "hpke_pubkey_attested",
+        "runtime_config_fully_attested",
+        "tls_pubkey_pinned"
+      ]
+    },
+    {
+      "provider": "tinfoil",
+      "model": "gpt-oss-120b",
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": "SSLError: HTTPSConnectionPool(host='gpt-oss-120b-0.inf6.tinfoil.sh', port=443): ",
+      "hidden_layers": []
+    },
+    {
+      "provider": "tinfoil",
+      "model": "llama3-3-70b",
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": "ConnectionError: HTTPSConnectionPool(host='llama3-3-70b.tinfoil.containers.tinfo",
+      "hidden_layers": []
+    },
+    {
+      "provider": "tinfoil",
+      "model": "gemma4-31b",
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": "ConnectionError: HTTPSConnectionPool(host='gemma4-31b-inf6.tinfoil.containers.ti",
+      "hidden_layers": []
+    },
+    {
+      "provider": "venice",
+      "model": "e2ee-glm-5",
+      "shape": "venice",
+      "status": "verified",
+      "proven": 6,
+      "required": 6,
+      "missing": [],
+      "version_identity": "absent",
+      "version_source": "none",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "venice",
+      "model": "e2ee-qwen3-5-122b-a10b",
+      "shape": "venice",
+      "status": "verified",
+      "proven": 6,
+      "required": 6,
+      "missing": [],
+      "version_identity": "absent",
+      "version_source": "none",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "venice",
+      "model": "e2ee-uncensored-24b-p",
+      "shape": "venice",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 6,
+      "missing": [
+        "compose_hash_committed",
+        "gpu_attested",
+        "key_derives_to_address",
+        "nonce_bound",
+        "report_data_binds_key",
+        "tdx_verified"
+      ],
+      "version_identity": "absent",
+      "version_source": "none",
+      "error": "no TEE attestation available for this model (404)",
+      "hidden_layers": []
+    },
+    {
+      "provider": "venice",
+      "model": "e2ee-gpt-oss-120b-p",
+      "shape": "venice",
+      "status": "partial",
+      "proven": 5,
+      "required": 6,
+      "missing": [
+        "compose_hash_committed"
+      ],
+      "version_identity": "absent",
+      "version_source": "none",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "Qwen3-32B-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "gemma-4-31B-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "GLM-5-TEE",
+      "shape": "chutes-tee",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 4,
+      "missing": [
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": "RuntimeError: HTTP 404 on /e2e/instances/e51e818e-fa63-570d-9f68-49d7d1b4d12f: {",
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "DeepSeek-V3.2-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "Kimi-K2.6-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    }
+  ],
+  "coverage_summary": {
+    "partial": 8,
+    "unreachable": 11,
+    "verified": 2
+  },
+  "unmeasurable_providers": [
+    "redpill",
+    "venice"
+  ],
+  "audit_debt": {
+    "builds_observed": 19,
+    "builds_reviewed": 2,
+    "backlog": 17,
+    "last_audit": "2026-06-18",
+    "days_since_last_audit": 53
+  },
+  "density": {
+    "published_cells": 189,
+    "carrying_signal": 50,
+    "dashes": 139,
+    "signal_fraction": 0.265
+  },
+  "hidden_layer_targets": [
+    "tinfoil/router"
+  ],
+  "cadence": [
+    {
+      "provider": "chutes",
+      "model": "DeepSeek-V3.2-TEE",
+      "observations": 53,
+      "span_days": 53,
+      "distinct": 2,
+      "novel": 1,
+      "revisit": 0,
+      "version_source": "instance-sampled",
+      "days_per_deploy": 53.0,
+      "days_per_deploy_corrected": 52.5
+    },
+    {
+      "provider": "chutes",
+      "model": "GLM-5-TEE",
+      "observations": 43,
+      "span_days": 43,
+      "distinct": 2,
+      "novel": 1,
+      "revisit": 6,
+      "version_source": "instance-sampled",
+      "days_per_deploy": 43.0,
+      "days_per_deploy_corrected": 42.5
+    },
+    {
+      "provider": "chutes",
+      "model": "Kimi-K2.6-TEE",
+      "observations": 53,
+      "span_days": 53,
+      "distinct": 2,
+      "novel": 1,
+      "revisit": 4,
+      "version_source": "instance-sampled",
+      "days_per_deploy": 53.0,
+      "days_per_deploy_corrected": 52.5
+    },
+    {
+      "provider": "chutes",
+      "model": "Qwen3-32B-TEE",
+      "observations": 53,
+      "span_days": 53,
+      "distinct": 2,
+      "novel": 1,
+      "revisit": 19,
+      "version_source": "instance-sampled",
+      "days_per_deploy": 53.0,
+      "days_per_deploy_corrected": 52.5
+    },
+    {
+      "provider": "chutes",
+      "model": "gemma-4-31B-TEE",
+      "observations": 53,
+      "span_days": 53,
+      "distinct": 2,
+      "novel": 1,
+      "revisit": 16,
+      "version_source": "instance-sampled",
+      "days_per_deploy": 53.0,
+      "days_per_deploy_corrected": 52.5
+    },
+    {
+      "provider": "near-ai",
+      "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "observations": 32,
+      "span_days": 31,
+      "distinct": 10,
+      "novel": 9,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 3.4,
+      "days_per_deploy_corrected": 2.9
+    },
+    {
+      "provider": "near-ai",
+      "model": "openai/gpt-oss-120b",
+      "observations": 83,
+      "span_days": 85,
+      "distinct": 19,
+      "novel": 18,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 4.7,
+      "days_per_deploy_corrected": 4.2
+    },
+    {
+      "provider": "near-ai",
+      "model": "zai-org/GLM-5-FP8",
+      "observations": 31,
+      "span_days": 31,
+      "distinct": 10,
+      "novel": 9,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 3.4,
+      "days_per_deploy_corrected": 2.9
+    },
+    {
+      "provider": "near-ai",
+      "model": "zai-org/GLM-5.1-FP8",
+      "observations": 83,
+      "span_days": 83,
+      "distinct": 18,
+      "novel": 17,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 4.9,
+      "days_per_deploy_corrected": 4.4
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/gpt-oss-20b",
+      "observations": 33,
+      "span_days": 40,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/qwen-2.5-7b-instruct",
+      "observations": 34,
+      "span_days": 40,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
+      "provider": "tinfoil",
+      "model": "gemma4-31b",
+      "observations": 87,
+      "span_days": 87,
+      "distinct": 7,
+      "novel": 6,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 14.5,
+      "days_per_deploy_corrected": 14.0
+    },
+    {
+      "provider": "tinfoil",
+      "model": "gpt-oss-120b",
+      "observations": 82,
+      "span_days": 82,
+      "distinct": 2,
+      "novel": 1,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 82.0,
+      "days_per_deploy_corrected": 81.5
+    },
+    {
+      "provider": "tinfoil",
+      "model": "llama3-3-70b",
+      "observations": 93,
+      "span_days": 93,
+      "distinct": 3,
+      "novel": 2,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 46.5,
+      "days_per_deploy_corrected": 46.0
+    },
+    {
+      "provider": "tinfoil",
+      "model": "router",
+      "observations": 106,
+      "span_days": 106,
+      "distinct": 29,
+      "novel": 28,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "days_per_deploy": 3.8,
+      "days_per_deploy_corrected": 3.3
+    }
+  ]
+}
