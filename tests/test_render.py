@@ -78,16 +78,33 @@ def test_every_required_layer_is_reachable_by_a_reader():
     assert not unrendered["tdx+gpu"], "tdx+gpu layers should all be on the matrix"
 
 
-def test_disputed_bars_are_labelled():
-    """Rubric R3: a required set that omits the layers a provider would fail must say so.
+def test_every_scored_shape_states_what_it_excludes():
+    """Rubric R3: exclusions are the dangerous edit, so every shape must justify its bar.
 
-    Venice scores a full row only because its bar excludes serving_code_attested,
-    prod_os_image and backend_attested. That has to be visible, or the row reads as
-    the best provider on the board.
+    An inclusion is a line you can read in a diff. An exclusion is an absence from a set
+    literal — nothing to review and nothing to date. Requiring a note per shape is the
+    cheap half of the exhaustive-classification lint in issue #6.
     """
     from verifiers.common import BAR_NOTES, REQUIRED_LAYERS_BY_SHAPE, bar_note
 
     assert set(BAR_NOTES) == set(REQUIRED_LAYERS_BY_SHAPE), \
         "every scored shape must state what it excludes and why"
-    assert bar_note("venice")["disputed"] is True
+    assert all(len(n["note"]) > 40 for n in BAR_NOTES.values()), "notes must be substantive"
     assert bar_note("no-such-shape")["disputed"] is True  # unknown shapes are never sound
+
+
+def test_venice_requires_its_prompt_path_layers():
+    """Regression guard for the 2026-08-10 correction.
+
+    Venice's bar excluded prod_os_image and serving_code_attested on the grounds that the
+    backend belongs to NEAR/Phala. An independent audit showed those are precisely where
+    Venice's prompt-path exposure lives — an operator root-SSH key on an unpublished dev
+    image, and an unmeasured last hop. Excluding them made Venice the only full row on the
+    board. Whatever else changes about this bar, a reseller must not be excused the layers
+    that decide whether its users' prompts are readable.
+    """
+    from verifiers.common import REQUIRED_LAYERS_BY_SHAPE
+
+    for layer in ("prod_os_image", "serving_code_attested", "code_measurement_reproducible"):
+        assert layer in REQUIRED_LAYERS_BY_SHAPE["venice"], \
+            f"{layer} was excluded from Venice's bar once; it must stay required"

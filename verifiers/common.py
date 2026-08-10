@@ -60,11 +60,19 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "serving_code_attested",
     },
-    # Venice: TDX+GPU+compose; sits downstream of Phala/NEAR (no own
-    # gateway→backend hop to attest from this side).
+    # Venice: TDX+GPU+compose, plus the three layers that were wrongly excluded
+    # until 2026-08-10. Venice resells NEAR/Phala backends, and the old set left
+    # out prod_os_image, serving_code_attested and code_measurement_reproducible
+    # on the grounds that the backend "belongs to" the upstream operator. That
+    # asks whose fault a gap is rather than whether the user is exposed: a prompt
+    # sent to Venice is decrypted in a Phala enclave, so a dev image with root SSH
+    # exposes it no matter whose invoice it lands on. Venice's /tee/attestation
+    # does not report any of the three, which makes them required-and-unexposed
+    # (a fail), not architecturally N/A (benign). See providers/venice.md.
     "venice": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
+        "prod_os_image", "serving_code_attested", "code_measurement_reproducible",
     },
     # Tinfoil SEV-SNP: different attestation flavor (no Intel TDX). Stage 1
     # surface is OHTTP/HPKE binding + measured-config + live TLS pinning +
@@ -89,20 +97,26 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
     "phala-simple": {"disputed": False, "note":
         "Single TD, no gateway hop, so backend_attested is genuinely N/A. prod_os_image is "
         "required because the dev OS image carries an operator host-SSH path."},
-    "near-relay": {"disputed": False, "note": "Same architecture as tdx+gpu."},
+    "near-relay": {"disputed": False, "note":
+        "RedPill reselling NEAR: same gateway-plus-model-TD architecture as tdx+gpu, so the "
+        "same layers are required including backend_attested. Excludes prod_os_image, which "
+        "is checked on the NEAR rows themselves, and the Tinfoil SEV layers, which do not "
+        "exist here."},
     "chutes": {"disputed": False, "note":
         "TDX-only shape. GPU and compose binding are required because the catalog claims GPU "
         "inference, so their absence is a failure rather than an N/A."},
     "chutes-tee": {"disputed": False, "note":
         "serving_code_attested is required and is False by construction, so this shape cannot "
         "reach a full row. That is the intended reading, not a scoring bug."},
-    "venice": {"disputed": True, "note":
-        "DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and "
-        "backend_attested on the grounds that Venice resells NEAR and Phala backends and has "
-        "no hop of its own to attest. The effect is that Venice can score a full row while "
-        "providers that expose more of their stack score less. The exclusions were derived "
-        "from what the API happens to expose rather than from what Venice claims, which is "
-        "backwards. Do not compare this row's fraction against other providers."},
+    "venice": {"disputed": False, "note":
+        "Corrected 2026-08-10. This set previously omitted prod_os_image, "
+        "serving_code_attested and code_measurement_reproducible because Venice resells "
+        "NEAR and Phala backends, which let it score a full row while providers exposing "
+        "more of their stack scored less. An independent audit showed the two omitted "
+        "layers are exactly where Venice's prompt-path exposure lives, so they are now "
+        "required and read as unproven rather than not-applicable. backend_attested stays "
+        "excluded and is reported False: Venice has no gateway hop of its own, and the "
+        "upstream backend's own row carries that check."},
     "tinfoil-sev-snp-v2": {"disputed": False, "note":
         "SEV-SNP rather than TDX, so the Intel-specific layers are N/A and the bar is the "
         "OHTTP/HPKE binding, measured config, live TLS pinning and client nonce."},

@@ -68,8 +68,8 @@
 <section class="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Targets verified</div>
-    <div class="text-2xl font-semibold mt-1">2 / 21</div>
-    <div class="text-xs text-slate-500">8 partial ·
+    <div class="text-2xl font-semibold mt-1">0 / 21</div>
+    <div class="text-xs text-slate-500">10 partial ·
       11 unreachable</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
@@ -117,48 +117,6 @@
         </tr>
       </thead>
       <tbody>
-      
-        <tr class="border-t border-slate-100">
-          <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-glm-5</td>
-          <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700"
-                  title="Every layer this provider's architecture should be able to prove, it proves.">verified</span>
-          </td>
-          <td class="p-2 text-center font-mono text-xs">
-            6/6
-              <span class="text-rose-700" title="DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and backend_attested on the grounds that Venice resells NEAR and Phala backends and has no hop of its own to attest. The effect is that Venice can score a full row while providers that expose more of their stack score less. The exclusions were derived from what the API happens to expose rather than from what Venice claims, which is backwards. Do not compare this row's fraction against other providers.">⚠</span>
-            
-          </td>
-          <td class="p-2 text-xs text-slate-600">
-            —
-            
-            
-              <div class="mt-1 text-rose-700">DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and backend_attested on the grounds that Venice resells NEAR and Phala backends and has no hop of its own to attest. The effect is that Venice can score a full row while providers that expose more of their stack score less. The exclusions were derived from what the API happens to expose rather than from what Venice claims, which is backwards. Do not compare this row's fraction against other providers.</div>
-            
-          </td>
-        </tr>
-      
-        <tr class="border-t border-slate-100">
-          <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-qwen3-5-122b-a10b</td>
-          <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700"
-                  title="Every layer this provider's architecture should be able to prove, it proves.">verified</span>
-          </td>
-          <td class="p-2 text-center font-mono text-xs">
-            6/6
-              <span class="text-rose-700" title="DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and backend_attested on the grounds that Venice resells NEAR and Phala backends and has no hop of its own to attest. The effect is that Venice can score a full row while providers that expose more of their stack score less. The exclusions were derived from what the API happens to expose rather than from what Venice claims, which is backwards. Do not compare this row's fraction against other providers.">⚠</span>
-            
-          </td>
-          <td class="p-2 text-xs text-slate-600">
-            —
-            
-            
-              <div class="mt-1 text-rose-700">DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and backend_attested on the grounds that Venice resells NEAR and Phala backends and has no hop of its own to attest. The effect is that Venice can score a full row while providers that expose more of their stack score less. The exclusions were derived from what the API happens to expose rather than from what Venice claims, which is backwards. Do not compare this row's fraction against other providers.</div>
-            
-          </td>
-        </tr>
       
         <tr class="border-t border-slate-100">
           <td class="p-2 font-medium">chutes</td>
@@ -311,6 +269,78 @@
         </tr>
       
         <tr class="border-t border-slate-100">
+          <td class="p-2 font-medium">venice</td>
+          <td class="p-2 font-mono text-xs">e2ee-glm-5</td>
+          <td class="p-2">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
+          </td>
+          <td class="p-2 text-center font-mono text-xs">
+            6/9
+              
+            
+          </td>
+          <td class="p-2 text-xs text-slate-600">
+            
+              <span class="font-mono">code_measurement_reproducible, prod_os_image, serving_code_attested</span>
+            
+            
+              <div class="mt-1 text-amber-700">not shown on the matrix below:
+                <span class="font-mono">code_measurement_reproducible</span></div>
+            
+            
+          </td>
+        </tr>
+      
+        <tr class="border-t border-slate-100">
+          <td class="p-2 font-medium">venice</td>
+          <td class="p-2 font-mono text-xs">e2ee-gpt-oss-120b-p</td>
+          <td class="p-2">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
+          </td>
+          <td class="p-2 text-center font-mono text-xs">
+            5/9
+              
+            
+          </td>
+          <td class="p-2 text-xs text-slate-600">
+            
+              <span class="font-mono">code_measurement_reproducible, compose_hash_committed, prod_os_image, serving_code_attested</span>
+            
+            
+              <div class="mt-1 text-amber-700">not shown on the matrix below:
+                <span class="font-mono">code_measurement_reproducible</span></div>
+            
+            
+          </td>
+        </tr>
+      
+        <tr class="border-t border-slate-100">
+          <td class="p-2 font-medium">venice</td>
+          <td class="p-2 font-mono text-xs">e2ee-qwen3-5-122b-a10b</td>
+          <td class="p-2">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
+          </td>
+          <td class="p-2 text-center font-mono text-xs">
+            6/9
+              
+            
+          </td>
+          <td class="p-2 text-xs text-slate-600">
+            
+              <span class="font-mono">code_measurement_reproducible, prod_os_image, serving_code_attested</span>
+            
+            
+              <div class="mt-1 text-amber-700">not shown on the matrix below:
+                <span class="font-mono">code_measurement_reproducible</span></div>
+            
+            
+          </td>
+        </tr>
+      
+        <tr class="border-t border-slate-100">
           <td class="p-2 font-medium">chutes</td>
           <td class="p-2 font-mono text-xs">GLM-5-TEE</td>
           <td class="p-2">
@@ -332,23 +362,23 @@
       
         <tr class="border-t border-slate-100">
           <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-gpt-oss-120b-p</td>
+          <td class="p-2 font-mono text-xs">e2ee-uncensored-24b-p</td>
           <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
-                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-slate-200 text-slate-600"
+                  title="We could not get a response. This says nothing about the provider's privacy properties.">unreachable</span>
           </td>
           <td class="p-2 text-center font-mono text-xs">
-            5/6
-              <span class="text-rose-700" title="DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and backend_attested on the grounds that Venice resells NEAR and Phala backends and has no hop of its own to attest. The effect is that Venice can score a full row while providers that expose more of their stack score less. The exclusions were derived from what the API happens to expose rather than from what Venice claims, which is backwards. Do not compare this row's fraction against other providers.">⚠</span>
+            —
             
           </td>
           <td class="p-2 text-xs text-slate-600">
             
-              <span class="font-mono">compose_hash_committed</span>
+              <span class="font-mono">no TEE attestation available for this model (404)</span>
             
             
+              <div class="mt-1 text-amber-700">not shown on the matrix below:
+                <span class="font-mono">code_measurement_reproducible</span></div>
             
-              <div class="mt-1 text-rose-700">DISPUTED (2026-08-10): this set omits serving_code_attested, prod_os_image and backend_attested on the grounds that Venice resells NEAR and Phala backends and has no hop of its own to attest. The effect is that Venice can score a full row while providers that expose more of their stack score less. The exclusions were derived from what the API happens to expose rather than from what Venice claims, which is backwards. Do not compare this row's fraction against other providers.</div>
             
           </td>
         </tr>
@@ -545,26 +575,6 @@
           <td class="p-2 text-xs text-slate-600">
             
               <span class="font-mono">ConnectionError: HTTPSConnectionPool(host='llama3-3-70b.tinfoil.containers.tinfoil.dev', p</span>
-            
-            
-            
-          </td>
-        </tr>
-      
-        <tr class="border-t border-slate-100">
-          <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-uncensored-24b-p</td>
-          <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-slate-200 text-slate-600"
-                  title="We could not get a response. This says nothing about the provider's privacy properties.">unreachable</span>
-          </td>
-          <td class="p-2 text-center font-mono text-xs">
-            —
-            
-          </td>
-          <td class="p-2 text-xs text-slate-600">
-            
-              <span class="font-mono">no TEE attestation available for this model (404)</span>
             
             
             
@@ -842,94 +852,6 @@
         </tr>
       </thead>
       <tbody>
-      
-        <tr class="border-t border-slate-100 ">
-          <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-glm-5</td>
-          <td class="p-2 text-xs text-slate-500">venice</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
-          </td>
-          
-          <td class="p-2 text-right text-xs text-slate-500">3.31s</td>
-        </tr>
-      
-        <tr class="border-t border-slate-100 ">
-          <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-qwen3-5-122b-a10b</td>
-          <td class="p-2 text-xs text-slate-500">venice</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
-          </td>
-          
-          <td class="p-2 text-right text-xs text-slate-500">3.46s</td>
-        </tr>
       
         <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">chutes</td>
@@ -1239,6 +1161,138 @@
           <td class="p-2 text-right text-xs text-slate-500">0.56s</td>
         </tr>
       
+        <tr class="border-t border-slate-100 ">
+          <td class="p-2 font-medium">venice</td>
+          <td class="p-2 font-mono text-xs">e2ee-glm-5</td>
+          <td class="p-2 text-xs text-slate-500">venice</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">3.31s</td>
+        </tr>
+      
+        <tr class="border-t border-slate-100 ">
+          <td class="p-2 font-medium">venice</td>
+          <td class="p-2 font-mono text-xs">e2ee-gpt-oss-120b-p</td>
+          <td class="p-2 text-xs text-slate-500">venice</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">3.37s</td>
+        </tr>
+      
+        <tr class="border-t border-slate-100 ">
+          <td class="p-2 font-medium">venice</td>
+          <td class="p-2 font-mono text-xs">e2ee-qwen3-5-122b-a10b</td>
+          <td class="p-2 text-xs text-slate-500">venice</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">3.46s</td>
+        </tr>
+      
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
           <td class="p-2 font-medium">chutes</td>
           <td class="p-2 font-mono text-xs">GLM-5-TEE</td>
@@ -1283,29 +1337,37 @@
           <td class="p-2 text-right text-xs text-slate-500">0.33s</td>
         </tr>
       
-        <tr class="border-t border-slate-100 ">
+        <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
           <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-gpt-oss-120b-p</td>
+          <td class="p-2 font-mono text-xs">e2ee-uncensored-24b-p</td>
           <td class="p-2 text-xs text-slate-500">venice</td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
           </td>
           
           <td class="p-2 text-center">
@@ -1316,15 +1378,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
-          </td>
-          
-          <td class="p-2 text-right text-xs text-slate-500">3.37s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.19s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1723,50 +1777,6 @@
           <td class="p-2 text-right text-xs text-slate-500">0.0s</td>
         </tr>
       
-        <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
-          <td class="p-2 font-medium">venice</td>
-          <td class="p-2 font-mono text-xs">e2ee-uncensored-24b-p</td>
-          <td class="p-2 text-xs text-slate-500">venice</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-right text-xs text-slate-500">0.19s</td>
-        </tr>
-      
       </tbody>
     </table>
   </div>
@@ -1805,7 +1815,7 @@
     
     <li class="flex gap-2">
       <span class="text-slate-400 font-mono text-xs whitespace-nowrap pt-0.5">2026-08-10</span>
-      <span><strong>The bar itself is unaudited.</strong> REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog, and it is uneven: Venice's required set omits the layers it would fail, so Venice can score a full row while Chutes is capped below full by construction. Treat cross-provider fraction comparisons as unsound until this is rebuilt from provider claims.</span>
+      <span><strong>The bar is hand-set, and one entry was wrong.</strong> REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog. Venice's set excluded the two layers where its prompt-path exposure actually lives, so Venice scored a full row until an outside audit pointed at them; corrected 2026-08-10. Denominators still differ per architecture, so compare the unproven layers rather than the fractions, and treat the bar as editorial until it is derived from provider claims (issue #6).</span>
     </li>
     
   </ul>

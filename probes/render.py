@@ -84,11 +84,13 @@ EDITORIAL_NOTES = [
     {"checked": "2026-04-26", "title": "Upstream verifier decodes JWTs without checking signatures.",
      "body": "Phala's private-ai-verifier passes verify_signature=False on NVIDIA and Intel "
              "Trust Authority tokens, and every reseller routing through it inherits that."},
-    {"checked": "2026-08-10", "title": "The bar itself is unaudited.",
-     "body": "REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog, and it is uneven: "
-             "Venice's required set omits the layers it would fail, so Venice can score a full "
-             "row while Chutes is capped below full by construction. Treat cross-provider "
-             "fraction comparisons as unsound until this is rebuilt from provider claims."},
+    {"checked": "2026-08-10", "title": "The bar is hand-set, and one entry was wrong.",
+     "body": "REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog. Venice's set "
+             "excluded the two layers where its prompt-path exposure actually lives, so Venice "
+             "scored a full row until an outside audit pointed at them; corrected 2026-08-10. "
+             "Denominators still differ per architecture, so compare the unproven layers rather "
+             "than the fractions, and treat the bar as editorial until it is derived from "
+             "provider claims (issue #6)."},
 ]
 
 
