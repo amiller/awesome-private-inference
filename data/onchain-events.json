@@ -1,344 +1,9 @@
 {
-  "generated_at": "2026-08-10T20:58:30Z",
-  "rpc": "https://mainnet.base.org",
-  "head_block": 49803081,
-  "hermes_anchor_url": "https://raw.githubusercontent.com/amiller/hermes-agent/feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json",
-  "anchored_compose_hash_count": 4,
-  "anchored_compose_hashes": [
-    "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
-    "409193986088efa406a283dfb8f9a542190a5957b9e928432890a46c76a74ce9",
-    "700adbf53ad4a14e58d2eae65776d451b914b1f5d377c20c7a4e6cca681446ec",
-    "95cbf0a83038191232da507282e3df1e944f079249e4735786e99cf62f891cf9"
-  ],
-  "contracts": [
-    {
+  "generated_at": "2026-08-10T20:57:03Z",
+  "head_block": 49803037,
+  "contracts": {
+    "near-ai/models": {
       "address": "0x2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
-      "label": "near-ai/models",
-      "anchor_relevant": true,
-      "_note": "shared by every NEAR AI model CVM (GLM, gpt-oss, deepseek/qwen, ...)",
-      "genesis_block": 41918859,
-      "last_scanned_block": 49803081,
-      "event_count": 109,
-      "distinct_compose_hashes": [
-        {
-          "compose_hash": "afbf8a7b533cb5e55d02f3094a8088adf70c115f2b2157b7649b458c273af9b7",
-          "first_seen_block": 41918859,
-          "first_seen_timestamp": 1770627065,
-          "first_seen_date": "2026-02-09T08:51:05Z"
-        },
-        {
-          "compose_hash": "466e16df0fd44109809f691c5a4e182dea489b639b36e5e802555f0fc23cdc3e",
-          "first_seen_block": 42011469,
-          "first_seen_timestamp": 1770812285,
-          "first_seen_date": "2026-02-11T12:18:05Z"
-        },
-        {
-          "compose_hash": "ada9522776508c36311b025bdf58a5fa36a07665cae2ab34bd667cdb5402bb84",
-          "first_seen_block": 42011583,
-          "first_seen_timestamp": 1770812513,
-          "first_seen_date": "2026-02-11T12:21:53Z"
-        },
-        {
-          "compose_hash": "87712c0c73e7110e2ffc3a97f31be4215fbb65d911458fa883becda690b4db80",
-          "first_seen_block": 42015371,
-          "first_seen_timestamp": 1770820089,
-          "first_seen_date": "2026-02-11T14:28:09Z"
-        },
-        {
-          "compose_hash": "55eb7c09af10b95c92ca863336ce776178b00c7731eb21625acd9abaf726a18f",
-          "first_seen_block": 42273155,
-          "first_seen_timestamp": 1771335657,
-          "first_seen_date": "2026-02-17T13:40:57Z"
-        },
-        {
-          "compose_hash": "5ef8335b634da6342f5b9639052b2bda23d6006e2c6ba88081552607dc518d3b",
-          "first_seen_block": 42281597,
-          "first_seen_timestamp": 1771352541,
-          "first_seen_date": "2026-02-17T18:22:21Z"
-        },
-        {
-          "compose_hash": "727c9aa91a40609e7dff7f2d4f93b2d1b918ce18e06e4f8a969322d45cbf8bcc",
-          "first_seen_block": 42310945,
-          "first_seen_timestamp": 1771411237,
-          "first_seen_date": "2026-02-18T10:40:37Z"
-        },
-        {
-          "compose_hash": "39eaa3f466bb30f10e9d2be1b103b2d97d452f4d3dd15fcc9c6fb1f1023bfdba",
-          "first_seen_block": 42452570,
-          "first_seen_timestamp": 1771694487,
-          "first_seen_date": "2026-02-21T17:21:27Z"
-        },
-        {
-          "compose_hash": "77e5ae7b0251ae25222a5316a691eb76752814cc95fb6380506a4b0888c5b032",
-          "first_seen_block": 42756929,
-          "first_seen_timestamp": 1772303205,
-          "first_seen_date": "2026-02-28T18:26:45Z"
-        },
-        {
-          "compose_hash": "3d7c161f278c8241024476b54ae00cdbdc209d3a89b5b6079f5dc737f3027d5a",
-          "first_seen_block": 42914930,
-          "first_seen_timestamp": 1772619207,
-          "first_seen_date": "2026-03-04T10:13:27Z"
-        },
-        {
-          "compose_hash": "cff03e995702c46d4d5bbee1789fd33f90e27ee7701c84a58e72a70a67044c82",
-          "first_seen_block": 42922565,
-          "first_seen_timestamp": 1772634477,
-          "first_seen_date": "2026-03-04T14:27:57Z"
-        },
-        {
-          "compose_hash": "830d0befd9866f49c715a308181e4f681e9458658e4d0845948470ec67ac6476",
-          "first_seen_block": 42923363,
-          "first_seen_timestamp": 1772636073,
-          "first_seen_date": "2026-03-04T14:54:33Z"
-        },
-        {
-          "compose_hash": "e6292edec7db21b26570ab232761ca7fecb33c15929874d7412f018ea19f1103",
-          "first_seen_block": 42971157,
-          "first_seen_timestamp": 1772731661,
-          "first_seen_date": "2026-03-05T17:27:41Z"
-        },
-        {
-          "compose_hash": "242a62724303cc32f364da0fc92738706b0078e7587821b7ba3e75488223797b",
-          "first_seen_block": 43176907,
-          "first_seen_timestamp": 1773143161,
-          "first_seen_date": "2026-03-10T11:46:01Z"
-        },
-        {
-          "compose_hash": "0ff8705ec8cb7edba1ddeb6589d3a4f6dca766e482497bf73408730d732de60b",
-          "first_seen_block": 43436471,
-          "first_seen_timestamp": 1773662289,
-          "first_seen_date": "2026-03-16T11:58:09Z"
-        },
-        {
-          "compose_hash": "700adbf53ad4a14e58d2eae65776d451b914b1f5d377c20c7a4e6cca681446ec",
-          "first_seen_block": 44791240,
-          "first_seen_timestamp": 1776371827,
-          "first_seen_date": "2026-04-16T20:37:07Z"
-        },
-        {
-          "compose_hash": "409193986088efa406a283dfb8f9a542190a5957b9e928432890a46c76a74ce9",
-          "first_seen_block": 45208404,
-          "first_seen_timestamp": 1777206155,
-          "first_seen_date": "2026-04-26T12:22:35Z"
-        },
-        {
-          "compose_hash": "95cbf0a83038191232da507282e3df1e944f079249e4735786e99cf62f891cf9",
-          "first_seen_block": 45726790,
-          "first_seen_timestamp": 1778242927,
-          "first_seen_date": "2026-05-08T12:22:07Z"
-        },
-        {
-          "compose_hash": "f39bd7632c0276908889a9a02ad5c530a22c1be94925c994458d1dbd84086534",
-          "first_seen_block": 45727026,
-          "first_seen_timestamp": 1778243399,
-          "first_seen_date": "2026-05-08T12:29:59Z"
-        },
-        {
-          "compose_hash": "bcbccccf457a8f2dcd837b615ef56f63eaa707e3675f1ecd08ee81cb06ec2b28",
-          "first_seen_block": 45946624,
-          "first_seen_timestamp": 1778682595,
-          "first_seen_date": "2026-05-13T14:29:55Z"
-        },
-        {
-          "compose_hash": "fa1d62abe3e9a9ae9020f51fb909ab617892a24ea4efba1a77298e1b4f3d2612",
-          "first_seen_block": 46175225,
-          "first_seen_timestamp": 1779139797,
-          "first_seen_date": "2026-05-18T21:29:57Z"
-        },
-        {
-          "compose_hash": "5d6d9af6637694be3c62990711384e7278f78a962910593dcc790b81bc0a4083",
-          "first_seen_block": 46212900,
-          "first_seen_timestamp": 1779215147,
-          "first_seen_date": "2026-05-19T18:25:47Z"
-        },
-        {
-          "compose_hash": "4e74a6469c1544e55e3a569bbf6e3c24005aefe9ddea9c90a1ef213546a06294",
-          "first_seen_block": 46259036,
-          "first_seen_timestamp": 1779307419,
-          "first_seen_date": "2026-05-20T20:03:39Z"
-        },
-        {
-          "compose_hash": "39b1713cd589171ef1fc4ca859e33b3609a1311c15a4dca1a117ff71c27070c4",
-          "first_seen_block": 46303386,
-          "first_seen_timestamp": 1779396119,
-          "first_seen_date": "2026-05-21T20:41:59Z"
-        },
-        {
-          "compose_hash": "5ebba2067c7358bd120b438bbe0b6127c24d7ebf9780c3d14cf0d1c872d81fcf",
-          "first_seen_block": 46515349,
-          "first_seen_timestamp": 1779820045,
-          "first_seen_date": "2026-05-26T18:27:25Z"
-        },
-        {
-          "compose_hash": "d7de607dae99f90788d8465e2b650e5da7c7b0e7833ba41466c3c656d0c97da5",
-          "first_seen_block": 46520585,
-          "first_seen_timestamp": 1779830517,
-          "first_seen_date": "2026-05-26T21:21:57Z"
-        },
-        {
-          "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
-          "first_seen_block": 46802529,
-          "first_seen_timestamp": 1780394405,
-          "first_seen_date": "2026-06-02T10:00:05Z"
-        },
-        {
-          "compose_hash": "bdabc1ea194db60a0134214ffb7d6f7baeded797c9e228388fb28f4cd618bf29",
-          "first_seen_block": 46806749,
-          "first_seen_timestamp": 1780402845,
-          "first_seen_date": "2026-06-02T12:20:45Z"
-        },
-        {
-          "compose_hash": "02af55ac4e55b5a4ad70c3c34f4dcb796fd32f7161c97618555721c1d1f1cda9",
-          "first_seen_block": 46827677,
-          "first_seen_timestamp": 1780444701,
-          "first_seen_date": "2026-06-02T23:58:21Z"
-        },
-        {
-          "compose_hash": "2525066de8b134989dc837ab1d87aedbb448fe7c4ecf567b12730bf09cf7f053",
-          "first_seen_block": 46833081,
-          "first_seen_timestamp": 1780455509,
-          "first_seen_date": "2026-06-03T02:58:29Z"
-        },
-        {
-          "compose_hash": "9dac1c5b621cf625d0a701f79a1853fea3bd6fa0e483fa5f6cc6f2822a939abe",
-          "first_seen_block": 46839427,
-          "first_seen_timestamp": 1780468201,
-          "first_seen_date": "2026-06-03T06:30:01Z"
-        },
-        {
-          "compose_hash": "4c330b00e5922c265a88214f0848f44a027be99e819ac258f8616a061cd47a00",
-          "first_seen_block": 46855054,
-          "first_seen_timestamp": 1780499455,
-          "first_seen_date": "2026-06-03T15:10:55Z"
-        },
-        {
-          "compose_hash": "fa97d5070526f8f133ff68bbc61f678343f31dcc3389cf0c41019acc195b9170",
-          "first_seen_block": 46855991,
-          "first_seen_timestamp": 1780501329,
-          "first_seen_date": "2026-06-03T15:42:09Z"
-        },
-        {
-          "compose_hash": "eff33d708c366cf685928c6db683a749fd19a2f12ecfbba9f18113bfe84fab8a",
-          "first_seen_block": 46871318,
-          "first_seen_timestamp": 1780531983,
-          "first_seen_date": "2026-06-04T00:13:03Z"
-        },
-        {
-          "compose_hash": "4676ec04ecaff0303142bd3b76205ffc7bc218adaa91b92c10863d4fa6463a3f",
-          "first_seen_block": 46886514,
-          "first_seen_timestamp": 1780562375,
-          "first_seen_date": "2026-06-04T08:39:35Z"
-        },
-        {
-          "compose_hash": "c445f29994165e94e85bdfc4824f4bcba89b0a883f45e7912f1bfd7c2634a698",
-          "first_seen_block": 46926785,
-          "first_seen_timestamp": 1780642917,
-          "first_seen_date": "2026-06-05T07:01:57Z"
-        },
-        {
-          "compose_hash": "c3892cb5b1b4a1c705a53d7b757c29afbcff21fc8d1743bcdf9f5b3f3ef936b4",
-          "first_seen_block": 46933954,
-          "first_seen_timestamp": 1780657255,
-          "first_seen_date": "2026-06-05T11:00:55Z"
-        },
-        {
-          "compose_hash": "57f1e9af916a4af89a07ab7c669010097bb75cf7051cb54125eefcdca28501c6",
-          "first_seen_block": 46935716,
-          "first_seen_timestamp": 1780660779,
-          "first_seen_date": "2026-06-05T11:59:39Z"
-        },
-        {
-          "compose_hash": "7aa611652f5fe664ea967a82e5047e6b3886d8dd376397ec7bb05a7d12b03623",
-          "first_seen_block": 46935743,
-          "first_seen_timestamp": 1780660833,
-          "first_seen_date": "2026-06-05T12:00:33Z"
-        },
-        {
-          "compose_hash": "399f68e7e8240f646ff9a9701393c2dc8ea68ecbb0fbc272d7f0512a5b25b8c1",
-          "first_seen_block": 46945198,
-          "first_seen_timestamp": 1780679743,
-          "first_seen_date": "2026-06-05T17:15:43Z"
-        },
-        {
-          "compose_hash": "cbbb4c024376cb03f83be57e154f0de4a449e0751404802fea0f51c69ce60f42",
-          "first_seen_block": 47254945,
-          "first_seen_timestamp": 1781299237,
-          "first_seen_date": "2026-06-12T21:20:37Z"
-        },
-        {
-          "compose_hash": "931f7b342e7e54fdde1d587ff9732bc4b0cdeebd88dc53f4cccb1fa07e6cd640",
-          "first_seen_block": 47274763,
-          "first_seen_timestamp": 1781338873,
-          "first_seen_date": "2026-06-13T08:21:13Z"
-        },
-        {
-          "compose_hash": "fb3d47e5ae94ddfd43721002b127ce07d3828b05687e4e5a394a7a827d0ec55c",
-          "first_seen_block": 47400985,
-          "first_seen_timestamp": 1781591317,
-          "first_seen_date": "2026-06-16T06:28:37Z"
-        },
-        {
-          "compose_hash": "002b406e4770df733eba8f7dfce066f1c8e8d041d972cc02da8b9e3756ebca9a",
-          "first_seen_block": 47442202,
-          "first_seen_timestamp": 1781673751,
-          "first_seen_date": "2026-06-17T05:22:31Z"
-        },
-        {
-          "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
-          "first_seen_block": 47483435,
-          "first_seen_timestamp": 1781756217,
-          "first_seen_date": "2026-06-18T04:16:57Z"
-        },
-        {
-          "compose_hash": "525cde9f2fdc5950ca92124aaecb4e04979ebf3df38b7b46636e0f4bdb34ca6a",
-          "first_seen_block": 47526457,
-          "first_seen_timestamp": 1781842261,
-          "first_seen_date": "2026-06-19T04:11:01Z"
-        },
-        {
-          "compose_hash": "db6943f37a4f54bd12144ecbf9f8c780ca14c0c44600a5a9ca09a041d92ba5ca",
-          "first_seen_block": 47564757,
-          "first_seen_timestamp": 1781918861,
-          "first_seen_date": "2026-06-20T01:27:41Z"
-        },
-        {
-          "compose_hash": "66007399f064f058af68771c552bcae150c9f88622305631b5141da1aa2f7b7e",
-          "first_seen_block": 47643878,
-          "first_seen_timestamp": 1782077103,
-          "first_seen_date": "2026-06-21T21:25:03Z"
-        },
-        {
-          "compose_hash": "0fccab4eb7ffc4c9ec1be8e2851e7b820efef0485cfd21ac027bf1408dc836b0",
-          "first_seen_block": 47652170,
-          "first_seen_timestamp": 1782093687,
-          "first_seen_date": "2026-06-22T02:01:27Z"
-        },
-        {
-          "compose_hash": "4e7018393a66b624dd95d22344fe0eae140fcbb03e7ee65d0962f72c12906783",
-          "first_seen_block": 47697702,
-          "first_seen_timestamp": 1782184751,
-          "first_seen_date": "2026-06-23T03:19:11Z"
-        },
-        {
-          "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
-          "first_seen_block": 47794092,
-          "first_seen_timestamp": 1782377531,
-          "first_seen_date": "2026-06-25T08:52:11Z"
-        },
-        {
-          "compose_hash": "9385918de0a73b861ae833d99fb5be6f7e1c8a50487a835df4f277497c206825",
-          "first_seen_block": 48721649,
-          "first_seen_timestamp": 1784232645,
-          "first_seen_date": "2026-07-16T20:10:45Z"
-        },
-        {
-          "compose_hash": "d98a2568546afce9ab53f7eb4d4b2058e5497e1efd05a8ad0934793043240ed7",
-          "first_seen_block": 49275538,
-          "first_seen_timestamp": 1785340423,
-          "first_seen_date": "2026-07-29T15:53:43Z"
-        }
-      ],
       "events": [
         {
           "block": 41918859,
@@ -886,937 +551,11 @@
           "tx": "0x9bc6ba7f038c9f27c15905ca97cb2ac40f27c59e98ab6b19398f5b4504e83633"
         }
       ],
-      "new_since_anchor": [
-        {
-          "compose_hash": "afbf8a7b533cb5e55d02f3094a8088adf70c115f2b2157b7649b458c273af9b7",
-          "first_seen_block": 41918859,
-          "first_seen_timestamp": 1770627065,
-          "first_seen_date": "2026-02-09T08:51:05Z"
-        },
-        {
-          "compose_hash": "466e16df0fd44109809f691c5a4e182dea489b639b36e5e802555f0fc23cdc3e",
-          "first_seen_block": 42011469,
-          "first_seen_timestamp": 1770812285,
-          "first_seen_date": "2026-02-11T12:18:05Z"
-        },
-        {
-          "compose_hash": "ada9522776508c36311b025bdf58a5fa36a07665cae2ab34bd667cdb5402bb84",
-          "first_seen_block": 42011583,
-          "first_seen_timestamp": 1770812513,
-          "first_seen_date": "2026-02-11T12:21:53Z"
-        },
-        {
-          "compose_hash": "87712c0c73e7110e2ffc3a97f31be4215fbb65d911458fa883becda690b4db80",
-          "first_seen_block": 42015371,
-          "first_seen_timestamp": 1770820089,
-          "first_seen_date": "2026-02-11T14:28:09Z"
-        },
-        {
-          "compose_hash": "55eb7c09af10b95c92ca863336ce776178b00c7731eb21625acd9abaf726a18f",
-          "first_seen_block": 42273155,
-          "first_seen_timestamp": 1771335657,
-          "first_seen_date": "2026-02-17T13:40:57Z"
-        },
-        {
-          "compose_hash": "5ef8335b634da6342f5b9639052b2bda23d6006e2c6ba88081552607dc518d3b",
-          "first_seen_block": 42281597,
-          "first_seen_timestamp": 1771352541,
-          "first_seen_date": "2026-02-17T18:22:21Z"
-        },
-        {
-          "compose_hash": "727c9aa91a40609e7dff7f2d4f93b2d1b918ce18e06e4f8a969322d45cbf8bcc",
-          "first_seen_block": 42310945,
-          "first_seen_timestamp": 1771411237,
-          "first_seen_date": "2026-02-18T10:40:37Z"
-        },
-        {
-          "compose_hash": "39eaa3f466bb30f10e9d2be1b103b2d97d452f4d3dd15fcc9c6fb1f1023bfdba",
-          "first_seen_block": 42452570,
-          "first_seen_timestamp": 1771694487,
-          "first_seen_date": "2026-02-21T17:21:27Z"
-        },
-        {
-          "compose_hash": "77e5ae7b0251ae25222a5316a691eb76752814cc95fb6380506a4b0888c5b032",
-          "first_seen_block": 42756929,
-          "first_seen_timestamp": 1772303205,
-          "first_seen_date": "2026-02-28T18:26:45Z"
-        },
-        {
-          "compose_hash": "3d7c161f278c8241024476b54ae00cdbdc209d3a89b5b6079f5dc737f3027d5a",
-          "first_seen_block": 42914930,
-          "first_seen_timestamp": 1772619207,
-          "first_seen_date": "2026-03-04T10:13:27Z"
-        },
-        {
-          "compose_hash": "cff03e995702c46d4d5bbee1789fd33f90e27ee7701c84a58e72a70a67044c82",
-          "first_seen_block": 42922565,
-          "first_seen_timestamp": 1772634477,
-          "first_seen_date": "2026-03-04T14:27:57Z"
-        },
-        {
-          "compose_hash": "830d0befd9866f49c715a308181e4f681e9458658e4d0845948470ec67ac6476",
-          "first_seen_block": 42923363,
-          "first_seen_timestamp": 1772636073,
-          "first_seen_date": "2026-03-04T14:54:33Z"
-        },
-        {
-          "compose_hash": "e6292edec7db21b26570ab232761ca7fecb33c15929874d7412f018ea19f1103",
-          "first_seen_block": 42971157,
-          "first_seen_timestamp": 1772731661,
-          "first_seen_date": "2026-03-05T17:27:41Z"
-        },
-        {
-          "compose_hash": "0ff8705ec8cb7edba1ddeb6589d3a4f6dca766e482497bf73408730d732de60b",
-          "first_seen_block": 43436471,
-          "first_seen_timestamp": 1773662289,
-          "first_seen_date": "2026-03-16T11:58:09Z"
-        },
-        {
-          "compose_hash": "f39bd7632c0276908889a9a02ad5c530a22c1be94925c994458d1dbd84086534",
-          "first_seen_block": 45727026,
-          "first_seen_timestamp": 1778243399,
-          "first_seen_date": "2026-05-08T12:29:59Z"
-        },
-        {
-          "compose_hash": "bcbccccf457a8f2dcd837b615ef56f63eaa707e3675f1ecd08ee81cb06ec2b28",
-          "first_seen_block": 45946624,
-          "first_seen_timestamp": 1778682595,
-          "first_seen_date": "2026-05-13T14:29:55Z"
-        },
-        {
-          "compose_hash": "fa1d62abe3e9a9ae9020f51fb909ab617892a24ea4efba1a77298e1b4f3d2612",
-          "first_seen_block": 46175225,
-          "first_seen_timestamp": 1779139797,
-          "first_seen_date": "2026-05-18T21:29:57Z"
-        },
-        {
-          "compose_hash": "5d6d9af6637694be3c62990711384e7278f78a962910593dcc790b81bc0a4083",
-          "first_seen_block": 46212900,
-          "first_seen_timestamp": 1779215147,
-          "first_seen_date": "2026-05-19T18:25:47Z"
-        },
-        {
-          "compose_hash": "4e74a6469c1544e55e3a569bbf6e3c24005aefe9ddea9c90a1ef213546a06294",
-          "first_seen_block": 46259036,
-          "first_seen_timestamp": 1779307419,
-          "first_seen_date": "2026-05-20T20:03:39Z"
-        },
-        {
-          "compose_hash": "39b1713cd589171ef1fc4ca859e33b3609a1311c15a4dca1a117ff71c27070c4",
-          "first_seen_block": 46303386,
-          "first_seen_timestamp": 1779396119,
-          "first_seen_date": "2026-05-21T20:41:59Z"
-        },
-        {
-          "compose_hash": "5ebba2067c7358bd120b438bbe0b6127c24d7ebf9780c3d14cf0d1c872d81fcf",
-          "first_seen_block": 46515349,
-          "first_seen_timestamp": 1779820045,
-          "first_seen_date": "2026-05-26T18:27:25Z"
-        },
-        {
-          "compose_hash": "d7de607dae99f90788d8465e2b650e5da7c7b0e7833ba41466c3c656d0c97da5",
-          "first_seen_block": 46520585,
-          "first_seen_timestamp": 1779830517,
-          "first_seen_date": "2026-05-26T21:21:57Z"
-        },
-        {
-          "compose_hash": "887b282da649646b13c26fca36e54433b7be3e3bb679d61899ee13d3704b8162",
-          "first_seen_block": 46802529,
-          "first_seen_timestamp": 1780394405,
-          "first_seen_date": "2026-06-02T10:00:05Z"
-        },
-        {
-          "compose_hash": "bdabc1ea194db60a0134214ffb7d6f7baeded797c9e228388fb28f4cd618bf29",
-          "first_seen_block": 46806749,
-          "first_seen_timestamp": 1780402845,
-          "first_seen_date": "2026-06-02T12:20:45Z"
-        },
-        {
-          "compose_hash": "02af55ac4e55b5a4ad70c3c34f4dcb796fd32f7161c97618555721c1d1f1cda9",
-          "first_seen_block": 46827677,
-          "first_seen_timestamp": 1780444701,
-          "first_seen_date": "2026-06-02T23:58:21Z"
-        },
-        {
-          "compose_hash": "2525066de8b134989dc837ab1d87aedbb448fe7c4ecf567b12730bf09cf7f053",
-          "first_seen_block": 46833081,
-          "first_seen_timestamp": 1780455509,
-          "first_seen_date": "2026-06-03T02:58:29Z"
-        },
-        {
-          "compose_hash": "9dac1c5b621cf625d0a701f79a1853fea3bd6fa0e483fa5f6cc6f2822a939abe",
-          "first_seen_block": 46839427,
-          "first_seen_timestamp": 1780468201,
-          "first_seen_date": "2026-06-03T06:30:01Z"
-        },
-        {
-          "compose_hash": "4c330b00e5922c265a88214f0848f44a027be99e819ac258f8616a061cd47a00",
-          "first_seen_block": 46855054,
-          "first_seen_timestamp": 1780499455,
-          "first_seen_date": "2026-06-03T15:10:55Z"
-        },
-        {
-          "compose_hash": "fa97d5070526f8f133ff68bbc61f678343f31dcc3389cf0c41019acc195b9170",
-          "first_seen_block": 46855991,
-          "first_seen_timestamp": 1780501329,
-          "first_seen_date": "2026-06-03T15:42:09Z"
-        },
-        {
-          "compose_hash": "eff33d708c366cf685928c6db683a749fd19a2f12ecfbba9f18113bfe84fab8a",
-          "first_seen_block": 46871318,
-          "first_seen_timestamp": 1780531983,
-          "first_seen_date": "2026-06-04T00:13:03Z"
-        },
-        {
-          "compose_hash": "4676ec04ecaff0303142bd3b76205ffc7bc218adaa91b92c10863d4fa6463a3f",
-          "first_seen_block": 46886514,
-          "first_seen_timestamp": 1780562375,
-          "first_seen_date": "2026-06-04T08:39:35Z"
-        },
-        {
-          "compose_hash": "c445f29994165e94e85bdfc4824f4bcba89b0a883f45e7912f1bfd7c2634a698",
-          "first_seen_block": 46926785,
-          "first_seen_timestamp": 1780642917,
-          "first_seen_date": "2026-06-05T07:01:57Z"
-        },
-        {
-          "compose_hash": "c3892cb5b1b4a1c705a53d7b757c29afbcff21fc8d1743bcdf9f5b3f3ef936b4",
-          "first_seen_block": 46933954,
-          "first_seen_timestamp": 1780657255,
-          "first_seen_date": "2026-06-05T11:00:55Z"
-        },
-        {
-          "compose_hash": "57f1e9af916a4af89a07ab7c669010097bb75cf7051cb54125eefcdca28501c6",
-          "first_seen_block": 46935716,
-          "first_seen_timestamp": 1780660779,
-          "first_seen_date": "2026-06-05T11:59:39Z"
-        },
-        {
-          "compose_hash": "7aa611652f5fe664ea967a82e5047e6b3886d8dd376397ec7bb05a7d12b03623",
-          "first_seen_block": 46935743,
-          "first_seen_timestamp": 1780660833,
-          "first_seen_date": "2026-06-05T12:00:33Z"
-        },
-        {
-          "compose_hash": "399f68e7e8240f646ff9a9701393c2dc8ea68ecbb0fbc272d7f0512a5b25b8c1",
-          "first_seen_block": 46945198,
-          "first_seen_timestamp": 1780679743,
-          "first_seen_date": "2026-06-05T17:15:43Z"
-        },
-        {
-          "compose_hash": "cbbb4c024376cb03f83be57e154f0de4a449e0751404802fea0f51c69ce60f42",
-          "first_seen_block": 47254945,
-          "first_seen_timestamp": 1781299237,
-          "first_seen_date": "2026-06-12T21:20:37Z"
-        },
-        {
-          "compose_hash": "931f7b342e7e54fdde1d587ff9732bc4b0cdeebd88dc53f4cccb1fa07e6cd640",
-          "first_seen_block": 47274763,
-          "first_seen_timestamp": 1781338873,
-          "first_seen_date": "2026-06-13T08:21:13Z"
-        },
-        {
-          "compose_hash": "fb3d47e5ae94ddfd43721002b127ce07d3828b05687e4e5a394a7a827d0ec55c",
-          "first_seen_block": 47400985,
-          "first_seen_timestamp": 1781591317,
-          "first_seen_date": "2026-06-16T06:28:37Z"
-        },
-        {
-          "compose_hash": "002b406e4770df733eba8f7dfce066f1c8e8d041d972cc02da8b9e3756ebca9a",
-          "first_seen_block": 47442202,
-          "first_seen_timestamp": 1781673751,
-          "first_seen_date": "2026-06-17T05:22:31Z"
-        },
-        {
-          "compose_hash": "980056493c87c09c6cc71fbe09a441cb4334749b64a6192abf28083dfac136b3",
-          "first_seen_block": 47483435,
-          "first_seen_timestamp": 1781756217,
-          "first_seen_date": "2026-06-18T04:16:57Z"
-        },
-        {
-          "compose_hash": "525cde9f2fdc5950ca92124aaecb4e04979ebf3df38b7b46636e0f4bdb34ca6a",
-          "first_seen_block": 47526457,
-          "first_seen_timestamp": 1781842261,
-          "first_seen_date": "2026-06-19T04:11:01Z"
-        },
-        {
-          "compose_hash": "db6943f37a4f54bd12144ecbf9f8c780ca14c0c44600a5a9ca09a041d92ba5ca",
-          "first_seen_block": 47564757,
-          "first_seen_timestamp": 1781918861,
-          "first_seen_date": "2026-06-20T01:27:41Z"
-        },
-        {
-          "compose_hash": "66007399f064f058af68771c552bcae150c9f88622305631b5141da1aa2f7b7e",
-          "first_seen_block": 47643878,
-          "first_seen_timestamp": 1782077103,
-          "first_seen_date": "2026-06-21T21:25:03Z"
-        },
-        {
-          "compose_hash": "0fccab4eb7ffc4c9ec1be8e2851e7b820efef0485cfd21ac027bf1408dc836b0",
-          "first_seen_block": 47652170,
-          "first_seen_timestamp": 1782093687,
-          "first_seen_date": "2026-06-22T02:01:27Z"
-        },
-        {
-          "compose_hash": "4e7018393a66b624dd95d22344fe0eae140fcbb03e7ee65d0962f72c12906783",
-          "first_seen_block": 47697702,
-          "first_seen_timestamp": 1782184751,
-          "first_seen_date": "2026-06-23T03:19:11Z"
-        },
-        {
-          "compose_hash": "2c650eae81601afade86d1aa5ad898473b992081998026bb42ee1524ce99ee38",
-          "first_seen_block": 47794092,
-          "first_seen_timestamp": 1782377531,
-          "first_seen_date": "2026-06-25T08:52:11Z"
-        },
-        {
-          "compose_hash": "9385918de0a73b861ae833d99fb5be6f7e1c8a50487a835df4f277497c206825",
-          "first_seen_block": 48721649,
-          "first_seen_timestamp": 1784232645,
-          "first_seen_date": "2026-07-16T20:10:45Z"
-        },
-        {
-          "compose_hash": "d98a2568546afce9ab53f7eb4d4b2058e5497e1efd05a8ad0934793043240ed7",
-          "first_seen_block": 49275538,
-          "first_seen_timestamp": 1785340423,
-          "first_seen_date": "2026-07-29T15:53:43Z"
-        }
-      ]
+      "genesis_block": 41918859,
+      "last_scanned_block": 49803037
     },
-    {
+    "near-ai/cloud-api": {
       "address": "0xf550fdfb4eb8ad787c1bcd423f091cbb4a4431ae",
-      "label": "near-ai/cloud-api",
-      "anchor_relevant": false,
-      "_note": "gateway TD; pinned in awesome-private-inference verifier for backend_attested",
-      "genesis_block": 36840195,
-      "last_scanned_block": 49803081,
-      "event_count": 366,
-      "distinct_compose_hashes": [
-        {
-          "compose_hash": "65f9a647c48bbb0ee0c0f128e6e43a575347ca049f7a10be5c75d6469945a039",
-          "first_seen_block": 36841409,
-          "first_seen_timestamp": 1760472165,
-          "first_seen_date": "2025-10-14T20:02:45Z"
-        },
-        {
-          "compose_hash": "572d0a16a551fb9a1d51d726ba53e313ff688407adae2cef032ac0ff81e6ff9f",
-          "first_seen_block": 36841506,
-          "first_seen_timestamp": 1760472359,
-          "first_seen_date": "2025-10-14T20:05:59Z"
-        },
-        {
-          "compose_hash": "6be966b710d5da2dc1e3431cb5d1c8cdf08c0631182e6659709a99823bd38b8d",
-          "first_seen_block": 36843998,
-          "first_seen_timestamp": 1760477343,
-          "first_seen_date": "2025-10-14T21:29:03Z"
-        },
-        {
-          "compose_hash": "922f0793fd39abd09ebcc3edd1a007a50938cc6a406bc9982e96ad22aa9ab82d",
-          "first_seen_block": 36847362,
-          "first_seen_timestamp": 1760484071,
-          "first_seen_date": "2025-10-14T23:21:11Z"
-        },
-        {
-          "compose_hash": "9ed1d3a128608d336863cd5554380825c366d872fe2effa654a7110e7fbe56ad",
-          "first_seen_block": 36940655,
-          "first_seen_timestamp": 1760670657,
-          "first_seen_date": "2025-10-17T03:10:57Z"
-        },
-        {
-          "compose_hash": "186a48b4f9ad5c0e88a34cd1c76fb7bdb2221b757fbe8ed587d4b3f5f6332d78",
-          "first_seen_block": 37007517,
-          "first_seen_timestamp": 1760804381,
-          "first_seen_date": "2025-10-18T16:19:41Z"
-        },
-        {
-          "compose_hash": "317bb3c816f04443e3b5846aab38366cd0a6b3d453aa65e200cc7c3c47457a0f",
-          "first_seen_block": 37140227,
-          "first_seen_timestamp": 1761069801,
-          "first_seen_date": "2025-10-21T18:03:21Z"
-        },
-        {
-          "compose_hash": "5cd945cf5309856f372841bf5a55e586edca3d622bafd3477e920fa8b81e6388",
-          "first_seen_block": 37270845,
-          "first_seen_timestamp": 1761331037,
-          "first_seen_date": "2025-10-24T18:37:17Z"
-        },
-        {
-          "compose_hash": "37a5ff70953be8abf063d5f4ec781679db0dea001f7f0f57ad0c9b1bb990ed41",
-          "first_seen_block": 37277377,
-          "first_seen_timestamp": 1761344101,
-          "first_seen_date": "2025-10-24T22:15:01Z"
-        },
-        {
-          "compose_hash": "720d9893d6a6bb04a5401eab7e4100c3487160533c1d797302711abef5af2e61",
-          "first_seen_block": 37278356,
-          "first_seen_timestamp": 1761346059,
-          "first_seen_date": "2025-10-24T22:47:39Z"
-        },
-        {
-          "compose_hash": "ee8121a50f04a88c24c2323b489ced3ee6005bd57176df04ab879f44c3fd455b",
-          "first_seen_block": 37279205,
-          "first_seen_timestamp": 1761347757,
-          "first_seen_date": "2025-10-24T23:15:57Z"
-        },
-        {
-          "compose_hash": "c7af89c10453f82618f0d602a7665dec3461c4bf795e52dcb9fd752316c51119",
-          "first_seen_block": 37279438,
-          "first_seen_timestamp": 1761348223,
-          "first_seen_date": "2025-10-24T23:23:43Z"
-        },
-        {
-          "compose_hash": "0a6d2e518c60302f3071e622f6eb601540c7c459c26c43416ef507263636f9ab",
-          "first_seen_block": 37282695,
-          "first_seen_timestamp": 1761354737,
-          "first_seen_date": "2025-10-25T01:12:17Z"
-        },
-        {
-          "compose_hash": "1b48c35fe740e43ddbdc43e515ff62cb63d4e409489f3cbbe986bf54bab26025",
-          "first_seen_block": 37426607,
-          "first_seen_timestamp": 1761642561,
-          "first_seen_date": "2025-10-28T09:09:21Z"
-        },
-        {
-          "compose_hash": "5a4dd6aa3c0b264d98c90212c4d6c652fe457efcf5f55f899cc506bbcf4887f4",
-          "first_seen_block": 37466047,
-          "first_seen_timestamp": 1761721441,
-          "first_seen_date": "2025-10-29T07:04:01Z"
-        },
-        {
-          "compose_hash": "2f9e65679cabd34aec917bf4586fec20ec8e9b3b4ffefd4bddc3011a218af4a6",
-          "first_seen_block": 37697981,
-          "first_seen_timestamp": 1762185309,
-          "first_seen_date": "2025-11-03T15:55:09Z"
-        },
-        {
-          "compose_hash": "de3aecc9289d14612928328f365bd3c6cf0def5aafcbed70185ab5f20af1bbe9",
-          "first_seen_block": 37823781,
-          "first_seen_timestamp": 1762436909,
-          "first_seen_date": "2025-11-06T13:48:29Z"
-        },
-        {
-          "compose_hash": "65f5896a3b0374073cac639de716871a2211f439e2d59a02d6163caf0de6d642",
-          "first_seen_block": 38041048,
-          "first_seen_timestamp": 1762871443,
-          "first_seen_date": "2025-11-11T14:30:43Z"
-        },
-        {
-          "compose_hash": "fb0f2aadba408ee2bad78b8f7c1d103d1407fb3475ab7a56380d253f6231fafb",
-          "first_seen_block": 38087189,
-          "first_seen_timestamp": 1762963725,
-          "first_seen_date": "2025-11-12T16:08:45Z"
-        },
-        {
-          "compose_hash": "656e8626bccf670413c5d38044ea0829dc54e6df063c4fec36b5ba489fdd1b46",
-          "first_seen_block": 38087345,
-          "first_seen_timestamp": 1762964037,
-          "first_seen_date": "2025-11-12T16:13:57Z"
-        },
-        {
-          "compose_hash": "083d8b6f8ac410ee860d5b6785cb9a2312f5d56311b0ad25c98742ecfe86c4f6",
-          "first_seen_block": 38087671,
-          "first_seen_timestamp": 1762964689,
-          "first_seen_date": "2025-11-12T16:24:49Z"
-        },
-        {
-          "compose_hash": "fe7cae94a910f12372bd1a589fb975523a75b913cfc9ca56fe14a71f05ba1f8d",
-          "first_seen_block": 38182522,
-          "first_seen_timestamp": 1763154391,
-          "first_seen_date": "2025-11-14T21:06:31Z"
-        },
-        {
-          "compose_hash": "bd942195f15c4d18f88648d78beda78e518f7a92cb96b3771dbe050d278002ba",
-          "first_seen_block": 38218373,
-          "first_seen_timestamp": 1763226093,
-          "first_seen_date": "2025-11-15T17:01:33Z"
-        },
-        {
-          "compose_hash": "d2469acc5e0938c0ad2c42f2691d372c53a75579b2b2c683ac16fc4b443c194e",
-          "first_seen_block": 38320765,
-          "first_seen_timestamp": 1763430877,
-          "first_seen_date": "2025-11-18T01:54:37Z"
-        },
-        {
-          "compose_hash": "17089b008f7ae557daf913354e9278736f0e1ccb44efaf82c1fb37cb46f60af4",
-          "first_seen_block": 38328717,
-          "first_seen_timestamp": 1763446781,
-          "first_seen_date": "2025-11-18T06:19:41Z"
-        },
-        {
-          "compose_hash": "db810ac9236f0320b6784fbad4f33187c3db8094f75b948d8e05cbeaa9e9168a",
-          "first_seen_block": 38335982,
-          "first_seen_timestamp": 1763461311,
-          "first_seen_date": "2025-11-18T10:21:51Z"
-        },
-        {
-          "compose_hash": "53c2541f3e2569d851c67bf733afe927ebb926987ccef6bd72839f28081cbf9e",
-          "first_seen_block": 38659299,
-          "first_seen_timestamp": 1764107945,
-          "first_seen_date": "2025-11-25T21:59:05Z"
-        },
-        {
-          "compose_hash": "19521821029fd65f5f77a24115d73befb137220fde13419a34f3d7dafb53de51",
-          "first_seen_block": 38904199,
-          "first_seen_timestamp": 1764597745,
-          "first_seen_date": "2025-12-01T14:02:25Z"
-        },
-        {
-          "compose_hash": "d0f5a56beeccf5f0a21885c56d9499fcf9c061aa15d65fa86c3e1a586f92a15c",
-          "first_seen_block": 38947960,
-          "first_seen_timestamp": 1764685267,
-          "first_seen_date": "2025-12-02T14:21:07Z"
-        },
-        {
-          "compose_hash": "09edcd8a73a9dc7b312526675b48dbe36581f0e16edde87bc7c895849257deae",
-          "first_seen_block": 39079161,
-          "first_seen_timestamp": 1764947669,
-          "first_seen_date": "2025-12-05T15:14:29Z"
-        },
-        {
-          "compose_hash": "d4dba3581ecdbbbd1aeb325feb9836efd42b3317669e0bff484ca56ce73dedb0",
-          "first_seen_block": 39287089,
-          "first_seen_timestamp": 1765363525,
-          "first_seen_date": "2025-12-10T10:45:25Z"
-        },
-        {
-          "compose_hash": "e9d456df575773d76d6f24da83b7f375f370e21c10e3cc6bd7553bdc6fcdd724",
-          "first_seen_block": 39287344,
-          "first_seen_timestamp": 1765364035,
-          "first_seen_date": "2025-12-10T10:53:55Z"
-        },
-        {
-          "compose_hash": "df065ffecebd5d07228da9ecc08108157e27a345f39d82335fcacc58ad7ed309",
-          "first_seen_block": 39288968,
-          "first_seen_timestamp": 1765367283,
-          "first_seen_date": "2025-12-10T11:48:03Z"
-        },
-        {
-          "compose_hash": "8535347a8b9f13f395ec06b9789af59dd86f8219ebb732bd88ba551a5c331c29",
-          "first_seen_block": 39292328,
-          "first_seen_timestamp": 1765374003,
-          "first_seen_date": "2025-12-10T13:40:03Z"
-        },
-        {
-          "compose_hash": "6b15303703afe1094811892180e8eddc3197f3da18f6f360ec49ed86648a0333",
-          "first_seen_block": 39297661,
-          "first_seen_timestamp": 1765384669,
-          "first_seen_date": "2025-12-10T16:37:49Z"
-        },
-        {
-          "compose_hash": "bdc61960fc9410e251cf160839a276b9d09d2f83b6da6a23cff2c61aa6f6d0f6",
-          "first_seen_block": 39574522,
-          "first_seen_timestamp": 1765938391,
-          "first_seen_date": "2025-12-17T02:26:31Z"
-        },
-        {
-          "compose_hash": "2e480d3ec16082dd37f9622e5359c1179069428250638e9d749b051177a8ed80",
-          "first_seen_block": 40421718,
-          "first_seen_timestamp": 1767632783,
-          "first_seen_date": "2026-01-05T17:06:23Z"
-        },
-        {
-          "compose_hash": "3b310302479888f95f7f1547c0850c87886ff3dd643669abc24d2583a827b0d5",
-          "first_seen_block": 41359151,
-          "first_seen_timestamp": 1769507649,
-          "first_seen_date": "2026-01-27T09:54:09Z"
-        },
-        {
-          "compose_hash": "8e5195f67f971169d05005919e94659883c25c2dc4034abcd8ca44b7850139f3",
-          "first_seen_block": 41422605,
-          "first_seen_timestamp": 1769634557,
-          "first_seen_date": "2026-01-28T21:09:17Z"
-        },
-        {
-          "compose_hash": "bdc9a9c4a06b4ba3186871b53234af10b43f44456bd509123b0fd101ce9fd5c6",
-          "first_seen_block": 41665059,
-          "first_seen_timestamp": 1770119465,
-          "first_seen_date": "2026-02-03T11:51:05Z"
-        },
-        {
-          "compose_hash": "e7c4f92e3e805c3f30c0a102f50ec55e83def631b3e6109eeedc887de43b43d4",
-          "first_seen_block": 41773542,
-          "first_seen_timestamp": 1770336431,
-          "first_seen_date": "2026-02-06T00:07:11Z"
-        },
-        {
-          "compose_hash": "d1283d563ba4924691df20d8ade82def8d448be05b1f7f9602139c490cf45106",
-          "first_seen_block": 42071383,
-          "first_seen_timestamp": 1770932113,
-          "first_seen_date": "2026-02-12T21:35:13Z"
-        },
-        {
-          "compose_hash": "13e9753457567367dbaaf712b85ecf524aecd4b8af99fe2c4ea09aa7300ed038",
-          "first_seen_block": 42303627,
-          "first_seen_timestamp": 1771396601,
-          "first_seen_date": "2026-02-18T06:36:41Z"
-        },
-        {
-          "compose_hash": "ecb74f5fabd226ac341005b1e40c258ba95d0795570a3473ef97e3a0effddff4",
-          "first_seen_block": 42378314,
-          "first_seen_timestamp": 1771545975,
-          "first_seen_date": "2026-02-20T00:06:15Z"
-        },
-        {
-          "compose_hash": "115a8c6daded93a713c7639a0a3c407bea95ab3ad4835ea019c808decb11ac60",
-          "first_seen_block": 42642630,
-          "first_seen_timestamp": 1772074607,
-          "first_seen_date": "2026-02-26T02:56:47Z"
-        },
-        {
-          "compose_hash": "85090548e1dca43e5d41ac51c6b0b75c330c0fe46847d9a69dd738e643444273",
-          "first_seen_block": 42945003,
-          "first_seen_timestamp": 1772679353,
-          "first_seen_date": "2026-03-05T02:55:53Z"
-        },
-        {
-          "compose_hash": "116f2873230ce3f4e03aab91fe6d74a6800b0fdebcd81df66b65ea8ee34e555e",
-          "first_seen_block": 43204126,
-          "first_seen_timestamp": 1773197599,
-          "first_seen_date": "2026-03-11T02:53:19Z"
-        },
-        {
-          "compose_hash": "c8069a323b3193b16e68d7d52120ad945a25bb5ec78db172a184dbff27af330a",
-          "first_seen_block": 43247429,
-          "first_seen_timestamp": 1773284205,
-          "first_seen_date": "2026-03-12T02:56:45Z"
-        },
-        {
-          "compose_hash": "0ac6f4796b13592deccb584d004547a0e63a241a5604c6d3732d543942c24543",
-          "first_seen_block": 43262973,
-          "first_seen_timestamp": 1773315293,
-          "first_seen_date": "2026-03-12T11:34:53Z"
-        },
-        {
-          "compose_hash": "6f751f032d68e6e711bb43e1c097028a73fd374d0a7936e640f06938c6e4202d",
-          "first_seen_block": 43269945,
-          "first_seen_timestamp": 1773329237,
-          "first_seen_date": "2026-03-12T15:27:17Z"
-        },
-        {
-          "compose_hash": "fe63e73a781b4e52446de85dc9408687d28dc0f5030676046a52062121c3c95a",
-          "first_seen_block": 43270861,
-          "first_seen_timestamp": 1773331069,
-          "first_seen_date": "2026-03-12T15:57:49Z"
-        },
-        {
-          "compose_hash": "e989b7772232cc3f7337e73bf3095719c93e2002d600e03fe803997f28c0e260",
-          "first_seen_block": 43273411,
-          "first_seen_timestamp": 1773336169,
-          "first_seen_date": "2026-03-12T17:22:49Z"
-        },
-        {
-          "compose_hash": "4a8dee36dcc22b499c1f73e1724e74fc8d2cfaca2b87d4694038f93ea83cfaee",
-          "first_seen_block": 43321387,
-          "first_seen_timestamp": 1773432121,
-          "first_seen_date": "2026-03-13T20:02:01Z"
-        },
-        {
-          "compose_hash": "0e10d840d58e7f7d73d94e2b997f72cb394136e362d88eb13237eae9a4a2e613",
-          "first_seen_block": 43550182,
-          "first_seen_timestamp": 1773889711,
-          "first_seen_date": "2026-03-19T03:08:31Z"
-        },
-        {
-          "compose_hash": "34f29fdf08a5fefafa3944a77e18a8c2cd639bb1162347dbb02393997071dd4c",
-          "first_seen_block": 43931972,
-          "first_seen_timestamp": 1774653291,
-          "first_seen_date": "2026-03-27T23:14:51Z"
-        },
-        {
-          "compose_hash": "b8b1f12c3a3dd2adfb3f2986f43c3350cc3cdcb281b604418ec43ee937e5987b",
-          "first_seen_block": 43952102,
-          "first_seen_timestamp": 1774693551,
-          "first_seen_date": "2026-03-28T10:25:51Z"
-        },
-        {
-          "compose_hash": "ec8e9a9a63a160d754089c4c7d398924a3ff7bdcd5eb6efeaadddbf1700bb025",
-          "first_seen_block": 44014714,
-          "first_seen_timestamp": 1774818775,
-          "first_seen_date": "2026-03-29T21:12:55Z"
-        },
-        {
-          "compose_hash": "f6202115d7b86e08eb2298cea068d5d58c66c89461abd30741d86185d7426937",
-          "first_seen_block": 44151600,
-          "first_seen_timestamp": 1775092547,
-          "first_seen_date": "2026-04-02T01:15:47Z"
-        },
-        {
-          "compose_hash": "11369675e793061bbe1c4176cec902df45cea455922f86ee234d8332e32cdf93",
-          "first_seen_block": 44198210,
-          "first_seen_timestamp": 1775185767,
-          "first_seen_date": "2026-04-03T03:09:27Z"
-        },
-        {
-          "compose_hash": "439d4b5bf89485b6e4568cab8fd5aab6c22b6909559f6e4cc853fe8424659bd6",
-          "first_seen_block": 44457410,
-          "first_seen_timestamp": 1775704167,
-          "first_seen_date": "2026-04-09T03:09:27Z"
-        },
-        {
-          "compose_hash": "e0ec83b8ee253be0d6a2451eb424c1b3b130477ef19943aa3f40931c9115d20b",
-          "first_seen_block": 44716639,
-          "first_seen_timestamp": 1776222625,
-          "first_seen_date": "2026-04-15T03:10:25Z"
-        },
-        {
-          "compose_hash": "b4632fc2d5df831f466bf36efc555868f1bc7baedf10d241f44b663bd8d0913e",
-          "first_seen_block": 44759857,
-          "first_seen_timestamp": 1776309061,
-          "first_seen_date": "2026-04-16T03:11:01Z"
-        },
-        {
-          "compose_hash": "59f8d1299078b09aacb19648c99edb4e5cd2a471df3490fbae8e1f83d3b39be8",
-          "first_seen_block": 44808905,
-          "first_seen_timestamp": 1776407157,
-          "first_seen_date": "2026-04-17T06:25:57Z"
-        },
-        {
-          "compose_hash": "9773f8a1328797941cc76ec8f42e6e0cd83624514bf1fc0733c58292913f6f70",
-          "first_seen_block": 44810807,
-          "first_seen_timestamp": 1776410961,
-          "first_seen_date": "2026-04-17T07:29:21Z"
-        },
-        {
-          "compose_hash": "3a5b9747bc6731c5de6c6d6740c3c37cc4522a935b1655e2b757d81089df31f0",
-          "first_seen_block": 44813266,
-          "first_seen_timestamp": 1776415879,
-          "first_seen_date": "2026-04-17T08:51:19Z"
-        },
-        {
-          "compose_hash": "2e84b7214760b9b3f9db5b137beedb4cecdf7ef1e846699fcd3331f998a7f3a3",
-          "first_seen_block": 45364727,
-          "first_seen_timestamp": 1777518801,
-          "first_seen_date": "2026-04-30T03:13:21Z"
-        },
-        {
-          "compose_hash": "75e65dc88b3c2369161054b35ddde27ee43c764d7ae1af65b944c462a6c7147b",
-          "first_seen_block": 45588349,
-          "first_seen_timestamp": 1777966045,
-          "first_seen_date": "2026-05-05T07:27:25Z"
-        },
-        {
-          "compose_hash": "a71c514f28c749443d08f2c0efbfa9acd98085dd05dd865003dad5832224ea7f",
-          "first_seen_block": 45623918,
-          "first_seen_timestamp": 1778037183,
-          "first_seen_date": "2026-05-06T03:13:03Z"
-        },
-        {
-          "compose_hash": "224ebb6612559b4f2083fbb78803ae8154196e7ae5dff22e1321d54afd6f2064",
-          "first_seen_block": 45969514,
-          "first_seen_timestamp": 1778728375,
-          "first_seen_date": "2026-05-14T03:12:55Z"
-        },
-        {
-          "compose_hash": "0492a33e6b2ebc31be6b392f1358519b4495bd98b72f61f7f8aae10d408cf293",
-          "first_seen_block": 46204205,
-          "first_seen_timestamp": 1779197757,
-          "first_seen_date": "2026-05-19T13:35:57Z"
-        },
-        {
-          "compose_hash": "efee4798f79ebd9b32d634b79221637c4f428df4bdbd31c5ac9f1f0fd1904d5c",
-          "first_seen_block": 46271980,
-          "first_seen_timestamp": 1779333307,
-          "first_seen_date": "2026-05-21T03:15:07Z"
-        },
-        {
-          "compose_hash": "91831a031aaf934d14e64a82d00c78fc623ca92ded2d7b178ed8cf213b7aa950",
-          "first_seen_block": 46315185,
-          "first_seen_timestamp": 1779419717,
-          "first_seen_date": "2026-05-22T03:15:17Z"
-        },
-        {
-          "compose_hash": "6319fed9ec002527687c61782fa0ecf1199e10a889f3e0b9f198a487f9065a7a",
-          "first_seen_block": 46465334,
-          "first_seen_timestamp": 1779720015,
-          "first_seen_date": "2026-05-25T14:40:15Z"
-        },
-        {
-          "compose_hash": "f80a48184e369d89e92c3869e9bcd46d8480d763a2b8236be235963db694ebd7",
-          "first_seen_block": 46512536,
-          "first_seen_timestamp": 1779814419,
-          "first_seen_date": "2026-05-26T16:53:39Z"
-        },
-        {
-          "compose_hash": "f966165727f1015c4eed2f171c7807f165da0bc15981e0bcaf92e6dd90a5b628",
-          "first_seen_block": 46517231,
-          "first_seen_timestamp": 1779823809,
-          "first_seen_date": "2026-05-26T19:30:09Z"
-        },
-        {
-          "compose_hash": "00a2639fb294b0ade5fa2047c2873f273f96680bb505103cf99ec97ca5047bbe",
-          "first_seen_block": 46617592,
-          "first_seen_timestamp": 1780024531,
-          "first_seen_date": "2026-05-29T03:15:31Z"
-        },
-        {
-          "compose_hash": "93c7417650459d5f728172e347cea0291dd65a2df07f1ec0d151c0f4cedb80a8",
-          "first_seen_block": 46876822,
-          "first_seen_timestamp": 1780542991,
-          "first_seen_date": "2026-06-04T03:16:31Z"
-        },
-        {
-          "compose_hash": "1bff8094b483915606e7d0e185de2ef0bb126f241415bf43f1dd172ad4136fbc",
-          "first_seen_block": 46887641,
-          "first_seen_timestamp": 1780564629,
-          "first_seen_date": "2026-06-04T09:17:09Z"
-        },
-        {
-          "compose_hash": "6df1fd801e20def9d6bbd1773a0463f864e2c8ff9a730e68e1c35c7366aa4a78",
-          "first_seen_block": 46890625,
-          "first_seen_timestamp": 1780570597,
-          "first_seen_date": "2026-06-04T10:56:37Z"
-        },
-        {
-          "compose_hash": "341c4170ef6fbf1501ec2b813b32f85216cfd7545317dfe23774d8e594af287e",
-          "first_seen_block": 46891150,
-          "first_seen_timestamp": 1780571647,
-          "first_seen_date": "2026-06-04T11:14:07Z"
-        },
-        {
-          "compose_hash": "9d99ec7b89464a6d726878f61dcd2d96aefa08676832fdad649797451148367c",
-          "first_seen_block": 46897008,
-          "first_seen_timestamp": 1780583363,
-          "first_seen_date": "2026-06-04T14:29:23Z"
-        },
-        {
-          "compose_hash": "86e289a4dda88a70d16e2804d4bd592d7c37845888d82e34956e1f4d48e63841",
-          "first_seen_block": 46920008,
-          "first_seen_timestamp": 1780629363,
-          "first_seen_date": "2026-06-05T03:16:03Z"
-        },
-        {
-          "compose_hash": "b748d15f2a69abeffd33f32a12dadb2616adfd2a230887d13ba5707d3f4bea41",
-          "first_seen_block": 47071585,
-          "first_seen_timestamp": 1780932517,
-          "first_seen_date": "2026-06-08T15:28:37Z"
-        },
-        {
-          "compose_hash": "749f0c39826f472b060134c607b0c4f801a5751c4a30e3706b0a892d84853334",
-          "first_seen_block": 47265558,
-          "first_seen_timestamp": 1781320463,
-          "first_seen_date": "2026-06-13T03:14:23Z"
-        },
-        {
-          "compose_hash": "d1330abd3b94c4d41949606ab3a57154caf428c9bf45faebd4a7f7db0537736f",
-          "first_seen_block": 47308828,
-          "first_seen_timestamp": 1781407003,
-          "first_seen_date": "2026-06-14T03:16:43Z"
-        },
-        {
-          "compose_hash": "2f093b5695c1c5976612a7c3402f2f30c3856b82043f988c8ce0fa74470b81a8",
-          "first_seen_block": 47363156,
-          "first_seen_timestamp": 1781515659,
-          "first_seen_date": "2026-06-15T09:27:39Z"
-        },
-        {
-          "compose_hash": "03e1e0d8bc896ff398a219949a1edfcf3ccf028c208ebca3f180b8925c956de0",
-          "first_seen_block": 47364882,
-          "first_seen_timestamp": 1781519111,
-          "first_seen_date": "2026-06-15T10:25:11Z"
-        },
-        {
-          "compose_hash": "a986df434d8f06fba080a3ad4aae7095afeaf8c5a2a336c12763c14b00a1ce91",
-          "first_seen_block": 47458590,
-          "first_seen_timestamp": 1781706527,
-          "first_seen_date": "2026-06-17T14:28:47Z"
-        },
-        {
-          "compose_hash": "1cd309570efabb944da3727cd4416634baf857b49df6f206d339ad1a933ebbcb",
-          "first_seen_block": 47524806,
-          "first_seen_timestamp": 1781838959,
-          "first_seen_date": "2026-06-19T03:15:59Z"
-        },
-        {
-          "compose_hash": "2665f2ed82bb23acef8f3e61973488d9d6d96f84773b3b440d8e7a6dc502c168",
-          "first_seen_block": 47666646,
-          "first_seen_timestamp": 1782122639,
-          "first_seen_date": "2026-06-22T10:03:59Z"
-        },
-        {
-          "compose_hash": "ae7943e51a5d59d91f8a5996f3f8613356ce8be1a9b9a67da41bb09490cc5096",
-          "first_seen_block": 47750831,
-          "first_seen_timestamp": 1782291009,
-          "first_seen_date": "2026-06-24T08:50:09Z"
-        },
-        {
-          "compose_hash": "ceed6b3d82e09b3149a01fd74ba482faeb3ec14a0d4613681d885d799f6a5ef6",
-          "first_seen_block": 47761436,
-          "first_seen_timestamp": 1782312219,
-          "first_seen_date": "2026-06-24T14:43:39Z"
-        },
-        {
-          "compose_hash": "52a82a58fd5d1eac580adb564ab08ca1813094b9e4e8f5b43aca2e3914512c53",
-          "first_seen_block": 47800138,
-          "first_seen_timestamp": 1782389623,
-          "first_seen_date": "2026-06-25T12:13:43Z"
-        },
-        {
-          "compose_hash": "1f194a3ace2722c846e3d282da5df775af6ae7cc1f42ac15d2a0e890ea3ba13a",
-          "first_seen_block": 47999932,
-          "first_seen_timestamp": 1782789211,
-          "first_seen_date": "2026-06-30T03:13:31Z"
-        },
-        {
-          "compose_hash": "d74fc5a5442957a5922705796804dc84bf8cce72ab77123220a1f39bb04e0e49",
-          "first_seen_block": 48086280,
-          "first_seen_timestamp": 1782961907,
-          "first_seen_date": "2026-07-02T03:11:47Z"
-        },
-        {
-          "compose_hash": "15a350fb4dcbf46be795da16f4e906c985ec8a1998a8b998db5454ae2baa413b",
-          "first_seen_block": 48274481,
-          "first_seen_timestamp": 1783338309,
-          "first_seen_date": "2026-07-06T11:45:09Z"
-        },
-        {
-          "compose_hash": "bb8f3b7a203eca288fa4cfdb3b2b59100850fc9bf52cf09ae81be81656ce2afa",
-          "first_seen_block": 48388614,
-          "first_seen_timestamp": 1783566575,
-          "first_seen_date": "2026-07-09T03:09:35Z"
-        },
-        {
-          "compose_hash": "508e35f578835e00da7f923b6c4195f777cfd27ac7fa69b9080cd3ed83513e4b",
-          "first_seen_block": 48431822,
-          "first_seen_timestamp": 1783652991,
-          "first_seen_date": "2026-07-10T03:09:51Z"
-        },
-        {
-          "compose_hash": "f7f0fac4d61926e2588416c86bb6b7d16772a20f732dde79b02c786d4a5215bd",
-          "first_seen_block": 48690939,
-          "first_seen_timestamp": 1784171225,
-          "first_seen_date": "2026-07-16T03:07:05Z"
-        },
-        {
-          "compose_hash": "520cfd6cf9693dac2d1cf88ecc174007c3a31c9f5107cc8238885b9be98478b8",
-          "first_seen_block": 48993353,
-          "first_seen_timestamp": 1784776053,
-          "first_seen_date": "2026-07-23T03:07:33Z"
-        },
-        {
-          "compose_hash": "46d8a96061673540e70f9f552759840205dcd9af428fdc289949ce964ecafb06",
-          "first_seen_block": 49015113,
-          "first_seen_timestamp": 1784819573,
-          "first_seen_date": "2026-07-23T15:12:53Z"
-        },
-        {
-          "compose_hash": "dfacd445383b2d55152dbd05e9889dd7e38d99587935efbf36467b2cba6ad53d",
-          "first_seen_block": 49305977,
-          "first_seen_timestamp": 1785401301,
-          "first_seen_date": "2026-07-30T08:48:21Z"
-        },
-        {
-          "compose_hash": "11021fa8082dcfe29d7dd1828d9466c52e2502b61777e1680383fde78d0d30c7",
-          "first_seen_block": 49306625,
-          "first_seen_timestamp": 1785402597,
-          "first_seen_date": "2026-07-30T09:09:57Z"
-        },
-        {
-          "compose_hash": "2e79a5a5c14247859a427c2739996c24c00322cdafb7b6bb9bff714971234d12",
-          "first_seen_block": 49598162,
-          "first_seen_timestamp": 1785985671,
-          "first_seen_date": "2026-08-06T03:07:51Z"
-        }
-      ],
       "events": [
         {
           "block": 36841409,
@@ -3649,282 +2388,11 @@
           "tx": "0xe92829b331e171c336d79e2200b5b2569b272bec7297fa4ca0fff9f1d7cac02f"
         }
       ],
-      "new_since_anchor": null
+      "genesis_block": 36840195,
+      "last_scanned_block": 49803037
     },
-    {
+    "near-ai/chat-api": {
       "address": "0xf723e96ab11772f0166e5e4749e49a2113f63b0c",
-      "label": "near-ai/chat-api",
-      "anchor_relevant": false,
-      "_note": null,
-      "genesis_block": 38618455,
-      "last_scanned_block": 49803081,
-      "event_count": 67,
-      "distinct_compose_hashes": [
-        {
-          "compose_hash": "073b1124d0e6be63c8a73e394210956e89ff68b0d999b1dde5940ea5f7112ca4",
-          "first_seen_block": 38703318,
-          "first_seen_timestamp": 1764195983,
-          "first_seen_date": "2025-11-26T22:26:23Z"
-        },
-        {
-          "compose_hash": "e6623320adf1b62e779fe04b715ff5b45304f12029d379977e3db52009c07ea7",
-          "first_seen_block": 38951063,
-          "first_seen_timestamp": 1764691473,
-          "first_seen_date": "2025-12-02T16:04:33Z"
-        },
-        {
-          "compose_hash": "d58ecebaa5f0c44556df3469b4251ca254201446a11484e957144f8c79b7c542",
-          "first_seen_block": 38961829,
-          "first_seen_timestamp": 1764713005,
-          "first_seen_date": "2025-12-02T22:03:25Z"
-        },
-        {
-          "compose_hash": "56befcad1c77523840f4a977b9dc27051241dcd0bb77d90fffbb50ec56169e6c",
-          "first_seen_block": 38988015,
-          "first_seen_timestamp": 1764765377,
-          "first_seen_date": "2025-12-03T12:36:17Z"
-        },
-        {
-          "compose_hash": "63921b68ea69b6947d7720aa07b58797c6117a4f1d7d9f8ecf3dd8dea132901e",
-          "first_seen_block": 39006617,
-          "first_seen_timestamp": 1764802581,
-          "first_seen_date": "2025-12-03T22:56:21Z"
-        },
-        {
-          "compose_hash": "fa5e3ed11dac365fdced36c884943033a3581b57eef68806d119c1cfaf933faf",
-          "first_seen_block": 39016559,
-          "first_seen_timestamp": 1764822465,
-          "first_seen_date": "2025-12-04T04:27:45Z"
-        },
-        {
-          "compose_hash": "a16a0f70378142f12eb2d4ce72d4ce5c8603187f6f93b429921fd8c2931f401d",
-          "first_seen_block": 39030961,
-          "first_seen_timestamp": 1764851269,
-          "first_seen_date": "2025-12-04T12:27:49Z"
-        },
-        {
-          "compose_hash": "f5b95e79e4733044a3d941bde8a380ee1df2dfba00f60da68690e61efd4e904e",
-          "first_seen_block": 39053515,
-          "first_seen_timestamp": 1764896377,
-          "first_seen_date": "2025-12-05T00:59:37Z"
-        },
-        {
-          "compose_hash": "2547b46a02a2d36aec714fd64677538b8a0550ccddd280d7af24de261de7366f",
-          "first_seen_block": 39078428,
-          "first_seen_timestamp": 1764946203,
-          "first_seen_date": "2025-12-05T14:50:03Z"
-        },
-        {
-          "compose_hash": "271bd9f0a19876cbbb69605829e9b8e0a86a71bf52e6c63c8bfcdbafd7335888",
-          "first_seen_block": 39329022,
-          "first_seen_timestamp": 1765447391,
-          "first_seen_date": "2025-12-11T10:03:11Z"
-        },
-        {
-          "compose_hash": "b5b75614ba4b8f5622b9827a06cf143dcaf58937980b2acd217531f8ba6a55c2",
-          "first_seen_block": 39385819,
-          "first_seen_timestamp": 1765560985,
-          "first_seen_date": "2025-12-12T17:36:25Z"
-        },
-        {
-          "compose_hash": "e650272ac54b4943767314f455bee32c4b018c2aaeb57d6251dacf4d6acb1c8c",
-          "first_seen_block": 39573855,
-          "first_seen_timestamp": 1765937057,
-          "first_seen_date": "2025-12-17T02:04:17Z"
-        },
-        {
-          "compose_hash": "481c43bb22b3e0198c4caea19d97187bd212e27c836f4445c9ab1817c8d858b3",
-          "first_seen_block": 39676366,
-          "first_seen_timestamp": 1766142079,
-          "first_seen_date": "2025-12-19T11:01:19Z"
-        },
-        {
-          "compose_hash": "477faa093d4d1ecc4d0cd10d16b3b32d4050e3eb1d855e7dd015132aee12b381",
-          "first_seen_block": 39754379,
-          "first_seen_timestamp": 1766298105,
-          "first_seen_date": "2025-12-21T06:21:45Z"
-        },
-        {
-          "compose_hash": "b6b711e560498a49c938eb2463339fa86d162d5b64e8ae954a6f7a42c37be259",
-          "first_seen_block": 40268481,
-          "first_seen_timestamp": 1767326309,
-          "first_seen_date": "2026-01-02T03:58:29Z"
-        },
-        {
-          "compose_hash": "4555c4e70fc2b380ff8b99e8b1af329830b0cd8cd8ae39e1c9b1ebcb38317267",
-          "first_seen_block": 40452101,
-          "first_seen_timestamp": 1767693549,
-          "first_seen_date": "2026-01-06T09:59:09Z"
-        },
-        {
-          "compose_hash": "43f451506d7391596f7e7d7fa1688f0d9f6ad0cb2c3db00981717166dbfd6351",
-          "first_seen_block": 41495913,
-          "first_seen_timestamp": 1769781173,
-          "first_seen_date": "2026-01-30T13:52:53Z"
-        },
-        {
-          "compose_hash": "989c38e3d5072387fe602a7c9123011dd11383d34275def9dac4db3409340286",
-          "first_seen_block": 41797809,
-          "first_seen_timestamp": 1770384965,
-          "first_seen_date": "2026-02-06T13:36:05Z"
-        },
-        {
-          "compose_hash": "e858bd12aabe2094c3dd33e27d30a21233d4cc34f779174cd3d3d606b9bded02",
-          "first_seen_block": 41966514,
-          "first_seen_timestamp": 1770722375,
-          "first_seen_date": "2026-02-10T11:19:35Z"
-        },
-        {
-          "compose_hash": "7f6d4b133288096c60d63d3c9ce3be680fc338d9f5a736c4108839c3783fe574",
-          "first_seen_block": 42415073,
-          "first_seen_timestamp": 1771619493,
-          "first_seen_date": "2026-02-20T20:31:33Z"
-        },
-        {
-          "compose_hash": "ce2c4d911e5722849e55c02a98c28bbfdb8caf8b72f240f8ad3101ad016badee",
-          "first_seen_block": 42468589,
-          "first_seen_timestamp": 1771726525,
-          "first_seen_date": "2026-02-22T02:15:25Z"
-        },
-        {
-          "compose_hash": "9c30b67c7cbf12c46c3d581b422f365da985bcce23c237b0fde068625ea422a1",
-          "first_seen_block": 42536423,
-          "first_seen_timestamp": 1771862193,
-          "first_seen_date": "2026-02-23T15:56:33Z"
-        },
-        {
-          "compose_hash": "21eac4670f8f6b6fd911f4f880b6aa2fd5fa051c2d3ff6fdad468fc41d09a25b",
-          "first_seen_block": 42559171,
-          "first_seen_timestamp": 1771907689,
-          "first_seen_date": "2026-02-24T04:34:49Z"
-        },
-        {
-          "compose_hash": "f48d92a23ac962bb5fdd2c7f0c3f62dac9dc8c81278e94617169ca4d14747428",
-          "first_seen_block": 42740078,
-          "first_seen_timestamp": 1772269503,
-          "first_seen_date": "2026-02-28T09:05:03Z"
-        },
-        {
-          "compose_hash": "3dc476e5fd8e1b083d36e2027ae0aefc715f014b9dd4ca17ef8d9fc2b768d0d0",
-          "first_seen_block": 42927166,
-          "first_seen_timestamp": 1772643679,
-          "first_seen_date": "2026-03-04T17:01:19Z"
-        },
-        {
-          "compose_hash": "708bd35ec8c8d0266ec618cd80b9a82b40247aef2e96c44117f7bf9e4bb3eb59",
-          "first_seen_block": 43123310,
-          "first_seen_timestamp": 1773035967,
-          "first_seen_date": "2026-03-09T05:59:27Z"
-        },
-        {
-          "compose_hash": "9e1e21f2922eb1e5a529711de68eae9e60a1f5ba1686f8f261a5c4e86558b195",
-          "first_seen_block": 43142163,
-          "first_seen_timestamp": 1773073673,
-          "first_seen_date": "2026-03-09T16:27:53Z"
-        },
-        {
-          "compose_hash": "c64eb94d26bfd11b736f0f9b8feebaa7008605b7bfc36994bdeb95531a5c25d2",
-          "first_seen_block": 43578674,
-          "first_seen_timestamp": 1773946695,
-          "first_seen_date": "2026-03-19T18:58:15Z"
-        },
-        {
-          "compose_hash": "205a27be5d0cc50ce1e257b3152fd1c0d39833d85745df8a934caec26bb04c9d",
-          "first_seen_block": 43887962,
-          "first_seen_timestamp": 1774565271,
-          "first_seen_date": "2026-03-26T22:47:51Z"
-        },
-        {
-          "compose_hash": "8be13e411fa7bcb93568c0360188ca10bbb9962ff90f401db1472d7c297516c1",
-          "first_seen_block": 43919927,
-          "first_seen_timestamp": 1774629201,
-          "first_seen_date": "2026-03-27T16:33:21Z"
-        },
-        {
-          "compose_hash": "3da7229cedd3792515e349453a6d2b5273ef9ea48569ed6ec7af908dc6fe94fc",
-          "first_seen_block": 44696994,
-          "first_seen_timestamp": 1776183335,
-          "first_seen_date": "2026-04-14T16:15:35Z"
-        },
-        {
-          "compose_hash": "cfb83b22145765898e4d9920d623c2cf50e67a40382e1a0bc79f64ec52efd5e6",
-          "first_seen_block": 44842362,
-          "first_seen_timestamp": 1776474071,
-          "first_seen_date": "2026-04-18T01:01:11Z"
-        },
-        {
-          "compose_hash": "a301e321e641abce6c7202c27a78611cb24931f6eb23ec06f3e2409e7f0bd910",
-          "first_seen_block": 45033746,
-          "first_seen_timestamp": 1776856839,
-          "first_seen_date": "2026-04-22T11:20:39Z"
-        },
-        {
-          "compose_hash": "8dd734a25060702d7bf57587bf5f36e4bfb23ac174e41fd6e769f068643bca3b",
-          "first_seen_block": 45074246,
-          "first_seen_timestamp": 1776937839,
-          "first_seen_date": "2026-04-23T09:50:39Z"
-        },
-        {
-          "compose_hash": "ab2f90d6f0af8999f0ab643a86f22fde50e6c17023292e791c8bdf9df97d7b4a",
-          "first_seen_block": 45428910,
-          "first_seen_timestamp": 1777647167,
-          "first_seen_date": "2026-05-01T14:52:47Z"
-        },
-        {
-          "compose_hash": "4b00fdecaabce02962f240c2119b14cc0a446984aaee3eb78bf09df93acd98c1",
-          "first_seen_block": 46026620,
-          "first_seen_timestamp": 1778842587,
-          "first_seen_date": "2026-05-15T10:56:27Z"
-        },
-        {
-          "compose_hash": "67fd08e2fa438682eda8418f98a09f154c04f6e3445d225cf78c91f45c6418dd",
-          "first_seen_block": 46334632,
-          "first_seen_timestamp": 1779458611,
-          "first_seen_date": "2026-05-22T14:03:31Z"
-        },
-        {
-          "compose_hash": "1232eb4a3298c299ddf54166fbfd05c269471130a6940796f3d637781038d164",
-          "first_seen_block": 46557499,
-          "first_seen_timestamp": 1779904345,
-          "first_seen_date": "2026-05-27T17:52:25Z"
-        },
-        {
-          "compose_hash": "41f70a49929b2e5b7a7aa302d1483a5b25b51c856e084e7cf330bc9e5edeec6b",
-          "first_seen_block": 47369613,
-          "first_seen_timestamp": 1781528573,
-          "first_seen_date": "2026-06-15T13:02:53Z"
-        },
-        {
-          "compose_hash": "fd1848ca8d34134be79eb82a3d946c93aa30327944f6fa40b7c1e341d4f8d67a",
-          "first_seen_block": 48723696,
-          "first_seen_timestamp": 1784236739,
-          "first_seen_date": "2026-07-16T21:18:59Z"
-        },
-        {
-          "compose_hash": "de037e3394bab47bae6006badcc82dad64eb5ff411efeb09a803158a6c271dbd",
-          "first_seen_block": 49188517,
-          "first_seen_timestamp": 1785166381,
-          "first_seen_date": "2026-07-27T15:33:01Z"
-        },
-        {
-          "compose_hash": "f7fe28cfb64a4c894081764f709b01ceecfbc3c67356413b271ae2b966ce35a2",
-          "first_seen_block": 49229483,
-          "first_seen_timestamp": 1785248313,
-          "first_seen_date": "2026-07-28T14:18:33Z"
-        },
-        {
-          "compose_hash": "0cf66a5eb1b246fa41b134a8793013dc9ffc2c199b85fe1ab8e8963390a1abd7",
-          "first_seen_block": 49298282,
-          "first_seen_timestamp": 1785385911,
-          "first_seen_date": "2026-07-30T04:31:51Z"
-        },
-        {
-          "compose_hash": "751e50219b386d68764253d1c2649af244ceb5a62d2fef42455e71c3894cfa64",
-          "first_seen_block": 49643016,
-          "first_seen_timestamp": 1786075379,
-          "first_seen_date": "2026-08-07T04:02:59Z"
-        }
-      ],
       "events": [
         {
           "block": 38703318,
@@ -4262,36 +2730,11 @@
           "tx": "0xe51b481c57788b73d477a1f97aff37d6596383397323bc09399da8fa5e5a032b"
         }
       ],
-      "new_since_anchor": null
+      "genesis_block": 38618455,
+      "last_scanned_block": 49803037
     },
-    {
+    "near-ai/dstack-ingress": {
       "address": "0x000b2d32de3ed13d7e15b735997e7580ed6dea69",
-      "label": "near-ai/dstack-ingress",
-      "anchor_relevant": false,
-      "_note": null,
-      "genesis_block": 38618457,
-      "last_scanned_block": 49803081,
-      "event_count": 6,
-      "distinct_compose_hashes": [
-        {
-          "compose_hash": "7809c5309ddd471022f68c381c5052fcece13f89cf8fc917547dc7721ed0e2ce",
-          "first_seen_block": 38703410,
-          "first_seen_timestamp": 1764196167,
-          "first_seen_date": "2025-11-26T22:29:27Z"
-        },
-        {
-          "compose_hash": "54dd7cab9c24a3f54598965f53f5673fc09c4e7060cb94db50083b20b87a652f",
-          "first_seen_block": 38704447,
-          "first_seen_timestamp": 1764198241,
-          "first_seen_date": "2025-11-26T23:04:01Z"
-        },
-        {
-          "compose_hash": "2df8a9cc20f5bc20b447b4bd8dcc77ae07e17e6a109b33339e7019f36c0a7b60",
-          "first_seen_block": 38951258,
-          "first_seen_timestamp": 1764691863,
-          "first_seen_date": "2025-12-02T16:11:03Z"
-        }
-      ],
       "events": [
         {
           "block": 38703410,
@@ -4324,348 +2767,11 @@
           "tx": "0x8444deb064061ce2b5a43bf3a5e34fc5f2fd0a9df864587561f17a749f1251aa"
         }
       ],
-      "new_since_anchor": null
+      "genesis_block": 38618457,
+      "last_scanned_block": 49803037
     },
-    {
+    "near-ai/postgres": {
       "address": "0xc5f76292a3df94d50056b08e57fc30fe1081ad40",
-      "label": "near-ai/postgres",
-      "anchor_relevant": false,
-      "_note": null,
-      "genesis_block": 36173019,
-      "last_scanned_block": 49803081,
-      "event_count": 71,
-      "distinct_compose_hashes": [
-        {
-          "compose_hash": "df2679c0294c977055fb9cbc1ea8329083ba9f61b4ea5f9d627e84757117c64d",
-          "first_seen_block": 36173019,
-          "first_seen_timestamp": 1759135385,
-          "first_seen_date": "2025-09-29T08:43:05Z"
-        },
-        {
-          "compose_hash": "46754ae24f8a43c39882a0638524a1c50030256412a92e744f10f788405b00bb",
-          "first_seen_block": 36228781,
-          "first_seen_timestamp": 1759246909,
-          "first_seen_date": "2025-09-30T15:41:49Z"
-        },
-        {
-          "compose_hash": "cd53bf072de0c909333b5151a5aaa93070c8722d307e61bc37346e1005ea510c",
-          "first_seen_block": 36260438,
-          "first_seen_timestamp": 1759310223,
-          "first_seen_date": "2025-10-01T09:17:03Z"
-        },
-        {
-          "compose_hash": "970f406e1da019fa8067b2dd8d31c9dac1f3b36c0473f5d02efee0304e1b4211",
-          "first_seen_block": 36261720,
-          "first_seen_timestamp": 1759312787,
-          "first_seen_date": "2025-10-01T09:59:47Z"
-        },
-        {
-          "compose_hash": "aea394f0e14a834c6b1d6efe2da1031889b6d86ecdcfbdd9a563ca31db905700",
-          "first_seen_block": 36262835,
-          "first_seen_timestamp": 1759315017,
-          "first_seen_date": "2025-10-01T10:36:57Z"
-        },
-        {
-          "compose_hash": "034e658bc210244cb97479ff9afc2973b1f7f8228c4d5721a4e903e4ace5851a",
-          "first_seen_block": 36266310,
-          "first_seen_timestamp": 1759321967,
-          "first_seen_date": "2025-10-01T12:32:47Z"
-        },
-        {
-          "compose_hash": "40b5ba62bf3455d6dd329d9f14f65d3c9763ff8d8a0f584174c6cc781108f722",
-          "first_seen_block": 36267188,
-          "first_seen_timestamp": 1759323723,
-          "first_seen_date": "2025-10-01T13:02:03Z"
-        },
-        {
-          "compose_hash": "b3a7dcc3c4e3429409023dc1aae4fae95d177067c974cb13dabeaf32cb0d5d0a",
-          "first_seen_block": 36271724,
-          "first_seen_timestamp": 1759332795,
-          "first_seen_date": "2025-10-01T15:33:15Z"
-        },
-        {
-          "compose_hash": "ffaa93ce4e8c5d452412de2e78a165cb5015eb28c09ab208fb57902470f41ea0",
-          "first_seen_block": 36272754,
-          "first_seen_timestamp": 1759334855,
-          "first_seen_date": "2025-10-01T16:07:35Z"
-        },
-        {
-          "compose_hash": "dc4d26df502cb2c5f56e77bb369ac4718a596d5e63b7585f06cd2e842eae22ca",
-          "first_seen_block": 36304930,
-          "first_seen_timestamp": 1759399207,
-          "first_seen_date": "2025-10-02T10:00:07Z"
-        },
-        {
-          "compose_hash": "436d890ff4218701c1197260980848289f56a1deb0cc2a4858d9fc5c15991afc",
-          "first_seen_block": 36358426,
-          "first_seen_timestamp": 1759506199,
-          "first_seen_date": "2025-10-03T15:43:19Z"
-        },
-        {
-          "compose_hash": "c09969eaf3f97ffd9c6f45c12b82c1c7b347710e70a4c21a2235abd647bfbfb6",
-          "first_seen_block": 36486643,
-          "first_seen_timestamp": 1759762633,
-          "first_seen_date": "2025-10-06T14:57:13Z"
-        },
-        {
-          "compose_hash": "fd74bad4958068f66466a330ae9cd6bee9f8fb3540df61e9535634f26d991f80",
-          "first_seen_block": 36519140,
-          "first_seen_timestamp": 1759827627,
-          "first_seen_date": "2025-10-07T09:00:27Z"
-        },
-        {
-          "compose_hash": "541723af5f968979deff976f3d96781b43b83454ed60da47f5f7682924b72e06",
-          "first_seen_block": 36524918,
-          "first_seen_timestamp": 1759839183,
-          "first_seen_date": "2025-10-07T12:13:03Z"
-        },
-        {
-          "compose_hash": "a3442353cdda521b55ff8d47887e6428c22f1cc7a6bd682bce9b17d09fa48dd3",
-          "first_seen_block": 36524993,
-          "first_seen_timestamp": 1759839333,
-          "first_seen_date": "2025-10-07T12:15:33Z"
-        },
-        {
-          "compose_hash": "7dab429e7406da9edc31bef4eb69508c2baa4ddf21e3a0d3c7e7c1f9fdee0d8f",
-          "first_seen_block": 36525121,
-          "first_seen_timestamp": 1759839589,
-          "first_seen_date": "2025-10-07T12:19:49Z"
-        },
-        {
-          "compose_hash": "6018b61a1b93401b95baf85ecf7fa3d1077caf4dab58c252b1178b9481d77397",
-          "first_seen_block": 36525742,
-          "first_seen_timestamp": 1759840831,
-          "first_seen_date": "2025-10-07T12:40:31Z"
-        },
-        {
-          "compose_hash": "c53cb989c9d2ceac0822963611ccb379247dde8741029cd468d9c46d1ff348b5",
-          "first_seen_block": 36526348,
-          "first_seen_timestamp": 1759842043,
-          "first_seen_date": "2025-10-07T13:00:43Z"
-        },
-        {
-          "compose_hash": "84733f4f1fd618afbf177e0451f438bb049af064c3ae5230874fb92f6c893cb5",
-          "first_seen_block": 36660530,
-          "first_seen_timestamp": 1760110407,
-          "first_seen_date": "2025-10-10T15:33:27Z"
-        },
-        {
-          "compose_hash": "83d660eb280dae687401c42e0dfbea4ee4dc8e534220c3965fe3ac334efe0b1b",
-          "first_seen_block": 36667317,
-          "first_seen_timestamp": 1760123981,
-          "first_seen_date": "2025-10-10T19:19:41Z"
-        },
-        {
-          "compose_hash": "73af4830d4385dad4f4539255a81fafe98046599919c5558f0b61c1aaa3ce2a0",
-          "first_seen_block": 36670846,
-          "first_seen_timestamp": 1760131039,
-          "first_seen_date": "2025-10-10T21:17:19Z"
-        },
-        {
-          "compose_hash": "cbda24361cf6867e61b6f3cf2cf10646484b2ed5cb53db93cb2a886a5d06e2d3",
-          "first_seen_block": 36672600,
-          "first_seen_timestamp": 1760134547,
-          "first_seen_date": "2025-10-10T22:15:47Z"
-        },
-        {
-          "compose_hash": "9ffa2f62b56e92c7fa26d914ae4f417029d1f44fe4fc888ec3053256b2d97b1d",
-          "first_seen_block": 36672788,
-          "first_seen_timestamp": 1760134923,
-          "first_seen_date": "2025-10-10T22:22:03Z"
-        },
-        {
-          "compose_hash": "bdc90ff892c9366634d5d06ccf475f049b7308e7bbfc6635edc5807c5f157ee4",
-          "first_seen_block": 36673029,
-          "first_seen_timestamp": 1760135405,
-          "first_seen_date": "2025-10-10T22:30:05Z"
-        },
-        {
-          "compose_hash": "82fb48b81bd8d0f6874453d798767780adfcca90df136d4ff712a08512ccffc3",
-          "first_seen_block": 36673196,
-          "first_seen_timestamp": 1760135739,
-          "first_seen_date": "2025-10-10T22:35:39Z"
-        },
-        {
-          "compose_hash": "6c0beda1fb576e85000489c011d769a5cc6d925563c97a289a189b4a363fd915",
-          "first_seen_block": 36673321,
-          "first_seen_timestamp": 1760135989,
-          "first_seen_date": "2025-10-10T22:39:49Z"
-        },
-        {
-          "compose_hash": "9fe6f66958c86c62904ba937550c87e202f5e8f70c7006734e37697cf62055c4",
-          "first_seen_block": 36673888,
-          "first_seen_timestamp": 1760137123,
-          "first_seen_date": "2025-10-10T22:58:43Z"
-        },
-        {
-          "compose_hash": "035240f6a0b82aa656ff12ca9c4b360f80b985f55ab41987578c43de299a758c",
-          "first_seen_block": 36751003,
-          "first_seen_timestamp": 1760291353,
-          "first_seen_date": "2025-10-12T17:49:13Z"
-        },
-        {
-          "compose_hash": "6ebcf5c9a68cf58ab90ccb71d0a44fdb79f2013781881411503210ab2a2586df",
-          "first_seen_block": 36758579,
-          "first_seen_timestamp": 1760306505,
-          "first_seen_date": "2025-10-12T22:01:45Z"
-        },
-        {
-          "compose_hash": "c95672c75de37c6735f51799dd738dfe2bcd3665312af544d8f6baa799a65b47",
-          "first_seen_block": 36758643,
-          "first_seen_timestamp": 1760306633,
-          "first_seen_date": "2025-10-12T22:03:53Z"
-        },
-        {
-          "compose_hash": "d8049a0b8aa91e5a3fbc6fb5e3e56b92bab41558fd5a1a17a52b1410ecd4fbb0",
-          "first_seen_block": 36758751,
-          "first_seen_timestamp": 1760306849,
-          "first_seen_date": "2025-10-12T22:07:29Z"
-        },
-        {
-          "compose_hash": "dd486168ae64e6db37ed9d7e045bc7f969dc2b788e3585e67cebe564a434333e",
-          "first_seen_block": 36759036,
-          "first_seen_timestamp": 1760307419,
-          "first_seen_date": "2025-10-12T22:16:59Z"
-        },
-        {
-          "compose_hash": "a56acd81fc2725a9c1bc3f46811e4aba068f6690b675bc0e5aaa036cc9d85fd1",
-          "first_seen_block": 36759419,
-          "first_seen_timestamp": 1760308185,
-          "first_seen_date": "2025-10-12T22:29:45Z"
-        },
-        {
-          "compose_hash": "84afb1b2bd2d690e9d740e5a599280d51f7121680c541f9197fb355d910c6376",
-          "first_seen_block": 36760476,
-          "first_seen_timestamp": 1760310299,
-          "first_seen_date": "2025-10-12T23:04:59Z"
-        },
-        {
-          "compose_hash": "92af320bb769e7605614f3ba8e1f06e44f7d111d1cebd3f404ad955ee1f75184",
-          "first_seen_block": 36761641,
-          "first_seen_timestamp": 1760312629,
-          "first_seen_date": "2025-10-12T23:43:49Z"
-        },
-        {
-          "compose_hash": "b446fb047d60b4ab5ea841e1541571112a7e38d8882246e966516248275be0f2",
-          "first_seen_block": 36761989,
-          "first_seen_timestamp": 1760313325,
-          "first_seen_date": "2025-10-12T23:55:25Z"
-        },
-        {
-          "compose_hash": "68ace823fbac67dc6650d7938a6c09a8c5cb399a9c66f0daa9913de26a33a5e5",
-          "first_seen_block": 36762703,
-          "first_seen_timestamp": 1760314753,
-          "first_seen_date": "2025-10-13T00:19:13Z"
-        },
-        {
-          "compose_hash": "41faeb72b1f24aed71540ceaa1a97191039cc67f3516b43328af4be73897b84f",
-          "first_seen_block": 36763107,
-          "first_seen_timestamp": 1760315561,
-          "first_seen_date": "2025-10-13T00:32:41Z"
-        },
-        {
-          "compose_hash": "54ac92859707f42c37d2856dfb57872f950e821065a0c876dfdf8ae96458dd2b",
-          "first_seen_block": 36763315,
-          "first_seen_timestamp": 1760315977,
-          "first_seen_date": "2025-10-13T00:39:37Z"
-        },
-        {
-          "compose_hash": "637b019a6b5c55d93b2d37dccba9566fb0c20b00e00b822e1d5e6244c981e38d",
-          "first_seen_block": 36791583,
-          "first_seen_timestamp": 1760372513,
-          "first_seen_date": "2025-10-13T16:21:53Z"
-        },
-        {
-          "compose_hash": "6a528a45e17c47262488a294bccbbc8293c494f75d4b1f7ae9ada2a37d4e9666",
-          "first_seen_block": 36803109,
-          "first_seen_timestamp": 1760395565,
-          "first_seen_date": "2025-10-13T22:46:05Z"
-        },
-        {
-          "compose_hash": "f333fd79cd40cc113d0ca8d4a8891cb0274a79d4f1c53e0006d4e2dfc6b52a0b",
-          "first_seen_block": 36803388,
-          "first_seen_timestamp": 1760396123,
-          "first_seen_date": "2025-10-13T22:55:23Z"
-        },
-        {
-          "compose_hash": "a57b5c0511e90db0e354d52d33d8b758c0850b616078e7fcf202001ef92f8dc5",
-          "first_seen_block": 36803641,
-          "first_seen_timestamp": 1760396629,
-          "first_seen_date": "2025-10-13T23:03:49Z"
-        },
-        {
-          "compose_hash": "8b8918bc952da0424933793bcda706a6b739d0a5f7a62fc01dbbcbd01484a79c",
-          "first_seen_block": 36803840,
-          "first_seen_timestamp": 1760397027,
-          "first_seen_date": "2025-10-13T23:10:27Z"
-        },
-        {
-          "compose_hash": "c3ad5740114336a469f12ea4c697c639f15a1e5c74284a08758c1103e5ad3723",
-          "first_seen_block": 37270569,
-          "first_seen_timestamp": 1761330485,
-          "first_seen_date": "2025-10-24T18:28:05Z"
-        },
-        {
-          "compose_hash": "6789a3147e931550ce70c39d267d38bb42a8c60c52eff5d319eaffb6d0e5a4ab",
-          "first_seen_block": 37277591,
-          "first_seen_timestamp": 1761344529,
-          "first_seen_date": "2025-10-24T22:22:09Z"
-        },
-        {
-          "compose_hash": "1c2f4b13d86d0d0466322b5c8264cc0f0555b2c59c1414bceb71cd277c5cea6e",
-          "first_seen_block": 38617577,
-          "first_seen_timestamp": 1764024501,
-          "first_seen_date": "2025-11-24T22:48:21Z"
-        },
-        {
-          "compose_hash": "fd998d16f83499655aae1212e2a92093330c2db83eb5845d0e5326e8ea8e6ed8",
-          "first_seen_block": 40424358,
-          "first_seen_timestamp": 1767638063,
-          "first_seen_date": "2026-01-05T18:34:23Z"
-        },
-        {
-          "compose_hash": "cf4d10f45b82397004eac27707e6bcc60262ced05b7dd5b92cea9f83ad64ce6b",
-          "first_seen_block": 46897947,
-          "first_seen_timestamp": 1780585241,
-          "first_seen_date": "2026-06-04T15:00:41Z"
-        },
-        {
-          "compose_hash": "34b2d433af67c3e80a315507de366ba8528fb21f187e85392113a1e94db2bc16",
-          "first_seen_block": 46899521,
-          "first_seen_timestamp": 1780588389,
-          "first_seen_date": "2026-06-04T15:53:09Z"
-        },
-        {
-          "compose_hash": "1ff7dd8d2b34ac468a041f5acd294de57f42da11138ab8c0c8c54502707381ec",
-          "first_seen_block": 46900280,
-          "first_seen_timestamp": 1780589907,
-          "first_seen_date": "2026-06-04T16:18:27Z"
-        },
-        {
-          "compose_hash": "d2bde6a3df69acc0c3f36a7184ffae5cb2fb223f1bf03089acc8b825cef4e423",
-          "first_seen_block": 47369964,
-          "first_seen_timestamp": 1781529275,
-          "first_seen_date": "2026-06-15T13:14:35Z"
-        },
-        {
-          "compose_hash": "23d09ae2316a3d732f3258959a3874e2acbfbcdc41833ced82b058b0a106768a",
-          "first_seen_block": 47720907,
-          "first_seen_timestamp": 1782231161,
-          "first_seen_date": "2026-06-23T16:12:41Z"
-        },
-        {
-          "compose_hash": "7ed91707f4b776d055cd0eacfbd4f8c899a3a3d54626b403a53975d9c870cc80",
-          "first_seen_block": 48740619,
-          "first_seen_timestamp": 1784270585,
-          "first_seen_date": "2026-07-17T06:43:05Z"
-        },
-        {
-          "compose_hash": "b2cb40c6abacf5c7c7f96b24d3823336395c573931b670874546fb352726f3c5",
-          "first_seen_block": 49063508,
-          "first_seen_timestamp": 1784916363,
-          "first_seen_date": "2026-07-24T18:06:03Z"
-        }
-      ],
       "events": [
         {
           "block": 36173019,
@@ -5023,126 +3129,11 @@
           "tx": "0x8af907ccc232daed24a3f90e44453e1c43142284e9c0fed922281d45f3a56ff0"
         }
       ],
-      "new_since_anchor": null
+      "genesis_block": 36173019,
+      "last_scanned_block": 49803037
     },
-    {
+    "near-ai/vpc-server": {
       "address": "0xe78c12915ad57900317b97bd16f59ae13f86f148",
-      "label": "near-ai/vpc-server",
-      "anchor_relevant": false,
-      "_note": null,
-      "genesis_block": 36139440,
-      "last_scanned_block": 49803081,
-      "event_count": 44,
-      "distinct_compose_hashes": [
-        {
-          "compose_hash": "3820e796c17bd542bb8a5df00cb77c459b8a0a33495557ce8e5d0a7d152b889d",
-          "first_seen_block": 36139440,
-          "first_seen_timestamp": 1759068227,
-          "first_seen_date": "2025-09-28T14:03:47Z"
-        },
-        {
-          "compose_hash": "b523d14c320251e79b4c43d229becac0b04808e7000d7b26fb445e44ac7f5f2a",
-          "first_seen_block": 36228439,
-          "first_seen_timestamp": 1759246225,
-          "first_seen_date": "2025-09-30T15:30:25Z"
-        },
-        {
-          "compose_hash": "59b93c9c98454c71c7c943634180dc530232f927647fff0af8fdf1b0dc8a9593",
-          "first_seen_block": 36260399,
-          "first_seen_timestamp": 1759310145,
-          "first_seen_date": "2025-10-01T09:15:45Z"
-        },
-        {
-          "compose_hash": "0d3d3e57e3991e51d5e084028c6210b267459bebe8ab17b32034b0825ceff3b7",
-          "first_seen_block": 36358304,
-          "first_seen_timestamp": 1759505955,
-          "first_seen_date": "2025-10-03T15:39:15Z"
-        },
-        {
-          "compose_hash": "56a4749d6cfa2f9a246478e1a824b08af31aa23befcb080764ccb09e6678a55f",
-          "first_seen_block": 36519135,
-          "first_seen_timestamp": 1759827617,
-          "first_seen_date": "2025-10-07T09:00:17Z"
-        },
-        {
-          "compose_hash": "ddc70d422085a89aee2c1079ce5b2bb7148667a7b882eaf70bc6113e2827b908",
-          "first_seen_block": 36523779,
-          "first_seen_timestamp": 1759836905,
-          "first_seen_date": "2025-10-07T11:35:05Z"
-        },
-        {
-          "compose_hash": "be0fdfdf23ae00c5695dcff9a5327b21d7bfa771e40d35bad48e13b4a5bc7f03",
-          "first_seen_block": 36524369,
-          "first_seen_timestamp": 1759838085,
-          "first_seen_date": "2025-10-07T11:54:45Z"
-        },
-        {
-          "compose_hash": "ef645fdd15b8376a76a37c207c8634feafa861c4813d141d1b6f6331eb48f4fe",
-          "first_seen_block": 36656619,
-          "first_seen_timestamp": 1760102585,
-          "first_seen_date": "2025-10-10T13:23:05Z"
-        },
-        {
-          "compose_hash": "d47fedffb2951de5e18df31a0cdf700566d1f73e04584e4920b612c339d66218",
-          "first_seen_block": 37180588,
-          "first_seen_timestamp": 1761150523,
-          "first_seen_date": "2025-10-22T16:28:43Z"
-        },
-        {
-          "compose_hash": "a0502c5f37b77351436367b8a2fac3a6e82c21d9e8c86df2a77832c58c2f3938",
-          "first_seen_block": 37180650,
-          "first_seen_timestamp": 1761150647,
-          "first_seen_date": "2025-10-22T16:30:47Z"
-        },
-        {
-          "compose_hash": "dd243ec499bd0731536f246a2efc9eeaf3abd047b8ee0ac163d691a71d862800",
-          "first_seen_block": 37181084,
-          "first_seen_timestamp": 1761151515,
-          "first_seen_date": "2025-10-22T16:45:15Z"
-        },
-        {
-          "compose_hash": "21d82d5e3f3d535f2d27c454ae37edf20af2128991c74ae3e3697ac3b8f8926c",
-          "first_seen_block": 37270480,
-          "first_seen_timestamp": 1761330307,
-          "first_seen_date": "2025-10-24T18:25:07Z"
-        },
-        {
-          "compose_hash": "a390e0b6a434f501821f23d2cbde45521c0aced5a6e6c2bc1c4c388b46094f33",
-          "first_seen_block": 37271745,
-          "first_seen_timestamp": 1761332837,
-          "first_seen_date": "2025-10-24T19:07:17Z"
-        },
-        {
-          "compose_hash": "d88e7480a448de461a49eec0767a078380b270d5d365e0fc4e971ced54dd0710",
-          "first_seen_block": 37271954,
-          "first_seen_timestamp": 1761333255,
-          "first_seen_date": "2025-10-24T19:14:15Z"
-        },
-        {
-          "compose_hash": "67dcac7fe02b2023ad39a44ae1e354550d85467ebb5603b01d249d478a7db18e",
-          "first_seen_block": 37272063,
-          "first_seen_timestamp": 1761333473,
-          "first_seen_date": "2025-10-24T19:17:53Z"
-        },
-        {
-          "compose_hash": "187bf71020cc5c13ba39135400561f7c05c6a9babc30cfe84ec9c915c10b875e",
-          "first_seen_block": 38703247,
-          "first_seen_timestamp": 1764195841,
-          "first_seen_date": "2025-11-26T22:24:01Z"
-        },
-        {
-          "compose_hash": "a5bb51198b00b7d7075d9399499a9e0cc89d2d4b32ff64402bba2faeb15afb49",
-          "first_seen_block": 38703281,
-          "first_seen_timestamp": 1764195909,
-          "first_seen_date": "2025-11-26T22:25:09Z"
-        },
-        {
-          "compose_hash": "f3fa7dbb7e7a38d49aefb56e157aa2199973064ef85f4d0535f395cf1d37c02d",
-          "first_seen_block": 38703775,
-          "first_seen_timestamp": 1764196897,
-          "first_seen_date": "2025-11-26T22:41:37Z"
-        }
-      ],
       "events": [
         {
           "block": 36139440,
@@ -5365,7 +3356,287 @@
           "tx": "0x49fcb687168ed35335007135d831bd3932ea8ca0e39b9684811fc2ec9dd01a4e"
         }
       ],
-      "new_since_anchor": null
+      "genesis_block": 36139440,
+      "last_scanned_block": 49803037
     }
-  ]
+  },
+  "block_timestamps": {
+    "36139440": 1759068227,
+    "36173019": 1759135385,
+    "36228439": 1759246225,
+    "36228781": 1759246909,
+    "36260399": 1759310145,
+    "36260438": 1759310223,
+    "36261720": 1759312787,
+    "36262835": 1759315017,
+    "36266310": 1759321967,
+    "36267188": 1759323723,
+    "36271724": 1759332795,
+    "36272754": 1759334855,
+    "36304930": 1759399207,
+    "36358304": 1759505955,
+    "36358426": 1759506199,
+    "36486643": 1759762633,
+    "36519135": 1759827617,
+    "36519140": 1759827627,
+    "36523779": 1759836905,
+    "36524369": 1759838085,
+    "36524918": 1759839183,
+    "36524993": 1759839333,
+    "36525121": 1759839589,
+    "36525742": 1759840831,
+    "36526348": 1759842043,
+    "36656619": 1760102585,
+    "36660530": 1760110407,
+    "36667317": 1760123981,
+    "36670846": 1760131039,
+    "36672600": 1760134547,
+    "36672788": 1760134923,
+    "36673029": 1760135405,
+    "36673196": 1760135739,
+    "36673321": 1760135989,
+    "36673888": 1760137123,
+    "36751003": 1760291353,
+    "36758579": 1760306505,
+    "36758643": 1760306633,
+    "36758751": 1760306849,
+    "36759036": 1760307419,
+    "36759419": 1760308185,
+    "36760476": 1760310299,
+    "36761641": 1760312629,
+    "36761989": 1760313325,
+    "36762703": 1760314753,
+    "36763107": 1760315561,
+    "36763315": 1760315977,
+    "36791583": 1760372513,
+    "36803109": 1760395565,
+    "36803388": 1760396123,
+    "36803641": 1760396629,
+    "36803840": 1760397027,
+    "36841409": 1760472165,
+    "36841506": 1760472359,
+    "36843998": 1760477343,
+    "36847362": 1760484071,
+    "36940655": 1760670657,
+    "37007517": 1760804381,
+    "37140227": 1761069801,
+    "37180588": 1761150523,
+    "37180650": 1761150647,
+    "37181084": 1761151515,
+    "37270480": 1761330307,
+    "37270569": 1761330485,
+    "37270845": 1761331037,
+    "37271745": 1761332837,
+    "37271954": 1761333255,
+    "37272063": 1761333473,
+    "37277377": 1761344101,
+    "37277591": 1761344529,
+    "37278356": 1761346059,
+    "37279205": 1761347757,
+    "37279438": 1761348223,
+    "37282695": 1761354737,
+    "37426607": 1761642561,
+    "37466047": 1761721441,
+    "37697981": 1762185309,
+    "37823781": 1762436909,
+    "38041048": 1762871443,
+    "38087189": 1762963725,
+    "38087345": 1762964037,
+    "38087671": 1762964689,
+    "38182522": 1763154391,
+    "38218373": 1763226093,
+    "38320765": 1763430877,
+    "38328717": 1763446781,
+    "38335982": 1763461311,
+    "38617577": 1764024501,
+    "38659299": 1764107945,
+    "38703247": 1764195841,
+    "38703281": 1764195909,
+    "38703318": 1764195983,
+    "38703410": 1764196167,
+    "38703775": 1764196897,
+    "38704447": 1764198241,
+    "38904199": 1764597745,
+    "38947960": 1764685267,
+    "38951063": 1764691473,
+    "38951258": 1764691863,
+    "38961829": 1764713005,
+    "38988015": 1764765377,
+    "39006617": 1764802581,
+    "39016559": 1764822465,
+    "39030961": 1764851269,
+    "39053515": 1764896377,
+    "39078428": 1764946203,
+    "39079161": 1764947669,
+    "39287089": 1765363525,
+    "39287344": 1765364035,
+    "39288968": 1765367283,
+    "39292328": 1765374003,
+    "39297661": 1765384669,
+    "39329022": 1765447391,
+    "39385819": 1765560985,
+    "39573855": 1765937057,
+    "39574522": 1765938391,
+    "39676366": 1766142079,
+    "39754379": 1766298105,
+    "40268481": 1767326309,
+    "40421718": 1767632783,
+    "40424358": 1767638063,
+    "40452101": 1767693549,
+    "41359151": 1769507649,
+    "41422605": 1769634557,
+    "41495913": 1769781173,
+    "41665059": 1770119465,
+    "41773542": 1770336431,
+    "41797809": 1770384965,
+    "41918859": 1770627065,
+    "41966514": 1770722375,
+    "42011469": 1770812285,
+    "42011583": 1770812513,
+    "42015371": 1770820089,
+    "42071383": 1770932113,
+    "42273155": 1771335657,
+    "42281597": 1771352541,
+    "42303627": 1771396601,
+    "42310945": 1771411237,
+    "42378314": 1771545975,
+    "42415073": 1771619493,
+    "42452570": 1771694487,
+    "42468589": 1771726525,
+    "42536423": 1771862193,
+    "42559171": 1771907689,
+    "42642630": 1772074607,
+    "42740078": 1772269503,
+    "42756929": 1772303205,
+    "42914930": 1772619207,
+    "42922565": 1772634477,
+    "42923363": 1772636073,
+    "42927166": 1772643679,
+    "42945003": 1772679353,
+    "42971157": 1772731661,
+    "43123310": 1773035967,
+    "43142163": 1773073673,
+    "43176907": 1773143161,
+    "43204126": 1773197599,
+    "43247429": 1773284205,
+    "43262973": 1773315293,
+    "43269945": 1773329237,
+    "43270861": 1773331069,
+    "43273411": 1773336169,
+    "43321387": 1773432121,
+    "43436471": 1773662289,
+    "43550182": 1773889711,
+    "43578674": 1773946695,
+    "43887962": 1774565271,
+    "43919927": 1774629201,
+    "43931972": 1774653291,
+    "43952102": 1774693551,
+    "44014714": 1774818775,
+    "44151600": 1775092547,
+    "44198210": 1775185767,
+    "44457410": 1775704167,
+    "44696994": 1776183335,
+    "44716639": 1776222625,
+    "44759857": 1776309061,
+    "44791240": 1776371827,
+    "44808905": 1776407157,
+    "44810807": 1776410961,
+    "44813266": 1776415879,
+    "44842362": 1776474071,
+    "45033746": 1776856839,
+    "45074246": 1776937839,
+    "45208404": 1777206155,
+    "45364727": 1777518801,
+    "45428910": 1777647167,
+    "45588349": 1777966045,
+    "45623918": 1778037183,
+    "45726790": 1778242927,
+    "45727026": 1778243399,
+    "45946624": 1778682595,
+    "45969514": 1778728375,
+    "46026620": 1778842587,
+    "46175225": 1779139797,
+    "46204205": 1779197757,
+    "46212900": 1779215147,
+    "46259036": 1779307419,
+    "46271980": 1779333307,
+    "46303386": 1779396119,
+    "46315185": 1779419717,
+    "46334632": 1779458611,
+    "46465334": 1779720015,
+    "46512536": 1779814419,
+    "46515349": 1779820045,
+    "46517231": 1779823809,
+    "46520585": 1779830517,
+    "46557499": 1779904345,
+    "46617592": 1780024531,
+    "46802529": 1780394405,
+    "46806749": 1780402845,
+    "46827677": 1780444701,
+    "46833081": 1780455509,
+    "46839427": 1780468201,
+    "46855054": 1780499455,
+    "46855991": 1780501329,
+    "46871318": 1780531983,
+    "46876822": 1780542991,
+    "46886514": 1780562375,
+    "46887641": 1780564629,
+    "46890625": 1780570597,
+    "46891150": 1780571647,
+    "46897008": 1780583363,
+    "46897947": 1780585241,
+    "46899521": 1780588389,
+    "46900280": 1780589907,
+    "46920008": 1780629363,
+    "46926785": 1780642917,
+    "46933954": 1780657255,
+    "46935716": 1780660779,
+    "46935743": 1780660833,
+    "46945198": 1780679743,
+    "47071585": 1780932517,
+    "47254945": 1781299237,
+    "47265558": 1781320463,
+    "47274763": 1781338873,
+    "47308828": 1781407003,
+    "47363156": 1781515659,
+    "47364882": 1781519111,
+    "47369613": 1781528573,
+    "47369964": 1781529275,
+    "47400985": 1781591317,
+    "47442202": 1781673751,
+    "47458590": 1781706527,
+    "47483435": 1781756217,
+    "47524806": 1781838959,
+    "47526457": 1781842261,
+    "47564757": 1781918861,
+    "47643878": 1782077103,
+    "47652170": 1782093687,
+    "47666646": 1782122639,
+    "47697702": 1782184751,
+    "47720907": 1782231161,
+    "47750831": 1782291009,
+    "47761436": 1782312219,
+    "47794092": 1782377531,
+    "47800138": 1782389623,
+    "47999932": 1782789211,
+    "48086280": 1782961907,
+    "48274481": 1783338309,
+    "48388614": 1783566575,
+    "48431822": 1783652991,
+    "48690939": 1784171225,
+    "48721649": 1784232645,
+    "48723696": 1784236739,
+    "48740619": 1784270585,
+    "48993353": 1784776053,
+    "49015113": 1784819573,
+    "49063508": 1784916363,
+    "49188517": 1785166381,
+    "49229483": 1785248313,
+    "49275538": 1785340423,
+    "49298282": 1785385911,
+    "49305977": 1785401301,
+    "49306625": 1785402597,
+    "49598162": 1785985671,
+    "49643016": 1786075379
+  }
 }

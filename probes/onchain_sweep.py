@@ -11,6 +11,14 @@ This is the CT-style discovery layer: on-chain `ComposeHashAdded` is the
 authoritative SET of permitted compose hashes; the hermes anchor is the
 human-reviewed subset of preimages we've audited; this script is the diff.
 
+The authorized set is append-only, so the events are accumulated once into
+`data/onchain-events.json` and each run scans only the blocks since the last
+checkpoint. The previous version re-scanned a 2M-block sliding window every
+run: ~1,334 eth_getLogs calls per invocation, and — worse — the window
+outran the history it was sized for, so events aged out silently and
+`first_seen_block` was measured from the window edge instead of from chain
+history. See issue #10.
+
 Usage: `python -m probes.onchain_sweep`
 """
 from __future__ import annotations
@@ -20,16 +28,21 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = REPO_ROOT / "data"
+EVENTS_PATH = DATA_DIR / "onchain-events.json"
 RPC_URL = "https://mainnet.base.org"
 RANGE_LIMIT = 9000  # public Base RPC caps eth_getLogs to 10000 blocks
 PARALLEL = 4  # concurrent eth_getLogs requests; public Base RPC tolerates ~4 in-flight
 RETRY_BASE_SLEEP = 1.5  # exponential backoff base for rate limiting
+
+# Re-scan this many blocks below the checkpoint each run so a reorg near the
+# tip cannot strand an event behind the watermark.
+REORG_OVERLAP = 300
 
 # keccak256("ComposeHashAdded(bytes32)")
 COMPOSE_HASH_ADDED_TOPIC = "0xfecb34306dd9d8b785b54d65489d06afc8822a0893ddacedff40c50a4942d0af"
@@ -43,11 +56,6 @@ CONTRACTS = [
     {"address": "0xc5f76292a3df94d50056b08e57fc30fe1081ad40", "label": "near-ai/postgres",        "anchor_relevant": False},
     {"address": "0xe78c12915ad57900317b97bd16f59ae13f86f148", "label": "near-ai/vpc-server",      "anchor_relevant": False},
 ]
-
-# Sweep window. Base = 2s/block ⇒ 1 day ≈ 43200 blocks. 2M ≈ 46 days, enough
-# to catch the historical NEAR rotations we already audited (earliest at
-# block 43883122, ~1.76M blocks before block 45643488 on 2026-05-06).
-SWEEP_WINDOW_BLOCKS = 2_000_000
 
 HERMES_ANCHOR_URL = (
     "https://raw.githubusercontent.com/amiller/hermes-agent/"
@@ -79,32 +87,43 @@ def _block_number() -> int:
     return int(_rpc("eth_blockNumber", []), 16)
 
 
-def _block_timestamp(block_hex: str, cache: Dict[str, int]) -> int:
-    if block_hex in cache:
-        return cache[block_hex]
-    res = _rpc("eth_getBlockByNumber", [block_hex, False])
+def _block_timestamp(block: int, cache: Dict[int, int]) -> int:
+    if block in cache:
+        return cache[block]
+    res = _rpc("eth_getBlockByNumber", [hex(block), False])
     ts = int(res["timestamp"], 16) if res else 0
-    cache[block_hex] = ts
+    cache[block] = ts
     return ts
 
 
+def _deployment_block(address: str, latest: int) -> int:
+    """Binary-search the first block at which the contract has code (~25 calls, once)."""
+    if _rpc("eth_getCode", [address, hex(latest)]) in ("0x", "0x0"):
+        raise RuntimeError(f"{address} has no code at head {latest}")
+    lo, hi = 0, latest
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if _rpc("eth_getCode", [address, hex(mid)]) in ("0x", "0x0"):
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
+
+
 def _logs_one_range(address: str, start: int, end: int, topic: str) -> List[Dict]:
-    try:
-        return _rpc("eth_getLogs", [{
-            "address": address,
-            "fromBlock": hex(start),
-            "toBlock": hex(end),
-            "topics": [topic],
-        }])
-    except RuntimeError as e:
-        print(f"    {address[:8]}.. range {start}..{end}: {e}", file=sys.stderr)
-        return []
+    """Raises on failure. A swallowed range would advance the checkpoint past
+    blocks that were never actually scanned, permanently losing those events."""
+    return _rpc("eth_getLogs", [{
+        "address": address,
+        "fromBlock": hex(start),
+        "toBlock": hex(end),
+        "topics": [topic],
+    }])
 
 
 def _logs_paginated(address: str, from_block: int, to_block: int, topic: str) -> List[Dict]:
     """Paginate eth_getLogs in parallel. Public Base RPC caps to ~10K blocks/range."""
-    ranges = []
-    cur = to_block
+    ranges, cur = [], to_block
     while cur >= from_block:
         start = max(from_block, cur - RANGE_LIMIT)
         ranges.append((start, cur))
@@ -117,106 +136,155 @@ def _logs_paginated(address: str, from_block: int, to_block: int, topic: str) ->
     return out
 
 
-def sweep_contract(address: str, label: str, from_block: int, to_block: int) -> List[Dict]:
-    """Returns event records WITHOUT timestamps (resolved only for first-seen hashes later)."""
-    raw = _logs_paginated(address, from_block, to_block, COMPOSE_HASH_ADDED_TOPIC)
-    print(f"  {label}: {len(raw)} events in blocks {from_block}..{to_block}", file=sys.stderr)
-    events = [{
-        "block": int(log["blockNumber"], 16),
-        "compose_hash": log["data"][2:].lower(),
-        "tx": log["transactionHash"],
-    } for log in raw]
-    events.sort(key=lambda e: e["block"])
-    return events
+def _load_store() -> Tuple[Dict[str, Dict], Dict[int, int]]:
+    if not EVENTS_PATH.exists():
+        return {}, {}
+    raw = json.loads(EVENTS_PATH.read_text())
+    # keys round-trip through JSON as strings
+    return raw["contracts"], {int(k): v for k, v in raw.get("block_timestamps", {}).items()}
 
 
-def distinct_first_seen(events: List[Dict]) -> List[Dict]:
-    """Distinct compose hashes by first-seen block, with timestamp resolved."""
-    seen: Dict[str, Dict] = {}
+def _save_store(store: Dict[str, Dict], head: int, ts_cache: Dict[int, int]) -> None:
+    """Written after every contract, not once at the end: the initial backfill takes
+    tens of minutes, and a crash partway through should cost one contract's progress
+    rather than all of it. Each contract carries its own watermark, so a partial
+    store is resumable.
+
+    Block timestamps are persisted alongside. A block's timestamp is immutable and
+    first_seen_block never moves once recorded, so re-resolving them every run would be
+    ~283 pointless eth_getBlockByNumber calls."""
+    EVENTS_PATH.write_text(json.dumps(
+        {"generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+         "head_block": head, "contracts": store,
+         "block_timestamps": {str(k): v for k, v in sorted(ts_cache.items())}}, indent=2))
+
+
+def _key(e: Dict) -> Tuple[int, str, str]:
+    return (e["block"], e["tx"], e["compose_hash"])
+
+
+def sync_contract(c: Dict, store: Dict[str, Dict], latest: int) -> Dict:
+    """Bring one contract's accumulated event set up to `latest`. Append-only."""
+    st = store.setdefault(c["label"], {"address": c["address"], "events": []})
+
+    if st.get("genesis_block") is None:
+        st["genesis_block"] = _deployment_block(c["address"], latest)
+        print(f"  {c['label']}: deployed at block {st['genesis_block']}", file=sys.stderr)
+
+    watermark = st.get("last_scanned_block")
+    start = st["genesis_block"] if watermark is None else max(
+        st["genesis_block"], watermark + 1 - REORG_OVERLAP)
+
+    if start > latest:
+        print(f"  {c['label']}: up to date at {watermark}", file=sys.stderr)
+        return st
+
+    raw = _logs_paginated(c["address"], start, latest, COMPOSE_HASH_ADDED_TOPIC)
+    fresh = [{"block": int(l["blockNumber"], 16),
+              "compose_hash": l["data"][2:].lower(),
+              "tx": l["transactionHash"]} for l in raw]
+
+    known: Set[Tuple] = {_key(e) for e in st["events"]}
+    added = [e for e in fresh if _key(e) not in known]
+    st["events"] = sorted(st["events"] + added, key=lambda e: e["block"])
+    st["last_scanned_block"] = latest
+
+    span = "backfill" if watermark is None else f"+{latest - watermark} blocks"
+    print(f"  {c['label']}: {len(added)} new ({span}), {len(st['events'])} total",
+          file=sys.stderr)
+    return st
+
+
+def distinct_first_seen(events: List[Dict], cache: Dict[int, int]) -> List[Dict]:
+    """Distinct compose hashes by first-seen block over the FULL accumulated history.
+
+    first_seen_* is absolute, not relative to a scan window — it is the continuity
+    primitive the continuity log is built on, so a moving baseline would corrupt it.
+    """
+    seen: Dict[str, int] = {}
     for e in events:
-        h = e["compose_hash"]
-        if h not in seen:
-            seen[h] = {"compose_hash": h, "first_seen_block": e["block"]}
-    # Resolve timestamps for the first-seen blocks only (small fan-out).
-    cache: Dict[str, int] = {}
+        seen.setdefault(e["compose_hash"], e["block"])
     out = []
-    for d in seen.values():
-        ts = _block_timestamp(hex(d["first_seen_block"]), cache)
+    for h, block in seen.items():
+        ts = _block_timestamp(block, cache)
         out.append({
-            **d,
+            "compose_hash": h,
+            "first_seen_block": block,
             "first_seen_timestamp": ts,
             "first_seen_date": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(ts)) if ts else "",
         })
-    return out
+    return sorted(out, key=lambda d: d["first_seen_block"])
 
 
 def fetch_anchor() -> Optional[Dict]:
-    try:
-        r = requests.get(HERMES_ANCHOR_URL, timeout=10)
-        r.raise_for_status()
-        return r.json()
-    except Exception as e:
-        print(f"  hermes anchor fetch failed ({e}); skipping cross-ref", file=sys.stderr)
-        return None
+    r = requests.get(HERMES_ANCHOR_URL, timeout=10)
+    r.raise_for_status()
+    return r.json()
 
 
 def main() -> int:
     latest = _block_number()
-    from_block = max(0, latest - SWEEP_WINDOW_BLOCKS)
-    print(f"sweeping Base blocks {from_block}..{latest} for ComposeHashAdded events", file=sys.stderr)
+    store, ts_cache = _load_store()
+    print(f"syncing Base contracts to block {latest}", file=sys.stderr)
 
-    contracts_out = []
     for c in CONTRACTS:
-        events = sweep_contract(c["address"], c["label"], from_block, latest)
-        contracts_out.append({
+        sync_contract(c, store, latest)
+        _save_store(store, latest, ts_cache)
+
+    anchor = fetch_anchor()
+    anchored: Set[str] = {h.lower().removeprefix("0x")
+                          for m in anchor.get("models", {}).values()
+                          for h in m.get("compose_hashes", [])}
+
+    contracts_out, drift_alerts = [], []
+    for c in CONTRACTS:
+        st = store[c["label"]]
+        distinct = distinct_first_seen(st["events"], ts_cache)
+        entry = {
             "address": c["address"],
             "label": c["label"],
             "anchor_relevant": c["anchor_relevant"],
             "_note": c.get("_note"),
-            "event_count": len(events),
-            "distinct_compose_hashes": distinct_first_seen(events),
-            "events": events,
-        })
-
-    anchor = fetch_anchor()
-    anchored_hashes: set = set()
-    if anchor:
-        for m in anchor.get("models", {}).values():
-            for h in m.get("compose_hashes", []):
-                anchored_hashes.add(h.lower().removeprefix("0x"))
-
-    drift_alerts = []
-    for c in contracts_out:
-        if not c["anchor_relevant"] or anchor is None:
-            c["new_since_anchor"] = None
-            continue
-        new = [d for d in c["distinct_compose_hashes"] if d["compose_hash"] not in anchored_hashes]
-        c["new_since_anchor"] = new
-        if new:
-            drift_alerts.append((c, new))
+            "genesis_block": st["genesis_block"],
+            "last_scanned_block": st["last_scanned_block"],
+            "event_count": len(st["events"]),
+            "distinct_compose_hashes": distinct,
+            "events": st["events"],
+        }
+        if c["anchor_relevant"]:
+            new = [d for d in distinct if d["compose_hash"] not in anchored]
+            entry["new_since_anchor"] = new
+            if new:
+                drift_alerts.append((entry, new))
+        else:
+            entry["new_since_anchor"] = None
+        contracts_out.append(entry)
 
     out = {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "rpc": RPC_URL,
-        "from_block": from_block,
-        "to_block": latest,
+        "head_block": latest,
         "hermes_anchor_url": HERMES_ANCHOR_URL,
-        "anchored_compose_hash_count": len(anchored_hashes),
+        "anchored_compose_hash_count": len(anchored),
+        # published so diffalert can tell "now anchored" from "vanished from our
+        # own records", which the sliding window used to conflate (issue #10)
+        "anchored_compose_hashes": sorted(anchored),
         "contracts": contracts_out,
     }
-    out_path = DATA_DIR / "onchain-status.json"
-    out_path.write_text(json.dumps(out, indent=2))
-    print(f"wrote {out_path}", file=sys.stderr)
+    _save_store(store, latest, ts_cache)  # persist any newly-resolved timestamps
+    (DATA_DIR / "onchain-status.json").write_text(json.dumps(out, indent=2))
+    print(f"wrote {DATA_DIR / 'onchain-status.json'}", file=sys.stderr)
 
     if drift_alerts:
-        print("", file=sys.stderr)
-        print("⚠️  drift detected: on-chain authorized compose hashes not in hermes anchor:", file=sys.stderr)
-        for c, new in drift_alerts:
-            print(f"  {c['label']} ({c['address']}):", file=sys.stderr)
+        print("\n⚠️  drift detected: on-chain authorized compose hashes not in hermes anchor:",
+              file=sys.stderr)
+        for entry, new in drift_alerts:
+            print(f"  {entry['label']} ({entry['address']}):", file=sys.stderr)
             for d in new:
-                print(f"    0x{d['compose_hash']}  added {d['first_seen_date']} (block {d['first_seen_block']})", file=sys.stderr)
-        print("", file=sys.stderr)
-        print("→ capture the preimage from a live attestation, audit the diff, add to anchor.", file=sys.stderr)
+                print(f"    0x{d['compose_hash']}  added {d['first_seen_date']} "
+                      f"(block {d['first_seen_block']})", file=sys.stderr)
+        print("\n→ capture the preimage from a live attestation, audit the diff, "
+              "add to anchor.", file=sys.stderr)
         return 1
     print("anchor is in sync with on-chain authorized set ✅", file=sys.stderr)
     return 0

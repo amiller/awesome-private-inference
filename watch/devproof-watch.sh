@@ -14,9 +14,13 @@ cd "$(dirname "$(readlink -f "$0")")/.."
 source .venv/bin/activate
 STATE="$HOME/.config/devproof-watch.state.json"
 
-# our own sweep dirties this tracked file every run; CI also updates it daily,
-# so an unrestored copy makes every pull fail (near-watch was stuck on this for days)
-git restore data/onchain-status.json
+# our own sweep dirties generated files under data/ every run; CI also updates them
+# daily, so an unrestored copy makes every pull fail (near-watch was stuck on this
+# for days). Restore whatever is actually tracked and modified rather than naming
+# paths — naming one that isn't in the checkout yet would kill the script here,
+# before the pull that would have introduced it.
+DIRTY=$(git ls-files -m -- data/)
+if [ -n "$DIRTY" ]; then git restore $DIRTY; fi
 git pull --ff-only
 python -m probes.onchain_sweep || echo "onchain_sweep exit $? (drift is informational; RPC errors above)"
 

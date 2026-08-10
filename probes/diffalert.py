@@ -84,11 +84,23 @@ def describe(key: str, old: str | None, new: str) -> str:
     if key.startswith("anchor-drift:"):
         added = sorted(set(new.split(",")) - set((old or "").split(",")) - {""})
         removed = sorted(set((old or "").split(",")) - set(new.split(",")) - {""})
+        # A hash leaves the unanchored set for exactly one good reason: it is now
+        # in the anchor. Anything else that disappears is our records losing an
+        # authorized hash — a reorg or a bug — and must never read as resolved.
+        # The old sliding-window sweep evicted history and this printed the
+        # evictions as "cleared (now anchored)" (issue #10).
+        anchored = set(json.load(open(DATA / "onchain-status.json"))
+                       .get("anchored_compose_hashes", []))
+        cleared = [h for h in removed if h in anchored]
+        vanished = [h for h in removed if h not in anchored]
         parts = []
         if added:
             parts.append(f"new unanchored compose hashes: {', '.join(added)}")
-        if removed:
-            parts.append(f"cleared (now anchored): {', '.join(removed)}")
+        if cleared:
+            parts.append(f"cleared (now anchored): {', '.join(cleared)}")
+        if vanished:
+            parts.append("VANISHED from our on-chain records without being anchored "
+                         f"(reorg or sweep bug — investigate): {', '.join(vanished)}")
         return f"[{key}] {'; '.join(parts)}"
     return f"[{key}] {old} -> {new}"
 
