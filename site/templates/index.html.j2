@@ -235,12 +235,12 @@
     checked against the data. Anything not on this list that you see above is machine-derived.
   </p>
   <ul class="space-y-2 text-sm text-slate-800">
-    {% for note in EDITORIAL_NOTES %}
+{% for note in EDITORIAL_NOTES %}
     <li class="flex gap-2">
       <span class="text-slate-400 font-mono text-xs whitespace-nowrap pt-0.5">{{ note.checked }}</span>
       <span><strong>{{ note.title }}</strong> {{ note.body }}</span>
     </li>
-    {% endfor %}
+{% endfor %}
   </ul>
 </section>
 

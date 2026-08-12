@@ -25,7 +25,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pricing", action="store_true",
                     help="also run pricing sweep (costs real $, off by default)")
-    ap.add_argument("--providers", default="near-ai,redpill,tinfoil,venice,chutes",
+    ap.add_argument("--providers", default="near-ai,tinfoil,venice,chutes",
                     help="comma-separated provider slugs")
     args = ap.parse_args()
 

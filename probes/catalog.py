@@ -9,14 +9,6 @@ MODELS: dict[str, list[str]] = {
         "openai/gpt-oss-120b",
         "zai-org/GLM-5.1-FP8",
     ],
-    "redpill": [
-        "phala/gpt-oss-20b",
-        "phala/gpt-oss-120b",
-        "phala/qwen-2.5-7b-instruct",
-        "phala/glm-4.7",
-        "phala/deepseek-v3.2",
-        "phala/kimi-k2.5",
-    ],
     "venice": [
         "e2ee-glm-5",
         "e2ee-qwen3-5-122b-a10b",

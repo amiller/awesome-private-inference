@@ -1,6 +1,7 @@
-"""Deploy-cadence and failure-mode analysis over the full snapshot series.
+"""Deploy-cadence and failure-mode analysis over active-provider snapshot history.
 
-Regenerates the two tables in research/critical-review-2026-08-10.md.
+Uses the same methodology as the tables in
+research/critical-review-2026-08-10.md, limited to current providers.
 
 A "novel" transition is a version string never observed before — a real deploy.
 A "revisit" is a return to a previously-seen value. Counting all transitions as
@@ -15,6 +16,9 @@ than observed. See probes/quality.py:VERSION_IDENTITY.
 
 Usage:
     python -m probes.trajectory
+
+The active provider set comes from data/latest.json. Historical rows for retired
+integrations remain in the archive but do not enter current trajectory statistics.
 """
 from __future__ import annotations
 
@@ -26,6 +30,7 @@ import sys
 from pathlib import Path
 
 SNAPSHOTS = Path(__file__).resolve().parents[1] / "data" / "snapshots"
+LATEST = Path(__file__).resolve().parents[1] / "data" / "latest.json"
 
 # What names the running code version, per provider. `None` = the provider
 # exposes no version identity, so its trajectory is unmeasurable.
@@ -33,7 +38,6 @@ VERSION_FIELD = {
     "near-ai": "cloud_api_image_digest",
     "tinfoil": "digest",
     "chutes": "mrtd",
-    "redpill": "os_image",
     "venice": None,
 }
 
@@ -48,13 +52,18 @@ def load():
 
 
 def main() -> int:
+    snapshots = list(load())
+    active = json.loads(LATEST.read_text())
+    active_providers = set(active.get("attestations", {}))
     outcomes = collections.Counter(
         {k: 0 for k in ("pass", "transport / liveness",
                         "invalid, no error recorded", "verification failure")})
     history = collections.defaultdict(list)
 
-    for date, snap in load():
+    for date, snap in snapshots:
         for provider, rows in snap.get("attestations", {}).items():
+            if provider not in active_providers:
+                continue
             for row in rows:
                 err = row.get("error") or ""
                 if row.get("valid"):
@@ -96,7 +105,7 @@ def main() -> int:
         print(f"{provider + '/' + model:46.46s} {len(obs):4d} {span:5d} "
               f"{len(seen):4d} {novel:5d} {revisit:7d} {cadence:>11s}")
 
-    untracked = [p for p, f in VERSION_FIELD.items() if f is None]
+    untracked = [p for p in active_providers if VERSION_FIELD[p] is None]
     print(f"\nno version identity exposed, trajectory unmeasurable: {', '.join(untracked)}")
     return 0
 

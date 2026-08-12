@@ -23,18 +23,26 @@
 </dl>
 
 <h2 class="mt-8 text-xl font-semibold">Independent re-verification</h2>
-<p>We intentionally do <em>not</em> trust the provider's own "server_verification" field when
-the provider exposes one (e.g. Venice). We forward the TDX quote to
+<p>We do <em>not</em> trust the provider's own
+"server_verification" field when the provider exposes one (for example, Venice). We forward the TDX quote to
 <a class="underline" href="https://cloud-api.phala.network/api/v1/attestations/verify">Phala's public TDX verifier</a>
 and the NVIDIA payload to
 <a class="underline" href="https://nras.attestation.nvidia.com/v3/attest/gpu">NVIDIA NRAS</a>.
-We then recompute the key-derivation and the report_data binding in-process. This means a
-compromised provider cannot fake a ✅ by lying about its own verification result.</p>
+We then recompute key derivation and the <code>report_data</code> binding in-process.
+A green TDX cell therefore means Phala's appraisal service accepted the quote; it is not
+equivalent to verifying Intel's chain locally.</p>
+
+<p>The current RedPill/Phala ACI gateway uses a different verifier. Its Rust client runs
+<code>dcap-qvl</code> against PCCS collateral, verifies the nonce-bound workload keyset and
+measured Compose, and checks the live TLS SPKI. That ACI surface is documented in the
+provider pages but is not yet a daily dashboard row.</p>
 
 <h2 class="mt-8 text-xl font-semibold">Known upstream TODOs</h2>
 <p>
-  The Phala verifier itself decodes NRAS and Intel Trust Authority JWTs with
-  <code>verify_signature=False</code>. We inherit that limitation. See
+  Phala's <code>private-ai-verifier</code> decodes NRAS and Intel Trust Authority JWTs with
+  <code>verify_signature=False</code>. Provider adapters inherit that limitation when
+  they rely on those decoded claims. The ACI client's native DCAP verification of the
+  gateway quote is a separate path. See
   <a class="underline" href="https://github.com/amiller/devproof-audits-guide/blob/main/LEARNINGS.md">devproof-audits-guide/LEARNINGS.md</a>.
 </p>
 
@@ -57,7 +65,9 @@ compromised provider cannot fake a ✅ by lying about its own verification resul
     <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">nearai/cloud-api#224</a>.</li>
   <li><strong>Operator-mutable routing.</strong> Database field controls which backend a gateway calls
     (admin-gated; bounded but not eliminated by the inline-verify hop above).</li>
-  <li><strong>KMS opacity.</strong> Mutable image tags, no upgrade log on the KMS providing key material.</li>
+  <li><strong>KMS policy is incomplete in the public ACI client.</strong> The current report
+    publishes dstack KMS custody evidence, but <code>aci verify</code> still skips custody and
+    subject policy.</li>
 </ul>
 
 <h2 class="mt-8 text-xl font-semibold">How <code>Backend attested</code> is decided</h2>
@@ -93,11 +103,16 @@ git clone https://github.com/nearai/nearai-cloud-verifier _nearai-verifier
 export NEARAI_VERIFIER_PATH="$(pwd)/_nearai-verifier/py"
 
 export NEAR_API_KEY=...
-export REDPILL_API_KEY=...
 export VENICE_API_KEY=...
 
 python -m probes.collect
 python -m probes.render
+
+# Current RedPill/Phala ACI surface, verified separately from this Python matrix
+git clone https://github.com/Dstack-TEE/private-ai-gateway.git
+cd private-ai-gateway
+cargo run --bin aci -- verify https://tee.redpill.ai
+cargo run --bin aci -- sessions https://tee.redpill.ai
 </code></pre>
 
 </section>

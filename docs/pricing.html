@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pricing · awesome-private-inference</title>
-  <meta name="description" content="Public automated registry of TEE-verified inference providers. Daily-refreshed scorecard of attestation layers and pricing across RedPill, Venice, NEAR AI, and more.">
+  <meta name="description" content="Public automated registry of TEE-verified inference providers. Daily-refreshed scorecard of attestation layers and pricing across NEAR AI, Tinfoil, Venice, Chutes, and more.">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
@@ -67,13 +67,10 @@
   <h2 class="text-xl font-semibold text-slate-900">Subscription math</h2>
   <p>Several providers offer flat-rate subscriptions that don't map cleanly onto $/M:</p>
   <ul class="list-disc ml-5 space-y-1">
-    <li><strong>RedPill Pro ($50/mo).</strong> Used to be a credit pool; 2026-04-21 measurement gave a
-      <code>sub/list ratio = 0.998</code> — effectively no discount vs the pay-as-you-go rates above.</li>
     <li><strong>Venice Pro ($18/mo).</strong> Chat-UI only for API — provides $1 of API credit.
       Pro+ ($68/mo) gives $75 credit (~10% bonus). Max ($200/mo) gives $225 (~12.5% bonus).</li>
     <li><strong>Z.AI GLM Coding Plan.</strong> Separate coding endpoint (not TEE-attested). Pro $30/mo
-      works out to roughly $0.08–0.15 $/M on GLM-5.1 — about 30× cheaper than RedPill's list GLM-5.1
-      but with no attestation.</li>
+      works out to roughly $0.08–0.15 $/M on GLM-5.1, but with no attestation.</li>
   </ul>
   <p class="text-xs text-slate-500">
     These rates are observations from manual runs; they are intentionally not scraped into the daily

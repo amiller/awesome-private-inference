@@ -21,7 +21,6 @@ DATA_LATEST = REPO_ROOT / "data" / "latest.json"
 DOCS_DIR = REPO_ROOT / "docs"
 TEMPLATE_DIR = REPO_ROOT / "site" / "templates"
 
-
 SCORECARD_LABELS = {
     "nonce_bound": "Nonce bound",
     "tdx_verified": "TDX quote",
@@ -68,11 +67,11 @@ SCORECARD_TOOLTIPS = {
 # so a reader can tell how much of the page is measurement and how much is opinion.
 # A claim here that the probe can check belongs in a scorecard column instead.
 EDITORIAL_NOTES = [
-    {"checked": "2026-06-18", "title": "RedPill phala-simple host-SSH path is closed.",
-     "body": "The fleet moved off dstack-nvidia-dev to prod dstack-nvidia-0.5.9, removing the "
-             "operator host-SSH route. Now machine-tracked by the Prod OS image column, which "
-             "flips on any regression. Residual gaps (mutable image tags, unpinned runtime "
-             "weights) are unaddressed."},
+    {"checked": "2026-08-12", "title": "Current RedPill uses ACI.",
+     "body": "Five of six checks passed for the live tee.redpill.ai ACI gateway; key custody "
+             "was skipped. A repeated session audit accepted all "
+             "observed PhalaDirect, ACI-service, NEAR, SecretAI, and Tinfoil records and rejected "
+             "all Chutes records. The current gateway is documented per route but not scored here."},
     {"checked": "2026-06-18", "title": "Chutes' serving code is not measured.",
      "body": "serve.py on the prompt-plaintext path is CFSV-excluded and in no RTMR, and the "
              "model name is not bound to the quote. A passing quote proves genuine TDX running "
@@ -81,9 +80,10 @@ EDITORIAL_NOTES = [
      "body": "ALLOWED_COMPOSE_HASHES is unset server-side, so the gateway alone does not pin "
              "code. A closed-chain client that checks compose_hash against the on-chain set on "
              "Base closes it; a client that trusts the gateway does not."},
-    {"checked": "2026-04-26", "title": "Upstream verifier decodes JWTs without checking signatures.",
-     "body": "Phala's private-ai-verifier passes verify_signature=False on NVIDIA and Intel "
-             "Trust Authority tokens, and every reseller routing through it inherits that."},
+    {"checked": "2026-08-12", "title": "Some provider-adapter JWTs are decoded without signature checks.",
+     "body": "Phala's private-ai-verifier still passes verify_signature=False on NVIDIA and "
+             "Intel Trust Authority tokens. This affects adapter conclusions derived from those "
+             "tokens. The current ACI client verifies its gateway TDX quote through native DCAP."},
     {"checked": "2026-08-10", "title": "The bar is hand-set, and one entry was wrong.",
      "body": "REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog. Venice's set "
              "excluded the two layers where its prompt-path exposure actually lives, so Venice "

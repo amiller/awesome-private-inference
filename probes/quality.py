@@ -2,6 +2,8 @@
 
 The registry grades providers. Nothing graded the registry. This does, from the
 snapshot series on disk, and writes data/quality.json for the dashboard to render.
+Historical observations are included only for providers present in data/latest.json;
+retired integrations remain archival data rather than active quality inputs.
 
 Five questions, all answered from data rather than asserted in prose:
 
@@ -49,7 +51,6 @@ VERSION_IDENTITY = {
     "near-ai": ("cloud_api_image_digest", "content-hash", "control-plane"),
     "tinfoil": ("digest", "content-hash", "control-plane"),
     "chutes": ("mrtd", "content-hash", "instance-sampled"),
-    "redpill": ("os_image", "mutable-tag", "control-plane"),
     "venice": (None, "absent", "none"),
 }
 
@@ -88,15 +89,19 @@ def _classify(row):
 def compute(latest: dict | None = None) -> dict:
     """Grade the registry. `latest` overrides which snapshot counts as current, so the
     renderer grades the page it is actually building rather than whatever is on disk."""
+    snapshots = list(_snapshots())
+    current = latest if latest is not None else json.loads((DATA / "latest.json").read_text())
+    active_providers = set(current.get("attestations", {}))
+
     dates, outcomes = [], collections.Counter(
         {k: 0 for k in ("pass", "transport", "no-error-invalid", "verification-failure")})
     versions = collections.defaultdict(list)
-    newest = None
 
-    for date, snap in _snapshots():
+    for date, snap in snapshots:
         dates.append(date)
-        newest = snap
         for provider, rows in snap.get("attestations", {}).items():
+            if provider not in active_providers:
+                continue
             field = VERSION_IDENTITY[provider][0]
             for row in rows:
                 err = row.get("error") or ""
@@ -113,7 +118,6 @@ def compute(latest: dict | None = None) -> dict:
                     versions[(provider, row["model"])].append((date, v))
 
     # --- coverage: what can we actually measure, per live target ---
-    current = latest if latest is not None else newest
     coverage, cells = [], collections.Counter()
     for provider, rows in current.get("attestations", {}).items():
         field, kind, source = VERSION_IDENTITY[provider]
@@ -183,13 +187,13 @@ def compute(latest: dict | None = None) -> dict:
             "observations": total_obs,
             **{k: v for k, v in outcomes.items()},
             "red_cells_that_were_verification_failures": outcomes["verification-failure"],
-            "note": ("Every red cell in the registry's history was a transport error. "
-                     "The verification path has never rejected a provider."),
+            "note": ("Every red cell in the active providers' retained history was a "
+                     "transport error. The verification path has never rejected a provider."),
         },
         "coverage": coverage,
         "coverage_summary": collections.Counter(c["status"] for c in coverage),
         "unmeasurable_providers": sorted(
-            p for p, (_, kind, _s) in VERSION_IDENTITY.items() if kind != "content-hash"),
+            p for p in active_providers if VERSION_IDENTITY[p][1] != "content-hash"),
         "audit_debt": {
             "builds_observed": len(observed),
             "builds_reviewed": len(audited),

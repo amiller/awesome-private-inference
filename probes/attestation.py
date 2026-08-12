@@ -6,12 +6,11 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Dict, List
 
 from verifiers.common import AttestationReport, now_iso, ScoreCard
-from verifiers import near_ai, redpill, tinfoil, venice, chutes
+from verifiers import near_ai, tinfoil, venice, chutes
 
 
 PROVIDERS: Dict[str, Callable[[str, str, str], AttestationReport]] = {
     "near-ai": near_ai.verify,
-    "redpill": redpill.verify,
     "tinfoil": tinfoil.verify,
     "venice": venice.verify,
     "chutes": chutes.verify,
@@ -19,7 +18,6 @@ PROVIDERS: Dict[str, Callable[[str, str, str], AttestationReport]] = {
 
 PROVIDER_BASE_URLS: Dict[str, str] = {
     "near-ai": near_ai.DEFAULT_BASE_URL,
-    "redpill": redpill.DEFAULT_BASE_URL,
     "tinfoil": tinfoil.DEFAULT_BASE_URL,
     "venice": venice.DEFAULT_BASE_URL,
     "chutes": chutes.DEFAULT_BASE_URL,
@@ -27,7 +25,6 @@ PROVIDER_BASE_URLS: Dict[str, str] = {
 
 PROVIDER_ENV_KEYS: Dict[str, str] = {
     "near-ai": "NEAR_API_KEY",
-    "redpill": "REDPILL_API_KEY",
     "tinfoil": "TINFOIL_API_KEY",
     "venice": "VENICE_API_KEY",
     "chutes": "CHUTES_API_KEY",

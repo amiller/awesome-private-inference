@@ -147,7 +147,8 @@ they perform themselves.
   `verifiers/near_ai_lightclient.py`.
 - **Verifier JWT signatures unchecked.** Phala's `private-ai-verifier`
   decodes NRAS / Intel Trust Authority JWTs with `verify_signature=False`.
-  Acknowledged TODO; affects every downstream that uses it as the TDX oracle.
+  Acknowledged TODO. It affects results that depend on those decoded JWTs. It
+  does not describe native DCAP verification in the newer ACI client.
 
 ## Reproduce
 

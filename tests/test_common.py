@@ -67,10 +67,10 @@ def test_sha256_nonce_pubkey_binding_negative():
 
 def test_attestation_report_as_dict_includes_scorecard():
     r = AttestationReport(
-        provider="redpill", model="x", valid=True,
+        provider="near-ai", model="x", valid=True,
         verified_at="2026-01-01T00:00:00Z",
         scorecard=ScoreCard(tdx_verified=True),
     )
     d = r.as_dict()
     assert d["scorecard"]["tdx_verified"] is True
-    assert d["provider"] == "redpill"
+    assert d["provider"] == "near-ai"

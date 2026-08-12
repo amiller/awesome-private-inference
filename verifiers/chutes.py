@@ -1,7 +1,7 @@
 """Chutes direct confidential-inference verifier (api.chutes.ai, Bittensor subnet 64).
 
-Distinct from RedPill's `chutes` relay shape: this hits the chutes control plane
-directly via the E2E discovery + evidence endpoints.
+This hits the Chutes control plane directly through the E2E discovery and
+evidence endpoints.
 
 Per `-TEE` chute, we verify the crypto core (live-confirmed sound):
   - report_data[0:32] == SHA256(nonce || e2e_pubkey)      (E2E key binding, fresh)

@@ -31,27 +31,6 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
         "backend_attested",
     },
-    # RedPill phala-direct: single-TD, no gateway hop. prod_os_image is the
-    # load-bearing layer: the dstack-nvidia-dev image ships sshd + debug-tweaks
-    # and, with DSTACK_AUTHORIZED_KEYS, gives the operator host-SSH root in the CVM.
-    "phala-simple": {
-        "tdx_verified", "nonce_bound", "report_data_binds_key",
-        "gpu_attested", "key_derives_to_address", "compose_hash_committed",
-        "prod_os_image",
-    },
-    # RedPill via NEAR: same shape as NEAR-direct.
-    "near-relay": {
-        "tdx_verified", "nonce_bound", "report_data_binds_key",
-        "gpu_attested", "key_derives_to_address", "compose_hash_committed",
-        "backend_attested",
-    },
-    # RedPill via Chutes: TDX-only shape. The provider claims GPU inference
-    # per the catalog, so missing NRAS evidence and compose binding are fails,
-    # not architectural N/As.
-    "chutes": {
-        "tdx_verified", "nonce_bound", "report_data_binds_key",
-        "gpu_attested", "compose_hash_committed",
-    },
     # Chutes direct (api.chutes.ai): crypto core is sound, but the serve.py on the
     # prompt-plaintext path (and the model) are unmeasured, so serving_code_attested
     # is False by construction and the shape never reaches Stage 1 — the operator can
@@ -94,17 +73,6 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
     "tdx+gpu": {"disputed": False, "note":
         "Gateway plus per-model TD, so every hop is required. Excludes the Tinfoil-specific "
         "SEV layers, which do not exist in this architecture."},
-    "phala-simple": {"disputed": False, "note":
-        "Single TD, no gateway hop, so backend_attested is genuinely N/A. prod_os_image is "
-        "required because the dev OS image carries an operator host-SSH path."},
-    "near-relay": {"disputed": False, "note":
-        "RedPill reselling NEAR: same gateway-plus-model-TD architecture as tdx+gpu, so the "
-        "same layers are required including backend_attested. Excludes prod_os_image, which "
-        "is checked on the NEAR rows themselves, and the Tinfoil SEV layers, which do not "
-        "exist here."},
-    "chutes": {"disputed": False, "note":
-        "TDX-only shape. GPU and compose binding are required because the catalog claims GPU "
-        "inference, so their absence is a failure rather than an N/A."},
     "chutes-tee": {"disputed": False, "note":
         "serving_code_attested is required and is False by construction, so this shape cannot "
         "reach a full row. That is the intended reading, not a scoring bug."},
@@ -214,7 +182,7 @@ def phala_report_data_binds_addr_nonce(
 ) -> bool:
     """report_data layout = addr.ljust(32, \\x00) || nonce_bytes (32).
 
-    This is the canonical Phala/NEAR TDX binding used by RedPill and NEAR AI.
+    This is the canonical Phala/NEAR TDX binding used by NEAR AI and Venice.
     """
     try:
         rd = bytes.fromhex(report_data_hex.removeprefix("0x"))
