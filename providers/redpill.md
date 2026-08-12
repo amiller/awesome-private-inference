@@ -24,10 +24,26 @@ To determine which upstream served a request, verify the receipt's
 
 ## Scorecard
 
-RedPill is not yet scored in the automated daily matrix. The current ACI client
-and data model do not map faithfully onto the registry's older per-model Python
-verifier interface, so the live results below remain a separately reproduced
-audit rather than a synthetic dashboard row.
+**Verdict: ❌ Stage 0.** RedPill is not yet a row in the automated daily matrix,
+because the ACI data model does not map faithfully onto the older per-model
+Python verifier interface. The manual verdict is still clear. The official ACI
+verifier passed five of six protocol checks, but only one of the seven
+all-or-nothing Stage 1 requirements linked by this registry was demonstrated.
+
+| Stage 1 requirement | Result | Reason |
+|---|---|---|
+| Immutable attestation and upgrade transparency | Fail | The live Compose is quote-bound, but no on-chain or equivalent immutable deployment history was demonstrated. |
+| Auditable code | **Pass** | The report names a public repository and commit. |
+| Reproducible code measurement | Fail | The report's image digest and image provenance are `null`; this audit did not reproduce the build, and one integrity-path image uses the mutable tag `dstacktee/dstack-verifier:latest`. |
+| Developer has no access to secrets | Fail | Custody policy is skipped, the subject is `null`, and the measured deployment permits an operator-supplied root SSH key. |
+| Upgrade process and public history | Fail | No notice mechanism or publicly queryable deployment history was demonstrated. The withdrawal requirement is vacuous for ephemeral requests, but the history requirement is not. |
+| No centralized integrity or privacy dependency | Fail | The control-plane URL and credentials are operator-injected, and active routes live in admin-mutable state outside the measured Compose. Session pinning limits substitution when clients use it. |
+| No backdoor or debug path | Fail | The dev-OS root path is not ruled out, and public logs explicitly enable raw upstream error details that can echo request fragments. |
+
+This is a deployment score, not a dismissal of ACI's verified properties. The
+quote, keyset, measured Compose, TLS binding, session pins, and receipts all
+reduce trust compared with an ordinary API. Stage 1 is simply an all-or-nothing
+bar, and the current deployment does not meet it.
 
 ## Live ACI verification
 
@@ -54,6 +70,10 @@ as source provenance. That repository and commit are a source declaration. The
 measured Compose is attestation-bound, but this check did not independently
 rebuild the source or prove that the published commit produced the running image.
 
+The audit did not send a paid inference request, so it did not independently
+exercise or verify a per-request receipt. Receipt support is established here by
+the attested source and public endpoint, not by a sampled live receipt.
+
 ## Upstream evidence published by the gateway
 
 The gateway publishes one content-addressed session record per verified upstream
@@ -74,6 +94,24 @@ They are not all equivalent to independently reviewed release provenance.
 
 ## Current gaps
 
+- **The gateway deployment retains operator access paths.** The quote-bound VM
+  config identifies `dstack-dev-0.5.9-de9c74f0`. Its allowed environment names
+  include `DSTACK_ROOT_PUBLIC_KEY`, and its measured pre-launch script writes a
+  supplied value to root's `authorized_keys`. dstack's published
+  [dev-image recipe](https://github.com/Dstack-TEE/meta-dstack/blob/7cc276ff0ef82650c65b86ba000cfa35a604818a/meta-dstack/recipes-core/images/dstack-rootfs-dev.inc)
+  includes OpenSSH and enables root public-key login. Attestation does not reveal
+  whether a key was actually supplied, so it cannot rule out operator access to
+  the TD. That is enough to fail the developer-access and backdoor requirements.
+- **The measured logging policy can disclose request fragments.** The deployment
+  sets `public_logs: true` and `RUST_LOG=info,request_outcome=debug`. The attested
+  source says upstream error bodies can echo request content and, at that debug
+  level, writes a sanitized snippet of up to 240 characters to the log. This is
+  an error-path exposure, not a claim that successful prompts are logged.
+- **Runtime routing is operator-mutable.** The measured upstream seed is empty;
+  active routes are stored on a persistent volume and replaceable through the
+  authenticated admin API. The `tee.redpill.ai` host forces ACI-verified routes,
+  and clients can pin accepted session ids, so operator control is constrained
+  and visible in receipts. It is not part of the measured routing policy itself.
 - **Session integrity is adapter-specific.** At 2026-08-12T06:02:12Z,
   `aci sessions https://tee.redpill.ai --json` accepted 154 of 271 records.
   Every observed `aci-service/v2`, PhalaDirect, NEAR, SecretAI, and Tinfoil
@@ -89,6 +127,8 @@ They are not all equivalent to independently reviewed release provenance.
 - **Release provenance is incomplete.** The gateway proves its measured Compose
   and publishes a source revision, but the public verification run did not
   reproduce the build or bind a reviewed image digest to that source revision.
+  The measured Compose also names `dstacktee/dstack-verifier:latest`, so that
+  verifier can change without changing the Compose text.
 - **Upstream quality varies by adapter.** ACI makes the route, channel binding,
   and provider claims auditable. It does not turn an unknown serving-software or
   model-weight claim into a proven one.
@@ -97,6 +137,16 @@ They are not all equivalent to independently reviewed release provenance.
   still decode JWTs with `verify_signature=False`. This affects adapters that
   rely on those decoded results. It does not describe the gateway's native DCAP
   verification of its own ACI quote.
+
+## What would change the verdict
+
+- Move the gateway to the production dstack OS and remove every root-key input.
+- Disable raw error-detail logging and keep any prompt-adjacent logs private.
+- Pin every image by digest and publish a reproducible source-to-image record.
+- Put deployment and routing-policy changes in a public immutable history, or
+  require clients to pin an independently audited Compose and session set.
+- Implement custody and subject policy in the public client, then publish a live
+  receipt test alongside the gateway and session checks.
 
 ## Reproduce
 

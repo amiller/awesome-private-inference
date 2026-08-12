@@ -68,10 +68,12 @@ SCORECARD_TOOLTIPS = {
 # A claim here that the probe can check belongs in a scorecard column instead.
 EDITORIAL_NOTES = [
     {"checked": "2026-08-12", "title": "Current RedPill uses ACI.",
-     "body": "Five of six checks passed for the live tee.redpill.ai ACI gateway; key custody "
-             "was skipped. A repeated session audit accepted all "
-             "observed PhalaDirect, ACI-service, NEAR, SecretAI, and Tinfoil records and rejected "
-             "all Chutes records. The current gateway is documented per route but not scored here."},
+     "body": "The live tee.redpill.ai gateway scores Stage 0 even though five of six ACI "
+             "protocol checks passed. Its measured deployment uses a dstack dev OS, permits an "
+             "operator-supplied root SSH key, and publishes logs while enabling raw upstream "
+             "error snippets. Only one of seven Stage 1 requirements was demonstrated. A repeated "
+             "session audit accepted all observed PhalaDirect, ACI-service, NEAR, SecretAI, and "
+             "Tinfoil records and rejected all Chutes records."},
     {"checked": "2026-06-18", "title": "Chutes' serving code is not measured.",
      "body": "serve.py on the prompt-plaintext path is CFSV-excluded and in no RTMR, and the "
              "model name is not bound to the quote. A passing quote proves genuine TDX running "

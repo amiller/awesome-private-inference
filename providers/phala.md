@@ -36,14 +36,19 @@ in its automated daily matrix.
 
 ## Scorecard
 
-The current Phala ACI surface is **not yet scored by this registry**. A manual
-live check on 2026-08-12 produced the same gateway result documented on the
-[RedPill page](./redpill.md): five of six ACI checks passed and the
-public key-custody policy check was skipped. The current upstream-session audit
-accepted every observed PhalaDirect and `aci-service/v2` record. The gateway's
-Chutes records failed, so RedPill as an aggregator must still be evaluated per
-route. The missing public custody-policy check and the provenance gaps below
-prevent a blanket Stage 1 verdict. See the
+**Verdict for the current shared ACI gateway: ❌ Stage 0.** A manual live check on
+2026-08-12 produced the same result documented on the [RedPill page](./redpill.md):
+five of six ACI protocol checks passed, while the public key-custody policy check
+was skipped. Against the registry's all-or-nothing Stage 1 checklist, only
+auditable source was demonstrated. The dev-OS root-access path and public debug
+logging are independently disqualifying; immutable upgrade history,
+reproducible source-to-image provenance, custody policy, and measured routing
+policy were also not demonstrated.
+
+This verdict applies to the shared gateway deployment, not automatically to
+every Phala-hosted model CVM. The upstream-session audit accepted every observed
+PhalaDirect and `aci-service/v2` record. The gateway's Chutes records failed, so
+each route still needs its own claim-level review. See the
 [2026-08-12 refresh audit](../research/redpill-phala-refresh-2026-08-12.md)
 for the commands and sampled claim fields.
 
@@ -107,11 +112,19 @@ public policy check not implemented," rather than "no evidence exists."
 
 ## Remaining gaps
 
+- The shared gateway uses a measured dstack dev OS, permits injection of a root
+  SSH key, and publishes logs while enabling raw upstream error snippets. These
+  facts make the gateway Stage 0 even when an upstream session passes.
+- Active route state and control-plane coordinates are operator-mutable outside
+  the measured Compose. ACI's verified-route requirement and optional session
+  pins constrain this power, but clients must use the pins when route identity
+  is load-bearing.
 - All observed PhalaDirect and `aci-service/v2` session records passed the live
   ACI integrity audit. The same gateway's Chutes records did not, so this result
   is specific to the Phala paths.
 - The gateway report's source repository and commit were not independently
-  rebuilt during this audit.
+  rebuilt during this audit, its image provenance fields were empty, and the
+  measured `dstack-verifier` service used a mutable `latest` tag.
 - A sampled PhalaDirect session proved a production OS, current TCB, TDX,
   nonce-bound GPU evidence, canonical model ID, and quote-bound TLS SPKI. It
   still reported serving-software and model-weight provenance as unknown.

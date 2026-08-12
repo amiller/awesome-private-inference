@@ -35,7 +35,8 @@ equivalent to verifying Intel's chain locally.</p>
 <p>The current RedPill/Phala ACI gateway uses a different verifier. Its Rust client runs
 <code>dcap-qvl</code> against PCCS collateral, verifies the nonce-bound workload keyset and
 measured Compose, and checks the live TLS SPKI. That ACI surface is documented in the
-provider pages but is not yet a daily dashboard row.</p>
+provider pages but is not yet a daily dashboard row. Its separately reproduced deployment
+verdict is Stage 0; the 5/6 ACI protocol result is not a Stage score.</p>
 
 <h2 class="mt-8 text-xl font-semibold">Known upstream TODOs</h2>
 <p>
@@ -68,6 +69,10 @@ provider pages but is not yet a daily dashboard row.</p>
   <li><strong>KMS policy is incomplete in the public ACI client.</strong> The current report
     publishes dstack KMS custody evidence, but <code>aci verify</code> still skips custody and
     subject policy.</li>
+  <li><strong>The current RedPill gateway preserves operator paths.</strong> Its measured config
+    uses a dstack dev OS, accepts an operator-supplied root SSH key, and makes logs public while
+    enabling raw upstream error details. Active route state is also admin-mutable outside the
+    measured Compose. See the RedPill provider page for the evidence and mitigations.</li>
 </ul>
 
 <h2 class="mt-8 text-xl font-semibold">How <code>Backend attested</code> is decided</h2>

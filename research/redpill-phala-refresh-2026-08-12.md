@@ -21,6 +21,8 @@ Reviewed source revisions:
 - Live report source declaration:
   `Dstack-TEE/private-ai-gateway@59882c2970d931c0a12c6f05b86d835149b67dff`
 - `Phala-Network/private-ai-verifier@51c2b5a83d6d753b9a29288e0ed522ab2d65bac4`
+- `Dstack-TEE/meta-dstack@7cc276ff0ef82650c65b86ba000cfa35a604818a`
+- Stage rubric: `amiller/devproof-audits-guide@7edaafd65b894d1a357521d38b397add2ba97f80`
 
 ## Gateway verification
 
@@ -50,6 +52,49 @@ than reproduced release provenance.
 The same command passed the same five checks and skipped custody at
 `https://inference.phala.com`. The channel check observed and matched the
 distinct SPKI for each hostname.
+
+The live receipt path was not exercised because this audit did not send an
+authenticated inference request. Receipt support is source- and
+attestation-grounded in this report, but not confirmed with a sampled request.
+
+## Deployment posture and Stage verdict
+
+The ACI verifier's 5/6 result is a protocol score, not an ERC-733 Stage score.
+The fresh report also exposed the measured deployment configuration:
+
+| Field | Live value | Security consequence |
+|---|---|---|
+| VM image | `dstack-dev-0.5.9-de9c74f0` | The deployment uses the development OS rather than the production flavor. |
+| Operator SSH input | `DSTACK_ROOT_PUBLIC_KEY` is allowed; the pre-launch script writes it to root's `authorized_keys` | Attestation cannot rule out operator root access inside the TD. |
+| Logs | `public_logs: true`; `RUST_LOG=info,request_outcome=debug` | The attested source can write up to 240 characters of upstream error detail, which may echo request content, to publicly visible logs. |
+| Source provenance | Public commit declared; `image_digest` and `image_provenance` are `null` | The source label was not reproducibly connected to the running image. |
+| Verifier image | `dstacktee/dstack-verifier:latest` | This integrity-path component is not pinned by digest. |
+| Active routes | Empty measured seed; persistent `upstreams.json` replaced by authenticated admin API | Effective routing policy can change without a new Compose measurement. |
+| Control plane | URL and token supplied through allowed environment variables | Authorization, catalog, and route selection depend on operator-selected infrastructure. The code sends model, provider constraints, API-key hash, and usage—not prompt content—to this service. |
+
+The root key is a capability, not proof that an operator key was present during
+the check. dstack's published
+[dev-image recipe](https://github.com/Dstack-TEE/meta-dstack/blob/7cc276ff0ef82650c65b86ba000cfa35a604818a/meta-dstack/recipes-core/images/dstack-rootfs-dev.inc)
+includes OpenSSH and permits root public-key login. The measured pre-launch
+script deliberately configures that path. The logging exposure is active in the
+measured configuration, but applies to error snippets rather than every request.
+
+Against this registry's linked Stage 1 checklist, the result is **Stage 0 (one
+of seven requirements demonstrated)**:
+
+| Stage 1 requirement | Result | Evidence |
+|---|---|---|
+| Immutable attestation and upgrade transparency | Fail | Current attestation exists; immutable deployment history was not demonstrated. |
+| Auditable code | **Pass** | Public source and an exact commit are declared. |
+| Reproducible code measurement | Fail | No reproduced build or source-to-image proof; one verifier image uses `latest`. |
+| Developer has no access to secrets | Fail | Custody policy is skipped and operator root access is not ruled out. |
+| Upgrade process and public history | Fail | No notice mechanism or queryable deployment history was demonstrated. |
+| No centralized integrity or privacy dependency | Fail | Operator-selected control infrastructure and mutable route state remain. Session pins mitigate route substitution when used. |
+| No backdoor or debug path | Fail | The dev-OS SSH path and public error-detail logging remain enabled. |
+
+Stage 1 fails if any requirement fails. The result does not erase the five
+cryptographic checks that passed; it says the current trust chain still leaves
+operator-controlled paths that the client cannot exclude.
 
 ## Upstream-session verification
 
@@ -135,7 +180,8 @@ tokens.
 ## Corrections applied to this registry
 
 - Document the current ACI gateway per route without assigning it a synthetic
-  score in the Python matrix.
+  score in the Python matrix, while giving the deployment an explicit manual
+  Stage 0 verdict.
 - Replace blanket statements about Phala E2EE, TLS binding, Compose binding,
   KMS evidence, and local sidecar trust with component-specific statements.
 - Preserve current limitations: custody-policy skip, unreproduced source label,
