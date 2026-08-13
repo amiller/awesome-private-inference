@@ -67,11 +67,13 @@ SCORECARD_TOOLTIPS = {
 # so a reader can tell how much of the page is measurement and how much is opinion.
 # A claim here that the probe can check belongs in a scorecard column instead.
 EDITORIAL_NOTES = [
-    {"checked": "2026-08-12", "title": "Current RedPill uses ACI.",
+    {"checked": "2026-08-13", "title": "Current RedPill uses ACI.",
      "body": "The live tee.redpill.ai gateway scores Stage 0 even though five of six ACI "
              "protocol checks passed. Its measured deployment uses a dstack dev OS, permits an "
              "operator-supplied root SSH key, and publishes logs while enabling raw upstream "
-             "error snippets. Only one of seven Stage 1 requirements was demonstrated. A repeated "
+             "error snippets. The strict production-OS appraisal rejects that live image; all "
+             "current Compose images, including the dstack verifier, are now digest-pinned. "
+             "Only one of seven Stage 1 requirements was demonstrated. A repeated "
              "session audit accepted all observed PhalaDirect, ACI-service, NEAR, SecretAI, and "
              "Tinfoil records and rejected all Chutes records."},
     {"checked": "2026-06-18", "title": "Chutes' serving code is not measured.",

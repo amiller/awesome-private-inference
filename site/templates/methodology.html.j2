@@ -117,8 +117,12 @@ python -m probes.render
 git clone https://github.com/Dstack-TEE/private-ai-gateway.git
 cd private-ai-gateway
 cargo run --bin aci -- verify https://tee.redpill.ai
+cargo run --bin aci -- verify https://tee.redpill.ai --require-production-os
 cargo run --bin aci -- sessions https://tee.redpill.ai
 </code></pre>
+<p>The production-OS option is an RTMR3 appraisal and currently rejects the live
+gateway. Use it with a dstack verifier that reconstructs MRTD and RTMR0-2 from
+the same quote, event log, and VM configuration.</p>
 
 </section>
 

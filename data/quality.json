@@ -6,13 +6,13 @@
     "days": 114
   },
   "calibration": {
-    "observations": 2421,
-    "pass": 1686,
-    "transport": 605,
-    "no-error-invalid": 130,
+    "observations": 1737,
+    "pass": 1290,
+    "transport": 440,
+    "no-error-invalid": 7,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
-    "note": "Every red cell in the registry's history was a transport error. The verification path has never rejected a provider."
+    "note": "Every red cell in the active providers' retained history was a transport error. The verification path has never rejected a provider."
   },
   "coverage": [
     {
@@ -43,84 +43,6 @@
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
-      "hidden_layers": []
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/gpt-oss-20b",
-      "shape": "redpill",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "mutable-tag",
-      "version_source": "control-plane",
-      "error": "HTTP 502: <html>",
-      "hidden_layers": []
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/gpt-oss-120b",
-      "shape": "redpill",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "mutable-tag",
-      "version_source": "control-plane",
-      "error": "HTTP 502: <html>",
-      "hidden_layers": []
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/qwen-2.5-7b-instruct",
-      "shape": "redpill",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "mutable-tag",
-      "version_source": "control-plane",
-      "error": "HTTP 502: <html>",
-      "hidden_layers": []
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/glm-4.7",
-      "shape": "redpill",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "mutable-tag",
-      "version_source": "control-plane",
-      "error": "HTTP 502: <html>",
-      "hidden_layers": []
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/deepseek-v3.2",
-      "shape": "redpill",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "mutable-tag",
-      "version_source": "control-plane",
-      "error": "HTTP 502: <html>",
-      "hidden_layers": []
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/kimi-k2.5",
-      "shape": "redpill",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "mutable-tag",
-      "version_source": "control-plane",
-      "error": "HTTP 502: <html>",
       "hidden_layers": []
     },
     {
@@ -348,10 +270,9 @@
   ],
   "coverage_summary": {
     "partial": 10,
-    "unreachable": 11
+    "unreachable": 5
   },
   "unmeasurable_providers": [
-    "redpill",
     "venice"
   ],
   "audit_debt": {
@@ -362,10 +283,10 @@
     "days_since_last_audit": 56
   },
   "density": {
-    "published_cells": 189,
+    "published_cells": 135,
     "carrying_signal": 50,
-    "dashes": 139,
-    "signal_fraction": 0.265
+    "dashes": 85,
+    "signal_fraction": 0.37
   },
   "hidden_layer_targets": [
     "tinfoil/router",
@@ -482,30 +403,6 @@
       "version_source": "control-plane",
       "days_per_deploy": 5.1,
       "days_per_deploy_corrected": 4.5
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/gpt-oss-20b",
-      "observations": 33,
-      "span_days": 40,
-      "distinct": 1,
-      "novel": 0,
-      "revisit": 0,
-      "version_source": "control-plane",
-      "days_per_deploy": null,
-      "days_per_deploy_corrected": null
-    },
-    {
-      "provider": "redpill",
-      "model": "phala/qwen-2.5-7b-instruct",
-      "observations": 34,
-      "span_days": 40,
-      "distinct": 1,
-      "novel": 0,
-      "revisit": 0,
-      "version_source": "control-plane",
-      "days_per_deploy": null,
-      "days_per_deploy_corrected": null
     },
     {
       "provider": "tinfoil",

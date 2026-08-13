@@ -4,6 +4,35 @@ This audit records the fields needed to reproduce conclusions about the current
 RedPill and Phala ACI deployment. No API keys, raw quotes, JWTs, or full evidence
 bundles are included.
 
+## Follow-up, 2026-08-13
+
+A fresh nonce-bound check found three changes worth recording:
+
+- The live report now declares
+  [`private-ai-gateway@45a7666`](https://github.com/Dstack-TEE/private-ai-gateway/commit/45a7666275de3e2d877842513c2bd5c17676936d)
+  and Compose hash
+  `0fcdf7fa2b9a40425871bc7c2978a14eda61386822ee30a622b7c00137ef6215`.
+- All four Compose images are now digest-pinned. In particular, the earlier
+  `dstacktee/dstack-verifier:latest` is now
+  `dstacktee/dstack-verifier:0.5.11@sha256:06a20b77...`.
+- The session audit accepted 192 of 327 records: 92/92 `aci-service/v2`, 81/81
+  PhalaDirect, 16/16 NEAR, 2/2 SecretAI, and 1/1 Tinfoil. All 135 Chutes
+  records still failed.
+
+The public CLI still reports five passes and one custody-policy skip. Its new
+`--require-production-os` appraisal rejects the live
+`de9c74f0c85d0820ce075cb4a99f8e39f7b681be632907c5bf8bdc95ea72feb9`
+dev-image hash. The same fresh quote, event log, and VM config passed a local run
+of the deployment's exact pinned dstack-verifier digest with `is_valid: true`
+and `os_image_hash_verified: true`, binding that hash through MRTD and RTMR0-2.
+Re-verifying dstack's published archive resolved version 0.5.9 with
+`is_dev: true`.
+
+The Stage verdict remains 0. The dev OS, operator root-key input, public
+error-detail logging, mutable route state, missing immutable upgrade history,
+unreproduced source-to-image provenance, and unenforced custody/subject policy
+remain. The digest pin closes one sub-gap; it does not close the verdict.
+
 ## Targets
 
 | Target | Role | Observation on 2026-08-12 |

@@ -22,7 +22,7 @@ accurate.
 ## Current endpoint surface
 
 `https://inference.phala.com` served the same ACI workload keyset as
-`https://tee.redpill.ai` on 2026-08-12. The current public endpoints include:
+`https://tee.redpill.ai` on 2026-08-13. The current public endpoints include:
 
 - `GET https://inference.phala.com/v1/aci/attestation?nonce=<64-hex>`
 - `GET https://inference.phala.com/v1/aci/sessions`
@@ -37,7 +37,7 @@ in its automated daily matrix.
 ## Scorecard
 
 **Verdict for the current shared ACI gateway: ❌ Stage 0.** A manual live check on
-2026-08-12 produced the same result documented on the [RedPill page](./redpill.md):
+2026-08-13 produced the same result documented on the [RedPill page](./redpill.md):
 five of six ACI protocol checks passed, while the public key-custody policy check
 was skipped. Against the registry's all-or-nothing Stage 1 checklist, only
 auditable source was demonstrated. The dev-OS root-access path and public debug
@@ -66,7 +66,7 @@ ACI clients verify the gateway's TDX quote, bind the workload keyset to that
 quote, pin the live TLS SPKI or use a key from the attested E2EE keyset, demand a
 verified upstream route, and verify a signed receipt. Every observed
 PhalaDirect and `aci-service/v2` session passed the ACI section 9.2 integrity
-audit on 2026-08-12.
+audit on 2026-08-13.
 
 ### TDX and JWT verification
 
@@ -91,6 +91,14 @@ TDX quote, replays the dstack event log to RTMR3, extracts the measured
 `compose-hash` event, and checks it against `SHA256(app_compose)`. This proves the
 Compose preimage is measurement-bound. It does not prove the source revision was
 reproducibly built into an accepted image.
+
+The ACI clients now also offer an opt-in production-OS allowlist. It rejected
+the shared gateway's current dev-image hash. This is an RTMR3 appraisal, not a
+replacement for the dstack verifier's reconstruction of MRTD and RTMR0-2 from
+the same quote, event log, and VM config. A local run of the exact verifier
+digest pinned by the deployment returned `is_valid: true` and
+`os_image_hash_verified: true`; a separate validation of dstack's published
+archive resolved the bound 0.5.9 image with `is_dev: true`.
 
 ### TLS channel binding
 
@@ -123,8 +131,9 @@ public policy check not implemented," rather than "no evidence exists."
   ACI integrity audit. The same gateway's Chutes records did not, so this result
   is specific to the Phala paths.
 - The gateway report's source repository and commit were not independently
-  rebuilt during this audit, its image provenance fields were empty, and the
-  measured `dstack-verifier` service used a mutable `latest` tag.
+  rebuilt during this audit and its image provenance fields were empty. The
+  current Compose now pins all four images by digest, including
+  `dstacktee/dstack-verifier:0.5.11`, closing the earlier mutable-verifier gap.
 - A sampled PhalaDirect session proved a production OS, current TCB, TDX,
   nonce-bound GPU evidence, canonical model ID, and quote-bound TLS SPKI. It
   still reported serving-software and model-weight provenance as unknown.
@@ -147,7 +156,11 @@ ACI endpoint lacks an independent client verifier.
 git clone https://github.com/Dstack-TEE/private-ai-gateway.git
 cd private-ai-gateway
 cargo run --bin aci -- verify https://inference.phala.com
+cargo run --bin aci -- verify https://inference.phala.com --require-production-os
 cargo run --bin aci -- sessions https://inference.phala.com
 ```
+
+The production-OS option currently rejects the shared gateway and should be
+used together with the dstack boot-measurement verifier.
 
 Snapshots: [data/snapshots/](../data/snapshots/).

@@ -8,7 +8,7 @@ and client-facing channel, then publishes receipts and upstream-session records
 that identify the route used for each request.
 
 `https://inference.phala.com` served the same ACI workload keyset as
-`https://tee.redpill.ai` during the 2026-08-12 check. Each hostname had its own
+`https://tee.redpill.ai` during the 2026-08-13 check. Each hostname had its own
 TLS SPKI in the attested keyset.
 
 ## Endpoint surface
@@ -34,7 +34,7 @@ all-or-nothing Stage 1 requirements linked by this registry was demonstrated.
 |---|---|---|
 | Immutable attestation and upgrade transparency | Fail | The live Compose is quote-bound, but no on-chain or equivalent immutable deployment history was demonstrated. |
 | Auditable code | **Pass** | The report names a public repository and commit. |
-| Reproducible code measurement | Fail | The report's image digest and image provenance are `null`; this audit did not reproduce the build, and one integrity-path image uses the mutable tag `dstacktee/dstack-verifier:latest`. |
+| Reproducible code measurement | Fail | The current Compose pins every container image by digest, but the report's gateway image digest and image provenance are `null`, and this audit did not reproduce the source-to-image build. |
 | Developer has no access to secrets | Fail | Custody policy is skipped, the subject is `null`, and the measured deployment permits an operator-supplied root SSH key. |
 | Upgrade process and public history | Fail | No notice mechanism or publicly queryable deployment history was demonstrated. The withdrawal requirement is vacuous for ephemeral requests, but the history requirement is not. |
 | No centralized integrity or privacy dependency | Fail | The control-plane URL and credentials are operator-injected, and active routes live in admin-mutable state outside the measured Compose. Session pinning limits substitution when clients use it. |
@@ -48,7 +48,7 @@ bar, and the current deployment does not meet it.
 ## Live ACI verification
 
 The official [`aci` verifier](https://github.com/Dstack-TEE/private-ai-gateway/tree/main/src/bin/aci)
-ran against `https://tee.redpill.ai` on 2026-08-12. A cross-check against
+ran against `https://tee.redpill.ai` on 2026-08-13. A cross-check against
 `https://inference.phala.com` returned the same workload keyset digest. The
 RedPill endpoint produced the following results:
 
@@ -57,7 +57,7 @@ RedPill endpoint produced the following results:
 | TDX quote and `report_data` | Pass | A genuine TDX workload with `UpToDate` TCB produced a nonce-bound quote. |
 | Workload keyset binding | Pass | The quote binds the JCS digest of the receipt, E2EE, and TLS keys. |
 | Keyset freshness | Pass | The keyset had not expired at verification time. |
-| Measured Compose | Pass | RTMR3 binds Compose hash `cbbc26ea26a5dbe807df5d9abdb22c0485fb40f7634b9a7cc719580959c51213`. |
+| Measured Compose | Pass | RTMR3 binds Compose hash `0fcdf7fa2b9a40425871bc7c2978a14eda61386822ee30a622b7c00137ef6215`. |
 | Key custody and subject policy | **Skipped** | The public CLI does not yet enforce dstack KMS custody policy. The keyset subject was `null`. |
 | Live channel binding | Pass | The TLS SPKI observed for each hostname was present in the attested keyset. |
 
@@ -65,10 +65,21 @@ The command transcript and sampled claim fields are recorded in the
 [2026-08-12 refresh audit](../research/redpill-phala-refresh-2026-08-12.md).
 
 The report named
-[`Dstack-TEE/private-ai-gateway@59882c2`](https://github.com/Dstack-TEE/private-ai-gateway/commit/59882c2970d931c0a12c6f05b86d835149b67dff)
+[`Dstack-TEE/private-ai-gateway@45a7666`](https://github.com/Dstack-TEE/private-ai-gateway/commit/45a7666275de3e2d877842513c2bd5c17676936d)
 as source provenance. That repository and commit are a source declaration. The
 measured Compose is attestation-bound, but this check did not independently
 rebuild the source or prove that the published commit produced the running image.
+
+The merged `--require-production-os` appraisal makes the OS policy explicit.
+It rejected the live `de9c74f0...` dev-image hash. This check uses the
+quote-verified RTMR3 event log; a production-OS conclusion must also use the
+dstack verifier on the same quote, event log, and VM config to bind the OS hash
+to MRTD and RTMR0-2.
+
+A local run of the deployment's exact pinned dstack-verifier digest returned
+`is_valid: true` and `os_image_hash_verified: true` for that evidence. Independent
+validation of dstack's published image archive resolved the bound hash to
+version 0.5.9 with `is_dev: true`.
 
 The audit did not send a paid inference request, so it did not independently
 exercise or verify a per-request receipt. Receipt support is established here by
@@ -77,7 +88,7 @@ the attested source and public endpoint, not by a sampled live receipt.
 ## Upstream evidence published by the gateway
 
 The gateway publishes one content-addressed session record per verified upstream
-channel. Two live examples on 2026-08-12 show why each record must be audited
+channel. Two live examples on 2026-08-13 show why each record must be audited
 claim by claim:
 
 - A `private-ai-verifier/phala-direct/v1` session for
@@ -112,10 +123,10 @@ They are not all equivalent to independently reviewed release provenance.
   authenticated admin API. The `tee.redpill.ai` host forces ACI-verified routes,
   and clients can pin accepted session ids, so operator control is constrained
   and visible in receipts. It is not part of the measured routing policy itself.
-- **Session integrity is adapter-specific.** At 2026-08-12T06:02:12Z,
-  `aci sessions https://tee.redpill.ai --json` accepted 154 of 271 records.
+- **Session integrity is adapter-specific.** At 2026-08-13T16:50:13Z,
+  `aci sessions https://tee.redpill.ai --json` accepted 192 of 327 records.
   Every observed `aci-service/v2`, PhalaDirect, NEAR, SecretAI, and Tinfoil
-  record passed. All 117 Chutes records failed. The Chutes records carried no
+  record passed. All 135 Chutes records failed. The Chutes records carried no
   ACI section 8.2 evidence digest and data. For a sampled Chutes record, the
   `session_id` also matched SHA-256 of the exact served bytes, while the current
   [ACI specification](https://github.com/Dstack-TEE/private-ai-gateway/blob/main/spec/aci.md#8-attested-sessions)
@@ -127,8 +138,9 @@ They are not all equivalent to independently reviewed release provenance.
 - **Release provenance is incomplete.** The gateway proves its measured Compose
   and publishes a source revision, but the public verification run did not
   reproduce the build or bind a reviewed image digest to that source revision.
-  The measured Compose also names `dstacktee/dstack-verifier:latest`, so that
-  verifier can change without changing the Compose text.
+  All four current Compose images are pinned by digest, including
+  `dstacktee/dstack-verifier:0.5.11`; this closes the earlier mutable-verifier
+  sub-gap but does not supply source-to-image provenance for the gateway.
 - **Upstream quality varies by adapter.** ACI makes the route, channel binding,
   and provider claims auditable. It does not turn an unknown serving-software or
   model-weight claim into a proven one.
@@ -142,7 +154,7 @@ They are not all equivalent to independently reviewed release provenance.
 
 - Move the gateway to the production dstack OS and remove every root-key input.
 - Disable raw error-detail logging and keep any prompt-adjacent logs private.
-- Pin every image by digest and publish a reproducible source-to-image record.
+- Publish a reproducible source-to-image record for the pinned gateway release.
 - Put deployment and routing-policy changes in a public immutable history, or
   require clients to pin an independently audited Compose and session set.
 - Implement custody and subject policy in the public client, then publish a live
@@ -154,9 +166,15 @@ They are not all equivalent to independently reviewed release provenance.
 git clone https://github.com/Dstack-TEE/private-ai-gateway.git
 cd private-ai-gateway
 cargo run --bin aci -- verify https://tee.redpill.ai
+cargo run --bin aci -- verify https://tee.redpill.ai --require-production-os
 cargo run --bin aci -- sessions https://tee.redpill.ai
 ```
 
+The production-OS option currently rejects this deployment. Use it together
+with a dstack verifier that validates the same boot measurements.
+
 ## History
 
+- **2026-08-13:** Confirmed the verifier digest pin, strict OS rejection, and
+  refreshed session totals.
 - **2026-08-12:** Recorded live gateway and session-verification results.
