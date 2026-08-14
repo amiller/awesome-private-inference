@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-13T14:32:36Z",
+  "generated_at": "2026-08-14T14:19:33Z",
   "window": {
     "first": "2026-04-21",
-    "last": "2026-08-13",
-    "days": 114
+    "last": "2026-08-14",
+    "days": 115
   },
   "calibration": {
-    "observations": 2421,
-    "pass": 1686,
-    "transport": 605,
-    "no-error-invalid": 130,
+    "observations": 2442,
+    "pass": 1694,
+    "transport": 616,
+    "no-error-invalid": 132,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
     "note": "Every red cell in the registry's history was a transport error. The verification path has never rejected a provider."
@@ -188,13 +188,14 @@
       "provider": "venice",
       "model": "e2ee-glm-5",
       "shape": "venice",
-      "status": "partial",
-      "proven": 6,
+      "status": "invalid",
+      "proven": 5,
       "required": 9,
       "missing": [
         "code_measurement_reproducible",
         "prod_os_image",
-        "serving_code_attested"
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "absent",
       "version_source": "none",
@@ -207,13 +208,14 @@
       "provider": "venice",
       "model": "e2ee-qwen3-5-122b-a10b",
       "shape": "venice",
-      "status": "partial",
-      "proven": 6,
+      "status": "invalid",
+      "proven": 5,
       "required": 9,
       "missing": [
         "code_measurement_reproducible",
         "prod_os_image",
-        "serving_code_attested"
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "absent",
       "version_source": "none",
@@ -347,8 +349,9 @@
     }
   ],
   "coverage_summary": {
-    "partial": 10,
-    "unreachable": 11
+    "partial": 8,
+    "unreachable": 11,
+    "invalid": 2
   },
   "unmeasurable_providers": [
     "redpill",
@@ -359,7 +362,7 @@
     "builds_reviewed": 2,
     "backlog": 17,
     "last_audit": "2026-06-18",
-    "days_since_last_audit": 56
+    "days_since_last_audit": 57
   },
   "density": {
     "published_cells": 189,
@@ -378,14 +381,14 @@
     {
       "provider": "chutes",
       "model": "DeepSeek-V3.2-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 57,
       "distinct": 2,
       "novel": 1,
       "revisit": 0,
       "version_source": "instance-sampled",
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 57.0,
+      "days_per_deploy_corrected": 56.5
     },
     {
       "provider": "chutes",
@@ -402,38 +405,38 @@
     {
       "provider": "chutes",
       "model": "Kimi-K2.6-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 57,
       "distinct": 2,
       "novel": 1,
       "revisit": 4,
       "version_source": "instance-sampled",
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 57.0,
+      "days_per_deploy_corrected": 56.5
     },
     {
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 57,
       "distinct": 2,
       "novel": 1,
       "revisit": 20,
       "version_source": "instance-sampled",
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 57.0,
+      "days_per_deploy_corrected": 56.5
     },
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 57,
       "distinct": 2,
       "novel": 1,
       "revisit": 16,
       "version_source": "instance-sampled",
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 57.0,
+      "days_per_deploy_corrected": 56.5
     },
     {
       "provider": "near-ai",
@@ -450,8 +453,8 @@
     {
       "provider": "near-ai",
       "model": "openai/gpt-oss-120b",
-      "observations": 86,
-      "span_days": 88,
+      "observations": 87,
+      "span_days": 89,
       "distinct": 19,
       "novel": 18,
       "revisit": 0,
@@ -474,14 +477,14 @@
     {
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
-      "observations": 86,
-      "span_days": 86,
+      "observations": 87,
+      "span_days": 87,
       "distinct": 18,
       "novel": 17,
       "revisit": 0,
       "version_source": "control-plane",
       "days_per_deploy": 5.1,
-      "days_per_deploy_corrected": 4.5
+      "days_per_deploy_corrected": 4.6
     },
     {
       "provider": "redpill",
@@ -546,14 +549,14 @@
     {
       "provider": "tinfoil",
       "model": "router",
-      "observations": 109,
-      "span_days": 109,
-      "distinct": 31,
-      "novel": 30,
+      "observations": 110,
+      "span_days": 110,
+      "distinct": 32,
+      "novel": 31,
       "revisit": 0,
       "version_source": "control-plane",
-      "days_per_deploy": 3.6,
-      "days_per_deploy_corrected": 3.1
+      "days_per_deploy": 3.5,
+      "days_per_deploy_corrected": 3.0
     }
   ]
 }
