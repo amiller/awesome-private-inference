@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-08-15T14:18:11Z",
+  "generated_at": "2026-08-15T20:19:53Z",
   "git_sha": "",
   "run_id": "local",
   "attestations": {
@@ -9,7 +9,7 @@
         "provider": "near-ai",
         "model": "openai/gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:14Z",
+        "verified_at": "2026-08-15T20:19:55Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -41,13 +41,13 @@
           "audit_key": null
         },
         "error": null,
-        "latency_s": 2.83
+        "latency_s": 2.54
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5.1-FP8",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:16Z",
+        "verified_at": "2026-08-15T20:19:57Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
@@ -79,7 +79,7 @@
           "audit_key": null
         },
         "error": null,
-        "latency_s": 4.78
+        "latency_s": 4.45
       }
     ],
     "redpill": [
@@ -87,7 +87,7 @@
         "provider": "redpill",
         "model": "phala/gpt-oss-20b",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:16Z",
+        "verified_at": "2026-08-15T20:19:57Z",
         "attestation_type": "redpill",
         "signing_address": "",
         "signing_public_key": "",
@@ -117,7 +117,7 @@
         "provider": "redpill",
         "model": "phala/gpt-oss-120b",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:16Z",
+        "verified_at": "2026-08-15T20:19:57Z",
         "attestation_type": "redpill",
         "signing_address": "",
         "signing_public_key": "",
@@ -141,43 +141,13 @@
         },
         "details": {},
         "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.32
+        "latency_s": 0.33
       },
       {
         "provider": "redpill",
         "model": "phala/qwen-2.5-7b-instruct",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:17Z",
-        "attestation_type": "redpill",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.42
-      },
-      {
-        "provider": "redpill",
-        "model": "phala/glm-4.7",
-        "valid": false,
-        "verified_at": "2026-08-15T14:18:16Z",
+        "verified_at": "2026-08-15T20:19:57Z",
         "attestation_type": "redpill",
         "signing_address": "",
         "signing_public_key": "",
@@ -205,9 +175,9 @@
       },
       {
         "provider": "redpill",
-        "model": "phala/deepseek-v3.2",
+        "model": "phala/glm-4.7",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:17Z",
+        "verified_at": "2026-08-15T20:19:57Z",
         "attestation_type": "redpill",
         "signing_address": "",
         "signing_public_key": "",
@@ -231,13 +201,43 @@
         },
         "details": {},
         "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.31
+        "latency_s": 0.33
+      },
+      {
+        "provider": "redpill",
+        "model": "phala/deepseek-v3.2",
+        "valid": false,
+        "verified_at": "2026-08-15T20:19:58Z",
+        "attestation_type": "redpill",
+        "signing_address": "",
+        "signing_public_key": "",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": null,
+          "tdx_verified": null,
+          "report_data_binds_key": null,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "serving_code_attested": null,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null
+        },
+        "details": {},
+        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
+        "latency_s": 0.29
       },
       {
         "provider": "redpill",
         "model": "phala/kimi-k2.5",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:17Z",
+        "verified_at": "2026-08-15T20:19:58Z",
         "attestation_type": "redpill",
         "signing_address": "",
         "signing_public_key": "",
@@ -261,7 +261,7 @@
         },
         "details": {},
         "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.31
+        "latency_s": 0.46
       }
     ],
     "tinfoil": [
@@ -269,7 +269,7 @@
         "provider": "tinfoil",
         "model": "router",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:18Z",
+        "verified_at": "2026-08-15T20:19:59Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "4539df144c761e852824083b1e0e23026ab8fec4fa0612ca16b2672a7a45983e",
@@ -343,13 +343,13 @@
           "live_tls_spki_sha256": "198c3340b8b007efdb5aa9b2bff68eb6776c4710f0731121f195c65e6410c232"
         },
         "error": null,
-        "latency_s": 0.63
+        "latency_s": 0.64
       },
       {
         "provider": "tinfoil",
         "model": "gpt-oss-120b",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:17Z",
+        "verified_at": "2026-08-15T20:19:58Z",
         "attestation_type": "error",
         "signing_address": "",
         "signing_public_key": "",
@@ -379,7 +379,7 @@
         "provider": "tinfoil",
         "model": "llama3-3-70b",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:17Z",
+        "verified_at": "2026-08-15T20:19:58Z",
         "attestation_type": "error",
         "signing_address": "",
         "signing_public_key": "",
@@ -409,7 +409,7 @@
         "provider": "tinfoil",
         "model": "gemma4-31b",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:17Z",
+        "verified_at": "2026-08-15T20:19:58Z",
         "attestation_type": "error",
         "signing_address": "",
         "signing_public_key": "",
@@ -440,15 +440,15 @@
       {
         "provider": "venice",
         "model": "e2ee-glm-5",
-        "valid": true,
-        "verified_at": "2026-08-15T14:18:21Z",
+        "valid": false,
+        "verified_at": "2026-08-15T20:20:03Z",
         "attestation_type": "venice",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "042a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
-          "tdx_verified": true,
+          "tdx_verified": false,
           "report_data_binds_key": true,
           "gpu_attested": true,
           "key_derives_to_address": true,
@@ -473,13 +473,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.44
+        "latency_s": 4.52
       },
       {
         "provider": "venice",
         "model": "e2ee-qwen3-5-122b-a10b",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:21Z",
+        "verified_at": "2026-08-15T20:20:04Z",
         "attestation_type": "venice",
         "signing_address": "0x6525e128afcffebf7eed05d485d7be983cdae934",
         "signing_public_key": "041d9bbc96671c3fbc983867bd7a6b5c83298e040801764b7085352d84f3f095125db36956caed8c84bfefca635c3c455f409c79a3889d679af688f4aded542fd5",
@@ -511,13 +511,13 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.7
+        "latency_s": 5.41
       },
       {
         "provider": "venice",
         "model": "e2ee-uncensored-24b-p",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:18Z",
+        "verified_at": "2026-08-15T20:19:59Z",
         "attestation_type": "venice",
         "signing_address": "",
         "signing_public_key": "",
@@ -541,13 +541,13 @@
         },
         "details": {},
         "error": "no TEE attestation available for this model (404)",
-        "latency_s": 0.18
+        "latency_s": 0.16
       },
       {
         "provider": "venice",
         "model": "e2ee-gpt-oss-120b-p",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:22Z",
+        "verified_at": "2026-08-15T20:20:06Z",
         "attestation_type": "venice",
         "signing_address": "0x79a5061efe5a46b0d1f33b11cf1c5adbedae6b79",
         "signing_public_key": "04943cea0b4babf60f6e2031e9a00866a37c4ae696fb45895b3a9b38ab8cbb898f42c85b704aceaa0a396cf26f7fdf79d83205be7e11d3a5d70419a68277158c3d",
@@ -579,7 +579,7 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.68
+        "latency_s": 7.51
       }
     ],
     "chutes": [
@@ -587,10 +587,10 @@
         "provider": "chutes",
         "model": "Qwen3-32B-TEE",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:27Z",
+        "verified_at": "2026-08-15T20:20:13Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "fa68d178-837e-4505-8ef5-8ebf5cf15c82",
-        "signing_public_key": "0JF7IcxgrIWjO1d2oXUwIXNFTIPI3QllEoOIfQUQ7GcjzOoSUAzINzBvmNCuy7CvqIG5RtG6faOeZmZkVHixD5kUiTVF14sV9XrHYrx0/cg/p1YMMtGYOaYCzHs2Foh+EkSdIYMOMHtyMqXKcbuWk4wNJ9VacqUOFMyKscFV6saNtQgjoXGQNdKTLhFmAtSMHwRcnyR9CgDFgPd+8alM4EudOIWBEdBK7swV8qydcIMgKwRtdhOk52VgOKFHYrtTQ5l4byxAmEUWz8V+3DwF2iFRriqxZBqwwVAqkDXNwCg5JInPE0YYoNDL1lmkogIZOjwBd/hlv3esKlaftXTBF6dmeckfexCjruIGzeALISLLtoQ7hgsSlDxTH+CfO/KsVmqdA5Q4eFOdbZJ/RaQwWba811nMFhZnC2ZmSUQK8CYR9qQy4+l2sxca5HpwJ8WrmcFILLkdmwyVjFDJuKG/gRgGURdS7SCOO6oKyzU4SgOc3OZhw9JtsjaqyQei+vw5TwVSQGdseAxfhDooQ5Ix41sYMgxQEOVVaLmeTCdk6gRuzmkGureHEABT75R+d9hfS/ay3CogFmkhE9wPpEE7AFawOAupwfokHql6YyIE9UuWvGOUD6rAc7EFyEGtUUuQE+CUL/NhdJNjCJBvzAvKqUtYLueZOOUumsevGXJTgzhSaGE4I2mtcVKPgIELt3cMqDq8dZFHxpEGUNQQ4ogYcVu8QaEvq+A3blA5J6uk5CdsL8nNMhAOSdwZHWI2KBqEEQCOOxLIlGY6n/Yg5kM50zxV/VxHARFXMAQNGst5TJwJS5Jv1sggzXcFKgsa/XkAPQZZvco3dDwpf4mXQ5OsJkgmw6wv5FOk5Je4GdJz9Bij8gdyBpg751GnDUxTaXCWbDEjOPUPx1NVYmW/5fIae4l6xyQcoTOGIvAQFpDHtauyrDu+KrO2HjiKSRjMhpoDQGVg5vooYUC0X5GDdQGiuXscs5SY7hm5pWBQiCsUQXtGl3wDrJgNTylLbPZv/BozuljHC8kOL3ZbweSJwnKgJTBZirQKDkR0ZTOaK5CXwZK3IrEw1JYHCGdjIlBmGozP0YmEsTNuBwKliLILfYqSyWQOrrluUoOgM/gAl1F7cbKlrLay0qkHOKy5l4RWQXsUK1GXLqypkYjJykaxbJkeA3KDBPu7OgBdnjR1slooYZcBO7FjwRYXhrSKYAOXvLMzaseYoqkY8wGiVNInUgJOBSVbTTO9DdGOe2mlPnJGIGW3+ecfKeOy25ypX3hzpdJlfxTE+nKDiqsdd7pAoRd/6EQokAEAuGt18dwSxcfAg8RhTrlSp3cD1mwjq2ZuFGwA7wzC8ENCBnzAAhGGaxeW+YwbzKt2SSole3on+/l5FLO7utE34GKbCWy4TcgVSYQotdi6KuiiOTFhRUzFkUpZhzwUfjqw0GYTE0kZcbSyCntRs0tJfyEC2vIc+rh1Xdg2kzuYMtDLzWVlefOZDeq+QYdWcpt5CTq00bylvBpxR8cOYFh0w4SQOuBb6bcZo3h7gyzp8RUHuiD+XFOpCVR5ZtAZOAJstkxbYwVJnl6n8FE=",
+        "signing_address": "2bc6de81-4818-4e83-9339-f8657d606d5d",
+        "signing_public_key": "tLYlXvN695QSDRxPnJANKsUXAKZwkKOZo9m3kDohlHEtCzgG3Ls+K7MyKpgRhoipzytjMnR4E6u3i8OgnSBq45t3d6wqDsF8XWEyBJGoUAt+PMg5ZkQX+PegXyo2V/ok/JWUi9OGQpRSvkgxGEpxRLy40pgDOtacxlMA/KVzumRZQpqf5Jysi9O76TQ/VpmV14Y9K7QW9bCTL0cyThQTY9O1EKkKWdR3oexfrscJD/twddwISxJUjWtm4qTJsahSLTANEFVNqjRmXxln3cRrYIZc6SWwbmklL0UWwQeb5ECx4EhWUySz+YyURAzLrHlwbvdwcNyzHvdTKKU3PUYni0kJk3eUMHpMrtsT/fY9rFMY/hYX3wK4+MKNuuQ/LDR9mjem2OPIWSKQwLRXKODD3nKAIKZReIggbuC88rmvVKpFn3eqClV+0aV0o3NKWayt1tRRh7MruAxKRCi+7dK7TjOUP1svj1cKlbEHc8d2ZRYzNzZ5CRiLjTBHbPOV/NJ0UhxxtDRu3OChzxhvQGYX56ddRICiuxGd7WYR+8wP/ghzmhO2wbtTXEF+I6lrDSIHqkbBuGRno9E0LgHCGJTAZXuCNzWqd8CxIHZMJjSNSTVQeWYyOddvu/IkG5EzTcwtpnWAZ+MQFit43tnHncpeP6cLTWmZPlgSfkh587aRwRKHj3ZmjsxgM1VpHBRxMxyR2djH3iaT01KCbCNrsMoQE9AA6XUejvaYHfRgK5VdrOoaDALLWYG9JHrIzbx6QDCvLMllpKtgRuK9yVGiugwR/8x5D+yzLrfORlwim9kfhHGGI7qx3Om3UMxgHRULbeCJ23S8B2CRJmAn88s+HopOeYYP8oKWGuc59ubIbBl4nZGgiKFLqdN+lUNvi/SHiHc1PPm5+QKMu4NO0bAH+WjK3DQ8sfUVKdEExQkGR6GufiHFmmrGVQoQ58KUdnoYeYhGw8uLe5k8CldB9AvDUCsGClpXXTUXqcG4ZfMGsuqYiPmAxqQdGAKGP9u3RxLDAvJ2+adpUboLdKcr8cS/OraUyRBA8pPKlkF/EhFs4mGQOPEQwrA0DLM1fqaEvcKIzXbH0ZKGtovENkce35Gc/QVocyJKBcMSEylafhet7GdKNtUEQjxjGpV5+KIjycKOZ7BVO0YmgXMd3EU2Z+oBWoS88yCt90hULPIGYDF0YNetJGiLcIVjfKREEFVm7LikzPlZtbNNG1tMmHGTFbCoeQAl8bSUzIyWZCmkb7ii6CJKEKJ0Zay3kJWq5veOkLo5jQJwLmFBceALanGCF2KkoDNY2zkxhyme1IA3DOJYKhJCwhUoWIg712yKGeGi3+wlkri03+GPW9FcQndoo/CmX2kUUslB2TAAPklmDJQgNth5wAcZUSrLMDKpRWoH+IAYlYNcY9h3XuyJUcw5VIJH8WS68vN2pQtlB9B5OeyJl2ipXDm6DUmb6Squt9vDzYt6pIASe2cUL6CuNcuzyoeJ4XZJsZCHaBzO1cq3W8sG/GNsZMNw+2NbhpkQvelvg/K0bRAzXLF+QR4YKB6su0TzjoEvyKyPxWpLLL8D2N+RsDICxfk=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -611,24 +611,24 @@
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "fa68d178-837e-4505-8ef5-8ebf5cf15c82",
-          "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+          "instance_id": "2bc6de81-4818-4e83-9339-f8657d606d5d",
+          "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
           "gpu_evidence_count": 8,
           "cert_spki_bound": true,
           "debug_disabled": true,
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 4.93
+        "latency_s": 6.06
       },
       {
         "provider": "chutes",
         "model": "gemma-4-31B-TEE",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:29Z",
+        "verified_at": "2026-08-15T20:20:12Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "87b638d3-fcc8-4097-8a07-ae9f984b8ea1",
-        "signing_public_key": "rAZ5MxQtTjyk1Ugh2Rgqb+dlSTiCmnTB3VoDd5ZarQgaFglXcMUJOBMXSbsxlqJ6lrUjttwjgXkxkUHJS0Su9GYlaFkIR3itpNdsE8WKm9RTV0oeg0FCphCur9YYQLp7TDMDjItWjDSywAlNwKRJbuW37CsTfnpndrd+e6SVWpkoNNMbNvdo2ouaZ+yqxFWkGEEeD/IsPaF7QFZM02CkIOorS3Fv4DCUIzygBfSFAle05oaiGZaQIoUjB4tuNHaNNcCthwsAy4gu1QPDRnkf3tGCQOKDIYAwBXaQzQldsHwTV7yJlfZHRYJ8EJXENMLIamx76RcZc8SJoJhVyNo+YQcPfBKz8axZvHuQyxBmtpZn+ZltnZSUTVAQjTN2sNyyj3alGFe0/ml044CpJPbCtBx/bbrFZNyT/ycjqluWjMQDJyluuLggxzuKVkcyJ5OvqWfIbmhQwWWKxiSw8WcfJvm6dBJboyBN0Te7vpmHO4cwNGizINIElhFdemjL4spsfHgQGcfCkimuRYSeEJRvJpjGszq5JkKbHHRD30OK0RJpO2qWEeA/dRw+6iNso1uRgCM6JOdba8Sptzl4HEpKdlPE2BRogceMuKaJgzsFuEk2jGkg8JZWVraYxUgK8ncrdiNzdnWSzSs//sCTwplsaYhEBIMmdJl5kPgd8FF6lhlscTigVmUdtGu/0Vgw9axyW0KJRRnIcDoVhEENBCBL0nWXHFaC12C69wJdqbF3Hrw9kuG10aqwlBO3GKIfwzzOuFPHa3UhgAHCtEgAlNtr/FdVp5xWKvUSdaZfQDQWpodkqoWi6YqajBE+C+pLKfesASwzAYa766Zi54diVTic4RfIRzhPV2SGE4LPEmWrsYyvkoq4BNbMntoZQRcfYkti7+g0ePkkBOFBwfKopRMeUUlNbtOfnPJ6w2pa3UQBm1VkdaEKx3ULTwMYUnVGovuVX2xxJtO+vzF25CBcfpwa0tYdPVEy41IllomzGVBUE3YYRCZ83NxylSmg/aeA9unBTJuD7udlWst9BmhIEAHPuLsxOXmccxEE9VgkKaDApEBAuNepW6ZitEiPyaUapnLNo7uEycYKH0M2s+ogB/inOru3lcAipmwed6tYwgKWp+BTI3lmyjUpsbE7wUJfngIXM3OtFkVO4Gc/jBUjHFOIAaAHCbVmoSVEp+rCmaS1dHmfBSoaVgAnZdMPFDEebuNUnbd4DchAM8AxstTB8FGUc/YMcmC8nxx+ZhhpH6u4yPYXz9nD9LmupugGmvFe+rollCQSN6WaVPdXbmSFfBgHMIViVnOr/EixYwe3byjB6BkzOwNLBpyq/+qoAso59cEahRh1xpJ34jZuj2BVM2wDlwKGgjhap2N/hvFF70QN9xW/YVyD/TJvIaeRBFubJ1h4ZttJ/+PB8qls9vYzkhiBJaUvS4IC7TpECFuM2qE0QEwn2IRwCZEQAxc9buFigQzNTSyBbdgSmFwA4zYHTwdokHqUiWpz0ie6VTalDYZOkWWmPvdsNJG/TZW4hPwRqPBFyMUGpkPeTR/F9n0o6zMc6RvT8i0jTFKoPVFo1Vzo0FE=",
+        "signing_address": "82049362-6469-4e53-b9d5-6729222b50c9",
+        "signing_public_key": "2Wy55rFv4NknhMebQGSsVaEp7NrEW4NinuZLroSe65xtNGs5vVlowWSq1PN1kow814BLWxFyQaZU0vnNWLtgHVs01MIHUSWOZvyrNJOmsYU5XQqv0TRRnNdD7DUJuueWSzBf9oyqD+iSOFSr0RJdvAMHPUOxLltB3Gsf+YhZgySafSVmtMbG72W8rxCcJId+2nUmfKOum2KpR5ubqlYBOGKFK8OcWdwgcdijHStjcwgnn2tE3SxWR+d2qWNRpuAKLISI0iZtfUJ41pHE7qx9MmJ3EaWNWJxELmO1yxCrn+a41zRhmfoiDxzK8LBimiIwZcKPsCUkZ9aWikXDm4qQBJm7hgzA73Z2ilAnqtl1xyCK22GqbcFsQebI3Nh5MJZmzbFg0LKbHnzHUJNy0qa3kPkF+NXKj8yEGeNhP2luU6uW+dm6trdCKAsSy6MdtjAFpxOQQbGW03rGzZRmnQNHzouBLMZwzPtxkRV+qmVyp/QzhIJE2opg8LywhmiezKnLe7MboCugGlmyp9QEdqNmmzclqIFIlJdbrAVnbqvIB5l0Xisk1MvNGBUnYgvIfVdQkWBltFcbsiGKw7MFGZCSytZ7Reun4wRUWSsIh4pEWFyYEZOc58tkX5oRoXet5PvH2nAlVVLPlsQxNIZIikyulBiMOXhVU9eVlWIg7veinczEMVenz5cgQ1u12/JPzBOXsCgAO1OCp0OZPGGqY2XGyuQ3lpI87Cem7DcR1mJVxTxaKrU9NWUT+PMmwoBaBhoumae+JhHBnPAOGSEXreiiEnNuXfhMRded9Gxb3Bpl+2Iames505yHB2yNJflI3byrBgJdOdhn9BXKOKqcEBMHgVBVwrTAhLarmIu9dMkiFWtvQwwOUxMSBtKu4QDIiFtCgKxwp5WqhAyikSgtQ7KWKkTJgfiWKEaZLbUqasm1awRbkbFVJkDBaHUoy0sEpzbAO1APk4Mtxjd13HVgC7gAKBsvcvhPNBcKK6DKL9wQfcCjEwwUl/BCjioPiAocTNGCdYET1CHL3GYnzmqdvSoSUHQm/ywQ8HG1KIJa0byO3xZFYuRAkOBUZnvHAvkwOdOkjCgu1mbDcWSziAGM/IslBWxFo6KX3yg31nyMQJItQGZhzld0/ruTw7y67ZE0cmN8lfJbLDlHRjMTEBIYw1FUD5aUimQQITCU+WjLI3qaonWuz6hyOnlu6cJSK3PMiKYREgg5r1o9XNyVXqQOjuS8gYtsaDoEsOay0VxicRJBPCc/1GseARZ9tci3PkEqa/VN8SiUWcJC+uwjouVuPKx6ZTFRVbA0nXq/4BJP8Qy5mDRA72s+xAFgLYaFx+GGMMA66rFMwwbDipZ6OdQABngG6cxij1oDf9dZIXlHBWi9Ekh2FQUIKyRQGzob1NiJYFxjWgYDr2oyDVC0ttuHRlAZNQwabvyHesUX4xqrHtuOhDQOqpSBlKdTihaInOkF3WR5cwJY9SoaZcR3b2ucNAi13rBSvTM4PMKiQ9BGSSIvpCZEa1mpolJOtAsgB5pBBmdCr6uc/q+nOAhlsB6pY/uHLE4Iay1SjubgY1MWuoHsuVE=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -649,7 +649,7 @@
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "87b638d3-fcc8-4097-8a07-ae9f984b8ea1",
+          "instance_id": "82049362-6469-4e53-b9d5-6729222b50c9",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
           "gpu_evidence_count": 1,
           "cert_spki_bound": true,
@@ -657,13 +657,13 @@
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 6.98
+        "latency_s": 5.86
       },
       {
         "provider": "chutes",
         "model": "GLM-5-TEE",
         "valid": false,
-        "verified_at": "2026-08-15T14:18:22Z",
+        "verified_at": "2026-08-15T20:20:07Z",
         "attestation_type": "chutes-tee",
         "signing_address": "",
         "signing_public_key": "",
@@ -687,16 +687,16 @@
         },
         "details": {},
         "error": "RuntimeError: HTTP 404 on /e2e/instances/e51e818e-fa63-570d-9f68-49d7d1b4d12f: {\"detail\":\"Chute not found\"}",
-        "latency_s": 0.42
+        "latency_s": 0.81
       },
       {
         "provider": "chutes",
         "model": "DeepSeek-V3.2-TEE",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:29Z",
+        "verified_at": "2026-08-15T20:20:13Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "24bcd7fa-6416-4826-8282-92f0e15800fd",
-        "signing_public_key": "3RqQt+S89UpUtHoMDaTOUmuiUQacfsgz5/sVc0hVGVC1aDZKRJOOfWMgKVd5rdRVi/ILSjanXKeVcWly/YOjLyIApxKul/RYNfLFs0REs+iYassADzl84RUWJkVs3KExzLl/yUc7UQjA+cg90wmQH5sk/9d/aXAwtJd5C3PIsWmCFga8rlyNrJhyQYgESahwrUV/QkHGzkIZ/iBMQOpcWkGPPVohAKys3gCvYANhVAI7zZPHakIO9mpKoloeJnw8l8mX5uY0v7pE0ktFe/oJQwk/b3pzpQpOIBOviqenjyBGgBQ6knzLGqWV/CY9rqMbZzukCCFjnVdcGbFE05Wy8QPB8YBomChGe9lySNyS9pRVqoBReId2hMifK4JBq1CDXsQRvBKHJjUyyjSIt5eRioCSDBl7AQFadBKznuW3tlnMymw0OKcsP2g66mNTBOGukAS4Z5AMtpFj2heROvlUZ0qgYpW5JOi4YEJCOxnIgJBvy1eUJCQnrXVDFnARXEw+MpBvBakyNnsYUgiQ0FumNOhjbacs4lEme2sHWLKks4Y+CYEXKhJgkvh5shJrwQGOiXOsqSMbJYIpangFuJI4QNlqmYIGjoMzENEk6Tqnz7Q9HWW5oKw4w8sUL9uiRxVuywZ3ahgWg8OQA/ibYuEah/cIJzoW0OGsnmYgF1gFcAGaciprd0GQtTYbrVxiEgwIxIOxbkoeH0YGzxVBUgbMRUmi6cMqYQM1p0ZiNcoIpDeT4ay1CgnEM5AYhzCOuGQsc4S5j+eGySrKodOfSns6K+oYcqCv2ZBQAipo8hljR4QiZRgkfJs8JQxUSht7/0A3pwyEWrFK5xsLVWSyC9Az3TVy12GdxxBZsrOuPHR5tfshnsGQTjhAmZWQZRKfMSSg6gG6vuNGFEFog9q274MW7fWqFbZxmMm1zAaHpRQVY0cNpUGWGOEyXbBIPBK0CJQ4ludR1PyGRsEG8aQSDhp0n6AuuFNCuZVZIEEyV3ZjdMHNzAWRLLKs4hJArtTMLfcJRuMjKIVfwrm8XRHNcJJ8N9lYREJYpnMS4asa4dZ/p5Alm6XBMtkdHgW/VGADssRXmbWoneHFMBl4Y2Uoajk4gANSbRJ7rQqExhHN4ht0WcHPfiOiSdCypxS09sCz5rvLg3Bi9WPHTtB7eFOkzuM9J7t7lclI6jyiiYdQbyZ3ObWlRKQLpuR+GKojrBKk9FtyggN9xkxeFmkku8gCXXBWlizC+xSdRenLS9mUJYMvYkZotEcxW1iw8LmIAvOyLNeyGTdG62vCozpparPHhGC2P1Ws0njPaDqRziJvD+BgCIAVlVTNzPKJ1ph00RnFdXLHGCnFwdWznAGxgeRZC1mOlOUZkfN3rzaz7+ciGXd/IyeMNsN3QJVNHaO81qJ8xhGMj0p4fmaBMPOL2CEWXzBcOFUqT7MJduS/KsNGMYMbjwWDmNeRCACfSjy/+qorrVcdvroaDZNW9AmPw2cXw+hHjxLDcvVlbRKwvIOOb6h8epG8IgA20gpjVsNrG3Jb6JVlwz75vaTrKFF1A2TFrhxH3Mm7uVm1k01OKq6n0xj95aU=",
+        "signing_address": "8b0548d7-cfe0-4223-bbaa-0315496c82df",
+        "signing_public_key": "RUjLHKh4/Ca0B7R0wiORKpRTFpcymEBwFrh8Szk+P7DHvjmQ6auowQiBxZGgutNGYjoLySVJXREAL8tcsRV/CGSROrS/2AsbUdWg+8qYrQNpt0w6oteuRoqrBdqWVCSoGoIuPHCi09nHtCMUAeojOjmKEzt243amcRNu8AAxhPvPKHpC9ykKTPYsVZXMc3suZnFAy/RHjDGz8SFoiiu2Kaij60DFNIG3kLS0vmF7YOp5Q8CCnfA9BRfBtDBEqWVfTONVwSmPEiEns4MWL1kc7fQ0kLoqKaEov3gCHfohh9tqrDDFMnGUkvJYCSyWKLwKuWbHVwyk7vQV89C91bHF9/bGlnOP+2eadJEpQJyZllY6YsE+X/Y2SxmlUmGpVoJA46YM2iuGuAWISAPITfJxsBGmd/XK13OKUoFdrWYGUFwjKIGBePIp6XuO1cRHYVsggrIShKxVGajCzyy8roVEokJwhDqYK2q/ObgD9xuuD3VMBepdSwahgQd1lqDDX/RCEchzh8hHqwep+zrJQhRPniXAPkFmXBppOkAqoeSp0DS1u7i/A6mwdjZJWGZFp6kme1MHxfsmtUlo/eGd58UA7iYwVcQOa4wo5EBM+VDNniq8eQQ7IPadg6S9lZhH/XceGQEyNGspAIKCokW7ltingReOhLcSNhcxYCgzGFClfElxuBdEwKxLnROIqZiZUlM3zzW27agLFchCRlRz6YVNS7Qp1idJFPKz8QoEUREPsURHHWodEhcADoEwYuVcmVhpj0x5qJRn0GFci7xc5ENiJGsHk1Sh+3snmqt7TkwDXLd4z1y1CBV1Jcq24ESTVRWQSykuhZhH29pLS2C5ytYN3vxzqdWSQkSTm0utuJmj9clEi5m9ybY6MtGs5Sql9nxBZwojq0d1F4fJs8ZMyXSvActmGnVom3QpANeOtAplO9ROo9QR+4TO4RmF0lm+wKrMhjMWPhkMmGawtMOeQeRzk1hYYzMCq6WQkIi+Gqw3OJueXvZ1z4XGDZRlDLzNtyllRYswn2KyRqnJ3Ca+4uFy+1BakkyX+5F5xmursBxuVDuesBh49qFZ2WqwugoaUamwmamclTshGdC6DUqziVtanAYR5+MqmFdya5dnpNc1YnIUXkQOqRSfUuJv4AowEwMxHZFZJssx5kCRuorFMTisjkmY89sMD9nLmSo5E/K6CrqGTXJph/p2AXbL7xEXZHKjqTnG8inIgjJ1GQsJ6ywQ3gJ82UrN6bBJaynGw9Srk4xklCDDFtceXCF7rYZAq3odZVFWBJbD7osXhHkFM6h+vIVBL1a2hLeSvvgmJqhIPpQ4i+GkPYUVHKBx8iVZBWgkDbC+4gKfhUNMJncUY3AHe2fDFrJ2XNmQHxEOInxJ1hUo9Ytopkey/aGuvZc3zrogooCqwpRVaWAq2qSEF7huSwWYarTPhrlcjHus6ElEjQWIwqsKAnK8Rie6wWkLFzqWvyAyDqh4AlPIRASVv2QGe8vLWfktUSaEBKZ6Zmdu2QbNgUe98+ejdrgLwjiv/odTVW5ccKWUtSeIS4YzqfeHkWGvHJGIZvdWQcvSvFczM8E=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -717,7 +717,7 @@
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "24bcd7fa-6416-4826-8282-92f0e15800fd",
+          "instance_id": "8b0548d7-cfe0-4223-bbaa-0315496c82df",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
           "gpu_evidence_count": 8,
           "cert_spki_bound": true,
@@ -725,16 +725,16 @@
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 7.55
+        "latency_s": 6.91
       },
       {
         "provider": "chutes",
         "model": "Kimi-K2.6-TEE",
         "valid": true,
-        "verified_at": "2026-08-15T14:18:29Z",
+        "verified_at": "2026-08-15T20:20:13Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "e7522958-fcc9-407f-a975-ff9b106b908a",
-        "signing_public_key": "BOqaNLmOfQsA3VcCCZkT7wJ2zcsGKAVESiyogtd/Fnuq74FZRTqnSprIZ+tcDbLFihWD6pRCP4SminyH1tlvpRCHv3O4bESGJkSdViSy0oY4LpLMwuoPJJQsMkSAPeYZpoxGfcrM2aCHccqeF0lp1Ox68mNpuRaxfqME9ToUSEBeFVJYiCu8dRNqa8h4qzoec8AR7rqeG3ISRHS4zxhNBeQS8/xz+NK65HwkS7Qpnyu42GwzLZcHOjdRQsJlq8mL+HRkA4yzFEyvQwSR0IexHwBj/aEM/3ECKzIsWsaYm8Qf+7NYPZSUanEfFoTNBEVN4tZGzqYxLbvGIxW/Yss7gWbDr9KORUiF15xKKtwTOHtuqPktAydqCFbPJArQOHRnYDR9jCizKaUBspQgHPMfr4odSgRD3KlHFLxM8/xn5kmgU5FADbMYyiE/KlwZlsyVsuN8jUd+K8o7HgFxcimOU9SOuWp8I5qYh3K+biWieTkhDIAkvShz1ayNyypIhuowARIhbWeb2HvNPvJu0DNEruGzFVFSTPvIDWc0k9xx/xs1U2A0cMe6/Voeg+iWV+kRd2J4umbMBgkuyEMKqBV/y3Je3viOpvE6v6ebbiO1Wch9avmLshi0zpcsVXK1/FcPUrIP0QRH5UCnmwVXCpdNx1h4AwcdAtpKerWSSMc+8GTPt5g3I8qOXBqX8qkpJpOfXtel8vHPUBxqZ2Yg3GITi0yaPtEu3EEibmWEcUUFDNY1KtGL9lDBbFAKprIscJyyQ3wUdmwzx6taUlOxH9csA0K/QujMnXCc2hM5W/g5luMWLRyotcu77iC6oaojDDaoBnyQahFjEpgzdHMpK9GWhthyQTesPRG6c9Nd6nK7gbIlAHW5rZkBfFSYeaJEi3Kz83gc4nu4egMwwPbOY4MPbekJ6FlH6zSxORpo/oGi8jZi/YmipzhkQ2UXcVFVmUgRyJkcWtsVVHkcYfmfFsWWkSVOHcQqlOGQuSCgSACqT8OeSZKZNlNulMoiY+HDF7pYE4MnkKMlZHe4EYAv71h/WDVIXAyd/QQu4dau6usUm0oW0jgQ7vcPEmyRIQw4HzcWN4BREcBJJdwPVjJL3YMpV2qc40aKg2c44rC3ETJnmjuefInOr8Fxs/tEBWhCHgWiVDxkDIEmjLgq+KayQxBgh9hT/UYDEfIFb0S5dawRwjy5SFFjiDJNO9av17EPxFC8ysYvyupZMWqvC2khL9ygd5UXqLYH8EA0xmuEgEvPiYUyFzUjvaprVgyJmbfCcfs0rpw1E0AIVwvKTsYheTFyZyOY3ZeDY9Ktx2g6QwWx3yJypOObaZxWa4kynEnHWNaIjpR/nMBGgci9thZEqJR+/SKSOZQdhKoulNFj4QZYDPlIm6hJvQJ0vgoYZUmU09ByyjRgx1eCq2u5o1cf5ZN1rBtgVyiop8IBdCGBk4A+3nFRl2WReVcSNsx9IdGEY4Y93BOjTscplWuppmSxm+Ydlpi/4Bgbe9TFpQCCDpUdXuh42eh2C1wK77Ma5BaA/xJ13hMCYL9LDeXQUItogqsqIju71GghrvhlraxqvB7geb4=",
+        "signing_address": "7f19fe41-43ba-43e0-9635-d927f78b748d",
+        "signing_public_key": "cogYx6orF5uJBkTHhOcWIAIsOPZVm6k2kfIILnNkO1dyTUs6CMSJqqOgWcqatfxyZmlK3tOnm5rDGVM0CYqpJfLLH+WnEbkY2SiKSrEZKdEZYHSm9CYn/LSu9IWxvTMTRZKHvZdgz8kSaEa/ICeKDSlMJ+Ioi3QIZOCc4uiNVfAbmnYPvVW1ZNaWpDuxDBO91fZ8JsBY2kIMDIGvuAKgltBmJSJAopsWYCx6X9XJ7IO50AHLrjleEtkGP/pZOpS14uaz6mqdLZlvjKdQ8/SbO/AVw4IoYcK/l0B0pUdq9sKYqahkudRKwZgN7uKOZMdPsekl8ICcuqB4IaeH0Au5Nuxd9xVSTzsD0GlXl3ggacxlVTFWWHWIWBYe4KwBg4ldnNK+BQJTxep+okeZGHM6TzW+Z/IeKIQTjtoxo6uS4GA3rom9dEQZAaoy7dYF9GSbInR3+sNTwVcDJuN2URlGSOM9wwsg7TQIIGrG1dpllDQGk0Nr5UUOT3Nmh7JoxmujhEslJRODxWZltyRmSCQgQLp8zXWKetOt1iMUQYvO3bl+pAq7yLqCSyWHRbmuNVZNIdOwxHu243umQKHEK/KCw+K94jsUwYKLWpmetHxOeORHShteCtY2POiEFxoRerTLt2mVvxxGVdhSa9stzSFwA+BwE0SXiBeRDbR6Kwuc7PxQHAZRoRprDxebrBF28iytScBwTQMo/9oB7oaOX7IibHt//2o0wlh250Q9KcEgKJqcZFnEVUirXFIhJ6B4JUgWOveP0wEJrzoJpFXIBdBIoAUJ8wCPaBoYxlgn9wMBkre6MmJD9oe/+GPPnIgSyLt4BUhn8xpovZkqqAEiNQRAu2tsVHm4vlgXOxhvF9ZGx8VfQEnIcKBMTKhr16WtfgmuHKOdL7JCMqaMQclTGqKf9vVh4vdexZdVtmeEbQQzf1NMAQC7JzbJ3+SvO4Kxl5Q50Cg7evRbCtw78qM9nPy1uhSF52IXEsZ430wcx8VqGKnPaCK8d3V/Z8wUNSNJaoG21GEwwderClwgyLoDtlVhMRw58zJYLdaCzhE26KSZ3yqNLwOimjZxRsN6ZLmzaFc0X4i7Hug5/fyJ+bDKePyS4cYrbklU64hXGVoAI+otiqcmdnwuSuSPYlzCbOs2KtMsLjJZdpgnPascUcHDAci3qXU4CcTNjFAQBgUqNaChvFZpY5Mx0fSJ2sw4FrEXD+pvTgg5Z/i2FYoPx3d5z9gq/Aejdost0/oEG1ZuhcheXfoqrPWqBWEbB3FkyAPBBEWu8MQlDAE3hXk/4ghNs1yQbJIfNQa321JVS3UMdMRh3KeHc5os/MOTxqVrVSvByoGz5WiE0xxUxjwXYhyTTBB85SuavPSNkzSmdGNDRFSTEiC+Ghs2fSslp+tJoRiv2ZFF/8ty1QJ3Lzx+ELvDTTmYEtu0rFJUWKMQ44FkiISklxh8kQt1IkmGlZVBJASR6ppaLLSKFXgCzmqDO5jEoTM2UzfGXNdmM5UAG+DPKdeHyWMvbQa674OqAaMGF5VcGPixnbOgiI3rbRtu836VuHyZ7m6Y8XflGNBQgrvHbDlicMU=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -755,7 +755,7 @@
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "e7522958-fcc9-407f-a975-ff9b106b908a",
+          "instance_id": "7f19fe41-43ba-43e0-9635-d927f78b748d",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
           "gpu_evidence_count": 8,
           "cert_spki_bound": true,
@@ -763,7 +763,7 @@
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 7.37
+        "latency_s": 5.34
       }
     ]
   },
