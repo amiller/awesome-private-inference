@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-16T13:44:17Z",
+  "generated_at": "2026-08-17T13:52:27Z",
   "window": {
     "first": "2026-04-21",
-    "last": "2026-08-16",
-    "days": 117
+    "last": "2026-08-17",
+    "days": 118
   },
   "calibration": {
-    "observations": 2484,
-    "pass": 1710,
-    "transport": 638,
-    "no-error-invalid": 136,
+    "observations": 2505,
+    "pass": 1719,
+    "transport": 649,
+    "no-error-invalid": 137,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
     "note": "Every red cell in the registry's history was a transport error. The verification path has never rejected a provider."
@@ -188,14 +188,13 @@
       "provider": "venice",
       "model": "e2ee-glm-5",
       "shape": "venice",
-      "status": "invalid",
-      "proven": 5,
+      "status": "partial",
+      "proven": 6,
       "required": 9,
       "missing": [
         "code_measurement_reproducible",
         "prod_os_image",
-        "serving_code_attested",
-        "tdx_verified"
+        "serving_code_attested"
       ],
       "version_identity": "absent",
       "version_source": "none",
@@ -349,9 +348,9 @@
     }
   ],
   "coverage_summary": {
-    "partial": 8,
+    "partial": 9,
     "unreachable": 11,
-    "invalid": 2
+    "invalid": 1
   },
   "unmeasurable_providers": [
     "redpill",
@@ -362,7 +361,7 @@
     "builds_reviewed": 2,
     "backlog": 17,
     "last_audit": "2026-06-18",
-    "days_since_last_audit": 59
+    "days_since_last_audit": 60
   },
   "density": {
     "published_cells": 189,
@@ -381,14 +380,14 @@
     {
       "provider": "chutes",
       "model": "DeepSeek-V3.2-TEE",
-      "observations": 59,
-      "span_days": 59,
+      "observations": 60,
+      "span_days": 60,
       "distinct": 2,
       "novel": 1,
       "revisit": 0,
       "version_source": "instance-sampled",
-      "days_per_deploy": 59.0,
-      "days_per_deploy_corrected": 58.5
+      "days_per_deploy": 60.0,
+      "days_per_deploy_corrected": 59.5
     },
     {
       "provider": "chutes",
@@ -405,38 +404,38 @@
     {
       "provider": "chutes",
       "model": "Kimi-K2.6-TEE",
-      "observations": 59,
-      "span_days": 59,
+      "observations": 60,
+      "span_days": 60,
       "distinct": 2,
       "novel": 1,
       "revisit": 4,
       "version_source": "instance-sampled",
-      "days_per_deploy": 59.0,
-      "days_per_deploy_corrected": 58.5
+      "days_per_deploy": 60.0,
+      "days_per_deploy_corrected": 59.5
     },
     {
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
-      "observations": 59,
-      "span_days": 59,
+      "observations": 60,
+      "span_days": 60,
       "distinct": 2,
       "novel": 1,
-      "revisit": 21,
+      "revisit": 22,
       "version_source": "instance-sampled",
-      "days_per_deploy": 59.0,
-      "days_per_deploy_corrected": 58.5
+      "days_per_deploy": 60.0,
+      "days_per_deploy_corrected": 59.5
     },
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
-      "observations": 59,
-      "span_days": 59,
+      "observations": 60,
+      "span_days": 60,
       "distinct": 2,
       "novel": 1,
       "revisit": 16,
       "version_source": "instance-sampled",
-      "days_per_deploy": 59.0,
-      "days_per_deploy_corrected": 58.5
+      "days_per_deploy": 60.0,
+      "days_per_deploy_corrected": 59.5
     },
     {
       "provider": "near-ai",
@@ -453,14 +452,14 @@
     {
       "provider": "near-ai",
       "model": "openai/gpt-oss-120b",
-      "observations": 89,
-      "span_days": 91,
+      "observations": 90,
+      "span_days": 92,
       "distinct": 19,
       "novel": 18,
       "revisit": 0,
       "version_source": "control-plane",
       "days_per_deploy": 5.1,
-      "days_per_deploy_corrected": 4.5
+      "days_per_deploy_corrected": 4.6
     },
     {
       "provider": "near-ai",
@@ -477,14 +476,14 @@
     {
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
-      "observations": 89,
-      "span_days": 89,
+      "observations": 90,
+      "span_days": 90,
       "distinct": 18,
       "novel": 17,
       "revisit": 0,
       "version_source": "control-plane",
-      "days_per_deploy": 5.2,
-      "days_per_deploy_corrected": 4.7
+      "days_per_deploy": 5.3,
+      "days_per_deploy_corrected": 4.8
     },
     {
       "provider": "redpill",
@@ -549,8 +548,8 @@
     {
       "provider": "tinfoil",
       "model": "router",
-      "observations": 112,
-      "span_days": 112,
+      "observations": 113,
+      "span_days": 113,
       "distinct": 32,
       "novel": 31,
       "revisit": 0,
