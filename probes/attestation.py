@@ -36,11 +36,19 @@ PROVIDER_ENV_KEYS: Dict[str, str] = {
 
 # ACI publishes its report and catalog unauthenticated; the receipt path would
 # need a key, and is deliberately not part of the daily row.
-PUBLIC_ATTESTATION_PROVIDERS = {"tinfoil", "aci-gateway"}
+# Venice serves attestation without auth too (it ignores the header); /models and
+# /chat/completions still need a real key.
+PUBLIC_ATTESTATION_PROVIDERS = {"tinfoil", "aci-gateway", "venice"}
+
+
+# Venice rate-limits /tee/attestation hard enough that four parallel probes return
+# 429 for three of them, which lands on the dashboard as red cells that say nothing
+# about Venice's attestation. Probe it one at a time instead.
+PROVIDER_MAX_WORKERS: Dict[str, int] = {"venice": 1}
 
 
 def probe_provider(
-    provider: str, models: List[str], max_workers: int = 4
+    provider: str, models: List[str], max_workers: int | None = None
 ) -> List[AttestationReport]:
     api_key = os.environ.get(PROVIDER_ENV_KEYS[provider], "").strip()
     base_url = PROVIDER_BASE_URLS[provider]
@@ -61,7 +69,8 @@ def probe_provider(
 
     if not models:
         return []
-    with ThreadPoolExecutor(max_workers=min(max_workers, len(models))) as ex:
+    workers = max_workers if max_workers is not None else PROVIDER_MAX_WORKERS.get(provider, 4)
+    with ThreadPoolExecutor(max_workers=min(workers, len(models))) as ex:
         return list(ex.map(_one, models))
 
 

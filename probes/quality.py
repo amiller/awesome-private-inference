@@ -207,11 +207,16 @@ def compute(latest: dict | None = None) -> dict:
             "no_error_invalid_by_provider": dict(sorted(no_error_invalid.items())),
             "note": (
                 f"{outcomes['no-error-invalid']} of {total_obs} observations were invalid "
-                "with no error attached — the verifier rejecting a row (a required layer "
-                "came back False), not failing to reach it: "
+                "with no error attached: "
                 + ", ".join(f"{p} {n}" for p, n in sorted(no_error_invalid.items()))
-                + ". Every other red cell was a transport error. Retired providers stay in "
-                "this history; removing an integration must not improve the registry's grade."),
+                + ". Read these carefully. A row lands here when a required layer came back "
+                "False without an exception, which is a genuine failure — but until "
+                "2026-08-18 it also caught a failed call to Phala's appraisal service, "
+                "because the helper read an error body as `verified: false`. That is fixed "
+                "(the call now raises, so it is recorded as transport), and counts from "
+                "earlier snapshots mix the two. Every other red cell was a transport error. "
+                "Retired providers stay in this history; removing an integration must not "
+                "improve the registry's grade."),
         },
         "coverage": coverage,
         "coverage_summary": collections.Counter(c["status"] for c in coverage),

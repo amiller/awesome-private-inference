@@ -38,7 +38,8 @@ DEFAULT_BASE_URL = "https://api.chutes.ai"
 CHUTE_IDS: Dict[str, str] = {
     "Qwen3-32B-TEE": "ac059e33-eb27-541c-b9a9-24b214036475",
     "gemma-4-31B-TEE": "42ee92ba-a537-5a73-8741-876067750db7",
-    "GLM-5-TEE": "e51e818e-fa63-570d-9f68-49d7d1b4d12f",
+    "GLM-5.1-TEE": "b048fe26-0352-5c46-acf7-335e527e7f3d",
+    "GLM-5.2-TEE": "08901219-159f-55a7-87cf-9d0d02744668",
     "DeepSeek-V3.2-TEE": "398651e1-5f85-5e50-a513-7c5324e8e839",
     "Kimi-K2.6-TEE": "aac09863-35b4-5d9b-9b67-6e6a9d54273a",
 }

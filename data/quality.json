@@ -1,24 +1,67 @@
 {
-  "generated_at": "2026-08-13T14:32:36Z",
+  "generated_at": "2026-08-18T20:36:29Z",
   "window": {
     "first": "2026-04-21",
-    "last": "2026-08-13",
-    "days": 114
+    "last": "2026-08-18",
+    "days": 115
   },
   "calibration": {
-    "observations": 2421,
-    "pass": 1686,
+    "observations": 2438,
+    "pass": 1701,
     "transport": 605,
-    "no-error-invalid": 130,
+    "no-error-invalid": 132,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
     "no_error_invalid_by_provider": {
+      "aci-gateway": 1,
       "near-ai": 7,
-      "redpill": 123
+      "redpill": 123,
+      "venice": 1
     },
-    "note": "130 of 2421 observations were invalid with no error attached \u2014 the verifier rejecting a row (a required layer came back False), not failing to reach it: near-ai 7, redpill 123. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "132 of 2438 observations were invalid with no error attached: aci-gateway 1, near-ai 7, redpill 123, venice 1. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
+    {
+      "provider": "aci-gateway",
+      "model": "tee.redpill.ai",
+      "shape": "aci-gateway",
+      "status": "verified",
+      "proven": 6,
+      "required": 6,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "aci-gateway",
+      "model": "inference.phala.com",
+      "shape": "aci-gateway",
+      "status": "verified",
+      "proven": 6,
+      "required": 6,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "aci-gateway",
+      "model": "api.redpill.ai",
+      "shape": "aci-gateway",
+      "status": "invalid",
+      "proven": 5,
+      "required": 6,
+      "missing": [
+        "attested_serving_enforced"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": null,
+      "hidden_layers": []
+    },
     {
       "provider": "near-ai",
       "model": "openai/gpt-oss-120b",
@@ -72,47 +115,8 @@
       ]
     },
     {
-      "provider": "tinfoil",
-      "model": "gpt-oss-120b",
-      "shape": "error",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "content-hash",
-      "version_source": "control-plane",
-      "error": "SSLError: HTTPSConnectionPool(host='gpt-oss-120b-0.inf6.tinfoil.sh', port=443): ",
-      "hidden_layers": []
-    },
-    {
-      "provider": "tinfoil",
-      "model": "llama3-3-70b",
-      "shape": "error",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "content-hash",
-      "version_source": "control-plane",
-      "error": "ConnectionError: HTTPSConnectionPool(host='llama3-3-70b.tinfoil.containers.tinfo",
-      "hidden_layers": []
-    },
-    {
-      "provider": "tinfoil",
-      "model": "gemma4-31b",
-      "shape": "error",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 0,
-      "missing": [],
-      "version_identity": "content-hash",
-      "version_source": "control-plane",
-      "error": "ConnectionError: HTTPSConnectionPool(host='gemma4-31b-inf6.tinfoil.containers.ti",
-      "hidden_layers": []
-    },
-    {
       "provider": "venice",
-      "model": "e2ee-glm-5",
+      "model": "e2ee-glm-5-1",
       "shape": "venice",
       "status": "partial",
       "proven": 6,
@@ -131,7 +135,7 @@
     },
     {
       "provider": "venice",
-      "model": "e2ee-qwen3-5-122b-a10b",
+      "model": "e2ee-qwen3-6-35b-a3b",
       "shape": "venice",
       "status": "partial",
       "proven": 6,
@@ -150,25 +154,20 @@
     },
     {
       "provider": "venice",
-      "model": "e2ee-uncensored-24b-p",
+      "model": "e2ee-gemma-4-31b",
       "shape": "venice",
-      "status": "unreachable",
-      "proven": 0,
+      "status": "invalid",
+      "proven": 5,
       "required": 9,
       "missing": [
         "code_measurement_reproducible",
-        "compose_hash_committed",
-        "gpu_attested",
-        "key_derives_to_address",
-        "nonce_bound",
         "prod_os_image",
-        "report_data_binds_key",
         "serving_code_attested",
         "tdx_verified"
       ],
       "version_identity": "absent",
       "version_source": "none",
-      "error": "no TEE attestation available for this model (404)",
+      "error": null,
       "hidden_layers": [
         "code_measurement_reproducible"
       ]
@@ -176,6 +175,26 @@
     {
       "provider": "venice",
       "model": "e2ee-gpt-oss-120b-p",
+      "shape": "venice",
+      "status": "partial",
+      "proven": 5,
+      "required": 9,
+      "missing": [
+        "code_measurement_reproducible",
+        "compose_hash_committed",
+        "prod_os_image",
+        "serving_code_attested"
+      ],
+      "version_identity": "absent",
+      "version_source": "none",
+      "error": null,
+      "hidden_layers": [
+        "code_measurement_reproducible"
+      ]
+    },
+    {
+      "provider": "venice",
+      "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
       "shape": "venice",
       "status": "partial",
       "proven": 5,
@@ -225,20 +244,32 @@
     },
     {
       "provider": "chutes",
-      "model": "GLM-5-TEE",
+      "model": "GLM-5.1-TEE",
       "shape": "chutes-tee",
-      "status": "unreachable",
-      "proven": 0,
+      "status": "partial",
+      "proven": 3,
       "required": 4,
       "missing": [
-        "nonce_bound",
-        "report_data_binds_key",
-        "serving_code_attested",
-        "tdx_verified"
+        "serving_code_attested"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": "RuntimeError: HTTP 404 on /e2e/instances/e51e818e-fa63-570d-9f68-49d7d1b4d12f: {",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "GLM-5.2-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
       "hidden_layers": []
     },
     {
@@ -273,8 +304,9 @@
     }
   ],
   "coverage_summary": {
-    "partial": 10,
-    "unreachable": 5
+    "verified": 2,
+    "invalid": 2,
+    "partial": 13
   },
   "unmeasurable_providers": [
     "venice"
@@ -284,34 +316,74 @@
     "builds_reviewed": 2,
     "backlog": 17,
     "last_audit": "2026-06-18",
-    "days_since_last_audit": 56
+    "days_since_last_audit": 61
   },
   "density": {
-    "published_cells": 135,
-    "carrying_signal": 50,
-    "dashes": 85,
-    "signal_fraction": 0.37
+    "published_cells": 170,
+    "carrying_signal": 92,
+    "dashes": 78,
+    "signal_fraction": 0.541
   },
   "hidden_layer_targets": [
     "tinfoil/router",
-    "venice/e2ee-glm-5",
+    "venice/e2ee-gemma-4-31b",
+    "venice/e2ee-glm-5-1",
     "venice/e2ee-gpt-oss-120b-p",
-    "venice/e2ee-qwen3-5-122b-a10b",
-    "venice/e2ee-uncensored-24b-p"
+    "venice/e2ee-qwen3-6-35b-a3b",
+    "venice/e2ee-qwen3-6-35b-a3b-uncensored-p"
   ],
   "cadence": [
     {
+      "provider": "aci-gateway",
+      "model": "api.redpill.ai",
+      "observations": 1,
+      "span_days": 0,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "retired": false,
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
+      "provider": "aci-gateway",
+      "model": "inference.phala.com",
+      "observations": 1,
+      "span_days": 0,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "retired": false,
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
+      "provider": "aci-gateway",
+      "model": "tee.redpill.ai",
+      "observations": 1,
+      "span_days": 0,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "retired": false,
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
       "provider": "chutes",
       "model": "DeepSeek-V3.2-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 61,
       "distinct": 2,
       "novel": 1,
       "revisit": 0,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 61.0,
+      "days_per_deploy_corrected": 60.5
     },
     {
       "provider": "chutes",
@@ -328,42 +400,68 @@
     },
     {
       "provider": "chutes",
+      "model": "GLM-5.1-TEE",
+      "observations": 1,
+      "span_days": 0,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "instance-sampled",
+      "retired": false,
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
+      "provider": "chutes",
+      "model": "GLM-5.2-TEE",
+      "observations": 1,
+      "span_days": 0,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "instance-sampled",
+      "retired": false,
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
+      "provider": "chutes",
       "model": "Kimi-K2.6-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 61,
       "distinct": 2,
       "novel": 1,
       "revisit": 4,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 61.0,
+      "days_per_deploy_corrected": 60.5
     },
     {
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 61,
       "distinct": 2,
       "novel": 1,
       "revisit": 20,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 61.0,
+      "days_per_deploy_corrected": 60.5
     },
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
-      "observations": 56,
-      "span_days": 56,
+      "observations": 57,
+      "span_days": 61,
       "distinct": 2,
       "novel": 1,
       "revisit": 16,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 56.0,
-      "days_per_deploy_corrected": 55.5
+      "days_per_deploy": 61.0,
+      "days_per_deploy_corrected": 60.5
     },
     {
       "provider": "near-ai",
@@ -381,15 +479,15 @@
     {
       "provider": "near-ai",
       "model": "openai/gpt-oss-120b",
-      "observations": 86,
-      "span_days": 88,
+      "observations": 87,
+      "span_days": 93,
       "distinct": 19,
       "novel": 18,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 4.9,
-      "days_per_deploy_corrected": 4.4
+      "days_per_deploy": 5.2,
+      "days_per_deploy_corrected": 4.6
     },
     {
       "provider": "near-ai",
@@ -407,15 +505,15 @@
     {
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
-      "observations": 86,
-      "span_days": 86,
+      "observations": 87,
+      "span_days": 91,
       "distinct": 18,
       "novel": 17,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.1,
-      "days_per_deploy_corrected": 4.5
+      "days_per_deploy": 5.4,
+      "days_per_deploy_corrected": 4.8
     },
     {
       "provider": "redpill",
@@ -485,14 +583,14 @@
     {
       "provider": "tinfoil",
       "model": "router",
-      "observations": 109,
-      "span_days": 109,
-      "distinct": 31,
-      "novel": 30,
+      "observations": 110,
+      "span_days": 114,
+      "distinct": 32,
+      "novel": 31,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.6,
+      "days_per_deploy": 3.7,
       "days_per_deploy_corrected": 3.1
     }
   ]
