@@ -53,7 +53,7 @@
     produced <strong>0 verification failures</strong>.
     Every failing observation in its history was a transport error
     (649) or an invalid response with no recorded reason
-    (142).
+    (139).
     
     By the rule of three, zero events in 2522 trials puts the
     95% upper bound on the per-observation verification-failure rate at
@@ -69,8 +69,8 @@
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Targets verified</div>
     <div class="text-2xl font-semibold mt-1">2 / 17</div>
-    <div class="text-xs text-slate-500">10 partial ·
-      5 unreachable</div>
+    <div class="text-xs text-slate-500">13 partial ·
+      2 unreachable</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Builds reviewed</div>
@@ -371,16 +371,17 @@
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-gemma-4-31b</td>
           <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700"
-                  title="A response arrived but did not verify.">invalid</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
           </td>
           <td class="p-2 text-center font-mono text-xs">
-            —
+            6/9
+              
             
           </td>
           <td class="p-2 text-xs text-slate-600">
             
-              <span class="font-mono">no response</span>
+              <span class="font-mono">code_measurement_reproducible, prod_os_image, serving_code_attested</span>
             
             
               <div class="mt-1 text-amber-700">not shown on the matrix below:
@@ -394,16 +395,17 @@
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-glm-5-1</td>
           <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700"
-                  title="A response arrived but did not verify.">invalid</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
           </td>
           <td class="p-2 text-center font-mono text-xs">
-            —
+            6/9
+              
             
           </td>
           <td class="p-2 text-xs text-slate-600">
             
-              <span class="font-mono">no response</span>
+              <span class="font-mono">code_measurement_reproducible, prod_os_image, serving_code_attested</span>
             
             
               <div class="mt-1 text-amber-700">not shown on the matrix below:
@@ -441,16 +443,17 @@
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-qwen3-6-35b-a3b</td>
           <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700"
-                  title="A response arrived but did not verify.">invalid</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
           </td>
           <td class="p-2 text-center font-mono text-xs">
-            —
+            6/9
+              
             
           </td>
           <td class="p-2 text-xs text-slate-600">
             
-              <span class="font-mono">no response</span>
+              <span class="font-mono">code_measurement_reproducible, prod_os_image, serving_code_attested</span>
             
             
               <div class="mt-1 text-amber-700">not shown on the matrix below:
@@ -1007,7 +1010,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">9.97s</td>
+          <td class="p-2 text-right text-xs text-slate-500">9.86s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1055,7 +1058,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">10.03s</td>
+          <td class="p-2 text-right text-xs text-slate-500">14.3s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1103,7 +1106,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">9.86s</td>
+          <td class="p-2 text-right text-xs text-slate-500">9.09s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1151,7 +1154,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">8.12s</td>
+          <td class="p-2 text-right text-xs text-slate-500">7.89s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1199,7 +1202,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">9.15s</td>
+          <td class="p-2 text-right text-xs text-slate-500">8.17s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1247,7 +1250,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">7.13s</td>
+          <td class="p-2 text-right text-xs text-slate-500">7.98s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1295,7 +1298,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.76s</td>
+          <td class="p-2 text-right text-xs text-slate-500">4.53s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1343,7 +1346,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">4.8s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.63s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1394,7 +1397,7 @@
           <td class="p-2 text-right text-xs text-slate-500">0.6s</td>
         </tr>
       
-        <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-gemma-4-31b</td>
           <td class="p-2 text-xs text-slate-500">venice</td>
@@ -1404,7 +1407,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
@@ -1439,10 +1442,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.49s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.6s</td>
         </tr>
       
-        <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-glm-5-1</td>
           <td class="p-2 text-xs text-slate-500">venice</td>
@@ -1452,7 +1455,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
@@ -1487,7 +1490,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.93s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.46s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1535,10 +1538,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.62s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.71s</td>
         </tr>
       
-        <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
+        <tr class="border-t border-slate-100 ">
           <td class="p-2 font-medium">venice</td>
           <td class="p-2 font-mono text-xs">e2ee-qwen3-6-35b-a3b</td>
           <td class="p-2 text-xs text-slate-500">venice</td>
@@ -1548,7 +1551,7 @@
           </td>
           
           <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
           </td>
           
           <td class="p-2 text-center">
@@ -1583,7 +1586,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.49s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.31s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1631,7 +1634,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.3s</td>
+          <td class="p-2 text-right text-xs text-slate-500">4.16s</td>
         </tr>
       
       </tbody>
@@ -1696,7 +1699,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-08-18T23:17:52Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/local">local</a> </span>
+    <span>Snapshot 2026-08-18T23:19:49Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/local">local</a> </span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
