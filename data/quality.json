@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18T20:36:29Z",
+  "generated_at": "2026-08-18T21:59:04Z",
   "window": {
     "first": "2026-04-21",
     "last": "2026-08-18",
@@ -7,9 +7,9 @@
   },
   "calibration": {
     "observations": 2522,
-    "pass": 1734,
+    "pass": 1733,
     "transport": 649,
-    "no-error-invalid": 139,
+    "no-error-invalid": 140,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
     "no_error_invalid_by_provider": {
@@ -17,9 +17,9 @@
       "chutes": 1,
       "near-ai": 7,
       "redpill": 123,
-      "venice": 7
+      "venice": 8
     },
-    "note": "139 of 2522 observations were invalid with no error attached: aci-gateway 1, chutes 1, near-ai 7, redpill 123, venice 7. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "140 of 2522 observations were invalid with no error attached: aci-gateway 1, chutes 1, near-ai 7, redpill 123, venice 8. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
@@ -119,13 +119,14 @@
       "provider": "venice",
       "model": "e2ee-glm-5-1",
       "shape": "venice",
-      "status": "partial",
-      "proven": 6,
+      "status": "invalid",
+      "proven": 5,
       "required": 9,
       "missing": [
         "code_measurement_reproducible",
         "prod_os_image",
-        "serving_code_attested"
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "absent",
       "version_source": "none",
@@ -306,8 +307,8 @@
   ],
   "coverage_summary": {
     "verified": 2,
-    "invalid": 2,
-    "partial": 13
+    "invalid": 3,
+    "partial": 12
   },
   "unmeasurable_providers": [
     "venice"
