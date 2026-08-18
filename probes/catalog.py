@@ -34,6 +34,9 @@ MODELS: dict[str, list[str]] = {
     # So we cannot rediscover them, and probing the enclaves where prompts actually
     # run is no longer something a third party can do. Tracked as a coverage loss
     # rather than papered over with rows that are red for transport reasons.
+    # What replaces it: the router row now also checks that every model the router
+    # serves is pinned to a confidential-* repo in the trust anchor, so a model
+    # served from nothing reviewed still trips the row (verifiers/tinfoil.py).
     "tinfoil": [
         "router",
     ],
