@@ -34,11 +34,11 @@ all-or-nothing Stage 1 requirements linked by this registry was demonstrated.
 |---|---|---|
 | Immutable attestation and upgrade transparency | Fail | The live Compose is quote-bound, but no on-chain or equivalent immutable deployment history was demonstrated. |
 | Auditable code | **Pass** | The report names a public repository and commit. |
-| Reproducible code measurement | Fail | The current Compose pins every container image by digest, but the report's gateway image digest and image provenance are `null`, and this audit did not reproduce the source-to-image build. |
-| Developer has no access to secrets | Fail | Custody policy is skipped, the subject is `null`, and the measured deployment permits an operator-supplied root SSH key. |
+| Reproducible code measurement | Fail | The current Compose pins every container image by digest, but the report's gateway image digest and image provenance are `null`, and this audit did not reproduce the source-to-image build. The launcher clones and builds the gateway from `PRIVATE_AI_GATEWAY_REPO_COMMIT` at boot, so unlike the other three services the gateway binary is bound by a git commit rather than an image digest. |
+| Developer has no access to secrets | Fail | Custody policy is unenforced by the public client and the subject is `null`; the measured deployment still permits an operator-supplied root SSH key (`DSTACK_ROOT_PUBLIC_KEY`), now on the production OS. The published custody chain is itself complete and appraisable — the only missing input is a dstack KMS root to pin. |
 | Upgrade process and public history | Fail | No notice mechanism or publicly queryable deployment history was demonstrated. The withdrawal requirement is vacuous for ephemeral requests, but the history requirement is not. |
 | No centralized integrity or privacy dependency | Fail | The control-plane URL and credentials are operator-injected, and active routes live in admin-mutable state outside the measured Compose. Session pinning limits substitution when clients use it. |
-| No backdoor or debug path | Fail | The dev-OS root path is not ruled out, and public logs explicitly enable raw upstream error details that can echo request fragments. |
+| No backdoor or debug path | Fail | Public logs explicitly enable raw upstream error details that can echo request fragments, and the legacy `/v1/attestation/report` returns a passing attestation for any model name. The dev-OS half of this row is **resolved** as of 2026-08-18. |
 
 This is a deployment score, not a dismissal of ACI's verified properties. The
 quote, keyset, measured Compose, TLS binding, session pins, and receipts all
@@ -81,9 +81,8 @@ A local run of the deployment's exact pinned dstack-verifier digest returned
 validation of dstack's published image archive resolved the bound hash to
 version 0.5.9 with `is_dev: true`.
 
-The audit did not send a paid inference request, so it did not independently
-exercise or verify a per-request receipt. Receipt support is established here by
-the attested source and public endpoint, not by a sampled live receipt.
+A live receipt was exercised on 2026-08-18 and passes every section 9.3 check
+(see Current gaps).
 
 ## Upstream evidence published by the gateway
 
@@ -105,14 +104,31 @@ They are not all equivalent to independently reviewed release provenance.
 
 ## Current gaps
 
-- **The gateway deployment retains operator access paths.** The quote-bound VM
-  config identifies `dstack-dev-0.5.9-de9c74f0`. Its allowed environment names
-  include `DSTACK_ROOT_PUBLIC_KEY`, and its measured pre-launch script writes a
-  supplied value to root's `authorized_keys`. dstack's published
-  [dev-image recipe](https://github.com/Dstack-TEE/meta-dstack/blob/7cc276ff0ef82650c65b86ba000cfa35a604818a/meta-dstack/recipes-core/images/dstack-rootfs-dev.inc)
-  includes OpenSSH and enables root public-key login. Attestation does not reveal
-  whether a key was actually supplied, so it cannot rule out operator access to
-  the TD. That is enough to fail the developer-access and backdoor requirements.
+- **The gateway moved to the production OS on or before 2026-08-18.** The
+  quote-bound VM config now identifies `dstack-0.5.9-bd369a8c`, and
+  `aci verify --require-production-os` passes on both TEE-only hostnames.
+  Resolved independently of the client's allowlist: `mr_bd369a8c….tar.gz` from
+  `download.dstack.org` satisfies `os_image_hash == sha256(sha256sum.txt)` with
+  `metadata.json` listed in it, giving a cryptographically bound
+  `is_dev: false`. The same procedure on the previously measured
+  `de9c74f0…` returns `is_dev: true`, so the change is real.
+  `DSTACK_ROOT_PUBLIC_KEY` remains in `allowed_envs` and the measured
+  pre-launch script still writes it to root's `authorized_keys`, so attestation
+  still cannot rule out a supplied key — but on the production image that path
+  should be inert.
+
+- **The legacy attestation endpoint attests any model name.**
+  `GET /v1/attestation/report?model=<id>&nonce=<hex>` is still served for
+  pre-ACI clients and still passes every pre-ACI check: genuine TDX quote,
+  `report_data == addr.ljust(32) || nonce`, `keccak(pubkey)[-20:] == signing_address`.
+  The `model` parameter is ignored — `anthropic/claude-opus-5` and
+  `does/not-exist-xyz` both return 200 with the same gateway signing address
+  `0x79a5061e…`. The companion `GET /v1/signature/{chat_id}` signs
+  `sha256(request):sha256(response)`, dropping the `model:` prefix that
+  upstream's own related-work note documents for this convention. Neither
+  legacy surface binds the model actually served. This is why the retired
+  `verifiers/redpill.py` must not simply be repointed at `tee.redpill.ai`: it
+  would mint a green row for any model string.
 - **The measured logging policy can disclose request fragments.** The deployment
   sets `public_logs: true` and `RUST_LOG=info,request_outcome=debug`. The attested
   source says upstream error bodies can echo request content and, at that debug
@@ -127,11 +143,39 @@ They are not all equivalent to independently reviewed release provenance.
   `aci sessions https://tee.redpill.ai --json` accepted 192 of 327 records.
   Every observed `aci-service/v2`, PhalaDirect, NEAR, SecretAI, and Tinfoil
   record passed. All 135 Chutes records failed. The Chutes records carried no
-  ACI section 8.2 evidence digest and data. For a sampled Chutes record, the
-  `session_id` also matched SHA-256 of the exact served bytes, while the current
-  [ACI specification](https://github.com/Dstack-TEE/private-ai-gateway/blob/main/spec/aci.md#8-attested-sessions)
-  requires `SHA256(JCS(document))`. A client can accept the passing sessions,
-  but it must reject the Chutes sessions.
+  ACI section 8.2 evidence digest and data, so section 9.2 steps 2 and 4 cannot
+  be performed on them. A client can accept the passing sessions, but it must
+  reject the Chutes sessions.
+
+  *Correction (2026-08-18):* an earlier draft of this page also reported that a
+  sampled Chutes `session_id` matched SHA-256 of the exact served bytes rather
+  than `SHA256(JCS(document))`. That does not reproduce. Fetching the full
+  records through `/v1/aci/sessions/{id}`, every id recomputes correctly across
+  all six adapters, Chutes included. Section 8.1 abbreviates *list* entries —
+  they drop `evidence.data` and by design do not hash to their id — which is
+  what the earlier check hashed. The missing evidence is the whole finding.
+- **One attested identity spans two serving regimes.** The measured
+  `gateway.config.json` sets `tee_only_domains` to `tee.redpill.ai` and
+  `inference.phala.com` only. `api.redpill.ai` is served by the same CVM under
+  the same workload keyset, with its own attested TLS SPKI, and is not
+  TEE-only — so attested serving is not forced there: 67 models versus 25, the
+  extra 42 including `anthropic/claude-opus-5`, `openai/o3` and
+  `google/gemini-2.5-pro`. Verified with a live receipt: that model returns
+  HTTP 200 under the same keyset digest with
+  `upstream.verified: result=failed, required=false, session_id=None`. The
+  receipt still verifies, so a client checking signatures but not `required`
+  sees a green chain over an unattested hop. Sending
+  `provider.aci_verified: true` is refused 503 with no `request.forwarded`
+  event, so the guard works — it is opt-in, and invisible before you send.
+
+- **Receipts verify end to end (2026-08-18).** A live completion on
+  `tee.redpill.ai` produced a receipt whose ed25519 signature checks out under
+  the attested `receipt_signing_keys` entry, whose `request.received` and
+  `response.returned` hashes match the exact bytes on the wire, and whose cited
+  session recomputes to its id with `served_at` inside the validity window —
+  all seven section 9.3 checks. The earlier note that this audit had not
+  exercised a receipt no longer applies.
+
 - **Key custody is not checked by the public client.** The attestation includes
   dstack KMS custody evidence, but the CLI explicitly skips the custody-policy
   check. Presence of the evidence is not a pass.
@@ -152,7 +196,13 @@ They are not all equivalent to independently reviewed release provenance.
 
 ## What would change the verdict
 
-- Move the gateway to the production dstack OS and remove every root-key input.
+- ~~Move the gateway to the production dstack OS~~ (done, 2026-08-18) and remove
+  the `DSTACK_ROOT_PUBLIC_KEY` input.
+- Stop accepting a `model` parameter on `/v1/attestation/report` that scopes
+  nothing, or retire the legacy surface on a published date.
+- Surface the per-host serving policy in the attestation report, so a client can
+  see before sending whether attested serving is enforced on the host it is
+  talking to.
 - Disable raw error-detail logging and keep any prompt-adjacent logs private.
 - Publish a reproducible source-to-image record for the pinned gateway release.
 - Put deployment and routing-policy changes in a public immutable history, or
@@ -175,6 +225,10 @@ with a dstack verifier that validates the same boot measurements.
 
 ## History
 
+- **2026-08-18:** Independent re-check. Production OS confirmed and bound;
+  `--require-production-os` passes; receipts exercised end to end; legacy
+  endpoint and `api.redpill.ai` findings recorded; the earlier JCS
+  content-address claim withdrawn.
 - **2026-08-13:** Confirmed the verifier digest pin, strict OS rejection, and
   refreshed session totals.
 - **2026-08-12:** Recorded live gateway and session-verification results.

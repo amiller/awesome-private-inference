@@ -67,15 +67,15 @@ SCORECARD_TOOLTIPS = {
 # so a reader can tell how much of the page is measurement and how much is opinion.
 # A claim here that the probe can check belongs in a scorecard column instead.
 EDITORIAL_NOTES = [
-    {"checked": "2026-08-13", "title": "Current RedPill uses ACI.",
-     "body": "The live tee.redpill.ai gateway scores Stage 0 even though five of six ACI "
-             "protocol checks passed. Its measured deployment uses a dstack dev OS, permits an "
-             "operator-supplied root SSH key, and publishes logs while enabling raw upstream "
-             "error snippets. The strict production-OS appraisal rejects that live image; all "
-             "current Compose images, including the dstack verifier, are now digest-pinned. "
-             "Only one of seven Stage 1 requirements was demonstrated. A repeated "
-             "session audit accepted all observed PhalaDirect, ACI-service, NEAR, SecretAI, and "
-             "Tinfoil records and rejected all Chutes records."},
+    {"checked": "2026-08-18", "title": "Current RedPill uses ACI.",
+     "body": "The live tee.redpill.ai gateway scores Stage 0 even though all six ACI "
+             "protocol checks now pass, including the strict production-OS appraisal — the "
+             "deployment moved from the dstack dev image to prod 0.5.9 on or before "
+             "2026-08-18. Receipts verify end to end. Stage 0 rests on the legacy "
+             "/v1/attestation/report, which ignores its model parameter and attests any name; "
+             "public logs with raw upstream error detail; and an operator root-key input. "
+             "api.redpill.ai shares the same attested keyset but is not TEE-only. A session "
+             "audit accepted 163 of 237 records, rejecting only Chutes for missing evidence."},
     {"checked": "2026-06-18", "title": "Chutes' serving code is not measured.",
      "body": "serve.py on the prompt-plaintext path is CFSV-excluded and in no RTMR, and the "
              "model name is not bound to the quote. A passing quote proves genuine TDX running "

@@ -6,13 +6,17 @@
     "days": 114
   },
   "calibration": {
-    "observations": 1737,
-    "pass": 1290,
-    "transport": 440,
-    "no-error-invalid": 7,
+    "observations": 2421,
+    "pass": 1686,
+    "transport": 605,
+    "no-error-invalid": 130,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
-    "note": "Every red cell in the active providers' retained history was a transport error. The verification path has never rejected a provider."
+    "no_error_invalid_by_provider": {
+      "near-ai": 7,
+      "redpill": 123
+    },
+    "note": "130 of 2421 observations were invalid with no error attached \u2014 the verifier rejecting a row (a required layer came back False), not failing to reach it: near-ai 7, redpill 123. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
@@ -305,6 +309,7 @@
       "novel": 1,
       "revisit": 0,
       "version_source": "instance-sampled",
+      "retired": false,
       "days_per_deploy": 56.0,
       "days_per_deploy_corrected": 55.5
     },
@@ -317,6 +322,7 @@
       "novel": 1,
       "revisit": 6,
       "version_source": "instance-sampled",
+      "retired": false,
       "days_per_deploy": 43.0,
       "days_per_deploy_corrected": 42.5
     },
@@ -329,6 +335,7 @@
       "novel": 1,
       "revisit": 4,
       "version_source": "instance-sampled",
+      "retired": false,
       "days_per_deploy": 56.0,
       "days_per_deploy_corrected": 55.5
     },
@@ -341,6 +348,7 @@
       "novel": 1,
       "revisit": 20,
       "version_source": "instance-sampled",
+      "retired": false,
       "days_per_deploy": 56.0,
       "days_per_deploy_corrected": 55.5
     },
@@ -353,6 +361,7 @@
       "novel": 1,
       "revisit": 16,
       "version_source": "instance-sampled",
+      "retired": false,
       "days_per_deploy": 56.0,
       "days_per_deploy_corrected": 55.5
     },
@@ -365,6 +374,7 @@
       "novel": 9,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 3.4,
       "days_per_deploy_corrected": 2.9
     },
@@ -377,6 +387,7 @@
       "novel": 18,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 4.9,
       "days_per_deploy_corrected": 4.4
     },
@@ -389,6 +400,7 @@
       "novel": 9,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 3.4,
       "days_per_deploy_corrected": 2.9
     },
@@ -401,8 +413,35 @@
       "novel": 17,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 5.1,
       "days_per_deploy_corrected": 4.5
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/gpt-oss-20b",
+      "observations": 33,
+      "span_days": 40,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "retired": true,
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
+    },
+    {
+      "provider": "redpill",
+      "model": "phala/qwen-2.5-7b-instruct",
+      "observations": 34,
+      "span_days": 40,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "retired": true,
+      "days_per_deploy": null,
+      "days_per_deploy_corrected": null
     },
     {
       "provider": "tinfoil",
@@ -413,6 +452,7 @@
       "novel": 6,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 14.5,
       "days_per_deploy_corrected": 14.0
     },
@@ -425,6 +465,7 @@
       "novel": 1,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 82.0,
       "days_per_deploy_corrected": 81.5
     },
@@ -437,6 +478,7 @@
       "novel": 2,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 46.5,
       "days_per_deploy_corrected": 46.0
     },
@@ -449,6 +491,7 @@
       "novel": 30,
       "revisit": 0,
       "version_source": "control-plane",
+      "retired": false,
       "days_per_deploy": 3.6,
       "days_per_deploy_corrected": 3.1
     }

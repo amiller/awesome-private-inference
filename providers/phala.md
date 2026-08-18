@@ -40,8 +40,9 @@ in its automated daily matrix.
 2026-08-13 produced the same result documented on the [RedPill page](./redpill.md):
 five of six ACI protocol checks passed, while the public key-custody policy check
 was skipped. Against the registry's all-or-nothing Stage 1 checklist, only
-auditable source was demonstrated. The dev-OS root-access path and public debug
-logging are independently disqualifying; immutable upgrade history,
+auditable source was demonstrated. Public debug logging, an operator root-key
+input, and a legacy endpoint that attests any model name remain; immutable
+upgrade history,
 reproducible source-to-image provenance, custody policy, and measured routing
 policy were also not demonstrated.
 
@@ -92,13 +93,15 @@ TDX quote, replays the dstack event log to RTMR3, extracts the measured
 Compose preimage is measurement-bound. It does not prove the source revision was
 reproducibly built into an accepted image.
 
-The ACI clients now also offer an opt-in production-OS allowlist. It rejected
-the shared gateway's current dev-image hash. This is an RTMR3 appraisal, not a
-replacement for the dstack verifier's reconstruction of MRTD and RTMR0-2 from
-the same quote, event log, and VM config. A local run of the exact verifier
-digest pinned by the deployment returned `is_valid: true` and
-`os_image_hash_verified: true`; a separate validation of dstack's published
-archive resolved the bound 0.5.9 image with `is_dev: true`.
+The ACI clients now also offer an opt-in production-OS allowlist. As of
+2026-08-18 the shared gateway **passes** it: the bound image is
+`dstack-0.5.9-bd369a8c`, resolved against dstack's published archive as 0.5.9
+with `is_dev: false`. (Through 2026-08-13 it was `dstack-dev-0.5.9-de9c74f0`,
+`is_dev: true`, and the appraisal rejected it.) The flag is bound to the
+attested hash — `os_image_hash == sha256(sha256sum.txt)`, and `sha256sum.txt`
+pins `metadata.json` — so the download server cannot lie about it. This remains
+an RTMR3 appraisal, not a replacement for the dstack verifier's reconstruction
+of MRTD and RTMR0-2 from the same quote, event log, and VM config.
 
 ### TLS channel binding
 
@@ -120,9 +123,13 @@ public policy check not implemented," rather than "no evidence exists."
 
 ## Remaining gaps
 
-- The shared gateway uses a measured dstack dev OS, permits injection of a root
-  SSH key, and publishes logs while enabling raw upstream error snippets. These
-  facts make the gateway Stage 0 even when an upstream session passes.
+- The shared gateway still permits injection of a root SSH key
+  (`DSTACK_ROOT_PUBLIC_KEY` in `allowed_envs`, written to `authorized_keys` by
+  the measured pre-launch script) and publishes logs while enabling raw upstream
+  error snippets. The dev-OS half of this gap is resolved as of 2026-08-18.
+- The legacy `/v1/attestation/report` surface returns a passing pre-ACI
+  attestation for any `model` value, including models the gateway does not serve
+  in a TEE. See [RedPill](./redpill.md).
 - Active route state and control-plane coordinates are operator-mutable outside
   the measured Compose. ACI's verified-route requirement and optional session
   pins constrain this power, but clients must use the pins when route identity
@@ -160,7 +167,8 @@ cargo run --bin aci -- verify https://inference.phala.com --require-production-o
 cargo run --bin aci -- sessions https://inference.phala.com
 ```
 
-The production-OS option currently rejects the shared gateway and should be
-used together with the dstack boot-measurement verifier.
+The production-OS option passes as of 2026-08-18 and should still be used
+together with the dstack boot-measurement verifier, which binds the OS hash
+through MRTD and RTMR0-2.
 
 Snapshots: [data/snapshots/](../data/snapshots/).

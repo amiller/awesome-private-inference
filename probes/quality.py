@@ -2,8 +2,9 @@
 
 The registry grades providers. Nothing graded the registry. This does, from the
 snapshot series on disk, and writes data/quality.json for the dashboard to render.
-Historical observations are included only for providers present in data/latest.json;
-retired integrations remain archival data rather than active quality inputs.
+Coverage is scoped to the providers in data/latest.json. Outcome history is not:
+a retired integration keeps its observations, so removing one cannot improve the
+registry's own grade (see RETIRED_VERSION_IDENTITY).
 
 Five questions, all answered from data rather than asserted in prose:
 
@@ -54,6 +55,17 @@ VERSION_IDENTITY = {
     "venice": (None, "absent", "none"),
 }
 
+# Providers we no longer probe, kept so their observations still count in the
+# outcome history. Retiring an integration must not retroactively improve the
+# registry's own grade: redpill alone is 123 of the 130 `no-error-invalid` rows
+# ever recorded, and dropping it would quietly rewrite the one statistic on this
+# page that tracks the verification path rejecting something.
+RETIRED_VERSION_IDENTITY = {
+    "redpill": ("os_image", "mutable-tag", "control-plane"),
+}
+
+ALL_VERSION_IDENTITY = {**VERSION_IDENTITY, **RETIRED_VERSION_IDENTITY}
+
 TRANSPORT = re.compile(
     r"HTTP [45]\d\d|ConnectionError|SSLError|Timeout|"
     r"no TEE attestation available|catalog-only", re.I)
@@ -95,20 +107,23 @@ def compute(latest: dict | None = None) -> dict:
 
     dates, outcomes = [], collections.Counter(
         {k: 0 for k in ("pass", "transport", "no-error-invalid", "verification-failure")})
+    no_error_invalid = collections.Counter()
     versions = collections.defaultdict(list)
 
     for date, snap in snapshots:
         dates.append(date)
         for provider, rows in snap.get("attestations", {}).items():
-            if provider not in active_providers:
+            identity = ALL_VERSION_IDENTITY.get(provider)
+            if identity is None:
                 continue
-            field = VERSION_IDENTITY[provider][0]
+            field = identity[0]
             for row in rows:
                 err = row.get("error") or ""
                 if row.get("valid"):
                     outcomes["pass"] += 1
                 elif not err:
                     outcomes["no-error-invalid"] += 1
+                    no_error_invalid[provider] += 1
                 elif TRANSPORT.search(err):
                     outcomes["transport"] += 1
                 else:
@@ -174,7 +189,8 @@ def compute(latest: dict | None = None) -> dict:
             "provider": provider, "model": model, "observations": len(obs),
             "span_days": span, "distinct": len(seen), "novel": novel,
             "revisit": revisit,
-            "version_source": VERSION_IDENTITY[provider][2],
+            "version_source": ALL_VERSION_IDENTITY[provider][2],
+            "retired": provider in RETIRED_VERSION_IDENTITY,
             "days_per_deploy": round(span / novel, 1) if novel else None,
             "days_per_deploy_corrected": corrected,
         })
@@ -187,8 +203,14 @@ def compute(latest: dict | None = None) -> dict:
             "observations": total_obs,
             **{k: v for k, v in outcomes.items()},
             "red_cells_that_were_verification_failures": outcomes["verification-failure"],
-            "note": ("Every red cell in the active providers' retained history was a "
-                     "transport error. The verification path has never rejected a provider."),
+            "no_error_invalid_by_provider": dict(sorted(no_error_invalid.items())),
+            "note": (
+                f"{outcomes['no-error-invalid']} of {total_obs} observations were invalid "
+                "with no error attached — the verifier rejecting a row (a required layer "
+                "came back False), not failing to reach it: "
+                + ", ".join(f"{p} {n}" for p, n in sorted(no_error_invalid.items()))
+                + ". Every other red cell was a transport error. Retired providers stay in "
+                "this history; removing an integration must not improve the registry's grade."),
         },
         "coverage": coverage,
         "coverage_summary": collections.Counter(c["status"] for c in coverage),

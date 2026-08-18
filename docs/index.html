@@ -49,17 +49,17 @@
   <h2 class="text-sm uppercase font-semibold tracking-wider text-slate-500">How much to trust this page</h2>
   <p class="mt-2 text-sm leading-relaxed text-slate-800">
     Over <strong>114 days</strong> and
-    <strong>1737 observations</strong>, this instrument has
+    <strong>2421 observations</strong>, this instrument has
     produced <strong>0 verification failures</strong>.
     Every failing observation in its history was a transport error
-    (440) or an invalid response with no recorded reason
-    (7).
+    (605) or an invalid response with no recorded reason
+    (130).
     
-    By the rule of three, zero events in 1737 trials puts the
+    By the rule of three, zero events in 2421 trials puts the
     95% upper bound on the per-observation verification-failure rate at
-    <strong>0.173%</strong>. That is the honest reading:
+    <strong>0.124%</strong>. That is the honest reading:
     not "providers are safe", but "if this check fails, it fails less often than about once in
-    579 observations — or it is not wired to anything."
+    807 observations — or it is not wired to anything."
     We cannot yet distinguish those two cases.
     
   </p>
@@ -590,6 +590,30 @@
               title="control-plane version string — revisits are not meaningful here">0</td>
           <td class="p-2 text-right">5.1</td>
           <td class="p-2 text-right font-semibold">4.5</td>
+        </tr>
+      
+        <tr class="border-t border-slate-100">
+          <td class="p-2 font-mono text-xs">redpill/phala/gpt-oss-20b</td>
+          <td class="p-2 text-xs text-slate-400">control-plane</td>
+          <td class="p-2 text-right">33</td>
+          <td class="p-2 text-right">1</td>
+          <td class="p-2 text-right font-semibold">0</td>
+          <td class="p-2 text-right text-slate-300"
+              title="control-plane version string — revisits are not meaningful here">0</td>
+          <td class="p-2 text-right">—</td>
+          <td class="p-2 text-right font-semibold">—</td>
+        </tr>
+      
+        <tr class="border-t border-slate-100">
+          <td class="p-2 font-mono text-xs">redpill/phala/qwen-2.5-7b-instruct</td>
+          <td class="p-2 text-xs text-slate-400">control-plane</td>
+          <td class="p-2 text-right">34</td>
+          <td class="p-2 text-right">1</td>
+          <td class="p-2 text-right font-semibold">0</td>
+          <td class="p-2 text-right text-slate-300"
+              title="control-plane version string — revisits are not meaningful here">0</td>
+          <td class="p-2 text-right">—</td>
+          <td class="p-2 text-right font-semibold">—</td>
         </tr>
       
         <tr class="border-t border-slate-100">
@@ -1368,8 +1392,8 @@
   <ul class="space-y-2 text-sm text-slate-800">
 
     <li class="flex gap-2">
-      <span class="text-slate-400 font-mono text-xs whitespace-nowrap pt-0.5">2026-08-13</span>
-      <span><strong>Current RedPill uses ACI.</strong> The live tee.redpill.ai gateway scores Stage 0 even though five of six ACI protocol checks passed. Its measured deployment uses a dstack dev OS, permits an operator-supplied root SSH key, and publishes logs while enabling raw upstream error snippets. The strict production-OS appraisal rejects that live image; all current Compose images, including the dstack verifier, are now digest-pinned. Only one of seven Stage 1 requirements was demonstrated. A repeated session audit accepted all observed PhalaDirect, ACI-service, NEAR, SecretAI, and Tinfoil records and rejected all Chutes records.</span>
+      <span class="text-slate-400 font-mono text-xs whitespace-nowrap pt-0.5">2026-08-18</span>
+      <span><strong>Current RedPill uses ACI.</strong> The live tee.redpill.ai gateway scores Stage 0 even though all six ACI protocol checks now pass, including the strict production-OS appraisal — the deployment moved from the dstack dev image to prod 0.5.9 on or before 2026-08-18. Receipts verify end to end. Stage 0 rests on the legacy /v1/attestation/report, which ignores its model parameter and attests any name; public logs with raw upstream error detail; and an operator root-key input. api.redpill.ai shares the same attested keyset but is not TEE-only. A session audit accepted 163 of 237 records, rejecting only Chutes for missing evidence.</span>
     </li>
 
     <li class="flex gap-2">

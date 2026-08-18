@@ -216,3 +216,57 @@ tokens.
 - Preserve current limitations: custody-policy skip, unreproduced source label,
   unknown serving software and weights, unsigned adapter JWTs, and the failed
   Chutes session records.
+
+## Follow-up, 2026-08-18 (independent re-check)
+
+Re-run with the `aci` client built from `private-ai-gateway@HEAD`, plus a Python
+reimplementation of the §3.1/§3.2/§9.2 checks and a live receipt exercise.
+
+**The OS finding is resolved.** The bound image is now
+`dstack-0.5.9-bd369a8c` and `--require-production-os` passes on both TEE-only
+hostnames (6 pass, 1 custody skip). Resolved independently of the client's
+allowlist by downloading `mr_bd369a8c….tar.gz` and checking
+`os_image_hash == sha256(sha256sum.txt)` with `metadata.json` listed inside it:
+version 0.5.9, `is_dev: false`. The same procedure on the previously measured
+`de9c74f0…` returns `is_dev: true`. Live Compose hash `73fa4608…`, source commit
+`30296dd`.
+
+**The session content-address claim is withdrawn.** Fetching full records via
+`/v1/aci/sessions/{id}`, every id recomputes as `sha256(JCS(document))` across
+all six adapters, Chutes included (18/18 sampled). Spec §8.1 abbreviates list
+entries — they drop `evidence.data` and by design do not hash to their id. The
+earlier finding hashed a list entry. The Chutes failure is solely the absent
+§8.2 evidence, reproduced today: 163 of 237 accepted, all 74 rejections Chutes
+with `evidence: {}`.
+
+**Receipts work.** A live completion on `tee.redpill.ai` passes all seven §9.3
+checks — ed25519 signature over `JCS(receipt − signature)` under the attested
+`receipt_signing_keys` entry, `request.received` and `response.returned` hashes
+matching our own wire bytes, cited session recomputing to its id with
+`served_at` inside its window.
+
+**New: the legacy surface attests any model name.**
+`/v1/attestation/report?model=<id>&nonce=<hex>` still serves the pre-ACI shape
+and still passes every pre-ACI check, but the `model` parameter is ignored and
+the quote is gateway-scoped. `anthropic/claude-opus-5` and `does/not-exist-xyz`
+both return 200 with signing address `0x79a5061e…`. The companion
+`/v1/signature/{chat_id}` signs `sha256(request):sha256(response)` — without the
+`model:` prefix that upstream's related-work note documents for this convention.
+
+**New: `api.redpill.ai` shares the keyset but not the regime.** Same CVM, same
+`workload_keyset_digest`, own attested SPKI, absent from `tee_only_domains`: 67
+models against 25. A `claude-opus-5` prompt there returns 200 with
+`upstream.verified: result=failed, required=false, session_id=None`, on a
+receipt that still verifies. Sending `provider.aci_verified: true` is refused
+503 with no `request.forwarded` event, so the guard is real but opt-in.
+
+**Custody is more checkable than "skipped" implies.** Reading
+`src/aci/verifier/dstack.rs:227-278`: `signature_chain[0]` recovers the app key
+from `"<purpose>:<compressed kms_public_key>"`, `signature_chain[1]` recovers
+the KMS root from `"dstack-kms-issued:" || app_id || app_pubkey`, and `app_id`
+comes from the RTMR3-verified event log. The only missing input is a KMS root to
+pin — and the gateway's own upstream verifier refuses to start without one
+(`EmptyKmsRootPolicy`), a standard no public client currently applies to it.
+
+Full write-ups: [aci-protocol](https://github.com/amiller/devproof-audits-guide/tree/main/case-studies/aci-protocol)
+and [redpill-phala-aci-gateway](https://github.com/amiller/devproof-audits-guide/tree/main/case-studies/redpill-phala-aci-gateway).
