@@ -19,9 +19,9 @@ sidecar, measurement registry, and LUKS key release rather than Phala's dstack.
 - **Published measurements:** `GET /servers/tee/measurements`
 - **Auth:** Bearer API key (`cpk_...`).
 
-Chutes is reached two ways in this registry: **directly** (`chutes.ai`, documented here, not
-yet in the daily probe) and **relayed through RedPill** as the `chutes` attestation shape —
-see [RedPill](./redpill.md).
+Chutes is reached directly by the current daily probe. The RedPill ACI gateway
+also represents Chutes channels as upstream-session records. Those records must
+pass the ACI session-integrity checks described on the [RedPill page](./redpill.md).
 
 ## What re-verifies (the crypto core is sound — confirmed live)
 
@@ -38,10 +38,11 @@ confirms it against the live API:
 
 ## Scorecard
 
-Stage 0 for confidential inference. RedPill's `chutes` relay rows re-verify TDX + the
-`SHA256(nonce‖pubkey)` binding and show `valid` on the [live matrix](https://amiller.github.io/awesome-private-inference)
-— but that is exactly the "verified quote ≠ verified model or code" gap below: a passing quote
-proves a genuine TDX+GPU running *a* Chutes base image, not *which* model on *which* code.
+Stage 0 for confidential inference. The direct rows re-verify TDX and the
+`SHA256(nonce || pubkey)` binding. That is exactly the
+"verified quote does not identify the model or serving code" gap below: a passing
+quote proves a genuine TDX workload running a Chutes base image, not which model
+or application code handled plaintext.
 
 ## Known gaps
 
@@ -94,4 +95,4 @@ curl -s -H "Authorization: Bearer $(cat /tmp/ck)" \
 
 ## History
 
-Snapshots: [data/snapshots/](../data/snapshots/) (RedPill `chutes`-shape rows).
+Snapshots: [data/snapshots/](../data/snapshots/).

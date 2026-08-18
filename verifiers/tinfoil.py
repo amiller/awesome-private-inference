@@ -286,6 +286,39 @@ def _fetch_enclave_attestation(host: str, timeout: int = 30) -> Tuple[str, str]:
     return j["format"], j["body"]
 
 
+ROUTER_CONFIG_URL = (
+    "https://raw.githubusercontent.com/tinfoilsh/confidential-model-router/main/config.yml"
+)
+CATALOG_URL = "https://inference.tinfoil.sh/v1/models"
+
+
+def model_repo_anchor(timeout: int = 30) -> Dict[str, Any]:
+    """Check every served model against the router's model -> repo trust anchor.
+
+    Tinfoil's per-model enclaves stopped being publicly reachable in August 2026,
+    and their hostnames now live in Tinfoil's backend rather than in the attested
+    config, so a third party can no longer attest the enclave that runs a prompt.
+    What is still checkable is that each model the router serves is pinned to a
+    named confidential-* repo — an unpinned model would be one served from
+    something nobody agreed to review.
+
+    Weaker than the enclave probe it replaces, and differently bound: this anchor
+    is a repo file compiled into the router release (sigstore attests digest <->
+    repo), NOT the hardware-bound /config.yml, which carries only containers,
+    shim, and machine shape.
+    """
+    pinned = (yaml.safe_load(requests.get(ROUTER_CONFIG_URL, timeout=timeout).text) or {}).get(
+        "models") or {}
+    served = [m["id"] for m in requests.get(CATALOG_URL, timeout=timeout).json().get("data", [])]
+    unpinned = sorted(m for m in served if m not in pinned)
+    return {
+        "models_served": len(served),
+        "models_pinned": len(pinned),
+        "models_unpinned": unpinned,
+        "repos": sorted({v["repo"] for v in pinned.values() if isinstance(v, dict) and "repo" in v}),
+    }
+
+
 def _fetch_sigstore_bundle_for_repo(repo: str, timeout: int = 30) -> Tuple[str, dict]:
     """Fetch latest release digest + sigstore bundle from github-proxy."""
     rel = requests.get(f"{GITHUB_PROXY}/repos/{repo}/releases/latest", timeout=timeout)
@@ -470,4 +503,16 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     if model in TINFOIL_MODELS and model != "router":
         host, repo = TINFOIL_MODELS[model]
         return verify_bundle(fetch_per_host_bundle(host, repo), model=model, repo=repo)
-    return verify_bundle(fetch_bundle(), model=model or "router")
+
+    report = verify_bundle(fetch_bundle(), model=model or "router")
+    # The per-model enclaves went unreachable in Aug 2026, so this is what is left
+    # of per-model coverage: every served model must name a repo in the anchor.
+    anchor = model_repo_anchor()
+    report.details.update(anchor)
+    if anchor["models_unpinned"]:
+        report.valid = False
+        report.error = (
+            f"router serves {len(anchor['models_unpinned'])} model(s) with no repo pin in the "
+            f"trust anchor: {', '.join(anchor['models_unpinned'])}"
+        )
+    return report

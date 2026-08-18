@@ -2,6 +2,9 @@
 
 The registry grades providers. Nothing graded the registry. This does, from the
 snapshot series on disk, and writes data/quality.json for the dashboard to render.
+Coverage is scoped to the providers in data/latest.json. Outcome history is not:
+a retired integration keeps its observations, so removing one cannot improve the
+registry's own grade (see RETIRED_VERSION_IDENTITY).
 
 Five questions, all answered from data rather than asserted in prose:
 
@@ -46,12 +49,23 @@ LEDGER = DATA / "audits" / "near-ai_cloud-api.json"
 # answered, so repeats are real evidence about the fleet. Only chutes is the latter,
 # and conflating the two is how a load balancer gets reported as 20 deploys.
 VERSION_IDENTITY = {
+    "aci-gateway": ("compose_hash", "content-hash", "control-plane"),
     "near-ai": ("cloud_api_image_digest", "content-hash", "control-plane"),
     "tinfoil": ("digest", "content-hash", "control-plane"),
     "chutes": ("mrtd", "content-hash", "instance-sampled"),
-    "redpill": ("os_image", "mutable-tag", "control-plane"),
     "venice": (None, "absent", "none"),
 }
+
+# Providers we no longer probe, kept so their observations still count in the
+# outcome history. Retiring an integration must not retroactively improve the
+# registry's own grade: redpill alone is 123 of the 130 `no-error-invalid` rows
+# ever recorded, and dropping it would quietly rewrite the one statistic on this
+# page that tracks the verification path rejecting something.
+RETIRED_VERSION_IDENTITY = {
+    "redpill": ("os_image", "mutable-tag", "control-plane"),
+}
+
+ALL_VERSION_IDENTITY = {**VERSION_IDENTITY, **RETIRED_VERSION_IDENTITY}
 
 TRANSPORT = re.compile(
     r"HTTP [45]\d\d|ConnectionError|SSLError|Timeout|"
@@ -62,7 +76,7 @@ TRANSPORT = re.compile(
 PUBLISHED_COLUMNS = [
     "nonce_bound", "tdx_verified", "report_data_binds_key", "gpu_attested",
     "key_derives_to_address", "compose_hash_committed", "prod_os_image",
-    "serving_code_attested", "backend_attested",
+    "serving_code_attested", "backend_attested", "attested_serving_enforced",
 ]
 
 
@@ -88,22 +102,29 @@ def _classify(row):
 def compute(latest: dict | None = None) -> dict:
     """Grade the registry. `latest` overrides which snapshot counts as current, so the
     renderer grades the page it is actually building rather than whatever is on disk."""
+    snapshots = list(_snapshots())
+    current = latest if latest is not None else json.loads((DATA / "latest.json").read_text())
+    active_providers = set(current.get("attestations", {}))
+
     dates, outcomes = [], collections.Counter(
         {k: 0 for k in ("pass", "transport", "no-error-invalid", "verification-failure")})
+    no_error_invalid = collections.Counter()
     versions = collections.defaultdict(list)
-    newest = None
 
-    for date, snap in _snapshots():
+    for date, snap in snapshots:
         dates.append(date)
-        newest = snap
         for provider, rows in snap.get("attestations", {}).items():
-            field = VERSION_IDENTITY[provider][0]
+            identity = ALL_VERSION_IDENTITY.get(provider)
+            if identity is None:
+                continue
+            field = identity[0]
             for row in rows:
                 err = row.get("error") or ""
                 if row.get("valid"):
                     outcomes["pass"] += 1
                 elif not err:
                     outcomes["no-error-invalid"] += 1
+                    no_error_invalid[provider] += 1
                 elif TRANSPORT.search(err):
                     outcomes["transport"] += 1
                 else:
@@ -113,7 +134,6 @@ def compute(latest: dict | None = None) -> dict:
                     versions[(provider, row["model"])].append((date, v))
 
     # --- coverage: what can we actually measure, per live target ---
-    current = latest if latest is not None else newest
     coverage, cells = [], collections.Counter()
     for provider, rows in current.get("attestations", {}).items():
         field, kind, source = VERSION_IDENTITY[provider]
@@ -170,7 +190,8 @@ def compute(latest: dict | None = None) -> dict:
             "provider": provider, "model": model, "observations": len(obs),
             "span_days": span, "distinct": len(seen), "novel": novel,
             "revisit": revisit,
-            "version_source": VERSION_IDENTITY[provider][2],
+            "version_source": ALL_VERSION_IDENTITY[provider][2],
+            "retired": provider in RETIRED_VERSION_IDENTITY,
             "days_per_deploy": round(span / novel, 1) if novel else None,
             "days_per_deploy_corrected": corrected,
         })
@@ -183,13 +204,24 @@ def compute(latest: dict | None = None) -> dict:
             "observations": total_obs,
             **{k: v for k, v in outcomes.items()},
             "red_cells_that_were_verification_failures": outcomes["verification-failure"],
-            "note": ("Every red cell in the registry's history was a transport error. "
-                     "The verification path has never rejected a provider."),
+            "no_error_invalid_by_provider": dict(sorted(no_error_invalid.items())),
+            "note": (
+                f"{outcomes['no-error-invalid']} of {total_obs} observations were invalid "
+                "with no error attached: "
+                + ", ".join(f"{p} {n}" for p, n in sorted(no_error_invalid.items()))
+                + ". Read these carefully. A row lands here when a required layer came back "
+                "False without an exception, which is a genuine failure — but until "
+                "2026-08-18 it also caught a failed call to Phala's appraisal service, "
+                "because the helper read an error body as `verified: false`. That is fixed "
+                "(the call now raises, so it is recorded as transport), and counts from "
+                "earlier snapshots mix the two. Every other red cell was a transport error. "
+                "Retired providers stay in this history; removing an integration must not "
+                "improve the registry's grade."),
         },
         "coverage": coverage,
         "coverage_summary": collections.Counter(c["status"] for c in coverage),
         "unmeasurable_providers": sorted(
-            p for p, (_, kind, _s) in VERSION_IDENTITY.items() if kind != "content-hash"),
+            p for p in active_providers if VERSION_IDENTITY[p][1] != "content-hash"),
         "audit_debt": {
             "builds_observed": len(observed),
             "builds_reviewed": len(audited),

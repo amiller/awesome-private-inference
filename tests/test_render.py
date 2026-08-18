@@ -14,11 +14,11 @@ def test_render_produces_html(tmp_path, monkeypatch):
         "run_id": "local",
         "git_sha": "deadbeef",
         "attestations": {
-            "redpill": [
+            "near-ai": [
                 {
-                    "provider": "redpill", "model": "phala/gpt-oss-20b",
+                    "provider": "near-ai", "model": "openai/gpt-oss-120b",
                     "valid": True, "verified_at": "…",
-                    "attestation_type": "phala-simple",
+                    "attestation_type": "tdx+gpu",
                     "signing_address": "0xabc", "latency_s": 0.5,
                     "scorecard": {
                         "tdx_verified": True, "gpu_attested": True,
@@ -46,11 +46,12 @@ def test_render_produces_html(tmp_path, monkeypatch):
     rc = render.main()
     assert rc == 0
     html = (docs / "index.html").read_text()
-    assert "phala/gpt-oss-20b" in html
+    assert "openai/gpt-oss-120b" in html
+    assert "Current RedPill uses ACI." in html
     assert (docs / "methodology.html").exists()
     assert (docs / "pricing.html").exists()
 
-    # The row is missing compose_hash_committed, which phala-simple requires, so it
+    # The row is missing compose_hash_committed, which tdx+gpu requires, so it
     # must read as partial rather than verified.
     assert "partial" in html
     # Required-but-unproven layers are named, not left as a dash the reader must decode.

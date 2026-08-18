@@ -14,30 +14,30 @@ def _stub(provider, model, valid=True):
 
 
 def test_probe_provider_returns_skipped_when_no_key(monkeypatch):
-    monkeypatch.delenv("REDPILL_API_KEY", raising=False)
-    rows = attestation.probe_provider("redpill", ["phala/gpt-oss-20b"])
+    monkeypatch.delenv("NEAR_API_KEY", raising=False)
+    rows = attestation.probe_provider("near-ai", ["openai/gpt-oss-120b"])
     assert len(rows) == 1
     assert rows[0].valid is False
-    assert "REDPILL_API_KEY" in (rows[0].error or "")
+    assert "NEAR_API_KEY" in (rows[0].error or "")
 
 
 def test_probe_provider_swallows_verifier_exception(monkeypatch):
-    monkeypatch.setenv("REDPILL_API_KEY", "test")
+    monkeypatch.setenv("NEAR_API_KEY", "test")
     def boom(*_a, **_kw):
         raise RuntimeError("transport down")
-    monkeypatch.setitem(attestation.PROVIDERS, "redpill", boom)
-    rows = attestation.probe_provider("redpill", ["phala/x"])
+    monkeypatch.setitem(attestation.PROVIDERS, "near-ai", boom)
+    rows = attestation.probe_provider("near-ai", ["openai/x"])
     assert len(rows) == 1
     assert rows[0].valid is False
     assert "transport down" in (rows[0].error or "")
 
 
 def test_probe_provider_parallel(monkeypatch):
-    monkeypatch.setenv("REDPILL_API_KEY", "test")
+    monkeypatch.setenv("NEAR_API_KEY", "test")
     monkeypatch.setitem(
-        attestation.PROVIDERS, "redpill",
-        lambda k, b, m: _stub("redpill", m, valid=True),
+        attestation.PROVIDERS, "near-ai",
+        lambda k, b, m: _stub("near-ai", m, valid=True),
     )
-    rows = attestation.probe_provider("redpill", ["a", "b", "c"])
+    rows = attestation.probe_provider("near-ai", ["a", "b", "c"])
     assert [r.model for r in rows] == ["a", "b", "c"]
     assert all(r.valid for r in rows)

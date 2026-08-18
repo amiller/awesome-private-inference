@@ -18,7 +18,7 @@ Two answers, because two different things are being asked about.
   node that ends up holding your plaintext runs software nobody has measured.
 
 Both infrastructure defects are the same classes this registry already tracks as
-`prod_os_image` (found on RedPill) and `serving_code_attested` (found on Chutes). **This
+`prod_os_image` and `serving_code_attested` (found on Chutes). **This
 page did not apply either of them to Venice until 2026-08-10**, because Venice's required
 layer set in `verifiers/common.py` excluded them — see [Scoring correction](#scoring-correction).
 
@@ -106,8 +106,7 @@ had not applied them to Venice.
   cannot tell you either way. Compounded by a dev OS image with SSH and serial console
   enabled and not published, so you cannot reproduce it and check what actually boots.
   If a key is set, the holder has a shell inside the sealed box and can read every prompt
-  passing through it. This is the same `allowed_envs` + dev-image pattern this registry
-  documented on RedPill (`DSTACK_AUTHORIZED_KEYS`, `dstack-nvidia-dev`) and tracks as the
+  passing through it. This `allowed_envs` + dev-image pattern is tracked by the
   **Prod OS image** column — which was never required of Venice.
 - **[JB] The last hop's serving software is unmeasured.** Plaintext ends up on a GPU node
   whose serving software nobody has measured; nothing cryptographically prevents it from
@@ -156,10 +155,12 @@ had not applied them to Venice.
 - **Attestation endpoint flaky.** `/tee/attestation` times out consistently on
   `e2ee-glm-5` and `e2ee-qwen3-5-122b-a10b` across retries; works quickly on
   `e2ee-venice-uncensored-24b-p` and others. Not transient.
-- **Reseller markup.** Venice's Phala-backed models cost ~22% more than RedPill's equivalents
-  on identical enclaves. The enclave is the same; Venice is paying per-token to a downstream
-  Phala aggregator.
-- **Inner boundary inherited.** Same gateway-to-backend gap as NEAR/RedPill.
+- **Inner boundary depends on the serving path.** The NEAR response shape had
+  the gateway-to-backend limitations documented by this
+  audit. The current RedPill ACI gateway publishes an upstream session and
+  enforces its channel binding. Its PhalaDirect and `aci-service/v2` records
+  passed the live integrity audit, while its Chutes records failed. Do not
+  transfer either result to Venice without verifying Venice's own route.
 - **Undocumented endpoint.** `/tee/attestation` isn't in Venice's public API docs; the
   schema could change without notice.
 - **Subscription math.** Pro ($18/mo) is chat-UI only for API use — it provides only

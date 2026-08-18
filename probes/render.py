@@ -21,7 +21,6 @@ DATA_LATEST = REPO_ROOT / "data" / "latest.json"
 DOCS_DIR = REPO_ROOT / "docs"
 TEMPLATE_DIR = REPO_ROOT / "site" / "templates"
 
-
 SCORECARD_LABELS = {
     "nonce_bound": "Nonce bound",
     "tdx_verified": "TDX quote",
@@ -32,6 +31,7 @@ SCORECARD_LABELS = {
     "prod_os_image": "Prod OS image",
     "serving_code_attested": "Serving code attested",
     "backend_attested": "Backend attested",
+    "attested_serving_enforced": "Attested serving forced",
 }
 
 SCORECARD_TOOLTIPS = {
@@ -61,6 +61,13 @@ SCORECARD_TOOLTIPS = {
         "but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). "
         "❌ quote not self-consistent or compose not on the on-chain authorized set."
     ),
+    "attested_serving_enforced": (
+        "This hostname is in the attested tee_only_domains, so the gateway refuses to "
+        "serve it from a non-TEE upstream. ❌ means the same verified workload will "
+        "forward the prompt to an ordinary commercial API unless the client sets "
+        "provider.aci_verified per request — live on api.redpill.ai, which shares "
+        "tee.redpill.ai's quote and keyset but serves 42 models the TEE-only hosts refuse."
+    ),
 }
 
 
@@ -68,11 +75,15 @@ SCORECARD_TOOLTIPS = {
 # so a reader can tell how much of the page is measurement and how much is opinion.
 # A claim here that the probe can check belongs in a scorecard column instead.
 EDITORIAL_NOTES = [
-    {"checked": "2026-06-18", "title": "RedPill phala-simple host-SSH path is closed.",
-     "body": "The fleet moved off dstack-nvidia-dev to prod dstack-nvidia-0.5.9, removing the "
-             "operator host-SSH route. Now machine-tracked by the Prod OS image column, which "
-             "flips on any regression. Residual gaps (mutable image tags, unpinned runtime "
-             "weights) are unaddressed."},
+    {"checked": "2026-08-18", "title": "Current RedPill uses ACI.",
+     "body": "The live tee.redpill.ai gateway scores Stage 0 even though all six ACI "
+             "protocol checks now pass, including the strict production-OS appraisal — the "
+             "deployment moved from the dstack dev image to prod 0.5.9 on or before "
+             "2026-08-18. Receipts verify end to end. Stage 0 rests on the legacy "
+             "/v1/attestation/report, which ignores its model parameter and attests any name; "
+             "public logs with raw upstream error detail; and an operator root-key input. "
+             "api.redpill.ai shares the same attested keyset but is not TEE-only. A session "
+             "audit accepted 163 of 237 records, rejecting only Chutes for missing evidence."},
     {"checked": "2026-06-18", "title": "Chutes' serving code is not measured.",
      "body": "serve.py on the prompt-plaintext path is CFSV-excluded and in no RTMR, and the "
              "model name is not bound to the quote. A passing quote proves genuine TDX running "
@@ -81,9 +92,10 @@ EDITORIAL_NOTES = [
      "body": "ALLOWED_COMPOSE_HASHES is unset server-side, so the gateway alone does not pin "
              "code. A closed-chain client that checks compose_hash against the on-chain set on "
              "Base closes it; a client that trusts the gateway does not."},
-    {"checked": "2026-04-26", "title": "Upstream verifier decodes JWTs without checking signatures.",
-     "body": "Phala's private-ai-verifier passes verify_signature=False on NVIDIA and Intel "
-             "Trust Authority tokens, and every reseller routing through it inherits that."},
+    {"checked": "2026-08-12", "title": "Some provider-adapter JWTs are decoded without signature checks.",
+     "body": "Phala's private-ai-verifier still passes verify_signature=False on NVIDIA and "
+             "Intel Trust Authority tokens. This affects adapter conclusions derived from those "
+             "tokens. The current ACI client verifies its gateway TDX quote through native DCAP."},
     {"checked": "2026-08-10", "title": "The bar is hand-set, and one entry was wrong.",
      "body": "REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog. Venice's set "
              "excluded the two layers where its prompt-path exposure actually lives, so Venice "

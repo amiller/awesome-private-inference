@@ -1,8 +1,8 @@
 """Pricing sweep — asks "What's 2+2?" on each model and logs list $/M tokens.
 
 For providers that publish per-token rates in their /models catalog we capture
-prompt/completion $/M directly. Subscription math (RedPill Pro, Venice Pro+/Max,
-Z.AI Coding Plan) is documented in the provider markdown pages, not computed here.
+prompt/completion $/M directly. Subscription math (Venice Pro+/Max and the Z.AI
+Coding Plan) is documented in the provider markdown pages, not computed here.
 """
 from __future__ import annotations
 
@@ -29,22 +29,6 @@ class PriceRow:
 
     def as_dict(self) -> Dict:
         return asdict(self)
-
-
-def _redpill_catalog(api_key: str) -> Dict[str, tuple]:
-    """Returns {model_id: (prompt_per_m, completion_per_m)}."""
-    r = requests.get(
-        "https://api.red-pill.ai/api/models",
-        headers={"Authorization": f"Bearer {api_key}"}, timeout=30,
-    ).json()
-    out = {}
-    for m in r.get("data", []):
-        p = m.get("pricing") or {}
-        try:
-            out[m["id"]] = (float(p["prompt"]) * 1e6, float(p["completion"]) * 1e6)
-        except (KeyError, ValueError, TypeError):
-            continue
-    return out
 
 
 def _venice_catalog(api_key: str) -> Dict[str, tuple]:
@@ -76,15 +60,13 @@ def sweep(provider: str, models: List[str], max_workers: int = 3) -> List[PriceR
     """
     import time as _t
 
-    env_key = {"redpill": "REDPILL_API_KEY", "venice": "VENICE_API_KEY",
-               "near-ai": "NEAR_API_KEY"}[provider]
+    env_key = {"venice": "VENICE_API_KEY", "near-ai": "NEAR_API_KEY"}[provider]
     api_key = os.environ.get(env_key, "").strip()
     if not api_key:
         return [PriceRow(provider=provider, model=m, error=f"{env_key} not set")
                 for m in models]
 
     base_url, catalog_fn = {
-        "redpill": ("https://api.red-pill.ai/v1", _redpill_catalog),
         "venice": ("https://api.venice.ai/api/v1", _venice_catalog),
         "near-ai": ("https://cloud-api.near.ai/v1", None),
     }[provider]

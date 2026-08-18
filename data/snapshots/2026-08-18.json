@@ -1,15 +1,146 @@
 {
   "schema_version": "0.1",
-  "generated_at": "2026-08-18T13:56:22Z",
-  "git_sha": "dae4b3a36ef8c8a2649f60ec3ad710169c652a3d",
-  "run_id": "32145266691",
+  "generated_at": "2026-08-18T20:36:29Z",
+  "git_sha": "",
+  "run_id": "local",
   "attestations": {
+    "aci-gateway": [
+      {
+        "provider": "aci-gateway",
+        "model": "tee.redpill.ai",
+        "valid": true,
+        "verified_at": "2026-08-18T20:36:34Z",
+        "attestation_type": "aci-gateway",
+        "signing_address": "",
+        "signing_public_key": "",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": true,
+          "prod_os_image": true,
+          "serving_code_attested": null,
+          "backend_attested": false,
+          "catalog_serves": true,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": true
+        },
+        "details": {
+          "workload_keyset_digest": "sha256:c6e808d3505c5c7e38d15b2fbcc2c2b2eb377891f6dd6b28ed33132ad9ceb022",
+          "os_image": "dstack-0.5.9-bd369a8c",
+          "compose_hash": "73fa460888599ae66336ecd46b3c91d78f3061df474a95abed3dfd753793091a",
+          "repo_commit": "30296dd9a0dbaf06e520f2ed1be01eab75c3c287",
+          "tee_only_domains": [
+            "tee.redpill.ai",
+            "inference.phala.com"
+          ],
+          "models": 25,
+          "sessions": "169/236 with evidence; missing: {'private-ai-verifier/chutes/v1': 67}",
+          "tcb_status": null
+        },
+        "error": null,
+        "latency_s": 0.0
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "inference.phala.com",
+        "valid": true,
+        "verified_at": "2026-08-18T20:36:34Z",
+        "attestation_type": "aci-gateway",
+        "signing_address": "",
+        "signing_public_key": "",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": true,
+          "prod_os_image": true,
+          "serving_code_attested": null,
+          "backend_attested": false,
+          "catalog_serves": true,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": true
+        },
+        "details": {
+          "workload_keyset_digest": "sha256:c6e808d3505c5c7e38d15b2fbcc2c2b2eb377891f6dd6b28ed33132ad9ceb022",
+          "os_image": "dstack-0.5.9-bd369a8c",
+          "compose_hash": "73fa460888599ae66336ecd46b3c91d78f3061df474a95abed3dfd753793091a",
+          "repo_commit": "30296dd9a0dbaf06e520f2ed1be01eab75c3c287",
+          "tee_only_domains": [
+            "tee.redpill.ai",
+            "inference.phala.com"
+          ],
+          "models": 25,
+          "sessions": "169/236 with evidence; missing: {'private-ai-verifier/chutes/v1': 67}",
+          "tcb_status": null
+        },
+        "error": null,
+        "latency_s": 0.0
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "api.redpill.ai",
+        "valid": false,
+        "verified_at": "2026-08-18T20:36:34Z",
+        "attestation_type": "aci-gateway",
+        "signing_address": "",
+        "signing_public_key": "",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": true,
+          "prod_os_image": true,
+          "serving_code_attested": null,
+          "backend_attested": false,
+          "catalog_serves": true,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": false
+        },
+        "details": {
+          "workload_keyset_digest": "sha256:c6e808d3505c5c7e38d15b2fbcc2c2b2eb377891f6dd6b28ed33132ad9ceb022",
+          "os_image": "dstack-0.5.9-bd369a8c",
+          "compose_hash": "73fa460888599ae66336ecd46b3c91d78f3061df474a95abed3dfd753793091a",
+          "repo_commit": "30296dd9a0dbaf06e520f2ed1be01eab75c3c287",
+          "tee_only_domains": [
+            "tee.redpill.ai",
+            "inference.phala.com"
+          ],
+          "models": 67,
+          "sessions": "169/236 with evidence; missing: {'private-ai-verifier/chutes/v1': 67}",
+          "tcb_status": null
+        },
+        "error": null,
+        "latency_s": 0.0
+      }
+    ],
     "near-ai": [
       {
         "provider": "near-ai",
         "model": "openai/gpt-oss-120b",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:25Z",
+        "verified_at": "2026-08-18T20:36:38Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0x56d070df1c6be444b007839ef9cf67cec7c12b8b",
         "signing_public_key": "a31cdd4f9443ebc31cffffd688621a1807b41c2f02649881d010f881de0a5e94ddec8208161e8fa02ae3748700bf8be3333c9683d6e13e0bbe7e92ee7d2243b8",
@@ -23,13 +154,14 @@
           "compose_hash_committed": true,
           "prod_os_image": null,
           "serving_code_attested": null,
-          "backend_attested": "audit_pending",
+          "backend_attested": false,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "inner_models": 1,
@@ -37,17 +169,17 @@
           "gateway_compose_hash": "fe9a33b0db34301e15e1893e88121d8d580ab11693be3dcbd947d9b2065ecf80",
           "cloud_api_image_digest": "c427945706eb7c4fb4dd269634474e0d77d17f4d0f46b8c4b737677f8841b092",
           "gateway_self_consistent": true,
-          "chain_authorized": true,
+          "chain_authorized": false,
           "audit_key": null
         },
         "error": null,
-        "latency_s": 3.16
+        "latency_s": 3.61
       },
       {
         "provider": "near-ai",
         "model": "zai-org/GLM-5.1-FP8",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:25Z",
+        "verified_at": "2026-08-18T20:36:37Z",
         "attestation_type": "tdx+gpu",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "2a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
@@ -61,13 +193,14 @@
           "compose_hash_committed": true,
           "prod_os_image": null,
           "serving_code_attested": null,
-          "backend_attested": "audit_pending",
+          "backend_attested": false,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "inner_models": 1,
@@ -75,193 +208,11 @@
           "gateway_compose_hash": "fe9a33b0db34301e15e1893e88121d8d580ab11693be3dcbd947d9b2065ecf80",
           "cloud_api_image_digest": "c427945706eb7c4fb4dd269634474e0d77d17f4d0f46b8c4b737677f8841b092",
           "gateway_self_consistent": true,
-          "chain_authorized": true,
+          "chain_authorized": false,
           "audit_key": null
         },
         "error": null,
-        "latency_s": 3.18
-      }
-    ],
-    "redpill": [
-      {
-        "provider": "redpill",
-        "model": "phala/gpt-oss-20b",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:25Z",
-        "attestation_type": "redpill",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.24
-      },
-      {
-        "provider": "redpill",
-        "model": "phala/gpt-oss-120b",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:25Z",
-        "attestation_type": "redpill",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.23
-      },
-      {
-        "provider": "redpill",
-        "model": "phala/qwen-2.5-7b-instruct",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:25Z",
-        "attestation_type": "redpill",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.24
-      },
-      {
-        "provider": "redpill",
-        "model": "phala/glm-4.7",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:25Z",
-        "attestation_type": "redpill",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.23
-      },
-      {
-        "provider": "redpill",
-        "model": "phala/deepseek-v3.2",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:26Z",
-        "attestation_type": "redpill",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.34
-      },
-      {
-        "provider": "redpill",
-        "model": "phala/kimi-k2.5",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:26Z",
-        "attestation_type": "redpill",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "HTTP 502: <html>\r\n<head><title>502 Bad Gateway</title></head>\r\n<body>\r\n<center><h1>502 Bad Gateway</h1></center>\r\n<hr><center>nginx/1.31.1</center>\r\n</body>\r\n</html>\r\n",
-        "latency_s": 0.34
+        "latency_s": 2.77
       }
     ],
     "tinfoil": [
@@ -269,7 +220,7 @@
         "provider": "tinfoil",
         "model": "router",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:26Z",
+        "verified_at": "2026-08-18T20:36:39Z",
         "attestation_type": "tinfoil-sev-snp-v2",
         "signing_address": "",
         "signing_public_key": "4539df144c761e852824083b1e0e23026ab8fec4fa0612ca16b2672a7a45983e",
@@ -289,7 +240,8 @@
           "tls_pubkey_pinned": true,
           "hpke_pubkey_attested": true,
           "client_nonce_supported": false,
-          "runtime_config_fully_attested": false
+          "runtime_config_fully_attested": false,
+          "attested_serving_enforced": null
         },
         "details": {
           "domain": "inference.tinfoil.sh",
@@ -343,105 +295,15 @@
           "live_tls_spki_sha256": "198c3340b8b007efdb5aa9b2bff68eb6776c4710f0731121f195c65e6410c232"
         },
         "error": null,
-        "latency_s": 0.4
-      },
-      {
-        "provider": "tinfoil",
-        "model": "gpt-oss-120b",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:26Z",
-        "attestation_type": "error",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "SSLError: HTTPSConnectionPool(host='gpt-oss-120b-0.inf6.tinfoil.sh', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)')))",
-        "latency_s": 0.0
-      },
-      {
-        "provider": "tinfoil",
-        "model": "llama3-3-70b",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:26Z",
-        "attestation_type": "error",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "ConnectionError: HTTPSConnectionPool(host='llama3-3-70b.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by NameResolutionError(\"HTTPSConnection(host='llama3-3-70b.tinfoil.containers.tinfoil.dev', port=443): Failed to resolve 'llama3-3-70b.tinfoil.containers.tinfoil.dev' ([Errno -2] Name or service not known)\"))",
-        "latency_s": 0.0
-      },
-      {
-        "provider": "tinfoil",
-        "model": "gemma4-31b",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:26Z",
-        "attestation_type": "error",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "ConnectionError: HTTPSConnectionPool(host='gemma4-31b-inf6.tinfoil.containers.tinfoil.dev', port=443): Max retries exceeded with url: /.well-known/tinfoil-attestation (Caused by NameResolutionError(\"HTTPSConnection(host='gemma4-31b-inf6.tinfoil.containers.tinfoil.dev', port=443): Failed to resolve 'gemma4-31b-inf6.tinfoil.containers.tinfoil.dev' ([Errno -2] Name or service not known)\"))",
-        "latency_s": 0.0
+        "latency_s": 0.47
       }
     ],
     "venice": [
       {
         "provider": "venice",
-        "model": "e2ee-glm-5",
+        "model": "e2ee-glm-5-1",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:30Z",
+        "verified_at": "2026-08-18T20:36:42Z",
         "attestation_type": "venice",
         "signing_address": "0xbb4d2e7ffe98eefcd9690e2139be41e92b95e333",
         "signing_public_key": "042a1c47aad08a4f47dcb67134d77b83d8a1d5c895e37e959189249e819c3939289d8c59acb07d262db3ca946d52c51ae079fde6708cb0af7e25a57d35c8e0ac30",
@@ -461,7 +323,8 @@
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "tee_provider": "near-ai",
@@ -473,16 +336,55 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 3.6
+        "latency_s": 3.11
       },
       {
         "provider": "venice",
-        "model": "e2ee-qwen3-5-122b-a10b",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:29Z",
+        "model": "e2ee-qwen3-6-35b-a3b",
+        "valid": true,
+        "verified_at": "2026-08-18T20:36:45Z",
         "attestation_type": "venice",
-        "signing_address": "0x6525e128afcffebf7eed05d485d7be983cdae934",
-        "signing_public_key": "041d9bbc96671c3fbc983867bd7a6b5c83298e040801764b7085352d84f3f095125db36956caed8c84bfefca635c3c455f409c79a3889d679af688f4aded542fd5",
+        "signing_address": "0xe5d0fec43b001f181a3410b96715ec54171f36da",
+        "signing_public_key": "0489f03d8ed945eff27ad1053f87ece198409aff78c5c2aea3e438c460482f67ff5b900054dc129f6ce57e40e8875ceac0ddf30aeb885c28fd2c3e05bf3fbaa4d9",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": true,
+          "prod_os_image": null,
+          "serving_code_attested": null,
+          "backend_attested": false,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
+        },
+        "details": {
+          "tee_provider": "near-ai",
+          "tee_hardware": "intel-tdx",
+          "nonce_source": "client",
+          "candidates_available": 1,
+          "candidates_evaluated": 1,
+          "model_name": "Qwen/Qwen3.6-35B-A3B-FP8",
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 3.01
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-gemma-4-31b",
+        "valid": false,
+        "verified_at": "2026-08-18T20:36:47Z",
+        "attestation_type": "venice",
+        "signing_address": "0x9765596f43dd91d1467f9a370682173741786d8c",
+        "signing_public_key": "04323149efe98c490b9b44b517b3bd599defd1ad5a61f580ca27bfd3daedd3333eddd6e40663c9a79556897ddf9ecf9dfb937ebd3cfbac512d2a7620b3c2df09d2",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -499,7 +401,8 @@
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "tee_provider": "near-ai",
@@ -507,47 +410,17 @@
           "nonce_source": "client",
           "candidates_available": 1,
           "candidates_evaluated": 1,
-          "model_name": "Qwen/Qwen3.5-122B-A10B",
+          "model_name": "google/gemma-4-31B-it",
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 2.87
-      },
-      {
-        "provider": "venice",
-        "model": "e2ee-uncensored-24b-p",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:27Z",
-        "attestation_type": "venice",
-        "signing_address": "",
-        "signing_public_key": "",
-        "signing_algo": "ecdsa",
-        "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
-          "gpu_attested": null,
-          "key_derives_to_address": null,
-          "compose_hash_committed": null,
-          "prod_os_image": null,
-          "serving_code_attested": null,
-          "backend_attested": null,
-          "catalog_serves": null,
-          "code_measurement_reproducible": null,
-          "tls_pubkey_pinned": null,
-          "hpke_pubkey_attested": null,
-          "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
-        },
-        "details": {},
-        "error": "no TEE attestation available for this model (404)",
-        "latency_s": 0.08
+        "latency_s": 2.35
       },
       {
         "provider": "venice",
         "model": "e2ee-gpt-oss-120b-p",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:31Z",
+        "verified_at": "2026-08-18T20:36:51Z",
         "attestation_type": "venice",
         "signing_address": "0x79a5061efe5a46b0d1f33b11cf1c5adbedae6b79",
         "signing_public_key": "04943cea0b4babf60f6e2031e9a00866a37c4ae696fb45895b3a9b38ab8cbb898f42c85b704aceaa0a396cf26f7fdf79d83205be7e11d3a5d70419a68277158c3d",
@@ -567,7 +440,8 @@
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "tee_provider": "phala",
@@ -579,7 +453,46 @@
           "gpu_verdict": true
         },
         "error": null,
-        "latency_s": 4.05
+        "latency_s": 3.45
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+        "valid": true,
+        "verified_at": "2026-08-18T20:36:54Z",
+        "attestation_type": "venice",
+        "signing_address": "0x79a5061efe5a46b0d1f33b11cf1c5adbedae6b79",
+        "signing_public_key": "04943cea0b4babf60f6e2031e9a00866a37c4ae696fb45895b3a9b38ab8cbb898f42c85b704aceaa0a396cf26f7fdf79d83205be7e11d3a5d70419a68277158c3d",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": true,
+          "key_derives_to_address": true,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "serving_code_attested": null,
+          "backend_attested": false,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
+        },
+        "details": {
+          "tee_provider": "phala",
+          "tee_hardware": "intel-tdx",
+          "nonce_source": "client",
+          "candidates_available": 1,
+          "candidates_evaluated": 1,
+          "model_name": null,
+          "gpu_verdict": true
+        },
+        "error": null,
+        "latency_s": 3.22
       }
     ],
     "chutes": [
@@ -587,10 +500,10 @@
         "provider": "chutes",
         "model": "Qwen3-32B-TEE",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:39Z",
+        "verified_at": "2026-08-18T20:37:03Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "9ab08548-57b0-4193-920c-775e4b2a182a",
-        "signing_public_key": "pYXHmRDCSFh5+PyWEfYGzygJXTSsVtNTrjmYy1rH+aauOKsuJwTGapR9DKyt9tFLWEqlB7ZrRmMWfWlehsS3pdIBSwtw7imqH1cNr0itM5VEEfaW7xezPiclFuQY/FJifYxt/zYyYFw2cUFemQkYyImiv0SXaxldYbIW5CgFrmA20ZAH07A91nO/t2S1dodnFMGcLvyOXeJ8G9uWNrYC1mbAKGa5ttNVeCgtd9YNBvSWp1MMnMSjfiQ9tlzGyjwpzpum0hN1kEsNPPRs0WoIlIkOO1myhCeSjUwyZameedE6dQDEVNxmbwwwuoQuvUTMT1Z3gNDFe5qXbCypnDOMoWUCXoNcRbho3EiePTwxgIYjKxsmkMMh8YWAKOpwkna22LcIk7W5JfQTfuSdjuxfUlQcCQEohdqwsMlt58xrTdHILfUOzQywAJwvGgxVxnlqPCEY3GNcdqXLTNERJaUJUBCcU5C6mCIkN3I3+4sk74PIspGscPbGdXrAflEPk6iS1AhlglFq05aCmWtoSpgxsxi75pux7GhLVcQ01PJEB1wXHHCHthuvj5Ojq3OZ2sOO2TQ+19qiUbEaKMBSGeaiDzCJ6VkMeyCvlUoSqKvI33M5AodJQZhzA2lLswqwAMJMp0E7kxISBJu6nNi8PLdkXEJcL5l801JeassxBnRZkYsvBGWGKptRYvnK+OKzzuNodCnMlqa7JQcIZQiIPYK9uOCQBKyIdgC2eNRi/tWUvWA4QwSHOepOrblhJXIG6sSIlIdjcMg2rHGCn4yBPSYwfRur1joTT1yCQ4Gx7iVrVZdj6zTNBtasumg455Kdnpq8fXReQclsYzOapuBZPyyLVEltfDSb9MSP7TtUL4JJ0GQ45VSYroibr6QYUGJ/SMOluyQS5Sck02DKGxCQ0POyVEMILRCFfEQAhHxVqepanLQgwLEj6pIBG2Ma8xwQ/Rg0AmOsNAvQnJMN3uJOYQItmBYkA4p3HJu4y1CoXHUV5Qg8/VoMfow2ElafhtFG7kwlvxd7UOoVuUpxmssePEJZlUFn4GMmD4Up5tsSettNscOHu/gDMMhfsdhEGcudd8EpecRbs+J4tAQUW2kiCuFSZ+sObTsLmzxvFSuH3dCvUqY0NXk6DPkdrvsZcEU7xrs2R/SQe5qwm8R+Leyk+JowOSUTDfzIPnI6JxdfeUk4RCSLkHh8f+kRaCtijjqg+MrF41YJE4kwfhIVhjSrQpQnPLm0asNC3FYI6CAm5OU4T+YlMiJzCRGuw6lds1WahoUz30oU6YwgOKiQlkEcEEq3p6VKQDq+Iwl+Qkww8KJIbYkargIppNVkb0p5jmVzjolqVcQ9GiHCUDq324SUIEQHrURdYmJHEiERqWlcGBQ1NSoTSrPAeHxRqoqzOsVWBUjEiznEeDRn2tDA0UurtPw6VQQeSGPCOBi85OmiFzRm67K0YdNaVDYHX7YqWqoO2wNXikVGr/pJoACyd6RyZIptuOm2WZKwiDYEmSfENgvBloYVt8EGguFwHdaerlQzutQtlexR4Tk6DA0hQBJ5M0iIc0MoxLPD+DgYV2Twm8SuK7A=",
+        "signing_address": "b67dfebb-0460-488e-a3b6-2049ea6ee5f1",
+        "signing_public_key": "0WcxGUiWnbaLqHzBeNqJhPTLXwBSIZgDH+ZYTypNhal4L8G+qdSWDgcx2TSV8yCFvHREfMzGDHWRiDm8gyO9eER+b0A1dRgRzXxWEHgJMXfC4XikYSwIwRtY+khdrAi+6lk1K+yS6DbJzUdU0rVfB3qKw4lzBfIhZko7CZhGp6Yf58MOqeB5WVElQ6l484W98WuwomOL9ECXwgOTa8ZKpMvNYoJhlHcF+IxK9peI56svclludAJ7DOWstCKoymqw4cQy0TzIrOMENPY/ZMOYWucKABUvuFlqSFCN4KML8QCboeGb2rhhFvtn+7KgEFa/dqoZNaQA1KJDPsVHk0kvq3pBs4xYMogtQkpmIJcDtCnCOgl/0iGTxRW4rQNKnByj4yECUnSv3fYPz8lM+UkGOCfCbhN+O0skXHjB8XO7bPk6UoA2N1KPyhe9UtPHZaNHl/Kl/ySLVhsnlIOtW1M81KALesPEnSwevbGP21KA+/k3XgXFIuYL/Wh5eBSyEVtS/VmwwDNiv1k8A4dkhmERkUwRXLeaHGUDImVyRud7q7IbHeNQpQJ1V6pFuLZM4Gh5MAoKQMxxOiEgFghLSKkgq1wgO7CnSvawsgcnU4jAtnJQ8jy3nJmCycBF3QoZANZfCHC/dhfA13k5Y3hmFbJye9hgidgtuKCOmSdi53szZRRaREvGgyNIEcYsmsMxgKZI0rVSV0ESd1kVw6AhKrJf7PANuVUnO9gqCbe9jQtU8gCJtkd1QDGQazwfwWt4XUBxSiaXT0IM4rVtpYthgNGORKRNa5JiufwSMURt1WYiQjEviKEfV9kgcgJR8JYhFMh1GoqHklinnsaqMmMrFcucI5aXvbeHv1qSInh0PHfNtqhzLyO5oEIY9XS1TBEzieIR2niWs3oaPat16jMp+8Km8wIDbKgoDIW+oIaXbfgkG6GOdBcJ8HpmsbEARgADWpt8vvME5bmawbNAREKoniJTLcgYLrIG7fE9TFRZIqqJJitE1dpdjpqK6/CHQPC/oeQpFKy67iZDzTaz5Os7TbFdTkKNsGCnIKg1fUELZfIyo+JSz0g3ixskQKM0OurPYwm6vcsJ4tNOuDKWiyKOhuAsXEMe2ippPYAX3UsdlhO1W9sq60awEbu073VfNLYZOZTCPhwdlJu0whWh9lVkv2hoGneWojC0KUY9RQVF+7OqE1G2tbm+arEbOMpBxdCx2zK8neGwTQJNEscy8ZERFfGYfVE4fLS1PbVT7GA2I4bFzwE7e8GIyfwEDZUSr6g/qKmXz3EQ7MrDTvzEl/uBSGWc4zNo83IMmYEIJ6B77yMCYhFavNtZUJuMLaMLCYQntwCZcHVSWhGKpzFFA/wlKFYYTgWmafA5BRRedAAykEvNgfel0Xa/9ceYx+lnSQq8LENTfzJAORKRCDxA2ip9QIV10BskwYVzfDsIt3VWnyZQc5Zge+auMaFPylBUZDuYBnuk7ZLMtTc6QBK8I9Ru+xl/n5AgWnUpTJlyxRRFF6BPThwe3DqgdfQwlmiNwkRmQKedlcfpGTQqvCZOYbvygQePh60tlEglDqjQ/RpbSfxdgEE=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -607,28 +520,29 @@
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "9ab08548-57b0-4193-920c-775e4b2a182a",
-          "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
+          "instance_id": "b67dfebb-0460-488e-a3b6-2049ea6ee5f1",
+          "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
           "gpu_evidence_count": 8,
           "cert_spki_bound": true,
           "debug_disabled": true,
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 8.76
+        "latency_s": 9.08
       },
       {
         "provider": "chutes",
         "model": "gemma-4-31B-TEE",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:37Z",
+        "verified_at": "2026-08-18T20:37:02Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "57520d48-d8bc-44c3-a381-33c9ac352fe1",
-        "signing_public_key": "sfmAOACseRCx1Yhy+bIi5mUIJVpUHxFgP2HCs2FDb+mqFhyGoSxC84pHCqot7cdojgqdUDKtBqVNnoEUH0a4SlWAoqM0NvF4zYuIxfgblkOPn9VWjPtUJXphizQ7ruO+A4nCOAijYzVF/GITloeJQ4Um0WsQSbwOMEkj9Gh1TmpKHsdSh3qdwahWJbwKacJcLjZ9b2t+tQGpm4m383IE1pnDWDM7L1S5ZkMBr5HALhkjdzFbt6NakBA+YXS2ahQx98tJF5VoYOg5kKdzaMkGbisx4YAaqYspUwseyqo17jGRaVOKxHV5xzV2zzIzPNpn+ZxN4tYkx+KePtcM0hXAm4ebhgClGwNQdXSTR9WCT2jHwEfMkkg+ltAIV8AV8FAnLuoRfxAhInoy0DkTGhUMQoRlUNUvKJbIBapkPMyvIjez/bZ/ntbHtzQ6Y/YCvQSDldNWNvAeO4HODjphciXEKkl7A1Vr2JmEFHCgF4BG1VZQcpRnHWHKu0m5B5ZCwceI8/CwHjhsgjVTFNwXr6SAmVxoBhSUi9UPWkbEYlh9ishY10FoH0iIHBiuH7cK8NWPrVMJuVJjAtKgyNzKm0cE7CI4Zdi4LZFqu8BjTEeXZpYcwmMBwcqkkgTPl4qszbQ2QpZjxlgOL1ehERBh0KS7W6hTkrCakHhArbKMJ+HCaUZzNjCE3YcM0zCg6Umd9egivxEscwajWhhnmysc2Igmt1rKRtkZUBtouhAtLpRBVnE2YVV/tCRnqkQf8ZY/u9Ro5KhMo8NlS/MKsOmaNsotZVUvGEwKsfBP0/Ywc3MO8Hmt5EBQVQu9kOC02SpfMlzLOjxw1eukgIGQCmJRg0Co0uip14grd4RkAM0DtmFDpZZKrNWLcOm4hpbMIhJX/km8F7u98nF5iicTTHe+J7dLCOybm0WEzKMOpNzBbfGVd5uiXFsnoxiaY7OvnpWSuZJGVnIi5uR936hVHgyWGRET7JEc6vo1ogK33zqZ40PKJoA0CKSBL5YYo1pXoVcNqWh12RIlDcJEoPRhYBZcPVnPAjqljcdIuRmbtHyskrsrDvpfeKuvhzbGT0ld2GZz8UcYx0qa7kwFCZSRAIRe01J9b9q6A+OSYNFuopLP8JQCztfGE3GeV4bMHKWevHwVAIdKQgXFM7gqdJXPtOESbMyEh8IlqNdQyJRSlenCUatnFeI04ijGJPhzyUHNWxUH8YCGy5KPxDzHdHk8GgVDD6LJeRRUbhUJqgy5WZtq5oo1tLY0H1Mr/mWkE0tK76E4tWRvIXJMmCmopXFmn/AgQkZvPdBvW4BJUyuYgwSmZTi1XII1ysZuaet/mSBcPpSH8BVUB1GxPOc2XChd9vsk06dtw6M1kyMjgdgh6cuo4fl7VGdqlRZILesgT5iU6xZeV0g9lZs5vRxptQTK+2hiCru6rhGsUfkdLhGQWgEhjnkzHVqBaDrNXTkyCDAyUlNh0oYVPexT9kO0ZPytWVU1SYeMpumG3Hy7LxLLHusojOo+w8djaHNr9WgVKIEdRoyr+xJCUN+JNvGyb0ma1R7y9GezxzCwnsWG1RTne2H1ZFNewoM=",
+        "signing_address": "0e7bd827-c714-4afe-a928-4ce230afbed2",
+        "signing_public_key": "RIY6aUeCqgEqsdmvN5QWNkZz+SpeX2q2iWtMDpl4t5aIQWme06AwhVx9PxtbDnNtudmTqrODaTIdXZx1ITBBWGMVdykqT4LOeTxwKGBKykDA/SECTfpJftFVoneCsArD//se36pVdbgux7Q7CYkQ1ciRAqq/NKlK9vU0wwwdCZN0jDyB31YU41FE4lOJn4yEE9FLblVpN1gtqDWUOiE8m9alzQcIC5BLExsgk+LJ5mmNFktdE6sbxsmL2gZFLaQpkrFa+PM84QcD32zD54KK7ujEaNV10WJjgpwmqIWYWDSGgKp1V1Yf39suTck57vSewUa7waaM4QBq1NRCL8WYV4bH0oWJ5HF4a2fO8As98ilsT6qCGyDHD+ImJseZZAdFIyg0bRiEw5egF/pGD8tTNSBg91QnhcqpBYIF4EEp7JJgq2i06WKGa6e9QbShn2RMQ5OmDVlxKeIAWEXIs0Mhj6IlcdqOkWa6a4aLGdB/K4QB6kc5Dqo2/hZgsWRRBGic6CZPGBYHpcOA/DxGK6vIKoQn2NEws/AOJxWZ+bEDoDp2BvjIXJkaUKxOqRUo/oLBAPmcaryiZyxX1AKnL2ivFyiPVNYQ9XUYbDkFxTou4XpcZCi57chpPckKQqAdXKBWDSCdTOBLhtxd1pJk+0jBL/yv+bqKmYNpWta+fnJXIhx/+ccbC8NT6/pZipKZCZZ/TVBvoOQXmNo2eBsBTqU+lNMWgPgqvdhEHnOLgBk7b3Kw2Od0ENx/cFKufRanFUh8TLGaBuljaDME0ae2NqVbzUe0sQClWoMQaRNCCmS9JWimFOCK31hZ/NJuz8ucScK5OOzKRXMebcggrUQqJJLO1qcjAXJlvHhuXrxYSSx52hCjSTyDYyuhkPkaFJHDWGG6a6sXVSsdwCe2JDzJNrYeCqt+ZMcjv2FjbLO6ZABdwdJNzYOsd3u2/Fuge2kHIwNH4/MLQJcvVPtSDgvG76enx8iPbZOBBcYnLNAzqShzknMF4HgRD9uL1rA9+6KrnVERyzhxsFifqOGLgwUhX8s7Inc6R7FfWgHBGXEv3At6AHuXqnSHFdZ07kdARkNHn0UVHtU/mtdAz9yu2nmpKdiq16G6WJZCQ+hKWoS9Q1I8kCWiSZp8INMK9ckhJAihMwNZ8nh8N4KMU7tkPRUHHPDCKZFHBaU7yoRMMHetevW/PDqxFui36KOOtziYUwJHGyZsrBkSELZsd5FaAQR48io7VsEIKti0NyQnWntZtrbIDeXPv7abcXoCx6E6RexIweU4c1CxTggn7ltUjFkbAmTDPCCrf0ZGxsbERTyPuvttl5JZIZwTBoFDoykIrasy/WaeBbUoGDSGyTLMsQerdjQ1nneQIQgNjgWC4gixL1hzKJog3tB8DHdduxufG6Q37iF7NhQV71smUvGJeluiFOQ0CAUFD3XJZIslNloHjuwY9/sNepEvIcJP+AEcMxk0mvmt0IAhgzl5KSAhRncVOnBazZKhLVTCEkSv28M2YbJGL3zDtUGey8awNpmonbaQjzO4Npn1p+D7wJWOBTnjTtU2zn54rsPaeSB1br7m/pGJsnU=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -645,11 +559,12 @@
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "57520d48-d8bc-44c3-a381-33c9ac352fe1",
+          "instance_id": "0e7bd827-c714-4afe-a928-4ce230afbed2",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
           "gpu_evidence_count": 1,
           "cert_spki_bound": true,
@@ -657,46 +572,94 @@
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 6.88
+        "latency_s": 7.8
       },
       {
         "provider": "chutes",
-        "model": "GLM-5-TEE",
-        "valid": false,
-        "verified_at": "2026-08-18T13:56:32Z",
+        "model": "GLM-5.1-TEE",
+        "valid": true,
+        "verified_at": "2026-08-18T20:37:08Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "",
-        "signing_public_key": "",
+        "signing_address": "64c6cd9b-d59f-45a3-824c-5b04dd85cc20",
+        "signing_public_key": "h9sU/0tpkfeORhgAhIO96/cFtJSqngiEQ3pF0ltVCih9uRyEYprBjKdnxwZeVXZzrVFM2LCUzdR6g1DHSwcEdNY57oquUXopwTQ2jYSz6pa9zDUV5Mmga7d17hKnm2Q7PHkpjQaevPImkhbDhCk/2JiZSSiCFhZVKTHEonRmDRE6QQwoNiAj5rcbF5JQ+BM1G5U2QvV8JYOGMwcUA/oGA6qcVJWC2zt+yiGyQ2Oje+kUImgsNMh1QmYdnBOF2Tc6rgkvy/pfj1RwgXFUNoqACCcdHySscEYBl7fHL7XN1GItSuESaoA6YtIrcdclRjWUhHCXhjdJlkB6ZqRsG2kKATEi8TV/JDF6W0KjK+V629crCGYpxnSnsOkVw0JAhWcTKWgsI9ehbmC2tPhWq4GiN3aOaRoohoIaV/MJt9S/IAAwfMYZglgW4aF6F/Y/gblNzrk40yFzehHPjAmfOGRv2llOMOyzSwup2ooPapZO56RrxpeV8xMWCdptAVFbKbBY96OXRzZ6xMcG2/gureTOWNCUqjpvQPasBpwyB3R37LdvA6HCu2mISUGmyHSRyYMTE2jHu4p7NXWzXFcOIFVuykpqRqOxHhkg5IJAhGfE05t8Dbe+GMVT1uQjGFFq8vh6YZpIupyEsOxxzSehCEaHK2gULRAo5KaCfSo4qEklUdyfqGNkWtWi5hyUHwhZqLk3iska/dSBuyY9r6cy0yakmda6+LfD/LA3UiO5YWQ1vyBW0WgJzRaCRXV5xFTMvnprd6tA1disY6Uowjp8nPtq8RKNQUQ0qIgq15l3T6ovS4MN6/R+YLa+rFq09ydxQcMzK+WU2AUTKjws6NhVhJKcUzsncPYP2bY3T5KksqdF5QUMkOmKw+o2XjARRIVmNkGR+DFMIaif/eyOwZhc9tsacMGehYGqAwt36DuwFxKpCotwV5uRCjee7RFyJeKJN7lc/KBSWioZCSWXSDOjtOxsXNaWlaJMWGWhQyXI65IckGJoJVjG/8vGXOjCmuyRqxZET8I73nlsiyAChGSQe8d+k1wtsGSVxickxaC2j6Kj15BnJadnBfMPKzlO/NsHxzZ1zDvL+YqkxYwI3QGQzbmLlrB2cntI4zGwCdIQtZV3BxSKXyx2mXyXqaUA3yEWKIaaDYtBAlUnc8dJ1TqXjRBi5tI6naPH4rB2fRtgMnY8FirIBXMSKFJVqFS30dONgIiyORB9Ugwo6iaN7RCAVMSQjICU5VIVVuF4qFlYiviK2pMAg6hKpGum4WQoPpke8HlRf5wTTEl/ylYiKtdZ3CcSmxqiqfI7PxQivfNvr8ozLXJpFLQgjAN6AFogRls+dbHLnkEVSAQ6K1vMwMSq//Rcb7sakDSoOXUWGalOymZnV5yC10eYQeqUHfbCVPKR07MU55hVMlcZyACIuepJqzghPjUKjVh8AvJ+rgmLsYKsHKsWb9EyY3sOVglD/beL7IBwl9GZnuIrAxwW4ewdWrFhGHsWP2ubZ6aNJRC+upEesKaPPSHDT9cnlqCJ+6kWuhSTZ8MlHX0uoLJ5bM+VdXObMlo8ZMxz4fwtEjCjLMsDYPc=",
         "signing_algo": "ecdsa",
         "scorecard": {
-          "nonce_bound": null,
-          "tdx_verified": null,
-          "report_data_binds_key": null,
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
           "gpu_attested": null,
           "key_derives_to_address": null,
           "compose_hash_committed": null,
           "prod_os_image": null,
-          "serving_code_attested": null,
+          "serving_code_attested": false,
           "backend_attested": null,
           "catalog_serves": null,
           "code_measurement_reproducible": null,
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
-        "details": {},
-        "error": "RuntimeError: HTTP 404 on /e2e/instances/e51e818e-fa63-570d-9f68-49d7d1b4d12f: {\"detail\":\"Chute not found\"}",
-        "latency_s": 1.07
+        "details": {
+          "shape": "chutes-tee",
+          "instance_id": "64c6cd9b-d59f-45a3-824c-5b04dd85cc20",
+          "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+          "gpu_evidence_count": 8,
+          "cert_spki_bound": true,
+          "debug_disabled": true,
+          "mrtd_in_golden_set": true
+        },
+        "error": null,
+        "latency_s": 13.76
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5.2-TEE",
+        "valid": true,
+        "verified_at": "2026-08-18T20:37:03Z",
+        "attestation_type": "chutes-tee",
+        "signing_address": "df23e812-5e7b-47e2-901c-abd40030c0d2",
+        "signing_public_key": "pzs+zLCPSdnOxVB/Z1psZXl6vnuyCOR7dVm4FTXFsuaETGfGsSCIUeqb9cRRrEC+nbRwFQsk9eZ+73oTHvSEg8YJ3fSiQtV/0nMERvEYuxagMkeHZjQL/NowCsiwKWURESAHKoNSJ8QImVG5DVVOmrVU5KIF74gLO5FC6ceuH2Qs2tWGDJKWaxBuYiW0CdZZ17qjyzW9aCrIlrKZKEs+EdJ8lVSBACfMRuFYi9Z1aVmE8Qk4E5RBjowM3eKuyQLJ8Gcho3qCUFyYLBdNBiJyiYAMhsIl7GjEGsI778Mup8AN0TJbeGOXi6k2cMrGk+UhPqRhH+iu3EGK1lQlO/tNJphknyMVjUatM2gRU5Mn+UhoUvsUr9JhFTIduvGwqDbE39tau/poB6eFHVAz0HN8mxumKtmhXda9WTsx2PgudoifY/awXcNThuUMzEJOr3tAw4cJDVNgA6ZxVDGIF3RMDmdo5WbJxGEqjfyTpqgyjpMm3lJrHVqHZUwUeqadtbp45xVBRHFdtnyTXsCaZqK2zbtn/9TPgzeTGiQ1tvbEvUTB5VYkQanEWytj2MNdEJBpizvE8Aha6BelRdFmREuxxGVuFwEBoIKMujgbWJyvyHZCE8Ub0wI0RfYsB8dQkEmq/hdMIAmBDfm/2eQjNyAMYGfMKhRfg7lKG9WGgOtTXORkd+NF0HZcmLSOfkd9H2DLo0EBZIqnGqs6lBMs3VoOLOkqNLdmDqTIFym6iojMnbJ0OId8syyM5bSVUmmhPGFv/gjMoyYbF9M1ONF+XGUeM6t6aIErPgUb6DBkHkaIBigurcW/w4TBVdS3NipZF3fPNSQbQGCavDGcXwoM0omEnvi1P4kWu0bHuOec1LbNGetSmzo2IgDAkeB1NIHCgwOAyPJiG7AGRWaWUbiNeEI5EnyEJbicU5VRm5YUvham3ihMVrbLUtRz8NtY7EpopdYOqQut2GiRPVEQyoHMhVyKnpiIBqwY/3Ii59wJCftI0iiZRhMHELUrofgPIbec63zPCiQkMWQyiXyDXARMRwmprzKyErVr+prD7HisQxfJBLU5Rmis9OxgzAU0WqN41vI6BWmIPOHOeJNSx5xbPxV9y9yHqIsTmiQMmWlelmOxWlBQ0BwajLEog5rKsMQkZFZEFlwbRmGgjPtKVMNlHZqNOvk5BYto7le7+oa65joinHsJgXu2wGForKWlZDGwRIGK9ox1YTZ7dBcdVxF5SOmHoPuOrmgAu6Kh4HkKDSG6ZSmGzWG0MmukafxVFCQ3aaCnyEtagqEr7pezHFYGDNUXv7oE76dzOLCc+PqL07Ae8Nx+yCyns0dXxnAmSSQvDqcyeVST8/qGBShFWwsIblpw0Vul82OdaREi/9YS7yO6zvpltwdIqZSpmEAWHpsCuRjJdbAzpUMv/kkbwfwIk+djXjm8qWNNtUEZChJUFmOMpeOwL+VzZOEvEdZrV0GpDVGnNTCwyUuknWQGTXKb0ExN/vyK0QVpn3lz2RgLQiOCzFMN6FmeYKCZPyKG3JJ9CbZx8GmV7NZuv3DUwS+QP9IhTb2H3CmfeXnfuIznnlqFzRw=",
+        "signing_algo": "ecdsa",
+        "scorecard": {
+          "nonce_bound": true,
+          "tdx_verified": true,
+          "report_data_binds_key": true,
+          "gpu_attested": null,
+          "key_derives_to_address": null,
+          "compose_hash_committed": null,
+          "prod_os_image": null,
+          "serving_code_attested": false,
+          "backend_attested": null,
+          "catalog_serves": null,
+          "code_measurement_reproducible": null,
+          "tls_pubkey_pinned": null,
+          "hpke_pubkey_attested": null,
+          "client_nonce_supported": null,
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
+        },
+        "details": {
+          "shape": "chutes-tee",
+          "instance_id": "df23e812-5e7b-47e2-901c-abd40030c0d2",
+          "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+          "gpu_evidence_count": 8,
+          "cert_spki_bound": true,
+          "debug_disabled": true,
+          "mrtd_in_golden_set": true
+        },
+        "error": null,
+        "latency_s": 8.97
       },
       {
         "provider": "chutes",
         "model": "DeepSeek-V3.2-TEE",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:38Z",
+        "verified_at": "2026-08-18T20:37:11Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "55736d25-6c59-4d2f-b69f-e7117665045d",
-        "signing_public_key": "IeAAdjO7YsusyJc+hCWAyWtaI+MyBToab1i3AjIoH2qYoSayTlldC2NAR8RCAC13+9ae6vYwjLqc56URymoaxUMnm+oxbAkq5yytsDIQ1SBI7naidwGAJcG9AWN6kUCoBvNtpjuRfhNOLsUEdyuFqCupn9IKHgIt6OhT7gs+9EK/SgeHkNezaxldSTkOUExPb+jMGeQ2kvu2gxzDb6VEDge/5LlrkupvtdiBSUkqSNAB08dVuldCYyZORweZG9NFUip2z5aJEAyN72ElPzpzYddAyJqsjVunrIarM9Z6zWAEdbyXRTwrduu/SgE8kHqamVtSCbYF5gsKr+onSZkdU5Rf5Cgvj5E0qgsH16A/cBc3oeGteTy2eYO2v4CFMKJgJcG71iOSEekQv2BKBHYfTWmT2YdoA/yDqDXG8pmpc0w35lt/wOVgS7QfWuInH3xQGwdd6bsZYvNiyjhyqnNmdDg9MpF7mMwuIXKtq0CtdaFC5EmgJ8ewGUqPg3Sf2qrB/bd3i8qeWWwG1PKmeHuC8qUczILASDjO1gQbvkpzi0BJrfKu/DxBVAsIhuSHfKVg6EhpwieMaFokDXAvDMqBSzOIopAo8TM3JgRDTwEuxNHK+Pex6XtsXbswvQcYGTiTWzkYlTF6F/agTCywi3FK61saikhxYrZ1Gix6gIajfbeAGSkOuNUBsKC174q7L/Gg+lKdC3qY25dYJayPCOVPCQstrICBIXdqElAPHforKYROYmirojOBQka8O0VIm2BsQ8YJT5CZWvQG3hNOmvnJEet6hDp1+Yp0O8hbxSi2g6BbVoxtlGEuuLo+dQoAecNksaCSTbcXxSMqAyQnmFow9tYa1ki6oQtDibQ7AhRikKJtT3HNrqE/YFd8R1sy6NsWaTd/dsJGF4xDYPhPqGpcclkRodEW8HUfD2SRQiXKUjVoQCC8gNAq2ZIOYERW8UVZGecxR9e8jGyjTYU+hGx1aApj6ZoL3GEjecmm5zatoclYJLbJ+iChxaAJ+Uln5JAVyYOV0bIoM/C+CcAnzdRWweWY17WjeZGHAJgZJ4YSSQZmK3uYzweUl/J3NSyg0kJ6UyB2PcKZPyYdlESiaynFXHE4A5kGv+vPQ7olfWhpbCuBu5EhL6i8R3iBHOMUtahEQRB1CXYHY8x9L1vHKDYT8yqaFNxrzOcnY+Nk7PVYdeW493wldkTBkrXFszNtAko80UEJmhLPofNxAQR9Sai0YVN8BskdwnvM0wdBFkAmdLDCjquTQ6tVqlKBMoV5lvDEpfUAehUqGsa17dB1uCk5uPRIquN9OXZqb7iKJmdfN1AQAat6/9kSYyO5Pwy578sujqgDT0vNuDdzfLw/HQFAFItez2LHG+SBdqV3CCXPcrIN+jIM2Fh/dIopCQyDxHVOwot6lyIA7FI7BlhYClQQYksUkpGZcsiHhZsPeoF09/NapISLZIgQOIwwWjOVeSuwNZaJL5VftaFVOxmXzhCAFXGGFVEowsu0NSBICMEJdVR6S/pGLXXIq3psqcpEt/d2gRBtZhANSU1mVV+F2hiNBfXBUf7ppnj+K/QL1ZwPtNU=",
+        "signing_address": "819f3adc-8327-4e8a-8dfa-bc31f8d6e283",
+        "signing_public_key": "cqKofUCYJ3JuQzwNVsN5/Vsmg6cLx7wXx9fBPIs1OJN7QIAlKKxmrsxyP4UDM+d5cLooj6ibAbwWLeRxRRvNWFKTIKjAlES4adseQAOzuAUL3OIWO+lxxWw4DaVXyHETtVEZcIcw9Ne5U+RV+3u/OxjDC+cBl6kzt+a6MqeXPrFOZoc0pCkCBEAfq6gdkXUxHqqi4uMEOzOEJNINVJxemcMj/OqFhzWi5cuCcYw6Njmqhqy84Pk92kAcQUzF3UxM2irFU0KJTrEloVI/5oaX3cJGYrEtRpl1j8cZqiJXqbBqLfY0UifGUrl5dDJ5ZThTkgZ7VTG7NFpdwnIUAnhcD6cswWcB89AnSIO1QMNdtYzIpZAuembKvXAToIeEGLXODgwemsMF7bVaFWdEoJdABVxuSlF6K0R6i8g5jDu/gwYWjrSJr/fDdnIjXRWd54Mn+3QZ+Dw5Qlm2drpj6hecfFIzq7Bax3auhTZ3CCaGMTVlg/Qd0kYpPHBZ4AEGxVRslTSIP6psiFIaLILGPNlTr3pKqwof90Kx9yuSFpg+WFZGkeISTGWB/ZnFJXMuG8dHJikeE7N+IxIDofkQrhRXpwWIrWlPLixzbKBFZhEahjoy9vClBWEeHxV4VGyee7dxS3EbADqJe3sjv6VQXIsaXVZOhXW4FQum6QCfbmtbTKlxogUUkKSvh3EWI2Eb34kllYquT4ofWolJfjENu/ku92qniNs0GtAHUIopIhgfoGkW2wk3u0Z0jbu8L5o4hit9vrG0x7Vr2OajJUY9AlN6hIGOjNyUHce/67EKoIDJz3ZhQcM/FTIpyRA2JbsO9kwkxZUxECQ53XC26Ap7ekoeZWOgykuMh9CYgzeGl8mVIYF0itC3wrGqYsI5JGM+wSZFJ8Af8yNzuShoZje83xJNpWlNN5i6VGhMESKGYsjKirB6wvyIOTzDGhi8UFMtFNwLTPhJpJuwrpiNVsDNuLGYKdEtQJU7C6KGBFWY9VbPQDyTBYgxqUUu4QyhHRkfySV8v3dBKMR/1UkZubyLIdNwBYaxUFujYZC0gqNZatZW4sTKWgWdRGc2tIp1T8dsnIeza+ilN8gLY3ZY+ndRvNA188saXgWKk+KIAelQ7LqNqdBh5nVSt3oPldqbBcN/VhrNn8ykgFcrXfc50IMd64F3L3Qg1rSXbaVAXjChI9RgqxnKaqe3Jblzn2UE90XK8EpMU4HFtEODK7hvZ5ujONI9WVgiyXeisFKM8MhQM2jLRclBcYVVWTB4WMAzycwGC+Y3dPIRpgdFDvW954ydvHkImRm9+LYX4leGnxRD/sy/4WuNZbFLMdR+oJZnCOEKn5mX/3WQ2TGH3aE4VdhkyQq3WxuI+wCNwVGjdQSvF0iGxOhHccaN0rFFNjlaM4AIdRV9edqJ2QyMi4i+wKHHSpRAihKCPajIiSpuUcK7WLAPzbtogSJyEqqkV5OmyfJXb/ooyLyLFiOYskQLkxTHj3kdAI0fAhSD6nZq7UVVXbewPTiH5ghr2MZ8GWBZjLmZIasmJywhsidUsqT/UkafMaF7phGHQHaApvxBZKmB933Fk1E=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -713,11 +676,12 @@
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "55736d25-6c59-4d2f-b69f-e7117665045d",
+          "instance_id": "819f3adc-8327-4e8a-8dfa-bc31f8d6e283",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
           "gpu_evidence_count": 8,
           "cert_spki_bound": true,
@@ -725,16 +689,16 @@
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 7.32
+        "latency_s": 8.6
       },
       {
         "provider": "chutes",
         "model": "Kimi-K2.6-TEE",
         "valid": true,
-        "verified_at": "2026-08-18T13:56:37Z",
+        "verified_at": "2026-08-18T20:37:18Z",
         "attestation_type": "chutes-tee",
-        "signing_address": "3c1e1e10-91e2-41c8-b89e-0eaa05cee400",
-        "signing_public_key": "rsbLJhx/0prHf+evJ0sU0Jm8P+bK97ELgyqQySIwTVo6LYPKU6CbnphvNmdmozJeFBx/gjwfczt/zOFWFCEtl+Cv2vcrqYcU1cLMgIA4g3Jct4bPkaVAdXUDLXbBuPqH2xIQruU332u7daGa8mMj/rXN/mEacZZgA1nI/CJ9uhcFc9OyLtnDs2iDLCol8TQrtVZ7K7YkkfI4nqI6uQuMOhl5pgAd1aAgLXCn5XIXDUmQlSqLCbpqHLuKZPYowfWfs0w+LGhB3ZE2P7FkqoEvkaxkWrmaveJzRLi5ebVi2EirqoyeoJaKy4w8XRhF5wvJSAFQWEgcRTwRYGunOAq/zPq90fu8edlIBDRIx3C/+tiJAOID+4FNOuA3lWmMQ9urpWAK+vox4CiyoLvEj0VOw0VVRgOUh/xr13ODDOA8+oJ8aUy9gmxlJ+oPtTc/IUHMoUhGVpl28eWf1cKeLeIY0loWrCBS/crOICVEUMlHbXIDDoYrPQY/8EgKDjN14ivOwYAKAfZPmFRlHpOzGOvELIF3aZR8KEaoCneQaqV0ocEBETdDZaCbxvqAZTmdF6shoTmRAuiH/srOEHdtt5wePNoonHukqnA0TUYA8ZOhRGi/iooFmoc5GbS1QtCaFIMLr9Ch1Vsl7cK02rsu6MmhlVE51ge9+1xKOAN6aJEgMjCvwayOasRpZECqDQOgFPOClcZkdzkRYRZV6clvCDNSUrhmQcCk69NHrLqSKYywHFoisBeSvBefMwapbrVd/fC1OLYtGxlTGWADKSAi6xJ3IxCMEJO19lgS1Rsj7uCt8pJz3rQDiSvLaOdf8PY0KvFyidKef8YDHwI1mPeDRABwmfCXDBO0BcyTyuQSnTmDmyYWODuPKkFIhdwpkAB2X1usuYOeX7gQAomEfnYAkFIkGunKGqIKB4W5dBtNvbcWpzc8oGWf8eZHXEZnzis2VPsXgcqvUDJSDyW4yPyTybAi32o3xsy48OAv5jZRb6tjaXNfPHJtueJVp6sThXkwplAgCMCsJWxxpftTmvpZ4QORDGzPYTIo+HF3qXFLKYmoVlVBawPIbPFnyyMdoqJBmmw89GB/v0mKr5rB0Hx2vVQjgHdm/jHKKmKKtDk0ebOv4ZEIliotNGiz1pQ4tLsr/QishfhG4rq/DKDMCyRB2uW0eXUSlwpeTRFR2HNErId5SyI8LkQJGPCw3aWqUZybALWIE9nK++d5uujMMSAI/btUnICrmCMq2GFpypV0+RFnsRebiUsv9Qwn5xJ5oWow5jegWESWeXCCdradxZp7onUBozMcaStniWMTXdZswwahj5i5Gpd4phmKfAnQg0CgQCzJqhlk4tdy5fC2HZfN6/caX9F0XQMSu9J08DuajpJRp+UdbxGOm4eR9kIGtte/4QplifNm7PY8KzoAD1uXdDzCPREgC5c8njdibTlV3cszeImjhbUqJnEbRwHK5jfFsaUZyWYmYhhW9RspsMq5gsQ4ElXA3SU2RzjPOYjNJzLD3CVwjvKFeKeOMxIPIvY59tAgAOJlCZImUarFlILKjFb4+4ckgCBnIIPmanx7BPG8pu4=",
+        "signing_address": "e8d71f32-c270-483d-9863-40c55013b879",
+        "signing_public_key": "XopWXDIYIawSFrYBdmKxWXtB6xV2BONZuvyB/6Y43LFTJfdL/qWbGfw71qvNcadcYAHDduuiDSde6kYtiZt9WeJNlqUef1Q7I8h/3JKqwYKrE+ysRdl58OYx9AE6qjC9hNKHs3xzrhin1koEgaSHpWSo8JhcVti6WHeDpOt697q3onI3AiiPF5FTuVtp6vGgu/sxYlML+tN/kGiCKzVgw3CZFru61jEb93Cl3tG2TyPIRzMDVKubrZKL8CKom9e0QetbO2Eje9O/QxqskYeN+3atiRElONJ0f/IraEUGBzeqeBkvWFw32OAY46FwKgGlD7AaU4FlqftaYYrPyUjDFtAJq1ue/hNWWBkVsFOBo4SU5bADJzuQ5HVA9/CmbHpzHRUUbRg6TVMm8BlEEFEj6MNKqeQ36hnPjst5y6YaqHWw1wHCC7MsHXW+hOkTQcy7ggW23ofBTJFafWAw8hRcLASLbJtijXJYqWg8Uca6bBV4DaJwxywb/Fei4SDMLhdYPKiHnfaGGUBr+KacrZR7FnPDCtkTGjtyhxFYLJcpFTqNGXkuafh3zlU8zlEaDkUlFkFlKky/ZESqgggS8ZLB+GSXixmzjGHPzDO+oMCXJLIBm5YI/mekmCg/8WTGBzazcBxnxNYDPQhaekQ4T3uWPKEIyhwL+VBZN0TG/vAJUjYSftuDHwjHXIm2KtN4QEWS3PeiP/ItuSk4CiaQH+il9GhcaNBUyNxg0jxwLzs4usM+W/iNDIGESgcFYMfNLWwYYVg+d7tqSGqEy7U0+sY+YCu0aHINsROW9eoaymt2vxqjmtPCQFlkG6EFwOOEO3clBSRhqzO5ZeiTZAIgpMtQbaZ8n5SxZGgon/EovvuXscmp3vpIJ4Oiz5QE5KuRMBNrrxUK1Kcls1KJVYt4yvNSLBEOwDLMFjO1BiaP8HKF7EWjjBs7h1k9Z0R+vJqLDhN+DDAC21BV8XpaKloUjfd9QlqZU1AGekV5giZwzaE5CASSbgN2Omoei4zFRctO82Qcmsy05gO4zvMht9xt2buUH6MfKTRGvRnM1Fa3WgCvEglujYlsQDNU4/OatoIUPxoLsoiOOAND7LtRXdS4iTl2SvnGwyp37+UtYDNdewZ2gAoxByYQGjNlRIFwu0rHWdEfNbh4/0lyJfMfNUw3BkRBmlleUzk43tUOo/d13qwrx9pqkmJYQsDFAZFXMAJuhIy9pRBjHYMAe8UM2moZBQGYI9ko5Ws/rss0BUBLWMyfxxuGeIDAdpcGFPBXFaRPxRiRy5KrRRCrmtpRFAcCMDwYLsAdG7OjSvdfqFLDjFFlR1VNvkcs2BGFUuYrx3iMpGuhRZqF5lqYWbE3Gsoo9BcaiKF0rqG0iawupYpFPBy+g7xCsXwegaSbiLg907aFhYuQ0TOz58tXBVLMhzs8uJYrPKJp3NCg1gKoZhm132lAf6s2SEBlkeorqpAPLdESyDy4YeAECGOQ1qeG1+EWS2F6+Xal/Jk/tvBpdBCmbUpfeYUzNAhV36PDKzNf/fcq8uFrHCX7lAlfTj5wZdRu07WFw2ijdAygN6fkSkfZ3Be5Dxo=",
         "signing_algo": "ecdsa",
         "scorecard": {
           "nonce_bound": true,
@@ -751,11 +715,12 @@
           "tls_pubkey_pinned": null,
           "hpke_pubkey_attested": null,
           "client_nonce_supported": null,
-          "runtime_config_fully_attested": null
+          "runtime_config_fully_attested": null,
+          "attested_serving_enforced": null
         },
         "details": {
           "shape": "chutes-tee",
-          "instance_id": "3c1e1e10-91e2-41c8-b89e-0eaa05cee400",
+          "instance_id": "e8d71f32-c270-483d-9863-40c55013b879",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
           "gpu_evidence_count": 8,
           "cert_spki_bound": true,
@@ -763,7 +728,7 @@
           "mrtd_in_golden_set": true
         },
         "error": null,
-        "latency_s": 5.13
+        "latency_s": 14.83
       }
     ]
   },
