@@ -6,10 +6,11 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Callable, Dict, List
 
 from verifiers.common import AttestationReport, now_iso, ScoreCard
-from verifiers import near_ai, tinfoil, venice, chutes
+from verifiers import aci, near_ai, tinfoil, venice, chutes
 
 
 PROVIDERS: Dict[str, Callable[[str, str, str], AttestationReport]] = {
+    "aci-gateway": aci.verify,
     "near-ai": near_ai.verify,
     "tinfoil": tinfoil.verify,
     "venice": venice.verify,
@@ -17,6 +18,7 @@ PROVIDERS: Dict[str, Callable[[str, str, str], AttestationReport]] = {
 }
 
 PROVIDER_BASE_URLS: Dict[str, str] = {
+    "aci-gateway": aci.DEFAULT_BASE_URL,
     "near-ai": near_ai.DEFAULT_BASE_URL,
     "tinfoil": tinfoil.DEFAULT_BASE_URL,
     "venice": venice.DEFAULT_BASE_URL,
@@ -24,6 +26,7 @@ PROVIDER_BASE_URLS: Dict[str, str] = {
 }
 
 PROVIDER_ENV_KEYS: Dict[str, str] = {
+    "aci-gateway": "ACI_API_KEY",
     "near-ai": "NEAR_API_KEY",
     "tinfoil": "TINFOIL_API_KEY",
     "venice": "VENICE_API_KEY",
@@ -31,7 +34,9 @@ PROVIDER_ENV_KEYS: Dict[str, str] = {
 }
 
 
-PUBLIC_ATTESTATION_PROVIDERS = {"tinfoil"}
+# ACI publishes its report and catalog unauthenticated; the receipt path would
+# need a key, and is deliberately not part of the daily row.
+PUBLIC_ATTESTATION_PROVIDERS = {"tinfoil", "aci-gateway"}
 
 
 def probe_provider(

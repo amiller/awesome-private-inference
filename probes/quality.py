@@ -49,6 +49,7 @@ LEDGER = DATA / "audits" / "near-ai_cloud-api.json"
 # answered, so repeats are real evidence about the fleet. Only chutes is the latter,
 # and conflating the two is how a load balancer gets reported as 20 deploys.
 VERSION_IDENTITY = {
+    "aci-gateway": ("compose_hash", "content-hash", "control-plane"),
     "near-ai": ("cloud_api_image_digest", "content-hash", "control-plane"),
     "tinfoil": ("digest", "content-hash", "control-plane"),
     "chutes": ("mrtd", "content-hash", "instance-sampled"),
@@ -75,7 +76,7 @@ TRANSPORT = re.compile(
 PUBLISHED_COLUMNS = [
     "nonce_bound", "tdx_verified", "report_data_binds_key", "gpu_attested",
     "key_derives_to_address", "compose_hash_committed", "prod_os_image",
-    "serving_code_attested", "backend_attested",
+    "serving_code_attested", "backend_attested", "attested_serving_enforced",
 ]
 
 

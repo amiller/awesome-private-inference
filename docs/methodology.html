@@ -88,6 +88,11 @@
     <dd class="text-sm text-slate-700">Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.</dd>
   </div>
   
+  <div class="border-l-4 border-emerald-500/40 pl-4">
+    <dt class="font-semibold">Attested serving forced</dt>
+    <dd class="text-sm text-slate-700">This hostname is in the attested tee_only_domains, so the gateway refuses to serve it from a non-TEE upstream. ❌ means the same verified workload will forward the prompt to an ordinary commercial API unless the client sets provider.aci_verified per request — live on api.redpill.ai, which shares tee.redpill.ai's quote and keyset but serves 42 models the TEE-only hosts refuse.</dd>
+  </div>
+  
 </dl>
 
 <h2 class="mt-8 text-xl font-semibold">Independent re-verification</h2>

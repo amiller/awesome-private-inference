@@ -31,6 +31,7 @@ SCORECARD_LABELS = {
     "prod_os_image": "Prod OS image",
     "serving_code_attested": "Serving code attested",
     "backend_attested": "Backend attested",
+    "attested_serving_enforced": "Attested serving forced",
 }
 
 SCORECARD_TOOLTIPS = {
@@ -59,6 +60,13 @@ SCORECARD_TOOLTIPS = {
         "image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent "
         "but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). "
         "❌ quote not self-consistent or compose not on the on-chain authorized set."
+    ),
+    "attested_serving_enforced": (
+        "This hostname is in the attested tee_only_domains, so the gateway refuses to "
+        "serve it from a non-TEE upstream. ❌ means the same verified workload will "
+        "forward the prompt to an ordinary commercial API unless the client sets "
+        "provider.aci_verified per request — live on api.redpill.ai, which shares "
+        "tee.redpill.ai's quote and keyset but serves 42 models the TEE-only hosts refuse."
     ),
 }
 

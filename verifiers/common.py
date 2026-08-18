@@ -35,6 +35,16 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
     # prompt-plaintext path (and the model) are unmeasured, so serving_code_attested
     # is False by construction and the shape never reaches Stage 1 — the operator can
     # read/exfiltrate prompts and substitute the model undetectably.
+    # ACI gateway (spec/aci.md): one attested workload fronting several hostnames.
+    # gpu_attested and key_derives_to_address are genuinely N/A — this TD has no GPU
+    # (num_gpus: 0; the GPUs are upstream) and ACI identity is a keyset digest, not an
+    # eth address. attested_serving_enforced is required because the same quote,
+    # keyset and Compose serve hosts where attested serving is NOT forced, and that
+    # difference is the whole risk the row exists to show.
+    "aci-gateway": {
+        "tdx_verified", "nonce_bound", "report_data_binds_key",
+        "compose_hash_committed", "prod_os_image", "attested_serving_enforced",
+    },
     "chutes-tee": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "serving_code_attested",
@@ -73,6 +83,12 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
     "tdx+gpu": {"disputed": False, "note":
         "Gateway plus per-model TD, so every hop is required. Excludes the Tinfoil-specific "
         "SEV layers, which do not exist in this architecture."},
+    "aci-gateway": {"disputed": False, "note":
+        "One workload, several hostnames. Excludes gpu_attested and key_derives_to_address "
+        "(no GPU in this TD, and ACI identity is a keyset digest rather than an eth address) "
+        "and backend_attested is scored but not required, since a client can accept the "
+        "passing sessions and reject the rest. attested_serving_enforced is required: it is "
+        "the only layer that differs between hostnames on one shared attestation."},
     "chutes-tee": {"disputed": False, "note":
         "serving_code_attested is required and is False by construction, so this shape cannot "
         "reach a full row. That is the intended reading, not a scoring bug."},
@@ -129,6 +145,7 @@ class ScoreCard:
     hpke_pubkey_attested: Optional[bool] = None  # report_data carries a non-zero HPKE pubkey
     client_nonce_supported: Optional[bool] = None  # provider accepts a client-supplied nonce
     runtime_config_fully_attested: Optional[bool] = None  # no env/secret values come from unattested external config
+    attested_serving_enforced: Optional[bool] = None  # ACI: this hostname is in the measured tee_only_domains, so the gateway refuses to serve it from a non-TEE upstream. False means a verified workload will forward the prompt to an ordinary commercial API unless the client opts in per request (spec 5.3)
 
     def as_dict(self) -> Dict[str, Optional[bool]]:
         return asdict(self)

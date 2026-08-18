@@ -81,9 +81,9 @@
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Cells carrying signal</div>
-    <div class="text-2xl font-semibold mt-1">37%</div>
-    <div class="text-xs text-slate-500">85 of
-      135 matrix cells are dashes</div>
+    <div class="text-2xl font-semibold mt-1">33%</div>
+    <div class="text-xs text-slate-500">100 of
+      150 matrix cells are dashes</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Unmeasurable providers</div>
@@ -681,7 +681,7 @@
     <span class="inline-block rounded px-1.5 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300">○</span> awaiting our review,
     <span class="inline-block rounded px-1.5 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200">—</span> required but not exposed,
     <span class="inline-block rounded px-1.5 py-0.5 text-xs text-slate-400">—</span> not applicable to this architecture.
-    This matrix shows 9 of the 15 layers the probe records; the
+    This matrix shows 10 of the 15 layers the probe records; the
     remainder are listed per row in the coverage table above.
   </p>
   <div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
@@ -709,6 +709,8 @@
           <th class="p-2 text-center" title="The code on the prompt-plaintext path (serve.py) and the served model are committed to a measured register. Red on Chutes: serve.py is CFSV-excluded and in no RTMR, so the operator (or Chutes) can read or exfiltrate the decrypted prompt AND silently substitute the model — neither detectable from the quote. Live proof: all -TEE models share one MRTD. chutesai/chutes#75.">Serving code attested</th>
           
           <th class="p-2 text-center" title="Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). ❌ quote not self-consistent or compose not on the on-chain authorized set.">Backend attested</th>
+          
+          <th class="p-2 text-center" title="This hostname is in the attested tee_only_domains, so the gateway refuses to serve it from a non-TEE upstream. ❌ means the same verified workload will forward the prompt to an ordinary commercial API unless the client sets provider.aci_verified per request — live on api.redpill.ai, which shares tee.redpill.ai's quote and keyset but serves 42 models the TEE-only hosts refuse.">Attested serving forced</th>
           
           <th class="p-2 text-right">lat</th>
         </tr>
@@ -750,6 +752,10 @@
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
           <td class="p-2 text-center">
@@ -800,6 +806,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
           <td class="p-2 text-right text-xs text-slate-500">7.27s</td>
         </tr>
       
@@ -838,6 +848,10 @@
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
           <td class="p-2 text-center">
@@ -888,6 +902,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
           <td class="p-2 text-right text-xs text-slate-500">4.85s</td>
         </tr>
       
@@ -930,6 +948,10 @@
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300" title="Provider's code is chain-authorized and the gateway quote self-attests, but the analyst pair hasn't reviewed this revision yet. This is our backlog, not a provider fault.">○</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
           <td class="p-2 text-right text-xs text-slate-500">2.89s</td>
@@ -976,6 +998,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300" title="Provider's code is chain-authorized and the gateway quote self-attests, but the analyst pair hasn't reviewed this revision yet. This is our backlog, not a provider fault.">○</span>
           </td>
           
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
           <td class="p-2 text-right text-xs text-slate-500">4.01s</td>
         </tr>
       
@@ -983,6 +1009,10 @@
           <td class="p-2 font-medium">tinfoil</td>
           <td class="p-2 font-mono text-xs">router</td>
           <td class="p-2 text-xs text-slate-500">tinfoil-sev-snp-v2</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
@@ -1064,6 +1094,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
           </td>
           
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
           <td class="p-2 text-right text-xs text-slate-500">3.53s</td>
         </tr>
       
@@ -1106,6 +1140,10 @@
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
           <td class="p-2 text-right text-xs text-slate-500">3.78s</td>
@@ -1152,6 +1190,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
           </td>
           
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
           <td class="p-2 text-right text-xs text-slate-500">3.29s</td>
         </tr>
       
@@ -1190,6 +1232,10 @@
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
           <td class="p-2 text-center">
@@ -1240,6 +1286,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
           <td class="p-2 text-right text-xs text-slate-500">0.18s</td>
         </tr>
       
@@ -1247,6 +1297,10 @@
           <td class="p-2 font-medium">tinfoil</td>
           <td class="p-2 font-mono text-xs">gemma4-31b</td>
           <td class="p-2 text-xs text-slate-500">error</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
@@ -1328,6 +1382,10 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
           <td class="p-2 text-right text-xs text-slate-500">0.0s</td>
         </tr>
       
@@ -1335,6 +1393,10 @@
           <td class="p-2 font-medium">tinfoil</td>
           <td class="p-2 font-mono text-xs">llama3-3-70b</td>
           <td class="p-2 text-xs text-slate-500">error</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
           
           <td class="p-2 text-center">
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>

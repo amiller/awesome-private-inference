@@ -5,6 +5,13 @@ matrix; keep to representatives of each attestation shape.
 """
 
 MODELS: dict[str, list[str]] = {
+    # One attested workload, three hostnames. They differ only in whether the
+    # measured tee_only_domains forces attested serving, which is the point.
+    "aci-gateway": [
+        "tee.redpill.ai",
+        "inference.phala.com",
+        "api.redpill.ai",
+    ],
     "near-ai": [
         "openai/gpt-oss-120b",
         "zai-org/GLM-5.1-FP8",
