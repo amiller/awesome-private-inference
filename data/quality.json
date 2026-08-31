@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-08-30T17:28:47Z",
+  "generated_at": "2026-08-31T19:30:12Z",
   "window": {
     "first": "2026-04-21",
-    "last": "2026-08-30",
-    "days": 131
+    "last": "2026-08-31",
+    "days": 132
   },
   "calibration": {
-    "observations": 2726,
-    "pass": 1908,
-    "transport": 662,
-    "no-error-invalid": 156,
+    "observations": 2743,
+    "pass": 1915,
+    "transport": 671,
+    "no-error-invalid": 157,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
     "no_error_invalid_by_provider": {
-      "aci-gateway": 13,
+      "aci-gateway": 14,
       "chutes": 2,
       "near-ai": 7,
       "redpill": 123,
       "venice": 11
     },
-    "note": "156 of 2726 observations were invalid with no error attached: aci-gateway 13, chutes 2, near-ai 7, redpill 123, venice 11. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "157 of 2743 observations were invalid with no error attached: aci-gateway 14, chutes 2, near-ai 7, redpill 123, venice 11. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
@@ -234,98 +234,116 @@
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
+      "status": "unreachable",
+      "proven": 0,
       "required": 4,
       "missing": [
-        "serving_code_attested"
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "RuntimeError: HTTP 429 on /instances/ff977ee9-b4f8-4e03-b16d-b13176079196/eviden",
       "hidden_layers": []
     },
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
+      "status": "unreachable",
+      "proven": 0,
       "required": 4,
       "missing": [
-        "serving_code_attested"
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "RuntimeError: HTTP 429 on /instances/850578c8-3a69-4e77-82ab-9353cbe0e110/eviden",
       "hidden_layers": []
     },
     {
       "provider": "chutes",
       "model": "GLM-5.1-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
+      "status": "unreachable",
+      "proven": 0,
       "required": 4,
       "missing": [
-        "serving_code_attested"
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "RuntimeError: HTTP 429 on /instances/bec3b3e2-a641-48be-8b2f-eeef4e8c1607/eviden",
       "hidden_layers": []
     },
     {
       "provider": "chutes",
       "model": "GLM-5.2-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
+      "status": "unreachable",
+      "proven": 0,
       "required": 4,
       "missing": [
-        "serving_code_attested"
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "RuntimeError: HTTP 429 on /instances/5bc1b776-b167-40d8-9585-d6acd5297b47/eviden",
       "hidden_layers": []
     },
     {
       "provider": "chutes",
       "model": "DeepSeek-V3.2-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
+      "status": "unreachable",
+      "proven": 0,
       "required": 4,
       "missing": [
-        "serving_code_attested"
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "RuntimeError: HTTP 429 on /instances/38f7cf24-f141-426c-ac3c-e8b4f33f9acf/eviden",
       "hidden_layers": []
     },
     {
       "provider": "chutes",
       "model": "Kimi-K2.6-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
+      "status": "unreachable",
+      "proven": 0,
       "required": 4,
       "missing": [
-        "serving_code_attested"
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "RuntimeError: HTTP 429 on /instances/b89c6c42-fb04-406b-a907-269ad4f22e08/eviden",
       "hidden_layers": []
     }
   ],
   "coverage_summary": {
     "verified": 2,
     "invalid": 1,
-    "unreachable": 3,
-    "partial": 11
+    "unreachable": 9,
+    "partial": 5
   },
   "unmeasurable_providers": [
     "venice"
@@ -335,13 +353,13 @@
     "builds_reviewed": 2,
     "backlog": 18,
     "last_audit": "2026-06-18",
-    "days_since_last_audit": 73
+    "days_since_last_audit": 74
   },
   "density": {
     "published_cells": 170,
-    "carrying_signal": 72,
-    "dashes": 98,
-    "signal_fraction": 0.424
+    "carrying_signal": 48,
+    "dashes": 122,
+    "signal_fraction": 0.282
   },
   "hidden_layer_targets": [
     "tinfoil/router",
@@ -355,41 +373,41 @@
     {
       "provider": "aci-gateway",
       "model": "api.redpill.ai",
-      "observations": 13,
-      "span_days": 12,
+      "observations": 14,
+      "span_days": 13,
       "distinct": 5,
       "novel": 4,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.0,
-      "days_per_deploy_corrected": 2.5
+      "days_per_deploy": 3.2,
+      "days_per_deploy_corrected": 2.7
     },
     {
       "provider": "aci-gateway",
       "model": "inference.phala.com",
-      "observations": 13,
-      "span_days": 12,
+      "observations": 14,
+      "span_days": 13,
       "distinct": 5,
       "novel": 4,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.0,
-      "days_per_deploy_corrected": 2.5
+      "days_per_deploy": 3.2,
+      "days_per_deploy_corrected": 2.7
     },
     {
       "provider": "aci-gateway",
       "model": "tee.redpill.ai",
-      "observations": 13,
-      "span_days": 12,
+      "observations": 14,
+      "span_days": 13,
       "distinct": 5,
       "novel": 4,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.0,
-      "days_per_deploy_corrected": 2.5
+      "days_per_deploy": 3.2,
+      "days_per_deploy_corrected": 2.7
     },
     {
       "provider": "chutes",
@@ -524,15 +542,15 @@
     {
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
-      "observations": 103,
-      "span_days": 103,
+      "observations": 104,
+      "span_days": 104,
       "distinct": 19,
       "novel": 18,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.7,
-      "days_per_deploy_corrected": 5.2
+      "days_per_deploy": 5.8,
+      "days_per_deploy_corrected": 5.3
     },
     {
       "provider": "redpill",
@@ -602,14 +620,14 @@
     {
       "provider": "tinfoil",
       "model": "router",
-      "observations": 126,
-      "span_days": 126,
+      "observations": 127,
+      "span_days": 127,
       "distinct": 33,
       "novel": 32,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.9,
+      "days_per_deploy": 4.0,
       "days_per_deploy_corrected": 3.4
     }
   ]
