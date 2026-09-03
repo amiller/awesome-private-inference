@@ -1,0 +1,28 @@
+{
+  "_comment": "Reference-value ledger for Chutes TEE (Intel TDX) inference. Each row's `signoff` is either `analyst-pair` (a human reviewer promoted it; audited_by lists them) or `agent-draft-baseline` (an agent-draft review awaiting promotion). This ledger is WEAKER than near-ai's cloud-api ledger by construction of its audit unit: mrtd measures only the dstack base TD, NOT serve.py on the prompt-plaintext path (CFSV-excluded, in no RTMR — see verifiers/chutes.py), and the model sits in no measured register (MRTD/RTMRs identical across all -TEE models). So a matching mrtd attests the base image only; it does NOT prove the serving code wasn't modified to read/exfiltrate the decrypted prompt or substitute the model. Reference value = mrtd; source-of-truth for serving code = chutes-api (unmeasured). Anchor = provider golden set (self-attested, not on-chain). verifiers/chutes.py sets details.mrtd_audited from membership here; diffalert uses it only to silence the known fleet flip-flop, not as a trust claim. Refresh: mrtd is instance-sampled, so the fleet flip-flops between coexisting values rather than deploying serially; a value not in this ledger raises unaudited-mrtd:chutes/<model> for review.",
+  "identity_field": "mrtd",
+  "golden_set_source": "https://api.chutes.ai/servers/tee/measurements",
+  "source_repo": "chutes-api",
+  "audits": [
+    {
+      "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+      "first_seen": "2026-06-25",
+      "last_seen": "2026-09-02",
+      "audited_at": "2026-09-02",
+      "audited_by": ["amiller", "claude-opus-4-8"],
+      "signoff": "analyst-pair",
+      "verdict": "golden-set-member-serving-code-unmeasured",
+      "notes": "Live-observed mrtd, present in the provider golden set at every sampling 2026-06-25 through 2026-09-02; the dominant fleet value. TDX quote self-consistent (dcap_qvl), report_data binds the E2E pubkey and the attestation-svc cert SPKI, debug disabled. Attests the dstack base TD only. serve.py (prompt-plaintext path) is CFSV-excluded and in no measured register, so this mrtd does NOT cover the serving code or model identity; not comparable to near-ai backend_attested. Base-image-to-source mapping not reproduced from a chutes-api build."
+    },
+    {
+      "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
+      "first_seen": "2026-06-18",
+      "last_seen": "2026-09-02",
+      "audited_at": "2026-09-02",
+      "audited_by": ["amiller", "claude-opus-4-8"],
+      "signoff": "analyst-pair",
+      "verdict": "golden-set-member-serving-code-unmeasured",
+      "notes": "The second coexisting fleet mrtd, still sampled intermittently (e.g. 2026-08-12, 08-16, 08-25, 09-02) alongside 261ce538 — the two values flip-flop across daily samples (instance-sampled identity) rather than representing serial deploys. Same posture and same serving-code caveat as the other value."
+    }
+  ]
+}

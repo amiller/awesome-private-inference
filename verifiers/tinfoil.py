@@ -31,6 +31,7 @@ import ssl
 import threading
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 import requests
@@ -42,7 +43,21 @@ from sigstore.verify import Verifier as SigstoreVerifier
 from sigstore.verify import policy as sigstore_policy
 
 from . import tinfoil_sev
-from .common import AttestationReport, ScoreCard, now_iso
+from .common import (
+    AttestationReport, ScoreCard, audit_match, load_audit_ledger, now_iso,
+)
+
+_AUDITS_DIR = Path(__file__).resolve().parents[1] / "data" / "audits"
+
+
+def _digest_audited(repo: str, digest: str):
+    """None if no reference-value ledger exists for this model's repo yet;
+    else whether `digest` is a reviewed reference value."""
+    ledger = _AUDITS_DIR / f"tinfoil_{repo.split('/')[-1]}.json"
+    if not ledger.exists():
+        return None
+    audit_set, _ = load_audit_ledger(ledger, "bundle_digest")
+    return audit_match(digest, audit_set) is not None
 
 DEFAULT_BASE_URL = "https://api.tinfoil.sh/v1"
 ATC_BUNDLE_URL = "https://atc.tinfoil.sh/attestation"
@@ -378,6 +393,7 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
         "digest": bundle.digest,
         "predicate": bundle.report_format,
         "repo": repo,
+        "digest_audited": _digest_audited(repo, bundle.digest),
     }
 
     report = bundle.sev_report()
