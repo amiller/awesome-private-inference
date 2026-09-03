@@ -31,16 +31,16 @@ import re
 import sys
 from pathlib import Path
 
-from verifiers.common import REQUIRED_LAYERS_BY_SHAPE
+from verifiers.common import REQUIRED_LAYERS_BY_SHAPE, audit_match, load_audit_ledger
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA = REPO_ROOT / "data"
 SNAPSHOTS = DATA / "snapshots"
 
 # Per-provider reference-value ledgers and the row field that names the audited
-# build. near-ai is on-chain-anchored + analyst-pair signed; chutes/tinfoil are
-# bootstrap baselines (see each file's _comment). tinfoil's ledger covers only the
-# router repo, so its other models count as observed-but-unaudited — real backlog.
+# build (see each file's _comment for signoff level and audit-unit strength).
+# tinfoil's ledger covers only the router repo, so its other models count as
+# observed-but-unaudited — real backlog.
 AUDIT_LEDGERS = {
     "near-ai": ("near-ai_cloud-api.json", "image_digest"),
     "tinfoil": ("tinfoil_confidential-model-router.json", "bundle_digest"),
@@ -170,11 +170,11 @@ def compute(latest: dict | None = None) -> dict:
     # --- audit debt (per provider, then summed) ---
     audit_by_provider, all_observed, all_reviewed, last_audits = {}, set(), set(), []
     for prov, (fname, keyf) in AUDIT_LEDGERS.items():
-        led = json.loads((DATA / "audits" / fname).read_text())
-        entries = [str(e[keyf]).lower() for e in led["audits"]]
+        path = DATA / "audits" / fname
+        entries, meta = load_audit_ledger(path, keyf)
         obs = {v for (p, _), o in versions.items() if p == prov for _, v in o}
-        aud = {v for v in obs if any(v.startswith(e) for e in entries)}
-        la = max(e["audited_at"] for e in led["audits"])
+        aud = {v for v in obs if audit_match(v, entries)}
+        la = max(e["audited_at"] for e in meta.values())
         audit_by_provider[prov] = {
             "builds_observed": len(obs), "builds_reviewed": len(aud),
             "backlog": len(obs) - len(aud), "last_audit": la,

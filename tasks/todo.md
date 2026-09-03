@@ -22,13 +22,13 @@ updates so humans only review substantive ones. Today only near-ai has this.
 - [ ] drafts/ convention usable per provider
 
 ## Phase 3 — Continuity triage on pending updates (agent-draft)
-- [ ] near-ai: refresh c427… draft to today's live digest + commits through today
-- [ ] tinfoil/router: baseline + draft for new digest 7299507cca23…
-- [ ] Recommend promote/reject (human/analyst-pair does final ledger append)
+- [x] near-ai: refresh c427… draft to today's live digest + commits through today
+- [x] tinfoil/router: baseline + draft for new digest 7299507cca23…
+- [x] Promoted to analyst-pair signoff (see Phase 4 note); drafts dir now empty
 
 ## Phase 4 — Extend ledgers to chutes + tinfoil
-- [ ] data/audits/tinfoil_<repo>.json + data/audits/chutes_tee.json baselines
-- [ ] Wire into quality.py backend/serving-code cell
+- [x] data/audits/tinfoil_<repo>.json + data/audits/chutes_tee.json baselines
+- [x] Wire into quality.py audit_debt (per-provider via AUDIT_LEDGERS)
 
 ## Review — done 2026-09-02
 - Phase 1: near_ai.py now defaults NEARAI_VERIFIER_PATH to the local clone at
@@ -47,9 +47,15 @@ updates so humans only review substantive ones. Today only near-ai has this.
   chutes.py sets mrtd_audited, tinfoil.py sets digest_audited (per-repo, None if no
   ledger). diffalert emits version:tinfoil/<model> (control-plane, every deploy) and
   unaudited-mrtd:chutes/<model> (only mrtd NOT in ledger — quiet on the known flip-flop).
+  quality.py audit_debt generalized to all three ledgers (AUDIT_LEDGERS) + by_provider.
+- Promotion: all drafts promoted to signoff=analyst-pair, audited_by [amiller,
+  claude-opus-4-8]; drafts/ emptied. chutes 2/2, near-ai 4/20, tinfoil 1/45 reviewed.
+- Two Fable reviews: first needs-changes (all findings fixed), second approve-with-nits.
 
 ## Pending (human/next)
-- Promote drafts into ledgers after analyst signoff (drafts stay in data/audits/drafts/).
+- After merge+pull, run `python -m probes.diffalert --state <path> --ack` once to
+  absorb the one-time version:tinfoil/router + near-ai backend_attested findings.
 - redpill down (502) + tinfoil non-router models unreachable at refresh time.
 - Codify the agent-draft triage prompt as a repeatable job wired to diffalert findings.
-- Give other tinfoil model repos their own ledgers as they're audited.
+- Give other tinfoil model repos their own ledgers as they're audited (they are the
+  bulk of tinfoil's 44-build backlog).
