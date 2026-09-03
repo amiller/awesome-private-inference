@@ -245,6 +245,11 @@ def load_audit_ledger(path, key_field: str = "image_digest"):
     meta: Dict[str, Dict] = {}
     for row in data["audits"]:
         k = str(row[key_field]).lower()
+        # A short/empty key would startswith-match unrelated digests; reject it
+        # rather than silently mark everything audited.
+        if len(k) < 8 or any(c not in "0123456789abcdef" for c in k):
+            raise ValueError(f"{Path(path).name}: invalid {key_field} {k!r} "
+                             "(need >=8 hex chars)")
         ids.add(k)
         meta[k] = row
     return ids, meta

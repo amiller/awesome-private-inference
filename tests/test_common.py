@@ -2,13 +2,16 @@
 from __future__ import annotations
 
 import hashlib
+import json
 
 import pytest
 
 from verifiers.common import (
     AttestationReport,
     ScoreCard,
+    audit_match,
     keccak_eth_address,
+    load_audit_ledger,
     phala_report_data_binds_addr_nonce,
     sha256_nonce_pubkey_binding,
 )
@@ -74,3 +77,27 @@ def test_attestation_report_as_dict_includes_scorecard():
     d = r.as_dict()
     assert d["scorecard"]["tdx_verified"] is True
     assert d["provider"] == "near-ai"
+
+
+def test_audit_match_truncated_and_case(tmp_path):
+    led = tmp_path / "led.json"
+    led.write_text(json.dumps({"audits": [
+        {"k": "22763fe4"},
+        {"k": "ABCDEF0123456789"},
+    ]}))
+    ids, meta = load_audit_ledger(led, "k")
+    # truncated 8-hex prefix matches a full digest that starts with it
+    assert audit_match("22763fe4aabbccddeeff", ids) == "22763fe4"
+    # keys are lowercased; an uppercase live value still matches
+    assert audit_match("ABCDEF0123456789extra", ids) == "abcdef0123456789"
+    assert audit_match("deadbeefcafebabe", ids) is None
+    assert audit_match("", ids) is None
+    assert "abcdef0123456789" in meta
+
+
+def test_load_audit_ledger_rejects_short_or_nonhex_key(tmp_path):
+    for bad in ("", "abc", "nothexxx"):
+        led = tmp_path / "bad.json"
+        led.write_text(json.dumps({"audits": [{"k": bad}]}))
+        with pytest.raises(ValueError):
+            load_audit_ledger(led, "k")

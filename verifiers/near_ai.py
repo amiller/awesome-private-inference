@@ -1,8 +1,9 @@
 """NEAR AI attestation verifier.
 
 Relies on the vendored nearai-cloud-verifier modules (`model_verifier`,
-`domain_verifier`). Make sure `NEARAI_VERIFIER_PATH` points at the repo's `py/`
-directory before importing `verify()`.
+`domain_verifier`). These live in a local clone at `_nearai-verifier/py`
+(gitignored; CI clones it), which is the default search path; set
+`NEARAI_VERIFIER_PATH` to override before importing `verify()`.
 """
 from __future__ import annotations
 

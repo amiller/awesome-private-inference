@@ -11,6 +11,13 @@ Findings:
                                row is valid; probe outages don't churn cells).
   digest:near-ai/cloud-api   — gateway image digest changed (audit unit of the
                                analyst-pair ledger).
+  version:tinfoil/{model}    — tinfoil control-plane bundle digest changed (a new
+                               sigstore-tag-bound release; audit unit of
+                               data/audits/tinfoil_<repo>.json).
+  unaudited-mrtd:chutes/{model} — a chutes mrtd the verifier marked NOT in
+                               data/audits/chutes_tee.json. mrtd is instance-sampled
+                               and flip-flops between known values, so a ledger
+                               member never fires; only a genuinely new mrtd does.
   anchor-drift:{contract}    — on-chain compose hashes not in the hermes
                                anchor, reported as a delta vs last ack.
   stale:{file}               — latest.json / onchain-status.json older than 26h.
@@ -78,9 +85,10 @@ def current_values() -> dict[str, str]:
                     vals[f"version:tinfoil/{row['model']}"] = details["digest"]
                 # chutes: mrtd is instance-sampled and flip-flops between known
                 # fleet values, so only a value NOT in our reviewed ledger is a
-                # finding — the loop stays quiet on the known flip.
-                if provider == "chutes" and details.get("mrtd") \
-                        and not details.get("mrtd_audited", False):
+                # finding — the loop stays quiet on the known flip. Fire only when
+                # the verifier explicitly marked it unaudited; a snapshot predating
+                # the mrtd_audited field (None) is not a finding.
+                if provider == "chutes" and details.get("mrtd_audited") is False:
                     vals[f"unaudited-mrtd:chutes/{row['model']}"] = details["mrtd"]
 
     for c in onchain["contracts"]:

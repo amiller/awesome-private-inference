@@ -1,5 +1,5 @@
 {
-  "_comment": "Analyst-pair reference-value ledger for Chutes TEE (Intel TDX) inference. Each entry is an mrtd (TD measurement) the (user, agent) pair has observed live and cross-checked against the provider's self-published golden set at /servers/tee/measurements. IMPORTANT — this is a WEAKER audit unit than near-ai's cloud-api ledger: mrtd measures only the dstack base TD, NOT serve.py on the prompt-plaintext path (CFSV-excluded, in no RTMR — see verifiers/chutes.py), and the model sits in no measured register (MRTD/RTMRs are identical across all -TEE models). So a matching mrtd attests the base image only; it does NOT prove the serving code wasn't modified to read/exfiltrate the decrypted prompt or substitute the model. Reference value = mrtd; source-of-truth for serving code = chutes-api (unmeasured). Anchor = provider golden set (self-attested, not on-chain). Refresh: when a new mrtd is observed in the golden set, append a row; mrtd is instance-sampled, so the fleet flip-flops between coexisting values rather than deploying serially.",
+  "_comment": "Bootstrap reference-value ledger for Chutes TEE (Intel TDX) inference. Rows carry signoff=agent-draft-baseline: they were established by an agent-draft review and AWAIT analyst-pair promotion (on promotion, a human reviewer is added to audited_by and signoff becomes analyst-pair). This is DISTINCT from — and weaker than — near-ai's promoted-only cloud-api ledger, in two ways: (1) provenance is agent-only until promoted; (2) the audit unit itself is weaker: mrtd measures only the dstack base TD, NOT serve.py on the prompt-plaintext path (CFSV-excluded, in no RTMR — see verifiers/chutes.py), and the model sits in no measured register (MRTD/RTMRs identical across all -TEE models). So a matching mrtd attests the base image only; it does NOT prove the serving code wasn't modified to read/exfiltrate the decrypted prompt or substitute the model. Reference value = mrtd; source-of-truth for serving code = chutes-api (unmeasured). Anchor = provider golden set (self-attested, not on-chain). verifiers/chutes.py sets details.mrtd_audited from membership here; diffalert uses it only to silence the known fleet flip-flop, not as a trust claim. Refresh: mrtd is instance-sampled, so the fleet flip-flops between coexisting values rather than deploying serially; a value not in this ledger raises unaudited-mrtd:chutes/<model> for review.",
   "identity_field": "mrtd",
   "golden_set_source": "https://api.chutes.ai/servers/tee/measurements",
   "source_repo": "chutes-api",
@@ -10,17 +10,19 @@
       "last_seen": "2026-09-02",
       "audited_at": "2026-09-02",
       "audited_by": ["agent-draft"],
+      "signoff": "agent-draft-baseline",
       "verdict": "golden-set-member-serving-code-unmeasured",
-      "notes": "Live-observed mrtd, present in the provider golden set at every sampling 2026-06-25 through 2026-09-02; currently-serving fleet value. TDX quote self-consistent (dcap_qvl), report_data binds the E2E pubkey and the attestation-svc cert SPKI, debug disabled. Attests the dstack base TD only. serve.py (prompt-plaintext path) is CFSV-excluded and in no measured register, so this mrtd does NOT cover the serving code or model identity; not comparable to near-ai backend_attested. Base-image-to-source mapping not reproduced from a chutes-api build."
+      "notes": "Live-observed mrtd, present in the provider golden set at every sampling 2026-06-25 through 2026-09-02; the dominant fleet value. TDX quote self-consistent (dcap_qvl), report_data binds the E2E pubkey and the attestation-svc cert SPKI, debug disabled. Attests the dstack base TD only. serve.py (prompt-plaintext path) is CFSV-excluded and in no measured register, so this mrtd does NOT cover the serving code or model identity; not comparable to near-ai backend_attested. Base-image-to-source mapping not reproduced from a chutes-api build."
     },
     {
       "mrtd": "ddc6efcdd2309e10837f8a7f64b71272b7ef003b129460410fe715bdfffec38c7c0c1686dddb2a23d4fd623d145e8455",
       "first_seen": "2026-06-18",
-      "last_seen": "2026-08-06",
+      "last_seen": "2026-09-02",
       "audited_at": "2026-09-02",
       "audited_by": ["agent-draft"],
+      "signoff": "agent-draft-baseline",
       "verdict": "golden-set-member-serving-code-unmeasured",
-      "notes": "The second coexisting fleet mrtd, retired from sampling after 2026-08-06. Same posture and same serving-code caveat as the current value; the two values flip-flopped across daily samples (instance-sampled identity) rather than representing serial deploys."
+      "notes": "The second coexisting fleet mrtd, still sampled intermittently (e.g. 2026-08-12, 08-16, 08-25, 09-02) alongside 261ce538 — the two values flip-flop across daily samples (instance-sampled identity) rather than representing serial deploys. Same posture and same serving-code caveat as the other value."
     }
   ]
 }

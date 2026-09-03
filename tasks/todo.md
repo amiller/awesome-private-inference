@@ -31,7 +31,8 @@ updates so humans only review substantive ones. Today only near-ai has this.
 - [ ] Wire into quality.py backend/serving-code cell
 
 ## Review — done 2026-09-02
-- Phase 1: near_ai.py now defaults NEARAI_VERIFIER_PATH to in-repo _nearai-verifier/py
+- Phase 1: near_ai.py now defaults NEARAI_VERIFIER_PATH to the local clone at
+  _nearai-verifier/py (gitignored; CI clones it)
   (no env needed). near-ai re-captured; new digest 455d25f3… today.
 - Phase 2: load_audit_ledger()/audit_match() lifted into common.py; near_ai delegates
   (behavior identical, verified). Tests green (34 passed).
