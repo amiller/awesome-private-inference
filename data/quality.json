@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T01:47:15Z",
+  "generated_at": "2026-09-03T17:02:16Z",
   "window": {
     "first": "2026-04-21",
     "last": "2026-09-03",
@@ -88,10 +88,12 @@
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
       "shape": "tdx+gpu",
-      "status": "verified",
-      "proven": 7,
+      "status": "partial",
+      "proven": 6,
       "required": 7,
-      "missing": [],
+      "missing": [
+        "backend_attested"
+      ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -202,7 +204,7 @@
       ],
       "version_identity": "absent",
       "version_source": "none",
-      "error": "HTTP 502: {\"api_version\":\"aci/1\",\"workload_keyset_digest\":\"sha256:9c0ce15aff5ca6",
+      "error": "HTTP 502: {\"api_version\":\"aci/1\",\"workload_keyset_digest\":\"sha256:4f3dc45eeb18a5",
       "hidden_layers": [
         "code_measurement_reproducible"
       ]
@@ -319,31 +321,31 @@
     }
   ],
   "coverage_summary": {
-    "verified": 3,
+    "verified": 2,
     "invalid": 1,
     "unreachable": 3,
-    "partial": 10
+    "partial": 11
   },
   "unmeasurable_providers": [
     "venice"
   ],
   "audit_debt": {
-    "builds_observed": 67,
+    "builds_observed": 69,
     "builds_reviewed": 7,
-    "backlog": 60,
+    "backlog": 62,
     "last_audit": "2026-09-02",
     "days_since_last_audit": 1,
     "by_provider": {
       "near-ai": {
-        "builds_observed": 20,
+        "builds_observed": 21,
         "builds_reviewed": 4,
-        "backlog": 16,
+        "backlog": 17,
         "last_audit": "2026-09-02"
       },
       "tinfoil": {
-        "builds_observed": 45,
+        "builds_observed": 46,
         "builds_reviewed": 1,
-        "backlog": 44,
+        "backlog": 45,
         "last_audit": "2026-09-02"
       },
       "chutes": {
@@ -543,13 +545,13 @@
       "model": "zai-org/GLM-5.1-FP8",
       "observations": 107,
       "span_days": 107,
-      "distinct": 19,
-      "novel": 18,
+      "distinct": 20,
+      "novel": 19,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.9,
-      "days_per_deploy_corrected": 5.4
+      "days_per_deploy": 5.6,
+      "days_per_deploy_corrected": 5.1
     },
     {
       "provider": "redpill",
@@ -621,13 +623,13 @@
       "model": "router",
       "observations": 130,
       "span_days": 130,
-      "distinct": 33,
-      "novel": 32,
+      "distinct": 34,
+      "novel": 33,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 4.1,
-      "days_per_deploy_corrected": 3.5
+      "days_per_deploy": 3.9,
+      "days_per_deploy_corrected": 3.4
     }
   ]
 }

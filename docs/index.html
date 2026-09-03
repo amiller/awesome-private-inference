@@ -68,15 +68,15 @@
 <section class="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Targets verified</div>
-    <div class="text-2xl font-semibold mt-1">3 / 17</div>
-    <div class="text-xs text-slate-500">10 partial ·
+    <div class="text-2xl font-semibold mt-1">2 / 17</div>
+    <div class="text-xs text-slate-500">11 partial ·
       4 unreachable</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Builds reviewed</div>
     <div class="text-2xl font-semibold mt-1 text-rose-700">
-      7 / 67</div>
-    <div class="text-xs text-slate-500">backlog 60 ·
+      7 / 69</div>
+    <div class="text-xs text-slate-500">backlog 62 ·
       last 1d ago</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
@@ -146,25 +146,6 @@
           </td>
           <td class="p-2 text-center font-mono text-xs">
             6/6
-              
-            
-          </td>
-          <td class="p-2 text-xs text-slate-600">
-            —
-            
-            
-          </td>
-        </tr>
-      
-        <tr class="border-t border-slate-100">
-          <td class="p-2 font-medium">near-ai</td>
-          <td class="p-2 font-mono text-xs">zai-org/GLM-5.1-FP8</td>
-          <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700"
-                  title="Every layer this provider's architecture should be able to prove, it proves.">verified</span>
-          </td>
-          <td class="p-2 text-center font-mono text-xs">
-            7/7
               
             
           </td>
@@ -315,6 +296,27 @@
           <td class="p-2 text-xs text-slate-600">
             
               <span class="font-mono">serving_code_attested</span>
+            
+            
+            
+          </td>
+        </tr>
+      
+        <tr class="border-t border-slate-100">
+          <td class="p-2 font-medium">near-ai</td>
+          <td class="p-2 font-mono text-xs">zai-org/GLM-5.1-FP8</td>
+          <td class="p-2">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
+          </td>
+          <td class="p-2 text-center font-mono text-xs">
+            6/7
+              
+            
+          </td>
+          <td class="p-2 text-xs text-slate-600">
+            
+              <span class="font-mono">backend_attested</span>
             
             
             
@@ -473,7 +475,7 @@
           </td>
           <td class="p-2 text-xs text-slate-600">
             
-              <span class="font-mono">HTTP 502: {"api_version":"aci/1","workload_keyset_digest":"sha256:9c0ce15aff5ca6acf505e0f5</span>
+              <span class="font-mono">HTTP 502: {"api_version":"aci/1","workload_keyset_digest":"sha256:4f3dc45eeb18a5aefa49dfe5</span>
             
             
               <div class="mt-1 text-amber-700">not shown on the matrix below:
@@ -684,12 +686,12 @@
           <td class="p-2 font-mono text-xs">near-ai/zai-org/GLM-5.1-FP8</td>
           <td class="p-2 text-xs text-slate-400">control-plane</td>
           <td class="p-2 text-right">107</td>
-          <td class="p-2 text-right">19</td>
-          <td class="p-2 text-right font-semibold">18</td>
+          <td class="p-2 text-right">20</td>
+          <td class="p-2 text-right font-semibold">19</td>
           <td class="p-2 text-right text-slate-300"
               title="control-plane version string — revisits are not meaningful here">0</td>
-          <td class="p-2 text-right">5.9</td>
-          <td class="p-2 text-right font-semibold">5.4</td>
+          <td class="p-2 text-right">5.6</td>
+          <td class="p-2 text-right font-semibold">5.1</td>
         </tr>
       
         <tr class="border-t border-slate-100">
@@ -756,12 +758,12 @@
           <td class="p-2 font-mono text-xs">tinfoil/router</td>
           <td class="p-2 text-xs text-slate-400">control-plane</td>
           <td class="p-2 text-right">130</td>
-          <td class="p-2 text-right">33</td>
-          <td class="p-2 text-right font-semibold">32</td>
+          <td class="p-2 text-right">34</td>
+          <td class="p-2 text-right font-semibold">33</td>
           <td class="p-2 text-right text-slate-300"
               title="control-plane version string — revisits are not meaningful here">0</td>
-          <td class="p-2 text-right">4.1</td>
-          <td class="p-2 text-right font-semibold">3.5</td>
+          <td class="p-2 text-right">3.9</td>
+          <td class="p-2 text-right font-semibold">3.4</td>
         </tr>
       
       </tbody>
@@ -913,54 +915,6 @@
           <td class="p-2 text-right text-xs text-slate-500">0.0s</td>
         </tr>
       
-        <tr class="border-t border-slate-100 ">
-          <td class="p-2 font-medium">near-ai</td>
-          <td class="p-2 font-mono text-xs">zai-org/GLM-5.1-FP8</td>
-          <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-right text-xs text-slate-500">3.08s</td>
-        </tr>
-      
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
           <td class="p-2 font-medium">aci-gateway</td>
           <td class="p-2 font-mono text-xs">api.redpill.ai</td>
@@ -1054,7 +1008,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">6.94s</td>
+          <td class="p-2 text-right text-xs text-slate-500">8.28s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1102,7 +1056,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">7.68s</td>
+          <td class="p-2 text-right text-xs text-slate-500">9.47s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1150,7 +1104,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">7.59s</td>
+          <td class="p-2 text-right text-xs text-slate-500">10.61s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1198,7 +1152,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">5.44s</td>
+          <td class="p-2 text-right text-xs text-slate-500">8.35s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1246,7 +1200,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">5.41s</td>
+          <td class="p-2 text-right text-xs text-slate-500">9.37s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1294,7 +1248,55 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">4.39s</td>
+          <td class="p-2 text-right text-xs text-slate-500">9.69s</td>
+        </tr>
+      
+        <tr class="border-t border-slate-100 ">
+          <td class="p-2 font-medium">near-ai</td>
+          <td class="p-2 font-mono text-xs">zai-org/GLM-5.1-FP8</td>
+          <td class="p-2 text-xs text-slate-500">tdx+gpu</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300" title="Provider's code is chain-authorized and the gateway quote self-attests, but the analyst pair hasn't reviewed this revision yet. This is our backlog, not a provider fault.">○</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">3.0s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1342,7 +1344,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.43s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.38s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1390,7 +1392,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.86s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.0s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1438,7 +1440,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">3.42s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.1s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1486,7 +1488,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">4.48s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.31s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1534,7 +1536,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.71s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.88s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1582,7 +1584,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">18.24s</td>
+          <td class="p-2 text-right text-xs text-slate-500">18.19s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1630,7 +1632,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.69s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.66s</td>
         </tr>
       
       </tbody>
@@ -1695,7 +1697,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-09-03T01:47:15Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/33705040320">33705040320</a> · <code>41a28033</code></span>
+    <span>Snapshot 2026-09-03T17:02:16Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/33782153246">33782153246</a> · <code>3f94afcb</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
