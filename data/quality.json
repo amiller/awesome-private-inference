@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-09-02T17:09:42Z",
+  "generated_at": "2026-09-03T01:47:15Z",
   "window": {
     "first": "2026-04-21",
-    "last": "2026-09-02",
-    "days": 134
+    "last": "2026-09-03",
+    "days": 135
   },
   "calibration": {
-    "observations": 2777,
-    "pass": 1941,
-    "transport": 677,
-    "no-error-invalid": 159,
+    "observations": 2794,
+    "pass": 1954,
+    "transport": 680,
+    "no-error-invalid": 160,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
     "no_error_invalid_by_provider": {
-      "aci-gateway": 16,
+      "aci-gateway": 17,
       "chutes": 2,
       "near-ai": 7,
       "redpill": 123,
       "venice": 11
     },
-    "note": "159 of 2777 observations were invalid with no error attached: aci-gateway 16, chutes 2, near-ai 7, redpill 123, venice 11. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "160 of 2794 observations were invalid with no error attached: aci-gateway 17, chutes 2, near-ai 7, redpill 123, venice 11. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
@@ -88,12 +88,10 @@
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
       "shape": "tdx+gpu",
-      "status": "partial",
-      "proven": 6,
+      "status": "verified",
+      "proven": 7,
       "required": 7,
-      "missing": [
-        "backend_attested"
-      ],
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -204,7 +202,7 @@
       ],
       "version_identity": "absent",
       "version_source": "none",
-      "error": "HTTP 502: {\"api_version\":\"aci/1\",\"workload_keyset_digest\":\"sha256:4f3dc45eeb18a5",
+      "error": "HTTP 502: {\"api_version\":\"aci/1\",\"workload_keyset_digest\":\"sha256:9c0ce15aff5ca6",
       "hidden_layers": [
         "code_measurement_reproducible"
       ]
@@ -321,20 +319,40 @@
     }
   ],
   "coverage_summary": {
-    "verified": 2,
+    "verified": 3,
     "invalid": 1,
     "unreachable": 3,
-    "partial": 11
+    "partial": 10
   },
   "unmeasurable_providers": [
     "venice"
   ],
   "audit_debt": {
-    "builds_observed": 20,
-    "builds_reviewed": 2,
-    "backlog": 18,
-    "last_audit": "2026-06-18",
-    "days_since_last_audit": 76
+    "builds_observed": 67,
+    "builds_reviewed": 7,
+    "backlog": 60,
+    "last_audit": "2026-09-02",
+    "days_since_last_audit": 1,
+    "by_provider": {
+      "near-ai": {
+        "builds_observed": 20,
+        "builds_reviewed": 4,
+        "backlog": 16,
+        "last_audit": "2026-09-02"
+      },
+      "tinfoil": {
+        "builds_observed": 45,
+        "builds_reviewed": 1,
+        "backlog": 44,
+        "last_audit": "2026-09-02"
+      },
+      "chutes": {
+        "builds_observed": 2,
+        "builds_reviewed": 2,
+        "backlog": 0,
+        "last_audit": "2026-09-02"
+      }
+    }
   },
   "density": {
     "published_cells": 170,
@@ -354,54 +372,54 @@
     {
       "provider": "aci-gateway",
       "model": "api.redpill.ai",
-      "observations": 16,
-      "span_days": 15,
+      "observations": 17,
+      "span_days": 16,
       "distinct": 5,
       "novel": 4,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.8,
-      "days_per_deploy_corrected": 3.2
+      "days_per_deploy": 4.0,
+      "days_per_deploy_corrected": 3.5
     },
     {
       "provider": "aci-gateway",
       "model": "inference.phala.com",
-      "observations": 16,
-      "span_days": 15,
+      "observations": 17,
+      "span_days": 16,
       "distinct": 5,
       "novel": 4,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.8,
-      "days_per_deploy_corrected": 3.2
+      "days_per_deploy": 4.0,
+      "days_per_deploy_corrected": 3.5
     },
     {
       "provider": "aci-gateway",
       "model": "tee.redpill.ai",
-      "observations": 16,
-      "span_days": 15,
+      "observations": 17,
+      "span_days": 16,
       "distinct": 5,
       "novel": 4,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.8,
-      "days_per_deploy_corrected": 3.2
+      "days_per_deploy": 4.0,
+      "days_per_deploy_corrected": 3.5
     },
     {
       "provider": "chutes",
       "model": "DeepSeek-V3.2-TEE",
-      "observations": 75,
-      "span_days": 76,
+      "observations": 76,
+      "span_days": 77,
       "distinct": 2,
       "novel": 1,
       "revisit": 0,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 76.0,
-      "days_per_deploy_corrected": 75.5
+      "days_per_deploy": 77.0,
+      "days_per_deploy_corrected": 76.5
     },
     {
       "provider": "chutes",
@@ -419,8 +437,8 @@
     {
       "provider": "chutes",
       "model": "GLM-5.1-TEE",
-      "observations": 15,
-      "span_days": 15,
+      "observations": 16,
+      "span_days": 16,
       "distinct": 1,
       "novel": 0,
       "revisit": 0,
@@ -432,8 +450,8 @@
     {
       "provider": "chutes",
       "model": "GLM-5.2-TEE",
-      "observations": 15,
-      "span_days": 15,
+      "observations": 16,
+      "span_days": 16,
       "distinct": 1,
       "novel": 0,
       "revisit": 0,
@@ -445,41 +463,41 @@
     {
       "provider": "chutes",
       "model": "Kimi-K2.6-TEE",
-      "observations": 74,
-      "span_days": 76,
+      "observations": 75,
+      "span_days": 77,
       "distinct": 2,
       "novel": 1,
       "revisit": 4,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 76.0,
-      "days_per_deploy_corrected": 75.5
+      "days_per_deploy": 77.0,
+      "days_per_deploy_corrected": 76.5
     },
     {
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
-      "observations": 75,
-      "span_days": 76,
+      "observations": 76,
+      "span_days": 77,
       "distinct": 2,
       "novel": 1,
-      "revisit": 25,
+      "revisit": 26,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 76.0,
-      "days_per_deploy_corrected": 75.5
+      "days_per_deploy": 77.0,
+      "days_per_deploy_corrected": 76.5
     },
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
-      "observations": 75,
-      "span_days": 76,
+      "observations": 76,
+      "span_days": 77,
       "distinct": 2,
       "novel": 1,
       "revisit": 18,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 76.0,
-      "days_per_deploy_corrected": 75.5
+      "days_per_deploy": 77.0,
+      "days_per_deploy_corrected": 76.5
     },
     {
       "provider": "near-ai",
@@ -523,8 +541,8 @@
     {
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
-      "observations": 106,
-      "span_days": 106,
+      "observations": 107,
+      "span_days": 107,
       "distinct": 19,
       "novel": 18,
       "revisit": 0,
@@ -601,14 +619,14 @@
     {
       "provider": "tinfoil",
       "model": "router",
-      "observations": 129,
-      "span_days": 129,
+      "observations": 130,
+      "span_days": 130,
       "distinct": 33,
       "novel": 32,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 4.0,
+      "days_per_deploy": 4.1,
       "days_per_deploy_corrected": 3.5
     }
   ]
