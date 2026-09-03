@@ -36,7 +36,16 @@ from verifiers.common import REQUIRED_LAYERS_BY_SHAPE
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA = REPO_ROOT / "data"
 SNAPSHOTS = DATA / "snapshots"
-LEDGER = DATA / "audits" / "near-ai_cloud-api.json"
+
+# Per-provider reference-value ledgers and the row field that names the audited
+# build. near-ai is on-chain-anchored + analyst-pair signed; chutes/tinfoil are
+# bootstrap baselines (see each file's _comment). tinfoil's ledger covers only the
+# router repo, so its other models count as observed-but-unaudited — real backlog.
+AUDIT_LEDGERS = {
+    "near-ai": ("near-ai_cloud-api.json", "image_digest"),
+    "tinfoil": ("tinfoil_confidential-model-router.json", "bundle_digest"),
+    "chutes": ("chutes_tee.json", "mrtd"),
+}
 
 # What string names the running code version, per provider, whether it is a content
 # hash (a real audit unit) or a mutable tag (names nothing), and — critically — where
@@ -158,12 +167,23 @@ def compute(latest: dict | None = None) -> dict:
                 v = sc.get(key)
                 cells["signal" if v is not None else "dash"] += 1
 
-    # --- audit debt ---
-    ledger = json.loads(LEDGER.read_text())
-    entries = [e["image_digest"].lower() for e in ledger["audits"]]
-    observed = {v for (p, _), obs in versions.items() if p == "near-ai" for _, v in obs}
-    audited = {v for v in observed if any(v.startswith(e) for e in entries)}
-    last_audit = max(e["audited_at"] for e in ledger["audits"])
+    # --- audit debt (per provider, then summed) ---
+    audit_by_provider, all_observed, all_reviewed, last_audits = {}, set(), set(), []
+    for prov, (fname, keyf) in AUDIT_LEDGERS.items():
+        led = json.loads((DATA / "audits" / fname).read_text())
+        entries = [str(e[keyf]).lower() for e in led["audits"]]
+        obs = {v for (p, _), o in versions.items() if p == prov for _, v in o}
+        aud = {v for v in obs if any(v.startswith(e) for e in entries)}
+        la = max(e["audited_at"] for e in led["audits"])
+        audit_by_provider[prov] = {
+            "builds_observed": len(obs), "builds_reviewed": len(aud),
+            "backlog": len(obs) - len(aud), "last_audit": la,
+        }
+        # tuple-key the union so a chutes mrtd and a tinfoil digest can't collide
+        all_observed |= {(prov, v) for v in obs}
+        all_reviewed |= {(prov, v) for v in aud}
+        last_audits.append(la)
+    last_audit = max(last_audits)
     today = datetime.date.fromisoformat(dates[-1])
 
     # --- deploy cadence, novel vs revisit ---
@@ -223,11 +243,12 @@ def compute(latest: dict | None = None) -> dict:
         "unmeasurable_providers": sorted(
             p for p in active_providers if VERSION_IDENTITY[p][1] != "content-hash"),
         "audit_debt": {
-            "builds_observed": len(observed),
-            "builds_reviewed": len(audited),
-            "backlog": len(observed) - len(audited),
+            "builds_observed": len(all_observed),
+            "builds_reviewed": len(all_reviewed),
+            "backlog": len(all_observed) - len(all_reviewed),
             "last_audit": last_audit,
             "days_since_last_audit": (today - datetime.date.fromisoformat(last_audit)).days,
+            "by_provider": audit_by_provider,
         },
         "density": {
             "published_cells": sum(cells.values()),

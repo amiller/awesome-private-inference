@@ -30,6 +30,24 @@
       "verdict": "inline-verify-PR552-PR558",
       "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md",
       "notes": "Live-captured from the gateway attestation (compose a986df43…, on-chain authorized for cloud-api DstackApp 0xf550fdfb…). Serves both openai/gpt-oss-120b and zai-org/GLM-5.1-FP8, which were ○ audit_pending on this rotation. Admitted on continuity grounds: the 100 cloud-api commits between 2026-05-15 and 2026-06-18 show no revert of #552/#558 — inline verification was strengthened, not weakened (#748 strict report_data binding removing the padded-address fallback; #745/#746/#749 per-provider fail-closed MeasurementPolicy + GPU-evidence requirement; #709 byte-exact SSE forwarding). Digest not reproduced from a build."
+    },
+    {
+      "image_digest": "c427945706eb7c4fb4dd269634474e0d77d17f4d0f46b8c4b737677f8841b092",
+      "image_digest_truncated": false,
+      "audited_at": "2026-09-02",
+      "audited_by": ["amiller", "claude-opus-4-8"],
+      "verdict": "inline-verify-PR552-PR558",
+      "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md",
+      "notes": "Promoted from agent-draft on 2026-09-02. Live-captured behind on-chain-authorized compose 2e79a5a5c14247859a427c2739996c24c00322cdafb7b6bb9bff714971234d12; quote/app_compose self-consistent. Reviewed all 54 nearai/cloud-api commits 2026-06-18 through 2026-08-04: no revert or weakening of the PR #552/#558 inline chain (DCAP-QVL TDX, RTMR3 replay/measurement policy, GPU evidence, strict report_data + signing-address/TLS-SPKI binding, TLS SPKI pinning all intact). Continuity-preserving or stricter: #817/#850 cache only no-nonce reports and keep forwarding caller-supplied nonces; #857 adds an Intel Trust Authority token surface without replacing the inline verifier; #886 omits dstack's incompatible JSON event log only from the ITA request; #898 requires API-key auth for report retrieval; #906 normalizes GPU cert chains for ITA. Digest observed live, not reproduced from a build."
+    },
+    {
+      "image_digest": "455d25f3223a3dcbc49358e827f95a8cd62a3ff4528e0fc25b6909b1d4670ec6",
+      "image_digest_truncated": false,
+      "audited_at": "2026-09-02",
+      "audited_by": ["amiller", "claude-opus-4-8"],
+      "verdict": "inline-verify-PR552-PR558",
+      "audit_doc": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/near-ai-private-inference/DEVPROOF-REPORT-revisit-2026-05-02.md",
+      "notes": "Promoted from agent-draft on 2026-09-02. Verdict MUNDANE. Extends the c427 audit by reviewing every nearai/cloud-api commit 2026-08-04 through HEAD (2026-09-02): no revert or weakening of PR #552/#558; spki_verifier.rs and near_nonce.rs untouched. Continuity-preserving or stricter: #991 E2EE backend-key affinity (routing-only pin, not forwarded upstream); #918 additive chutes golden-measurement resync (20→29 rows, same software identity, per-hardware RTMR0 only); #952 real HTTP error on pre-first-event stream failure with byte-exact SSE + TLS pinning preserved; #925/#924/#923 Anthropic wire-compat on the non-attested external path only; #949 pricing metadata; #919 ca-cert reproducible-build pin. Live behind compose 9b15afa635b9c6a88464335b5386537d01680ae75ee4b3d645ef4694087b3048, confirmed on-chain-anchored by the 2026-09-02T17:36Z sweep (111 distinct compose hashes). Serves zai-org/GLM-5.1-FP8. Digest observed live, not reproduced from a build."
     }
   ]
 }
