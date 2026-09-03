@@ -10,6 +10,7 @@ import hashlib
 import json
 import time
 from dataclasses import dataclass, field, asdict
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 
@@ -233,3 +234,28 @@ def sha256_hex(s: str | bytes) -> str:
     if isinstance(s, str):
         s = s.encode()
     return hashlib.sha256(s).hexdigest()
+
+
+def load_audit_ledger(path, key_field: str = "image_digest"):
+    """Read an analyst-pair audit ledger (data/audits/*.json). Returns
+    (identity_set, metadata_by_identity). Keys are lowercased; a truncated key
+    matches a live value by startswith (see audit_match)."""
+    data = json.loads(Path(path).read_text())
+    ids: Set[str] = set()
+    meta: Dict[str, Dict] = {}
+    for row in data["audits"]:
+        k = str(row[key_field]).lower()
+        ids.add(k)
+        meta[k] = row
+    return ids, meta
+
+
+def audit_match(value: str, audit_set: Set[str]) -> Optional[str]:
+    """Return the matching audit key (full or truncated prefix) if any, else None."""
+    if not value:
+        return None
+    value = value.lower()
+    for entry in audit_set:
+        if value.startswith(entry):
+            return entry
+    return None

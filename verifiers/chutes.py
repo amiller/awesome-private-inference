@@ -29,8 +29,15 @@ from typing import Any, Dict
 
 import requests
 
-from .common import AttestationReport, ScoreCard, now_iso, sha256_nonce_pubkey_binding
+from pathlib import Path
+
+from .common import (
+    AttestationReport, ScoreCard, audit_match, load_audit_ledger, now_iso,
+    sha256_nonce_pubkey_binding,
+)
 from . import phala_tdx
+
+_TEE_AUDITS = Path(__file__).resolve().parents[1] / "data" / "audits" / "chutes_tee.json"
 
 DEFAULT_BASE_URL = "https://api.chutes.ai"
 
@@ -109,6 +116,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     details["cert_spki_bound"] = q["report_data"][64:128] == _cert_spki_sha256(ev["certificate"])
     details["debug_disabled"] = (int(q["td_attributes"], 16) & 1) == 0
     details["mrtd_in_golden_set"] = q["mrtd"] in golden
+    audit_set, _ = load_audit_ledger(_TEE_AUDITS, "mrtd")
+    details["mrtd_audited"] = audit_match(q["mrtd"], audit_set) is not None
 
     tdx = phala_tdx.verify_tdx_quote(base64.b64decode(ev["quote"]).hex())
     sc.tdx_verified = phala_tdx.is_verified(tdx)

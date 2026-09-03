@@ -68,9 +68,20 @@ def current_values() -> dict[str, str]:
             if row["valid"]:
                 for cell, v in row["scorecard"].items():
                     vals[f"cell:{rid}/{cell}"] = json.dumps(v)
-                digest = (row.get("details") or {}).get("cloud_api_image_digest")
+                details = row.get("details") or {}
+                digest = details.get("cloud_api_image_digest")
                 if digest:
                     vals["digest:near-ai/cloud-api"] = digest
+                # tinfoil: per-model control-plane digest — every change is a real
+                # deploy; fire the review agent on each.
+                if provider == "tinfoil" and details.get("digest"):
+                    vals[f"version:tinfoil/{row['model']}"] = details["digest"]
+                # chutes: mrtd is instance-sampled and flip-flops between known
+                # fleet values, so only a value NOT in our reviewed ledger is a
+                # finding — the loop stays quiet on the known flip.
+                if provider == "chutes" and details.get("mrtd") \
+                        and not details.get("mrtd_audited", False):
+                    vals[f"unaudited-mrtd:chutes/{row['model']}"] = details["mrtd"]
 
     for c in onchain["contracts"]:
         if c["anchor_relevant"] and c["new_since_anchor"] is not None:

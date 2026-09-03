@@ -24,14 +24,17 @@ from urllib.parse import urlparse
 
 import requests
 
-_vendor = os.environ.get("NEARAI_VERIFIER_PATH")
+_vendor = os.environ.get("NEARAI_VERIFIER_PATH") or str(
+    Path(__file__).resolve().parents[1] / "_nearai-verifier" / "py")
 if _vendor and _vendor not in sys.path:
     sys.path.insert(0, _vendor)
 
 from .common import (
     AttestationReport,
     ScoreCard,
+    audit_match,
     keccak_eth_address,
+    load_audit_ledger,
     now_iso,
     sha256_hex,
 )
@@ -52,14 +55,7 @@ _CLOUD_API_IMAGE_RE = re.compile(
 def _cloud_api_audit_set() -> Tuple[Set[str], Dict[str, Dict]]:
     """Read the analyst-pair audit ledger. Returns (digest_set, metadata_by_digest).
     digest_set contains both full digests and truncated prefixes; match uses startswith."""
-    data = json.loads(_CLOUD_API_AUDITS.read_text())
-    digests: Set[str] = set()
-    meta: Dict[str, Dict] = {}
-    for row in data["audits"]:
-        d = row["image_digest"].lower()
-        digests.add(d)
-        meta[d] = row
-    return digests, meta
+    return load_audit_ledger(_CLOUD_API_AUDITS, "image_digest")
 
 
 @lru_cache(maxsize=1)
@@ -77,14 +73,7 @@ def _cloud_api_chain_set() -> Set[str]:
     )
 
 
-def _audit_match(digest: str, audit_set: Set[str]) -> Optional[str]:
-    """Return the matching audit key (full or truncated) if digest matches, else None."""
-    if not digest:
-        return None
-    for entry in audit_set:
-        if digest.startswith(entry):
-            return entry
-    return None
+_audit_match = audit_match
 
 
 def _sync(coro):
