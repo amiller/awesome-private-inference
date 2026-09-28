@@ -48,18 +48,18 @@
 <section class="mb-8 rounded-xl border border-slate-300 bg-white p-5">
   <h2 class="text-sm uppercase font-semibold tracking-wider text-slate-500">How much to trust this page</h2>
   <p class="mt-2 text-sm leading-relaxed text-slate-800">
-    Over <strong>159 days</strong> and
-    <strong>3202 observations</strong>, this instrument has
+    Over <strong>160 days</strong> and
+    <strong>3219 observations</strong>, this instrument has
     produced <strong>0 verification failures</strong>.
     Every failing observation in its history was a transport error
-    (768) or an invalid response with no recorded reason
-    (204).
+    (771) or an invalid response with no recorded reason
+    (206).
     
-    By the rule of three, zero events in 3202 trials puts the
+    By the rule of three, zero events in 3219 trials puts the
     95% upper bound on the per-observation verification-failure rate at
-    <strong>0.094%</strong>. That is the honest reading:
+    <strong>0.093%</strong>. That is the honest reading:
     not "providers are safe", but "if this check fails, it fails less often than about once in
-    1067 observations — or it is not wired to anything."
+    1073 observations — or it is not wired to anything."
     We cannot yet distinguish those two cases.
     
   </p>
@@ -69,20 +69,20 @@
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Targets verified</div>
     <div class="text-2xl font-semibold mt-1">2 / 17</div>
-    <div class="text-xs text-slate-500">9 partial ·
-      6 unreachable</div>
+    <div class="text-xs text-slate-500">10 partial ·
+      5 unreachable</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Builds reviewed</div>
     <div class="text-2xl font-semibold mt-1 text-rose-700">
       7 / 85</div>
     <div class="text-xs text-slate-500">backlog 78 ·
-      last 25d ago</div>
+      last 26d ago</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
     <div class="text-xs uppercase tracking-wider text-slate-500">Cells carrying signal</div>
-    <div class="text-2xl font-semibold mt-1">39%</div>
-    <div class="text-xs text-slate-500">104 of
+    <div class="text-2xl font-semibold mt-1">41%</div>
+    <div class="text-xs text-slate-500">100 of
       170 matrix cells are dashes</div>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4">
@@ -282,6 +282,27 @@
         </tr>
       
         <tr class="border-t border-slate-100">
+          <td class="p-2 font-medium">chutes</td>
+          <td class="p-2 font-mono text-xs">gemma-4-31B-TEE</td>
+          <td class="p-2">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-amber-100 text-amber-800 ring-1 ring-amber-300"
+                  title="Reachable and internally consistent, but at least one required layer is unproven.">partial</span>
+          </td>
+          <td class="p-2 text-center font-mono text-xs">
+            3/4
+              
+            
+          </td>
+          <td class="p-2 text-xs text-slate-600">
+            
+              <span class="font-mono">serving_code_attested</span>
+            
+            
+            
+          </td>
+        </tr>
+      
+        <tr class="border-t border-slate-100">
           <td class="p-2 font-medium">near-ai</td>
           <td class="p-2 font-mono text-xs">zai-org/GLM-5.1-FP8</td>
           <td class="p-2">
@@ -398,26 +419,6 @@
         </tr>
       
         <tr class="border-t border-slate-100">
-          <td class="p-2 font-medium">chutes</td>
-          <td class="p-2 font-mono text-xs">gemma-4-31B-TEE</td>
-          <td class="p-2">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-slate-200 text-slate-600"
-                  title="We could not get a response. This says nothing about the provider's privacy properties.">unreachable</span>
-          </td>
-          <td class="p-2 text-center font-mono text-xs">
-            —
-            
-          </td>
-          <td class="p-2 text-xs text-slate-600">
-            
-              <span class="font-mono">RuntimeError: HTTP 429 on /instances/7d6d7f81-1cdc-42af-aa7d-13b8f8500b47/evidence?nonce=c</span>
-            
-            
-            
-          </td>
-        </tr>
-      
-        <tr class="border-t border-slate-100">
           <td class="p-2 font-medium">near-ai</td>
           <td class="p-2 font-mono text-xs">openai/gpt-oss-120b</td>
           <td class="p-2">
@@ -527,49 +528,49 @@
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">aci-gateway/api.redpill.ai</td>
           <td class="p-2 text-xs text-slate-400">control-plane</td>
-          <td class="p-2 text-right">41</td>
+          <td class="p-2 text-right">42</td>
           <td class="p-2 text-right">11</td>
           <td class="p-2 text-right font-semibold">10</td>
           <td class="p-2 text-right text-slate-300"
               title="control-plane version string — revisits are not meaningful here">1</td>
-          <td class="p-2 text-right">4.0</td>
-          <td class="p-2 text-right font-semibold">3.5</td>
+          <td class="p-2 text-right">4.1</td>
+          <td class="p-2 text-right font-semibold">3.6</td>
         </tr>
       
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">aci-gateway/inference.phala.com</td>
           <td class="p-2 text-xs text-slate-400">control-plane</td>
-          <td class="p-2 text-right">41</td>
+          <td class="p-2 text-right">42</td>
           <td class="p-2 text-right">11</td>
           <td class="p-2 text-right font-semibold">10</td>
           <td class="p-2 text-right text-slate-300"
               title="control-plane version string — revisits are not meaningful here">0</td>
-          <td class="p-2 text-right">4.0</td>
-          <td class="p-2 text-right font-semibold">3.5</td>
+          <td class="p-2 text-right">4.1</td>
+          <td class="p-2 text-right font-semibold">3.6</td>
         </tr>
       
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">aci-gateway/tee.redpill.ai</td>
           <td class="p-2 text-xs text-slate-400">control-plane</td>
-          <td class="p-2 text-right">41</td>
+          <td class="p-2 text-right">42</td>
           <td class="p-2 text-right">11</td>
           <td class="p-2 text-right font-semibold">10</td>
           <td class="p-2 text-right text-slate-300"
               title="control-plane version string — revisits are not meaningful here">0</td>
-          <td class="p-2 text-right">4.0</td>
-          <td class="p-2 text-right font-semibold">3.5</td>
+          <td class="p-2 text-right">4.1</td>
+          <td class="p-2 text-right font-semibold">3.6</td>
         </tr>
       
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">chutes/DeepSeek-V3.2-TEE</td>
           <td class="p-2 text-xs ">instance-sampled</td>
-          <td class="p-2 text-right">98</td>
+          <td class="p-2 text-right">99</td>
           <td class="p-2 text-right">2</td>
           <td class="p-2 text-right font-semibold">1</td>
           <td class="p-2 text-right "
               >0</td>
-          <td class="p-2 text-right">101.0</td>
-          <td class="p-2 text-right font-semibold">100.5</td>
+          <td class="p-2 text-right">102.0</td>
+          <td class="p-2 text-right font-semibold">101.5</td>
         </tr>
       
         <tr class="border-t border-slate-100">
@@ -587,7 +588,7 @@
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">chutes/GLM-5.1-TEE</td>
           <td class="p-2 text-xs ">instance-sampled</td>
-          <td class="p-2 text-right">39</td>
+          <td class="p-2 text-right">40</td>
           <td class="p-2 text-right">1</td>
           <td class="p-2 text-right font-semibold">0</td>
           <td class="p-2 text-right "
@@ -599,7 +600,7 @@
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">chutes/GLM-5.2-TEE</td>
           <td class="p-2 text-xs ">instance-sampled</td>
-          <td class="p-2 text-right">38</td>
+          <td class="p-2 text-right">39</td>
           <td class="p-2 text-right">1</td>
           <td class="p-2 text-right font-semibold">0</td>
           <td class="p-2 text-right "
@@ -611,37 +612,37 @@
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">chutes/Kimi-K2.6-TEE</td>
           <td class="p-2 text-xs ">instance-sampled</td>
-          <td class="p-2 text-right">97</td>
+          <td class="p-2 text-right">98</td>
           <td class="p-2 text-right">2</td>
           <td class="p-2 text-right font-semibold">1</td>
           <td class="p-2 text-right text-amber-700"
               >4</td>
-          <td class="p-2 text-right">101.0</td>
-          <td class="p-2 text-right font-semibold">100.5</td>
+          <td class="p-2 text-right">102.0</td>
+          <td class="p-2 text-right font-semibold">101.5</td>
         </tr>
       
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">chutes/Qwen3-32B-TEE</td>
           <td class="p-2 text-xs ">instance-sampled</td>
-          <td class="p-2 text-right">97</td>
+          <td class="p-2 text-right">98</td>
           <td class="p-2 text-right">2</td>
           <td class="p-2 text-right font-semibold">1</td>
           <td class="p-2 text-right text-amber-700"
               >34</td>
-          <td class="p-2 text-right">101.0</td>
-          <td class="p-2 text-right font-semibold">100.5</td>
+          <td class="p-2 text-right">102.0</td>
+          <td class="p-2 text-right font-semibold">101.5</td>
         </tr>
       
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">chutes/gemma-4-31B-TEE</td>
           <td class="p-2 text-xs ">instance-sampled</td>
-          <td class="p-2 text-right">97</td>
+          <td class="p-2 text-right">98</td>
           <td class="p-2 text-right">2</td>
           <td class="p-2 text-right font-semibold">1</td>
           <td class="p-2 text-right text-amber-700"
               >22</td>
-          <td class="p-2 text-right">100.0</td>
-          <td class="p-2 text-right font-semibold">99.5</td>
+          <td class="p-2 text-right">102.0</td>
+          <td class="p-2 text-right font-semibold">101.5</td>
         </tr>
       
         <tr class="border-t border-slate-100">
@@ -683,13 +684,13 @@
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">near-ai/zai-org/GLM-5.1-FP8</td>
           <td class="p-2 text-xs text-slate-400">control-plane</td>
-          <td class="p-2 text-right">131</td>
+          <td class="p-2 text-right">132</td>
           <td class="p-2 text-right">26</td>
           <td class="p-2 text-right font-semibold">25</td>
           <td class="p-2 text-right text-slate-300"
               title="control-plane version string — revisits are not meaningful here">0</td>
-          <td class="p-2 text-right">5.2</td>
-          <td class="p-2 text-right font-semibold">4.7</td>
+          <td class="p-2 text-right">5.3</td>
+          <td class="p-2 text-right font-semibold">4.8</td>
         </tr>
       
         <tr class="border-t border-slate-100">
@@ -755,7 +756,7 @@
         <tr class="border-t border-slate-100">
           <td class="p-2 font-mono text-xs">tinfoil/router</td>
           <td class="p-2 text-xs text-slate-400">control-plane</td>
-          <td class="p-2 text-right">154</td>
+          <td class="p-2 text-right">155</td>
           <td class="p-2 text-right">44</td>
           <td class="p-2 text-right font-semibold">43</td>
           <td class="p-2 text-right text-slate-300"
@@ -1006,7 +1007,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">6.11s</td>
+          <td class="p-2 text-right text-xs text-slate-500">4.67s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1054,7 +1055,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">7.52s</td>
+          <td class="p-2 text-right text-xs text-slate-500">5.83s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1102,7 +1103,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">6.03s</td>
+          <td class="p-2 text-right text-xs text-slate-500">6.04s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1150,7 +1151,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">6.55s</td>
+          <td class="p-2 text-right text-xs text-slate-500">8.12s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1198,7 +1199,55 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">5.25s</td>
+          <td class="p-2 text-right text-xs text-slate-500">4.45s</td>
+        </tr>
+      
+        <tr class="border-t border-slate-100 ">
+          <td class="p-2 font-medium">chutes</td>
+          <td class="p-2 font-mono text-xs">gemma-4-31B-TEE</td>
+          <td class="p-2 text-xs text-slate-500">chutes-tee</td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-emerald-500/20 text-emerald-700" title="Verified">✅</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/20 text-rose-700" title="Rejected by verifier">❌</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-center">
+            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
+          </td>
+          
+          <td class="p-2 text-right text-xs text-slate-500">6.31s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1246,7 +1295,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.91s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.61s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1294,7 +1343,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.55s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.54s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1342,7 +1391,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">1.77s</td>
+          <td class="p-2 text-right text-xs text-slate-500">1.87s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1390,7 +1439,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.16s</td>
+          <td class="p-2 text-right text-xs text-slate-500">2.34s</td>
         </tr>
       
         <tr class="border-t border-slate-100 ">
@@ -1438,55 +1487,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">2.85s</td>
-        </tr>
-      
-        <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
-          <td class="p-2 font-medium">chutes</td>
-          <td class="p-2 font-mono text-xs">gemma-4-31B-TEE</td>
-          <td class="p-2 text-xs text-slate-500">chutes-tee</td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs bg-rose-500/10 text-rose-700 ring-1 ring-rose-200" title="Required for this shape but not exposed by the attestation response">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-center">
-            <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
-          </td>
-          
-          <td class="p-2 text-right text-xs text-slate-500">16.24s</td>
+          <td class="p-2 text-right text-xs text-slate-500">3.18s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1582,7 +1583,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.14s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.16s</td>
         </tr>
       
         <tr class="border-t border-slate-100 bg-slate-50 text-slate-400">
@@ -1630,7 +1631,7 @@
             <span class="inline-block rounded px-2 py-0.5 text-xs text-slate-400" title="Not applicable to this attestation shape">—</span>
           </td>
           
-          <td class="p-2 text-right text-xs text-slate-500">0.29s</td>
+          <td class="p-2 text-right text-xs text-slate-500">0.17s</td>
         </tr>
       
       </tbody>
@@ -1695,7 +1696,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot 2026-09-27T17:53:15Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/36338025030">36338025030</a> · <code>19a6ec9c</code></span>
+    <span>Snapshot 2026-09-28T20:16:34Z · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/36476871126">36476871126</a> · <code>08c6b276</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
