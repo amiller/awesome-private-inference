@@ -41,8 +41,8 @@ if [ "${1:-}" = "--dry" ]; then echo "[dry] would spawn paseo agent"; exit 0; fi
 
 PASEO_HOST=$(cat "$HOME/.config/paseo-host")
 paseo run --detach --host "$PASEO_HOST" --provider "${DEVPROOF_PROVIDER:-codex}" --mode full-access \
-  --cwd "$PWD" --title "devproof watch $(date +%F)" \
-  "You are the devproof audit agent for awesome-private-inference (read README.md and docs/methodology.html for context). The watcher detected these changes since last ack:
+  --cwd /home/swarm/projects/awesome-private-inference --title "devproof watch $(date +%F)" \
+  "You are the devproof audit agent for awesome-private-inference (read README.md and docs/methodology.html for context; start with git pull --ff-only). The watcher detected these changes since last ack:
 
 $FINDINGS
 
@@ -52,8 +52,9 @@ Playbook by finding type:
 - [version:tinfoil/<model>]: a new sigstore-tag-bound router/model release. Map the new bundle_digest to its release tag (github.com/tinfoilsh/confidential-<model>: the digest is that tag's tinfoil.hash), diff the source vs the last audited tag in data/audits/tinfoil_<repo>.json. MUNDANE = build/dep-only (Dockerfile, go.mod, config placeholder); SUBSTANTIVE = changes under manager/ (addEnclave, updateModelMeasurements), config.yml repo pins, or the shim path allowlist. Write a DRAFT to data/audits/drafts/tinfoil-<repo>-<digest12>.json as a single audit object in that ledger's schema (bundle_digest, sigstore_measurement, release_tag, audited_by [\"agent-draft\"], signoff \"agent-draft-baseline\"). Do NOT append to the ledger.
 - [unaudited-mrtd:chutes/<model>]: a chutes mrtd not in data/audits/chutes_tee.json. Confirm it is in the provider golden set (/servers/tee/measurements). Remember the audit unit is WEAK: mrtd does not cover serve.py (CFSV-excluded). Write a DRAFT to data/audits/drafts/chutes-<mrtd12>.json in that ledger's schema (mrtd, first_seen/last_seen, audited_by [\"agent-draft\"], signoff \"agent-draft-baseline\"). Do NOT append to the ledger.
 - [cell] changes elsewhere (prod_os_image, serving_code_attested, ...): explain what changed and whether it is a regression against the provider's page in providers/.
-- [anchor-drift]: identify which near-ai CVM the new compose hash belongs to and whether the hermes anchor needs a fresh preimage.
-- [stale]: find out why data stopped refreshing (GitHub Actions probe-daily runs? Base RPC?).
+- [anchor-drift]: a compose hash NEAR model CVMs serve is not in the hermes anchor. Identify which model serves it (data/latest.json details.model_composes) and whether the hermes anchor needs a fresh preimage.
+- [unauthorized-compose]: a served model compose hash its DstackApp on Base does not allow. Re-check with the allowedComposeHashes eth_call; this is a serious finding if it holds.
+- [stale]: find out why data stopped refreshing (GitHub Actions probe-daily runs?).
 
 Always finish by running ./run-audit.sh (refreshes + publishes the dashboard) and a short brief: what changed, what you concluded, what needs the human analyst."
 
