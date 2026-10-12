@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T21:45:27Z",
+  "generated_at": "2026-10-12T22:42:48Z",
   "window": {
     "first": "2026-04-21",
     "last": "2026-10-12",
@@ -7,8 +7,8 @@
   },
   "calibration": {
     "observations": 3389,
-    "pass": 2349,
-    "transport": 813,
+    "pass": 2348,
+    "transport": 814,
     "no-error-invalid": 227,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
@@ -251,15 +251,18 @@
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
+      "status": "unreachable",
+      "proven": 0,
       "required": 4,
       "missing": [
-        "serving_code_attested"
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
       ],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "RuntimeError: HTTP 502 on /instances/353de1c6-4520-4720-bac7-39af5b9de8e5/eviden",
       "hidden_layers": []
     },
     {
@@ -326,8 +329,8 @@
   "coverage_summary": {
     "verified": 2,
     "invalid": 3,
-    "unreachable": 3,
-    "partial": 9
+    "unreachable": 4,
+    "partial": 8
   },
   "unmeasurable_providers": [
     "venice"
@@ -361,9 +364,9 @@
   },
   "density": {
     "published_cells": 170,
-    "carrying_signal": 70,
-    "dashes": 100,
-    "signal_fraction": 0.412
+    "carrying_signal": 66,
+    "dashes": 104,
+    "signal_fraction": 0.388
   },
   "hidden_layer_targets": [
     "tinfoil/router",
@@ -494,15 +497,15 @@
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
-      "observations": 106,
-      "span_days": 116,
+      "observations": 105,
+      "span_days": 110,
       "distinct": 2,
       "novel": 1,
       "revisit": 22,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 116.0,
-      "days_per_deploy_corrected": 115.4
+      "days_per_deploy": 110.0,
+      "days_per_deploy_corrected": 109.5
     },
     {
       "provider": "near-ai",
