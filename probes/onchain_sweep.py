@@ -71,6 +71,8 @@ def _rpc(method: str, params: list, max_attempts: int = 5) -> Any:
             if r.status_code == 429:
                 time.sleep(RETRY_BASE_SLEEP * (2 ** attempt))
                 continue
+            if 400 <= r.status_code < 500:
+                raise RuntimeError(f"{method} HTTP {r.status_code}: {r.text[:200]}")
             r.raise_for_status()
             j = r.json()
             if "error" in j:
@@ -129,10 +131,14 @@ def _logs_paginated(address: str, from_block: int, to_block: int, topic: str) ->
         ranges.append((start, cur))
         cur = start - 1
     out: List[Dict] = []
-    with ThreadPoolExecutor(max_workers=PARALLEL) as pool:
+    pool = ThreadPoolExecutor(max_workers=PARALLEL)
+    try:
         futs = [pool.submit(_logs_one_range, address, s, e, topic) for s, e in ranges]
         for f in as_completed(futs):
             out.extend(f.result())
+    finally:
+        # a plain `with` waits out every queued range after the first failure (~13 min in CI)
+        pool.shutdown(cancel_futures=True)
     return out
 
 
