@@ -79,6 +79,25 @@ layer, where the code that touches plaintext is unmeasured. Full analysis:
   holds no key and cannot compute "their" digest, and the image identity is in no
   verifier-readable measured register (RTMR3 = 0 in production). A Chutes customer cannot prove to
   *their* users which code ran.
+- **Encrypted streaming has no integrity across chunks.** On `/e2e/invoke` with streaming, each
+  SSE chunk is sealed separately with no sequence number or transcript MAC, so Chutes' API (or
+  anything on that path) can drop, reorder or replay chunks and every chunk still decrypts. Only a
+  missing inner `[DONE]` is detectable. NEAR's gateway, which streams from Chutes on this channel,
+  documents the same limit (nearai/cloud-api `34fba04`,
+  `crates/inference_providers/src/attested/chutes/e2ee_stream.rs:18-37`). An unstreamed
+  `/e2e/invoke` reply is one AEAD-sealed blob and does not have this problem.
+- **An instance running an unpublished TD image (2026-10-12).** All 55 rows of
+  `/servers/tee/measurements` share one MRTD (`261CE538…`). Of the two listed `Qwen/Qwen3-32B-TEE`
+  instances, `45130fc6` matched a published row; `912aec3d` returned a valid, `UpToDate` TDX quote
+  bound to our nonce with MRTD `ddc6efcd…`, and its MRTD and RTMR0-3 appear in no published row.
+  A client that checks the quote but not the measurement list would accept it.
+- **`confidential_compute` models with no obtainable evidence (2026-10-12).** Of 14 models marked
+  `confidential_compute` at `llm.chutes.ai/v1/models`, `/instances/<id>/evidence` failed for
+  `Qwen/Qwen3-235B-A22B-Thinking-2507-TEE` (HTTP 400, "Instances requires chutes_version >= 0.6.0
+  to retrieve evidence") and `Nemotron-3-Nano-Omni-30B-TEE` (HTTP 502, "Attestation service
+  unavailable"), and `unsloth/Mistral-Nemo-Instruct-2407-TEE` had no active instance. Ten verified
+  `UpToDate` against the published list, with NRAS-signed GPU verdicts, and answered an E2EE request;
+  `zai-org/GLM-5.2-TEE` verified but was at capacity (HTTP 429).
 - **Lower-tier.** NVIDIA's offline `LOCAL` GPU verifier isn't offered (NRAS network-only);
   a single fleet-wide static LUKS passphrase rather than per-TD sealed keys; the Jobs path
   (`@chute.job`, SSH-in-TEE) is unaudited.
@@ -88,7 +107,7 @@ layer, where the code that touches plaintext is unmeasured. Full analysis:
 ```bash
 # API key (Bearer cpk_...) in /tmp/ck
 curl -s -H "Authorization: Bearer $(cat /tmp/ck)" \
-     https://api.chutes.ai/servers/tee/measurements | jq 'length'   # 10 configs, 1 MRTD
+     https://api.chutes.ai/servers/tee/measurements | jq 'length'   # 55 configs, 1 MRTD (2026-10-12)
 # Standalone reproducer (crypto core [1]-[5] + model-substitution check [6]):
 #   devproof-audits-guide/case-studies/chutes-confidential-inference/verify/verify_chutes.py
 ```
