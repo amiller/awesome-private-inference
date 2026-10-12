@@ -93,6 +93,26 @@ def _sync(coro):
         return ex.submit(_worker).result()
 
 
+async def _check_tdx(att: Dict) -> Dict:
+    """Same verdict as upstream check_tdx_quote, but keeps the TCB status, advisories and
+    raw quote that it only prints. Both UpToDate and OutOfDate count as verified."""
+    import dcap_qvl
+    quote = att["intel_quote"]
+    result = await dcap_qvl.get_collateral_and_verify(bytes.fromhex(quote))
+    td10 = json.loads(result.to_json())["report"]["TD10"]
+    return {
+        "quote": {"body": {"reportdata": td10["report_data"], "mrconfig": td10["mr_config_id"]}},
+        "verified": result.status in ("UpToDate", "OutOfDate"),
+        "tcb_status": result.status,
+        "advisory_ids": list(result.advisory_ids),
+        "intel_quote": quote,
+    }
+
+
+def _tdx_evidence(intel: Dict) -> Dict:
+    return {k: intel[k] for k in ("tcb_status", "advisory_ids", "intel_quote")}
+
+
 def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     started = time.time()
     base = base_url.rstrip("/")
@@ -109,7 +129,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         )
 
     try:
-        from model_verifier import check_tdx_quote, check_report_data, check_gpu
+        from model_verifier import check_report_data, check_gpu
     except ImportError:
         return _fail("nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH")
 
@@ -136,10 +156,9 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     details: Dict[str, Any] = {"inner_models": len(models)}
 
     # Gateway TDX + report_data
-    buf = io.StringIO()
-    with _STDOUT_LOCK, contextlib.redirect_stdout(buf):
-        gw_intel = _sync(check_tdx_quote(gateway))
-    sc.tdx_verified = bool(gw_intel and gw_intel.get("verified"))
+    gw_intel = _sync(_check_tdx(gateway))
+    details["tdx"] = {"gateway": _tdx_evidence(gw_intel), "models": []}
+    sc.tdx_verified = gw_intel["verified"]
     if not sc.tdx_verified:
         return _fail("gateway TDX quote did not verify", gateway_intel=gw_intel)
 
@@ -158,10 +177,9 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     compose_ok = None
 
     for i, m in enumerate(models):
-        buf_m = io.StringIO()
-        with _STDOUT_LOCK, contextlib.redirect_stdout(buf_m):
-            m_intel = _sync(check_tdx_quote(m))
-        if not (m_intel and m_intel.get("verified")):
+        m_intel = _sync(_check_tdx(m))
+        details["tdx"]["models"].append(_tdx_evidence(m_intel))
+        if not m_intel["verified"]:
             model_ok = False
             continue
         buf_m2 = io.StringIO()
