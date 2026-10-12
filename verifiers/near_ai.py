@@ -44,7 +44,7 @@ DEFAULT_BASE_URL = "https://cloud-api.near.ai"
 _STDOUT_LOCK = threading.Lock()
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
-_ONCHAIN_STATUS = _REPO_ROOT / "data" / "onchain-status.json"
+_BASE_RPC = "https://mainnet.base.org"
 _CLOUD_API_AUDITS = _REPO_ROOT / "data" / "audits" / "near-ai_cloud-api.json"
 
 _CLOUD_API_IMAGE_RE = re.compile(
@@ -59,19 +59,13 @@ def _cloud_api_audit_set() -> Tuple[Set[str], Dict[str, Dict]]:
     return load_audit_ledger(_CLOUD_API_AUDITS, "image_digest")
 
 
-@lru_cache(maxsize=1)
-def _cloud_api_chain_set() -> Set[str]:
-    """Compose hashes authorized on Base for the cloud-api DstackApp contract."""
-    audits = json.loads(_CLOUD_API_AUDITS.read_text())
-    target_addr = audits["contract_address"].lower()
-    status = json.loads(_ONCHAIN_STATUS.read_text())
-    for c in status["contracts"]:
-        if c["address"].lower() == target_addr:
-            return {d["compose_hash"].lower() for d in c["distinct_compose_hashes"]}
-    raise RuntimeError(
-        f"data/onchain-status.json has no contract entry for {target_addr}; "
-        "refresh probes/onchain_sweep.py or update CONTRACTS list"
-    )
+def _cloud_api_chain_authorized(compose_hash: str) -> bool:
+    """allowedComposeHashes(bytes32) on the cloud-api DstackApp on Base, read live (no log sweep needed)."""
+    app = json.loads(_CLOUD_API_AUDITS.read_text())["contract_address"]
+    r = requests.post(_BASE_RPC, timeout=20, json={"jsonrpc": "2.0", "id": 1, "method": "eth_call",
+                      "params": [{"to": app, "data": "0x2f6622e5" + compose_hash}, "latest"]})
+    r.raise_for_status()
+    return int(r.json()["result"], 16) == 1
 
 
 _audit_match = audit_match
@@ -252,9 +246,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         if m:
             gw_cloud_api_digest = m.group(1).lower()
 
-    chain_set = _cloud_api_chain_set()
     audit_set, audit_meta = _cloud_api_audit_set()
-    chain_authorized = gw_compose_hash in chain_set
+    chain_authorized = _cloud_api_chain_authorized(gw_compose_hash)
     audit_key = _audit_match(gw_cloud_api_digest, audit_set)
 
     if not (gw_self_consistent and chain_authorized):
