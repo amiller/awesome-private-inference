@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T18:31:33Z",
+  "generated_at": "2026-10-12T21:21:15Z",
   "window": {
     "first": "2026-04-21",
     "last": "2026-10-12",
@@ -7,19 +7,19 @@
   },
   "calibration": {
     "observations": 3389,
-    "pass": 2350,
+    "pass": 2349,
     "transport": 813,
-    "no-error-invalid": 226,
+    "no-error-invalid": 227,
     "verification-failure": 0,
     "red_cells_that_were_verification_failures": 0,
     "no_error_invalid_by_provider": {
       "aci-gateway": 52,
-      "chutes": 2,
+      "chutes": 3,
       "near-ai": 7,
       "redpill": 123,
       "venice": 42
     },
-    "note": "226 of 3389 observations were invalid with no error attached: aci-gateway 52, chutes 2, near-ai 7, redpill 123, venice 42. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "227 of 3389 observations were invalid with no error attached: aci-gateway 52, chutes 3, near-ai 7, redpill 123, venice 42. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
@@ -236,7 +236,7 @@
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
       "shape": "chutes-tee",
-      "status": "partial",
+      "status": "invalid",
       "proven": 3,
       "required": 4,
       "missing": [
@@ -325,9 +325,9 @@
   ],
   "coverage_summary": {
     "verified": 2,
-    "invalid": 2,
+    "invalid": 3,
     "unreachable": 3,
-    "partial": 10
+    "partial": 9
   },
   "unmeasurable_providers": [
     "venice"
@@ -485,7 +485,7 @@
       "span_days": 116,
       "distinct": 2,
       "novel": 1,
-      "revisit": 34,
+      "revisit": 35,
       "version_source": "instance-sampled",
       "retired": false,
       "days_per_deploy": 116.0,
