@@ -22,7 +22,6 @@ STATE="$HOME/.config/devproof-watch.state.json"
 DIRTY=$(git ls-files -m -- data/)
 if [ -n "$DIRTY" ]; then git restore $DIRTY; fi
 git pull --ff-only
-python -m probes.onchain_sweep || echo "onchain_sweep exit $? (drift is informational; RPC errors above)"
 
 if [ ! -f "$STATE" ]; then
   python -m probes.diffalert --state "$STATE" --ack

@@ -59,13 +59,25 @@ def _cloud_api_audit_set() -> Tuple[Set[str], Dict[str, Dict]]:
     return load_audit_ledger(_CLOUD_API_AUDITS, "image_digest")
 
 
-def _cloud_api_chain_authorized(compose_hash: str) -> bool:
-    """allowedComposeHashes(bytes32) on the cloud-api DstackApp on Base, read live (no log sweep needed)."""
-    app = json.loads(_CLOUD_API_AUDITS.read_text())["contract_address"]
+_MODELS_APP = "0x2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b"  # DstackApp shared by every NEAR AI model CVM
+_HERMES_ANCHOR = ("https://raw.githubusercontent.com/amiller/hermes-agent/"
+                  "feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json")
+
+
+def _allowed_on_chain(app: str, compose_hash: str) -> bool:
+    """allowedComposeHashes(bytes32) on a DstackApp on Base, read live (no log sweep needed)."""
     r = requests.post(_BASE_RPC, timeout=20, json={"jsonrpc": "2.0", "id": 1, "method": "eth_call",
                       "params": [{"to": app, "data": "0x2f6622e5" + compose_hash}, "latest"]})
     r.raise_for_status()
     return int(r.json()["result"], 16) == 1
+
+
+@lru_cache(maxsize=1)
+def _anchored_model_composes() -> Set[str]:
+    """Model compose hashes a maintainer has reviewed into the hermes anchor."""
+    r = requests.get(_HERMES_ANCHOR, timeout=20)
+    r.raise_for_status()
+    return {h.lower().removeprefix("0x") for m in r.json()["models"].values() for h in m["compose_hashes"]}
 
 
 _audit_match = audit_match
@@ -214,6 +226,10 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         mr_config = (m_intel.get("quote", {}).get("body", {}) or {}).get("mrconfig", "")
         if app_compose and mr_config:
             compose_ok = mr_config.lower().startswith(("01" + sha256_hex(app_compose)).lower())
+            h = sha256_hex(app_compose)
+            details.setdefault("model_composes", []).append({
+                "compose_hash": h, "chain_authorized": _allowed_on_chain(_MODELS_APP, h),
+                "anchored": h in _anchored_model_composes()})
 
     sc.key_derives_to_address = key_ok
     sc.gpu_attested = gpu_ok
@@ -247,7 +263,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
             gw_cloud_api_digest = m.group(1).lower()
 
     audit_set, audit_meta = _cloud_api_audit_set()
-    chain_authorized = _cloud_api_chain_authorized(gw_compose_hash)
+    chain_authorized = _allowed_on_chain(json.loads(_CLOUD_API_AUDITS.read_text())["contract_address"], gw_compose_hash)
     audit_key = _audit_match(gw_cloud_api_digest, audit_set)
 
     if not (gw_self_consistent and chain_authorized):

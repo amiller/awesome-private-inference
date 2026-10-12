@@ -83,9 +83,9 @@ verdict is Stage 0; the 5/6 ACI protocol result is not a Stage score.</p>
 </p>
 <ul>
   <li><strong>✅ Verified.</strong> The gateway's TDX quote self-attests its measured compose
-    (<code>mr_config = 0x01 ‖ sha256(app_compose)</code>), the compose_hash appears in the
-    <code>ComposeHashAdded(bytes32)</code> set on the gateway's DstackApp contract on Base
-    (<code>probes/onchain_sweep.py</code> enumerates these), AND the cloud-api container image
+    (<code>mr_config = 0x01 ‖ sha256(app_compose)</code>), the compose_hash is allowed by
+    the gateway's DstackApp contract on Base (a live <code>allowedComposeHashes(bytes32)</code>
+    call), AND the cloud-api container image
     digest pulled from the measured docker-compose is in our analyst-pair audit ledger
     (<code>data/audits/near-ai_cloud-api.json</code>), with a link to the audit doc.</li>
   <li><strong>○ Audit pending</strong> (amber outline). All the chain + self-consistency checks

@@ -18,9 +18,11 @@ Findings:
                                data/audits/chutes_tee.json. mrtd is instance-sampled
                                and flip-flops between known values, so a ledger
                                member never fires; only a genuinely new mrtd does.
-  anchor-drift:{contract}    — on-chain compose hashes not in the hermes
-                               anchor, reported as a delta vs last ack.
-  stale:{file}               — latest.json / onchain-status.json older than 26h.
+  anchor-drift:near-ai/models — compose hashes NEAR model CVMs are serving that
+                               are not in the hermes anchor, as a delta vs last ack.
+  unauthorized-compose:near-ai/{model} — a served model compose hash that its
+                               DstackApp on Base does not allow.
+  stale:latest.json          — latest.json older than 26h.
 
 Usage:
     python -m probes.diffalert --state PATH          # print new findings, exit 3 if any
@@ -52,14 +54,11 @@ def recent_snapshots(n: int = 4) -> list[dict]:
 
 def current_values() -> dict[str, str]:
     latest = json.load(open(DATA / "latest.json"))
-    onchain = json.load(open(DATA / "onchain-status.json"))
     snaps = recent_snapshots()
     vals: dict[str, str] = {}
 
-    for fname, ts in [("latest.json", latest["generated_at"]),
-                      ("onchain-status.json", onchain["generated_at"])]:
-        stale = time.time() - parse_ts(ts) > STALE_SECONDS
-        vals[f"stale:{fname}"] = f"stale@{ts}" if stale else "fresh"
+    ts = latest["generated_at"]
+    vals["stale:latest.json"] = f"stale@{ts}" if time.time() - parse_ts(ts) > STALE_SECONDS else "fresh"
 
     for provider, rows in latest["attestations"].items():
         for row in rows:
@@ -91,10 +90,12 @@ def current_values() -> dict[str, str]:
                 if provider == "chutes" and details.get("mrtd_audited") is False:
                     vals[f"unaudited-mrtd:chutes/{row['model']}"] = details["mrtd"]
 
-    for c in onchain["contracts"]:
-        if c["anchor_relevant"] and c["new_since_anchor"] is not None:
-            hashes = sorted(h["compose_hash"] for h in c["new_since_anchor"])
-            vals[f"anchor-drift:{c['label']}"] = ",".join(hashes)
+    served = [mc | {"model": row["model"]} for row in latest["attestations"].get("near-ai", [])
+              for mc in row["details"].get("model_composes", [])]
+    vals["anchor-drift:near-ai/models"] = ",".join(sorted({mc["compose_hash"] for mc in served if not mc["anchored"]}))
+    for mc in served:
+        if not mc["chain_authorized"]:
+            vals[f"unauthorized-compose:near-ai/{mc['model']}"] = mc["compose_hash"]
 
     return vals
 
@@ -102,24 +103,9 @@ def current_values() -> dict[str, str]:
 def describe(key: str, old: str | None, new: str) -> str:
     if key.startswith("anchor-drift:"):
         added = sorted(set(new.split(",")) - set((old or "").split(",")) - {""})
-        removed = sorted(set((old or "").split(",")) - set(new.split(",")) - {""})
-        # A hash leaves the unanchored set for exactly one good reason: it is now
-        # in the anchor. Anything else that disappears is our records losing an
-        # authorized hash — a reorg or a bug — and must never read as resolved.
-        # The old sliding-window sweep evicted history and this printed the
-        # evictions as "cleared (now anchored)" (issue #10).
-        anchored = set(json.load(open(DATA / "onchain-status.json"))
-                       .get("anchored_compose_hashes", []))
-        cleared = [h for h in removed if h in anchored]
-        vanished = [h for h in removed if h not in anchored]
-        parts = []
-        if added:
-            parts.append(f"new unanchored compose hashes: {', '.join(added)}")
-        if cleared:
-            parts.append(f"cleared (now anchored): {', '.join(cleared)}")
-        if vanished:
-            parts.append("VANISHED from our on-chain records without being anchored "
-                         f"(reorg or sweep bug — investigate): {', '.join(vanished)}")
+        gone = sorted(set((old or "").split(",")) - set(new.split(",")) - {""})
+        parts = ([f"new unanchored compose hashes in service: {', '.join(added)}"] if added else []) + \
+                ([f"no longer served unanchored (anchored or retired): {', '.join(gone)}"] if gone else [])
         return f"[{key}] {'; '.join(parts)}"
     return f"[{key}] {old} -> {new}"
 
