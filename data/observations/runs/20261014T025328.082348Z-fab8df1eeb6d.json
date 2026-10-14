@@ -1,0 +1,87 @@
+{
+  "complete": true,
+  "git_sha": "63248266b140960e99fd273196e880bda93768b3",
+  "instrument": {
+    "files": {
+      "data/instrument.json": "7a40dddc63d8493b5a539c25453f29865acddf289526dbc6df23621fff028e09",
+      "probes/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "probes/attestation.py": "ed9217644b75d859162c5b2e20ca69b5cd52946ff2e0a51eebdef49a155e250f",
+      "probes/catalog.py": "4ee382a411f4e1597e5a4aee23ac5a924f385039ab3c4ab94f1fd2a0f69a2d44",
+      "probes/collect.py": "9d3e0a5be4614dbaea0a861a3b7d7d074dde37913f6d24c1ffae86ed189334f5",
+      "probes/continuity.py": "be9f40c4ffab21885ee40d373d22d5fdd9bf4cc1c5ca1783ffc3f9351dbe6cd1",
+      "probes/diffalert.py": "18a97b34dc7c5170f0f22001323ec8da2743aa1cff143f19ade4c19f5eae932e",
+      "probes/health.py": "305f2085b28e5692558cf7bf73e245036192878d5b4426867ba357842b05204e",
+      "probes/instrument.py": "354d32b1b8b00d78bbe1ed887c749b0cf4e4efa4f69f5a0268092878fa47a373",
+      "probes/observations.py": "dc6ff1f0e4b59335d7fa399877631a52f855eeeeba40115a97e6f35c82725cea",
+      "probes/pricing.py": "98462d10ad9c38dbcabec2f668d94bd9727d85c5eb14891590f6ff6c8a0ca909",
+      "probes/quality.py": "d597d213a82df11eb183aceab48e6c17db4c840c643800ed33c8f9d0d2542033",
+      "probes/reference_history.py": "6f59fba35db1fc03ce7aae12985e2238661af86a8e3b38e12195577e8f1f97c7",
+      "probes/references.py": "b1213b48d029dfa67aae97a622b596dd616415a880268d2d58d4fb52fcfe294f",
+      "probes/render.py": "6679fa567ee7e7476af75ab4c01bc61acf2940a911c20ce88d274f8e924d7ffc",
+      "probes/review_queue.py": "e8d02469621a9514ba70e103e1b13302309a6e7a73e865cbbb53a0a6141910da",
+      "probes/review_worker.py": "712e84f63d7f12adc92bf2849a06cc7607c74abeb102a00340bc1ae1141f506d",
+      "probes/schema.py": "9a47b08f7ecd7f9df4e4ffc205f27d0d14e696ca35aa15fab91372e42c85a091",
+      "probes/trajectory.py": "c4907a607cb6197b54f0edc3e3227da35a9ec109357ab4b3c53e7da91522a3d7",
+      "uv.lock": "c233b99a867cda2f8a8b943347ee0a6ea7e96d436cd796ce94c53eaf95be8fb9",
+      "verifiers/__init__.py": "a5f57014ab26db3001695b7011166db170867e6752869084eb4f1db6510da3cf",
+      "verifiers/aci.py": "8a401f68b0ae98f2b65b4e67c3cfe4a8ceeb997c0a163a52e03d942ba2d3a21c",
+      "verifiers/chutes.py": "a2eb55ecd05f4a11a22c095660b275645d03f16067b9b77f31eee61f7a9542d1",
+      "verifiers/common.py": "9306ec871c62672bf4951e658a893a1d4925bd0bb420a7c30e8b3cd9115f365f",
+      "verifiers/near_ai.py": "e5cb53bc3323c68f265b67b56647cc4912c2ec607db07762f76d9a0380afa864",
+      "verifiers/near_ai_lightclient.py": "84f0227aedc814eb8cb38a8f360fbd7f3b2c5d69d72f74a1fe9f6426d28ac1f6",
+      "verifiers/nvidia_nras.py": "96dfce4911f0b800047664bd616de4c45091757c618458cc906dddc3f2966e62",
+      "verifiers/phala_tdx.py": "81b78f16df4a7fd67ed8b3f1d076072ab22b2037ed73e01e0c2db9f06c62dd49",
+      "verifiers/tinfoil.py": "bb02451256ddbfc955c1f6cce54d683776c1af06532cb99ec2da0508068e8609",
+      "verifiers/tinfoil_sev.py": "bce3917209c5a9e31905b7d1a7af53c888c4b46891a14dad7697cdb99b04cc85",
+      "verifiers/venice.py": "2efe3c36e274ffc955e13eb30a0fb90cfea3ae6812f4e1386f9404f825af7f26"
+    },
+    "repository_commit": "63248266b140960e99fd273196e880bda93768b3",
+    "revision": "eae3549e0eceb1719cd093562a5fb139d9adb60ad8dec96ebc7d1c60912529d9",
+    "scope": "Exact source and lockfile bytes; does not attest installed packages or runtime integrity",
+    "upstream_actual_revision": "94554726fd548676842b7ea603a8173a60c31341",
+    "upstream_expected_revision": "94554726fd548676842b7ea603a8173a60c31341"
+  },
+  "legacy": false,
+  "observer": "daily-probe",
+  "policy_revisions": {
+    "aci-gateway": "unknown",
+    "chutes": "unknown",
+    "near-ai": "unknown",
+    "tinfoil": "unknown",
+    "venice": "unknown"
+  },
+  "requested_models": {
+    "aci-gateway": [
+      "tee.redpill.ai",
+      "inference.phala.com",
+      "api.redpill.ai"
+    ],
+    "chutes": [
+      "Qwen3-32B-TEE",
+      "gemma-4-31B-TEE",
+      "GLM-5.1-TEE",
+      "GLM-5.2-TEE",
+      "DeepSeek-V3.2-TEE",
+      "Kimi-K2.6-TEE"
+    ],
+    "near-ai": [
+      "openai/gpt-oss-120b",
+      "zai-org/GLM-5.1-FP8"
+    ],
+    "tinfoil": [
+      "router"
+    ],
+    "venice": [
+      "e2ee-glm-5-1",
+      "e2ee-qwen3-6-35b-a3b",
+      "e2ee-gemma-4-31b",
+      "e2ee-gpt-oss-120b-p",
+      "e2ee-qwen3-6-35b-a3b-uncensored-p"
+    ]
+  },
+  "run_id": "20261014T025328.082348Z-fab8df1eeb6d",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "started_at": "2026-10-14T02:53:28.082384Z",
+  "verifier_revision": "eae3549e0eceb1719cd093562a5fb139d9adb60ad8dec96ebc7d1c60912529d9"
+}
