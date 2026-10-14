@@ -1,0 +1,99 @@
+{% extends "_base.html.j2" %}
+{% block content %}
+<section class="mb-8 max-w-4xl">
+  <p class="text-xs font-semibold uppercase tracking-widest text-indigo-700">Public reference observatory</p>
+  <h1 class="mt-2 text-3xl font-bold tracking-tight">Route evidence and recent changes</h1>
+  <p class="mt-3 text-slate-700">Follow each client route from plaintext holder to reference policy and observed evidence. The dated adapter rows below describe checks performed by this repository; they are not full provider verdicts.</p>
+  <div class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+    <div class="rounded-lg border border-slate-200 bg-white p-3"><strong>Published</strong><p class="text-slate-600">Values or policy bytes available from a provider.</p></div>
+    <div class="rounded-lg border border-slate-200 bg-white p-3"><strong>Accepted</strong><p class="text-slate-600">Values a particular client or verifier permits.</p></div>
+    <div class="rounded-lg border border-slate-200 bg-white p-3"><strong>Observed</strong><p class="text-slate-600">Evidence returned on one route at a stated time.</p></div>
+  </div>
+  <p class="mt-3 text-xs text-slate-600">These sets can differ during rollout or after retirement. A public file fetch proves publication, not signature validity, hardware state or request binding. <a class="underline" href="./methodology.html">How to read the evidence</a></p>
+</section>
+
+<section id="changes" class="mb-9">
+  <a href="./history.html" class="block mb-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4 text-indigo-900"><strong>Explore the reference history graph →</strong><br><span class="text-sm">Observed workload changes, published reference sets, full values, and the evidence available to estimate change size.</span></a>
+  <div class="flex flex-wrap justify-between items-end gap-2"><h2 class="text-xl font-semibold">Change timeline</h2><span class="text-xs text-slate-500">{{ timeline_total }} recorded events · latest 20 shown</span></div>
+  <p class="mt-1 mb-3 text-sm text-slate-600">A new identity means newly observed by this sampling process. It does not establish a deployment date or authorize a new value.</p>
+  {% for event in reviewed_events %}
+  <div class="mb-3 rounded-lg border border-indigo-200 bg-indigo-50 p-3 text-sm">
+    <strong>Reviewed: {{ event.review.disposition|replace('_', ' ') }}</strong> · <code>{{ event.route_id }}</code>
+    <p class="mt-1">{{ event.draft.summary }}</p>
+    <p class="mt-1 text-xs">{{ event.review.rationale }}</p>
+    <a class="text-xs underline text-indigo-700" href="{{ event.review_url }}">Review and evidence ↗</a>
+  </div>
+  {% endfor %}
+  <div class="rounded-xl border border-slate-200 bg-white divide-y divide-slate-100">
+  {% for event in timeline %}
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="{{ event.when }}">{{ event.when[:16] or "time unknown" }}</time>
+      <div class="min-w-0"><span class="font-semibold">{{ event.kind or event.type }}</span> <code class="text-xs break-all">{{ event.route_id }}</code>
+        {% if event.field %}<span class="text-slate-600">· {{ event.field }}</span>{% endif %}
+        {% if event.old_value is defined or event.new_value is defined %}<p class="mt-1 text-xs text-slate-600 break-all">{{ event.old_value if event.old_value is defined and event.old_value is not none else "—" }} → {{ event.new_value if event.new_value is defined and event.new_value is not none else "—" }}</p>{% endif %}
+        {% if event.previous_sha256 or event.current_sha256 %}<p class="mt-1 text-xs text-slate-600 break-all">{{ (event.previous_sha256 or "—")[:20] }} → {{ (event.current_sha256 or "—")[:20] }} (hash prefixes)</p>{% endif %}
+        <a class="text-xs underline text-indigo-700" href="{{ event.source_url }}">Event evidence ↗</a>
+        {% if event.review %}<a class="ml-2 text-xs underline" href="{{ event.review_url }}">Reviewed: {{ event.review.disposition|replace('_', ' ') }} ↗</a>{% else %}<span class="ml-2 text-xs text-slate-500">Awaiting review</span>{% endif %}
+      </div>
+    </article>
+  {% else %}
+    <p class="p-4 text-sm text-slate-600">No change events recorded yet. The publication baseline below remains a point observation.</p>
+  {% endfor %}
+  </div>
+</section>
+
+<section id="routes" class="mb-9">
+  <div class="flex flex-wrap justify-between items-end gap-2"><h2 class="text-xl font-semibold">Client routes and plaintext holders</h2><span class="text-xs text-slate-500">{{ route_cards|length }} routes · inventory reviewed {{ routes_as_of or "date unknown" }}</span></div>
+  <p class="mt-1 mb-3 text-sm text-slate-600">A model or brand can have multiple routes. Each card names who can receive plaintext and what its client accepts.</p>
+  <div class="grid gap-3 md:grid-cols-2">
+  {% for route in route_cards %}
+    <article id="route-{{ route.id }}" class="rounded-xl border border-slate-200 bg-white p-4">
+      <div class="flex justify-between gap-2"><div><h3 class="font-semibold">{{ route.title }}</h3><p class="text-xs text-slate-500">{{ route.client_mode }} · {{ route.protocol }}</p></div><span class="h-fit rounded bg-slate-100 px-2 py-1 text-xs text-slate-700">{{ route.evidence_status|replace('_', ' ') }}</span></div>
+      <p class="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Plaintext holders</p>
+      <p class="text-sm text-slate-800">{{ route.plaintext_holders|join("; ") }}</p>
+      <p class="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Client acceptance</p>
+      <p class="text-sm text-slate-800">{{ route.acceptance }}</p>
+      {% if route.references %}<details class="mt-2 text-xs text-slate-700"><summary class="cursor-pointer font-medium">{{ route.references|length }} reference input{{ "s" if route.references|length != 1 else "" }}</summary><ul class="mt-1 space-y-1">{% for ref in route.references %}<li class="border-l-2 border-slate-200 pl-2"><strong>{{ ref.component }}:</strong> {{ ref.kind }} · published at {{ ref.publication }} · accepted by {{ ref.accepted_by }} <span class="text-slate-500">({{ ref.status|replace('_', ' ') }})</span></li>{% endfor %}</ul></details>{% endif %}
+      <div class="mt-3 rounded-md bg-slate-50 p-2 text-xs text-slate-700">
+        {% if route.matched_rows %}<strong>{{ route.matched_rows|length }} adapter row{{ "s" if route.matched_rows|length != 1 else "" }} matched:</strong>
+          {% for row in route.matched_rows %}<span class="inline-block mr-2">{{ row.model }} — {{ row.outcome_label|lower }}</span>{% endfor %}
+        {% else %}<strong>No matched request observation.</strong> This route has an inventory or source review only.{% endif %}
+        {% if route.publications %}<div class="mt-1">{{ route.publications|length }} public source capture{{ "s" if route.publications|length != 1 else "" }} for this provider; publication only, last attempt {{ route.latest_publication[:16] }}.</div>{% endif %}
+      </div>
+      {% if route.blockers %}<p class="mt-3 text-xs text-slate-700"><strong>Open:</strong> {{ route.blockers|join("; ") }}</p>{% endif %}
+      <p class="mt-2 text-xs text-slate-700"><strong>Next:</strong> {{ route.next_action }}</p>
+      <div class="mt-3 text-xs">Sources: {% for source in route.sources_linked %}<a class="underline text-indigo-700 mr-2" href="{{ source.url }}">{{ source.label.rsplit('/', 1)[-1] }} ↗</a>{% endfor %}</div>
+    </article>
+  {% else %}<p class="text-sm text-slate-600">No route inventory available.</p>{% endfor %}
+  </div>
+</section>
+
+<section id="publications" class="mb-9">
+  <h2 class="text-xl font-semibold">Public reference captures</h2>
+  <p class="mt-1 mb-3 text-sm text-slate-600">Read-only HTTP captures preserve exact bytes and hashes. Every row here has <strong>no signature or quote verification</strong>. A fetch error keeps the last successful hash for continuity.</p>
+  <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 mb-3 text-sm">
+    {% for provider, counts in references.summaries|dictsort %}<div class="rounded-lg border border-slate-200 bg-white p-3"><strong>{{ provider }}</strong><p class="text-xs text-slate-600">{{ counts.observed or 0 }} fetched · {{ counts.error or 0 }} errors</p></div>{% endfor %}
+  </div>
+  {% if references.mirror_agreements %}<p class="mb-3 text-sm rounded-lg border border-slate-200 bg-white p-3"><strong>Maple canonical ↔ legacy:</strong> {% for name, agrees in references.mirror_agreements|dictsort %}{{ name }} {{ "match" if agrees else "MISMATCH" }}{% if not loop.last %} · {% endif %}{% endfor %}. Byte agreement at this vantage does not validate signatures or live PCRs.</p>{% endif %}
+  <details class="rounded-xl border border-slate-200 bg-white p-3"><summary class="cursor-pointer font-medium text-sm">Inspect {{ references.observations|length }} captured sources and hashes</summary>
+    <div class="mt-3 overflow-x-auto"><table class="w-full text-xs"><thead><tr class="text-left text-slate-500"><th class="pb-2">Source</th><th>State</th><th>Observed</th><th>SHA-256 / last success</th></tr></thead><tbody>
+    {% for source in references.observations %}<tr class="border-t border-slate-100"><td class="py-2 pr-3"><a class="underline text-indigo-700" href="{{ source.url }}">{{ source.source_id }}</a></td><td>{{ source.status }}{% if source.error %}: {{ source.error }}{% endif %}</td><td class="pr-2">{{ source.observed_at[:16] }}</td><td class="font-mono break-all">{{ source.sha256 or (source.last_success.sha256 if source.last_success else "—") }}{% if source.archive_url %} <a class="underline text-indigo-700" href="{{ source.archive_url }}">raw bytes</a>{% endif %}</td></tr>{% endfor %}
+    </tbody></table></div>
+  </details>
+</section>
+
+<section id="observations" class="mb-9">
+  <h2 class="text-xl font-semibold">Current adapter observations</h2>
+  <p class="mt-1 mb-3 text-sm text-slate-600">An adapter pass means its scoped code accepted a response. Unavailable evidence, an incomplete check and a checked rejection are different outcomes. See each route card for plaintext and policy gaps.</p>
+  <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white"><table class="w-full text-sm"><thead class="bg-slate-100 text-left text-slate-700"><tr><th class="p-2">Target</th><th class="p-2">Outcome</th><th class="p-2">Reason / checked at</th><th class="p-2">Checks</th></tr></thead><tbody>
+    {% for row in rows %}<tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">{{ row.route_id }}</td><td class="p-2"><span class="rounded px-2 py-1 text-xs {{ row.outcome_css }}" title="{{ row.outcome_title }}">{{ row.outcome_label }}</span></td><td class="p-2 text-xs text-slate-600">{{ row.error or row.reason }}<div>{{ row.checked_at or "time unknown" }}</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">{{ row.checked_count }} checked fields</summary><div class="mt-1 max-w-sm">{% for check in row.checks %}<span class="inline-block mr-2 mb-1 rounded px-1 {{ check.css }}" title="{{ check.label }}: {{ check.meaning }}">{{ check.mark }} {{ check.label }}</span>{% endfor %}</div></details></td></tr>
+    {% else %}<tr><td colspan="4" class="p-4 text-slate-600">No adapter snapshot rows.</td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+
+<section class="mb-8 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700">
+  <h2 class="text-lg font-semibold text-slate-900">Sampling and audit limits</h2>
+  <p class="mt-2">{{ quality.calibration.observations }} historical provider/model observations over {{ quality.window.days }} sampled dates. Error-string buckets include {{ quality.calibration.transport }} transport-classified rows and {{ quality.calibration['no-error-invalid'] }} invalid rows with no recorded reason. These correlated samples do not estimate a provider failure rate or detector sensitivity.</p>
+  <p class="mt-2">Newly observed identities are first sightings, not confirmed deployments. {% if quality.cadence %}<a class="underline" href="./methodology.html#cadence">Inspect sampled identity cadence and gaps</a>.{% endif %} Published references, accepted policy, and same-request proof remain separate evidence.</p>
+</section>
+{% endblock %}

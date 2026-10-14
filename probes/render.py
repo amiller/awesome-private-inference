@@ -181,12 +181,13 @@ def _render(snapshot: dict) -> None:
            "repo_url": REPO_URL}
     ctx["history"] = build_reference_history(REPO_ROOT)
     for page, template in (("index.html", "index.html.j2"),
+                           ("evidence.html", "evidence.html.j2"),
                            ("methodology.html", "methodology.html.j2"),
                            ("pricing.html", "pricing.html.j2"),
                            ("history.html", "history.html.j2")):
         rendered = env.get_template(template).render(**ctx)
         (DOCS_DIR / page).write_text("\n".join(line.rstrip() for line in rendered.splitlines()) + "\n")
-    print(f"wrote {DOCS_DIR}/{{index,methodology,pricing,history}}.html")
+    print(f"wrote {DOCS_DIR}/{{index,evidence,methodology,pricing,history}}.html")
 
 
 def main() -> int:
