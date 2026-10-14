@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "source_revision": "59cb873faa96a2d1984235a823dd05f52b853757",
+  "review_scope": "Directory curation against retained repository sources; not a new provider audit or fresh live verification.",
+  "providers": [
+    {
+      "provider": "aci-gateway",
+      "name": "ACI gateway (RedPill / Phala)",
+      "route_ids": [
+        "aci-gateway-tee-redpill",
+        "aci-gateway-phala",
+        "aci-gateway-api-redpill"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "verifiers/aci.py",
+          "entrypoint": "verify(api_key, base_url, model)",
+          "status": "repository adapter"
+        }
+      ],
+      "checks": [
+        "Selected gateway quote, event-log, compose and keyset bindings; measured hostname policy."
+      ],
+      "delegates": [
+        "TDX appraisal uses the pinned NEAR verifier dependency in data/instrument.json."
+      ],
+      "unchecked": [
+        "Expected boot-register policy, downstream session closure and a complete encrypted request."
+      ],
+      "evidence": [
+        "providers/redpill.md",
+        "providers/phala.md",
+        "verifiers/aci.py"
+      ]
+    },
+    {
+      "provider": "near-ai",
+      "name": "NEAR AI",
+      "route_ids": [
+        "near-ai-gateway-plain",
+        "near-ai-gateway-e2ee",
+        "near-ai-direct"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "verifiers/near_ai.py",
+          "entrypoint": "verify(api_key, base_url, model)",
+          "status": "repository adapter"
+        },
+        {
+          "source": "verifiers/near_ai_lightclient.py",
+          "entrypoint": "verify(api_key=..., model_name=..., onchain=...)",
+          "status": "repository adapter"
+        },
+        {
+          "source": "https://github.com/nearai/nearai-cloud-verifier/tree/94554726fd548676842b7ea603a8173a60c31341",
+          "entrypoint": null,
+          "status": "pinned cryptographic dependency"
+        }
+      ],
+      "checks": [
+        "Selected TDX/GPU/key/compose checks, per-model anchor comparison and recorded on-chain authorization queries."
+      ],
+      "delegates": [
+        "External quote/GPU appraisal and Base authorization; an authorization is provider policy."
+      ],
+      "unchecked": [
+        "Authenticated compose-manager closure and request/reply/model binding; the lightclient is diagnostic and cannot complete an encrypted request."
+      ],
+      "evidence": [
+        "providers/near-ai.md",
+        "verifiers/near_ai.py",
+        "verifiers/near_ai_lightclient.py",
+        "data/instrument.json"
+      ]
+    },
+    {
+      "provider": "tinfoil",
+      "name": "Tinfoil",
+      "route_ids": [
+        "tinfoil-router"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "verifiers/tinfoil.py",
+          "entrypoint": "verify(api_key, base_url, model); verify_bundle(bundle, ...)",
+          "status": "repository adapter"
+        }
+      ],
+      "checks": [
+        "Release provenance, release/report measurement agreement, selected TLS/HPKE key and runtime configuration checks."
+      ],
+      "delegates": [
+        "Sigstore release verification; router trust policy for downstream workers."
+      ],
+      "unchecked": [
+        "AMD report signature-chain verification, independent build reproduction and a live worker request."
+      ],
+      "evidence": [
+        "providers/tinfoil.md",
+        "verifiers/tinfoil.py"
+      ]
+    },
+    {
+      "provider": "venice",
+      "name": "Venice",
+      "route_ids": [
+        "venice-near",
+        "venice-phala"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "verifiers/venice.py",
+          "entrypoint": "verify(api_key, base_url, model)",
+          "status": "repository adapter"
+        }
+      ],
+      "checks": [
+        "Backend-shaped attestation reports for sampled Venice model routes."
+      ],
+      "delegates": [
+        "Backend-specific checks; NEAR and Phala routes require different evidence."
+      ],
+      "unchecked": [
+        "A complete request-bound model/key proof and shipped-client enforcement; reachable evidence alone is insufficient."
+      ],
+      "evidence": [
+        "providers/venice.md",
+        "verifiers/venice.py"
+      ]
+    },
+    {
+      "provider": "chutes",
+      "name": "Chutes",
+      "route_ids": [
+        "chutes-tee"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "verifiers/chutes.py",
+          "entrypoint": "verify(api_key, base_url, model)",
+          "status": "repository adapter"
+        }
+      ],
+      "checks": [
+        "Selected TDX, nonce and worker-key checks and base-image MRTD observations. GPU evidence presence is recorded without appraisal."
+      ],
+      "delegates": [
+        "External TDX appraisal; provider golden measurements are not independent workload approval."
+      ],
+      "unchecked": [
+        "GPU evidence is not appraised by this adapter. Serving code and weights are outside measured registers; ordinary API and opt-in encrypted paths differ."
+      ],
+      "evidence": [
+        "providers/chutes.md",
+        "verifiers/chutes.py",
+        "data/audits/chutes_tee.json"
+      ]
+    },
+    {
+      "provider": "maple",
+      "name": "Maple",
+      "route_ids": [
+        "maple-tinfoil",
+        "maple-privatemode"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "https://github.com/MaplePrivacyLabs/Maple/blob/059b6b9ccb39fccd8cc65b1386affc8edfd37b61/sdk/src/lib/attestation.ts",
+          "entrypoint": null,
+          "status": "source-inspected Nitro verifier; not live-verified"
+        },
+        {
+          "source": "https://github.com/MaplePrivacyLabs/Maple/blob/059b6b9ccb39fccd8cc65b1386affc8edfd37b61/sdk/src/lib/getAttestation.ts",
+          "entrypoint": null,
+          "status": "source-inspected handshake; not live-verified"
+        }
+      ],
+      "checks": [
+        "Inspected SDK source checks Nitro document, nonce, certificate chain, signature and PCR policy before session use. Repository captures PCR publications and SDK policy bytes."
+      ],
+      "delegates": [
+        "AWS Nitro roots and SDK PCR history policy; Tinfoil or Continuum/Privatemode onward verification."
+      ],
+      "unchecked": [
+        "No repository live Nitro adapter, independent EIF reproduction, shipped-client mapping or selected downstream request proof."
+      ],
+      "evidence": [
+        "providers/maple.md",
+        "research/review-2026-10-13/maple.md"
+      ]
+    },
+    {
+      "provider": "private-inference",
+      "name": "Private Inference",
+      "route_ids": [
+        "private-inference-standard",
+        "private-inference-zdr",
+        "private-inference-private"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "data/references/observations/raw/private-inference-browser-verifier-b2b1d0220cb838b9bc82baed08b1e845429632aad63c70274cc99485b6b4c49f.bin",
+          "entrypoint": null,
+          "status": "captured deployed browser verifier; source-inspected only"
+        }
+      ],
+      "checks": [
+        "Captured browser code performs selected quote/compose/GPU self-consistency checks and encryption. Repository captures browser/catalog bytes."
+      ],
+      "delegates": [
+        "NEAR worker evidence and browser delivery; standard and ZDR routes have separate plaintext boundaries."
+      ],
+      "unchecked": [
+        "No approved compose/OS baseline seen in inspected browser; no repository live verifier or authenticated completion; reply-key substitution remains a dated finding."
+      ],
+      "evidence": [
+        "providers/privateinference.md",
+        "research/review-2026-10-13/privateinference.md"
+      ]
+    },
+    {
+      "provider": "privatemode",
+      "name": "Privatemode",
+      "route_ids": [
+        "privatemode-proxy-auto",
+        "privatemode-proxy-pinned",
+        "privatemode-proxyless"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "https://github.com/edgelesssys/privatemode-public",
+          "entrypoint": null,
+          "status": "source/publication lead; not exercised here"
+        }
+      ],
+      "checks": [
+        "Repository captures the published workload manifest. Linked proxy/SDK verification is a documented lead."
+      ],
+      "delegates": [
+        "Provider manifest and selected proxy update policy; a pinned manifest differs from automatic adoption."
+      ],
+      "unchecked": [
+        "No repository live hardware/session verifier; manifest signatures, workloads, GPU/model roots and proxyless path remain unproven here."
+      ],
+      "evidence": [
+        "providers/privatemode.md",
+        "research/review-2026-10-13/landscape.md"
+      ]
+    },
+    {
+      "provider": "confidential-ai",
+      "name": "Confidential AI Inference",
+      "route_ids": [
+        "confidential-ai-api"
+      ],
+      "reviewed_at": "2026-10-14",
+      "implementations": [
+        {
+          "source": "https://github.com/confidential-dot-ai/confidential-inference",
+          "entrypoint": null,
+          "status": "source/publication lead; not exercised here"
+        },
+        {
+          "source": "https://github.com/confidential-dot-ai/teerminator",
+          "entrypoint": null,
+          "status": "source/publication lead; not exercised here"
+        }
+      ],
+      "checks": [
+        "Repository captures allowlist/release publications. Linked verifier/TEErminator procedures are documented leads."
+      ],
+      "delegates": [
+        "Published release identity, allowlist, TDX workload policy and same-channel TLS pinning require separate verification."
+      ],
+      "unchecked": [
+        "No repository live signature/receipt/channel verifier or completion; source-documented operator-control exclusions remain unresolved."
+      ],
+      "evidence": [
+        "providers/confidential-ai.md",
+        "research/review-2026-10-13/landscape.md"
+      ]
+    }
+  ]
+}

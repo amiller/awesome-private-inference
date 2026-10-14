@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stage criteria · Private Inference Beat</title>
+  <meta name="description" content="Curated private inference verifiers, reference-value observations and evidence-based route assessments.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .dot { display:inline-block; width:0.5rem; height:0.5rem; border-radius:9999px; margin-right:0.4rem; vertical-align:middle; }
+  </style>
+</head>
+<body class="h-full text-slate-900">
+<header class="border-b border-slate-200 bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap gap-4 items-center justify-between">
+    <a href="./index.html" class="flex items-baseline gap-2">
+      <span class="text-xl font-bold tracking-tight">Private Inference Beat</span>
+
+    </a>
+    <nav class="text-sm flex flex-wrap gap-4 text-slate-600">
+      <a href="./verifiers.html" class="hover:text-slate-900">Verifiers</a>
+      <a href="./history.html" class="hover:text-slate-900">Reference history</a>
+      <a href="./index.html" class="hover:text-slate-900">Overview</a>
+      <a href="./stages.html" class="hover:text-slate-900">Stage criteria</a>
+      <a href="./measurements.html" class="hover:text-slate-900">Measurements</a>
+      <a href="./pricing.html" class="hover:text-slate-900">Pricing</a>
+      <a href="./methodology.html" class="hover:text-slate-900">Methodology</a>
+      <a href="https://github.com/amiller/awesome-private-inference" class="hover:text-slate-900">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+
+<h1 class="text-2xl font-bold">Private Inference Beat stage criteria</h1>
+<p class="mt-2 text-slate-600">Proposal draft-1 · no stages awarded. The current comparison publishes dated route assessments. This proposal makes the intended promotion criteria explicit for review before any ranking is introduced.</p>
+<p class="mt-3 text-sm">Assess a specific endpoint, protocol, client version and mode, requested model, protected fields and all plaintext-holding components. A provider brand cannot inherit its best route's stage. Unassessed is a separate state; it is never an automatic Stage 0.</p>
+<div class="overflow-x-auto mt-5"><table class="w-full text-sm text-left"><thead><tr class="border-b"><th class="p-2">Proposed stage</th><th class="p-2">Required evidence</th></tr></thead><tbody>
+<tr class="border-b align-top"><th class="p-2">Stage 0 · documented route</th><td class="p-2">A dated review names the client, plaintext holders, reference authority and unresolved obligations. At least one Stage 1 obligation is unmet or unknown. This is an inventory/assessment state, not a confidentiality guarantee.</td></tr>
+<tr class="border-b align-top"><th class="p-2">Stage 1 · verified private route</th><td class="p-2">Every applicable obligation in all six <a href="./assessments.html#rubric" class="underline text-indigo-700">assessment axes</a> is Established with scoped proof records: hardware/TCB, live session and reply-key binding, approved reproducible code/model identity, operator-input constraints, downstream/request closure and explicit update authorization. N/A requires an architectural justification. Negative controls must reject substituted keys, models, workloads, stale evidence and unapproved updates before protected data leaves the client.</td></tr>
+<tr class="border-b align-top"><th class="p-2">Stage 2 · independently sustained assurance</th><td class="p-2">Stage 1 plus independent build reproduction and route verification, a public versioned reference/update history with authenticated integrity and consistency checks, and an independently reviewed approval process that prevents unilateral operator updates from silently expanding client policy. Publish reviewers, trust roots, approval/revocation/rollback rules and evidence of enforcement.</td></tr>
+</tbody></table></div>
+<p class="mt-4 text-sm">Promotion must record rubric version, reviewer, date, exact client and workload versions, policy authority/revision, proof records and test results. Reference changes trigger dependency review; neither new samples nor an unchanged hash renew an assessment. A stage describes only the recorded versions and scope.</p>
+<p class="mt-3 text-sm">An adapter passing every configured check does not award a stage. Publication, provider authorization, analyst review and client acceptance remain independent facts. Historical audit-ledger verdicts do not award stages under this proposal.</p>
+<p class="mt-3 text-sm">The current observatory retains evidence in Git; it does not provide a certificate-transparency protocol, append-only guarantees or log consistency proofs. Stage 2 is a proposed requirement, not a claim about this repository.</p>
+<p class="mt-4"><a href="./index.html" class="underline text-indigo-700">Compare current route assessments</a> · <a href="./verifiers.html" class="underline text-indigo-700">Find verifier implementations</a></p>
+
+</main>
+
+<footer class="border-t border-slate-200 bg-white mt-16">
+  <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
+    <span>Adapter snapshot 2026-10-14T18:00:14.615327Z · run 20261014T180014.615271Z-89426d0ce7c9 · <code>292ff7e4</code></span>
+    <span>Code MIT · Data CC-BY 4.0</span>
+  </div>
+</footer>
+</body>
+</html>

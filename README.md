@@ -1,14 +1,22 @@
-# awesome-private-inference
+# Private Inference Beat
 
-**An observatory of reference-value consistency in confidential inference.**
+**Curated private inference verifiers, a public history of reference values and their evidence, and criteria for assessing private inference routes.**
 
-For each client and request path, we track what software is observed, which values the provider publishes, what the client accepts, and who can authorize a change. Devproof reviews establish what those values cover and whether operators can change the plaintext path outside that boundary.
+The repository remains **awesome-private-inference**. It provides three independently useful resources:
 
-[Dashboard](https://amiller.github.io/awesome-private-inference/) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Detailed project review](research/review-2026-10-13/review.md)
+| Resource | What you can find |
+| --- | --- |
+| [Curated verifiers](https://amiller.github.io/awesome-private-inference/verifiers.html) | Implementations for each tracked provider, their checks, delegated trust, reference policies and missing proof. Upstream leads and missing live adapters are explicit. |
+| [Reference-value observatory](https://amiller.github.io/awesome-private-inference/history.html) | Full observed measurements, image/compose digests, published reference sets and captured policy documents, with dates, changes and supporting evidence. |
+| [Private Inference Beat](https://amiller.github.io/awesome-private-inference/) | Route comparisons and [proposed stage criteria](https://amiller.github.io/awesome-private-inference/stages.html). Current assessments are preliminary; no stages are awarded. |
 
-The [comparison overview](https://amiller.github.io/awesome-private-inference/) groups providers into expandable client paths and compares hardware, session binding, code identity, operator access, downstream binding and update control. Each indicator links to a dated, source-pinned [route assessment](https://amiller.github.io/awesome-private-inference/assessments.html). These are preliminary evidence assessments, not completed route proofs or security stages. [Measurements](https://amiller.github.io/awesome-private-inference/measurements.html) preserves the model-level adapter table.
+**Observed, provider-authorized, reviewed and accepted by a client are independent facts.** A newly observed value creates review work; it never silently expands a client allowlist. An assessment applies to a named client mode and request path, rather than a whole provider brand.
 
-[Reference history graph](https://amiller.github.io/awesome-private-inference/history.html) plots captured workload identities, published reference sets, client-policy inputs and document hashes. Select a point for full old/new values and scoped review evidence. Circle size can show set edits or captured text changes; neither is a measurement of deployed code size or security risk. The page is self-contained and works offline.
+[Verifier directory data](data/verifiers.json) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Shared verification contract](specifications/shared-verification.md)
+
+The reference history page shows exact old/new values and scoped review evidence. First seen is not deployment time. Document changes do not measure deployed code size or security risk. This is an observatory backed by retained evidence, without certificate-transparency-style append-only or consistency guarantees.
+
+Abalone and multi-provider gateways could share the verifier routines and versioned reference records while applying their own explicit acceptance policies. The [consumption contract](specifications/shared-verification.md) documents the existing adapter interfaces, machine-readable exports and an unknown-value example. These integrations are not implemented here yet.
 
 ## Read the evidence by route
 

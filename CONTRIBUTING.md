@@ -16,3 +16,17 @@ Follow [the review workflow](docs/REVIEW-WORKFLOW.md). Jobs refer to immutable o
 Keep historical observations and retired integrations. Distinguish policy changes, key rotation, fleet sampling and newly observed software identities. Do not infer deployment counts from a daily hash series.
 
 Use the locked environment and pinned external verifier. Retain logs, raw public evidence and results; remove temporary installs/build outputs after rehearsals. Keep at most one live install per rehearsal.
+
+## Curate verifiers and reference evidence
+
+Keep `data/verifiers.json` complete for the routes in `data/routes.json`. Name the
+implementation and entry point (or a missing live verifier), pin the evidence
+revision, date the directory review, and state checks, delegated trust and gaps.
+Directory inclusion is not approval. Keep observation dates separate from review
+dates and identify source-only or publication-only evidence.
+
+Regenerate the site and v1 JSON exports with `python -m probes.render`; see the
+[shared verification contract](specifications/shared-verification.md). A new
+reference observation, provider authorization or analyst review must not create
+client acceptance. Stages require separately scoped proof against a versioned
+rubric; adapter booleans cannot award them.

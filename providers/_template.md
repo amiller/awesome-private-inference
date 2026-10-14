@@ -18,10 +18,24 @@ curl "<base_url>/attestation?model=<model>&nonce=<32-byte hex>" \
      -H "Authorization: Bearer $API_KEY"
 ```
 
-## Scorecard
+## Verifiers and reference policy
 
-See [live matrix](https://amiller.github.io/awesome-private-inference). Pulled from the last
-snapshot — hover any cell for the re-verification detail.
+- **Route IDs / client versions / modes:** link entries in `data/routes.json`.
+- **Verifier implementation and pinned revision:** entry point or explicit missing verifier.
+- **Checks / delegated trust / unchecked proof:** distinguish source inspection from live evidence.
+- **Reference identities:** component, platform field, algorithm, full value and evidence.
+- **Authority and policy:** who publishes, who authorizes, and which client/policy revision accepts it?
+- **Dates:** observation time and review date separately; include update/rollback behavior.
+
+Add a scoped entry to `data/verifiers.json`. An observed value is not an approved
+value. Link retained evidence and the reference history, including missing data.
+
+## Route assessment
+
+Link dated, version-bound evidence for each applicable assessment obligation.
+Name protected fields, plaintext holders, model and downstream boundaries.
+Unknown/unmet obligations prevent promotion; automated check coverage cannot
+award a stage. See the proposed [stage criteria](../docs/stages.html).
 
 ## Known gaps
 

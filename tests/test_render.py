@@ -50,6 +50,15 @@ def test_render_produces_html(tmp_path, monkeypatch):
     measurements = (docs / "measurements.html").read_text()
     assert "Attestation checks across providers and models" in measurements
     assert (docs / "assessments.html").exists()
+    directory = (docs / "verifiers.html").read_text()
+    assert "Unchecked or missing" in directory
+    assert "Directory reviewed" in directory
+    assert "Private Inference Beat" in html
+    assert "no stages awarded" in (docs / "stages.html").read_text()
+    feed = json.loads((docs / "reference-values.json").read_text())
+    assert feed["schema_version"] == 1
+    assert all(s["client_acceptance"] is None for s in feed["surfaces"])
+    assert json.loads((docs / "verifiers.json").read_text())["schema_version"] == 1
     evidence = (docs / "evidence.html").read_text()
     assert "openai/gpt-oss-120b" in evidence
     assert "Public reference observatory" in evidence
