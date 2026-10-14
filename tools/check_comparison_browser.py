@@ -23,10 +23,13 @@ def main():
         page = browser.new_page(viewport={'width':1440, 'height':1000})
         page.goto((docs/'index.html').as_uri(), wait_until='networkidle')
         assert page.locator('.provider-row').count() == 9
+        assert page.locator('.signal').filter(has_text='Partial').count() == 0
+        assert page.locator('.signal').filter(has_text='Unknown').count() == 0
+        assert page.locator('#audit-lessons article').count() == 4
         assert page.locator('.route-row:visible').count() == 0
         top = page.locator('table').bounding_box()['y']
         heights = page.locator('.provider-row').evaluate_all('(es)=>es.map(e=>e.getBoundingClientRect().height)')
-        assert top < 250 and max(heights) <= 44
+        assert top < 250 and max(heights) <= 56
         assert page.locator('.assessment-scroll').bounding_box()['height'] < 500
         page.screenshot(path=str(out/'overview.png'), full_page=True)
         button = page.locator('tbody[data-provider="near-ai"] .provider-toggle')
@@ -44,6 +47,18 @@ def main():
         page.locator('tbody[data-provider="tinfoil"] .signal').first.click()
         page.wait_for_url('**/assessments.html#provider-tinfoil-hardware')
         assert 'limitation of our instrument' in page.locator('#provider-tinfoil-hardware').inner_text()
+        page.goto((docs/'index.html').as_uri(), wait_until='networkidle')
+        page.locator('tbody[data-provider="chutes"] a[href="./assessments.html#provider-chutes-hardware"]').click()
+        page.wait_for_url('**/assessments.html#provider-chutes-hardware')
+        hardware=page.locator('#provider-chutes-hardware')
+        assert 'Work in our verifier' in hardware.inner_text()
+        assert hardware.locator('a[href$="/issues/28"]').count() == 1
+        hardware.screenshot(path=str(out/'chutes-hardware.png'))
+        page.goto((docs/'assessments.html').as_uri()+'#chutes-tee-code')
+        code=page.locator('#chutes-tee-code')
+        assert 'Finding in the reviewed system' in code.inner_text()
+        assert code.locator('a[href$="/issues/31"]').count() == 1
+        code.screenshot(path=str(out/'chutes-code.png'))
         page.goto((docs/'index.html').as_uri(), wait_until='networkidle')
         page.locator('#expand-all').click()
         assert page.locator('.route-row:visible').count() == 19
@@ -83,7 +98,7 @@ def main():
             target=Path(u.path).name if u.path else name
             if target not in parsed:continue
             if u.fragment:assert unquote(u.fragment) in parsed[target].ids,(name,href)
-    (out/'browser-results.json').write_text(json.dumps({'provider_rows':9,'route_rows':19,'row_heights':heights,'table_top':top,'keyboard_expansion':True,'assessment_links':True,'provider_history_filter':True,'mobile_sticky_identity':True,'no_js_routes_visible':True,'internal_fragments_valid':True},indent=2)+'\n')
+    (out/'browser-results.json').write_text(json.dumps({'provider_rows':9,'route_rows':19,'row_heights':heights,'table_top':top,'keyboard_expansion':True,'assessment_links':True,'method_and_system_tasks_distinct':True,'concrete_labels':True,'companion_lessons':4,'provider_history_filter':True,'mobile_sticky_identity':True,'no_js_routes_visible':True,'internal_fragments_valid':True},indent=2)+'\n')
     print('Comparison browser checks passed.')
 
 

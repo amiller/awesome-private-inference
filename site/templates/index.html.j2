@@ -3,16 +3,16 @@
 {% block title %}Comparison · Private Inference Beat{% endblock %}
 {% block content %}
 {% include "_assessment_style.html.j2" %}
-{% macro badge(state, href, title) %}<a class="signal {{ state }}" href="{{ href }}" title="{{ title }}">{{ assessment_states[state][1] }} {{ assessment_states[state][0] }}</a>{% endmacro %}
+{% macro badge(cell, href, title) %}<a class="signal {{ cell.state }}" href="{{ href }}" title="{{ title }}">{{ cell.label }}</a>{% endmacro %}
 <section class="mb-4">
   <h1 class="text-2xl font-bold tracking-tight">Comparison</h1>
-  <p class="mt-1 text-sm text-slate-600">Compare the evidence for each private inference route: what the client verifies, who can access plaintext, and who can approve software changes.</p>
-  <p class="mt-2 text-xs text-slate-500">Expand a provider for its request paths. Assessments are dated; no stages are awarded. <a href="./assessments.html#rubric" class="text-indigo-700 underline">How to read the table</a> · <a href="./stages.html" class="text-indigo-700 underline">Stage criteria (proposed)</a></p>
+  <p class="mt-1 text-sm text-slate-600">Who can read your prompts and replies, and what does the client verify? Compare the evidence and unfinished checks for each request path.</p>
+  <p class="mt-2 text-xs text-slate-500">Expand a provider for its paths. <a href="#private-inference" class="text-indigo-700 underline">What private inference requires</a> · <a href="#audit-lessons" class="text-indigo-700 underline">Companion audit findings</a> · <a href="./stages.html" class="text-indigo-700 underline">Stage criteria (proposed)</a>. Dated assessments; no stages awarded.</p>
 </section>
 <div class="mb-3 flex flex-wrap items-center gap-4 text-xs text-slate-600">
   <label>Provider <select id="provider-filter" class="border rounded bg-white px-2 py-1"><option value="">All</option>{% for group in assessment_groups %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
   <button id="expand-all" class="underline text-indigo-700" type="button">Expand all routes</button>
-  <span>◐ partial evidence · × documented gap · ? unknown · ↕ routes differ</span>
+  <span>Cells name the finding or our remaining work · select one for evidence and success criteria</span>
 </div>
 <p class="mb-2 text-xs text-slate-500 lg:hidden">Scroll sideways; provider names stay visible.</p>
 <div class="assessment-scroll">
@@ -22,7 +22,7 @@
   <tbody data-provider="{{ group.id }}">
     <tr class="provider-row">
       <td><button type="button" class="provider-toggle" aria-expanded="false" aria-controls="routes-{{ group.id }}"><span class="chevron" aria-hidden="true">›</span>{{ group.name }}</button> <span class="provider-meta">{{ group.routes|length }} {{ 'path' if group.routes|length == 1 else 'paths' }}</span></td>
-      {% for key, cell in group.axes.items() %}<td>{{ badge(cell.state, './assessments.html#provider-' ~ group.id ~ '-' ~ key, group.name ~ ': ' ~ assessment_axes[key][1] ~ ' ' ~ assessment_states[cell.state][0] ~ '. Open route-specific reasons and sources.') }}</td>{% endfor %}
+      {% for key, cell in group.axes.items() %}<td>{{ badge(cell, './assessments.html#provider-' ~ group.id ~ '-' ~ key, group.name ~ ': ' ~ cell.label ~ '. Open path-specific evidence, missing proof and tasks.') }}</td>{% endfor %}
       <td class="collection" title="{{ group.observations|length }} distinct model/endpoint observations. Collection status is separate from proof or audit status.">{{ group.collection }}</td>
       <td><a class="history-link" href="{{ group.history_url }}">{{ group.last_new[5:10] if group.last_new else ('Baseline' if group.baseline_only else 'No history') }}</a>{% if group.changed_surfaces %}<span class="needs-review">{{ group.changed_surfaces }} changed since review</span>{% endif %}{% if group.missing_surfaces %}<span class="needs-review">Coverage missing</span>{% endif %}</td>
       <td><a class="detail-link" href="./assessments.html#provider-{{ group.id }}">{{ group.reviewed_at[5:] if group.reviewed_at != 'Unreviewed' else 'Unreviewed' }}</a></td>
@@ -31,16 +31,17 @@
   <tbody id="routes-{{ group.id }}" data-provider="{{ group.id }}" class="route-body" hidden>
     {% for route in group.routes %}<tr class="route-row">
       <td><a href="./assessments.html#route-{{ route.id }}" class="detail-link" title="{{ route.architecture|default(route.protocol) }}">{{ route.label }}</a></td>
-      {% for key, cell in route.axes.items() %}<td>{{ badge(cell.state, './assessments.html#' ~ route.id ~ '-' ~ key, cell.reason) }}</td>{% endfor %}
+      {% for key, cell in route.axes.items() %}<td>{{ badge(cell, './assessments.html#' ~ route.id ~ '-' ~ key, assessment_limitations[cell.limitation] ~ ': ' ~ cell.evidence ~ ' Next: ' ~ cell.missing) }}</td>{% endfor %}
       <td class="collection">{{ route.collection }}</td><td colspan="2"><a class="detail-link" href="./evidence.html#route-{{ route.id }}">Source &amp; probe details</a></td>
     </tr>{% endfor %}
   </tbody>
   {% endfor %}
 </table>
 </div>
-<p class="mt-3 text-xs text-slate-500">{{ assessment_groups|length }} providers · {{ route_cards|length }} paths · Dates refer to source review. “Gap” identifies a documented client/protocol protection gap, not a demonstrated compromise. Missing checks in our tool remain Unknown. Collection counts do not measure privacy.</p>
+<p class="mt-3 text-xs text-slate-500">{{ assessment_groups|length }} providers · {{ route_cards|length }} paths · Dates refer to source review. Cells name documented system findings or work still missing in our method. Select one for evidence, limits and a linked task. Collection counts do not measure privacy.</p>
 <p class="mt-2 text-xs text-slate-500">Reference dates are provider-wide first sightings of new sets. Later reference differences flag review work; they never authorize a new value. <a href="./history.html" class="text-indigo-700 underline">Explore reference history →</a></p>
 <p class="mt-3 text-sm"><a href="./measurements.html" class="text-indigo-700 underline">All {{ rows|length }} model / endpoint measurements →</a></p>
+{% include "_comparison_explainers.html.j2" %}
 <noscript><style>.route-body[hidden]{display:table-row-group!important}</style><p>All routes are shown because JavaScript is disabled.</p></noscript>
 <script>
 const toggles=[...document.querySelectorAll('.provider-toggle')];

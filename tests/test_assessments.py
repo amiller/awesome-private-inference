@@ -11,7 +11,7 @@ from probes.assessments import AXES, build, collection, rollup, validate
 def definition(route='one', state='unknown'):
     return {'id': route, 'label': route, 'reviewed_at': '2026-10-14',
             'source_revision': 'a' * 40, 'sources': ['providers/example.md'], 'reviewer': 'test source review',
-            'axes': {a: {'state': state, 'reason': 'Specific scoped evidence or absence.'} for a in AXES}}
+            'axes': {a: {'state': state, 'reason': 'Specific scoped evidence or absence.', 'label': 'Our test pending', 'evidence': 'Retained source review only.', 'missing': 'Retain scoped positive and negative tests.', 'limitation': 'evidence', 'issue_urls': ['https://github.com/amiller/awesome-private-inference/issues/30']} for a in AXES}}
 
 
 def card(route='one'):
@@ -20,7 +20,7 @@ def card(route='one'):
 
 
 def data(*routes):
-    return {'rubric_version': 1, 'routes': list(routes), 'reference_baselines': {}}
+    return {'rubric_version': 2, 'routes': list(routes), 'reference_baselines': {}}
 
 
 def test_group_never_selects_best_route_or_drops_unknown():
@@ -99,3 +99,51 @@ def test_external_model_text_is_escaped_in_measurements(tmp_path, monkeypatch):
     page=(tmp_path/'docs/measurements.html').read_text()
     assert model not in page
     assert '&lt;script&gt;' in page
+
+
+def test_same_state_with_different_work_is_not_one_provider_verdict():
+    first, second = definition('one'), definition('two')
+    second['axes']['hardware']['label'] = 'Our AMD check missing'
+    group = build(data(first, second), [card(), card('two')], {}, '2026-10-14T02:00:00Z')[0]
+    assert group['axes']['hardware']['state'] == 'varies'
+    assert group['axes']['hardware']['label'] == 'Routes differ'
+
+
+def test_every_cell_names_evidence_missing_work_and_ownership():
+    route = definition()
+    del route['axes']['hardware']['missing']
+    with pytest.raises(ValueError, match='concrete label'):
+        validate(data(route))
+    route = definition()
+    route['axes']['hardware']['limitation'] = 'unknown-whose'
+    with pytest.raises(ValueError, match='whose limitation'):
+        validate(data(route))
+
+
+def test_chutes_method_tasks_are_distinct_from_application_findings():
+    root = Path(__file__).resolve().parents[1]
+    routes = {r['id']: r for r in json.loads((root/'data/assessments/routes.json').read_text())['routes']}
+    chutes = routes['chutes-tee']['axes']
+    assert chutes['hardware']['limitation'] == 'ours'
+    assert 'GPU/RTMR' in chutes['hardware']['label']
+    assert chutes['hardware']['issue_urls'] == ['https://github.com/amiller/awesome-private-inference/issues/28']
+    assert chutes['code']['limitation'] == 'reviewed_system'
+    assert 'dstack' not in chutes['code']['evidence'].lower()
+    assert '31' in chutes['code']['issue_urls'][0]
+    assert routes['tinfoil-router']['axes']['hardware']['limitation'] == 'ours'
+
+
+def test_companion_lessons_pin_primary_evidence_and_name_real_routes():
+    from probes.assessments import validate_audit_synthesis
+    root = Path(__file__).resolve().parents[1]
+    lessons = json.loads((root/'data/audit-synthesis.json').read_text())
+    cards = json.loads((root/'data/routes.json').read_text())['routes']
+    validate_audit_synthesis(lessons, cards)
+    invalid = copy.deepcopy(lessons)
+    invalid['studies'][0]['source_url'] = 'https://github.com/amiller/devproof-audits-guide/blob/main/report.md'
+    with pytest.raises(ValueError, match='pin'):
+        validate_audit_synthesis(invalid, cards)
+    invalid = copy.deepcopy(lessons)
+    invalid['studies'][0]['route_ids'] = ['unreviewed-route']
+    with pytest.raises(ValueError, match='outside'):
+        validate_audit_synthesis(invalid, cards)

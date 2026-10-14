@@ -39,6 +39,9 @@ with sync_playwright() as w:
     primary.locator('a[href="./history.html"]').click()
     page.wait_for_url('**/history.html')
     page.locator('#chart svg').wait_for()
+    assert page.locator('.reference-key dt').all_text_contents() == ['Expected reference','Observed identity','Document fingerprint']
+    page.locator('details.explainer summary').click()
+    assert 'Maple publishes PCR0' in page.locator('details.explainer').inner_text()
     primary=page.locator('nav[aria-label="Primary"]')
     assert primary.locator('a').count() == 2
     assert primary.locator('a[aria-current="page"]').get_attribute('href') == './history.html'

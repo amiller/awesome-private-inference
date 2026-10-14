@@ -47,6 +47,12 @@ def test_render_produces_html(tmp_path, monkeypatch):
     assert rc == 0
     html = (docs / "index.html").read_text()
     assert ">Comparison</h1>" in html
+    assert "What makes inference private?" in html
+    assert "What the companion audits establish" in html
+    history = (docs / "history.html").read_text()
+    assert "Expected reference" in history
+    assert "Observed identity" in history
+    assert "Document fingerprint" in history
     assert 'aria-label="Primary"' in html
     measurements = (docs / "measurements.html").read_text()
     assert "Attestation checks across providers and models" in measurements

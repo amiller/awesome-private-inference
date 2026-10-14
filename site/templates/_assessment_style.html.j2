@@ -1,7 +1,7 @@
 <style>
   .assessment-table {width:100%;border-collapse:collapse;font-size:12px;line-height:1.3;}
   .assessment-table th {position:sticky;top:0;background:#f1f5f9;z-index:2;padding:10px 6px;font-size:11px;color:#475569;text-align:center;}
-  .assessment-table td {padding:7px 6px;border-top:1px solid #e2e8f0;text-align:center;height:42px;}
+  .assessment-table td {padding:5px 6px;border-top:1px solid #e2e8f0;text-align:center;height:42px;}
   .assessment-table th:first-child,.assessment-table td:first-child{text-align:left;width:195px;}
   .assessment-table tbody tr:hover{background:#f8fafc;}
   .assessment-scroll{overflow:auto;max-height:72vh;border:1px solid #e2e8f0;border-radius:8px;background:white;}
@@ -10,7 +10,7 @@
   .assessment-table .provider-toggle{font:inherit;font-weight:650;text-align:left;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
   .provider-toggle[aria-expanded="true"] .chevron{transform:rotate(90deg);}
   .provider-meta{font-size:10px;color:#64748b;font-weight:400;white-space:nowrap;}
-  .signal{display:inline-flex;align-items:center;justify-content:center;gap:3px;min-width:53px;border-radius:4px;padding:4px 5px;font-size:10px;text-decoration:none;white-space:nowrap;border:1px solid transparent;}
+  .signal{display:inline-flex;align-items:center;justify-content:center;gap:3px;min-width:53px;max-width:108px;border-radius:4px;padding:3px 4px;font-size:10px;line-height:1.2;text-decoration:none;white-space:normal;border:1px solid transparent;}
   .signal.partial{background:#fff4d9;color:#81550a}.signal.gap{background:#ffeded;color:#a32535}.signal.unknown{background:#f1f5f9;color:#64748b}.signal.na{color:#64748b}.signal.established{background:#e0f4e9;color:#166345}.signal.varies{background:#eee8fb;color:#6442a0}
   .signal:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid #4338ca;outline-offset:2px}
   .collection{font-size:10px;color:#64748b;white-space:nowrap}.history-link{font-size:11px;color:#4338ca;text-decoration:underline;white-space:nowrap}.needs-review{display:block;color:#a32535;font-size:10px}
