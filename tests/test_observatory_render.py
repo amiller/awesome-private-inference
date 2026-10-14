@@ -48,7 +48,15 @@ def test_publication_and_adapter_pass_remain_scoped(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "compute_quality", lambda snapshot: _quality())
     render._render({"attestations": {"test": [{"model": "model", "valid": True,
                     "attestation_type": "test", "scorecard": {"tdx_verified": True}}]}, "pricing": {}})
-    html = (tmp_path / "docs/index.html").read_text()
+    home = (tmp_path / "docs/index.html").read_text()
+    assert 'class="matrix"' in home
+    assert "model" in home and "candidate" in home
+    assert "./evidence.html#observation-1" in home
+    assert "Who can see plaintext?" not in home
+    assert "./history.html" in home
+    assert "reference_mismatch" not in home
+    assert "Change timeline" not in home
+    html = (tmp_path / "docs/evidence.html").read_text()
     assert "reference_mismatch" in html
     assert "Client policy unverified" in html
     assert "No matched request observation" in html
