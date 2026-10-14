@@ -1,0 +1,100 @@
+{
+  "captured_at": "2026-10-13T19:51:47Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": null,
+    "adapter_report_ref": {
+      "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+      "path": "snapshots/2026-10-13.json",
+      "provider": "venice"
+    },
+    "adapter_report_sha256": "9b0601f312941d2a3d165a04f6bdbce4958da10bb10e161e3b87bc454cf9a7f0",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "9b0601f312941d2a3d165a04f6bdbce4958da10bb10e161e3b87bc454cf9a7f0"
+  },
+  "identities": [],
+  "identity_trust": "legacy_adapter_result",
+  "instance_id": null,
+  "legacy": true,
+  "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+  "observation_id": "legacy-f92ab80278c30d15c102f4ca/66573e9817f2d95025f0dec4",
+  "observer": "legacy-snapshot",
+  "outcome": "verified",
+  "policy_revision": "unknown",
+  "provider": "venice",
+  "reason": "legacy_adapter_result",
+  "reason_detail": null,
+  "route_id": "venice/e2ee-qwen3-6-35b-a3b-uncensored-p",
+  "run_id": "legacy-f92ab80278c30d15c102f4ca",
+  "schema_version": "1",
+  "source_snapshot": "snapshots/2026-10-13.json",
+  "verification_scope": "legacy_adapter_result",
+  "verifier_revision": "35f05fb4c6a59f6794cc43aec2e854e5d183d106"
+}

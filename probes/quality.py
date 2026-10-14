@@ -25,13 +25,13 @@ from __future__ import annotations
 import argparse
 import collections
 import datetime
+from dataclasses import fields
 import json
-import math
 import re
 import sys
 from pathlib import Path
 
-from verifiers.common import REQUIRED_LAYERS_BY_SHAPE, audit_match, load_audit_ledger
+from verifiers.common import REQUIRED_LAYERS_BY_SHAPE, ScoreCard, audit_match, load_audit_ledger
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA = REPO_ROOT / "data"
@@ -80,13 +80,8 @@ TRANSPORT = re.compile(
     r"HTTP [45]\d\d|ConnectionError|SSLError|Timeout|"
     r"no TEE attestation available|catalog-only", re.I)
 
-# Rendered on the public matrix today. Six further scorecard fields are collected
-# and never shown, which is why Tinfoil's row is blank; tracked as a gap below.
-PUBLISHED_COLUMNS = [
-    "nonce_bound", "tdx_verified", "report_data_binds_key", "gpu_attested",
-    "key_derives_to_address", "compose_hash_committed", "prod_os_image",
-    "serving_code_attested", "backend_attested", "attested_serving_enforced",
-]
+# The observatory renders every declared scorecard field in scoped details.
+PUBLISHED_COLUMNS = [field.name for field in fields(ScoreCard)]
 
 
 def _snapshots():
@@ -95,12 +90,11 @@ def _snapshots():
 
 
 def _classify(row):
-    """reachable / verifies / sufficient — the three axes the board collapses into one."""
-    err = row.get("error") or ""
-    if err and TRANSPORT.search(err):
-        return "unreachable"
-    if not row.get("valid"):
-        return "invalid"
+    """Keep unavailable evidence, rejected evidence and incomplete checks separate."""
+    from probes.schema import classify_report
+    outcome, _reason = classify_report(row)
+    if outcome != "verified":
+        return {"unavailable": "unreachable", "rejected": "invalid"}.get(outcome, outcome)
     required = REQUIRED_LAYERS_BY_SHAPE.get(row.get("attestation_type", ""), set())
     if not required:
         return "uncharacterized"
@@ -145,7 +139,7 @@ def compute(latest: dict | None = None) -> dict:
     # --- coverage: what can we actually measure, per live target ---
     coverage, cells = [], collections.Counter()
     for provider, rows in current.get("attestations", {}).items():
-        field, kind, source = VERSION_IDENTITY[provider]
+        field, kind, source = VERSION_IDENTITY.get(provider, (None, "unknown", "unknown"))
         for row in rows:
             shape = row.get("attestation_type", "")
             required = REQUIRED_LAYERS_BY_SHAPE.get(shape, set())
@@ -174,7 +168,7 @@ def compute(latest: dict | None = None) -> dict:
         entries, meta = load_audit_ledger(path, keyf)
         obs = {v for (p, _), o in versions.items() if p == prov for _, v in o}
         aud = {v for v in obs if audit_match(v, entries)}
-        la = max(e["audited_at"] for e in meta.values())
+        la = max((e["audited_at"] for e in meta.values()), default=None)
         audit_by_provider[prov] = {
             "builds_observed": len(obs), "builds_reviewed": len(aud),
             "backlog": len(obs) - len(aud), "last_audit": la,
@@ -182,9 +176,10 @@ def compute(latest: dict | None = None) -> dict:
         # tuple-key the union so a chutes mrtd and a tinfoil digest can't collide
         all_observed |= {(prov, v) for v in obs}
         all_reviewed |= {(prov, v) for v in aud}
-        last_audits.append(la)
-    last_audit = max(last_audits)
-    today = datetime.date.fromisoformat(dates[-1])
+        if la:
+            last_audits.append(la)
+    last_audit = max(last_audits, default=None)
+    today = datetime.datetime.now(datetime.timezone.utc).date()
 
     # --- deploy cadence, novel vs revisit ---
     cadence = []
@@ -198,32 +193,26 @@ def compute(latest: dict | None = None) -> dict:
             prev = v
         span = (datetime.date.fromisoformat(obs[-1][0])
                 - datetime.date.fromisoformat(obs[0][0])).days
-        # A deploy that starts and ends between two probes is invisible. With T novel
-        # transitions over n-1 daily intervals, the MLE for the deploy rate is
-        # lambda = -ln(1 - T/(n-1))/delta, which corrects the naive figure upward ~15%.
-        intervals = len(obs) - 1
-        corrected = None
-        if novel and intervals and novel < intervals:
-            rate = -math.log(1 - novel / intervals) / (span / intervals)
-            corrected = round(1 / rate, 1)
+        # First observation does not identify deployment time or fleet size.
         cadence.append({
             "provider": provider, "model": model, "observations": len(obs),
             "span_days": span, "distinct": len(seen), "novel": novel,
             "revisit": revisit,
             "version_source": ALL_VERSION_IDENTITY[provider][2],
             "retired": provider in RETIRED_VERSION_IDENTITY,
-            "days_per_deploy": round(span / novel, 1) if novel else None,
-            "days_per_deploy_corrected": corrected,
+            "observed_days_per_new_identity": round(span / novel, 1) if novel else None,
+            "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable",
         })
 
     total_obs = sum(outcomes.values())
     return {
         "generated_at": current.get("generated_at"),
-        "window": {"first": dates[0], "last": dates[-1], "days": len(dates)},
+        "window": {"first": dates[0] if dates else None, "last": dates[-1] if dates else None, "days": len(dates)},
         "calibration": {
             "observations": total_obs,
             **{k: v for k, v in outcomes.items()},
-            "red_cells_that_were_verification_failures": outcomes["verification-failure"],
+            "explicit_error_bucket": outcomes["verification-failure"],
+            "interpretation": "Historical adapter outcomes, not a security failure rate or independent trials",
             "no_error_invalid_by_provider": dict(sorted(no_error_invalid.items())),
             "note": (
                 f"{outcomes['no-error-invalid']} of {total_obs} observations were invalid "
@@ -234,27 +223,27 @@ def compute(latest: dict | None = None) -> dict:
                 "2026-08-18 it also caught a failed call to Phala's appraisal service, "
                 "because the helper read an error body as `verified: false`. That is fixed "
                 "(the call now raises, so it is recorded as transport), and counts from "
-                "earlier snapshots mix the two. Every other red cell was a transport error. "
+                "earlier snapshots mix the two. Error-string classes are not a calibrated detector. "
                 "Retired providers stay in this history; removing an integration must not "
                 "improve the registry's grade."),
         },
         "coverage": coverage,
         "coverage_summary": collections.Counter(c["status"] for c in coverage),
         "unmeasurable_providers": sorted(
-            p for p in active_providers if VERSION_IDENTITY[p][1] != "content-hash"),
+            p for p in active_providers if VERSION_IDENTITY.get(p, (None, "unknown", "unknown"))[1] != "content-hash"),
         "audit_debt": {
             "builds_observed": len(all_observed),
             "builds_reviewed": len(all_reviewed),
             "backlog": len(all_observed) - len(all_reviewed),
             "last_audit": last_audit,
-            "days_since_last_audit": (today - datetime.date.fromisoformat(last_audit)).days,
+            "days_since_last_audit": (today - datetime.date.fromisoformat(last_audit)).days if last_audit else None,
             "by_provider": audit_by_provider,
         },
         "density": {
             "published_cells": sum(cells.values()),
             "carrying_signal": cells["signal"],
             "dashes": cells["dash"],
-            "signal_fraction": round(cells["signal"] / sum(cells.values()), 3),
+            "signal_fraction": round(cells["signal"] / sum(cells.values()), 3) if cells else 0,
         },
         "hidden_layer_targets": sorted(
             f"{c['provider']}/{c['model']}" for c in coverage if c["hidden_layers"]),
@@ -271,7 +260,7 @@ def main() -> int:
     w, c, a, d = q["window"], q["calibration"], q["audit_debt"], q["density"]
     print(f"window        {w['first']} .. {w['last']}  ({w['days']} days)")
     print(f"calibration   {c['observations']} observations, "
-          f"{c['verification-failure']} verification failures, "
+          f"{c['verification-failure']} rows in historical explicit-error bucket, "
           f"{c['transport']} transport, {c['no-error-invalid']} invalid-no-error")
     print(f"audit debt    {a['builds_reviewed']}/{a['builds_observed']} builds reviewed, "
           f"backlog {a['backlog']}, last audit {a['last_audit']} "

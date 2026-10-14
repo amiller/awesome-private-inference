@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}awesome-private-inference{% endblock %}</title>
-  <meta name="description" content="Public automated registry of TEE-verified inference providers. Daily-refreshed scorecard of attestation layers and pricing across NEAR AI, Tinfoil, Venice, Chutes, and more.">
+  <meta name="description" content="Public observatory of confidential inference routes, accepted reference values, and observed evidence.">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
@@ -16,10 +16,11 @@
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
     <a href="./index.html" class="flex items-baseline gap-2">
       <span class="text-xl font-bold tracking-tight">awesome-private-inference</span>
-      <span class="text-xs text-slate-500">a registry of TEE-verified inference</span>
+      <span class="text-xs text-slate-500">routes · references · evidence</span>
     </a>
     <nav class="text-sm flex gap-4 text-slate-600">
-      <a href="./index.html" class="hover:text-slate-900">Dashboard</a>
+      <a href="./index.html#changes" class="hover:text-slate-900">Changes</a>
+      <a href="./index.html#routes" class="hover:text-slate-900">Routes</a>
       <a href="./pricing.html" class="hover:text-slate-900">Pricing</a>
       <a href="./methodology.html" class="hover:text-slate-900">Methodology</a>
       <a href="https://github.com/amiller/awesome-private-inference" class="hover:text-slate-900">GitHub ↗</a>
@@ -33,7 +34,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Snapshot {{ generated_at or "(none)" }} · run <a class="underline" href="https://github.com/amiller/awesome-private-inference/actions/runs/{{ run_id }}">{{ run_id }}</a> {% if git_sha %}· <code>{{ git_sha[:8] }}</code>{% endif %}</span>
+    <span>Adapter snapshot {{ generated_at or "(none)" }} · run {{ run_id }} {% if git_sha %}· <code>{{ git_sha[:8] }}</code>{% endif %}</span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>

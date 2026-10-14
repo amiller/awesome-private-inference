@@ -1,129 +1,38 @@
 {% extends "_base.html.j2" %}
 {% block title %}Methodology · awesome-private-inference{% endblock %}
 {% block content %}
+<section class="max-w-4xl text-slate-700">
+  <h1 class="text-3xl font-bold text-slate-900">How to read the observatory</h1>
+  <p class="mt-3">The unit of analysis is a client, model and request route. A brand can have several plaintext paths and different client policies. The <a class="underline" href="./index.html#routes">route cards</a> name the client mode, processes that may receive plaintext, published values, client acceptance and missing evidence.</p>
 
-<section class="prose prose-slate max-w-none">
-
-<h1 class="text-3xl font-bold">Methodology</h1>
-
-<p class="text-slate-700">
-  The dashboard scores each (provider × model) pair across eight capability layers. This page
-  explains exactly what each layer means and how we re-verify it.
-</p>
-
-<h2 class="mt-8 text-xl font-semibold">Scorecard layers</h2>
-
-<dl class="space-y-4 mt-3">
-  {% for key, label in SCORECARD_LABELS.items() %}
-  <div class="border-l-4 border-emerald-500/40 pl-4">
-    <dt class="font-semibold">{{ label }}</dt>
-    <dd class="text-sm text-slate-700">{{ SCORECARD_TOOLTIPS[key] }}</dd>
+  <h2 class="mt-8 text-xl font-semibold text-slate-900">Three distinct sets</h2>
+  <div class="mt-3 grid gap-3 sm:grid-cols-3 text-sm">
+    <div class="rounded-lg border border-slate-200 bg-white p-3"><strong>Published</strong><p class="mt-1">A provider serves a manifest, allowlist, release or reference history. Our capture retains exact bytes, origin, time and hash. Publication does not authenticate the file or prove deployment.</p></div>
+    <div class="rounded-lg border border-slate-200 bg-white p-3"><strong>Accepted</strong><p class="mt-1">An identified client policy permits a value. A built-in root, automatically refreshed manifest and locally pinned file have different authorities and rollback behavior.</p></div>
+    <div class="rounded-lg border border-slate-200 bg-white p-3"><strong>Observed</strong><p class="mt-1">A particular probe or request received evidence at one time. The check must bind authenticated measurement, recipient key, requested model and actual plaintext path before it supports a route verdict.</p></div>
   </div>
-  {% endfor %}
-</dl>
+  <p class="mt-3 text-sm">A mismatch may reflect a legitimate rollout, stale client, rejected update or attack. The change event requests review; it does not authorize a value. Reviewer decisions belong in separate signed or witnessed records.</p>
 
-<h2 class="mt-8 text-xl font-semibold">Independent re-verification</h2>
-<p>We do <em>not</em> trust the provider's own
-"server_verification" field when the provider exposes one (for example, Venice). We forward the TDX quote to
-<a class="underline" href="https://cloud-api.phala.network/api/v1/attestations/verify">Phala's public TDX verifier</a>
-and the NVIDIA payload to
-<a class="underline" href="https://nras.attestation.nvidia.com/v3/attest/gpu">NVIDIA NRAS</a>.
-We then recompute key derivation and the <code>report_data</code> binding in-process.
-A green TDX cell therefore means Phala's appraisal service accepted the quote; it is not
-equivalent to verifying Intel's chain locally.</p>
+  <h2 class="mt-8 text-xl font-semibold text-slate-900">What the current labels mean</h2>
+  <dl class="mt-3 space-y-2 text-sm">
+    {% for outcome, style in outcome_style.items() %}<div class="rounded border border-slate-200 bg-white p-3"><dt class="font-semibold">{{ style[0] }}</dt><dd>{{ style[2] }}</dd></div>{% endfor %}
+  </dl>
+  <p class="mt-3 text-sm">A green adapter field is a result from that adapter's limited implementation. It is not an independent hardware, release or end-to-end request proof unless its verifier actually performed those checks. A missing credential is “not checked”; an HTTP failure is “unavailable”; a checked contradiction is “rejected.” Legacy snapshots may have only a boolean and narrower error context.</p>
 
-<p>The current RedPill/Phala ACI gateway uses a different verifier. Its Rust client runs
-<code>dcap-qvl</code> against PCCS collateral, verifies the nonce-bound workload keyset and
-measured Compose, and checks the live TLS SPKI. That ACI surface is documented in the
-provider pages but is not yet a daily dashboard row. Its separately reproduced deployment
-verdict is Stage 0; the 5/6 ACI protocol result is not a Stage score.</p>
+  <h2 class="mt-8 text-xl font-semibold text-slate-900">Reference capture and continuity</h2>
+  <p class="mt-3 text-sm">The publication probe makes bounded read-only HTTPS requests. Raw bodies are stored by SHA-256 and a derived latest index points to the last attempt and last success separately. Mirror comparison is byte agreement only. Changes in a public catalog's model or tier routing are distinct from volatile price text. The weekly model inventory is separate from the daily sentinel sample. Immutable events include route, old/new values, provenance and timestamp; no event is a deployment claim.</p>
+  <p class="mt-2 text-sm">Reproduce the public baseline with <code>python -m probes.references --catalogs</code>. No key is required for the reference sources. Catalog endpoints may accept an existing API key through environment variables; credentials are never written into observations.</p>
 
-<h2 class="mt-8 text-xl font-semibold">Known upstream TODOs</h2>
-<p>
-  Phala's <code>private-ai-verifier</code> decodes NRAS and Intel Trust Authority JWTs with
-  <code>verify_signature=False</code>. Provider adapters inherit that limitation when
-  they rely on those decoded claims. The ACI client's native DCAP verification of the
-  gateway quote is a separate path. See
-  <a class="underline" href="https://github.com/amiller/devproof-audits-guide/blob/main/LEARNINGS.md">devproof-audits-guide/LEARNINGS.md</a>.
-</p>
+  <h2 id="cadence" class="mt-8 text-xl font-semibold text-slate-900">Sampled identity cadence</h2>
+  <p class="mt-3 text-sm">Daily probes can first see an existing fleet member. A value seen again can mean load balancing, rollback, recovery or sampling error. The table reports only observation windows; it does not estimate true rollout speed or fleet size.</p>
+  <div class="mt-3 overflow-x-auto rounded-lg border border-slate-200 bg-white"><table class="w-full text-sm"><thead class="bg-slate-100 text-left"><tr><th class="p-2">Target</th><th class="p-2">Source type</th><th class="p-2">Samples</th><th class="p-2">Distinct identities</th><th class="p-2">Newly seen transitions</th><th class="p-2">Observed days per new identity</th></tr></thead><tbody>
+  {% for item in quality.cadence %}<tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">{{ item.provider }}/{{ item.model }}</td><td class="p-2">{{ item.version_source }}</td><td class="p-2">{{ item.observations }}</td><td class="p-2">{{ item.distinct }}</td><td class="p-2">{{ item.novel }}</td><td class="p-2">{{ item.observed_days_per_new_identity if item.observed_days_per_new_identity is not none else "—" }}</td></tr>{% else %}<tr><td colspan="6" class="p-3">No identity series yet.</td></tr>{% endfor %}
+  </tbody></table></div>
 
-<h2 class="mt-8 text-xl font-semibold">Why "Stage 0" on every provider</h2>
-<p>
-  Even when every layer in the matrix shows ✅, the provider is Stage 0 in the
-  <a class="underline" href="https://github.com/amiller/devproof-audits-guide">ERC-733 / devproof sense</a>
-  for at least one of:
-</p>
-<ul>
-  <li><strong>Backend code not pinned at the gateway.</strong> NEAR's cloud-api now inline-verifies
-    each backend's TDX quote + RTMR3 + GPU NRAS and pins the TLS fingerprint before serving
-    (<a class="underline" href="https://github.com/nearai/cloud-api/pull/552">PR #552</a> /
-    <a class="underline" href="https://github.com/nearai/cloud-api/pull/558">#558</a>, Apr–May 2026) —
-    the dashboard's <code>Backend attested</code> column reflects this. But
-    <code>ALLOWED_COMPOSE_HASHES</code> is still unset server-side, so any TCB-current TDX TD the
-    operator points the gateway at passes. Closed-chain clients close the gap by pulling
-    <code>compose_hash</code> out of the attestation themselves and checking it against the on-chain
-    <code>addComposeHash</code> set on Base. Tracking issue:
-    <a class="underline" href="https://github.com/nearai/cloud-api/issues/224">nearai/cloud-api#224</a>.</li>
-  <li><strong>Operator-mutable routing.</strong> Database field controls which backend a gateway calls
-    (admin-gated; bounded but not eliminated by the inline-verify hop above).</li>
-  <li><strong>KMS policy is incomplete in the public ACI client.</strong> The current report
-    publishes dstack KMS custody evidence, but <code>aci verify</code> still skips custody and
-    subject policy.</li>
-  <li><strong>The current RedPill gateway preserves operator paths.</strong> Its measured config
-    uses a dstack dev OS, accepts an operator-supplied root SSH key, and makes logs public while
-    enabling raw upstream error details. Active route state is also admin-mutable outside the
-    measured Compose. See the RedPill provider page for the evidence and mitigations.</li>
-</ul>
+  <h2 class="mt-8 text-xl font-semibold text-slate-900">Current adapter check names</h2>
+  <p class="mt-2 text-sm">These field names help locate implementation and negative tests. Different architectures expose different checks, so a count of green cells is not a cross-provider privacy score.</p>
+  <div class="mt-3 grid gap-2 sm:grid-cols-2">{% for key, label in scorecard_labels.items() %}<div class="rounded border border-slate-200 bg-white p-2 text-xs"><strong>{{ label }}</strong> <code class="text-slate-500">{{ key }}</code></div>{% endfor %}</div>
 
-<h2 class="mt-8 text-xl font-semibold">How <code>Backend attested</code> is decided</h2>
-<p>
-  For providers with a gateway→backend hop, we cross-reference three signals before marking the
-  column. The cell is tri-state, and the middle state is deliberate: we want to distinguish
-  "provider shipped code we haven't audited yet" from "provider is doing something wrong."
-</p>
-<ul>
-  <li><strong>✅ Verified.</strong> The gateway's TDX quote self-attests its measured compose
-    (<code>mr_config = 0x01 ‖ sha256(app_compose)</code>), the compose_hash is allowed by
-    the gateway's DstackApp contract on Base (a live <code>allowedComposeHashes(bytes32)</code>
-    call), AND the cloud-api container image
-    digest pulled from the measured docker-compose is in our analyst-pair audit ledger
-    (<code>data/audits/near-ai_cloud-api.json</code>), with a link to the audit doc.</li>
-  <li><strong>○ Audit pending</strong> (amber outline). All the chain + self-consistency checks
-    pass, but the image digest is new — we haven't read the diff yet. Treat as "queue
-    grew faster than the analyst pair did," not a provider regression. The
-    <code>details.cloud_api_image_digest</code> in the snapshot identifies what's waiting to be
-    reviewed.</li>
-  <li><strong>❌ Rejected.</strong> Either the gateway quote doesn't self-attest the compose it
-    claims, or the compose isn't in the on-chain authorized set — meaning someone deployed code
-    the EOA owner never signed into the DstackApp.</li>
-</ul>
-
-<h2 class="mt-8 text-xl font-semibold">Reproduce</h2>
-<pre class="bg-slate-100 rounded p-3 text-xs overflow-x-auto"><code>git clone https://github.com/amiller/awesome-private-inference
-cd awesome-private-inference
-uv venv && source .venv/bin/activate
-uv pip install -e .
-
-git clone https://github.com/nearai/nearai-cloud-verifier _nearai-verifier
-export NEARAI_VERIFIER_PATH="$(pwd)/_nearai-verifier/py"
-
-export NEAR_API_KEY=...
-export VENICE_API_KEY=...
-
-python -m probes.collect
-python -m probes.render
-
-# Current RedPill/Phala ACI surface, verified separately from this Python matrix
-git clone https://github.com/Dstack-TEE/private-ai-gateway.git
-cd private-ai-gateway
-cargo run --bin aci -- verify https://tee.redpill.ai
-cargo run --bin aci -- verify https://tee.redpill.ai --require-production-os
-cargo run --bin aci -- sessions https://tee.redpill.ai
-</code></pre>
-<p>The production-OS option is an RTMR3 appraisal and currently rejects the live
-gateway. Use it with a dstack verifier that reconstructs MRTD and RTMR0-2 from
-the same quote, event log, and VM configuration.</p>
-
+  <p class="mt-8 text-sm">Read the <a class="underline" href="{{ repo_url }}research/review-2026-10-13/review.md">review and limitations</a> for the source-level concerns that motivated this structure, including quote binding, model-scoped policy, reply-key substitution and operator access paths.</p>
 </section>
-
 {% endblock %}

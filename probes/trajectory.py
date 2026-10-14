@@ -1,24 +1,11 @@
-"""Deploy-cadence and failure-mode analysis over active-provider snapshot history.
+"""Observed identity transitions and legacy adapter outcomes.
 
-Uses the same methodology as the tables in
-research/critical-review-2026-08-10.md, limited to current providers.
+A first-seen value is a newly observed identity, not proof of a deployment.
+A revisit may be fleet sampling, rollback, recovery or an observation artifact.
+Control-plane publications can also revert. No fleet-size or corrected deployment
+rate is inferred from these snapshots.
 
-A "novel" transition is a version string never observed before — a real deploy.
-A "revisit" is a return to a previously-seen value. Counting all transitions as
-deploys overstates Chutes by 20x.
-
-Revisits only mean "we sampled a different fleet instance" where the version is
-read from whichever backend answered — that is chutes alone. near-ai regexes the
-digest out of the gateway's app_compose and tinfoil reads it from the release
-feed, so those are single control-plane documents: they cannot show fleet
-structure, and their zero-revisit sequences are guaranteed by construction rather
-than observed. See probes/quality.py:VERSION_IDENTITY.
-
-Usage:
-    python -m probes.trajectory
-
-The active provider set comes from data/latest.json. Historical rows for retired
-integrations remain in the archive but do not enter current trajectory statistics.
+Usage: python -m probes.trajectory
 """
 from __future__ import annotations
 
@@ -85,9 +72,9 @@ def main() -> int:
     for k, v in outcomes.most_common():
         print(f"  {k:28s} {v:5d}  {100 * v / total:5.1f}%")
 
-    print(f"\n=== deploy cadence ===")
+    print(f"\n=== observed identity transitions ===")
     print(f"{'target':46s} {'obs':>4s} {'days':>5s} {'uniq':>4s} "
-          f"{'novel':>5s} {'revisit':>7s} {'days/deploy':>11s}")
+          f"{'novel':>5s} {'revisit':>7s} {'days/new-id':>11s}")
     fmt = "%Y-%m-%d"
     for (provider, model), obs in sorted(history.items()):
         seen, novel, revisit, prev = set(), 0, 0, None
@@ -101,7 +88,7 @@ def main() -> int:
             prev = version
         span = (datetime.datetime.strptime(obs[-1][0], fmt)
                 - datetime.datetime.strptime(obs[0][0], fmt)).days
-        cadence = f"{span / novel:.1f}" if novel else "never"
+        cadence = f"{span / novel:.1f}" if novel else "not observed"
         print(f"{provider + '/' + model:46.46s} {len(obs):4d} {span:5d} "
               f"{len(seen):4d} {novel:5d} {revisit:7d} {cadence:>11s}")
 

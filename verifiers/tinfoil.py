@@ -1,12 +1,12 @@
 """Tinfoil attestation verifier.
 
-Trust chain we re-verify (bundle path):
+Checks this adapter performs on a bundle (incomplete hardware chain):
   1. Fetch ATC bundle: {domain, enclaveAttestationReport, digest, sigstoreBundle, vcek, enclaveCert}
   2. Decompress + parse the SEV-SNP report (predicate sev-snp-guest/v2)
   3. Verify the sigstore-signed in-toto statement for the bundle's digest under
      the GitHub Actions identity for tinfoilsh/confidential-model-router.
      Extract `snp_measurement` from the predicate.
-  4. Compare predicate snp_measurement == report.measurement.
+  4. Compare predicate snp_measurement == the parsed, unverified report field.
   5. Open a live TLS connection to bundle.domain; assert
      sha256(SPKI) == report_data[:32].
   6. Decode the bundle's enclaveCert SANs (dcode format) and assert the
@@ -17,7 +17,8 @@ Out of scope for v1:
   - VCEK chain verification to AMD's Genoa root (we trust the report's
     self-claimed measurement to be checked structurally + by sigstore equality).
   - HPKE handshake to actually encrypt a prompt.
-  - Per-request client nonce — Tinfoil's report_data has no nonce slot.
+  - Authenticated session freshness and an encrypted request. A per-request
+    nonce is one possible freshness mechanism, not a universal requirement.
 """
 from __future__ import annotations
 
@@ -57,7 +58,8 @@ def _digest_audited(repo: str, digest: str):
     if not ledger.exists():
         return None
     audit_set, _ = load_audit_ledger(ledger, "bundle_digest")
-    return audit_match(digest, audit_set) is not None
+    # Prefix entries in historical ledgers are review hints, not authorization.
+    return digest.lower() in {entry for entry in audit_set if len(entry) == 64}
 
 DEFAULT_BASE_URL = "https://api.tinfoil.sh/v1"
 ATC_BUNDLE_URL = "https://atc.tinfoil.sh/attestation"
@@ -387,16 +389,36 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
     which serves all models under the same measurement.
     """
     started = time.time()
-    sc = ScoreCard(client_nonce_supported=False)  # report_data has no nonce slot
+    sc = ScoreCard(client_nonce_supported=False)  # freshness must be established by session evidence
     details: Dict[str, Any] = {
         "domain": bundle.domain,
         "digest": bundle.digest,
         "predicate": bundle.report_format,
         "repo": repo,
         "digest_audited": _digest_audited(repo, bundle.digest),
+        "raw_evidence": {
+            "domain": bundle.domain,
+            "repo": repo,
+            "release_digest": bundle.digest,
+            "report_format": bundle.report_format,
+            "report_body_b64": bundle.report_body_b64,
+            "sigstore_bundle": bundle.sigstore_bundle,
+            "enclave_cert_pem": bundle.enclave_cert_pem,
+            "vcek_b64": bundle.vcek_b64,
+        },
+        "hardware_signature_verification": "not_checked: AMD VCEK chain and SNP report signature",
+        "build_reproduction": "not_checked",
+        "encrypted_request_binding": "not_checked",
+        "freshness": "not_checked: no authenticated session freshness test",
+        "verification_status": "not_checked",
+        "verification_reason": "AMD SNP report signature, VCEK chain, and encrypted request are not verified",
     }
 
-    report = bundle.sev_report()
+    try:
+        report = bundle.sev_report()
+    except (ValueError, OSError) as exc:
+        return _err(model, f"malformed SEV-SNP report: {type(exc).__name__}",
+                    details, started, sc)
     details["sev"] = {
         "version": report.version,
         "policy_hex": hex(report.policy),
@@ -409,16 +431,18 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
         return _err(model, "SEV report has DEBUG bit set", details, started, sc)
 
     predicate, predicate_type = _verify_sigstore(bundle, repo)
+    sc.release_provenance_verified = True
     details["sigstore_predicate_type"] = predicate_type
     sigstore_measurement = _extract_snp_measurement(predicate, predicate_type)
     details["sigstore_measurement"] = sigstore_measurement
     if sigstore_measurement != report.measurement_hex:
+        sc.measurement_matches_release = False
         return _err(
             model,
             f"measurement mismatch: sigstore={sigstore_measurement} report={report.measurement_hex}",
             details, started, sc,
         )
-    sc.code_measurement_reproducible = True
+    sc.measurement_matches_release = True
 
     audit = _audit_attested_config(predicate)
     details["attested_config"] = {
@@ -476,7 +500,10 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
     return AttestationReport(
         provider="tinfoil",
         model=model or bundle.domain,
-        valid=True,
+        # The parsed SNP report is not hardware authenticated until its VCEK
+        # chain and signature verify. Agreement with a signed release alone is
+        # not a hardware attestation or independent source reproduction.
+        valid=False,
         verified_at=now_iso(),
         attestation_type="tinfoil-sev-snp-v2",
         signing_address="",
@@ -484,6 +511,7 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
         signing_algo="hpke",
         scorecard=sc,
         details=details,
+        error="AMD SNP report signature and VCEK chain not verified",
         latency_s=round(time.time() - started, 2),
     )
 
@@ -491,6 +519,8 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
 def _err(
     model: str, msg: str, details: Dict[str, Any], started: float, sc: ScoreCard
 ) -> AttestationReport:
+    details["verification_status"] = "rejected"
+    details["verification_reason"] = msg
     return AttestationReport(
         provider="tinfoil",
         model=model,

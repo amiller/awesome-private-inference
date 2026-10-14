@@ -1,0 +1,83 @@
+{
+  "recorded_at_utc": "2026-10-14T01:39:51Z",
+  "capture_window_utc": "2026-10-14 before recorded_at_utc; exact request timestamps were not captured",
+  "repository_base_commit": "cbf555f661e81c838ba8daa3f7bb131691d5dbae",
+  "instrument_revision": {
+    "state": "uncommitted worktree; exact file hashes at the earlier live calls were not captured",
+    "file_sha256_at_recording": {
+      "verifiers/aci.py": "8a401f68b0ae98f2b65b4e67c3cfe4a8ceeb997c0a163a52e03d942ba2d3a21c",
+      "verifiers/near_ai.py": "e5cb53bc3323c68f265b67b56647cc4912c2ec607db07762f76d9a0380afa864",
+      "verifiers/tinfoil.py": "bb02451256ddbfc955c1f6cce54d683776c1af06532cb99ec2da0508068e8609",
+      "verifiers/chutes.py": "a2eb55ecd05f4a11a22c095660b275645d03f16067b9b77f31eee61f7a9542d1",
+      "verifiers/common.py": "9306ec871c62672bf4951e658a893a1d4925bd0bb420a7c30e8b3cd9115f365f"
+    }
+  },
+  "live_read_only_checks": [
+    {
+      "provider": "aci-gateway",
+      "endpoint": "https://tee.redpill.ai/v1/aci/attestation",
+      "request": "fresh random nonce; public GET; no inference",
+      "http_status": 200,
+      "observed": {
+        "deployed_profile": "older ACI draft without workload_id or keyset endorsement",
+        "legacy_statement_matches_report_data": true,
+        "keyset_digest_recomputes": true,
+        "all_imr3_event_preimages_match_dstack_v1_digests": true,
+        "compose_event_matches_exact_app_compose_sha256": true,
+        "os_image_event_matches_vm_config_hash": true,
+        "quote_appraisal_verified": true,
+        "quote_reportdata_matches_statement_digest_plus_zero_padding": true
+      },
+      "limitations": "The raw report, quote, nonce and request timestamp were not retained. OS boot measurements and request path were not checked; this is not a complete route pass."
+    },
+    {
+      "provider": "near-ai",
+      "endpoint": "https://cloud-api.near.ai/v1/attestation/report",
+      "request": "model=zai-org/GLM-5.1-FP8 with fresh random nonce; authenticated read-only GET; no inference",
+      "http_status": 200,
+      "observed": {
+        "requested_model": "zai-org/GLM-5.1-FP8",
+        "model_name_in_attestation_response": "z-ai/glm-5.3-flash",
+        "model_name_field_location": "model_attestations[0].model_name, not info.model_name",
+        "model_attestations_count": 1,
+        "measured_compose_preimage_length_bytes": 18202,
+        "nvidia_payload_length_characters": 98222
+      },
+      "limitations": "The response model_name is detached until the model/compose-manager quote chain is verified. No quote, GPU appraisal, encrypted request or raw response was retained. The observed name mismatch is a response-level policy divergence, not proof of model substitution inside authenticated hardware evidence."
+    },
+    {
+      "provider": "chutes",
+      "endpoint": "https://api.chutes.ai",
+      "request": "public-control-plane measurement/instance/evidence GETs for Qwen3-32B-TEE; existing API key; fresh nonce; no inference",
+      "http_status": 200,
+      "observed": {
+        "discoverable_instances": 2,
+        "golden_measurement_entries": 56,
+        "first_discovery_instance_id": "d8c701fa-fcad-4442-85d6-765273072507",
+        "evidence_quote_size_approx_bytes": 5247,
+        "later_verifier_run_sampled_instance": true,
+        "later_verifier_quote_appraisal_verified": true,
+        "later_verifier_nonce_key_binding": true,
+        "later_verifier_mrtd_in_golden_set": true,
+        "later_verifier_status": "not_checked",
+        "serving_code_attested": false
+      },
+      "limitations": "The first discovery instance ID is not asserted to be the same instance selected by the later verifier run. Exact capture timestamps, nonce, quote and golden-set bytes were not retained. Serving code and selected model remain unmeasured."
+    },
+    {
+      "provider": "base-chain-read",
+      "endpoint": "https://mainnet.base.org",
+      "request": "public read-only JSON-RPC block, chain ID, code and implementation queries",
+      "observed": {
+        "chain_id": 8453,
+        "sampled_block_number": 52575863,
+        "sampled_block_hash_length_characters": 66,
+        "model_contract_code_hash_length_characters": 64,
+        "eip1967_implementation_present": true
+      },
+      "limitations": "The exact block hash and query responses were not retained, so this check is not replayable chain-policy evidence."
+    }
+  ],
+  "evidence_retention": "These were ephemeral validation checks. No live transcript, response body, quote hash or immutable observation was saved; the file reports only results visible in command output. Subsequent production probes now support content-addressed raw evidence, subject to size and secret checks.",
+  "remaining_schema_semantics": "Explicit verifier binding failures use details.verification_status=rejected and incomplete proof uses not_checked. Some uncaught malformed provider shapes still reach the generic probe exception handler and classify as unavailable/probe_exception; this never produces verified but can undercount rejections."
+}

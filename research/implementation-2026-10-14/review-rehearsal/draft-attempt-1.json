@@ -1,0 +1,25 @@
+{
+  "event_id": "chg-0542457cf92e0f444bbf5c076d9705ad",
+  "summary": "Offline synthetic fixture for private-inference/browser-policy adds accepted compose hash bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb to a set that already contains aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa. This establishes only a fixture-level acceptance expansion, not a Private Inference policy change.",
+  "classification": "needs_evidence",
+  "evidence": [
+    "local-data/review-rehearsal/packet.json",
+    "local-data/review-rehearsal/evidence/synthetic-old-policy.json",
+    "local-data/review-rehearsal/evidence/synthetic-new-policy.json",
+    "research/review-2026-10-13/privateinference.md (public context only)",
+    "data/references/latest.json (public context only)",
+    "data/routes.json (public context only)"
+  ],
+  "checks_performed": [
+    "Read the packet and its exact old/new observation paths; both fixtures mark themselves synthetic and name the same component and route.",
+    "Compared accepted_compose_hashes as sets: the old value remains, bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb is added, and no value is removed.",
+    "Checked the specified public context for an approved client baseline or a source-to-live-artifact link; it supplies neither for this synthetic value. No endpoint was contacted."
+  ],
+  "uncertainties": [
+    "No captured provider publication, deployed client policy, attestation, or request ties either fixture hash to Private Inference or a live plaintext holder.",
+    "The public context describes browser self-consistency checks without an independently approved compose baseline; it cannot establish adoption of this synthetic policy."
+  ],
+  "next_action": "For any real change, obtain an authenticated policy publication and exact served-client artifact, map its approved compose hash to a fresh attestation and request-bound NEAR worker, then independently review the approval before changing an accepted ledger.",
+  "plaintext_boundary_impact": "No observed live impact. In the fixture, accepting the added compose hash would permit an additional measured workload to receive plaintext inside the nominal NEAR model TEE; the actual workload and holder are unproven.",
+  "acceptance_policy_impact": "The synthetic accepted set expands from {aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa} to {aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb}. No deployed client acceptance policy or authorized reference update is established."
+}

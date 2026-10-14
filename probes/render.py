@@ -1,247 +1,196 @@
-"""Render data/latest.json → docs/ static dashboard.
-
-Pure-Python, Tailwind via CDN. No Node build step.
-
-Usage:
-    python -m probes.render
-"""
+"""Render route, change, publication and adapter evidence as a static site."""
 from __future__ import annotations
 
+import fnmatch
+import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from probes.quality import compute as compute_quality
-from verifiers.common import bar_note, is_layer_required, is_stage1_ready
+from probes.schema import classify_report
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DATA_LATEST = REPO_ROOT / "data" / "latest.json"
+DATA_LATEST = REPO_ROOT / "data/latest.json"
+ROUTES_PATH = REPO_ROOT / "data/routes.json"
+REFERENCES_PATH = REPO_ROOT / "data/references/latest.json"
 DOCS_DIR = REPO_ROOT / "docs"
-TEMPLATE_DIR = REPO_ROOT / "site" / "templates"
+TEMPLATE_DIR = REPO_ROOT / "site/templates"
+REPO_URL = "https://github.com/amiller/awesome-private-inference/blob/main/"
 
 SCORECARD_LABELS = {
-    "nonce_bound": "Nonce bound",
-    "tdx_verified": "TDX quote",
-    "report_data_binds_key": "report_data binds key",
-    "gpu_attested": "GPU attested",
-    "key_derives_to_address": "Key derives to addr",
-    "compose_hash_committed": "compose_hash committed",
-    "prod_os_image": "Prod OS image",
-    "serving_code_attested": "Serving code attested",
-    "backend_attested": "Backend attested",
-    "attested_serving_enforced": "Attested serving forced",
+    "nonce_bound": "Fresh nonce", "tdx_verified": "TDX appraisal",
+    "report_data_binds_key": "Key binding", "gpu_attested": "GPU evidence",
+    "key_derives_to_address": "Address binding", "compose_hash_committed": "Compose binding",
+    "prod_os_image": "Production OS", "serving_code_attested": "Serving code",
+    "backend_attested": "Backend check", "gateway_reference_audited": "Gateway review",
+    "catalog_serves": "Catalog serving", "sessions_publish_evidence_digests": "Session digest listing",
+    "catalog_nonempty": "Catalog nonempty", "os_image_archive_declares_production": "OS archive metadata",
+    "code_measurement_reproducible": "Reproduced build", "release_provenance_verified": "Release provenance",
+    "measurement_matches_release": "Release measurement", "hardware_signature_verified": "Hardware signature",
+    "tls_pubkey_pinned": "TLS key pin", "hpke_pubkey_attested": "HPKE key",
+    "client_nonce_supported": "Client nonce", "runtime_config_fully_attested": "Runtime config",
+    "attested_serving_enforced": "TEE route enforced",
 }
 
-SCORECARD_TOOLTIPS = {
-    "nonce_bound": "Client-supplied nonce appears in TDX report_data",
-    "tdx_verified": "Intel TDX quote accepted by Phala's public verifier",
-    "report_data_binds_key": "report_data commits to signing address + nonce",
-    "gpu_attested": "NVIDIA NRAS returned PASS on the GPU payload",
-    "key_derives_to_address": "keccak(signing_public_key) == signing_address",
-    "compose_hash_committed": "mr_config starts with 0x01 || sha256(app_compose)",
-    "prod_os_image": (
-        "vm_config.image is the production dstack OS image, not dstack-nvidia-dev. "
-        "The dev image ships sshd + debug-tweaks + tools-profile; with "
-        "DSTACK_AUTHORIZED_KEYS it gives the operator host-network-namespace root SSH "
-        "inside the CVM (prompts in /proc/<vllm>/mem exfiltratable). Flips ✅ when the "
-        "fleet runs dstack-nvidia-* prod."
-    ),
-    "serving_code_attested": (
-        "The code on the prompt-plaintext path (serve.py) and the served model are "
-        "committed to a measured register. Red on Chutes: serve.py is CFSV-excluded "
-        "and in no RTMR, so the operator (or Chutes) can read or exfiltrate the "
-        "decrypted prompt AND silently substitute the model — neither detectable from "
-        "the quote. Live proof: all -TEE models share one MRTD. chutesai/chutes#75."
-    ),
-    "backend_attested": (
-        "Tri-state: ✅ gateway code self-attests + compose_hash is on-chain authorized + "
-        "image digest is in our analyst-pair audit ledger. ○ chain-authorized + self-consistent "
-        "but the audit ledger hasn't caught up (analyst backlog, NOT a provider fault). "
-        "❌ quote not self-consistent or compose not on the on-chain authorized set."
-    ),
-    "attested_serving_enforced": (
-        "This hostname is in the attested tee_only_domains, so the gateway refuses to "
-        "serve it from a non-TEE upstream. ❌ means the same verified workload will "
-        "forward the prompt to an ordinary commercial API unless the client sets "
-        "provider.aci_verified per request — live on api.redpill.ai, which shares "
-        "tee.redpill.ai's quote and keyset but serves 42 models the TEE-only hosts refuse."
-    ),
+OUTCOME_STYLE = {
+    "verified": ("Adapter accepted", "bg-emerald-100 text-emerald-800", "The adapter accepted its scoped checks; this is not a full route verdict."),
+    "rejected": ("Adapter rejected", "bg-rose-100 text-rose-800", "The adapter checked evidence and rejected it."),
+    "not_checked": ("Not checked", "bg-amber-100 text-amber-800", "Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof."),
+    "unsupported": ("Unsupported", "bg-slate-200 text-slate-700", "The adapter cannot check this evidence surface."),
+    "unavailable": ("Unavailable", "bg-slate-200 text-slate-700", "Evidence or endpoint was unavailable; this is not a cryptographic rejection."),
+    "stale": ("Stale", "bg-amber-100 text-amber-800", "The latest evidence is too old for the stated freshness policy."),
+    "not_applicable": ("Not applicable", "bg-slate-100 text-slate-500", "This check does not apply to this route."),
 }
 
 
-# Hand-written claims. Each carries the date it was last checked against the data,
-# so a reader can tell how much of the page is measurement and how much is opinion.
-# A claim here that the probe can check belongs in a scorecard column instead.
-EDITORIAL_NOTES = [
-    {"checked": "2026-08-18", "title": "Current RedPill uses ACI.",
-     "body": "The live tee.redpill.ai gateway scores Stage 0 even though all six ACI "
-             "protocol checks now pass, including the strict production-OS appraisal — the "
-             "deployment moved from the dstack dev image to prod 0.5.9 on or before "
-             "2026-08-18. Receipts verify end to end. Stage 0 rests on the legacy "
-             "/v1/attestation/report, which ignores its model parameter and attests any name; "
-             "public logs with raw upstream error detail; and an operator root-key input. "
-             "api.redpill.ai shares the same attested keyset but is not TEE-only. A session "
-             "audit accepted 163 of 237 records, rejecting only Chutes for missing evidence."},
-    {"checked": "2026-06-18", "title": "Chutes' serving code is not measured.",
-     "body": "serve.py on the prompt-plaintext path is CFSV-excluded and in no RTMR, and the "
-             "model name is not bound to the quote. A passing quote proves genuine TDX running "
-             "a Chutes base image, not which model on which code."},
-    {"checked": "2026-05-09", "title": "NEAR's gateway gap depends on the client.",
-     "body": "ALLOWED_COMPOSE_HASHES is unset server-side, so the gateway alone does not pin "
-             "code. A closed-chain client that checks compose_hash against the on-chain set on "
-             "Base closes it; a client that trusts the gateway does not."},
-    {"checked": "2026-08-12", "title": "Some provider-adapter JWTs are decoded without signature checks.",
-     "body": "Phala's private-ai-verifier still passes verify_signature=False on NVIDIA and "
-             "Intel Trust Authority tokens. This affects adapter conclusions derived from those "
-             "tokens. The current ACI client verifies its gateway TDX quote through native DCAP."},
-    {"checked": "2026-08-10", "title": "The bar is hand-set, and one entry was wrong.",
-     "body": "REQUIRED_LAYERS_BY_SHAPE is a hand-edited dict with no changelog. Venice's set "
-             "excluded the two layers where its prompt-path exposure actually lives, so Venice "
-             "scored a full row until an outside audit pointed at them; corrected 2026-08-10. "
-             "Denominators still differ per architecture, so compare the unproven layers rather "
-             "than the fractions, and treat the bar as editorial until it is derived from "
-             "provider claims (issue #6)."},
-]
+def source_link(source: str) -> str:
+    return source if source.startswith("https://") else REPO_URL + source.lstrip("/")
 
 
-def cell(value, required: bool = False):
-    """Render a scorecard cell.
-
-    ✅ — checked, passed.
-    ○ — chain-authorized and self-consistent, but the analyst pair hasn't audited
-        this image revision yet (our backlog, not the provider's fault).
-    ❌ — checked, rejected.
-    — (red) — required for this shape's Stage 1 surface but not exposed; fails the same as ❌.
-    — (grey) — not applicable to this shape; benign.
-    """
+def check_cell(value) -> dict:
     if value is True:
-        return {"mark": "✅", "class": "bg-emerald-500/20 text-emerald-700",
-                "title": "Verified"}
-    if value == "audit_pending":
-        return {"mark": "○", "class": "bg-amber-100 text-amber-800 ring-1 ring-amber-300",
-                "title": "Provider's code is chain-authorized and the gateway quote self-attests, "
-                         "but the analyst pair hasn't reviewed this revision yet. This is our "
-                         "backlog, not a provider fault."}
+        return {"mark": "✓", "meaning": "Adapter pass", "css": "bg-emerald-100 text-emerald-800"}
     if value is False:
-        return {"mark": "❌", "class": "bg-rose-500/20 text-rose-700",
-                "title": "Rejected by verifier"}
-    if required:
-        return {"mark": "—", "class": "bg-rose-500/10 text-rose-700 ring-1 ring-rose-200",
-                "title": "Required for this shape but not exposed by the attestation response"}
-    return {"mark": "—", "class": "text-slate-400",
-            "title": "Not applicable to this attestation shape"}
+        return {"mark": "×", "meaning": "Adapter rejection", "css": "bg-rose-100 text-rose-800"}
+    if value == "audit_pending":
+        return {"mark": "○", "meaning": "Review pending", "css": "bg-amber-100 text-amber-800"}
+    if value is None:
+        return {"mark": "—", "meaning": "Not checked or not applicable; consult route", "css": "bg-slate-100 text-slate-500"}
+    return {"mark": "?", "meaning": "Unsupported cell value", "css": "bg-slate-200 text-slate-700"}
 
 
-STATUS_STYLE = {
-    "verified": ("verified", "bg-emerald-500/20 text-emerald-700",
-                 "Every layer this provider's architecture should be able to prove, it proves."),
-    "partial": ("partial", "bg-amber-100 text-amber-800 ring-1 ring-amber-300",
-                "Reachable and internally consistent, but at least one required layer is unproven."),
-    "unreachable": ("unreachable", "bg-slate-200 text-slate-600",
-                    "We could not get a response. This says nothing about the provider's privacy properties."),
-    "invalid": ("invalid", "bg-rose-500/20 text-rose-700",
-                "A response arrived but did not verify."),
-    "uncharacterized": ("uncharacterized", "bg-slate-200 text-slate-600",
-                        "We have not defined what this attestation shape should be able to prove."),
-}
+def _load_optional(path: Path, default):
+    return json.loads(path.read_text()) if path.exists() else default
 
 
-def _render(snapshot):
-    quality = compute_quality(snapshot)
-    status_by_target = {(c["provider"], c["model"]): c for c in quality["coverage"]}
+def _publish_reference_archives(references: dict) -> dict:
+    """Put hash-checked current raw captures inside the docs-only Pages artifact."""
+    archive_dir = DOCS_DIR / "evidence"
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    visible = []
+    wanted = set()
+    for original in references.get("observations", []):
+        source = dict(original)
+        last = source if source.get("status") == "observed" else source.get("last_success") or {}
+        base, raw_path, digest = source.get("raw_base") or last.get("raw_base"), last.get("raw_path"), last.get("sha256")
+        if base and raw_path and isinstance(digest, str) and re.fullmatch(r"[0-9a-f]{64}", digest):
+            candidate = (REPO_ROOT / base / raw_path).resolve()
+            # The data index may be malformed or produced outside this checkout.
+            # Never publish arbitrary local files or paths escaping the repository.
+            if candidate.is_relative_to(REPO_ROOT.resolve()) and candidate.is_file():
+                body = candidate.read_bytes()
+                if hashlib.sha256(body).hexdigest() != digest:
+                    raise ValueError(f"reference archive hash mismatch: {source['source_id']}")
+                name = re.sub(r"[^a-zA-Z0-9_.-]", "_", source["source_id"]) + "-" + digest + ".bin"
+                target = archive_dir / name
+                if target.exists() and hashlib.sha256(target.read_bytes()).hexdigest() != digest:
+                    raise ValueError(f"published archive hash mismatch: {name}")
+                if not target.exists():
+                    target.write_bytes(body)
+                source["archive_url"] = "./evidence/" + name
+                wanted.add(name)
+        visible.append(source)
+    for stale in archive_dir.glob("*.bin"):
+        if stale.name not in wanted:
+            stale.unlink()  # generated copy; immutable original remains under data/references/
+    return {**references, "observations": visible}
 
+
+def _timeline() -> list[dict]:
+    events = []
+    for family, directory in (("route", REPO_ROOT / "data/continuity/events"),
+                              ("publication", REPO_ROOT / "data/references/events")):
+        for path in directory.glob("*.json"):
+            event = json.loads(path.read_text())
+            decision_path = REPO_ROOT / "data/reviews/decisions" / (str(event.get("event_id")) + ".json")
+            if decision_path.is_file():
+                decision = json.loads(decision_path.read_text())
+                if decision.get("event") != event:
+                    raise ValueError("review decision does not match immutable event")
+                event = {**event, "review": decision["review"], "draft": decision["draft"],
+                         "review_url": source_link(str(decision_path.relative_to(REPO_ROOT)))}
+            when = event.get("first_seen_at") or event.get("timestamp") or ""
+            events.append({**event, "family": family, "when": when,
+                           "source_url": source_link(str(path.relative_to(REPO_ROOT)))})
+    return sorted(events, key=lambda e: (e["when"], e.get("event_id", "")), reverse=True)
+
+
+def _rows(snapshot: dict) -> list[dict]:
     rows = []
     for provider, reports in snapshot.get("attestations", {}).items():
-        for r in reports:
-            sc = r.get("scorecard") or {}
-            shape = r.get("attestation_type", "")
-            cov = status_by_target[(provider, r["model"])]
-            label, css, tip = STATUS_STYLE[cov["status"]]
-            rows.append({
-                "provider": provider,
-                "model": r["model"],
-                "valid": r.get("valid", False),
-                "error": r.get("error"),
-                "attestation_type": shape,
-                "signing_address": r.get("signing_address", ""),
-                "latency_s": r.get("latency_s", 0),
-                "cells": {k: cell(sc.get(k), is_layer_required(k, shape)) for k in SCORECARD_LABELS},
-                "stage1_ready": is_stage1_ready(sc, shape),
-                "status": cov["status"],
-                "status_label": label,
-                "status_class": css,
-                "status_title": tip,
-                "proven": cov["proven"],
-                "required": cov["required"],
-                "missing": cov["missing"],
-                # required layers with no column on the matrix — invisible to a reader
-                "hidden_layers": cov["hidden_layers"],
-                "bar": bar_note(shape),
-            })
-    # disputed bars sort below sound ones at the same status, so a contested full row
-    # never sits at the top of the page looking like the best provider on offer
-    rows.sort(key=lambda r: (r["status"] != "verified", bool(r["bar"]["disputed"]),
-                             r["status"] == "unreachable", r["provider"], r["model"]))
+        for report in reports:
+            outcome = report.get("outcome") or classify_report(report)[0]
+            label, css, description = OUTCOME_STYLE.get(outcome, ("Unknown", "bg-slate-200 text-slate-700", "Unknown outcome"))
+            legacy = (report.get("outcome_reason") == "legacy_adapter_result" or
+                      (not report.get("observation_id") and not report.get("outcome")))
+            if legacy and outcome in ("verified", "rejected"):
+                label = "Legacy adapter accepted" if outcome == "verified" else "Legacy adapter rejected"
+                description = "Historical adapter valid flag; this predates typed observations and is not a complete route verdict."
+            scorecard = report.get("scorecard") or {}
+            rows.append({"provider": provider, "model": report.get("model", ""),
+                         "route_id": f"{provider}/{report.get('model', '')}",
+                         "outcome": outcome, "outcome_label": label, "outcome_css": css,
+                         "outcome_title": description,
+                         "reason": "legacy_adapter_result" if legacy and outcome in ("verified", "rejected") else
+                                   (report.get("outcome_reason") or classify_report(report)[1]),
+                         "error": report.get("error"), "checked_at": report.get("verified_at"),
+                         "observation_id": report.get("observation_id"),
+                         "freshness": report.get("freshness") or {},
+                         "attestation_type": report.get("attestation_type", ""),
+                         "checks": [{"key": key, "label": SCORECARD_LABELS.get(key, key.replace("_", " ").title()), **check_cell(value)}
+                                    for key, value in sorted(scorecard.items())],
+                         "checked_count": sum(value is True or value is False for value in scorecard.values())})
+    return sorted(rows, key=lambda row: (row["provider"], row["model"]))
 
-    provider_summary = {}
-    for p, reports in snapshot.get("attestations", {}).items():
-        targets = [status_by_target[(p, r["model"])] for r in reports]
-        provider_summary[p] = {
-            "total": len(targets),
-            "verified": sum(1 for t in targets if t["status"] == "verified"),
-            "partial": sum(1 for t in targets if t["status"] == "partial"),
-            "unreachable": sum(1 for t in targets if t["status"] in ("unreachable", "invalid")),
-            "measurable": next(t["version_identity"] for t in targets) == "content-hash",
-        }
 
-    pricing_rows = []
-    for p, rows_ in snapshot.get("pricing", {}).items():
-        pricing_rows.extend(rows_)
+def _route_cards(routes: dict, rows: list[dict], references: dict) -> list[dict]:
+    source_rows = references.get("observations", [])
+    cards = []
+    for route in routes.get("routes", []):
+        aliases = route.get("observation_aliases", [])
+        matched = [row for row in rows if any(fnmatch.fnmatchcase(row["route_id"], alias) for alias in aliases)]
+        publications = [source for source in source_rows if source.get("provider") == route.get("provider")]
+        cards.append({**route, "sources_linked": [{"label": source, "url": source_link(source)} for source in route.get("sources", [])],
+                      "matched_rows": matched, "publications": publications,
+                      "latest_publication": max((source.get("observed_at", "") for source in publications), default="")})
+    return cards
 
-    env = Environment(
-        loader=FileSystemLoader(str(TEMPLATE_DIR)),
-        autoescape=select_autoescape(["html"]),
-    )
-    env.globals.update({
-        "SCORECARD_LABELS": SCORECARD_LABELS,
-        "SCORECARD_TOOLTIPS": SCORECARD_TOOLTIPS,
-        "EDITORIAL_NOTES": EDITORIAL_NOTES,
-    })
 
-    # Rule of three: with zero events in n trials, the 95% upper bound on the
-    # per-observation rate is 3/n. Turns "never fired" into a quantified claim.
-    n = quality["calibration"]["observations"]
-    quality["calibration"]["rate_upper_bound_95"] = round(100 * 3 / n, 3) if n else None
-
-    ctx = {
-        "snapshot": snapshot,
-        "generated_at": snapshot.get("generated_at", ""),
-        "git_sha": snapshot.get("git_sha", ""),
-        "run_id": snapshot.get("run_id", "local"),
-        "rows": rows,
-        "provider_summary": provider_summary,
-        "pricing_rows": pricing_rows,
-        "quality": quality,
-    }
-
+def _render(snapshot: dict) -> None:
+    routes = _load_optional(ROUTES_PATH, {"routes": [], "as_of": None})
     DOCS_DIR.mkdir(exist_ok=True)
-    for page, tmpl in [("index.html", "index.html.j2"),
-                      ("methodology.html", "methodology.html.j2"),
-                      ("pricing.html", "pricing.html.j2")]:
-        rendered = env.get_template(tmpl).render(**ctx)
-        (DOCS_DIR / page).write_text(rendered)
+    references = _publish_reference_archives(_load_optional(REFERENCES_PATH, {"observations": [], "summaries": {}, "mirror_agreements": {}}))
+    rows = _rows(snapshot)
+    quality = compute_quality(snapshot)
+    timeline = _timeline()
+    cards = _route_cards(routes, rows, references)
+    pricing_rows = [row for group in snapshot.get("pricing", {}).values() for row in group]
+    env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=select_autoescape(["html"]))
+    ctx = {"snapshot": snapshot, "generated_at": snapshot.get("generated_at", ""),
+           "run_id": snapshot.get("run_id", "local"), "git_sha": snapshot.get("git_sha", ""),
+           "rows": rows, "route_cards": cards, "routes_as_of": routes.get("as_of"),
+           "references": references, "timeline": timeline[:20], "timeline_total": len(timeline),
+           "reviewed_events": [event for event in timeline if event.get("review")][:5],
+           "quality": quality, "pricing_rows": pricing_rows,
+           "scorecard_labels": SCORECARD_LABELS, "outcome_style": OUTCOME_STYLE,
+           "repo_url": REPO_URL}
+    for page, template in (("index.html", "index.html.j2"),
+                           ("methodology.html", "methodology.html.j2"),
+                           ("pricing.html", "pricing.html.j2")):
+        rendered = env.get_template(template).render(**ctx)
+        (DOCS_DIR / page).write_text("\n".join(line.rstrip() for line in rendered.splitlines()) + "\n")
     print(f"wrote {DOCS_DIR}/{{index,methodology,pricing}}.html")
 
 
 def main() -> int:
     if not DATA_LATEST.exists():
-        print(f"no snapshot at {DATA_LATEST}; run `python -m probes.collect` first",
-              file=sys.stderr)
+        print(f"no snapshot at {DATA_LATEST}; run `python -m probes.collect` first", file=sys.stderr)
         return 1
-    snap = json.loads(DATA_LATEST.read_text())
-    _render(snap)
+    _render(json.loads(DATA_LATEST.read_text()))
     return 0
 
 

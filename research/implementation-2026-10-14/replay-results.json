@@ -1,0 +1,314 @@
+{
+  "case_count": 24,
+  "cases": [
+    {
+      "event_ids": [
+        "chg-48be4e0d151a0d74acc17b79f0df3102"
+      ],
+      "expected": "identity_new",
+      "forbidden": [],
+      "name": "first_identity",
+      "observed_kinds": [
+        "identity_new"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-87f358a98bbc027c1b4d0bab21687c95"
+      ],
+      "expected": "identity_new",
+      "forbidden": [],
+      "name": "changed_compose",
+      "observed_kinds": [
+        "identity_new"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-d5cf99cc9197007c0a3ecb372c6fa2a5"
+      ],
+      "expected": "identity_revisited",
+      "forbidden": [],
+      "name": "known_revisit",
+      "observed_kinds": [
+        "identity_revisited"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-9bb4fbe1e8bfe8ee1bd6a74d2c4dace9"
+      ],
+      "expected": "identity_new",
+      "forbidden": [],
+      "name": "shared_keyset_identity",
+      "observed_kinds": [
+        "identity_new"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-884994fc6b137330af22ec40e9458579"
+      ],
+      "expected": "identity_new",
+      "forbidden": [],
+      "name": "generic_component_identity",
+      "observed_kinds": [
+        "identity_new"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-3d23e060ce4ce88d5019b96508112c8d"
+      ],
+      "expected": "untrusted_identity_reported",
+      "forbidden": [
+        "identity_new"
+      ],
+      "name": "rejected_candidate",
+      "observed_kinds": [
+        "untrusted_identity_reported",
+        "verification_rejected"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-e07ad8d66e8cdb89b1ad2f197d4912d6"
+      ],
+      "expected": "verification_rejected",
+      "forbidden": [],
+      "name": "binding_rejection",
+      "observed_kinds": [
+        "verification_rejected"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-67e694cf2115f27275d4170cc569ceac"
+      ],
+      "expected": "coverage_lost",
+      "forbidden": [],
+      "name": "evidence_unavailable",
+      "observed_kinds": [
+        "coverage_lost"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-c0c74560c799a7bddc0653c57172c5d9"
+      ],
+      "expected": "coverage_lost",
+      "forbidden": [],
+      "name": "credential_not_checked",
+      "observed_kinds": [
+        "coverage_lost"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-8fa42972444b297278b2c3b4c30bd66d"
+      ],
+      "expected": "coverage_restored",
+      "forbidden": [],
+      "name": "coverage_recovered",
+      "observed_kinds": [
+        "coverage_restored",
+        "identity_new",
+        "policy_mismatch"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-aef64842f67828dff86454e3f7f9c46e"
+      ],
+      "expected": "verification_restored",
+      "forbidden": [],
+      "name": "rejection_recovered",
+      "observed_kinds": [
+        "identity_new",
+        "verification_restored"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-3b6f1392ce35582fb706cfb08c3a4fec"
+      ],
+      "expected": "policy_mismatch",
+      "forbidden": [],
+      "name": "initial_policy_mismatch",
+      "observed_kinds": [
+        "identity_new",
+        "policy_mismatch"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-84953f82478341bd0b9682b11e753883"
+      ],
+      "expected": "policy_mismatch",
+      "forbidden": [],
+      "name": "new_policy_mismatch",
+      "observed_kinds": [
+        "policy_mismatch"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-0693acfb5a65c463fda8271c7846ae4c"
+      ],
+      "expected": "untrusted_policy_reported",
+      "forbidden": [
+        "policy_mismatch"
+      ],
+      "name": "rejected_policy_candidate",
+      "observed_kinds": [
+        "untrusted_policy_reported",
+        "verification_rejected"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-d9dfd66aba1044e43ee1ee34fcc5de5f"
+      ],
+      "expected": "cell_changed",
+      "forbidden": [],
+      "name": "verified_cell_change",
+      "observed_kinds": [
+        "cell_changed"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-72d63699b7aa6ebdbf2efa4652c02984"
+      ],
+      "expected": "untrusted_cell_reported",
+      "forbidden": [
+        "cell_changed"
+      ],
+      "name": "rejected_cell_candidate",
+      "observed_kinds": [
+        "untrusted_cell_reported",
+        "verification_rejected"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-2798a722256abcc8572e98cf576e6b07"
+      ],
+      "expected": "instrument_changed",
+      "forbidden": [],
+      "name": "instrument_revision",
+      "observed_kinds": [
+        "instrument_changed"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-18e9d92586cf3358388b052bf3e66ed7"
+      ],
+      "expected": "policy_revision_changed",
+      "forbidden": [],
+      "name": "policy_revision",
+      "observed_kinds": [
+        "policy_revision_changed"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-8bc2d61066c0439103bd508a6fe5338f"
+      ],
+      "expected": "identity_missing",
+      "forbidden": [],
+      "name": "identity_missing",
+      "observed_kinds": [
+        "identity_missing"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-d030918faa388e92f14ed9cf2b99b95c"
+      ],
+      "expected": "model_mapping_changed",
+      "forbidden": [],
+      "name": "model_mapping",
+      "observed_kinds": [
+        "model_mapping_changed"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-f1f1fbd69d74b321415b8f92d426c029"
+      ],
+      "expected": "key_rotated",
+      "forbidden": [],
+      "name": "key_rotation",
+      "observed_kinds": [
+        "key_rotated"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-9edb82e4eb26f90911db81446b7de583"
+      ],
+      "expected": "route_retired",
+      "forbidden": [],
+      "name": "declared_retirement",
+      "observed_kinds": [
+        "route_retired"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-1ee9b665b42bce75359432a7f6d34cb6"
+      ],
+      "expected": "route_reactivated",
+      "forbidden": [],
+      "name": "route_reactivated",
+      "observed_kinds": [
+        "coverage_restored",
+        "identity_new",
+        "policy_mismatch",
+        "route_reactivated"
+      ],
+      "passed": true
+    },
+    {
+      "event_ids": [
+        "chg-280cd705764db3e010ff606553ee8d30"
+      ],
+      "expected": "coverage_unknown",
+      "forbidden": [],
+      "name": "no_attempt",
+      "observed_kinds": [
+        "coverage_unknown"
+      ],
+      "passed": true
+    }
+  ],
+  "failed": 0,
+  "kind": "deterministic_continuity_replay",
+  "passed": 24,
+  "run_at": "2026-10-14T01:40:53.715380Z",
+  "scope": "Seeded observation/change detection only; no agent review evaluation or live provider claim"
+}

@@ -1,0 +1,107 @@
+{
+  "captured_at": "2026-10-13T19:51:53Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": null,
+    "adapter_report_ref": {
+      "model": "Qwen3-32B-TEE",
+      "path": "snapshots/2026-10-13.json",
+      "provider": "chutes"
+    },
+    "adapter_report_sha256": "a813f62ed0684e59edcebe2d21621f7acb7343aba191ad67fafd4a2b99db410b",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "a813f62ed0684e59edcebe2d21621f7acb7343aba191ad67fafd4a2b99db410b"
+  },
+  "identities": [
+    {
+      "component_id": "chutes/instance",
+      "kind": "mrtd",
+      "model_scope": "Qwen3-32B-TEE",
+      "value": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
+    }
+  ],
+  "identity_trust": "legacy_adapter_result",
+  "instance_id": "45130fc6-9a72-4594-981b-4fcf7269d1e0",
+  "legacy": true,
+  "model": "Qwen3-32B-TEE",
+  "observation_id": "legacy-f92ab80278c30d15c102f4ca/1f66168fc6c7e990300c6cca",
+  "observer": "legacy-snapshot",
+  "outcome": "verified",
+  "policy_revision": "unknown",
+  "provider": "chutes",
+  "reason": "legacy_adapter_result",
+  "reason_detail": null,
+  "route_id": "chutes/Qwen3-32B-TEE",
+  "run_id": "legacy-f92ab80278c30d15c102f4ca",
+  "schema_version": "1",
+  "source_snapshot": "snapshots/2026-10-13.json",
+  "verification_scope": "legacy_adapter_result",
+  "verifier_revision": "35f05fb4c6a59f6794cc43aec2e854e5d183d106"
+}

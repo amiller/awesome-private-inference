@@ -19,9 +19,7 @@ jobs:
 
       - name: Install deps
         run: |
-          uv venv .venv --python 3.11
-          source .venv/bin/activate
-          uv pip install -e ".[dev]"
+          uv sync --frozen --python 3.11 --extra dev
 
       - name: Run tests
         run: |

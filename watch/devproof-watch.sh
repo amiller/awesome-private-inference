@@ -1,61 +1,30 @@
 #!/usr/bin/env bash
-# Devproof watcher (zed cron, every 3h). Replaces near-watch.sh.
-# Pull fresh snapshots -> sweep on-chain state -> diffalert. On new findings,
-# spawn ONE detached Paseo agent with the delta + playbook; ack state only
-# after the spawn succeeds so a failed spawn re-fires next run.
-# Usage: devproof-watch.sh [--dry]
+# Run under the SAME account/filesystem as the worker so its lease is accessible.
+# Legacy diffalert acknowledgments are intentionally not consumed or updated.
 set -euo pipefail
-# paseo needs node >= 21 (--disable-warning); /usr/bin/node on zed is v20.9.0.
-# Without the nvm bin dir first, `paseo` is either missing or dies on startup —
-# which silently wedged this watcher from 2026-07-02 to 2026-08-10.
 export PATH="$HOME/.nvm/versions/node/v22.23.1/bin:$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
-command -v paseo >/dev/null || { echo "FATAL: paseo CLI not on PATH; agent spawn impossible"; exit 127; }
 cd "$(dirname "$(readlink -f "$0")")/.."
-source .venv/bin/activate
-STATE="$HOME/.config/devproof-watch.state.json"
+PYTHON_BIN="${DEVPROOF_PYTHON:-$PWD/.venv/bin/python}"
+QUEUE_DIR="${DEVPROOF_QUEUE_DIR:-$PWD/local-data/review-queue}"
+mkdir -p "$QUEUE_DIR"
+exec 9>"$QUEUE_DIR/watcher.lock"
+flock -n 9 || exit 0
 
-# our own sweep dirties generated files under data/ every run; CI also updates them
-# daily, so an unrestored copy makes every pull fail (near-watch was stuck on this
-# for days). Restore whatever is actually tracked and modified rather than naming
-# paths — naming one that isn't in the checkout yet would kill the script here,
-# before the pull that would have introduced it.
-DIRTY=$(git ls-files -m -- data/)
-if [ -n "$DIRTY" ]; then git restore $DIRTY; fi
-git pull --ff-only
-
-if [ ! -f "$STATE" ]; then
-  python -m probes.diffalert --state "$STATE" --ack
-  echo "baseline initialized"
-  exit 0
+# Never discard analyst evidence or mutate a dirty checkout to make pull succeed.
+if [ "${DEVPROOF_PULL:-1}" = 1 ]; then
+  if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
+    echo "Refusing to pull a dirty checkout; retain evidence and reconcile it." >&2
+    exit 2
+  fi
+  git pull --ff-only
 fi
 
-set +e
-FINDINGS=$(python -m probes.diffalert --state "$STATE")
-RC=$?
-set -e
-if [ "$RC" -eq 0 ]; then echo "no new findings"; exit 0; fi
-if [ "$RC" -ne 3 ]; then echo "diffalert failed rc=$RC"; echo "$FINDINGS"; exit "$RC"; fi
-
-echo "$FINDINGS"
-if [ "${1:-}" = "--dry" ]; then echo "[dry] would spawn paseo agent"; exit 0; fi
-
-PASEO_HOST=$(cat "$HOME/.config/paseo-host")
-paseo run --detach --host "$PASEO_HOST" --provider "${DEVPROOF_PROVIDER:-codex}" --mode full-access \
-  --cwd /home/swarm/projects/awesome-private-inference --title "devproof watch $(date +%F)" \
-  "You are the devproof audit agent for awesome-private-inference (read README.md and docs/methodology.html for context; start with git pull --ff-only). The watcher detected these changes since last ack:
-
-$FINDINGS
-
-Playbook by finding type:
-- [valid] up->down: re-probe the endpoint yourself (provider keys: source ~/.config/private-inference.env; run python -m probes.collect --providers <slug>). Decide: provider outage vs attestation regression. Check the raw error in data/latest.json.
-- [cell] or [digest] changes on near-ai backend_attested / cloud-api image digest: continuity-audit draft. Read data/audits/near-ai_cloud-api.json for the last audited digest and its evidence format. Fetch github.com/nearai/cloud-api and review all commits since that audit for reverts or weakening of inline backend verification (PR #552/#558 baseline: dcap_qvl TDX + RTMR3 replay + GPU NRAS + strict report_data binding). Write a DRAFT ledger entry to data/audits/drafts/<digest>.json in the same schema with audited_by [\"agent-draft\"] and your evidence in notes. Do NOT append to the signed ledger itself — the analyst pair reviews drafts and promotes them.
-- [version:tinfoil/<model>]: a new sigstore-tag-bound router/model release. Map the new bundle_digest to its release tag (github.com/tinfoilsh/confidential-<model>: the digest is that tag's tinfoil.hash), diff the source vs the last audited tag in data/audits/tinfoil_<repo>.json. MUNDANE = build/dep-only (Dockerfile, go.mod, config placeholder); SUBSTANTIVE = changes under manager/ (addEnclave, updateModelMeasurements), config.yml repo pins, or the shim path allowlist. Write a DRAFT to data/audits/drafts/tinfoil-<repo>-<digest12>.json as a single audit object in that ledger's schema (bundle_digest, sigstore_measurement, release_tag, audited_by [\"agent-draft\"], signoff \"agent-draft-baseline\"). Do NOT append to the ledger.
-- [unaudited-mrtd:chutes/<model>]: a chutes mrtd not in data/audits/chutes_tee.json. Confirm it is in the provider golden set (/servers/tee/measurements). Remember the audit unit is WEAK: mrtd does not cover serve.py (CFSV-excluded). Write a DRAFT to data/audits/drafts/chutes-<mrtd12>.json in that ledger's schema (mrtd, first_seen/last_seen, audited_by [\"agent-draft\"], signoff \"agent-draft-baseline\"). Do NOT append to the ledger.
-- [cell] changes elsewhere (prod_os_image, serving_code_attested, ...): explain what changed and whether it is a regression against the provider's page in providers/.
-- [anchor-drift]: a compose hash NEAR model CVMs serve is not in the hermes anchor. Identify which model serves it (data/latest.json details.model_composes) and whether the hermes anchor needs a fresh preimage.
-- [unauthorized-compose]: a served model compose hash its DstackApp on Base does not allow. Re-check with the allowedComposeHashes eth_call; this is a serious finding if it holds.
-- [stale]: find out why data stopped refreshing (GitHub Actions probe-daily runs?).
-
-Always finish by running ./run-audit.sh (refreshes + publishes the dashboard) and a short brief: what changed, what you concluded, what needs the human analyst."
-
-python -m probes.diffalert --state "$STATE" --ack
+ARGS=(--state-dir "$QUEUE_DIR" --cwd "$PWD")
+if [ "${1:-}" = --dry ]; then
+  ARGS+=(--dry)
+else
+  command -v paseo >/dev/null
+  if [ -n "${DEVPROOF_PASEO_HOST:-}" ]; then ARGS+=(--host "$DEVPROOF_PASEO_HOST"); fi
+fi
+"$PYTHON_BIN" -m probes.review_worker "${ARGS[@]}"
+"$PYTHON_BIN" -m probes.review_queue --state-dir "$QUEUE_DIR" status --output "$QUEUE_DIR/status.json" >/dev/null

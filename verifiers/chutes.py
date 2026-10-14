@@ -22,7 +22,9 @@ Quote offsets per chutes-api/api/server/quote.py (td_report = quote[48:]).
 from __future__ import annotations
 
 import base64
+import binascii
 import hashlib
+import json
 import secrets
 import time
 from typing import Any, Dict
@@ -32,7 +34,7 @@ import requests
 from pathlib import Path
 
 from .common import (
-    AttestationReport, ScoreCard, audit_match, load_audit_ledger, now_iso,
+    AttestationReport, ScoreCard, load_audit_ledger, now_iso,
     sha256_nonce_pubkey_binding,
 )
 from . import phala_tdx
@@ -53,7 +55,10 @@ CHUTE_IDS: Dict[str, str] = {
 
 
 def _parse_quote(quote_b64: str) -> Dict[str, str]:
-    body = base64.b64decode(quote_b64)[48:]
+    decoded = base64.b64decode(quote_b64, validate=True)
+    if len(decoded) < 48 + 584:
+        raise ValueError("truncated TDX quote body")
+    body = decoded[48:]
     return {
         "td_attributes": body[120:128].hex(),
         "mrtd": body[136:184].hex().lower(),
@@ -97,30 +102,63 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         return r.json()
 
     try:
-        golden = {c["mrtd"].lower() for c in _get("/servers/tee/measurements")}
+        golden_response = _get("/servers/tee/measurements")
+        golden_entries = [{k: item[k] for k in (
+            "name", "version", "fingerprint", "mrtd", "boot_rtmrs",
+            "runtime_rtmrs", "expected_gpus", "gpu_count") if k in item}
+            for item in golden_response]
+        golden = {c["mrtd"].lower() for c in golden_entries}
         inst = _get(f"/e2e/instances/{chute_id}")["instances"][0]
         instance_id, e2e_pubkey = inst["instance_id"], inst["e2e_pubkey"]
         ev = _get(f"/instances/{instance_id}/evidence?nonce={nonce}")
     except (requests.RequestException, RuntimeError, KeyError, IndexError) as exc:
         return _fail(f"{type(exc).__name__}: {exc}")
 
-    q = _parse_quote(ev["quote"])
+    golden_digest = hashlib.sha256(json.dumps(
+        golden_entries, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+    raw_evidence = {
+        "source": f"{api_base}/instances/{instance_id}/evidence",
+        "chute_id": chute_id, "instance_id": instance_id,
+        "nonce": nonce, "e2e_pubkey": e2e_pubkey,
+        "quote_b64": ev.get("quote"), "certificate_der_b64": ev.get("certificate"),
+        "golden_measurements": golden_entries,
+        "golden_set_sha256": golden_digest,
+        "quote_appraisal": None,  # filled after appraisal below
+    }
+    try:
+        q = _parse_quote(ev["quote"])
+        cert_spki = _cert_spki_sha256(ev["certificate"])
+    except (KeyError, TypeError, ValueError, binascii.Error) as exc:
+        return _fail(f"malformed quote or evidence certificate: {type(exc).__name__}",
+                     verification_status="rejected",
+                     verification_reason="malformed quote or evidence certificate",
+                     raw_evidence=raw_evidence, instance_id=instance_id)
     sc = ScoreCard(gpu_attested=None)
     details: Dict[str, Any] = {
         "shape": "chutes-tee", "instance_id": instance_id,
         "mrtd": q["mrtd"], "gpu_evidence_count": len(ev.get("gpu_evidence") or []),
+        "golden_set_sha256": golden_digest,
     }
+    details["raw_evidence"] = raw_evidence
 
     sc.report_data_binds_key = sha256_nonce_pubkey_binding(q["report_data"], nonce, e2e_pubkey)
     sc.nonce_bound = sc.report_data_binds_key
-    details["cert_spki_bound"] = q["report_data"][64:128] == _cert_spki_sha256(ev["certificate"])
+    details["cert_spki_bound"] = q["report_data"][64:128] == cert_spki
     details["debug_disabled"] = (int(q["td_attributes"], 16) & 1) == 0
     details["mrtd_in_golden_set"] = q["mrtd"] in golden
     audit_set, _ = load_audit_ledger(_TEE_AUDITS, "mrtd")
-    details["mrtd_audited"] = audit_match(q["mrtd"], audit_set) is not None
+    details["mrtd_audited"] = q["mrtd"] in audit_set
 
     tdx = phala_tdx.verify_tdx_quote(base64.b64decode(ev["quote"]).hex())
     sc.tdx_verified = phala_tdx.is_verified(tdx)
+    # A plausible detached report_data is not an authenticated binding when
+    # the hardware quote itself was rejected.
+    sc.report_data_binds_key = bool(sc.tdx_verified and sc.report_data_binds_key)
+    sc.nonce_bound = sc.report_data_binds_key
+    details["raw_evidence"]["quote_appraisal"] = {
+        "verified": sc.tdx_verified, "body": phala_tdx.quote_body(tdx),
+        "tcb_status": (tdx.get("quote") or {}).get("tcb_status"),
+    }
 
     # Headline gap: the serve.py on the prompt-plaintext path is unmeasured
     # (CFSV-excluded, in no RTMR), so the operator can read/exfiltrate the decrypted
@@ -129,14 +167,18 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     # quote. False by construction.
     sc.serving_code_attested = False
 
-    valid = bool(
+    checked_ok = bool(
         sc.tdx_verified and sc.report_data_binds_key
         and details["cert_spki_bound"] and details["debug_disabled"]
         and details["mrtd_in_golden_set"]
     )
+    details["verification_status"] = "not_checked" if checked_ok else "rejected"
+    details["verification_reason"] = (
+        "serving code and selected model are not measured or verified"
+        if checked_ok else "quote, key/certificate binding, debug flag, or golden MRTD check failed")
 
     return AttestationReport(
-        provider="chutes", model=model, valid=valid,
+        provider="chutes", model=model, valid=False,
         verified_at=now_iso(), attestation_type="chutes-tee",
         signing_address=instance_id, signing_public_key=e2e_pubkey,
         scorecard=sc, details=details,

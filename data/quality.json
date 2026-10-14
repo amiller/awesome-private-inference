@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T19:51:26Z",
+  "generated_at": "2026-10-14T01:42:25.270249Z",
   "window": {
     "first": "2026-04-21",
     "last": "2026-10-13",
@@ -11,7 +11,8 @@
     "transport": 818,
     "no-error-invalid": 229,
     "verification-failure": 0,
-    "red_cells_that_were_verification_failures": 0,
+    "explicit_error_bucket": 0,
+    "interpretation": "Historical adapter outcomes, not a security failure rate or independent trials",
     "no_error_invalid_by_provider": {
       "aci-gateway": 53,
       "chutes": 3,
@@ -19,17 +20,20 @@
       "redpill": 123,
       "venice": 43
     },
-    "note": "229 of 3406 observations were invalid with no error attached: aci-gateway 53, chutes 3, near-ai 7, redpill 123, venice 43. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "229 of 3406 observations were invalid with no error attached: aci-gateway 53, chutes 3, near-ai 7, redpill 123, venice 43. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Error-string classes are not a calibrated detector. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
       "provider": "aci-gateway",
-      "model": "tee.redpill.ai",
+      "model": "api.redpill.ai",
       "shape": "aci-gateway",
-      "status": "verified",
-      "proven": 6,
+      "status": "invalid",
+      "proven": 4,
       "required": 6,
-      "missing": [],
+      "missing": [
+        "attested_serving_enforced",
+        "prod_os_image"
+      ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -39,10 +43,12 @@
       "provider": "aci-gateway",
       "model": "inference.phala.com",
       "shape": "aci-gateway",
-      "status": "verified",
-      "proven": 6,
+      "status": "not_checked",
+      "proven": 5,
       "required": 6,
-      "missing": [],
+      "missing": [
+        "prod_os_image"
+      ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -50,17 +56,110 @@
     },
     {
       "provider": "aci-gateway",
-      "model": "api.redpill.ai",
+      "model": "tee.redpill.ai",
       "shape": "aci-gateway",
-      "status": "invalid",
+      "status": "not_checked",
       "proven": 5,
       "required": 6,
       "missing": [
-        "attested_serving_enforced"
+        "prod_os_image"
       ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "DeepSeek-V3.2-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "GLM-5.1-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "GLM-5.2-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "Kimi-K2.6-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "Qwen3-32B-TEE",
+      "shape": "chutes-tee",
+      "status": "partial",
+      "proven": 3,
+      "required": 4,
+      "missing": [
+        "serving_code_attested"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": null,
+      "hidden_layers": []
+    },
+    {
+      "provider": "chutes",
+      "model": "gemma-4-31B-TEE",
+      "shape": "chutes-tee",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 4,
+      "missing": [
+        "nonce_bound",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
+      ],
+      "version_identity": "content-hash",
+      "version_source": "instance-sampled",
+      "error": "RuntimeError: HTTP 502 on /instances/e6ee4b3e-d0b0-4f45-b16b-575144a60684/eviden",
       "hidden_layers": []
     },
     {
@@ -104,67 +203,16 @@
       "model": "router",
       "shape": "tinfoil-sev-snp-v2",
       "status": "partial",
-      "proven": 3,
-      "required": 5,
+      "proven": 2,
+      "required": 4,
       "missing": [
-        "client_nonce_supported",
+        "hardware_signature_verified",
         "runtime_config_fully_attested"
       ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
-      "hidden_layers": [
-        "client_nonce_supported",
-        "code_measurement_reproducible",
-        "hpke_pubkey_attested",
-        "runtime_config_fully_attested",
-        "tls_pubkey_pinned"
-      ]
-    },
-    {
-      "provider": "venice",
-      "model": "e2ee-glm-5-1",
-      "shape": "venice",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 9,
-      "missing": [
-        "code_measurement_reproducible",
-        "compose_hash_committed",
-        "gpu_attested",
-        "key_derives_to_address",
-        "nonce_bound",
-        "prod_os_image",
-        "report_data_binds_key",
-        "serving_code_attested",
-        "tdx_verified"
-      ],
-      "version_identity": "absent",
-      "version_source": "none",
-      "error": "no TEE attestation available for this model (404)",
-      "hidden_layers": [
-        "code_measurement_reproducible"
-      ]
-    },
-    {
-      "provider": "venice",
-      "model": "e2ee-qwen3-6-35b-a3b",
-      "shape": "venice",
-      "status": "invalid",
-      "proven": 5,
-      "required": 9,
-      "missing": [
-        "code_measurement_reproducible",
-        "prod_os_image",
-        "serving_code_attested",
-        "tdx_verified"
-      ],
-      "version_identity": "absent",
-      "version_source": "none",
-      "error": null,
-      "hidden_layers": [
-        "code_measurement_reproducible"
-      ]
+      "hidden_layers": []
     },
     {
       "provider": "venice",
@@ -187,9 +235,30 @@
       "version_identity": "absent",
       "version_source": "none",
       "error": "no TEE attestation available for this model (404)",
-      "hidden_layers": [
-        "code_measurement_reproducible"
-      ]
+      "hidden_layers": []
+    },
+    {
+      "provider": "venice",
+      "model": "e2ee-glm-5-1",
+      "shape": "venice",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 9,
+      "missing": [
+        "code_measurement_reproducible",
+        "compose_hash_committed",
+        "gpu_attested",
+        "key_derives_to_address",
+        "nonce_bound",
+        "prod_os_image",
+        "report_data_binds_key",
+        "serving_code_attested",
+        "tdx_verified"
+      ],
+      "version_identity": "absent",
+      "version_source": "none",
+      "error": "no TEE attestation available for this model (404)",
+      "hidden_layers": []
     },
     {
       "provider": "venice",
@@ -208,9 +277,25 @@
       "version_identity": "absent",
       "version_source": "none",
       "error": null,
-      "hidden_layers": [
-        "code_measurement_reproducible"
-      ]
+      "hidden_layers": []
+    },
+    {
+      "provider": "venice",
+      "model": "e2ee-qwen3-6-35b-a3b",
+      "shape": "venice",
+      "status": "invalid",
+      "proven": 5,
+      "required": 9,
+      "missing": [
+        "code_measurement_reproducible",
+        "prod_os_image",
+        "serving_code_attested",
+        "tdx_verified"
+      ],
+      "version_identity": "absent",
+      "version_source": "none",
+      "error": null,
+      "hidden_layers": []
     },
     {
       "provider": "venice",
@@ -228,109 +313,14 @@
       "version_identity": "absent",
       "version_source": "none",
       "error": null,
-      "hidden_layers": [
-        "code_measurement_reproducible"
-      ]
-    },
-    {
-      "provider": "chutes",
-      "model": "Qwen3-32B-TEE",
-      "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
-      "required": 4,
-      "missing": [
-        "serving_code_attested"
-      ],
-      "version_identity": "content-hash",
-      "version_source": "instance-sampled",
-      "error": null,
-      "hidden_layers": []
-    },
-    {
-      "provider": "chutes",
-      "model": "gemma-4-31B-TEE",
-      "shape": "chutes-tee",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 4,
-      "missing": [
-        "nonce_bound",
-        "report_data_binds_key",
-        "serving_code_attested",
-        "tdx_verified"
-      ],
-      "version_identity": "content-hash",
-      "version_source": "instance-sampled",
-      "error": "RuntimeError: HTTP 502 on /instances/e6ee4b3e-d0b0-4f45-b16b-575144a60684/eviden",
-      "hidden_layers": []
-    },
-    {
-      "provider": "chutes",
-      "model": "GLM-5.1-TEE",
-      "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
-      "required": 4,
-      "missing": [
-        "serving_code_attested"
-      ],
-      "version_identity": "content-hash",
-      "version_source": "instance-sampled",
-      "error": null,
-      "hidden_layers": []
-    },
-    {
-      "provider": "chutes",
-      "model": "GLM-5.2-TEE",
-      "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
-      "required": 4,
-      "missing": [
-        "serving_code_attested"
-      ],
-      "version_identity": "content-hash",
-      "version_source": "instance-sampled",
-      "error": null,
-      "hidden_layers": []
-    },
-    {
-      "provider": "chutes",
-      "model": "DeepSeek-V3.2-TEE",
-      "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
-      "required": 4,
-      "missing": [
-        "serving_code_attested"
-      ],
-      "version_identity": "content-hash",
-      "version_source": "instance-sampled",
-      "error": null,
-      "hidden_layers": []
-    },
-    {
-      "provider": "chutes",
-      "model": "Kimi-K2.6-TEE",
-      "shape": "chutes-tee",
-      "status": "partial",
-      "proven": 3,
-      "required": 4,
-      "missing": [
-        "serving_code_attested"
-      ],
-      "version_identity": "content-hash",
-      "version_source": "instance-sampled",
-      "error": null,
       "hidden_layers": []
     }
   ],
   "coverage_summary": {
-    "verified": 2,
     "invalid": 2,
-    "unreachable": 4,
-    "partial": 9
+    "not_checked": 2,
+    "partial": 9,
+    "unreachable": 4
   },
   "unmeasurable_providers": [
     "venice"
@@ -340,7 +330,7 @@
     "builds_reviewed": 7,
     "backlog": 81,
     "last_audit": "2026-09-02",
-    "days_since_last_audit": 41,
+    "days_since_last_audit": 42,
     "by_provider": {
       "near-ai": {
         "builds_observed": 29,
@@ -363,19 +353,12 @@
     }
   },
   "density": {
-    "published_cells": 170,
-    "carrying_signal": 66,
-    "dashes": 104,
-    "signal_fraction": 0.388
+    "published_cells": 391,
+    "carrying_signal": 74,
+    "dashes": 317,
+    "signal_fraction": 0.189
   },
-  "hidden_layer_targets": [
-    "tinfoil/router",
-    "venice/e2ee-gemma-4-31b",
-    "venice/e2ee-glm-5-1",
-    "venice/e2ee-gpt-oss-120b-p",
-    "venice/e2ee-qwen3-6-35b-a3b",
-    "venice/e2ee-qwen3-6-35b-a3b-uncensored-p"
-  ],
+  "hidden_layer_targets": [],
   "cadence": [
     {
       "provider": "aci-gateway",
@@ -387,8 +370,8 @@
       "revisit": 1,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.1,
-      "days_per_deploy_corrected": 4.5
+      "observed_days_per_new_identity": 5.1,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "aci-gateway",
@@ -400,8 +383,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.1,
-      "days_per_deploy_corrected": 4.5
+      "observed_days_per_new_identity": 5.1,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "aci-gateway",
@@ -413,8 +396,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.1,
-      "days_per_deploy_corrected": 4.5
+      "observed_days_per_new_identity": 5.1,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
@@ -426,8 +409,8 @@
       "revisit": 0,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 117.0,
-      "days_per_deploy_corrected": 116.5
+      "observed_days_per_new_identity": 117.0,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
@@ -439,8 +422,8 @@
       "revisit": 6,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 43.0,
-      "days_per_deploy_corrected": 42.5
+      "observed_days_per_new_identity": 43.0,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
@@ -452,8 +435,8 @@
       "revisit": 0,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": null,
-      "days_per_deploy_corrected": null
+      "observed_days_per_new_identity": null,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
@@ -465,8 +448,8 @@
       "revisit": 0,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": null,
-      "days_per_deploy_corrected": null
+      "observed_days_per_new_identity": null,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
@@ -478,8 +461,8 @@
       "revisit": 4,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 117.0,
-      "days_per_deploy_corrected": 116.4
+      "observed_days_per_new_identity": 117.0,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
@@ -491,8 +474,8 @@
       "revisit": 36,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 117.0,
-      "days_per_deploy_corrected": 116.4
+      "observed_days_per_new_identity": 117.0,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
@@ -504,8 +487,8 @@
       "revisit": 22,
       "version_source": "instance-sampled",
       "retired": false,
-      "days_per_deploy": 110.0,
-      "days_per_deploy_corrected": 109.5
+      "observed_days_per_new_identity": 110.0,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "near-ai",
@@ -517,8 +500,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.4,
-      "days_per_deploy_corrected": 2.9
+      "observed_days_per_new_identity": 3.4,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "near-ai",
@@ -530,8 +513,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.3,
-      "days_per_deploy_corrected": 4.8
+      "observed_days_per_new_identity": 5.3,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "near-ai",
@@ -543,8 +526,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.4,
-      "days_per_deploy_corrected": 2.9
+      "observed_days_per_new_identity": 3.4,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "near-ai",
@@ -556,8 +539,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 5.4,
-      "days_per_deploy_corrected": 4.9
+      "observed_days_per_new_identity": 5.4,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "redpill",
@@ -569,8 +552,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": true,
-      "days_per_deploy": null,
-      "days_per_deploy_corrected": null
+      "observed_days_per_new_identity": null,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "redpill",
@@ -582,8 +565,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": true,
-      "days_per_deploy": null,
-      "days_per_deploy_corrected": null
+      "observed_days_per_new_identity": null,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "tinfoil",
@@ -595,8 +578,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 14.5,
-      "days_per_deploy_corrected": 14.0
+      "observed_days_per_new_identity": 14.5,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "tinfoil",
@@ -608,8 +591,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 82.0,
-      "days_per_deploy_corrected": 81.5
+      "observed_days_per_new_identity": 82.0,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "tinfoil",
@@ -621,8 +604,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 46.5,
-      "days_per_deploy_corrected": 46.0
+      "observed_days_per_new_identity": 46.5,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "tinfoil",
@@ -634,8 +617,8 @@
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "days_per_deploy": 3.9,
-      "days_per_deploy_corrected": 3.3
+      "observed_days_per_new_identity": 3.9,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     }
   ]
 }

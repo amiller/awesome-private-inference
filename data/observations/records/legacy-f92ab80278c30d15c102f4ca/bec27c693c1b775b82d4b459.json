@@ -1,0 +1,100 @@
+{
+  "captured_at": "2026-10-13T19:51:57Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": null,
+    "adapter_report_ref": {
+      "model": "gemma-4-31B-TEE",
+      "path": "snapshots/2026-10-13.json",
+      "provider": "chutes"
+    },
+    "adapter_report_sha256": "d1c9453da95a34a80b340ca74827916985399990528e599cf123a08268da586a",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "d1c9453da95a34a80b340ca74827916985399990528e599cf123a08268da586a"
+  },
+  "identities": [],
+  "identity_trust": "legacy_adapter_result",
+  "instance_id": null,
+  "legacy": true,
+  "model": "gemma-4-31B-TEE",
+  "observation_id": "legacy-f92ab80278c30d15c102f4ca/bec27c693c1b775b82d4b459",
+  "observer": "legacy-snapshot",
+  "outcome": "rejected",
+  "policy_revision": "unknown",
+  "provider": "chutes",
+  "reason": "legacy_adapter_result",
+  "reason_detail": null,
+  "route_id": "chutes/gemma-4-31B-TEE",
+  "run_id": "legacy-f92ab80278c30d15c102f4ca",
+  "schema_version": "1",
+  "source_snapshot": "snapshots/2026-10-13.json",
+  "verification_scope": "legacy_adapter_result",
+  "verifier_revision": "35f05fb4c6a59f6794cc43aec2e854e5d183d106"
+}

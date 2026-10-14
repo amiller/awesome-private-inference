@@ -1,0 +1,70 @@
+{
+  "attempts": 2,
+  "created_at": "2026-10-14T01:35:43.403020Z",
+  "event": {
+    "affected_routes": [
+      "private-inference-private-beta"
+    ],
+    "component_id": "private-inference/browser-policy",
+    "context_only": [
+      "research/review-2026-10-13/privateinference.md",
+      "data/references/latest.json",
+      "data/routes.json"
+    ],
+    "event_id": "chg-0542457cf92e0f444bbf5c076d9705ad",
+    "kind": "synthetic_policy_expansion",
+    "new_observation_id": "synthetic-new-policy",
+    "new_observation_path": "local-data/review-rehearsal/evidence/synthetic-new-policy.json",
+    "new_value": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    ],
+    "old_observation_id": "synthetic-old-policy",
+    "old_observation_path": "local-data/review-rehearsal/evidence/synthetic-old-policy.json",
+    "old_value": [
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "priority": "high",
+    "review_questions": [
+      "Does the fixture expand client acceptance, and which exact value was added?",
+      "Can any captured public artifact establish that this expansion actually occurred?",
+      "What would be needed to map a provider publication to a live plaintext holder and client policy?"
+    ],
+    "route_id": "private-inference-private-beta",
+    "synthetic": true,
+    "uncertainty": "Entire change is a labeled offline fixture; no live provider policy or deployment evidence."
+  },
+  "event_id": "chg-0542457cf92e0f444bbf5c076d9705ad",
+  "history": [
+    {
+      "at": "2026-10-14T01:35:43.403020Z",
+      "status": "queued"
+    },
+    {
+      "at": "2026-10-14T01:35:43.404611Z",
+      "attempt": 1,
+      "status": "running",
+      "worker": "sol-offline-rehearsal"
+    },
+    {
+      "at": "2026-10-14T01:37:13.190818Z",
+      "status": "draft_ready",
+      "worker": "sol-offline-rehearsal"
+    },
+    {
+      "at": "2026-10-14T01:38:07.983214Z",
+      "reason": "Draft evidence list included prose suffixes instead of exact artifact paths; return for correction",
+      "status": "queued"
+    },
+    {
+      "at": "2026-10-14T01:38:11.147768Z",
+      "attempt": 2,
+      "status": "running",
+      "worker": "sol-offline-rehearsal"
+    }
+  ],
+  "lease_until": "2026-10-14T03:38:11.147768Z",
+  "status": "running",
+  "updated_at": "2026-10-14T01:38:11.147768Z",
+  "worker": "sol-offline-rehearsal"
+}

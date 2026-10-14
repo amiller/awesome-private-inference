@@ -1,0 +1,63 @@
+{
+  "draft": {
+    "acceptance_policy_impact": "No accepted client measurement or hash set should change from this event. A legacy adapter success is not a full client-policy acceptance decision. The current result narrows the verified claim to gateway bindings, leaving route acceptance and keyset continuity unresolved.",
+    "checks_performed": [
+      "Resolved the legacy snapshot-backed report and current content-addressed report; their recorded report digests and the current raw-evidence SHA-256 verified. The old record has no retained raw quote.",
+      "Recomputed the current keyset JCS digest, nonce statement digest, equality to reported data and the captured quote-appraisal body's reportdata; all matched. The captured appraisal reports verified=true, but this offline review did not independently reappraise the TDX quote signature.",
+      "Recomputed IMR3 event payload digests and RTMR3 replay against the captured appraisal body; checked the compose preimage hash, its position before boot-mr-done, the OS-image event hash, and measured tee-only host list. These checks matched for tee.redpill.ai.",
+      "Compared old and new identities: compose hash f08fdd348b0ced49eee1d006f61f8ace226081630ccfbe53c0c8656e749f567d and repo commit 24a31ff1b33cb45cd2ad0ddac02749eb4ea424e2 were unchanged; workload keyset digest changed from sha256:e04ce1973df777f4f9056e96ec9f2b50af4145a02c1eb412433cd60305505b1a to sha256:f41362b5a4920ea010c95885f8994575c51ace1af7acb0670a3fbca273d65e00. The deployed ACI draft provides neither workload_id nor keyset endorsement, so continuity across that change is unproven.",
+      "Read the current verifier source and run instrument manifest. The current revision records not_checked because MRTD/RTMR0-2 and the request path were not verified; the older legacy result used a narrower adapter scope. The same capture has not_checked for both TEE-only hostnames and rejected for api.redpill.ai, whose measured host policy differs."
+    ],
+    "classification": "coverage",
+    "event_id": "chg-b69f2fb6d3774d63dbf5612b560ea77d",
+    "evidence": [
+      "data/continuity/events/chg-b69f2fb6d3774d63dbf5612b560ea77d.json",
+      "data/observations/records/legacy-f92ab80278c30d15c102f4ca/3ffbae04915bf04dfe8f6ba0.json",
+      "data/snapshots/2026-10-13.json",
+      "data/observations/records/20261014T014225.270218Z-ee0f9ceae7d3/3ffbae04915bf04dfe8f6ba0.json",
+      "data/observations/evidence/sha256/fc5daf7af2601c3ec3af17149aa1c228c48d8abfe4d3c97abd05f75a2469ffd0.json",
+      "data/observations/runs/20261014T014225.270218Z-ee0f9ceae7d3.json",
+      "data/instrument.json",
+      "verifiers/aci.py",
+      "data/routes.json"
+    ],
+    "next_action": "Keep tee.redpill.ai at not_checked for full-route coverage. Add bounded verification of MRTD/RTMR0-2 and a harmless request bound to the gateway and selected backend; obtain a stable workload identity and endorsed keyset rotation before claiming continuity. Re-run the pinned instrument and review exact evidence before changing any accepted reference.",
+    "plaintext_boundary_impact": "No demonstrated change in plaintext holders. The gateway enclave terminates TLS and can see plaintext; a selected backend may also see it after forwarding. The captured gateway attestation does not establish which backend handled a user request or whether that backend was attested.",
+    "summary": "The tee.redpill.ai coverage_lost event compares a 2026-10-13 legacy adapter 'verified' row with a 2026-10-14 current 'not_checked' row. The newer verifier requires boot-measurement and request-path proof that the older result did not establish. Captured gateway quote, nonce, keyset, event-log and compose fields support several narrower bindings, but do not complete those missing checks. This is primarily an instrument-scope downgrade, not evidence that the provider changed to a compromised deployment. The three ACI hosts share one observed gateway workload; zero full-valid adapter results do not imply three compromised providers.",
+    "uncertainties": [
+      "The old legacy snapshot did not retain raw attestation bytes, so a cryptographic old-to-new quote or keyset comparison is unavailable.",
+      "The captured third-party quote appraisal result was not independently rerun here; boot measurements MRTD/RTMR0-2 and an actual client request path remain unchecked.",
+      "The changed keyset digest might reflect rotation, but the deployed profile lacks an identity endorsement proving continuity. Backend session evidence digests are published, not authenticated to this request or selected inference backend by this adapter."
+    ]
+  },
+  "event": {
+    "affected_routes": [
+      "aci-gateway/tee.redpill.ai"
+    ],
+    "component_id": null,
+    "event_id": "chg-b69f2fb6d3774d63dbf5612b560ea77d",
+    "field": null,
+    "first_seen_at": "2026-10-14T01:42:31Z",
+    "kind": "coverage_lost",
+    "last_seen_at": "2026-10-14T01:42:31Z",
+    "new_observation_id": "20261014T014225.270218Z-ee0f9ceae7d3/3ffbae04915bf04dfe8f6ba0",
+    "new_observation_path": "observations/records/20261014T014225.270218Z-ee0f9ceae7d3/3ffbae04915bf04dfe8f6ba0.json",
+    "new_raw_evidence_ref": "observations/evidence/sha256/fc5daf7af2601c3ec3af17149aa1c228c48d8abfe4d3c97abd05f75a2469ffd0.json",
+    "new_value": "not_checked",
+    "old_observation_id": "legacy-f92ab80278c30d15c102f4ca/3ffbae04915bf04dfe8f6ba0",
+    "old_observation_path": "observations/records/legacy-f92ab80278c30d15c102f4ca/3ffbae04915bf04dfe8f6ba0.json",
+    "old_raw_evidence_ref": null,
+    "old_value": "verified",
+    "priority": "high",
+    "route_id": "aci-gateway/tee.redpill.ai",
+    "trust": "untrusted_report",
+    "uncertainty": null
+  },
+  "event_id": "chg-b69f2fb6d3774d63dbf5612b560ea77d",
+  "review": {
+    "at": "2026-10-14T01:46:15.925973Z",
+    "disposition": "needs_evidence",
+    "rationale": "Confirmed immutable report/raw-evidence integrity, unchanged reported compose identity and the new explicit boot/request proof gap. The coverage event primarily corrects the instrument claim; it does not demonstrate a compromised deployment. The reported keyset change remains a separate unproven continuity question. Retain not_checked, do not expand accepted references, and verify boot measurements plus a bound backend request before a full-route claim.",
+    "reviewer": "astra-supervisor"
+  }
+}
