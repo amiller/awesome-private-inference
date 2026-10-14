@@ -46,15 +46,18 @@ def test_render_produces_html(tmp_path, monkeypatch):
     rc = render.main()
     assert rc == 0
     html = (docs / "index.html").read_text()
-    assert "Attestation checks across providers and models" in html
+    assert "Compare what clients can verify" in html
+    measurements = (docs / "measurements.html").read_text()
+    assert "Attestation checks across providers and models" in measurements
+    assert (docs / "assessments.html").exists()
     evidence = (docs / "evidence.html").read_text()
     assert "openai/gpt-oss-120b" in evidence
     assert "Public reference observatory" in evidence
     assert (docs / "methodology.html").exists()
     assert (docs / "pricing.html").exists()
 
-    assert "Legacy adapter accepted" in html
-    assert "not full provider verdicts" in html
+    assert "Legacy adapter accepted" in measurements
+    assert "not full provider verdicts" in measurements
     assert "Compose binding" in evidence
     assert "rule of three" not in html.lower()
 

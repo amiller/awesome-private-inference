@@ -1,56 +1,50 @@
 {% extends "_base.html.j2" %}
 {% block content %}
-<style>
-  .matrix { width:100%; border-collapse:collapse; font-size:12px; }
-  .matrix th { padding:10px 7px; text-align:center; background:#f1f5f9; color:#475569; font-weight:600; }
-  .matrix td { padding:9px 7px; border-top:1px solid #e2e8f0; text-align:center; }
-  .matrix th:first-child,.matrix td:first-child,.matrix th:nth-child(2),.matrix td:nth-child(2){text-align:left}
-  .matrix tbody tr:hover {background:#f8fafc}
-  .matrix .model {font:11px ui-monospace,monospace; max-width:230px; overflow-wrap:anywhere; }
-  .matrix .mark {display:inline-block; min-width:25px; padding:3px 5px; border-radius:4px; font-weight:650; text-decoration:none;}
-  .matrix-wrap {overflow-x:auto; background:white; border:1px solid #e2e8f0; border-radius:8px;}
-  .matrix .outcome {font-size:10px;display:inline-block;border-radius:4px;padding:3px 5px;white-space:nowrap;}
-  .matrix .full-link {font-size:10px;color:#4338ca;text-decoration:underline;display:block;margin-top:3px;}
-  @media(max-width:1050px){.matrix{min-width:1050px}}
-</style>
-<section class="mb-5">
-  <h1 class="text-3xl font-bold tracking-tight">Private inference</h1>
-  <p class="mt-2 text-slate-700">Attestation checks across providers and models. Open a result for its evidence and audit limitations.</p>
-  <div class="mt-4 flex flex-wrap gap-5 text-sm border-b border-slate-200 pb-3">
-    <span class="font-semibold">Overview</span>
-    <a class="text-indigo-700 hover:underline" href="./history.html">Reference values over time</a>
-    <a class="text-indigo-700 hover:underline" href="./evidence.html#routes">Provider audits &amp; routes</a>
-  </div>
+{% include "_assessment_style.html.j2" %}
+{% macro badge(state, href, title) %}<a class="signal {{ state }}" href="{{ href }}" title="{{ title }}">{{ assessment_states[state][1] }} {{ assessment_states[state][0] }}</a>{% endmacro %}
+<section class="mb-4">
+  <h1 class="text-2xl font-bold tracking-tight">Private inference</h1>
+  <p class="mt-1 text-sm text-slate-600">Compare what clients can verify and what operators can change. Expand a provider for its request paths.</p>
+  <p class="mt-2 text-xs text-slate-500">Dated, preliminary assessments · no overall security score · <a href="./assessments.html#rubric" class="text-indigo-700 underline">How assessments work</a></p>
 </section>
-<p class="mb-3 text-xs text-slate-600"><span class="text-emerald-700">✓</span> check passed · <span class="text-rose-700">×</span> check rejected · <span class="text-amber-700">○</span> review pending · — not checked / not applicable. These are scoped adapter results, not full provider verdicts.</p>
-<p class="mb-2 text-xs text-slate-500 lg:hidden">Scroll sideways for all check columns.</p>
-<div class="matrix-wrap">
-<table class="matrix">
-  <thead><tr>
-    <th scope="col">Provider</th><th scope="col">Model / endpoint</th><th scope="col">Attestation</th>
-    {% for key in matrix_keys %}<th scope="col">{{ scorecard_labels[key] }}</th>{% endfor %}
-    <th scope="col">Result</th>
-  </tr></thead>
-  <tbody>
-  {% for row in rows %}
-    <tr>
-      <td class="font-semibold">{{ row.provider }}</td>
-      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#{{ row.evidence_id }}">{{ row.model }}</a></td>
-      <td class="text-slate-500 text-xs">{{ row.attestation_type or '—' }}</td>
-      {% for key in matrix_keys %}{% set cell = row.matrix_cells[key] %}
-      <td><a class="mark {{ cell.css }}" href="./evidence.html#{{ row.evidence_id }}" title="{{ scorecard_labels[key] }}: {{ cell.meaning }}. Checked {{ row.checked_at or 'at unknown time' }}. Open full evidence." aria-label="{{ row.provider }} {{ row.model }}: {{ scorecard_labels[key] }} — {{ cell.meaning }}">{{ cell.mark }}</a></td>
-      {% endfor %}
-      <td><span class="outcome {{ row.outcome_css }}" title="{{ row.outcome_title }} {{ row.error or row.reason }}">{{ row.outcome_label }}</span><a class="full-link" href="./evidence.html#{{ row.evidence_id }}">All checks &amp; evidence</a></td>
+<div class="mb-3 flex flex-wrap items-center gap-4 text-xs text-slate-600">
+  <label>Provider <select id="provider-filter" class="border rounded bg-white px-2 py-1"><option value="">All</option>{% for group in assessment_groups %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
+  <button id="expand-all" class="underline text-indigo-700" type="button">Expand all routes</button>
+  <span>◐ partial evidence · × documented gap · ? unknown · ↕ routes differ</span>
+</div>
+<p class="mb-2 text-xs text-slate-500 lg:hidden">Scroll sideways; provider names stay visible.</p>
+<div class="assessment-scroll">
+<table class="assessment-table">
+  <thead><tr><th scope="col">Provider / path</th>{% for key, axis in assessment_axes.items() %}<th scope="col"><a href="./assessments.html#rubric-{{ key }}" title="{{ axis[1] }}">{{ axis[0] }}</a></th>{% endfor %}<th scope="col" title="Evidence returned does not mean verification passed.">Collection</th><th scope="col" title="Latest newly observed reference set anywhere in this provider's tracked surfaces; not deployment time.">New reference</th><th scope="col">Review</th></tr></thead>
+  {% for group in assessment_groups %}
+  <tbody data-provider="{{ group.id }}">
+    <tr class="provider-row">
+      <td><button type="button" class="provider-toggle" aria-expanded="false" aria-controls="routes-{{ group.id }}"><span class="chevron" aria-hidden="true">›</span>{{ group.name }}</button> <span class="provider-meta">{{ group.routes|length }} {{ 'path' if group.routes|length == 1 else 'paths' }}</span></td>
+      {% for key, cell in group.axes.items() %}<td>{{ badge(cell.state, './assessments.html#provider-' ~ group.id ~ '-' ~ key, group.name ~ ': ' ~ assessment_axes[key][1] ~ ' ' ~ assessment_states[cell.state][0] ~ '. Open route-specific reasons and sources.') }}</td>{% endfor %}
+      <td class="collection" title="{{ group.observations|length }} distinct model/endpoint observations. Collection status is separate from proof or audit status.">{{ group.collection }}</td>
+      <td><a class="history-link" href="{{ group.history_url }}">{{ group.last_new[5:10] if group.last_new else ('Baseline' if group.baseline_only else 'No history') }}</a>{% if group.changed_surfaces %}<span class="needs-review">{{ group.changed_surfaces }} changed since review</span>{% endif %}{% if group.missing_surfaces %}<span class="needs-review">Coverage missing</span>{% endif %}</td>
+      <td><a class="detail-link" href="./assessments.html#provider-{{ group.id }}">{{ group.reviewed_at[5:] if group.reviewed_at != 'Unreviewed' else 'Unreviewed' }}</a></td>
     </tr>
-  {% else %}<tr><td colspan="11">No adapter observations available.</td></tr>{% endfor %}
   </tbody>
+  <tbody id="routes-{{ group.id }}" data-provider="{{ group.id }}" class="route-body" hidden>
+    {% for route in group.routes %}<tr class="route-row">
+      <td><a href="./assessments.html#route-{{ route.id }}" class="detail-link" title="{{ route.architecture|default(route.protocol) }}">{{ route.label }}</a></td>
+      {% for key, cell in route.axes.items() %}<td>{{ badge(cell.state, './assessments.html#' ~ route.id ~ '-' ~ key, cell.reason) }}</td>{% endfor %}
+      <td class="collection">{{ route.collection }}</td><td colspan="2"><a class="detail-link" href="./evidence.html#route-{{ route.id }}">Source &amp; probe details</a></td>
+    </tr>{% endfor %}
+  </tbody>
+  {% endfor %}
 </table>
 </div>
-<p class="mt-3 text-xs text-slate-500">{{ rows|length }} model / endpoint observations. This retains the original check columns; additional checks, including AMD hardware, TLS pinning, build provenance and runtime configuration, are in each row’s full evidence. An unavailable endpoint is not a rejected proof.</p>
-{% if candidate_providers %}
-<section class="mt-6 text-sm">
-  <h2 class="font-semibold">Additional providers under review</h2>
-  <p class="mt-1 text-slate-600">{{ candidate_providers|join(' · ') }}. Source and publication reviews only; no matched request observations. <a class="text-indigo-700 underline" href="./evidence.html#routes">Review coverage →</a></p>
-</section>
-{% endif %}
+<p class="mt-3 text-xs text-slate-500">{{ assessment_groups|length }} providers · {{ route_cards|length }} paths · Dates refer to source review. “Gap” identifies a documented client/protocol protection gap, not a demonstrated compromise. Missing checks in our tool remain Unknown. Collection counts do not measure privacy.</p>
+<p class="mt-2 text-xs text-slate-500">Reference dates are provider-wide first sightings of new sets. Later reference differences flag review work; they never authorize a new value. <a href="./history.html" class="text-indigo-700 underline">Explore reference history →</a></p>
+<p class="mt-3 text-sm"><a href="./measurements.html" class="text-indigo-700 underline">All {{ rows|length }} model / endpoint measurements →</a></p>
+<noscript><style>.route-body[hidden]{display:table-row-group!important}</style><p>All routes are shown because JavaScript is disabled.</p></noscript>
+<script>
+const toggles=[...document.querySelectorAll('.provider-toggle')];
+function toggle(b,expanded){b.setAttribute('aria-expanded',String(expanded));document.getElementById(b.getAttribute('aria-controls')).hidden=!expanded;}
+for(const b of toggles)b.onclick=()=>toggle(b,b.getAttribute('aria-expanded')!=='true');
+document.getElementById('expand-all').onclick=function(){const expanded=toggles.some(b=>b.getAttribute('aria-expanded')!=='true');toggles.forEach(b=>toggle(b,expanded));this.textContent=expanded?'Collapse all routes':'Expand all routes'};
+document.getElementById('provider-filter').onchange=function(){for(const body of document.querySelectorAll('tbody[data-provider]'))body.style.display=this.value&&body.dataset.provider!==this.value?'none':''};
+</script>
 {% endblock %}

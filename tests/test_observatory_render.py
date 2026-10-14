@@ -49,9 +49,11 @@ def test_publication_and_adapter_pass_remain_scoped(tmp_path, monkeypatch):
     render._render({"attestations": {"test": [{"model": "model", "valid": True,
                     "attestation_type": "test", "scorecard": {"tdx_verified": True}}]}, "pricing": {}})
     home = (tmp_path / "docs/index.html").read_text()
-    assert 'class="matrix"' in home
-    assert "model" in home and "candidate" in home
-    assert "./evidence.html#observation-1" in home
+    assert 'class="assessment-table"' in home
+    assert "test" in home and "candidate" in home
+    assert "Unreviewed" in home
+    measurements = (tmp_path / "docs/measurements.html").read_text()
+    assert "./evidence.html#observation-1" in measurements
     assert "Who can see plaintext?" not in home
     assert "./history.html" in home
     assert "reference_mismatch" not in home

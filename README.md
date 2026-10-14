@@ -6,6 +6,8 @@ For each client and request path, we track what software is observed, which valu
 
 [Dashboard](https://amiller.github.io/awesome-private-inference/) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Detailed project review](research/review-2026-10-13/review.md)
 
+The [comparison overview](https://amiller.github.io/awesome-private-inference/) groups providers into expandable client paths and compares hardware, session binding, code identity, operator access, downstream binding and update control. Each indicator links to a dated, source-pinned [route assessment](https://amiller.github.io/awesome-private-inference/assessments.html). These are preliminary evidence assessments, not completed route proofs or security stages. [Measurements](https://amiller.github.io/awesome-private-inference/measurements.html) preserves the model-level adapter table.
+
 [Reference history graph](https://amiller.github.io/awesome-private-inference/history.html) plots captured workload identities, published reference sets, client-policy inputs and document hashes. Select a point for full old/new values and scoped review evidence. Circle size can show set edits or captured text changes; neither is a measurement of deployed code size or security risk. The page is self-contained and works offline.
 
 ## Read the evidence by route

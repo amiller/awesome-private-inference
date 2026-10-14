@@ -1,0 +1,44 @@
+{% extends "_base.html.j2" %}
+{% block title %}Route assessments · awesome-private-inference{% endblock %}
+{% block content %}
+{% include "_assessment_style.html.j2" %}
+<h1 class="text-2xl font-bold">Route assessments</h1>
+<p class="mt-2 text-slate-600">Dated explanations of what is established, what is missing, and which operator powers remain relevant. These are preliminary source/evidence reviews, not completed end-to-end devproof audits.</p>
+<section id="rubric" class="my-6">
+  <h2 class="text-xl font-semibold">Assessment rubric · version 1</h2>
+  <p class="mt-2 text-sm">A route is a named client mode, recipient and model path. Plaintext inside approved attested code does not imply operator access. The question is whether an operator can obtain it or alter the computation without the client refusing.</p>
+  <dl class="mt-3 text-sm space-y-2">
+    <div><dt class="font-semibold">Established</dt><dd>Every obligation for this axis is supported by dated, version-bound proof records for the actual route, including relevant negative controls. An adapter pass alone cannot establish it.</dd></div>
+    <div><dt class="font-semibold">Partial</dt><dd>Specific evidence supports part of the obligation; the explanation names what remains unproven.</dd></div>
+    <div><dt class="font-semibold">Gap</dt><dd>A cited review identifies a missing protection or omitted required verification in the assessed client/protocol. Missing implementation in our measurement tool is Unknown, not a provider defect. This is not a claim of exploitation or compromise.</dd></div>
+    <div><dt class="font-semibold">Unknown</dt><dd>No adequate scoped review or retained proof establishes this axis. An endpoint error does not turn this into a failed protection.</dd></div>
+    <div><dt class="font-semibold">N/A</dt><dd>The architecture makes the obligation irrelevant, with an explicit reason. Missing evidence is never N/A.</dd></div>
+    <div><dt class="font-semibold">Varies</dt><dd>Routes have different assessments. No best-route selection, averaging or provider-wide pass is performed.</dd></div>
+  </dl>
+  <p class="mt-3 text-sm">Collection is independent: “returned” includes responses an adapter rejected or could not fully check; “unavailable” means no usable response; “stale / mixed” includes samples more than 48 hours older than the snapshot. Exact observation dates and every raw check are on <a href="./measurements.html" class="underline text-indigo-700">Measurements</a>.</p>
+  <p class="mt-3 text-sm">Assessments remain dated source findings as references change. Provider-wide reference differences from the retained review baseline flag re-review; they do not automatically rewrite the assessment or expand accepted policy. A changed document may be unrelated to a particular route. Follow its history and trace the dependency before assigning impact.</p>
+  <p class="mt-3 text-sm">Promotion requires a recorded reviewer, exact client and workload versions, linked proof records and reproducible negative controls. This release assigns no “Established” cells or overall security stages. Dates refer to source review, not fresh deployment certification.</p>
+  {% for key, axis in assessment_axes.items() %}<div id="rubric-{{ key }}" class="axis-detail"><h3 class="font-semibold">{{ axis[0] }}</h3><p>{{ axis[1] }}</p>
+    {% if key == 'hardware' %}<p>Authenticate the vendor-root chain, quote signature, TCB/debug policy and any GPU evidence required by the route. Release-signature verification alone is insufficient. Changed signatures and unacceptable TCB must reject.</p>
+    {% elif key == 'session' %}<p>Bind the live channel, prompt recipient, reply key and freshness before sensitive data leaves the client. Test key replacement, replay and reply-key substitution. A receipt after disclosure is insufficient.</p>
+    {% elif key == 'code' %}<p>Trace source, build, artifact and measurement to the approved workload, including serving code and model identity where claimed. Distinguish reproducibility from signed provenance and matching digests.</p>
+    {% elif key == 'operator' %}<p>Trace root/debug access, unmeasured configuration, secrets, control-plane inputs and mutable routing to actual effects on prompts and replies. A configuration finding is specific to the reviewed code and deployment.</p>
+    {% elif key == 'downstream' %}<p>Close necessary gateway-to-worker trust links and requested-model mapping. Test substituted workers, models and route fallback. A direct route can eliminate a gateway hop but still needs its model proof.</p>
+    {% elif key == 'updates' %}<p>Identify who changes accepted values and when the client adopts them. Test an unapproved release, rollback and manifest update. Automatic adoption and independently reviewed pins imply different authority.</p>{% endif %}
+  </div>{% endfor %}
+</section>
+{% for group in assessment_groups %}
+<section id="provider-{{ group.id }}" class="review-heading mt-9 border-t pt-5">
+<h2 class="text-xl font-semibold">{{ group.name }}</h2>
+<p class="mt-2 text-sm text-slate-600">{{ group.routes|length }} paths · {{ group.collection }} · <a href="{{ group.history_url }}" class="underline text-indigo-700">Reference history</a></p>
+{% if group.changed_surfaces %}<p class="text-sm text-rose-700">{{ group.changed_surfaces }} provider reference surfaces differ from the review baseline. Determine route relevance before relying on the dated assessment.</p>{% endif %}
+{% for key, axis in assessment_axes.items() %}<details id="provider-{{ group.id }}-{{ key }}" class="axis-detail"><summary>{{ axis[0] }} · {{ assessment_states[group.axes[key].state][0] }}</summary>{% for route in group.routes %}<p><a href="#{{ route.id }}-{{ key }}" class="underline text-indigo-700">{{ route.label }}</a>: {{ assessment_states[route.axes[key].state][0] }} — {{ route.axes[key].reason }}</p>{% endfor %}</details>{% endfor %}
+{% for route in group.routes %}
+<article id="route-{{ route.id }}" class="review-heading mt-7">
+  <h3 class="font-semibold text-lg">{{ route.label }} <span class="font-normal text-sm text-slate-500">{{ route.architecture|default(route.protocol) }}</span></h3>
+  <p class="text-xs text-slate-500 mt-1">Reviewed {{ route.reviewed_at or 'not yet' }} by {{ route.reviewer|default('not assigned') }} · source revision {{ (route.source_revision or '')[:12] }} · <a class="underline" href="./evidence.html#route-{{ route.id }}">Route inventory and raw checks</a></p>
+  {% for key, cell in route.axes.items() %}<details id="{{ route.id }}-{{ key }}" class="axis-detail"><summary><span class="signal {{ cell.state }}">{{ assessment_states[cell.state][0] }}</span> {{ assessment_axes[key][0] }}</summary><p>{{ cell.reason }}</p><p class="text-xs text-slate-500">Evidence scope: dated repository source/review; no new live route proof is implied.</p><p class="text-xs">{% for source in route.sources_linked %}<a class="underline text-indigo-700 mr-3" href="{{ source.url }}">{{ source.label }}</a>{% endfor %}</p></details>{% endfor %}
+</article>{% endfor %}
+</section>{% endfor %}
+<script>function reveal(){const e=document.getElementById(location.hash.slice(1));if(e){if(e.tagName==='DETAILS')e.open=true;e.scrollIntoView({block:'start'});}}addEventListener('hashchange',reveal);reveal();</script>
+{% endblock %}
