@@ -5,7 +5,6 @@
   "routes": [
     {
       "id": "aci-gateway-tee-redpill", "provider": "aci-gateway", "title": "ACI gateway: tee.redpill.ai", "client_mode": "TLS to gateway", "protocol": "HTTPS",
-      "comparison": {"provider": "ACI gateway", "path": "tee.redpill.ai", "plaintext": "Gateway + selected backend", "policy": "Gateway compose + keyset", "gap": "Boot and request-bound backend proof incomplete."},
       "models": ["tee.redpill.ai"], "observation_aliases": ["aci-gateway/tee.redpill.ai"],
       "plaintext_holders": ["ACI gateway enclave", "selected backend after gateway forwarding"],
       "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "backend", "role": "inference", "plaintext_holder": true}],
@@ -15,7 +14,6 @@
     },
     {
       "id": "aci-gateway-phala", "provider": "aci-gateway", "title": "ACI gateway: inference.phala.com", "client_mode": "TLS to gateway", "protocol": "HTTPS",
-      "comparison": {"provider": "ACI gateway", "path": "inference.phala.com", "plaintext": "Gateway + selected backend", "policy": "Gateway compose + hostname policy", "gap": "Boot and request-bound backend proof incomplete."},
       "models": ["inference.phala.com"], "observation_aliases": ["aci-gateway/inference.phala.com"],
       "plaintext_holders": ["ACI gateway enclave", "selected backend after gateway forwarding"],
       "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "backend", "role": "inference", "plaintext_holder": true}],
@@ -25,7 +23,6 @@
     },
     {
       "id": "aci-gateway-api-redpill", "provider": "aci-gateway", "title": "ACI gateway: api.redpill.ai", "client_mode": "TLS to gateway", "protocol": "HTTPS",
-      "comparison": {"provider": "ACI gateway", "path": "api.redpill.ai", "plaintext": "Gateway + potentially non-TEE backend", "policy": "Hostname permits non-TEE serving", "gap": "Gateway quote does not prove private backend execution."},
       "models": ["api.redpill.ai"], "observation_aliases": ["aci-gateway/api.redpill.ai"],
       "plaintext_holders": ["ACI gateway enclave", "potential non-TEE backend selected by policy"],
       "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "backend", "role": "selected inference", "plaintext_holder": true}],
@@ -35,7 +32,6 @@
     },
     {
       "id": "near-ai-gateway-plain", "provider": "near-ai", "title": "NEAR AI gateway, ordinary HTTPS", "client_mode": "plain_gateway", "protocol": "HTTPS",
-      "comparison": {"provider": "NEAR AI", "path": "Gateway HTTPS", "plaintext": "Gateway + model worker", "policy": "Per-model anchors + chain authorization", "gap": "Actual request and model identity not fully bound."},
       "models": ["*"], "observation_aliases": ["near-ai/*"],
       "plaintext_holders": ["NEAR cloud-api gateway", "selected model worker"],
       "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
@@ -45,7 +41,6 @@
     },
     {
       "id": "near-ai-gateway-e2ee", "provider": "near-ai", "title": "NEAR AI gateway with application encryption", "client_mode": "verified_e2ee", "protocol": "application E2EE over HTTPS",
-      "comparison": {"provider": "NEAR AI", "path": "E2EE through gateway", "plaintext": "Model TEE for protected fields; relay sees other fields", "policy": "Model policy + attested encryption key", "gap": "Reply-key binding unresolved; full request untested."},
       "models": ["*"], "observation_aliases": [],
       "plaintext_holders": ["client before encryption", "selected model TEE for protected fields", "gateway may read unencrypted metadata and fields"],
       "components": [{"id": "client", "role": "verify and encrypt selected fields", "plaintext_holder": true}, {"id": "gateway", "role": "ciphertext relay and routing", "plaintext_holder": false}, {"id": "worker", "role": "decrypt and infer", "plaintext_holder": true}],
@@ -55,7 +50,6 @@
     },
     {
       "id": "near-ai-direct", "provider": "near-ai", "title": "NEAR AI experimental direct model endpoint", "client_mode": "direct", "protocol": "direct model HTTPS/E2EE",
-      "comparison": {"provider": "NEAR AI", "path": "Direct model endpoint", "plaintext": "Selected model worker, conditional on channel proof", "policy": "Direct endpoint key + workload policy", "gap": "Complete encrypted request proof missing."},
       "models": ["*"], "observation_aliases": [],
       "plaintext_holders": ["client before encryption", "model worker after decryption"],
       "components": [{"id": "client", "role": "verify and encrypt", "plaintext_holder": true}, {"id": "worker", "role": "direct inference", "plaintext_holder": true}],
@@ -65,7 +59,6 @@
     },
     {
       "id": "tinfoil-router", "provider": "tinfoil", "title": "Tinfoil router to model enclave", "client_mode": "SDK or HTTPS", "protocol": "HPKE/TLS",
-      "comparison": {"provider": "Tinfoil", "path": "Router → model enclave", "plaintext": "Router + selected model enclave", "policy": "Measured router pins worker repositories", "gap": "Independent AMD validation and worker trace missing."},
       "models": ["router"], "observation_aliases": ["tinfoil/router"],
       "plaintext_holders": ["Tinfoil router enclave", "selected model enclave"],
       "components": [{"id": "router", "role": "routing, token counting and billing", "plaintext_holder": true}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
@@ -75,7 +68,6 @@
     },
     {
       "id": "venice-near", "provider": "venice", "title": "Venice E2EE via NEAR", "client_mode": "Venice E2EE", "protocol": "application E2EE over HTTPS",
-      "comparison": {"provider": "Venice", "path": "E2EE via NEAR", "plaintext": "Worker; relay may see unencrypted fields", "policy": "Client-specific model + key policy", "gap": "Request-bound model and key proof missing."},
       "models": ["e2ee-glm-5-1", "e2ee-qwen3-6-35b-a3b"], "observation_aliases": ["venice/e2ee-glm-5-1", "venice/e2ee-qwen3-6-35b-a3b"],
       "plaintext_holders": ["client before encryption", "NEAR worker after decryption", "Venice relay may read unencrypted fields"],
       "components": [{"id": "venice", "role": "relay", "plaintext_holder": false}, {"id": "near-worker", "role": "inference", "plaintext_holder": true}],
@@ -85,7 +77,6 @@
     },
     {
       "id": "venice-phala", "provider": "venice", "title": "Venice E2EE via Phala", "client_mode": "Venice E2EE", "protocol": "application E2EE over HTTPS",
-      "comparison": {"provider": "Venice", "path": "E2EE via Phala", "plaintext": "Worker; relay may see unencrypted fields", "policy": "Separate Phala deployment policy", "gap": "Evidence availability and request binding incomplete."},
       "models": ["e2ee-gemma-4-31b", "e2ee-gpt-oss-120b-p", "e2ee-qwen3-6-35b-a3b-uncensored-p"], "observation_aliases": ["venice/e2ee-gemma-4-31b", "venice/e2ee-gpt-oss-120b-p", "venice/e2ee-qwen3-6-35b-a3b-uncensored-p"],
       "plaintext_holders": ["client before encryption", "Phala worker after decryption", "Venice relay may read unencrypted fields"],
       "components": [{"id": "venice", "role": "relay", "plaintext_holder": false}, {"id": "phala-worker", "role": "inference", "plaintext_holder": true}],
@@ -95,7 +86,6 @@
     },
     {
       "id": "chutes-tee", "provider": "chutes", "title": "Chutes TEE model route", "client_mode": "Chutes API", "protocol": "HTTPS and encrypted worker transport",
-      "comparison": {"provider": "Chutes", "path": "TEE model route", "plaintext": "API path + model worker", "policy": "Golden MRTD set covers base TD", "gap": "Serving code and model weights remain unmeasured."},
       "models": ["Qwen3-32B-TEE", "gemma-4-31B-TEE", "GLM-5.1-TEE", "GLM-5.2-TEE", "DeepSeek-V3.2-TEE", "Kimi-K2.6-TEE"], "observation_aliases": ["chutes/Qwen3-32B-TEE", "chutes/gemma-4-31B-TEE", "chutes/GLM-5.1-TEE", "chutes/GLM-5.2-TEE", "chutes/DeepSeek-V3.2-TEE", "chutes/Kimi-K2.6-TEE"],
       "plaintext_holders": ["API-side processing according to selected protocol", "worker process and model"],
       "components": [{"id": "api", "role": "routing", "plaintext_holder": null}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
@@ -105,7 +95,6 @@
     },
     {
       "id": "private-inference-standard", "provider": "private-inference", "title": "Private Inference standard routing", "client_mode": "standard", "protocol": "OpenAI-compatible HTTPS",
-      "comparison": {"provider": "Private Inference", "path": "Standard", "plaintext": "Proxy + selected supplier", "policy": "No TEE-private claim", "gap": "Request-specific supplier unknown."},
       "models": ["catalog standard tier"], "observation_aliases": [],
       "plaintext_holders": ["Private Inference proxy", "selected supplier"], "components": [{"id": "pi-proxy", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "supplier", "role": "inference", "plaintext_holder": true}],
       "references": [], "acceptance": "Standard routing makes no TEE-private claim; its supplier may be 0G, CheaperInference or OpenRouter according to published product description.",
@@ -113,7 +102,6 @@
     },
     {
       "id": "private-inference-zdr", "provider": "private-inference", "title": "Private Inference zero-data-retention routing", "client_mode": "zdr", "protocol": "OpenAI-compatible HTTPS",
-      "comparison": {"provider": "Private Inference", "path": "Zero data retention", "plaintext": "Proxy + selected supplier", "policy": "Retention policy", "gap": "Retention enforcement unverified."},
       "models": ["catalog ZDR tier"], "observation_aliases": [],
       "plaintext_holders": ["Private Inference proxy", "selected supplier"], "components": [{"id": "pi-proxy", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "supplier", "role": "inference", "plaintext_holder": true}],
       "references": [], "acceptance": "ZDR is a retention policy and does not encrypt prompts from the Private Inference proxy.",
@@ -121,7 +109,6 @@
     },
     {
       "id": "private-inference-private", "provider": "private-inference", "title": "Private Inference private beta via NEAR", "client_mode": "private beta browser", "protocol": "browser E2EE over HTTPS",
-      "comparison": {"provider": "Private Inference", "path": "Private beta via NEAR", "plaintext": "Model TEE; relay may expose reply", "policy": "Quote consistency; no approved workload baseline", "gap": "Approved references and reply-key binding missing."},
       "models": ["z-ai/glm-5.3-flash", "Qwen/Qwen3.6-35B-A3B-FP8", "Qwen/Qwen3.8-27B"], "observation_aliases": [],
       "plaintext_holders": ["browser before encryption", "NEAR model TEE", "relay can expose reply through unbound response-key header"],
       "components": [{"id": "browser", "role": "quote verification and encryption", "plaintext_holder": true}, {"id": "pi-proxy", "role": "relay", "plaintext_holder": false}, {"id": "near-worker", "role": "inference", "plaintext_holder": true}],
@@ -131,7 +118,6 @@
     },
     {
       "id": "maple-tinfoil", "provider": "maple", "title": "Maple Research or proxy via Tinfoil", "client_mode": "web/native/SDK/local proxy", "protocol": "Nitro session then Tinfoil backend",
-      "comparison": {"provider": "Maple", "path": "Via Tinfoil", "plaintext": "Nitro enclave + Tinfoil router / worker", "policy": "SDK roots + signed PCR0 histories", "gap": "Live session, rebuild and upstream proof missing."},
       "models": ["Maple models routed to Tinfoil"], "observation_aliases": [],
       "plaintext_holders": ["browser or local proxy before encryption", "Maple OpenSecret Nitro enclave", "Tinfoil router and worker enclaves"],
       "components": [{"id": "client", "role": "Nitro verification and encryption", "plaintext_holder": true}, {"id": "opensecret", "role": "session termination and routing", "plaintext_holder": true}, {"id": "tinfoil", "role": "backend inference", "plaintext_holder": true}],
@@ -141,7 +127,6 @@
     },
     {
       "id": "maple-privatemode", "provider": "maple", "title": "Maple Research or proxy via Continuum/Privatemode", "client_mode": "web/native/SDK/local proxy", "protocol": "Nitro session then loopback sidecar",
-      "comparison": {"provider": "Maple", "path": "Via Privatemode", "plaintext": "Nitro enclave / sidecar + worker", "policy": "Nitro PCR0 + upstream policy", "gap": "Live session, rebuild and upstream proof missing."},
       "models": ["Maple models routed to Continuum", "glm-5.3 may use either backend"], "observation_aliases": [],
       "plaintext_holders": ["browser or local proxy before encryption", "Maple OpenSecret Nitro enclave", "Continuum sidecar in Nitro image", "Privatemode worker"],
       "components": [{"id": "client", "role": "Nitro verification and encryption", "plaintext_holder": true}, {"id": "opensecret", "role": "session termination and routing", "plaintext_holder": true}, {"id": "continuum-sidecar", "role": "loopback upstream client", "plaintext_holder": true}, {"id": "privatemode-worker", "role": "inference", "plaintext_holder": true}],
@@ -151,7 +136,6 @@
     },
     {
       "id": "privatemode-proxy-auto", "provider": "privatemode", "title": "Privatemode proxy with automatic manifest", "client_mode": "proxy auto-update", "protocol": "local proxy to attested backend",
-      "comparison": {"provider": "Privatemode", "path": "Proxy · automatic manifest", "plaintext": "Local proxy + worker; key services matter", "policy": "Auto-adopts provider manifest", "gap": "Live key exchange and admission unverified."},
       "models": ["manifest worker policies"], "observation_aliases": [],
       "plaintext_holders": ["local proxy", "Coordinator and secret service where key material is handled", "selected model worker"],
       "components": [{"id": "proxy", "role": "local client", "plaintext_holder": true}, {"id": "coordinator", "role": "admission/key coordination", "plaintext_holder": null}, {"id": "secret-service", "role": "key custody", "plaintext_holder": null}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
@@ -161,7 +145,6 @@
     },
     {
       "id": "privatemode-proxy-pinned", "provider": "privatemode", "title": "Privatemode proxy with pinned manifest", "client_mode": "proxy pinned", "protocol": "local proxy to attested backend",
-      "comparison": {"provider": "Privatemode", "path": "Proxy · pinned manifest", "plaintext": "Local proxy + worker; key services matter", "policy": "Locally pinned manifest", "gap": "Fail-closed request and key distribution untested."},
       "models": ["manifest worker policies"], "observation_aliases": [],
       "plaintext_holders": ["local proxy", "Coordinator and secret service where key material is handled", "selected model worker"],
       "components": [{"id": "proxy", "role": "local client", "plaintext_holder": true}, {"id": "coordinator", "role": "admission/key coordination", "plaintext_holder": null}, {"id": "secret-service", "role": "key custody", "plaintext_holder": null}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
@@ -171,7 +154,6 @@
     },
     {
       "id": "privatemode-proxyless", "provider": "privatemode", "title": "Privatemode proxyless API", "client_mode": "proxyless", "protocol": "HTTPS",
-      "comparison": {"provider": "Privatemode", "path": "Proxyless API", "plaintext": "Service front door + backend", "policy": "No client-side attestation documented", "gap": "No client-verified recipient or key binding."},
       "models": ["proxyless service models"], "observation_aliases": [],
       "plaintext_holders": ["Privatemode service front door and backend according to deployed route"],
       "components": [{"id": "service", "role": "provider-mediated attestation and routing", "plaintext_holder": true}],
@@ -181,7 +163,6 @@
     },
     {
       "id": "confidential-ai-api", "provider": "confidential-ai", "title": "Confidential AI Inference API", "client_mode": "HTTPS API / TEErminator", "protocol": "TLS at c8s TEE then protected mesh",
-      "comparison": {"provider": "Confidential AI", "path": "Inference API", "plaintext": "TLS load balancer + gateway + workers", "policy": "Published allowlist + releases", "gap": "Live proof absent; operator access paths remain."},
       "models": ["published inference catalog"], "observation_aliases": [],
       "plaintext_holders": ["tls-lb TEE", "gateway", "SGLang router and workers", "operator access paths described in threat model"],
       "components": [{"id": "tls-lb", "role": "public TLS termination", "plaintext_holder": true}, {"id": "gateway", "role": "cluster API routing", "plaintext_holder": true}, {"id": "router", "role": "SGLang routing", "plaintext_holder": true}, {"id": "worker", "role": "inference", "plaintext_holder": true}],

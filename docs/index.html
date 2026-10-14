@@ -32,245 +32,422 @@
 <main class="max-w-6xl mx-auto px-4 py-8">
 
 <style>
-  .comparison { width:100%; border-collapse:collapse; font-size:13px; line-height:1.45; }
-  .comparison th { text-align:left; padding:12px; background:#f1f5f9; color:#475569; }
-  .comparison td { padding:12px; vertical-align:top; border-top:1px solid #e2e8f0; }
-  .comparison tbody tr:hover { background:#f8fafc; }
-  .comparison .provider { font-weight:650; display:block; }
-  .comparison .path { display:block; margin-top:3px; color:#475569; }
-  .comparison .result { display:block; font-size:11px; margin-top:5px; color:#64748b; }
-  .comparison a { color:#4338ca; text-decoration:underline; text-underline-offset:3px; }
-  .comparison-wrap { overflow-x:auto; background:white; border:1px solid #e2e8f0; border-radius:10px; }
-  @media(max-width:800px) { .comparison { min-width:850px; } }
+  .matrix { width:100%; border-collapse:collapse; font-size:12px; }
+  .matrix th { padding:10px 7px; text-align:center; background:#f1f5f9; color:#475569; font-weight:600; }
+  .matrix td { padding:9px 7px; border-top:1px solid #e2e8f0; text-align:center; }
+  .matrix th:first-child,.matrix td:first-child,.matrix th:nth-child(2),.matrix td:nth-child(2){text-align:left}
+  .matrix tbody tr:hover {background:#f8fafc}
+  .matrix .model {font:11px ui-monospace,monospace; max-width:230px; overflow-wrap:anywhere; }
+  .matrix .mark {display:inline-block; min-width:25px; padding:3px 5px; border-radius:4px; font-weight:650; text-decoration:none;}
+  .matrix-wrap {overflow-x:auto; background:white; border:1px solid #e2e8f0; border-radius:8px;}
+  .matrix .outcome {font-size:10px;display:inline-block;border-radius:4px;padding:3px 5px;white-space:nowrap;}
+  .matrix .full-link {font-size:10px;color:#4338ca;text-decoration:underline;display:block;margin-top:3px;}
+  @media(max-width:1050px){.matrix{min-width:1050px}}
 </style>
-<section class="mb-5 max-w-4xl">
-  <h1 class="text-3xl font-bold tracking-tight">Compare private inference</h1>
-  <p class="mt-2 text-slate-700">Who can read a prompt, what references the client relies on, and what remains unproven. Different request paths get separate rows.</p>
-  <p class="mt-2 text-sm text-slate-600">Client plaintext is implicit. Checks are scoped observations, not full provider verdicts. <a class="underline text-indigo-700" href="./methodology.html">Methodology</a></p>
+<section class="mb-5">
+  <h1 class="text-3xl font-bold tracking-tight">Private inference</h1>
+  <p class="mt-2 text-slate-700">Attestation checks across providers and models. Open a result for its evidence and audit limitations.</p>
+  <div class="mt-4 flex flex-wrap gap-5 text-sm border-b border-slate-200 pb-3">
+    <span class="font-semibold">Overview</span>
+    <a class="text-indigo-700 hover:underline" href="./history.html">Reference values over time</a>
+    <a class="text-indigo-700 hover:underline" href="./evidence.html#routes">Provider audits &amp; routes</a>
+  </div>
 </section>
-<p class="mb-2 text-xs text-slate-500 md:hidden">Scroll the table sideways to see policy and evidence columns.</p>
-<div id="comparison" class="comparison-wrap">
-<table class="comparison">
-  <thead><tr><th scope="col" style="width:19%">Provider / path</th><th scope="col" style="width:22%">Who can see plaintext?</th><th scope="col" style="width:23%">Reference policy</th><th scope="col">Main gap / evidence</th></tr></thead>
+<p class="mb-3 text-xs text-slate-600"><span class="text-emerald-700">✓</span> check passed · <span class="text-rose-700">×</span> check rejected · <span class="text-amber-700">○</span> review pending · — not checked / not applicable. These are scoped adapter results, not full provider verdicts.</p>
+<p class="mb-2 text-xs text-slate-500 lg:hidden">Scroll sideways for all check columns.</p>
+<div class="matrix-wrap">
+<table class="matrix">
+  <thead><tr>
+    <th scope="col">Provider</th><th scope="col">Model / endpoint</th><th scope="col">Attestation</th>
+    <th scope="col">Fresh nonce</th><th scope="col">TDX appraisal</th><th scope="col">Key binding</th><th scope="col">GPU evidence</th><th scope="col">Address binding</th><th scope="col">Compose binding</th><th scope="col">Backend check</th>
+    <th scope="col">Result</th>
+  </tr></thead>
   <tbody>
 
-
     <tr>
-      <td><span class="provider">ACI gateway</span><span class="path">tee.redpill.ai</span></td>
-      <td>Gateway + selected backend</td>
-      <td>Gateway compose + keyset</td>
-      <td>Boot and request-bound backend proof incomplete.
-        <span class="result">Not checked</span>
-        <a href="./evidence.html#route-aci-gateway-tee-redpill">Evidence →</a>
-      </td>
+      <td class="font-semibold">aci-gateway</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-1">api.redpill.ai</a></td>
+      <td class="text-slate-500 text-xs">aci-gateway</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-1" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-1" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-1" title="Key binding: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-1" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-1" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-1" title="Compose binding: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Compose binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-1" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-rose-100 text-rose-800" title="The adapter checked evidence and rejected it. unspecified">Adapter rejected</span><a class="full-link" href="./evidence.html#observation-1">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">ACI gateway</span><span class="path">inference.phala.com</span></td>
-      <td>Gateway + selected backend</td>
-      <td>Gateway compose + hostname policy</td>
-      <td>Boot and request-bound backend proof incomplete.
-        <span class="result">Not checked</span>
-        <a href="./evidence.html#route-aci-gateway-phala">Evidence →</a>
-      </td>
+      <td class="font-semibold">aci-gateway</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-2">inference.phala.com</a></td>
+      <td class="text-slate-500 text-xs">aci-gateway</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-2" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-2" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway inference.phala.com: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-2" title="Key binding: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-2" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway inference.phala.com: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-2" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-2" title="Compose binding: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Compose binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-2" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-2">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">ACI gateway</span><span class="path">api.redpill.ai</span></td>
-      <td>Gateway + potentially non-TEE backend</td>
-      <td>Hostname permits non-TEE serving</td>
-      <td>Gateway quote does not prove private backend execution.
-        <span class="result">Adapter rejected</span>
-        <a href="./evidence.html#route-aci-gateway-api-redpill">Evidence →</a>
-      </td>
+      <td class="font-semibold">aci-gateway</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-3">tee.redpill.ai</a></td>
+      <td class="text-slate-500 text-xs">aci-gateway</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-3" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-3" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-3" title="Key binding: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-3" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-3" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-3" title="Compose binding: Adapter pass. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Compose binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-3" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:51Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-3">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">NEAR AI</span><span class="path">Gateway HTTPS</span></td>
-      <td>Gateway + model worker</td>
-      <td>Per-model anchors + chain authorization</td>
-      <td>Actual request and model identity not fully bound.
-        <span class="result">Unavailable · Adapter rejected</span>
-        <a href="./evidence.html#route-near-ai-gateway-plain">Evidence →</a>
-      </td>
+      <td class="font-semibold">chutes</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-4">DeepSeek-V3.2-TEE</a></td>
+      <td class="text-slate-500 text-xs">chutes-tee</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-4" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:13Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-4" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:13Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-4" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:13Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:13Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:13Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:13Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:13Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-4">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">NEAR AI</span><span class="path">E2EE through gateway</span></td>
-      <td>Model TEE for protected fields; relay sees other fields</td>
-      <td>Model policy + attested encryption key</td>
-      <td>Reply-key binding unresolved; full request untested.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-near-ai-gateway-e2ee">Evidence →</a>
-      </td>
+      <td class="font-semibold">chutes</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-5">GLM-5.1-TEE</a></td>
+      <td class="text-slate-500 text-xs">chutes-tee</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-5" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-5" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-5" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-5">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">NEAR AI</span><span class="path">Direct model endpoint</span></td>
-      <td>Selected model worker, conditional on channel proof</td>
-      <td>Direct endpoint key + workload policy</td>
-      <td>Complete encrypted request proof missing.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-near-ai-direct">Evidence →</a>
-      </td>
+      <td class="font-semibold">chutes</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-6">GLM-5.2-TEE</a></td>
+      <td class="text-slate-500 text-xs">chutes-tee</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-6" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:14Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-6" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:14Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-6" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:14Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:14Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:14Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:14Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:14Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-6">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Tinfoil</span><span class="path">Router → model enclave</span></td>
-      <td>Router + selected model enclave</td>
-      <td>Measured router pins worker repositories</td>
-      <td>Independent AMD validation and worker trace missing.
-        <span class="result">Not checked</span>
-        <a href="./evidence.html#route-tinfoil-router">Evidence →</a>
-      </td>
+      <td class="font-semibold">chutes</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-7">Kimi-K2.6-TEE</a></td>
+      <td class="text-slate-500 text-xs">chutes-tee</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-7" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:27Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-7" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:27Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-7" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:27Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:27Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:27Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:27Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:27Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-7">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Venice</span><span class="path">E2EE via NEAR</span></td>
-      <td>Worker; relay may see unencrypted fields</td>
-      <td>Client-specific model + key policy</td>
-      <td>Request-bound model and key proof missing.
-        <span class="result">Unavailable · Adapter rejected</span>
-        <a href="./evidence.html#route-venice-near">Evidence →</a>
-      </td>
+      <td class="font-semibold">chutes</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-8">Qwen3-32B-TEE</a></td>
+      <td class="text-slate-500 text-xs">chutes-tee</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-8" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:09Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-8" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:09Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-8" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:09Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:09Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:09Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:09Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:09Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-8">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Venice</span><span class="path">E2EE via Phala</span></td>
-      <td>Worker; relay may see unencrypted fields</td>
-      <td>Separate Phala deployment policy</td>
-      <td>Evidence availability and request binding incomplete.
-        <span class="result">Unavailable · Adapter accepted</span>
-        <a href="./evidence.html#route-venice-phala">Evidence →</a>
-      </td>
+      <td class="font-semibold">chutes</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-9">gemma-4-31B-TEE</a></td>
+      <td class="text-slate-500 text-xs">chutes-tee</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-9" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-9" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-9" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:12Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-9">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Chutes</span><span class="path">TEE model route</span></td>
-      <td>API path + model worker</td>
-      <td>Golden MRTD set covers base TD</td>
-      <td>Serving code and model weights remain unmeasured.
-        <span class="result">Not checked</span>
-        <a href="./evidence.html#route-chutes-tee">Evidence →</a>
-      </td>
+      <td class="font-semibold">near-ai</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-10">openai/gpt-oss-120b</a></td>
+      <td class="text-slate-500 text-xs">tdx+gpu</td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:52Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:52Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Key binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:52Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Key binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:52Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:52Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:52Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:52Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-slate-200 text-slate-700" title="Evidence or endpoint was unavailable; this is not a cryptographic rejection. HTTP 400: {"error":{"message":"Model 'openai/gpt-oss-120b' not found. It's not a valid model name or alias.","type":"invalid_request_error","param":"model","code":null}}">Unavailable</span><a class="full-link" href="./evidence.html#observation-10">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Private Inference</span><span class="path">Standard</span></td>
-      <td>Proxy + selected supplier</td>
-      <td>No TEE-private claim</td>
-      <td>Request-specific supplier unknown.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-private-inference-standard">Evidence →</a>
-      </td>
+      <td class="font-semibold">near-ai</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-11">zai-org/GLM-5.1-FP8</a></td>
+      <td class="text-slate-500 text-xs">tdx+gpu</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-11" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:56:56Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-11" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:56:56Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-11" title="Key binding: Adapter pass. Checked 2026-10-14T01:56:56Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-11" title="GPU evidence: Adapter pass. Checked 2026-10-14T01:56:56Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: GPU evidence — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-11" title="Address binding: Adapter pass. Checked 2026-10-14T01:56:56Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Address binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-11" title="Compose binding: Adapter rejection. Checked 2026-10-14T01:56:56Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Compose binding — Adapter rejection">×</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-11" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:56Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-rose-100 text-rose-800" title="The adapter checked evidence and rejected it. unspecified">Adapter rejected</span><a class="full-link" href="./evidence.html#observation-11">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Private Inference</span><span class="path">Zero data retention</span></td>
-      <td>Proxy + selected supplier</td>
-      <td>Retention policy</td>
-      <td>Retention enforcement unverified.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-private-inference-zdr">Evidence →</a>
-      </td>
+      <td class="font-semibold">tinfoil</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-12">router</a></td>
+      <td class="text-slate-500 text-xs">tinfoil-sev-snp-v2</td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="tinfoil router: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="tinfoil router: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Key binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="tinfoil router: Key binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="tinfoil router: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="tinfoil router: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="tinfoil router: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="tinfoil router: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. AMD SNP report signature and VCEK chain not verified">Not checked</span><a class="full-link" href="./evidence.html#observation-12">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Private Inference</span><span class="path">Private beta via NEAR</span></td>
-      <td>Model TEE; relay may expose reply</td>
-      <td>Quote consistency; no approved workload baseline</td>
-      <td>Approved references and reply-key binding missing.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-private-inference-private">Evidence →</a>
-      </td>
+      <td class="font-semibold">venice</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-13">e2ee-gemma-4-31b</a></td>
+      <td class="text-slate-500 text-xs">venice</td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Key binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Key binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-slate-200 text-slate-700" title="Evidence or endpoint was unavailable; this is not a cryptographic rejection. no TEE attestation available for this model (404)">Unavailable</span><a class="full-link" href="./evidence.html#observation-13">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Maple</span><span class="path">Via Tinfoil</span></td>
-      <td>Nitro enclave + Tinfoil router / worker</td>
-      <td>SDK roots + signed PCR0 histories</td>
-      <td>Live session, rebuild and upstream proof missing.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-maple-tinfoil">Evidence →</a>
-      </td>
+      <td class="font-semibold">venice</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-14">e2ee-glm-5-1</a></td>
+      <td class="text-slate-500 text-xs">venice</td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="venice e2ee-glm-5-1: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="Key binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Key binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="venice e2ee-glm-5-1: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="Address binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Address binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="Backend check: Not checked or not applicable; consult route. Checked 2026-10-14T01:56:57Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Backend check — Not checked or not applicable; consult route">—</a></td>
+
+      <td><span class="outcome bg-slate-200 text-slate-700" title="Evidence or endpoint was unavailable; this is not a cryptographic rejection. no TEE attestation available for this model (404)">Unavailable</span><a class="full-link" href="./evidence.html#observation-14">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Maple</span><span class="path">Via Privatemode</span></td>
-      <td>Nitro enclave / sidecar + worker</td>
-      <td>Nitro PCR0 + upstream policy</td>
-      <td>Live session, rebuild and upstream proof missing.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-maple-privatemode">Evidence →</a>
-      </td>
+      <td class="font-semibold">venice</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-15">e2ee-gpt-oss-120b-p</a></td>
+      <td class="text-slate-500 text-xs">venice</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-15" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:02Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-15" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:02Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: TDX appraisal — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-15" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:02Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-15" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:02Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-15" title="Address binding: Adapter pass. Checked 2026-10-14T01:57:02Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Address binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-15" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:02Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-15" title="Backend check: Adapter rejection. Checked 2026-10-14T01:57:02Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Backend check — Adapter rejection">×</a></td>
+
+      <td><span class="outcome bg-emerald-100 text-emerald-800" title="The adapter accepted its scoped checks; this is not a full route verdict. adapter_accepted">Adapter accepted</span><a class="full-link" href="./evidence.html#observation-15">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Privatemode</span><span class="path">Proxy · automatic manifest</span></td>
-      <td>Local proxy + worker; key services matter</td>
-      <td>Auto-adopts provider manifest</td>
-      <td>Live key exchange and admission unverified.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-privatemode-proxy-auto">Evidence →</a>
-      </td>
+      <td class="font-semibold">venice</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-16">e2ee-qwen3-6-35b-a3b</a></td>
+      <td class="text-slate-500 text-xs">venice</td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-16" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b: Fresh nonce — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-16" title="TDX appraisal: Adapter rejection. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b: TDX appraisal — Adapter rejection">×</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-16" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b: Key binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-16" title="GPU evidence: Adapter pass. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b: GPU evidence — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-16" title="Address binding: Adapter pass. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b: Address binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-16" title="Compose binding: Adapter pass. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b: Compose binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-16" title="Backend check: Adapter rejection. Checked 2026-10-14T01:57:00Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b: Backend check — Adapter rejection">×</a></td>
+
+      <td><span class="outcome bg-rose-100 text-rose-800" title="The adapter checked evidence and rejected it. adapter_rejected">Adapter rejected</span><a class="full-link" href="./evidence.html#observation-16">All checks &amp; evidence</a></td>
     </tr>
 
-
     <tr>
-      <td><span class="provider">Privatemode</span><span class="path">Proxy · pinned manifest</span></td>
-      <td>Local proxy + worker; key services matter</td>
-      <td>Locally pinned manifest</td>
-      <td>Fail-closed request and key distribution untested.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-privatemode-proxy-pinned">Evidence →</a>
-      </td>
-    </tr>
+      <td class="font-semibold">venice</td>
+      <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-17">e2ee-qwen3-6-35b-a3b-uncensored-p</a></td>
+      <td class="text-slate-500 text-xs">venice</td>
 
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-17" title="Fresh nonce: Adapter pass. Checked 2026-10-14T01:57:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Fresh nonce — Adapter pass">✓</a></td>
 
-    <tr>
-      <td><span class="provider">Privatemode</span><span class="path">Proxyless API</span></td>
-      <td>Service front door + backend</td>
-      <td>No client-side attestation documented</td>
-      <td>No client-verified recipient or key binding.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-privatemode-proxyless">Evidence →</a>
-      </td>
-    </tr>
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-17" title="TDX appraisal: Adapter pass. Checked 2026-10-14T01:57:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: TDX appraisal — Adapter pass">✓</a></td>
 
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-17" title="Key binding: Adapter pass. Checked 2026-10-14T01:57:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Key binding — Adapter pass">✓</a></td>
 
-    <tr>
-      <td><span class="provider">Confidential AI</span><span class="path">Inference API</span></td>
-      <td>TLS load balancer + gateway + workers</td>
-      <td>Published allowlist + releases</td>
-      <td>Live proof absent; operator access paths remain.
-        <span class="result">No matched request observation</span>
-        <a href="./evidence.html#route-confidential-ai-api">Evidence →</a>
-      </td>
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-17" title="GPU evidence: Adapter pass. Checked 2026-10-14T01:57:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: GPU evidence — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-17" title="Address binding: Adapter pass. Checked 2026-10-14T01:57:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Address binding — Adapter pass">✓</a></td>
+
+      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-17" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-10-14T01:57:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Compose binding — Not checked or not applicable; consult route">—</a></td>
+
+      <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-17" title="Backend check: Adapter rejection. Checked 2026-10-14T01:57:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Backend check — Adapter rejection">×</a></td>
+
+      <td><span class="outcome bg-emerald-100 text-emerald-800" title="The adapter accepted its scoped checks; this is not a full route verdict. adapter_accepted">Adapter accepted</span><a class="full-link" href="./evidence.html#observation-17">All checks &amp; evidence</a></td>
     </tr>
 
   </tbody>
 </table>
 </div>
-<p class="mt-3 text-xs text-slate-500">19 paths · route inventory reviewed 2026-10-13. Observation times and individual checks are available in each evidence link.</p>
-<section class="mt-7 border-t border-slate-200 pt-5 text-sm">
-  <a class="font-semibold text-indigo-700 underline" href="./history.html">Reference values over time →</a>
-  <p class="mt-1 text-slate-600">Explore new values, returning sets and gaps in the recorded history.</p>
+<p class="mt-3 text-xs text-slate-500">17 model / endpoint observations. This retains the original check columns; additional checks, including AMD hardware, TLS pinning, build provenance and runtime configuration, are in each row’s full evidence. An unavailable endpoint is not a rejected proof.</p>
+
+<section class="mt-6 text-sm">
+  <h2 class="font-semibold">Additional providers under review</h2>
+  <p class="mt-1 text-slate-600">confidential-ai · maple · private-inference · privatemode. Source and publication reviews only; no matched request observations. <a class="text-indigo-700 underline" href="./evidence.html#routes">Review coverage →</a></p>
 </section>
+
 
 </main>
 

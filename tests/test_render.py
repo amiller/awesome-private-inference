@@ -46,7 +46,7 @@ def test_render_produces_html(tmp_path, monkeypatch):
     rc = render.main()
     assert rc == 0
     html = (docs / "index.html").read_text()
-    assert "Compare private inference" in html
+    assert "Attestation checks across providers and models" in html
     evidence = (docs / "evidence.html").read_text()
     assert "openai/gpt-oss-120b" in evidence
     assert "Public reference observatory" in evidence
