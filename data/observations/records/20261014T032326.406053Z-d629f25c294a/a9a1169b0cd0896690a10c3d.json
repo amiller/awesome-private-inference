@@ -1,0 +1,161 @@
+{
+  "captured_at": "2026-10-14T03:23:34Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "tdx+gpu",
+      "details": {},
+      "error": "HTTP 400: {\"error\":{\"message\":\"Model 'openai/gpt-oss-120b' not found. It's not a valid model name or alias.\",\"type\":\"invalid_request_error\",\"param\":\"model\",\"code\":null}}",
+      "latency_s": 0.29,
+      "model": "openai/gpt-oss-120b",
+      "provider": "near-ai",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": null,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": null,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": null,
+        "measurement_matches_release": null,
+        "nonce_bound": null,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": null,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": null,
+        "sessions_publish_evidence_digests": null,
+        "tdx_verified": null,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "",
+      "valid": false,
+      "verified_at": "2026-10-14T03:23:34Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "3a416a42a2f2f6880570117eea98a4bca9d9275421c0f1e26987f623f7351554",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "3a416a42a2f2f6880570117eea98a4bca9d9275421c0f1e26987f623f7351554"
+  },
+  "identities": [],
+  "identity_trust": "untrusted_report",
+  "instance_id": null,
+  "legacy": false,
+  "model": "openai/gpt-oss-120b",
+  "observation_id": "20261014T032326.406053Z-d629f25c294a/a9a1169b0cd0896690a10c3d",
+  "observer": "daily-probe",
+  "outcome": "unavailable",
+  "policy_revision": "unknown",
+  "provider": "near-ai",
+  "reason": "model_not_found",
+  "reason_detail": null,
+  "route_id": "near-ai/openai/gpt-oss-120b",
+  "run_id": "20261014T032326.406053Z-d629f25c294a",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "d82e1f486ebad8c57ee342f867723a52436a8189ef9dfcf733f75914ccc08b55"
+}
