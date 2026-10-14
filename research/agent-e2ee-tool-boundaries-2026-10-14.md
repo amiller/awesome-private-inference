@@ -55,3 +55,30 @@ The historical NEAR DevProof inference/private-chat reports did not explicitly a
 5. Qualify consecutive native-tool rounds only with an explicit live model/version and spend budget. Keep source, synthetic and live evidence distinct.
 
 No live requests, real transcripts or provider changes were made for this source review. The registry's existing inference score is not changed by this note.
+
+
+## Live native-tool evidence and input-integrity dependency
+
+[Abalone PR #75](https://github.com/amiller/abalone/pull/75) now records explicitly
+budgeted synthetic native-tool checks on `z-ai/glm-5.3-flash`: two consecutive echo
+calls and a separate complete tool/result/final-answer round trip passed, with
+model-issued signatures matching the declared request and received response hashes.
+Six POSTs total yielded a catalog-priced signed-token estimate of $0.00022808
+against a $0.25 authorization. Model TCB verified UpToDate; gateway TCB was OutOfDate
+with four Intel advisories, so strict admission failed. Normal private-work
+configuration was not changed; source/deployment closure remains unestablished.
+
+The source review identified a further distinction: trusted service-token callers
+can override the backend's signed request hash using X-Request-Hash in
+[resolve_request_hash_for_signing](https://github.com/nearai/inference-proxy/blob/efd600a46c4327c8d8d038ab8b01c25a0e74b5bd/src/routes/chat.rs).
+End-user cloud API keys cannot use that authority. A matching genuine model
+signature therefore does not independently prove the body actually received by
+the model when a privileged gateway can assert the client hash. The new synthetic
+regression demonstrates that signature-level limitation; no real service-token
+attack was attempted or established.
+
+Field confidentiality and authentic model replies passed the bounded observations.
+Gateway-independent client-request origin and action integrity did not qualify.
+Resolve this through enclave-enforced client request binding, or explicitly qualify
+the gateway/code/service-credential custody as trusted. The DevProof supplement
+in PR #5 now separates these properties and includes the live evidence.
