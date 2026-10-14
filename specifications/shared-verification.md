@@ -1,25 +1,30 @@
 # Shared verification and reference observations · v1
 
-Private Inference Beat has three outputs: a curated verifier directory, retained
-reference-value observations, and route assessments with proposed stage criteria.
+The Private Inference Beat website has two primary tabs: the comparison table
+and the reference values explorer. Introductory prose explains how to read each.
+Stage criteria, methodology and raw measurements are supporting material. A
+curated verifier directory lives in Git as part of the verification and reference
+process; it has no website page or tab.
 The repository remains `awesome-private-inference`.
 
 ## Outputs and regeneration
 
-`python -m probes.render` regenerates the static site and two JSON files offline:
+`python -m probes.render` regenerates the static site and the reference JSON export
+offline. The repository separately maintains the verifier directory:
 
-- `docs/verifiers.json` copies the curated `data/verifiers.json` directory.
+- `data/verifiers.json` is the curated directory in Git.
   Each provider has route IDs, implementation locations, a directory review date,
   delegated trust, missing checks and evidence pinned to `source_revision`.
   An upstream lead can be useful without a repository adapter or live proof.
 - `docs/reference-values.json` has `schema_version: 1` and
-  `kind: "reference-observations"`. It projects the same evidence as Reference
-  history, retaining full values, context, dated changes and scoped review records.
+  `kind: "reference-observations"`. It projects the same evidence as the Reference
+  values explorer, retaining full values, context, dated changes and scoped review records.
 
-The public files are available beside `index.html` on GitHub Pages. They are
-observation/discovery inputs, not signed acceptance manifests or stable adapter
-APIs. A schema change requires a version bump and consumer review. Do not flatten
-all extracted values into one allowlist.
+The reference export is available beside `index.html` on GitHub Pages; the verifier
+directory is consumed from a pinned repository revision. These are observation/
+discovery inputs, not signed acceptance manifests or stable adapter APIs. A schema
+change requires a version bump and consumer review. Do not flatten all extracted
+values into one allowlist.
 
 ### Reference export fields
 

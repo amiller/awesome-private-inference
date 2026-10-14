@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Private Inference Beat</title>
-  <meta name="description" content="Curated private inference verifiers, reference-value observations and evidence-based route assessments.">
+  <title>Comparison · Private Inference Beat</title>
+  <meta name="description" content="Private inference reference-value observations and evidence-based route assessments.">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
     .dot { display:inline-block; width:0.5rem; height:0.5rem; border-radius:9999px; margin-right:0.4rem; vertical-align:middle; }
+    .view-tab { display:inline-block; padding:8px 0; border-bottom:2px solid transparent; color:#546779; }
+    .view-tab:hover { color:#172b3c; }
+    .view-tab[aria-current="page"] { color:#4338ca; border-color:#4338ca; font-weight:600; }
   </style>
 </head>
 <body class="h-full text-slate-900">
@@ -18,15 +21,9 @@
       <span class="text-xl font-bold tracking-tight">Private Inference Beat</span>
 
     </a>
-    <nav class="text-sm flex flex-wrap gap-4 text-slate-600">
-      <a href="./verifiers.html" class="hover:text-slate-900">Verifiers</a>
-      <a href="./history.html" class="hover:text-slate-900">Reference history</a>
-      <a href="./index.html" class="hover:text-slate-900">Overview</a>
-      <a href="./stages.html" class="hover:text-slate-900">Stage criteria</a>
-      <a href="./measurements.html" class="hover:text-slate-900">Measurements</a>
-      <a href="./pricing.html" class="hover:text-slate-900">Pricing</a>
-      <a href="./methodology.html" class="hover:text-slate-900">Methodology</a>
-      <a href="https://github.com/amiller/awesome-private-inference" class="hover:text-slate-900">GitHub ↗</a>
+    <nav aria-label="Primary" class="text-sm flex gap-6">
+      <a href="./index.html" class="view-tab" aria-current="page">Comparison</a>
+      <a href="./history.html" class="view-tab">Reference values</a>
     </nav>
   </div>
 </header>
@@ -56,9 +53,9 @@
 </style>
 
 <section class="mb-4">
-  <h1 class="text-2xl font-bold tracking-tight">Private Inference Beat</h1>
-  <p class="mt-1 text-sm text-slate-600">Compare what clients can verify and what operators can change. Expand a provider for its request paths.</p>
-  <p class="mt-2 text-xs text-slate-500"><a href="./verifiers.html" class="text-indigo-700 underline">Curated verifiers</a> · <a href="./history.html" class="text-indigo-700 underline">Reference-value transparency</a> · <a href="./stages.html" class="text-indigo-700 underline">Stage criteria (proposed)</a> · Dated assessments; no stages awarded</p>
+  <h1 class="text-2xl font-bold tracking-tight">Comparison</h1>
+  <p class="mt-1 text-sm text-slate-600">Compare the evidence for each private inference route: what the client verifies, who can access plaintext, and who can approve software changes.</p>
+  <p class="mt-2 text-xs text-slate-500">Expand a provider for its request paths. Assessments are dated; no stages are awarded. <a href="./assessments.html#rubric" class="text-indigo-700 underline">How to read the table</a> · <a href="./stages.html" class="text-indigo-700 underline">Stage criteria (proposed)</a></p>
 </section>
 <div class="mb-3 flex flex-wrap items-center gap-4 text-xs text-slate-600">
   <label>Provider <select id="provider-filter" class="border rounded bg-white px-2 py-1"><option value="">All</option><option value="aci-gateway">ACI gateway</option><option value="near-ai">NEAR AI</option><option value="tinfoil">Tinfoil</option><option value="venice">Venice</option><option value="chutes">Chutes</option><option value="private-inference">Private Inference</option><option value="maple">Maple</option><option value="privatemode">Privatemode</option><option value="confidential-ai">Confidential AI</option></select></label>
@@ -282,6 +279,7 @@ document.getElementById('provider-filter').onchange=function(){for(const body of
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
     <span>Adapter snapshot 2026-10-14T18:00:14.615327Z · run 20261014T180014.615271Z-89426d0ce7c9 · <code>292ff7e4</code></span>
+    <span><a class="underline" href="./methodology.html">Methodology</a> · <a class="underline" href="./measurements.html">Measurements</a> · <a class="underline" href="./pricing.html">Pricing</a> · <a class="underline" href="https://github.com/amiller/awesome-private-inference">GitHub ↗</a></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>

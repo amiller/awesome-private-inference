@@ -1,4 +1,4 @@
-"""Check Beat navigation, internal links and mobile layout using existing Chromium."""
+"""Check Beat assessment/history navigation, internal links and mobile layout using existing Chromium."""
 import argparse
 import json
 from pathlib import Path
@@ -30,20 +30,30 @@ with sync_playwright() as w:
     browser=w.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
     page=browser.new_page(viewport={'width':1440,'height':1000})
     page.goto((docs/'index.html').as_uri(),wait_until='networkidle')
-    page.get_by_role('link',name='Curated verifiers',exact=True).click()
-    page.wait_for_url('**/verifiers.html')
-    assert page.locator('section').count()==9
-    assert page.locator('#chutes').inner_text().find('GPU evidence is not appraised')>=0
-    page.screenshot(path=str(out/'directory-desktop.png'),full_page=True)
-    page.get_by_role('link',name='Stage criteria',exact=True).click()
+    assert page.locator('a[href="./verifiers.html"]').count() == 0
+    assert not (docs/'verifiers.html').exists()
+    assert not (docs/'verifiers.json').exists()
+    primary=page.locator('nav[aria-label="Primary"]')
+    assert primary.locator('a').count() == 2
+    assert primary.locator('a[aria-current="page"]').get_attribute('href') == './index.html'
+    primary.locator('a[href="./history.html"]').click()
+    page.wait_for_url('**/history.html')
+    page.locator('#chart svg').wait_for()
+    primary=page.locator('nav[aria-label="Primary"]')
+    assert primary.locator('a').count() == 2
+    assert primary.locator('a[aria-current="page"]').get_attribute('href') == './history.html'
+    page.screenshot(path=str(out/'reference-values-desktop.png'),full_page=True)
+    primary.locator('a[href="./index.html"]').click()
+    page.wait_for_url('**/index.html')
+    page.locator('a[href="./stages.html"]').first.click()
     page.wait_for_url('**/stages.html')
     assert 'no stages awarded' in page.locator('main').inner_text()
     page.screenshot(path=str(out/'stages-desktop.png'),full_page=True)
-    for name in ['verifiers.html','stages.html','index.html']:
+    for name in ['stages.html','index.html','history.html']:
         page.set_viewport_size({'width':390,'height':844})
         page.goto((docs/name).as_uri(),wait_until='networkidle')
         assert not page.evaluate('document.documentElement.scrollWidth>innerWidth'),name
         page.screenshot(path=str(out/(name+'.mobile.png')),full_page=True)
     browser.close()
-(out/'beat-browser-results.json').write_text(json.dumps({'directory_providers':9,'navigation':True,'all_internal_links_valid':True,'mobile_no_overflow':True,'stage_proposal_no_awards':True},indent=2)+'\n')
+(out/'beat-browser-results.json').write_text(json.dumps({'verifier_directory_repo_only':True,'two_primary_tabs':True,'all_internal_links_valid':True,'mobile_no_overflow':True,'stage_proposal_no_awards':True},indent=2)+'\n')
 print('Beat browser and all generated internal links passed.')

@@ -1,5 +1,11 @@
 # Contributing
 
+Start with the [repository guide](docs/REPOSITORY-GUIDE.md) for the project
+question, source/output map and a reproducible evidence trace. Agents should also
+read [AGENTS.md](AGENTS.md). A useful contribution makes a scoped claim easier to
+check, closes a proof gap, or makes missing evidence and operational failures
+visible.
+
 ## Add a route or reference source
 
 1. Add a candidate with category, primary sources, inclusion reason, owner/blocker and next review date to `data/candidates.json`.

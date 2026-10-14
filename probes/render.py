@@ -14,7 +14,7 @@ from probes.quality import compute as compute_quality
 from probes.schema import classify_report
 from probes.reference_history import build as build_reference_history
 from probes.assessments import build as build_assessments, AXES, STATES
-from probes.directory import validate as validate_directory, reference_export
+from probes.directory import reference_export
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_LATEST = REPO_ROOT / "data/latest.json"
@@ -193,27 +193,13 @@ def _render(snapshot: dict) -> None:
            "scorecard_labels": SCORECARD_LABELS, "outcome_style": OUTCOME_STYLE,
            "repo_url": REPO_URL}
     ctx["history"] = build_reference_history(REPO_ROOT)
-    catalog = _load_optional(REPO_ROOT / "data/verifiers.json", None)
-    if catalog is not None:
-        validate_directory(catalog, routes)
-    else:
-        catalog = {"schema_version": 1, "source_revision": "", "providers": [],
-                   "review_scope": "No curated directory is available in this evidence checkout."}
-    ctx["verifier_catalog"] = {**catalog, "providers": [
-        {**item, "implementations": [{**impl, "source_url": impl["source"] if impl["source"].startswith("https://") else
-          REPO_URL.replace("/main/", "/" + catalog["source_revision"] + "/") + impl["source"]}
-          for impl in item["implementations"]],
-         "evidence_linked": [{"label": source, "url": REPO_URL.replace("/main/", "/" + catalog["source_revision"] + "/") + source}
-                             for source in item["evidence"]]}
-        for item in catalog["providers"]]}
-    for name, value in (("verifiers.json", catalog), ("reference-values.json", reference_export(ctx["history"]))):
-        (DOCS_DIR / name).write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+    (DOCS_DIR / "reference-values.json").write_text(
+        json.dumps(reference_export(ctx["history"]), indent=2, sort_keys=True) + "\n")
     assessment_data = _load_optional(REPO_ROOT / "data/assessments/routes.json", {"rubric_version": 1, "routes": []})
     ctx["assessment_groups"] = build_assessments(assessment_data, cards, ctx["history"], ctx["generated_at"])
     ctx["assessment_axes"] = AXES
     ctx["assessment_states"] = STATES
     for page, template in (("index.html", "index.html.j2"),
-                           ("verifiers.html", "verifiers.html.j2"),
                            ("stages.html", "stages.html.j2"),
                            ("assessments.html", "assessments.html.j2"),
                            ("measurements.html", "measurements.html.j2"),
@@ -223,7 +209,7 @@ def _render(snapshot: dict) -> None:
                            ("history.html", "history.html.j2")):
         rendered = env.get_template(template).render(**ctx)
         (DOCS_DIR / page).write_text("\n".join(line.rstrip() for line in rendered.splitlines()) + "\n")
-    print(f"wrote dashboard, directory, stage criteria and reference exports to {DOCS_DIR}")
+    print(f"wrote dashboard, stage criteria and reference exports to {DOCS_DIR}")
 
 
 def main() -> int:
