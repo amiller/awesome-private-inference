@@ -1,6 +1,6 @@
 # Reference observatory implementation and rollout evidence
 
-Implemented on `feat/reference-observatory`, based on upstream `cbf555f`. The original dirty checkout was preserved. Astra supervised three Sol implementation tracks and reviewed their integration. The framing, detailed goals and provider research are in the [project review](../review-2026-10-13/review.md).
+Implemented on `feat/reference-observatory`, based on upstream `cbf555f`, in [draft PR #20](https://github.com/amiller/awesome-private-inference/pull/20). The original dirty checkout was preserved. Astra supervised three Sol implementation tracks and reviewed their integration. The framing, detailed goals and provider research are in the [project review](../review-2026-10-13/review.md).
 
 ## Delivered
 

@@ -14,7 +14,7 @@ Branch: feat/reference-observatory, based on upstream cbf555f. Original dirty ch
 - [x] Pin instrument inputs and update daily/weekly/heartbeat workflows.
 - [x] Run deterministic replay, live readonly capture, simulated lease/crash recovery and independent review.
 - [x] Produce reviewed change packet and public sanitized decision.
-- [ ] Create reviewable PR and record rollout evidence.
+- [x] Create reviewable [draft PR #20](https://github.com/amiller/awesome-private-inference/pull/20) and record rollout evidence.
 
 ## Evidence gates still requiring follow-through
 
