@@ -3,28 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Methodology · awesome-private-inference</title>
-  <meta name="description" content="Public observatory of confidential inference routes, accepted reference values, and observed evidence.">
+  <title>Methodology · Private Inference Beat</title>
+  <meta name="description" content="Private inference reference-value observations and evidence-based route assessments.">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
     .dot { display:inline-block; width:0.5rem; height:0.5rem; border-radius:9999px; margin-right:0.4rem; vertical-align:middle; }
+    .view-tab { display:inline-block; padding:8px 0; border-bottom:2px solid transparent; color:#546779; }
+    .view-tab:hover { color:#172b3c; }
+    .view-tab[aria-current="page"] { color:#4338ca; border-color:#4338ca; font-weight:600; }
   </style>
 </head>
 <body class="h-full text-slate-900">
 <header class="border-b border-slate-200 bg-white">
   <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap gap-4 items-center justify-between">
     <a href="./index.html" class="flex items-baseline gap-2">
-      <span class="text-xl font-bold tracking-tight">awesome-private-inference</span>
+      <span class="text-xl font-bold tracking-tight">Private Inference Beat</span>
 
     </a>
-    <nav class="text-sm flex flex-wrap gap-4 text-slate-600">
-      <a href="./history.html" class="hover:text-slate-900">Reference history</a>
-      <a href="./index.html" class="hover:text-slate-900">Overview</a>
-      <a href="./measurements.html" class="hover:text-slate-900">Measurements</a>
-      <a href="./pricing.html" class="hover:text-slate-900">Pricing</a>
-      <a href="./methodology.html" class="hover:text-slate-900">Methodology</a>
-      <a href="https://github.com/amiller/awesome-private-inference" class="hover:text-slate-900">GitHub ↗</a>
+    <nav aria-label="Primary" class="text-sm flex gap-6">
+      <a href="./index.html" class="view-tab">Comparison</a>
+      <a href="./history.html" class="view-tab">Reference values</a>
     </nav>
   </div>
 </header>
@@ -72,6 +71,7 @@
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
     <span>Adapter snapshot 2026-10-14T18:00:14.615327Z · run 20261014T180014.615271Z-89426d0ce7c9 · <code>292ff7e4</code></span>
+    <span><a class="underline" href="./methodology.html">Methodology</a> · <a class="underline" href="./measurements.html">Measurements</a> · <a class="underline" href="./pricing.html">Pricing</a> · <a class="underline" href="https://github.com/amiller/awesome-private-inference">GitHub ↗</a></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>

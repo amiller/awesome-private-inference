@@ -1,11 +1,13 @@
 {% extends "_base.html.j2" %}
+{% set primary_view = 'comparison' %}
+{% block title %}Comparison · Private Inference Beat{% endblock %}
 {% block content %}
 {% include "_assessment_style.html.j2" %}
 {% macro badge(state, href, title) %}<a class="signal {{ state }}" href="{{ href }}" title="{{ title }}">{{ assessment_states[state][1] }} {{ assessment_states[state][0] }}</a>{% endmacro %}
 <section class="mb-4">
-  <h1 class="text-2xl font-bold tracking-tight">Private inference</h1>
-  <p class="mt-1 text-sm text-slate-600">Compare what clients can verify and what operators can change. Expand a provider for its request paths.</p>
-  <p class="mt-2 text-xs text-slate-500">Dated, preliminary assessments · no overall security score · <a href="./assessments.html#rubric" class="text-indigo-700 underline">How assessments work</a></p>
+  <h1 class="text-2xl font-bold tracking-tight">Comparison</h1>
+  <p class="mt-1 text-sm text-slate-600">Compare the evidence for each private inference route: what the client verifies, who can access plaintext, and who can approve software changes.</p>
+  <p class="mt-2 text-xs text-slate-500">Expand a provider for its request paths. Assessments are dated; no stages are awarded. <a href="./assessments.html#rubric" class="text-indigo-700 underline">How to read the table</a> · <a href="./stages.html" class="text-indigo-700 underline">Stage criteria (proposed)</a></p>
 </section>
 <div class="mb-3 flex flex-wrap items-center gap-4 text-xs text-slate-600">
   <label>Provider <select id="provider-filter" class="border rounded bg-white px-2 py-1"><option value="">All</option>{% for group in assessment_groups %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>

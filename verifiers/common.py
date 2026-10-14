@@ -15,19 +15,17 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 
-# Per attestation-shape Stage-1-required layers. A null cell on a required layer
-# fails Stage 1 the same way ❌ does — the provider's protocol elects not to
-# expose the check, so the audit surface is too thin. A null on an unrequired
-# layer is benign ("architecturally not applicable" — e.g. backend_attested for
-# a single-TD direct-TEE provider with no gateway hop).
+# Required layers for automated adapter coverage, not stage criteria. A null
+# required layer leaves coverage incomplete; it does not diagnose a provider
+# failure. Unrequired layers need the shape-specific justification in BAR_NOTES.
 #
 # To onboard a new shape: enumerate which scorecard fields the provider's
 # attestation response *should* let a verifier check, given what the provider
 # claims (GPU inference → gpu_attested required; gateway+backend hop →
 # backend_attested required; OHTTP/HPKE E2EE → hpke_pubkey_attested required).
 REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
-    # NEAR-direct: cloud-api gateway + per-model TDX+GPU. Stage 1 needs every
-    # hop attested and the model-CVM compose committed in mr_config.
+    # NEAR: gateway + per-model TDX+GPU checks, including backend evidence
+    # and the model-CVM compose committed in mr_config.
     "tdx+gpu": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
@@ -35,7 +33,7 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
     },
     # Chutes direct (api.chutes.ai): crypto core is sound, but the serve.py on the
     # prompt-plaintext path (and the model) are unmeasured, so serving_code_attested
-    # is False by construction and the shape never reaches Stage 1 — the operator can
+    # is False by construction and coverage remains incomplete — the operator can
     # read/exfiltrate prompts and substitute the model undetectably.
     # ACI gateway (spec/aci.md): one attested workload fronting several hostnames.
     # gpu_attested and key_derives_to_address are genuinely N/A — this TD has no GPU
@@ -65,9 +63,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
         "prod_os_image", "serving_code_attested", "code_measurement_reproducible",
     },
-    # Tinfoil SEV-SNP: different attestation flavor (no Intel TDX). Stage 1
-    # surface is OHTTP/HPKE binding + measured-config + live TLS pinning +
-    # client-supplied nonce + no operator-injected runtime config.
+    # Tinfoil SEV-SNP: hardware signature, HPKE/TLS key bindings and measured
+    # runtime configuration. This set does not establish complete route proof.
     "tinfoil-sev-snp-v2": {
         "hardware_signature_verified", "tls_pubkey_pinned",
         "hpke_pubkey_attested",
@@ -117,14 +114,17 @@ def bar_note(shape: str) -> Dict[str, object]:
         "No required-layer set is defined for this shape, so nothing is scored."})
 
 
-def is_stage1_ready(scorecard: Dict[str, Optional[bool]], shape: str) -> bool:
-    """A row passes Stage 1 iff every required layer for its shape is True.
-    Unknown shapes return False — we can't claim Stage 1 for something we
-    haven't characterized."""
+def has_required_check_coverage(scorecard: Dict[str, Optional[bool]], shape: str) -> bool:
+    """All configured adapter checks passed; this cannot award a security stage."""
     required = REQUIRED_LAYERS_BY_SHAPE.get(shape, set())
     if not required:
         return False
     return all(scorecard.get(layer) is True for layer in required)
+
+
+def is_stage1_ready(scorecard: Dict[str, Optional[bool]], shape: str) -> bool:
+    """Legacy compatibility name for check coverage, not a stage assessment."""
+    return has_required_check_coverage(scorecard, shape)
 
 
 def is_layer_required(layer: str, shape: str) -> bool:

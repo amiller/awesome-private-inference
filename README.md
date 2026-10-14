@@ -1,14 +1,41 @@
-# awesome-private-inference
+# Private Inference Beat
 
-**An observatory of reference-value consistency in confidential inference.**
+**Compare private inference routes and explore the reference values behind them.**
 
-For each client and request path, we track what software is observed, which values the provider publishes, what the client accepts, and who can authorize a change. Devproof reviews establish what those values cover and whether operators can change the plaintext path outside that boundary.
+For a particular client, model and request path: **who can read protected data,
+what evidence limits that access, and who can change the software the client
+accepts?** We retain observations, audit what they cover, and critically test the
+verifiers and policies that interpret them. Each conclusion should be traceable
+to dated evidence that another person or agent can check.
 
-[Dashboard](https://amiller.github.io/awesome-private-inference/) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Detailed project review](research/review-2026-10-13/review.md)
+The useful result is a shared evidence trail for users, client developers and
+auditors: conflicting reference publications, a verifier's missing binding,
+changes to plaintext access, or a route whose evidence has gone stale. Review
+work should resolve those questions or state the missing proof precisely.
 
-The [comparison overview](https://amiller.github.io/awesome-private-inference/) groups providers into expandable client paths and compares hardware, session binding, code identity, operator access, downstream binding and update control. Each indicator links to a dated, source-pinned [route assessment](https://amiller.github.io/awesome-private-inference/assessments.html). These are preliminary evidence assessments, not completed route proofs or security stages. [Measurements](https://amiller.github.io/awesome-private-inference/measurements.html) preserves the model-level adapter table.
+The website has two views:
 
-[Reference history graph](https://amiller.github.io/awesome-private-inference/history.html) plots captured workload identities, published reference sets, client-policy inputs and document hashes. Select a point for full old/new values and scoped review evidence. Circle size can show set edits or captured text changes; neither is a measurement of deployed code size or security risk. The page is self-contained and works offline.
+| Resource | What you can find |
+| --- | --- |
+| [Comparison](https://amiller.github.io/awesome-private-inference/) | What the client verifies, who can access plaintext, and who can approve software changes. Expand each provider into its request paths and follow each assessment to its evidence. |
+| [Reference values](https://amiller.github.io/awesome-private-inference/history.html) | Captured measurements, image/compose digests, published reference sets and policy documents. Inspect full values, changes, dates and review evidence. |
+
+The comparison publishes dated, preliminary assessments. [Proposed stage criteria](https://amiller.github.io/awesome-private-inference/stages.html) explain what stronger assurance would require; no stages are awarded.
+
+The repository remains **awesome-private-inference**. Its [verifier directory](data/verifiers.json) records the implementations behind the reference process, their checks, delegated trust and missing proof. This is maintained in Git alongside the verifier routines, evidence and review records.
+
+**Observed, provider-authorized, reviewed and accepted by a client are independent facts.** A newly observed value creates review work; it never silently expands a client allowlist. An assessment applies to a named client mode and request path, rather than a whole provider brand.
+
+[Verifier directory data](data/verifiers.json) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Shared verification contract](specifications/shared-verification.md)
+
+Start with the [repository guide](docs/REPOSITORY-GUIDE.md) to locate authoritative
+inputs, follow a claim to evidence, run independent checks and choose useful
+follow-up work. [AGENTS.md](AGENTS.md) gives agents the working rules;
+[CONTRIBUTING.md](CONTRIBUTING.md) describes route and verifier contributions.
+
+The reference history page shows exact old/new values and scoped review evidence. First seen is not deployment time. Document changes do not measure deployed code size or security risk. This is an observatory backed by retained evidence, without certificate-transparency-style append-only or consistency guarantees.
+
+Abalone and multi-provider gateways could share the verifier routines and versioned reference records while applying their own explicit acceptance policies. The [consumption contract](specifications/shared-verification.md) documents the existing adapter interfaces, machine-readable exports and an unknown-value example. These integrations are not implemented here yet.
 
 ## Read the evidence by route
 
@@ -34,21 +61,21 @@ The October implementation repairs ACI detached quote/event bindings and NEAR cr
 
 ## Run locally
 
+Use an existing Python environment to inspect and validate the retained evidence:
+
 ```bash
-uv sync --frozen --extra nearai --extra dev
-source .venv/bin/activate
-# Fetch the exact upstream verifier commit in data/instrument.json into
-# _nearai-verifier, then set NEARAI_VERIFIER_PATH to its py/ directory.
-python -m probes.collect
-python -m probes.references
-python -m probes.quality --write
-python -m probes.render
 python -m pytest
+python -m probes.render
+git diff --check
 ```
 
-Existing environments can be reused without reinstalling. Never print API keys or include them in evidence. New observations go to `data/observations/`; reference bodies to `data/references/`; events to `data/continuity/events/` and `data/references/events/`. Raw request prompts are not collected. `data/latest.json` is a derived view; daily snapshots remain a compatibility/history format.
-
-`python -m probes.references --catalogs` refreshes discovery. `python -m probes.collect --backfill` explicitly imports historical snapshots as legacy evidence. Queue commands and rollout checks are in [REVIEW-WORKFLOW.md](docs/REVIEW-WORKFLOW.md); private lease state stays under ignored `local-data/`.
+Rendering regenerates the website and reference export without contacting
+providers. The [repository guide](docs/REPOSITORY-GUIDE.md#validation-and-observation-commands)
+separates environment setup, browser checks, live collection and health checks.
+Collection health measures whether the observer obtained evidence; it is not a
+confidentiality verdict. Queue commands and rollout checks are in
+[REVIEW-WORKFLOW.md](docs/REVIEW-WORKFLOW.md); private lease state stays under
+ignored `local-data/`. Never include API keys or private prompts in evidence.
 
 ## Contributing
 

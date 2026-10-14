@@ -46,10 +46,19 @@ def test_render_produces_html(tmp_path, monkeypatch):
     rc = render.main()
     assert rc == 0
     html = (docs / "index.html").read_text()
-    assert "Compare what clients can verify" in html
+    assert ">Comparison</h1>" in html
+    assert 'aria-label="Primary"' in html
     measurements = (docs / "measurements.html").read_text()
     assert "Attestation checks across providers and models" in measurements
     assert (docs / "assessments.html").exists()
+    assert not (docs / "verifiers.html").exists()
+    assert not (docs / "verifiers.json").exists()
+    assert "verifiers.html" not in html
+    assert "Private Inference Beat" in html
+    assert "no stages awarded" in (docs / "stages.html").read_text()
+    feed = json.loads((docs / "reference-values.json").read_text())
+    assert feed["schema_version"] == 1
+    assert all(s["client_acceptance"] is None for s in feed["surfaces"])
     evidence = (docs / "evidence.html").read_text()
     assert "openai/gpt-oss-120b" in evidence
     assert "Public reference observatory" in evidence

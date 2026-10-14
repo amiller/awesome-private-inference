@@ -23,6 +23,8 @@ with sync_playwright() as p:
     page.select_option("#provider", "near-ai")
     page.select_option("#group", "component")
     page.locator("svg .mark").last.click()
+    if "Captured evidence" not in page.locator("#details").inner_text():
+        page.locator("#details .event-button").first.click()
     assert "Captured evidence" in page.locator("#details").inner_text()
     page.screenshot(path=str(OUT / "near-detail.png"))
     page.select_option("#provider", "maple")
