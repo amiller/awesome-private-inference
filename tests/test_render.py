@@ -47,36 +47,22 @@ def test_render_produces_html(tmp_path, monkeypatch):
     assert rc == 0
     html = (docs / "index.html").read_text()
     assert "openai/gpt-oss-120b" in html
-    assert "Current RedPill uses ACI." in html
+    assert "Public reference observatory" in html
     assert (docs / "methodology.html").exists()
     assert (docs / "pricing.html").exists()
 
-    # The row is missing compose_hash_committed, which tdx+gpu requires, so it
-    # must read as partial rather than verified.
-    assert "partial" in html
-    # Required-but-unproven layers are named, not left as a dash the reader must decode.
-    assert "compose_hash_committed" in html
-    # Calibration is stated on the page, not buried.
-    assert "verification failures" in html
+    assert "Legacy adapter accepted" in html
+    assert "not full provider verdicts" in html
+    assert "Compose binding" in html
+    assert "rule of three" not in html.lower()
 
 
-def test_every_required_layer_is_reachable_by_a_reader():
-    """Rubric R2: a verdict computed from a layer no column shows cannot be reconstructed.
-
-    Rows whose required layers are absent from the matrix must surface them some other
-    way. render.py carries them per row as `hidden_layers`; this pins that they are
-    accounted for rather than silently dropped, which is how Tinfoil's row went blank.
-    """
+def test_every_required_layer_has_a_display_name():
+    """Every required check can be named in the adapter detail, including SNP fields."""
     from probes.render import SCORECARD_LABELS
     from verifiers.common import REQUIRED_LAYERS_BY_SHAPE
 
-    unrendered = {
-        shape: sorted(required - set(SCORECARD_LABELS))
-        for shape, required in REQUIRED_LAYERS_BY_SHAPE.items()
-    }
-    # tinfoil-sev-snp-v2 is the known offender: all five of its layers are off-matrix.
-    assert unrendered["tinfoil-sev-snp-v2"], "expected the known gap to still be detected"
-    assert not unrendered["tdx+gpu"], "tdx+gpu layers should all be on the matrix"
+    assert all(required <= set(SCORECARD_LABELS) for required in REQUIRED_LAYERS_BY_SHAPE.values())
 
 
 def test_every_scored_shape_states_what_it_excludes():

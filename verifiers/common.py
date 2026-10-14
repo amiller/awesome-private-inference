@@ -8,6 +8,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
+import re
 import time
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
@@ -68,8 +69,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
     # surface is OHTTP/HPKE binding + measured-config + live TLS pinning +
     # client-supplied nonce + no operator-injected runtime config.
     "tinfoil-sev-snp-v2": {
-        "code_measurement_reproducible", "tls_pubkey_pinned",
-        "hpke_pubkey_attested", "client_nonce_supported",
+        "hardware_signature_verified", "tls_pubkey_pinned",
+        "hpke_pubkey_attested",
         "runtime_config_fully_attested",
     },
 }
@@ -85,14 +86,15 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
         "Gateway plus per-model TD, so every hop is required. Excludes the Tinfoil-specific "
         "SEV layers, which do not exist in this architecture."},
     "aci-gateway": {"disputed": False, "note":
-        "One workload, several hostnames. Excludes gpu_attested and key_derives_to_address "
-        "(no GPU in this TD, and ACI identity is a keyset digest rather than an eth address) "
-        "and backend_attested is scored but not required, since a client can accept the "
-        "passing sessions and reject the rest. attested_serving_enforced is required: it is "
-        "the only layer that differs between hostnames on one shared attestation."},
+        "One workload, several hostnames. The adapter binds quote, keyset and measured "
+        "compose events, but does not verify upstream session bundles or an inference request; "
+        "backend_attested therefore remains unknown. The OS archive's production flag "
+        "does not establish boot measurements, so prod_os_image is unknown. "
+        "attested_serving_enforced is required for each hostname."},
     "chutes-tee": {"disputed": False, "note":
-        "serving_code_attested is required and is False by construction, so this shape cannot "
-        "reach a full row. That is the intended reading, not a scoring bug."},
+        "The quote can bind the sampled instance key and golden MRTD, but serving code and "
+        "selected model are not measured. serving_code_attested is False and the route's "
+        "complete confidentiality check remains not_checked."},
     "venice": {"disputed": False, "note":
         "Corrected 2026-08-10. This set previously omitted prod_os_image, "
         "serving_code_attested and code_measurement_reproducible because Venice resells "
@@ -103,8 +105,10 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
         "excluded and is reported False: Venice has no gateway hop of its own, and the "
         "upstream backend's own row carries that check."},
     "tinfoil-sev-snp-v2": {"disputed": False, "note":
-        "SEV-SNP rather than TDX, so the Intel-specific layers are N/A and the bar is the "
-        "OHTTP/HPKE binding, measured config, live TLS pinning and client nonce."},
+        "SEV-SNP rather than TDX. Sigstore provenance and measurement agreement are "
+        "separate from AMD report-signature verification and independent reproduction. "
+        "This adapter does not verify the AMD VCEK chain or an encrypted request. "
+        "Freshness may use authenticated session evidence rather than a per-request nonce."},
 }
 
 
@@ -140,8 +144,15 @@ class ScoreCard:
     prod_os_image: Optional[bool] = None     # vm_config.image is the prod dstack OS image, not dstack-nvidia-dev (no host-SSH/debug-tweaks)
     serving_code_attested: Optional[bool] = None  # the code on the prompt-plaintext path (serve.py) + served model are in a measured register; if not, the operator can read/exfiltrate prompts AND substitute the model undetectably
     backend_attested: Optional[bool] = None  # gateway verified model backend's quote
+    gateway_reference_audited: Optional[bool] = None  # model gateway image has a reviewed full-digest ledger match
     catalog_serves: Optional[bool] = None    # model returns 2xx on a chat call
-    code_measurement_reproducible: Optional[bool] = None  # sigstore-signed measurement matches enclave
+    sessions_publish_evidence_digests: Optional[bool] = None  # ACI list metadata only
+    catalog_nonempty: Optional[bool] = None  # /v1/models lists at least one entry
+    os_image_archive_declares_production: Optional[bool] = None  # metadata for the bound event hash, not boot MRs
+    code_measurement_reproducible: Optional[bool] = None  # independent source-to-measurement rebuild
+    release_provenance_verified: Optional[bool] = None  # signed release provenance under pinned issuer
+    measurement_matches_release: Optional[bool] = None  # parsed report field equals signed predicate
+    hardware_signature_verified: Optional[bool] = None  # report chain and signature verified
     tls_pubkey_pinned: Optional[bool] = None  # report_data binds to a live TLS SPKI hash
     hpke_pubkey_attested: Optional[bool] = None  # report_data carries a non-zero HPKE pubkey
     client_nonce_supported: Optional[bool] = None  # provider accepts a client-supplied nonce
@@ -234,6 +245,28 @@ def sha256_hex(s: str | bytes) -> str:
     if isinstance(s, str):
         s = s.encode()
     return hashlib.sha256(s).hexdigest()
+
+
+_POTENTIAL_SECRET_ASSIGNMENT = re.compile(
+    r"(?i)(?:api[_-]?key|secret|password|token)\s*[=:]\s*['\"]?([^\s'\"]{8,})"
+)
+
+
+def public_compose_preimage(compose: str) -> Dict[str, str]:
+    """Retain exact measured bytes unless they appear to contain a literal secret.
+
+    Variable references such as `${HF_TOKEN}` contain no credential value.
+    A withheld preimage retains its digest and an explicit replay limitation.
+    """
+    value = {"app_compose_sha256": sha256_hex(compose)}
+    contains_literal = any(not match.group(1).startswith(("$", "{{"))
+                           for match in _POTENTIAL_SECRET_ASSIGNMENT.finditer(compose))
+    if contains_literal:
+        value["app_compose_preimage_status"] = "withheld_potential_secret"
+    else:
+        value["app_compose"] = compose
+        value["app_compose_preimage_status"] = "captured"
+    return value
 
 
 def load_audit_ledger(path, key_field: str = "image_digest"):

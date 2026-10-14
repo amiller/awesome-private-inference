@@ -1,7 +1,7 @@
 [project]
 name = "awesome-private-inference"
 version = "0.1.0"
-description = "Public automated registry of TEE-verified inference providers"
+description = "Reference-value consistency observatory for confidential inference"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [{ name = "Andrew Miller" }]
@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-nearai = ["dcap-qvl>=0.2"]
+nearai = ["dcap-qvl>=0.3.2", "cryptography>=46.0.0", "eth-account>=0.11.0", "pynacl>=1.5.0"]
 dev = ["pytest>=8.0", "pytest-mock>=3.12"]
 
 [build-system]

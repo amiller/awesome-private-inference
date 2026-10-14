@@ -1,0 +1,185 @@
+{
+  "schema_version": "1",
+  "as_of": "2026-10-13",
+  "meaning": "Route and client-policy inventory. Source-inspected and published references are not live proof.",
+  "routes": [
+    {
+      "id": "aci-gateway-tee-redpill", "provider": "aci-gateway", "title": "ACI gateway: tee.redpill.ai", "client_mode": "TLS to gateway", "protocol": "HTTPS",
+      "models": ["tee.redpill.ai"], "observation_aliases": ["aci-gateway/tee.redpill.ai"],
+      "plaintext_holders": ["ACI gateway enclave", "selected backend after gateway forwarding"],
+      "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "backend", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "gateway", "kind": "TDX quote, compose and keyset", "publication": "live attestation endpoint", "accepted_by": "repository adapter", "status": "observed_adapter_check"}, {"component": "backend", "kind": "session evidence digest", "publication": "gateway report", "accepted_by": "unverified in adapter", "status": "self_reported"}],
+      "acceptance": "Current adapter checks selected gateway fields; independent quote-to-statement and backend-session binding remain under repair.",
+      "evidence_status": "partial", "sources": ["providers/redpill.md", "verifiers/aci.py"], "blockers": ["Verify authenticated quote body binds reported keyset, nonce and compose payload", "Verify backend session bundles"], "next_action": "Re-run negative binding tests and inspect live request route."
+    },
+    {
+      "id": "aci-gateway-phala", "provider": "aci-gateway", "title": "ACI gateway: inference.phala.com", "client_mode": "TLS to gateway", "protocol": "HTTPS",
+      "models": ["inference.phala.com"], "observation_aliases": ["aci-gateway/inference.phala.com"],
+      "plaintext_holders": ["ACI gateway enclave", "selected backend after gateway forwarding"],
+      "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "backend", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "gateway", "kind": "TDX quote, compose and keyset", "publication": "live attestation endpoint", "accepted_by": "repository adapter", "status": "observed_adapter_check"}, {"component": "backend", "kind": "session evidence digest", "publication": "gateway report", "accepted_by": "unverified in adapter", "status": "self_reported"}],
+      "acceptance": "Hostname policy differs from the RedPill host; the shared gateway workload does not establish the selected backend.",
+      "evidence_status": "partial", "sources": ["providers/phala.md", "verifiers/aci.py"], "blockers": ["Verify authenticated quote bindings and backend session bundles"], "next_action": "Trace one harmless request through the selected route."
+    },
+    {
+      "id": "aci-gateway-api-redpill", "provider": "aci-gateway", "title": "ACI gateway: api.redpill.ai", "client_mode": "TLS to gateway", "protocol": "HTTPS",
+      "models": ["api.redpill.ai"], "observation_aliases": ["aci-gateway/api.redpill.ai"],
+      "plaintext_holders": ["ACI gateway enclave", "potential non-TEE backend selected by policy"],
+      "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "backend", "role": "selected inference", "plaintext_holder": true}],
+      "references": [{"component": "gateway", "kind": "TDX quote and measured domain policy", "publication": "live attestation endpoint", "accepted_by": "repository adapter", "status": "observed_adapter_check"}],
+      "acceptance": "This hostname's measured policy does not force TEE-only serving; a valid gateway quote cannot establish private backend execution.",
+      "evidence_status": "partial", "sources": ["providers/redpill.md", "verifiers/aci.py"], "blockers": ["Request-bound backend evidence absent"], "next_action": "Keep this hostname separate in route displays and test routing enforcement."
+    },
+    {
+      "id": "near-ai-gateway-plain", "provider": "near-ai", "title": "NEAR AI gateway, ordinary HTTPS", "client_mode": "plain_gateway", "protocol": "HTTPS",
+      "models": ["*"], "observation_aliases": ["near-ai/*"],
+      "plaintext_holders": ["NEAR cloud-api gateway", "selected model worker"],
+      "components": [{"id": "gateway", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "gateway", "kind": "TDX compose hash", "publication": "on-chain app authorization and live quote", "accepted_by": "repository adapter per observed hash at recorded Base block", "status": "observed_adapter_check"}, {"component": "worker", "kind": "model compose hash", "publication": "on-chain authorization and Hermes model mapping", "accepted_by": "repository adapter checks the requested model's own anchor entry; client policy remains separate", "status": "partially_checked"}],
+      "acceptance": "The adapter compares each requested model with its own anchor entry and records the authorization query's Base block number and hash. Chain authorization is operator policy, not independent client approval or request-path proof.",
+      "evidence_status": "partial", "sources": ["providers/near-ai.md", "research/review-2026-10-13/review.md"], "blockers": ["Authenticate compose-manager actions and model identity through the quote/event chain", "Bind selected backend and encryption or TLS key to the actual request"], "next_action": "Verify the remaining authenticated model and request chain with controlled mismatches."
+    },
+    {
+      "id": "near-ai-gateway-e2ee", "provider": "near-ai", "title": "NEAR AI gateway with application encryption", "client_mode": "verified_e2ee", "protocol": "application E2EE over HTTPS",
+      "models": ["*"], "observation_aliases": [],
+      "plaintext_holders": ["client before encryption", "selected model TEE for protected fields", "gateway may read unencrypted metadata and fields"],
+      "components": [{"id": "client", "role": "verify and encrypt selected fields", "plaintext_holder": true}, {"id": "gateway", "role": "ciphertext relay and routing", "plaintext_holder": false}, {"id": "worker", "role": "decrypt and infer", "plaintext_holder": true}],
+      "references": [{"component": "worker", "kind": "TDX compose, GPU and key", "publication": "live quote plus model authorization", "accepted_by": "specific E2EE client implementation", "status": "source_inspected"}],
+      "acceptance": "Client must authorize the requested model and bind the attested key before encryption; protection covers only selected fields. Open response-key substitution issue #1061 limits reply confidentiality.",
+      "evidence_status": "candidate_route", "sources": ["https://docs.near.ai/cloud/guides/e2ee-chat-completions", "https://github.com/nearai/cloud-api/issues/1061"], "blockers": ["End-to-end request trace and response-key fix"], "next_action": "Test a pinned client with a harmless request and altered route/key."
+    },
+    {
+      "id": "near-ai-direct", "provider": "near-ai", "title": "NEAR AI experimental direct model endpoint", "client_mode": "direct", "protocol": "direct model HTTPS/E2EE",
+      "models": ["*"], "observation_aliases": [],
+      "plaintext_holders": ["client before encryption", "model worker after decryption"],
+      "components": [{"id": "client", "role": "verify and encrypt", "plaintext_holder": true}, {"id": "worker", "role": "direct inference", "plaintext_holder": true}],
+      "references": [{"component": "worker", "kind": "model quote, key and authorization", "publication": "live model endpoint and on-chain authorization", "accepted_by": "experimental client implementation", "status": "unverified"}],
+      "acceptance": "Bypassing the gateway does not itself verify the direct channel; this repository's lightclient does not complete an encrypted request.",
+      "evidence_status": "candidate_route", "sources": ["verifiers/near_ai_lightclient.py", "research/review-2026-10-13/review.md"], "blockers": ["Authenticated action hash and quote binding; encrypted completion"], "next_action": "Verify each detached-to-authenticated link and complete a request."
+    },
+    {
+      "id": "tinfoil-router", "provider": "tinfoil", "title": "Tinfoil router to model enclave", "client_mode": "SDK or HTTPS", "protocol": "HPKE/TLS",
+      "models": ["router"], "observation_aliases": ["tinfoil/router"],
+      "plaintext_holders": ["Tinfoil router enclave", "selected model enclave"],
+      "components": [{"id": "router", "role": "routing, token counting and billing", "plaintext_holder": true}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "router", "kind": "SEV-SNP measurement and Sigstore release", "publication": "tagged GitHub release", "accepted_by": "repository adapter", "status": "observed_adapter_check"}, {"component": "worker", "kind": "model enclave measurement", "publication": "router trust configuration", "accepted_by": "router runtime re-attestation", "status": "source_inspected"}],
+      "acceptance": "Router's embedded repo pins and measured code can constrain worker admission; direct worker endpoints are currently unavailable for independent probes.",
+      "evidence_status": "partial", "sources": ["providers/tinfoil.md", "verifiers/tinfoil.py"], "blockers": ["Independent AMD chain validation and worker request observation"], "next_action": "Preserve router release identity and regain worker evidence."
+    },
+    {
+      "id": "venice-near", "provider": "venice", "title": "Venice E2EE via NEAR", "client_mode": "Venice E2EE", "protocol": "application E2EE over HTTPS",
+      "models": ["e2ee-glm-5-1", "e2ee-qwen3-6-35b-a3b"], "observation_aliases": ["venice/e2ee-glm-5-1", "venice/e2ee-qwen3-6-35b-a3b"],
+      "plaintext_holders": ["client before encryption", "NEAR worker after decryption", "Venice relay may read unencrypted fields"],
+      "components": [{"id": "venice", "role": "relay", "plaintext_holder": false}, {"id": "near-worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "near-worker", "kind": "TDX quote and model key", "publication": "Venice attestation endpoint", "accepted_by": "Venice client policy or repository adapter", "status": "partially_checked"}],
+      "acceptance": "Attestation reachability and selected-field encryption depend on the actual Venice client and model route.",
+      "evidence_status": "partial", "sources": ["providers/venice.md"], "blockers": ["Request-bound model and key proof"], "next_action": "Refresh catalog and independently verify a sampled E2EE request."
+    },
+    {
+      "id": "venice-phala", "provider": "venice", "title": "Venice E2EE via Phala", "client_mode": "Venice E2EE", "protocol": "application E2EE over HTTPS",
+      "models": ["e2ee-gemma-4-31b", "e2ee-gpt-oss-120b-p", "e2ee-qwen3-6-35b-a3b-uncensored-p"], "observation_aliases": ["venice/e2ee-gemma-4-31b", "venice/e2ee-gpt-oss-120b-p", "venice/e2ee-qwen3-6-35b-a3b-uncensored-p"],
+      "plaintext_holders": ["client before encryption", "Phala worker after decryption", "Venice relay may read unencrypted fields"],
+      "components": [{"id": "venice", "role": "relay", "plaintext_holder": false}, {"id": "phala-worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "phala-worker", "kind": "worker quote and model key", "publication": "Venice attestation endpoint", "accepted_by": "Venice client policy or repository adapter", "status": "partially_checked"}],
+      "acceptance": "Phala backend evidence must be evaluated separately from NEAR-backed Venice routes.",
+      "evidence_status": "partial", "sources": ["providers/venice.md"], "blockers": ["Some endpoints return no evidence; request-bound model and key proof"], "next_action": "Refresh catalog and distinguish missing evidence from failed verification."
+    },
+    {
+      "id": "chutes-tee", "provider": "chutes", "title": "Chutes TEE model route", "client_mode": "Chutes API", "protocol": "HTTPS and encrypted worker transport",
+      "models": ["Qwen3-32B-TEE", "gemma-4-31B-TEE", "GLM-5.1-TEE", "GLM-5.2-TEE", "DeepSeek-V3.2-TEE", "Kimi-K2.6-TEE"], "observation_aliases": ["chutes/Qwen3-32B-TEE", "chutes/gemma-4-31B-TEE", "chutes/GLM-5.1-TEE", "chutes/GLM-5.2-TEE", "chutes/DeepSeek-V3.2-TEE", "chutes/Kimi-K2.6-TEE"],
+      "plaintext_holders": ["API-side processing according to selected protocol", "worker process and model"],
+      "components": [{"id": "api", "role": "routing", "plaintext_holder": null}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "worker", "kind": "TDX MRTD", "publication": "provider golden set", "accepted_by": "repository adapter and audit ledger", "status": "observed_adapter_check"}],
+      "acceptance": "MRTD identifies the dstack base TD but does not measure serve.py or model weights; matching the golden set is a narrower fact than workload approval.",
+      "evidence_status": "partial", "sources": ["providers/chutes.md", "data/audits/chutes_tee.json"], "blockers": ["Serving code and model artifact outside measured registers"], "next_action": "Inventory all confidential catalog models and investigate any unpublished MRTD."
+    },
+    {
+      "id": "private-inference-standard", "provider": "private-inference", "title": "Private Inference standard routing", "client_mode": "standard", "protocol": "OpenAI-compatible HTTPS",
+      "models": ["catalog standard tier"], "observation_aliases": [],
+      "plaintext_holders": ["Private Inference proxy", "selected supplier"], "components": [{"id": "pi-proxy", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "supplier", "role": "inference", "plaintext_holder": true}],
+      "references": [], "acceptance": "Standard routing makes no TEE-private claim; its supplier may be 0G, CheaperInference or OpenRouter according to published product description.",
+      "evidence_status": "provider_claim", "sources": ["https://privateinference.gg/how-it-works", "research/review-2026-10-13/privateinference.md"], "blockers": ["Request-specific supplier unknown"], "next_action": "Track separately from private beta; do not score as confidential execution."
+    },
+    {
+      "id": "private-inference-zdr", "provider": "private-inference", "title": "Private Inference zero-data-retention routing", "client_mode": "zdr", "protocol": "OpenAI-compatible HTTPS",
+      "models": ["catalog ZDR tier"], "observation_aliases": [],
+      "plaintext_holders": ["Private Inference proxy", "selected supplier"], "components": [{"id": "pi-proxy", "role": "TLS termination and routing", "plaintext_holder": true}, {"id": "supplier", "role": "inference", "plaintext_holder": true}],
+      "references": [], "acceptance": "ZDR is a retention policy and does not encrypt prompts from the Private Inference proxy.",
+      "evidence_status": "provider_claim", "sources": ["https://privateinference.gg/how-it-works", "research/review-2026-10-13/privateinference.md"], "blockers": ["Retention enforcement and selected supplier unverified"], "next_action": "Keep retention claim outside confidentiality score."
+    },
+    {
+      "id": "private-inference-private", "provider": "private-inference", "title": "Private Inference private beta via NEAR", "client_mode": "private beta browser", "protocol": "browser E2EE over HTTPS",
+      "models": ["z-ai/glm-5.3-flash", "Qwen/Qwen3.6-35B-A3B-FP8", "Qwen/Qwen3.8-27B"], "observation_aliases": [],
+      "plaintext_holders": ["browser before encryption", "NEAR model TEE", "relay can expose reply through unbound response-key header"],
+      "components": [{"id": "browser", "role": "quote verification and encryption", "plaintext_holder": true}, {"id": "pi-proxy", "role": "relay", "plaintext_holder": false}, {"id": "near-worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "browser", "kind": "deployed JS bundle", "publication": "privateinference.gg/chat", "accepted_by": "web delivery", "status": "source_inspected"}, {"component": "near-worker", "kind": "TDX compose and OS image", "publication": "attestation endpoint", "accepted_by": "browser self-consistency checks; no approved baseline seen", "status": "unapproved_reference"}],
+      "acceptance": "Inspected browser checks quote self-consistency but does not compare compose or OS image to an approved baseline; response key remains relay-substitutable per NEAR issue #1061.",
+      "evidence_status": "candidate_unverified", "sources": ["research/review-2026-10-13/privateinference.md", "https://privateinference.gg/how-it-works"], "blockers": ["Attestation endpoint returned 401 without key", "No independent approved model-to-workload baseline", "Response-key binding gap"], "next_action": "Obtain authorized test key, verify a fresh quote and harmless encrypted completion, and test wrong-model rejection."
+    },
+    {
+      "id": "maple-tinfoil", "provider": "maple", "title": "Maple Research or proxy via Tinfoil", "client_mode": "web/native/SDK/local proxy", "protocol": "Nitro session then Tinfoil backend",
+      "models": ["Maple models routed to Tinfoil"], "observation_aliases": [],
+      "plaintext_holders": ["browser or local proxy before encryption", "Maple OpenSecret Nitro enclave", "Tinfoil router and worker enclaves"],
+      "components": [{"id": "client", "role": "Nitro verification and encryption", "plaintext_holder": true}, {"id": "opensecret", "role": "session termination and routing", "plaintext_holder": true}, {"id": "tinfoil", "role": "backend inference", "plaintext_holder": true}],
+      "references": [{"component": "opensecret", "kind": "Nitro PCR0", "publication": "canonical and legacy signed histories", "accepted_by": "embedded SDK roots plus history on miss", "status": "publication_monitored"}, {"component": "tinfoil", "kind": "router and model measurement", "publication": "Tinfoil releases", "accepted_by": "OpenSecret Tinfoil SDK", "status": "source_inspected"}],
+      "acceptance": "SDK embedded roots can continue to accept an old PCR0; mutable signed histories authorize PCR0 text only. Upstream Tinfoil must be established separately.",
+      "evidence_status": "candidate_unverified", "sources": ["research/review-2026-10-13/maple.md", "https://www.trymaple.ai/proof"], "blockers": ["No live Nitro/session evidence", "No independent EIF rebuild", "No request-bound upstream worker evidence"], "next_action": "Pin shipped client and source release, capture a fresh Nitro handshake, then trace chosen Tinfoil route."
+    },
+    {
+      "id": "maple-privatemode", "provider": "maple", "title": "Maple Research or proxy via Continuum/Privatemode", "client_mode": "web/native/SDK/local proxy", "protocol": "Nitro session then loopback sidecar",
+      "models": ["Maple models routed to Continuum", "glm-5.3 may use either backend"], "observation_aliases": [],
+      "plaintext_holders": ["browser or local proxy before encryption", "Maple OpenSecret Nitro enclave", "Continuum sidecar in Nitro image", "Privatemode worker"],
+      "components": [{"id": "client", "role": "Nitro verification and encryption", "plaintext_holder": true}, {"id": "opensecret", "role": "session termination and routing", "plaintext_holder": true}, {"id": "continuum-sidecar", "role": "loopback upstream client", "plaintext_holder": true}, {"id": "privatemode-worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "opensecret", "kind": "Nitro PCR0", "publication": "canonical and legacy signed histories", "accepted_by": "embedded SDK roots plus history on miss", "status": "publication_monitored"}, {"component": "continuum-sidecar", "kind": "binary in measured Nitro rootfs", "publication": "Maple source tree", "accepted_by": "Nitro PCR0 transitively", "status": "source_inspected"}, {"component": "privatemode-worker", "kind": "Privatemode manifest", "publication": "CDN manifest", "accepted_by": "sidecar policy not yet inspected", "status": "unknown"}],
+      "acceptance": "Nitro PCR0 covers checked-in sidecar bytes if deployed EIF matches source, but no source-to-binary or onward Privatemode proof has been established.",
+      "evidence_status": "candidate_unverified", "sources": ["research/review-2026-10-13/maple.md"], "blockers": ["No live Nitro/session evidence", "Sidecar policy and upstream key exchange uninspected", "No independent EIF rebuild"], "next_action": "Inspect sidecar source/build provenance and verify its onward Privatemode request."
+    },
+    {
+      "id": "privatemode-proxy-auto", "provider": "privatemode", "title": "Privatemode proxy with automatic manifest", "client_mode": "proxy auto-update", "protocol": "local proxy to attested backend",
+      "models": ["manifest worker policies"], "observation_aliases": [],
+      "plaintext_holders": ["local proxy", "Coordinator and secret service where key material is handled", "selected model worker"],
+      "components": [{"id": "proxy", "role": "local client", "plaintext_holder": true}, {"id": "coordinator", "role": "admission/key coordination", "plaintext_holder": null}, {"id": "secret-service", "role": "key custody", "plaintext_holder": null}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "worker", "kind": "SNP/TDX policies and GPU/model roots", "publication": "CDN manifest", "accepted_by": "proxy fetches latest and retries after validation failure", "status": "publication_monitored"}],
+      "acceptance": "Default proxy can auto-adopt the latest provider manifest; a successful retry means agreement with current provider publication, not an independently pinned policy.",
+      "evidence_status": "candidate_unverified", "sources": ["research/review-2026-10-13/landscape.md", "https://docs.privatemode.ai/api/proxy-configuration/"], "blockers": ["No live key exchange/completion", "Manifest policy values not independently reproduced", "Coordinator and secret-service admission unverified"], "next_action": "Pin exact manifest, inspect all policies and test update/failure behavior."
+    },
+    {
+      "id": "privatemode-proxy-pinned", "provider": "privatemode", "title": "Privatemode proxy with pinned manifest", "client_mode": "proxy pinned", "protocol": "local proxy to attested backend",
+      "models": ["manifest worker policies"], "observation_aliases": [],
+      "plaintext_holders": ["local proxy", "Coordinator and secret service where key material is handled", "selected model worker"],
+      "components": [{"id": "proxy", "role": "local client", "plaintext_holder": true}, {"id": "coordinator", "role": "admission/key coordination", "plaintext_holder": null}, {"id": "secret-service", "role": "key custody", "plaintext_holder": null}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "worker", "kind": "SNP/TDX policies and GPU/model roots", "publication": "locally pinned CDN manifest copy", "accepted_by": "proxy --manifest-path", "status": "publication_monitored"}],
+      "acceptance": "Locally pinned manifest may reject provider updates until operator review; actual fail-closed behavior requires a controlled request test.",
+      "evidence_status": "candidate_unverified", "sources": ["research/review-2026-10-13/landscape.md", "https://docs.privatemode.ai/api/proxy-configuration/"], "blockers": ["No pinned-client request test", "Policy reproduction and key distribution unverified"], "next_action": "Test old/new manifest and mutated quote before sending a harmless prompt."
+    },
+    {
+      "id": "privatemode-proxyless", "provider": "privatemode", "title": "Privatemode proxyless API", "client_mode": "proxyless", "protocol": "HTTPS",
+      "models": ["proxyless service models"], "observation_aliases": [],
+      "plaintext_holders": ["Privatemode service front door and backend according to deployed route"],
+      "components": [{"id": "service", "role": "provider-mediated attestation and routing", "plaintext_holder": true}],
+      "references": [{"component": "service", "kind": "provider internal attestation policy", "publication": "trust documentation", "accepted_by": "provider on caller's behalf", "status": "provider_claim"}],
+      "acceptance": "Documentation says this path currently lacks client-side attestation; it needs a separate verdict from local proxy modes.",
+      "evidence_status": "candidate_unverified", "sources": ["https://docs.privatemode.ai/security/trust-and-compliance/"], "blockers": ["No client-visible verified recipient or key binding"], "next_action": "Document actual TLS termination and provider-side checks before scoring."
+    },
+    {
+      "id": "confidential-ai-api", "provider": "confidential-ai", "title": "Confidential AI Inference API", "client_mode": "HTTPS API / TEErminator", "protocol": "TLS at c8s TEE then protected mesh",
+      "models": ["published inference catalog"], "observation_aliases": [],
+      "plaintext_holders": ["tls-lb TEE", "gateway", "SGLang router and workers", "operator access paths described in threat model"],
+      "components": [{"id": "tls-lb", "role": "public TLS termination", "plaintext_holder": true}, {"id": "gateway", "role": "cluster API routing", "plaintext_holder": true}, {"id": "router", "role": "SGLang routing", "plaintext_holder": true}, {"id": "worker", "role": "inference", "plaintext_holder": true}],
+      "references": [{"component": "tls-lb", "kind": "TDX MRTD/RTMR, TLS cert and nonce", "publication": "attestation endpoint and signed release", "accepted_by": "TEErminator with operator-reviewed pins", "status": "publication_monitored"}, {"component": "worker", "kind": "c8s allowlist and workload receipts", "publication": "allowlist endpoint and signed release", "accepted_by": "client verifier policy", "status": "publication_monitored"}],
+      "acceptance": "Read-only allowlist and release capture does not verify Sigstore, hardware quote, exact TLS session, GPU evidence or request route. Public threat model documents operator/control-plane access paths.",
+      "evidence_status": "candidate_unverified", "sources": ["research/review-2026-10-13/landscape.md", "https://github.com/confidential-dot-ai/confidential-inference/blob/main/docs/threat-model.md"], "blockers": ["No cryptographic live proof", "Operator key and unencrypted control-plane disk concerns", "No request-bound worker/model proof"], "next_action": "Match live attestation to signed release and allowlist; test pinned TEErminator against same TLS session."
+    }
+  ],
+  "discovery": {
+    "cadence": "weekly",
+    "meaning": "Catalog observations are distinct from daily sentinel model selection and from verified routes.",
+    "catalogs": [
+      {"provider": "near-ai", "source_id": "near-ai-models", "url": "https://cloud-api.near.ai/v1/models"},
+      {"provider": "chutes", "source_id": "chutes-models", "url": "https://llm.chutes.ai/v1/models"},
+      {"provider": "venice", "source_id": "venice-models", "url": "https://api.venice.ai/api/v1/models"},
+      {"provider": "private-inference", "source_id": "private-inference-catalog", "url": "https://privateinference.gg/v1/models"}
+    ],
+    "next_review_after": "2026-10-20"
+  }
+}

@@ -16,6 +16,9 @@ on:
       - 'verifiers/**'
       - 'probes/**'
       - 'site/templates/**'
+      - 'data/routes.json'
+      - 'data/instrument.json'
+      - 'uv.lock'
       - '.github/workflows/probe-daily.yml'
 
 permissions:
@@ -42,17 +45,16 @@ jobs:
 
       - name: Install deps
         run: |
-          uv venv .venv --python 3.11
-          source .venv/bin/activate
-          uv pip install -e ".[nearai]"
+          uv sync --frozen --python 3.11 --extra nearai
 
-      - name: Clone NEAR AI verifier
-        run: git clone --depth 1 https://github.com/nearai/nearai-cloud-verifier.git _nearai-verifier
-
-      - name: Install verifier deps
+      - name: Fetch pinned NEAR verifier
         run: |
-          source .venv/bin/activate
-          uv pip install -r _nearai-verifier/requirements.txt
+          REVISION=$(python3 -c 'import json; print(json.load(open("data/instrument.json"))["nearai_verifier_revision"])')
+          git init _nearai-verifier
+          git -C _nearai-verifier remote add origin https://github.com/nearai/nearai-cloud-verifier.git
+          git -C _nearai-verifier fetch --depth 1 origin "$REVISION"
+          git -C _nearai-verifier checkout --detach FETCH_HEAD
+          echo "VERIFIER_REVISION=$REVISION" >> "$GITHUB_ENV"
 
       - name: Run attestation probe
         env:
@@ -68,6 +70,19 @@ jobs:
             FLAGS="--pricing"
           fi
           python -m probes.collect $FLAGS
+
+      - name: Capture reference publications and weekly catalogs
+        env:
+          NEAR_API_KEY: ${{ secrets.NEAR_API_KEY }}
+          VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          CHUTES_API_KEY: ${{ secrets.CHUTES_API_KEY }}
+        run: |
+          source .venv/bin/activate
+          if [ "$(date -u +%u)" = 1 ] || [ "${{ github.event_name }}" = workflow_dispatch ]; then
+            python -m probes.references --catalogs
+          else
+            python -m probes.references
+          fi
 
       - name: Grade the registry
         run: |
@@ -87,6 +102,9 @@ jobs:
           path: |
             data/snapshots/*.json
             data/latest.json
+            data/observations/
+            data/continuity/
+            data/references/
             docs/*.html
           retention-days: 30
 
@@ -95,7 +113,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/snapshots/ data/latest.json data/quality.json docs/
+          git add data/snapshots/ data/latest.json data/quality.json data/observations/ data/continuity/ data/references/ docs/
           if ! git diff --staged --quiet; then
             git commit -m "ci: refresh snapshot + dashboard [skip ci]"
             git push

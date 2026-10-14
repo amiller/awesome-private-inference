@@ -1,24 +1,22 @@
-"""NEAR AI light-client verifier.
+"""NEAR AI light-client diagnostic (incomplete verification closure).
 
-Strict closed-chain verification using only on-chain anchoring + post-#30 inner
-compose pinning. Drops the static-anchor maintenance burden of the hermes
-strict-mode design.
+This prototype inspects a quote and detached on-chain/compose-manager fields.
+It does not establish that those detached fields are authenticated by the model
+or compose-manager quote, recompute the action hash, or send an encrypted
+completion. It must never report an end-to-end verification pass.
 
 What this checks:
   Block A:  TDX quote, GPU NRAS, report_data binds (signing_addr || nonce)
-  On-chain: info.compose_hash ∈ DstackApp(info.app_id).authorizedSet (Base)
+  On-chain: look up detached info.compose_hash in DstackApp(info.app_id)
   Inner:    compose_manager_attestation.actions[].compose_up matches a small
             per-model pin of (yaml_file, commit, file_sha256). Also verifies
-            CM's quote binds report_data == actions_hash || nonce.
+            Detached CM report_data says actions_hash || nonce; CM quote unchecked.
 
 What this *doesn't* check (vs hermes strict mode):
-  - Gateway compose hash. The gateway is transport under E2EE; if you trust
-    the model TD's signing key (bound by its own report_data) you don't need
-    to trust the routing layer.
-  - kmsInfo (KMS root pubkey anchor). The model TD's signing key is bound
-    directly by its own quote; chaining through KMS root is redundant.
-  - Static os_image_hash / kms_provider_info anchors. Model substitution is
-    detected via the compose_hash → yaml binding alone.
+  - Gateway compose, KMS root and OS-image reference policy.
+  - Authenticated relationship from the requested model to the model quote,
+    compose-manager actions and the selected encryption key.
+  - An encrypted completion and response-key protection test.
 
 Usage:
   python -m verifiers.near_ai_lightclient --model "zai-org/GLM-5.1-FP8"
@@ -155,7 +153,7 @@ def verify(
     min_age_seconds: int = 0,  # only used in live mode
     nonce: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Returns dict with `valid`, `signing_address`, and per-step details.
+    """Returns diagnostic details; `valid` is always False until closure exists.
 
     Raises VerificationError on any required step failing. `onchain="skip"`
     bypasses the on-chain set check (useful for offline testing).
@@ -261,7 +259,15 @@ def verify(
         )
 
     return {
-        "valid": True,
+        "valid": False,
+        "verification_status": "not_checked",
+        "verification_reason": "compose-manager quote, action hash, model mapping and encrypted request closure are incomplete",
+        "unverified_links": [
+            "info.app_id and info.compose_hash are not bound to the verified model quote",
+            "compose-manager report_data is detached from an authenticated CM quote",
+            "actions_hash is not recomputed from the actions log",
+            "no encrypted request or response-key binding is tested",
+        ],
         "model_name": model_name,
         "signing_address": addr,
         "signing_public_key": spk,
@@ -305,10 +311,10 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(f"❌ FAIL: {e}", file=sys.stderr)
         return 1
     print(json.dumps(result, indent=2))
-    print(f"\n✅ {args.model} verified end-to-end "
+    print(f"\nINCOMPLETE: {args.model} has diagnostic checks only "
           f"(on-chain={args.onchain}, signing_addr={result['signing_address']})",
           file=sys.stderr)
-    return 0
+    return 1
 
 
 if __name__ == "__main__":

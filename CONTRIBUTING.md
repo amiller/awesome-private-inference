@@ -1,22 +1,18 @@
 # Contributing
 
-## Add a provider
+## Add a route or reference source
 
-1. Copy `providers/_template.md` → `providers/<slug>.md`. Fill in claim, endpoint, scorecard gaps.
-2. Write `verifiers/<slug>.py`. It must export `verify(api_key, base_url, model, nonce) -> AttestationReport` from `verifiers.common`.
-3. Register the provider in `probes/attestation.py` (`PROVIDERS` dict).
-4. Add a handful of known models to `probes/catalog.py` (`MODELS` dict).
-5. Open a PR. CI runs the probe with repo secrets; the resulting snapshot is committed back.
+1. Add a candidate with category, primary sources, inclusion reason, owner/blocker and next review date to `data/candidates.json`.
+2. Add client/request-path cards to `data/routes.json`. Identify plaintext holders, shared components, published references, client acceptance policy and unmeasured inputs. A brand is not an independent inference stack.
+3. Implement a bounded publication capture in `probes/references.py` or a verifier adapter in `verifiers/`. Preserve evidence needed to replay each claimed check. Never store authorization headers, private API keys or prompts.
+4. Use `not_checked`, `unsupported`, `unavailable` and `rejected` accurately. A fetched manifest or nonce echo is not verified hardware evidence. Signed build provenance is not an independent rebuild.
+5. Add controls that alter each security-relevant binding independently. Show that known-good evidence is handled and a missing proof cannot become a pass. Source-to-image reproduction that needs heavy builds belongs on zed.
+6. Open a focused PR with exact source revisions, performed checks, unresolved boundaries and rollout evidence. An incomplete route can be included as a candidate; it cannot be labeled fully verified.
 
-## Principles
+## Review a change
 
-- **Re-verify, don't trust.** Every claim a provider makes should be re-checked against a public verifier (Phala TDX, NVIDIA NRAS, etc.). If a layer isn't re-checkable, note it in the provider's scorecard.
-- **Neutral tone.** No "best provider." Report what verifies, what doesn't, and link to the gap.
-- **No stored secrets.** API keys live in repo secrets (for CI) or env vars (local). Never committed.
-- **Small diffs.** One provider per PR; one verifier shape per PR.
+Follow [the review workflow](docs/REVIEW-WORKFLOW.md). Jobs refer to immutable observations and exact old/new identities. Agents produce drafts; a separate reviewer publishes a disposition. Neither step silently expands a client allowlist.
 
-## Don'ts
+Keep historical observations and retired integrations. Distinguish policy changes, key rotation, fleet sampling and newly observed software identities. Do not infer deployment counts from a daily hash series.
 
-- Don't hide failures. A provider being offline or a model 404-ing is data.
-- Don't add a provider you haven't verified manually at least once.
-- Don't add heuristics ("it *probably* passes") — the re-verifier is the single source of truth.
+Use the locked environment and pinned external verifier. Retain logs, raw public evidence and results; remove temporary installs/build outputs after rehearsals. Keep at most one live install per rehearsal.

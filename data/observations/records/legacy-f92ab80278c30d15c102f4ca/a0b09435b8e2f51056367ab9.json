@@ -1,0 +1,107 @@
+{
+  "captured_at": "2026-10-13T19:52:01Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": null,
+    "adapter_report_ref": {
+      "model": "DeepSeek-V3.2-TEE",
+      "path": "snapshots/2026-10-13.json",
+      "provider": "chutes"
+    },
+    "adapter_report_sha256": "9978bfe388bb3f3624aef8e6133cf3b5f66da8ba5dbb6ba962f5b103136714b9",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "9978bfe388bb3f3624aef8e6133cf3b5f66da8ba5dbb6ba962f5b103136714b9"
+  },
+  "identities": [
+    {
+      "component_id": "chutes/instance",
+      "kind": "mrtd",
+      "model_scope": "DeepSeek-V3.2-TEE",
+      "value": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
+    }
+  ],
+  "identity_trust": "legacy_adapter_result",
+  "instance_id": "f6e30434-dd1f-4e15-9df9-007dd0aa8ca7",
+  "legacy": true,
+  "model": "DeepSeek-V3.2-TEE",
+  "observation_id": "legacy-f92ab80278c30d15c102f4ca/a0b09435b8e2f51056367ab9",
+  "observer": "legacy-snapshot",
+  "outcome": "verified",
+  "policy_revision": "unknown",
+  "provider": "chutes",
+  "reason": "legacy_adapter_result",
+  "reason_detail": null,
+  "route_id": "chutes/DeepSeek-V3.2-TEE",
+  "run_id": "legacy-f92ab80278c30d15c102f4ca",
+  "schema_version": "1",
+  "source_snapshot": "snapshots/2026-10-13.json",
+  "verification_scope": "legacy_adapter_result",
+  "verifier_revision": "35f05fb4c6a59f6794cc43aec2e854e5d183d106"
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "1",
+  "as_of": "2026-10-14",
+  "review_cadence": "weekly",
+  "next_review_after": "2026-10-20",
+  "meaning": "Discovery inventory, not a registry of verified private inference routes. Catalog model IDs are collected separately from daily sentinels.",
+  "candidates": [
+    {
+      "id": "private-inference", "name": "Private Inference", "category": "API reseller/private beta", "priority": "high", "decision": "include_as_unverified_candidate",
+      "reason": "Public browser client and model catalog make the NEAR-backed private tier inspectable; standard and ZDR tiers have different plaintext boundaries.",
+      "public_sources": ["https://privateinference.gg/how-it-works", "https://privateinference.gg/v1/models", "https://privateinference.gg/chat"],
+      "current_blocker": "Private attestation endpoint requires an API key; no credentialed quote or encrypted completion was obtained.",
+      "next_review": "2026-10-20"
+    },
+    {
+      "id": "maple", "name": "Maple", "category": "consumer client and API proxy", "priority": "high", "decision": "include_as_unverified_candidate",
+      "reason": "Public Nitro PCR histories and SDK acceptance code permit independent publication and policy monitoring, but Tinfoil and Continuum are distinct backend paths.",
+      "public_sources": ["https://www.trymaple.ai/proof", "https://github.com/MaplePrivacyLabs/Maple", "https://raw.githubusercontent.com/MaplePrivacyLabs/Maple/master/services/opensecret/pcrProdHistory.json"],
+      "current_blocker": "No live client-to-Nitro session, independent EIF reproduction, or chosen upstream proof.",
+      "next_review": "2026-10-20"
+    },
+    {
+      "id": "privatemode", "name": "Privatemode", "category": "independent inference API", "priority": "high", "decision": "include_as_unverified_candidate",
+      "reason": "Public multi-workload manifest and local proxy policy expose a testable auto-update versus pinning distinction.",
+      "public_sources": ["https://cdn.confidential.cloud/privatemode/v2/manifest.json", "https://docs.privatemode.ai/api/proxy-configuration/", "https://github.com/edgelesssys/privatemode-public"],
+      "current_blocker": "No pinned proxy key exchange or worker completion; published measurements not independently reproduced.",
+      "next_review": "2026-10-20"
+    },
+    {
+      "id": "confidential-ai", "name": "Confidential AI Inference", "category": "independent inference API", "priority": "high", "decision": "include_as_unverified_candidate",
+      "reason": "Public allowlist, release metadata and TEErminator provide testable client policy and proof surfaces; threat model explicitly records operator access concerns.",
+      "public_sources": ["https://api.confidential.ai/allowlist", "https://github.com/confidential-dot-ai/confidential-inference", "https://github.com/confidential-dot-ai/teerminator"],
+      "current_blocker": "No signed-release/quote/TLS-session verification or request-bound worker proof; source-documented operator paths unresolved.",
+      "next_review": "2026-10-20"
+    },
+    {
+      "id": "confer", "name": "Confer", "category": "consumer service comparator", "priority": "medium", "decision": "defer_from_api_denominator",
+      "reason": "Useful public release-transparency comparator, but no general inference API established in this discovery pass.",
+      "public_sources": ["https://confer.to/blog/2026/01/private-inference/", "https://github.com/ConferLabs/confer-image"],
+      "next_review": "2026-10-27"
+    },
+    {
+      "id": "apple-pcc", "name": "Apple Private Cloud Compute", "category": "consumer infrastructure comparator", "priority": "medium", "decision": "defer_from_api_denominator",
+      "reason": "Public release transparency and device-bound reports are a reference design, but this is not a general inference API route.",
+      "public_sources": ["https://security.apple.com/documentation/private-cloud-compute/releasetransparency"],
+      "next_review": "2026-10-27"
+    },
+    {
+      "id": "google-private-ai-compute", "name": "Google Private AI Compute", "category": "consumer infrastructure comparator", "priority": "low", "decision": "defer_pending_public_evidence",
+      "reason": "Determine which attestation and release facts external relying parties can inspect before attempting a route verdict.",
+      "public_sources": ["https://blog.google/innovation-and-ai/products/google-private-ai-compute/"],
+      "next_review": "2026-11-03"
+    }
+  ]
+}

@@ -1,0 +1,759 @@
+{
+  "reviewed_commit": "cbf555f661e81c838ba8daa3f7bb131691d5dbae",
+  "quality": {
+    "generated_at": "2026-10-13T19:51:26Z",
+    "window": {
+      "first": "2026-04-21",
+      "last": "2026-10-13",
+      "days": 171
+    },
+    "calibration": {
+      "observations": 3406,
+      "pass": 2359,
+      "transport": 818,
+      "no-error-invalid": 229,
+      "verification-failure": 0,
+      "red_cells_that_were_verification_failures": 0,
+      "no_error_invalid_by_provider": {
+        "aci-gateway": 53,
+        "chutes": 3,
+        "near-ai": 7,
+        "redpill": 123,
+        "venice": 43
+      },
+      "note": "229 of 3406 observations were invalid with no error attached: aci-gateway 53, chutes 3, near-ai 7, redpill 123, venice 43. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Every other red cell was a transport error. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    },
+    "coverage": [
+      {
+        "provider": "aci-gateway",
+        "model": "tee.redpill.ai",
+        "shape": "aci-gateway",
+        "status": "verified",
+        "proven": 6,
+        "required": 6,
+        "missing": [],
+        "version_identity": "content-hash",
+        "version_source": "control-plane",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "inference.phala.com",
+        "shape": "aci-gateway",
+        "status": "verified",
+        "proven": 6,
+        "required": 6,
+        "missing": [],
+        "version_identity": "content-hash",
+        "version_source": "control-plane",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "api.redpill.ai",
+        "shape": "aci-gateway",
+        "status": "invalid",
+        "proven": 5,
+        "required": 6,
+        "missing": [
+          "attested_serving_enforced"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "control-plane",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "near-ai",
+        "model": "openai/gpt-oss-120b",
+        "shape": "tdx+gpu",
+        "status": "unreachable",
+        "proven": 0,
+        "required": 7,
+        "missing": [
+          "backend_attested",
+          "compose_hash_committed",
+          "gpu_attested",
+          "key_derives_to_address",
+          "nonce_bound",
+          "report_data_binds_key",
+          "tdx_verified"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "control-plane",
+        "error": "HTTP 400: {\"error\":{\"message\":\"Model 'openai/gpt-oss-120b' not found. It's not a",
+        "hidden_layers": []
+      },
+      {
+        "provider": "near-ai",
+        "model": "zai-org/GLM-5.1-FP8",
+        "shape": "tdx+gpu",
+        "status": "partial",
+        "proven": 6,
+        "required": 7,
+        "missing": [
+          "backend_attested"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "control-plane",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "tinfoil",
+        "model": "router",
+        "shape": "tinfoil-sev-snp-v2",
+        "status": "partial",
+        "proven": 3,
+        "required": 5,
+        "missing": [
+          "client_nonce_supported",
+          "runtime_config_fully_attested"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "control-plane",
+        "error": null,
+        "hidden_layers": [
+          "client_nonce_supported",
+          "code_measurement_reproducible",
+          "hpke_pubkey_attested",
+          "runtime_config_fully_attested",
+          "tls_pubkey_pinned"
+        ]
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-glm-5-1",
+        "shape": "venice",
+        "status": "unreachable",
+        "proven": 0,
+        "required": 9,
+        "missing": [
+          "code_measurement_reproducible",
+          "compose_hash_committed",
+          "gpu_attested",
+          "key_derives_to_address",
+          "nonce_bound",
+          "prod_os_image",
+          "report_data_binds_key",
+          "serving_code_attested",
+          "tdx_verified"
+        ],
+        "version_identity": "absent",
+        "version_source": "none",
+        "error": "no TEE attestation available for this model (404)",
+        "hidden_layers": [
+          "code_measurement_reproducible"
+        ]
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-qwen3-6-35b-a3b",
+        "shape": "venice",
+        "status": "invalid",
+        "proven": 5,
+        "required": 9,
+        "missing": [
+          "code_measurement_reproducible",
+          "prod_os_image",
+          "serving_code_attested",
+          "tdx_verified"
+        ],
+        "version_identity": "absent",
+        "version_source": "none",
+        "error": null,
+        "hidden_layers": [
+          "code_measurement_reproducible"
+        ]
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-gemma-4-31b",
+        "shape": "venice",
+        "status": "unreachable",
+        "proven": 0,
+        "required": 9,
+        "missing": [
+          "code_measurement_reproducible",
+          "compose_hash_committed",
+          "gpu_attested",
+          "key_derives_to_address",
+          "nonce_bound",
+          "prod_os_image",
+          "report_data_binds_key",
+          "serving_code_attested",
+          "tdx_verified"
+        ],
+        "version_identity": "absent",
+        "version_source": "none",
+        "error": "no TEE attestation available for this model (404)",
+        "hidden_layers": [
+          "code_measurement_reproducible"
+        ]
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-gpt-oss-120b-p",
+        "shape": "venice",
+        "status": "partial",
+        "proven": 4,
+        "required": 9,
+        "missing": [
+          "code_measurement_reproducible",
+          "compose_hash_committed",
+          "gpu_attested",
+          "prod_os_image",
+          "serving_code_attested"
+        ],
+        "version_identity": "absent",
+        "version_source": "none",
+        "error": null,
+        "hidden_layers": [
+          "code_measurement_reproducible"
+        ]
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+        "shape": "venice",
+        "status": "partial",
+        "proven": 5,
+        "required": 9,
+        "missing": [
+          "code_measurement_reproducible",
+          "compose_hash_committed",
+          "prod_os_image",
+          "serving_code_attested"
+        ],
+        "version_identity": "absent",
+        "version_source": "none",
+        "error": null,
+        "hidden_layers": [
+          "code_measurement_reproducible"
+        ]
+      },
+      {
+        "provider": "chutes",
+        "model": "Qwen3-32B-TEE",
+        "shape": "chutes-tee",
+        "status": "partial",
+        "proven": 3,
+        "required": 4,
+        "missing": [
+          "serving_code_attested"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "instance-sampled",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "chutes",
+        "model": "gemma-4-31B-TEE",
+        "shape": "chutes-tee",
+        "status": "unreachable",
+        "proven": 0,
+        "required": 4,
+        "missing": [
+          "nonce_bound",
+          "report_data_binds_key",
+          "serving_code_attested",
+          "tdx_verified"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "instance-sampled",
+        "error": "RuntimeError: HTTP 502 on /instances/e6ee4b3e-d0b0-4f45-b16b-575144a60684/eviden",
+        "hidden_layers": []
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5.1-TEE",
+        "shape": "chutes-tee",
+        "status": "partial",
+        "proven": 3,
+        "required": 4,
+        "missing": [
+          "serving_code_attested"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "instance-sampled",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5.2-TEE",
+        "shape": "chutes-tee",
+        "status": "partial",
+        "proven": 3,
+        "required": 4,
+        "missing": [
+          "serving_code_attested"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "instance-sampled",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "chutes",
+        "model": "DeepSeek-V3.2-TEE",
+        "shape": "chutes-tee",
+        "status": "partial",
+        "proven": 3,
+        "required": 4,
+        "missing": [
+          "serving_code_attested"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "instance-sampled",
+        "error": null,
+        "hidden_layers": []
+      },
+      {
+        "provider": "chutes",
+        "model": "Kimi-K2.6-TEE",
+        "shape": "chutes-tee",
+        "status": "partial",
+        "proven": 3,
+        "required": 4,
+        "missing": [
+          "serving_code_attested"
+        ],
+        "version_identity": "content-hash",
+        "version_source": "instance-sampled",
+        "error": null,
+        "hidden_layers": []
+      }
+    ],
+    "coverage_summary": {
+      "verified": 2,
+      "invalid": 2,
+      "unreachable": 4,
+      "partial": 9
+    },
+    "unmeasurable_providers": [
+      "venice"
+    ],
+    "audit_debt": {
+      "builds_observed": 88,
+      "builds_reviewed": 7,
+      "backlog": 81,
+      "last_audit": "2026-09-02",
+      "days_since_last_audit": 41,
+      "by_provider": {
+        "near-ai": {
+          "builds_observed": 29,
+          "builds_reviewed": 4,
+          "backlog": 25,
+          "last_audit": "2026-09-02"
+        },
+        "tinfoil": {
+          "builds_observed": 57,
+          "builds_reviewed": 1,
+          "backlog": 56,
+          "last_audit": "2026-09-02"
+        },
+        "chutes": {
+          "builds_observed": 2,
+          "builds_reviewed": 2,
+          "backlog": 0,
+          "last_audit": "2026-09-02"
+        }
+      }
+    },
+    "density": {
+      "published_cells": 170,
+      "carrying_signal": 66,
+      "dashes": 104,
+      "signal_fraction": 0.388
+    },
+    "hidden_layer_targets": [
+      "tinfoil/router",
+      "venice/e2ee-gemma-4-31b",
+      "venice/e2ee-glm-5-1",
+      "venice/e2ee-gpt-oss-120b-p",
+      "venice/e2ee-qwen3-6-35b-a3b",
+      "venice/e2ee-qwen3-6-35b-a3b-uncensored-p"
+    ],
+    "cadence": [
+      {
+        "provider": "aci-gateway",
+        "model": "api.redpill.ai",
+        "observations": 53,
+        "span_days": 56,
+        "distinct": 12,
+        "novel": 11,
+        "revisit": 1,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 5.1,
+        "days_per_deploy_corrected": 4.5
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "inference.phala.com",
+        "observations": 53,
+        "span_days": 56,
+        "distinct": 12,
+        "novel": 11,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 5.1,
+        "days_per_deploy_corrected": 4.5
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "tee.redpill.ai",
+        "observations": 53,
+        "span_days": 56,
+        "distinct": 12,
+        "novel": 11,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 5.1,
+        "days_per_deploy_corrected": 4.5
+      },
+      {
+        "provider": "chutes",
+        "model": "DeepSeek-V3.2-TEE",
+        "observations": 108,
+        "span_days": 117,
+        "distinct": 2,
+        "novel": 1,
+        "revisit": 0,
+        "version_source": "instance-sampled",
+        "retired": false,
+        "days_per_deploy": 117.0,
+        "days_per_deploy_corrected": 116.5
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5-TEE",
+        "observations": 43,
+        "span_days": 43,
+        "distinct": 2,
+        "novel": 1,
+        "revisit": 6,
+        "version_source": "instance-sampled",
+        "retired": false,
+        "days_per_deploy": 43.0,
+        "days_per_deploy_corrected": 42.5
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5.1-TEE",
+        "observations": 49,
+        "span_days": 56,
+        "distinct": 1,
+        "novel": 0,
+        "revisit": 0,
+        "version_source": "instance-sampled",
+        "retired": false,
+        "days_per_deploy": null,
+        "days_per_deploy_corrected": null
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5.2-TEE",
+        "observations": 48,
+        "span_days": 56,
+        "distinct": 1,
+        "novel": 0,
+        "revisit": 0,
+        "version_source": "instance-sampled",
+        "retired": false,
+        "days_per_deploy": null,
+        "days_per_deploy_corrected": null
+      },
+      {
+        "provider": "chutes",
+        "model": "Kimi-K2.6-TEE",
+        "observations": 107,
+        "span_days": 117,
+        "distinct": 2,
+        "novel": 1,
+        "revisit": 4,
+        "version_source": "instance-sampled",
+        "retired": false,
+        "days_per_deploy": 117.0,
+        "days_per_deploy_corrected": 116.4
+      },
+      {
+        "provider": "chutes",
+        "model": "Qwen3-32B-TEE",
+        "observations": 107,
+        "span_days": 117,
+        "distinct": 2,
+        "novel": 1,
+        "revisit": 36,
+        "version_source": "instance-sampled",
+        "retired": false,
+        "days_per_deploy": 117.0,
+        "days_per_deploy_corrected": 116.4
+      },
+      {
+        "provider": "chutes",
+        "model": "gemma-4-31B-TEE",
+        "observations": 105,
+        "span_days": 110,
+        "distinct": 2,
+        "novel": 1,
+        "revisit": 22,
+        "version_source": "instance-sampled",
+        "retired": false,
+        "days_per_deploy": 110.0,
+        "days_per_deploy_corrected": 109.5
+      },
+      {
+        "provider": "near-ai",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "observations": 32,
+        "span_days": 31,
+        "distinct": 10,
+        "novel": 9,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 3.4,
+        "days_per_deploy_corrected": 2.9
+      },
+      {
+        "provider": "near-ai",
+        "model": "openai/gpt-oss-120b",
+        "observations": 99,
+        "span_days": 101,
+        "distinct": 20,
+        "novel": 19,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 5.3,
+        "days_per_deploy_corrected": 4.8
+      },
+      {
+        "provider": "near-ai",
+        "model": "zai-org/GLM-5-FP8",
+        "observations": 31,
+        "span_days": 31,
+        "distinct": 10,
+        "novel": 9,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 3.4,
+        "days_per_deploy_corrected": 2.9
+      },
+      {
+        "provider": "near-ai",
+        "model": "zai-org/GLM-5.1-FP8",
+        "observations": 143,
+        "span_days": 147,
+        "distinct": 28,
+        "novel": 27,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 5.4,
+        "days_per_deploy_corrected": 4.9
+      },
+      {
+        "provider": "redpill",
+        "model": "phala/gpt-oss-20b",
+        "observations": 33,
+        "span_days": 40,
+        "distinct": 1,
+        "novel": 0,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": true,
+        "days_per_deploy": null,
+        "days_per_deploy_corrected": null
+      },
+      {
+        "provider": "redpill",
+        "model": "phala/qwen-2.5-7b-instruct",
+        "observations": 34,
+        "span_days": 40,
+        "distinct": 1,
+        "novel": 0,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": true,
+        "days_per_deploy": null,
+        "days_per_deploy_corrected": null
+      },
+      {
+        "provider": "tinfoil",
+        "model": "gemma4-31b",
+        "observations": 87,
+        "span_days": 87,
+        "distinct": 7,
+        "novel": 6,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 14.5,
+        "days_per_deploy_corrected": 14.0
+      },
+      {
+        "provider": "tinfoil",
+        "model": "gpt-oss-120b",
+        "observations": 82,
+        "span_days": 82,
+        "distinct": 2,
+        "novel": 1,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 82.0,
+        "days_per_deploy_corrected": 81.5
+      },
+      {
+        "provider": "tinfoil",
+        "model": "llama3-3-70b",
+        "observations": 93,
+        "span_days": 93,
+        "distinct": 3,
+        "novel": 2,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 46.5,
+        "days_per_deploy_corrected": 46.0
+      },
+      {
+        "provider": "tinfoil",
+        "model": "router",
+        "observations": 166,
+        "span_days": 170,
+        "distinct": 45,
+        "novel": 44,
+        "revisit": 0,
+        "version_source": "control-plane",
+        "retired": false,
+        "days_per_deploy": 3.9,
+        "days_per_deploy_corrected": 3.3
+      }
+    ]
+  },
+  "snapshot_summary": {
+    "generated_at": "2026-10-13T19:51:26Z",
+    "rows": [
+      {
+        "provider": "aci-gateway",
+        "model": "tee.redpill.ai",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "inference.phala.com",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "aci-gateway",
+        "model": "api.redpill.ai",
+        "valid": false,
+        "error": null
+      },
+      {
+        "provider": "near-ai",
+        "model": "openai/gpt-oss-120b",
+        "valid": false,
+        "error": "HTTP 400: {\"error\":{\"message\":\"Model 'openai/gpt-oss-120b' not found. It's not a valid model name or alias.\",\"type\":\"invalid_request_error\",\"param\":\"model\",\"code\":null}}"
+      },
+      {
+        "provider": "near-ai",
+        "model": "zai-org/GLM-5.1-FP8",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "tinfoil",
+        "model": "router",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-glm-5-1",
+        "valid": false,
+        "error": "no TEE attestation available for this model (404)"
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-qwen3-6-35b-a3b",
+        "valid": false,
+        "error": null
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-gemma-4-31b",
+        "valid": false,
+        "error": "no TEE attestation available for this model (404)"
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-gpt-oss-120b-p",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "venice",
+        "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "chutes",
+        "model": "Qwen3-32B-TEE",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "chutes",
+        "model": "gemma-4-31B-TEE",
+        "valid": false,
+        "error": "RuntimeError: HTTP 502 on /instances/e6ee4b3e-d0b0-4f45-b16b-575144a60684/evidence?nonce=2e51b769c9d7ae400b7b4e7641712811c5ad80cb9dbafb2d808f2a08a70784b9: {\"detail\":\"Attestation service unavailable. The instance's attestation proxy could not be reached or returned an error; the instance may have gone away, so refr"
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5.1-TEE",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "chutes",
+        "model": "GLM-5.2-TEE",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "chutes",
+        "model": "DeepSeek-V3.2-TEE",
+        "valid": true,
+        "error": null
+      },
+      {
+        "provider": "chutes",
+        "model": "Kimi-K2.6-TEE",
+        "valid": true,
+        "error": null
+      }
+    ]
+  },
+  "missing_snapshot_dates": [
+    "2026-04-28",
+    "2026-10-08",
+    "2026-10-09",
+    "2026-10-10",
+    "2026-10-11"
+  ],
+  "calendar_span_days": 176
+}

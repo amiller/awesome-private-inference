@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -67,9 +68,18 @@ def test_verify_bundle_offline_skips_live_tls(bundle, monkeypatch):
     expected = bundle.sev_report().report_data[:32].hex()
     monkeypatch.setattr(tinfoil, "_live_tls_spki_sha256", lambda host, **kw: expected)
     report = tinfoil.verify_bundle(bundle, model="test")
-    assert report.valid, report.error
+    assert not report.valid
+    assert "VCEK" in report.error
+    assert report.details["verification_status"] == "not_checked"
+    raw = report.details["raw_evidence"]
+    assert raw["report_body_b64"] == bundle.report_body_b64
+    assert raw["sigstore_bundle"] == bundle.sigstore_bundle
+    assert raw["enclave_cert_pem"] == bundle.enclave_cert_pem
     sc = report.scorecard
-    assert sc.code_measurement_reproducible is True
+    assert sc.release_provenance_verified is True
+    assert sc.measurement_matches_release is True
+    assert sc.code_measurement_reproducible is None
+    assert sc.hardware_signature_verified is None
     assert sc.tls_pubkey_pinned is True
     assert sc.hpke_pubkey_attested is True
     assert sc.client_nonce_supported is False
@@ -85,6 +95,8 @@ def test_verify_detects_measurement_mismatch(bundle, monkeypatch):
     report = tinfoil.verify_bundle(bundle, model="test")
     assert not report.valid
     assert "measurement mismatch" in (report.error or "")
+    assert report.details["verification_status"] == "rejected"
+    assert report.details["raw_evidence"]["report_body_b64"] == bundle.report_body_b64
     assert report.scorecard.code_measurement_reproducible is None
 
 
@@ -94,12 +106,20 @@ def test_verify_detects_live_tls_mismatch(bundle, monkeypatch):
     assert not report.valid
     assert "live TLS SPKI" in (report.error or "")
     assert report.scorecard.tls_pubkey_pinned is False
-    assert report.scorecard.code_measurement_reproducible is True
+    assert report.scorecard.measurement_matches_release is True
+    assert report.scorecard.code_measurement_reproducible is None
 
 
 def test_parse_rejects_wrong_length():
     with pytest.raises(ValueError, match="1184-byte"):
         tinfoil_sev.parse(b"\x00" * 100)
+
+
+def test_malformed_bundle_report_is_rejected_and_retained(bundle):
+    malformed = replace(bundle, report_body_b64="YQ==")
+    report = tinfoil.verify_bundle(malformed, model="test")
+    assert report.details["verification_status"] == "rejected"
+    assert report.details["raw_evidence"]["report_body_b64"] == "YQ=="
 
 
 def _decode_predicate(bundle):
@@ -158,7 +178,7 @@ def test_verify_bundle_surfaces_audit(bundle, monkeypatch):
     expected = bundle.sev_report().report_data[:32].hex()
     monkeypatch.setattr(tinfoil, "_live_tls_spki_sha256", lambda host, **kw: expected)
     report = tinfoil.verify_bundle(bundle, model="test")
-    assert report.valid
+    assert not report.valid
     assert report.scorecard.runtime_config_fully_attested is False
     cfg = report.details["attested_config"]
     assert cfg["total_env_external"] == 1
@@ -189,7 +209,8 @@ def test_per_host_bundle_fully_attested(per_host_bundle, monkeypatch):
         per_host_bundle, model="gpt-oss-120b",
         repo="tinfoilsh/confidential-gpt-oss-120b",
     )
-    assert report.valid, report.error
+    assert not report.valid
+    assert "VCEK" in report.error
     assert report.scorecard.runtime_config_fully_attested is True
     cfg = report.details["attested_config"]
     assert cfg["total_env_external"] == 0
@@ -209,3 +230,11 @@ def test_tinfoil_models_catalog_shape():
     for model, (host, repo) in tinfoil.TINFOIL_MODELS.items():
         assert isinstance(host, str) and host
         assert repo.startswith("tinfoilsh/confidential-") or model == "router"
+
+
+def test_prefix_only_legacy_ledger_does_not_authorize_digest(tmp_path, monkeypatch):
+    (tmp_path / "tinfoil_confidential-test.json").write_text(json.dumps({
+        "audits": [{"bundle_digest": "ab" * 4}],
+    }))
+    monkeypatch.setattr(tinfoil, "_AUDITS_DIR", tmp_path)
+    assert tinfoil._digest_audited("tinfoilsh/confidential-test", "ab" * 32) is False
