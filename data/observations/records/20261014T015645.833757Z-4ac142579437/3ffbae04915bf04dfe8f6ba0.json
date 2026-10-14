@@ -1,0 +1,211 @@
+{
+  "captured_at": "2026-10-14T01:56:51Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_nonempty": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "aci-gateway",
+      "details": {
+        "backend_evidence_verified": false,
+        "catalog_serving_tested": false,
+        "compose_hash": "f08fdd348b0ced49eee1d006f61f8ace226081630ccfbe53c0c8656e749f567d",
+        "event_payloads_bound": true,
+        "identity_continuity": "not available in deployed ACI draft",
+        "models": 22,
+        "os_archive_metadata_status": "checked",
+        "os_image": "dstack-0.5.9-bd369a8c",
+        "os_image_event_bound": true,
+        "quote_report_data_bound": true,
+        "raw_evidence_completeness": "complete",
+        "raw_evidence_ref": "observations/evidence/sha256/87ce0f048838302faacc36feedbe8ed59a1c8aa5af594785a31032ff82cefb27.json",
+        "raw_evidence_sha256": "87ce0f048838302faacc36feedbe8ed59a1c8aa5af594785a31032ff82cefb27",
+        "repo_commit": "24a31ff1b33cb45cd2ad0ddac02749eb4ea424e2",
+        "sessions": "86/86 with evidence",
+        "tcb_status": null,
+        "tee_only_domains": [
+          "tee.redpill.ai",
+          "inference.phala.com"
+        ],
+        "verification_reason": "OS boot measurements MRTD/RTMR0-2 and request path were not verified",
+        "verification_status": "not_checked",
+        "workload_identity_endorsed": null,
+        "workload_keyset_digest": "sha256:f41362b5a4920ea010c95885f8994575c51ace1af7acb0670a3fbca273d65e00"
+      },
+      "error": null,
+      "latency_s": 0.0,
+      "model": "tee.redpill.ai",
+      "provider": "aci-gateway",
+      "scorecard": {
+        "attested_serving_enforced": true,
+        "backend_attested": null,
+        "catalog_nonempty": true,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": true,
+        "gateway_reference_audited": null,
+        "gpu_attested": null,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": null,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": true,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": null,
+        "sessions_publish_evidence_digests": true,
+        "tdx_verified": true,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "",
+      "valid": false,
+      "verified_at": "2026-10-14T01:56:51Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "694ce500836cf9f10eb0288219baf56c0afd283b1d068a893fa17abd69c22016",
+    "raw_evidence_ref": "observations/evidence/sha256/87ce0f048838302faacc36feedbe8ed59a1c8aa5af594785a31032ff82cefb27.json",
+    "raw_evidence_sha256": "87ce0f048838302faacc36feedbe8ed59a1c8aa5af594785a31032ff82cefb27",
+    "raw_evidence_status": "stored_separately",
+    "stored_report_sha256": "ae4af787791bf673c8cb57bc113547f86985dd3482813bfd22b73dfcd134aa1a"
+  },
+  "identities": [
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "compose_hash",
+      "model_scope": "*",
+      "value": "f08fdd348b0ced49eee1d006f61f8ace226081630ccfbe53c0c8656e749f567d"
+    },
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "os_image",
+      "model_scope": "*",
+      "value": "dstack-0.5.9-bd369a8c"
+    },
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "repo_commit",
+      "model_scope": "*",
+      "value": "24a31ff1b33cb45cd2ad0ddac02749eb4ea424e2"
+    },
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "workload_keyset_digest",
+      "model_scope": "*",
+      "value": "sha256:f41362b5a4920ea010c95885f8994575c51ace1af7acb0670a3fbca273d65e00"
+    }
+  ],
+  "identity_trust": "untrusted_report",
+  "instance_id": null,
+  "legacy": false,
+  "model": "tee.redpill.ai",
+  "observation_id": "20261014T015645.833757Z-4ac142579437/3ffbae04915bf04dfe8f6ba0",
+  "observer": "daily-probe",
+  "outcome": "not_checked",
+  "policy_revision": "unknown",
+  "provider": "aci-gateway",
+  "reason": "verification_incomplete",
+  "reason_detail": "OS boot measurements MRTD/RTMR0-2 and request path were not verified",
+  "route_id": "aci-gateway/tee.redpill.ai",
+  "run_id": "20261014T015645.833757Z-4ac142579437",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "6502778fae68dbb919e54bd22f7a7b3e1a03d056d5db012bc042df693f36a0d0"
+}
