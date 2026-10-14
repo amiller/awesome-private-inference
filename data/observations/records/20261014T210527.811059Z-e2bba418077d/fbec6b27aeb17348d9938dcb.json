@@ -1,0 +1,273 @@
+{
+  "captured_at": "2026-10-14T21:05:46Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "measurement_matches_release": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "nonce_bound": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "report_data_binds_key": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "tinfoil-sev-snp-v2",
+      "details": {
+        "att_doc_hash": "9110b9bf996cdce501a1dc6d9927bf5c3d647d3fa81c1953c2cc8640c90deaf3",
+        "attested_config": {
+          "container_count": 2,
+          "containers": [
+            {
+              "env_attested": [
+                "REFRESH_INTERVAL",
+                "CACHE_SALT_ENABLED",
+                "USAGE_REPORTER_ID",
+                "CONTROL_PLANE_URL",
+                "UPDATE_CONFIG_URL",
+                "SAFEGUARDS_URL"
+              ],
+              "env_external": [],
+              "image": "ghcr.io/tinfoilsh/confidential-model-router@sha256:5ebdf1f8fab833dce8ddaa589238e079ca0b772015c45ace26f788c830936809",
+              "image_pinned_by_digest": true,
+              "name": "proxy",
+              "secrets_external": [
+                "USAGE_REPORTER_SECRET",
+                "USAGE_CONTEXT_SECRET",
+                "INFERENCE_DELEGATION_SECRET",
+                "CACHE_ROUTE_SECRET",
+                "METRICS_API_KEY"
+              ]
+            },
+            {
+              "env_attested": [
+                "SAFEGUARD_MODEL",
+                "SAFEGUARD_REVIEW_MODEL",
+                "SAFEGUARD_TIMEOUT",
+                "SAFEGUARD_REVIEW_TIMEOUT",
+                "MAX_TRANSCRIPT_BYTES",
+                "MAX_REQUEST_BYTES",
+                "QUEUE_TTL",
+                "QUEUE_MAX_SIZE",
+                "WORKERS",
+                "CONTROL_PLANE_URL",
+                "SAFEGUARD_POLICY"
+              ],
+              "env_external": [],
+              "image": "ghcr.io/tinfoilsh/confidential-safeguards@sha256:200aa8fb814fa52a494d581ff19e7530528aa367281449ea3b1d60d06b4a3eef",
+              "image_pinned_by_digest": true,
+              "name": "safeguards",
+              "secrets_external": [
+                "TINFOIL_API_KEY"
+              ]
+            }
+          ],
+          "cvm_version": "0.14.13",
+          "total_env_external": 0,
+          "total_secrets_external": 6
+        },
+        "build_reproduction": "not_checked",
+        "digest": "ec99fa87cbde94786fdc80000d7f4a790bbde5f8581e60741cccd6a882dc6227",
+        "digest_audited": false,
+        "domain": "router-0.tinfoil.sh",
+        "enclave_cert_sans_count": 6,
+        "enclave_cert_spki_sha256": "f554a4414b49bd6bc05cfdb639abb949fbf3d716d86ef6cbe6bf0b683ddf56a0",
+        "encrypted_request_binding": "not_checked",
+        "freshness": "not_checked: no authenticated session freshness test",
+        "hardware_signature_verification": "not_checked: AMD VCEK chain and SNP report signature",
+        "hpke_pubkey": "e03afb13985b5d5834a3e2e64e6bb23a6c098689036e165ca748d959fd400278",
+        "live_tls_spki_sha256": "f554a4414b49bd6bc05cfdb639abb949fbf3d716d86ef6cbe6bf0b683ddf56a0",
+        "models_pinned": 17,
+        "models_served": 16,
+        "models_unpinned": [],
+        "predicate": "https://tinfoil.sh/predicate/sev-snp-guest/v2",
+        "raw_evidence_ref": "observations/evidence/sha256/6ea549f72e9c4f947f84573ec64b4987e2247ad234ac6cbcd7e2ca940a50916f.json",
+        "raw_evidence_sha256": "6ea549f72e9c4f947f84573ec64b4987e2247ad234ac6cbcd7e2ca940a50916f",
+        "repo": "tinfoilsh/confidential-model-router",
+        "repos": [
+          "tinfoilsh/confidential-deepseek-v4-1-flash",
+          "tinfoilsh/confidential-doc-upload",
+          "tinfoilsh/confidential-gemma4-31b",
+          "tinfoilsh/confidential-glm5-3-flash",
+          "tinfoilsh/confidential-glm5-3-nvfp4",
+          "tinfoilsh/confidential-gpt-oss-120b",
+          "tinfoilsh/confidential-gpt-oss-safeguard-120b",
+          "tinfoilsh/confidential-kimi-k3",
+          "tinfoilsh/confidential-llama3-3-70b",
+          "tinfoilsh/confidential-nomic-embed-text",
+          "tinfoilsh/confidential-pii-cpu",
+          "tinfoilsh/confidential-realtime-models",
+          "tinfoilsh/confidential-voxtral-small-24b",
+          "tinfoilsh/confidential-websearch"
+        ],
+        "sev": {
+          "debug": false,
+          "measurement": "5a2f5576ff6b2850c8a7cc363bd22d164247bad743e6633f4637193251de2c8d717beb69bf7992df4ed35809694637f0",
+          "policy_hex": "0x30000",
+          "report_data": "f554a4414b49bd6bc05cfdb639abb949fbf3d716d86ef6cbe6bf0b683ddf56a0e03afb13985b5d5834a3e2e64e6bb23a6c098689036e165ca748d959fd400278",
+          "version": 5,
+          "vmpl": 0
+        },
+        "sigstore_measurement": "5a2f5576ff6b2850c8a7cc363bd22d164247bad743e6633f4637193251de2c8d717beb69bf7992df4ed35809694637f0",
+        "sigstore_predicate_type": "https://tinfoil.sh/predicate/snp-tdx-multiplatform/v1",
+        "verification_reason": "AMD SNP report signature, VCEK chain, and encrypted request are not verified",
+        "verification_status": "not_checked"
+      },
+      "error": "AMD SNP report signature and VCEK chain not verified",
+      "latency_s": 0.54,
+      "model": "router",
+      "provider": "tinfoil",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": null,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": false,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": null,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": true,
+        "key_derives_to_address": null,
+        "measurement_matches_release": true,
+        "nonce_bound": null,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": true,
+        "report_data_binds_key": null,
+        "runtime_config_fully_attested": false,
+        "serving_code_attested": null,
+        "sessions_publish_evidence_digests": null,
+        "tdx_verified": null,
+        "tls_pubkey_pinned": true
+      },
+      "signing_address": "",
+      "signing_algo": "hpke",
+      "signing_public_key": "e03afb13985b5d5834a3e2e64e6bb23a6c098689036e165ca748d959fd400278",
+      "valid": false,
+      "verified_at": "2026-10-14T21:05:46Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "d90b583a64a4beb9fe20da17a0b0150bc450a6de5447e3e04fa0e92fecac8691",
+    "raw_evidence_ref": "observations/evidence/sha256/6ea549f72e9c4f947f84573ec64b4987e2247ad234ac6cbcd7e2ca940a50916f.json",
+    "raw_evidence_sha256": "6ea549f72e9c4f947f84573ec64b4987e2247ad234ac6cbcd7e2ca940a50916f",
+    "raw_evidence_status": "stored_separately",
+    "stored_report_sha256": "190df652357499f1a84cf47771fe19577189fe5dc69834540ed767c388fd08fd"
+  },
+  "identities": [
+    {
+      "component_id": "tinfoil/router",
+      "kind": "bundle_digest",
+      "model_scope": "*",
+      "value": "ec99fa87cbde94786fdc80000d7f4a790bbde5f8581e60741cccd6a882dc6227"
+    },
+    {
+      "component_id": "tinfoil/router",
+      "kind": "measurement",
+      "model_scope": "*",
+      "value": "5a2f5576ff6b2850c8a7cc363bd22d164247bad743e6633f4637193251de2c8d717beb69bf7992df4ed35809694637f0"
+    }
+  ],
+  "identity_trust": "untrusted_report",
+  "instance_id": null,
+  "legacy": false,
+  "model": "router",
+  "observation_id": "20261014T210527.811059Z-e2bba418077d/fbec6b27aeb17348d9938dcb",
+  "observer": "daily-probe",
+  "outcome": "not_checked",
+  "policy_revision": "unknown",
+  "provider": "tinfoil",
+  "reason": "verification_incomplete",
+  "reason_detail": "AMD SNP report signature, VCEK chain, and encrypted request are not verified",
+  "route_id": "tinfoil/router",
+  "run_id": "20261014T210527.811059Z-e2bba418077d",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "11b0311304bc5e8db21da9f082c4dcbfc367187fd48bebb8e698760e61da3f49"
+}
