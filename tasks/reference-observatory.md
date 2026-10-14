@@ -10,10 +10,10 @@ Branch: feat/reference-observatory, based on upstream cbf555f. Original dirty ch
 - [x] Preserve unique observations and partial-run freshness.
 - [x] Persist typed change events and durable review leases.
 - [x] Capture Maple and Privatemode reference publications; track two additional candidates.
-- [ ] Integrate route cards and observed identity timeline.
-- [ ] Pin instrument inputs and update daily/weekly/heartbeat workflows.
-- [ ] Run deterministic replay, live readonly capture, queue crash recovery and independent review.
-- [ ] Produce reviewed change packet and public sanitized decision.
+- [x] Integrate route cards and observed identity timeline.
+- [x] Pin instrument inputs and update daily/weekly/heartbeat workflows.
+- [x] Run deterministic replay, live readonly capture, simulated lease/crash recovery and independent review.
+- [x] Produce reviewed change packet and public sanitized decision.
 - [ ] Create reviewable PR and record rollout evidence.
 
 ## Evidence gates still requiring follow-through
@@ -26,3 +26,5 @@ Branch: feat/reference-observatory, based on upstream cbf555f. Original dirty ch
 - 30-day reliability and multi-reader comprehension goals require elapsed operation and independent readers.
 
 A supported blocked/unknown disposition is acceptable onboarding output. It is not a completed confidentiality audit. No accepted reference policy is auto-expanded by review agents.
+
+[Implementation evidence and rollout limits](../research/implementation-2026-10-14/implementation.md). Production cron replacement, a separately reachable zed heartbeat, blinded Sol evaluation and reader testing remain follow-through work.

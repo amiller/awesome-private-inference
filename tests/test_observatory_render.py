@@ -74,6 +74,25 @@ def test_render_refuses_corrupted_publication_bytes(tmp_path, monkeypatch):
         render._publish_reference_archives(refs)
 
 
+def test_review_attaches_only_to_exact_event(tmp_path, monkeypatch):
+    monkeypatch.setattr(render, "REPO_ROOT", tmp_path)
+    events = tmp_path / "data/continuity/events"
+    decisions = tmp_path / "data/reviews/decisions"
+    events.mkdir(parents=True)
+    decisions.mkdir(parents=True)
+    event = {"event_id": "event-123", "kind": "coverage_lost", "route_id": "a/b"}
+    (events / "event-123.json").write_text(json.dumps(event))
+    decision = {"event": event, "review": {"disposition": "needs_evidence"},
+                "draft": {"summary": "Instrument scope narrowed"}}
+    path = decisions / "event-123.json"
+    path.write_text(json.dumps(decision))
+    assert render._timeline()[0]["draft"]["summary"] == "Instrument scope narrowed"
+    decision["event"] = event | {"route_id": "other"}
+    path.write_text(json.dumps(decision))
+    with pytest.raises(ValueError, match="immutable event"):
+        render._timeline()
+
+
 def test_typed_outcomes_do_not_collapse_into_rejection():
     rows = render._rows({"attestations": {"p": [
         {"model": "a", "outcome": "not_checked", "scorecard": {}},

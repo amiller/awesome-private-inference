@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T19:51:26Z",
+  "generated_at": "2026-10-14T01:42:25.270249Z",
   "window": {
     "first": "2026-04-21",
     "last": "2026-10-13",
@@ -28,10 +28,11 @@
       "model": "api.redpill.ai",
       "shape": "aci-gateway",
       "status": "invalid",
-      "proven": 5,
+      "proven": 4,
       "required": 6,
       "missing": [
-        "attested_serving_enforced"
+        "attested_serving_enforced",
+        "prod_os_image"
       ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
@@ -42,10 +43,12 @@
       "provider": "aci-gateway",
       "model": "inference.phala.com",
       "shape": "aci-gateway",
-      "status": "verified",
-      "proven": 6,
+      "status": "not_checked",
+      "proven": 5,
       "required": 6,
-      "missing": [],
+      "missing": [
+        "prod_os_image"
+      ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -55,10 +58,12 @@
       "provider": "aci-gateway",
       "model": "tee.redpill.ai",
       "shape": "aci-gateway",
-      "status": "verified",
-      "proven": 6,
+      "status": "not_checked",
+      "proven": 5,
       "required": 6,
-      "missing": [],
+      "missing": [
+        "prod_os_image"
+      ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -313,7 +318,7 @@
   ],
   "coverage_summary": {
     "invalid": 2,
-    "verified": 2,
+    "not_checked": 2,
     "partial": 9,
     "unreachable": 4
   },

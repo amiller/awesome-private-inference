@@ -39,7 +39,7 @@ SCORECARD_LABELS = {
 OUTCOME_STYLE = {
     "verified": ("Adapter accepted", "bg-emerald-100 text-emerald-800", "The adapter accepted its scoped checks; this is not a full route verdict."),
     "rejected": ("Adapter rejected", "bg-rose-100 text-rose-800", "The adapter checked evidence and rejected it."),
-    "not_checked": ("Not checked", "bg-amber-100 text-amber-800", "No check was completed, often because credentials are absent."),
+    "not_checked": ("Not checked", "bg-amber-100 text-amber-800", "Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof."),
     "unsupported": ("Unsupported", "bg-slate-200 text-slate-700", "The adapter cannot check this evidence surface."),
     "unavailable": ("Unavailable", "bg-slate-200 text-slate-700", "Evidence or endpoint was unavailable; this is not a cryptographic rejection."),
     "stale": ("Stale", "bg-amber-100 text-amber-800", "The latest evidence is too old for the stated freshness policy."),
@@ -106,6 +106,13 @@ def _timeline() -> list[dict]:
                               ("publication", REPO_ROOT / "data/references/events")):
         for path in directory.glob("*.json"):
             event = json.loads(path.read_text())
+            decision_path = REPO_ROOT / "data/reviews/decisions" / (str(event.get("event_id")) + ".json")
+            if decision_path.is_file():
+                decision = json.loads(decision_path.read_text())
+                if decision.get("event") != event:
+                    raise ValueError("review decision does not match immutable event")
+                event = {**event, "review": decision["review"], "draft": decision["draft"],
+                         "review_url": source_link(str(decision_path.relative_to(REPO_ROOT)))}
             when = event.get("first_seen_at") or event.get("timestamp") or ""
             events.append({**event, "family": family, "when": when,
                            "source_url": source_link(str(path.relative_to(REPO_ROOT)))})
@@ -167,6 +174,7 @@ def _render(snapshot: dict) -> None:
            "run_id": snapshot.get("run_id", "local"), "git_sha": snapshot.get("git_sha", ""),
            "rows": rows, "route_cards": cards, "routes_as_of": routes.get("as_of"),
            "references": references, "timeline": timeline[:20], "timeline_total": len(timeline),
+           "reviewed_events": [event for event in timeline if event.get("review")][:5],
            "quality": quality, "pricing_rows": pricing_rows,
            "scorecard_labels": SCORECARD_LABELS, "outcome_style": OUTCOME_STYLE,
            "repo_url": REPO_URL}

@@ -15,6 +15,14 @@
 <section id="changes" class="mb-9">
   <div class="flex flex-wrap justify-between items-end gap-2"><h2 class="text-xl font-semibold">Change timeline</h2><span class="text-xs text-slate-500">{{ timeline_total }} recorded events · latest 20 shown</span></div>
   <p class="mt-1 mb-3 text-sm text-slate-600">A new identity means newly observed by this sampling process. It does not establish a deployment date or authorize a new value.</p>
+  {% for event in reviewed_events %}
+  <div class="mb-3 rounded-lg border border-indigo-200 bg-indigo-50 p-3 text-sm">
+    <strong>Reviewed: {{ event.review.disposition|replace('_', ' ') }}</strong> · <code>{{ event.route_id }}</code>
+    <p class="mt-1">{{ event.draft.summary }}</p>
+    <p class="mt-1 text-xs">{{ event.review.rationale }}</p>
+    <a class="text-xs underline text-indigo-700" href="{{ event.review_url }}">Review and evidence ↗</a>
+  </div>
+  {% endfor %}
   <div class="rounded-xl border border-slate-200 bg-white divide-y divide-slate-100">
   {% for event in timeline %}
     <article class="p-3 sm:flex sm:gap-4 text-sm">
@@ -24,6 +32,7 @@
         {% if event.old_value is defined or event.new_value is defined %}<p class="mt-1 text-xs text-slate-600 break-all">{{ event.old_value if event.old_value is defined and event.old_value is not none else "—" }} → {{ event.new_value if event.new_value is defined and event.new_value is not none else "—" }}</p>{% endif %}
         {% if event.previous_sha256 or event.current_sha256 %}<p class="mt-1 text-xs text-slate-600 break-all">{{ (event.previous_sha256 or "—")[:20] }} → {{ (event.current_sha256 or "—")[:20] }} (hash prefixes)</p>{% endif %}
         <a class="text-xs underline text-indigo-700" href="{{ event.source_url }}">Event evidence ↗</a>
+        {% if event.review %}<a class="ml-2 text-xs underline" href="{{ event.review_url }}">Reviewed: {{ event.review.disposition|replace('_', ' ') }} ↗</a>{% else %}<span class="ml-2 text-xs text-slate-500">Awaiting review</span>{% endif %}
       </div>
     </article>
   {% else %}

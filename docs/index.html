@@ -43,11 +43,237 @@
 </section>
 
 <section id="changes" class="mb-9">
-  <div class="flex flex-wrap justify-between items-end gap-2"><h2 class="text-xl font-semibold">Change timeline</h2><span class="text-xs text-slate-500">0 recorded events · latest 20 shown</span></div>
+  <div class="flex flex-wrap justify-between items-end gap-2"><h2 class="text-xl font-semibold">Change timeline</h2><span class="text-xs text-slate-500">26 recorded events · latest 20 shown</span></div>
   <p class="mt-1 mb-3 text-sm text-slate-600">A new identity means newly observed by this sampling process. It does not establish a deployment date or authorize a new value.</p>
+
+  <div class="mb-3 rounded-lg border border-indigo-200 bg-indigo-50 p-3 text-sm">
+    <strong>Reviewed: needs evidence</strong> · <code>aci-gateway/tee.redpill.ai</code>
+    <p class="mt-1">The tee.redpill.ai coverage_lost event compares a 2026-10-13 legacy adapter 'verified' row with a 2026-10-14 current 'not_checked' row. The newer verifier requires boot-measurement and request-path proof that the older result did not establish. Captured gateway quote, nonce, keyset, event-log and compose fields support several narrower bindings, but do not complete those missing checks. This is primarily an instrument-scope downgrade, not evidence that the provider changed to a compromised deployment. The three ACI hosts share one observed gateway workload; zero full-valid adapter results do not imply three compromised providers.</p>
+    <p class="mt-1 text-xs">Confirmed immutable report/raw-evidence integrity, unchanged reported compose identity and the new explicit boot/request proof gap. The coverage event primarily corrects the instrument claim; it does not demonstrate a compromised deployment. The reported keyset change remains a separate unproven continuity question. Retain not_checked, do not expand accepted references, and verify boot measurements plus a bound backend request before a full-route claim.</p>
+    <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json">Review and evidence ↗</a>
+  </div>
+
   <div class="rounded-xl border border-slate-200 bg-white divide-y divide-slate-100">
 
-    <p class="p-4 text-sm text-slate-600">No change events recorded yet. The publication baseline below remains a point observation.</p>
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· prod_os_image</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">True → —</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-d93de73e23b80c92a4e69c0433203102.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· catalog_nonempty</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-bcb84249ce22d1f7b1ad334ceaffa982.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">coverage_lost</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+
+        <p class="mt-1 text-xs text-slate-600 break-all">verified → not_checked</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-b69f2fb6d3774d63dbf5612b560ea77d.json">Event evidence ↗</a>
+        <a class="ml-2 text-xs underline" href="https://github.com/amiller/awesome-private-inference/blob/main/data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json">Reviewed: needs evidence ↗</a>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· backend_attested</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">True → —</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-91e9a6e3a61d04cd38c057934d8c2f4a.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_identity_reported</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· workload_keyset_digest</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">sha256:e04ce1973df777f4f9056e96ec9f2b50af4145a02c1eb412433cd60305505b1a → sha256:f41362b5a4920ea010c95885f8994575c51ace1af7acb0670a3fbca273d65e00</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-826a36fb8f4ca324ffd1bdf564875ce9.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· sessions_publish_evidence_digests</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-7ab9de4290deecee59e0f6215625968b.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">instrument_changed</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· verifier_revision</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">35f05fb4c6a59f6794cc43aec2e854e5d183d106 → 733ce5544e411ccf61f432211dd73b1b2b72848f6a8c88d9beb0e669351ab8ee</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-6c71da693216518873ed3da2f7852c3b.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· backend_attested</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">True → —</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-654b575413b664b2fe78d81dd040c0eb.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· prod_os_image</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">True → —</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-5283aa24256dc5bbf7c115ee55517093.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· os_image_archive_declares_production</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-4e9515892a108ad73ea193e8f94d9a7e.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">instrument_changed</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· verifier_revision</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">35f05fb4c6a59f6794cc43aec2e854e5d183d106 → 733ce5544e411ccf61f432211dd73b1b2b72848f6a8c88d9beb0e669351ab8ee</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-4b5d5639f606ea73b8981866b488c7f2.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· catalog_nonempty</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-45264492449b7c855ff593ea1bfe1d3a.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· os_image_archive_declares_production</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-30f358513d9780439fe31a233d5b85cd.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_identity_reported</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· workload_keyset_digest</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">sha256:e04ce1973df777f4f9056e96ec9f2b50af4145a02c1eb412433cd60305505b1a → sha256:f41362b5a4920ea010c95885f8994575c51ace1af7acb0670a3fbca273d65e00</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-2d27e62a44c867b62f9b2ce67704dd17.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· catalog_serves</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">True → —</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-161f44da21bda7384a0c2c8d0a5c6584.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/tee.redpill.ai</code>
+        <span class="text-slate-600">· sessions_publish_evidence_digests</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-11c879389db73d6b2dff03c46bb14208.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:31Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/api.redpill.ai</code>
+        <span class="text-slate-600">· catalog_serves</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">True → —</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-017351894d62e5ca28a4f307157eb890.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:30Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/inference.phala.com</code>
+        <span class="text-slate-600">· sessions_publish_evidence_digests</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-c601a7c0b5530c40547c3345cb29a26e.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:30Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/inference.phala.com</code>
+        <span class="text-slate-600">· catalog_serves</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">True → —</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-ae4b7a8a41fba9691e3d35d697f2522a.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
+
+    <article class="p-3 sm:flex sm:gap-4 text-sm">
+      <time class="block sm:w-36 shrink-0 text-xs text-slate-500" datetime="2026-10-14T01:42:30Z">2026-10-14T01:42</time>
+      <div class="min-w-0"><span class="font-semibold">untrusted_cell_reported</span> <code class="text-xs break-all">aci-gateway/inference.phala.com</code>
+        <span class="text-slate-600">· catalog_nonempty</span>
+        <p class="mt-1 text-xs text-slate-600 break-all">— → True</p>
+
+        <a class="text-xs underline text-indigo-700" href="https://github.com/amiller/awesome-private-inference/blob/main/data/continuity/events/chg-accb1546cf85ebd4a9d307f4e1352dd2.json">Event evidence ↗</a>
+        <span class="ml-2 text-xs text-slate-500">Awaiting review</span>
+      </div>
+    </article>
 
   </div>
 </section>
@@ -66,7 +292,7 @@
       <details class="mt-2 text-xs text-slate-700"><summary class="cursor-pointer font-medium">2 reference inputs</summary><ul class="mt-1 space-y-1"><li class="border-l-2 border-slate-200 pl-2"><strong>gateway:</strong> TDX quote, compose and keyset · published at live attestation endpoint · accepted by repository adapter <span class="text-slate-500">(observed adapter check)</span></li><li class="border-l-2 border-slate-200 pl-2"><strong>backend:</strong> session evidence digest · published at gateway report · accepted by unverified in adapter <span class="text-slate-500">(self reported)</span></li></ul></details>
       <div class="mt-3 rounded-md bg-slate-50 p-2 text-xs text-slate-700">
         <strong>1 adapter row matched:</strong>
-          <span class="inline-block mr-2">tee.redpill.ai — legacy adapter accepted</span>
+          <span class="inline-block mr-2">tee.redpill.ai — not checked</span>
 
 
       </div>
@@ -84,7 +310,7 @@
       <details class="mt-2 text-xs text-slate-700"><summary class="cursor-pointer font-medium">2 reference inputs</summary><ul class="mt-1 space-y-1"><li class="border-l-2 border-slate-200 pl-2"><strong>gateway:</strong> TDX quote, compose and keyset · published at live attestation endpoint · accepted by repository adapter <span class="text-slate-500">(observed adapter check)</span></li><li class="border-l-2 border-slate-200 pl-2"><strong>backend:</strong> session evidence digest · published at gateway report · accepted by unverified in adapter <span class="text-slate-500">(self reported)</span></li></ul></details>
       <div class="mt-3 rounded-md bg-slate-50 p-2 text-xs text-slate-700">
         <strong>1 adapter row matched:</strong>
-          <span class="inline-block mr-2">inference.phala.com — legacy adapter accepted</span>
+          <span class="inline-block mr-2">inference.phala.com — not checked</span>
 
 
       </div>
@@ -102,7 +328,7 @@
       <details class="mt-2 text-xs text-slate-700"><summary class="cursor-pointer font-medium">1 reference input</summary><ul class="mt-1 space-y-1"><li class="border-l-2 border-slate-200 pl-2"><strong>gateway:</strong> TDX quote and measured domain policy · published at live attestation endpoint · accepted by repository adapter <span class="text-slate-500">(observed adapter check)</span></li></ul></details>
       <div class="mt-3 rounded-md bg-slate-50 p-2 text-xs text-slate-700">
         <strong>1 adapter row matched:</strong>
-          <span class="inline-block mr-2">api.redpill.ai — legacy adapter rejected</span>
+          <span class="inline-block mr-2">api.redpill.ai — adapter rejected</span>
 
 
       </div>
@@ -398,9 +624,9 @@
   <h2 class="text-xl font-semibold">Current adapter observations</h2>
   <p class="mt-1 mb-3 text-sm text-slate-600">An adapter pass means its scoped code accepted a response. Unavailable evidence, an incomplete check and a checked rejection are different outcomes. See each route card for plaintext and policy gaps.</p>
   <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white"><table class="w-full text-sm"><thead class="bg-slate-100 text-left text-slate-700"><tr><th class="p-2">Target</th><th class="p-2">Outcome</th><th class="p-2">Reason / checked at</th><th class="p-2">Checks</th></tr></thead><tbody>
-    <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">aci-gateway/api.redpill.ai</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-rose-100 text-rose-800" title="Historical adapter valid flag; this predates typed observations and is not a complete route verdict.">Legacy adapter rejected</span></td><td class="p-2 text-xs text-slate-600">legacy_adapter_result<div>2026-10-13T19:51:34Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">8 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-rose-100 text-rose-800" title="TEE route enforced: Adapter rejection">× TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Backend check: Adapter pass">✓ Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Catalog serving: Adapter pass">✓ Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Compose binding: Adapter pass">✓ Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Production OS: Adapter pass">✓ Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Serving code: Not checked or not applicable; consult route">— Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
-    <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">aci-gateway/inference.phala.com</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-emerald-100 text-emerald-800" title="Historical adapter valid flag; this predates typed observations and is not a complete route verdict.">Legacy adapter accepted</span></td><td class="p-2 text-xs text-slate-600">legacy_adapter_result<div>2026-10-13T19:51:34Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">8 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TEE route enforced: Adapter pass">✓ TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Backend check: Adapter pass">✓ Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Catalog serving: Adapter pass">✓ Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Compose binding: Adapter pass">✓ Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Production OS: Adapter pass">✓ Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Serving code: Not checked or not applicable; consult route">— Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
-    <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">aci-gateway/tee.redpill.ai</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-emerald-100 text-emerald-800" title="Historical adapter valid flag; this predates typed observations and is not a complete route verdict.">Legacy adapter accepted</span></td><td class="p-2 text-xs text-slate-600">legacy_adapter_result<div>2026-10-13T19:51:34Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">8 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TEE route enforced: Adapter pass">✓ TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Backend check: Adapter pass">✓ Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Catalog serving: Adapter pass">✓ Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Compose binding: Adapter pass">✓ Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Production OS: Adapter pass">✓ Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Serving code: Not checked or not applicable; consult route">— Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
+    <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">aci-gateway/api.redpill.ai</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-rose-100 text-rose-800" title="The adapter checked evidence and rejected it.">Adapter rejected</span></td><td class="p-2 text-xs text-slate-600">unspecified<div>2026-10-14T01:42:31Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">8 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-rose-100 text-rose-800" title="TEE route enforced: Adapter rejection">× TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Backend check: Not checked or not applicable; consult route">— Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Catalog nonempty: Adapter pass">✓ Catalog nonempty</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Catalog serving: Not checked or not applicable; consult route">— Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Compose binding: Adapter pass">✓ Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Gateway review: Not checked or not applicable; consult route">— Gateway review</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Hardware signature: Not checked or not applicable; consult route">— Hardware signature</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Release measurement: Not checked or not applicable; consult route">— Release measurement</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="OS archive metadata: Adapter pass">✓ OS archive metadata</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Production OS: Not checked or not applicable; consult route">— Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Release provenance: Not checked or not applicable; consult route">— Release provenance</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Serving code: Not checked or not applicable; consult route">— Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Session digest listing: Adapter pass">✓ Session digest listing</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
+    <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">aci-gateway/inference.phala.com</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof.">Not checked</span></td><td class="p-2 text-xs text-slate-600">verification_incomplete<div>2026-10-14T01:42:30Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">8 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TEE route enforced: Adapter pass">✓ TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Backend check: Not checked or not applicable; consult route">— Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Catalog nonempty: Adapter pass">✓ Catalog nonempty</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Catalog serving: Not checked or not applicable; consult route">— Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Compose binding: Adapter pass">✓ Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Gateway review: Not checked or not applicable; consult route">— Gateway review</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Hardware signature: Not checked or not applicable; consult route">— Hardware signature</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Release measurement: Not checked or not applicable; consult route">— Release measurement</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="OS archive metadata: Adapter pass">✓ OS archive metadata</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Production OS: Not checked or not applicable; consult route">— Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Release provenance: Not checked or not applicable; consult route">— Release provenance</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Serving code: Not checked or not applicable; consult route">— Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Session digest listing: Adapter pass">✓ Session digest listing</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
+    <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">aci-gateway/tee.redpill.ai</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-amber-100 text-amber-800" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof.">Not checked</span></td><td class="p-2 text-xs text-slate-600">verification_incomplete<div>2026-10-14T01:42:31Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">8 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TEE route enforced: Adapter pass">✓ TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Backend check: Not checked or not applicable; consult route">— Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Catalog nonempty: Adapter pass">✓ Catalog nonempty</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Catalog serving: Not checked or not applicable; consult route">— Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Compose binding: Adapter pass">✓ Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Gateway review: Not checked or not applicable; consult route">— Gateway review</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Hardware signature: Not checked or not applicable; consult route">— Hardware signature</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Release measurement: Not checked or not applicable; consult route">— Release measurement</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="OS archive metadata: Adapter pass">✓ OS archive metadata</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Production OS: Not checked or not applicable; consult route">— Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Release provenance: Not checked or not applicable; consult route">— Release provenance</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Serving code: Not checked or not applicable; consult route">— Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Session digest listing: Adapter pass">✓ Session digest listing</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
     <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">chutes/DeepSeek-V3.2-TEE</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-emerald-100 text-emerald-800" title="Historical adapter valid flag; this predates typed observations and is not a complete route verdict.">Legacy adapter accepted</span></td><td class="p-2 text-xs text-slate-600">legacy_adapter_result<div>2026-10-13T19:52:01Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">4 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TEE route enforced: Not checked or not applicable; consult route">— TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Backend check: Not checked or not applicable; consult route">— Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Catalog serving: Not checked or not applicable; consult route">— Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Compose binding: Not checked or not applicable; consult route">— Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Production OS: Not checked or not applicable; consult route">— Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-rose-100 text-rose-800" title="Serving code: Adapter rejection">× Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
     <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">chutes/GLM-5.1-TEE</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-emerald-100 text-emerald-800" title="Historical adapter valid flag; this predates typed observations and is not a complete route verdict.">Legacy adapter accepted</span></td><td class="p-2 text-xs text-slate-600">legacy_adapter_result<div>2026-10-13T19:51:55Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">4 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TEE route enforced: Not checked or not applicable; consult route">— TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Backend check: Not checked or not applicable; consult route">— Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Catalog serving: Not checked or not applicable; consult route">— Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Compose binding: Not checked or not applicable; consult route">— Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Production OS: Not checked or not applicable; consult route">— Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-rose-100 text-rose-800" title="Serving code: Adapter rejection">× Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
     <tr class="border-t border-slate-100"><td class="p-2 font-mono text-xs">chutes/GLM-5.2-TEE</td><td class="p-2"><span class="rounded px-2 py-1 text-xs bg-emerald-100 text-emerald-800" title="Historical adapter valid flag; this predates typed observations and is not a complete route verdict.">Legacy adapter accepted</span></td><td class="p-2 text-xs text-slate-600">legacy_adapter_result<div>2026-10-13T19:51:54Z</div></td><td class="p-2 text-xs"><details><summary class="cursor-pointer">4 checked fields</summary><div class="mt-1 max-w-sm"><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TEE route enforced: Not checked or not applicable; consult route">— TEE route enforced</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Backend check: Not checked or not applicable; consult route">— Backend check</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Catalog serving: Not checked or not applicable; consult route">— Catalog serving</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Client nonce: Not checked or not applicable; consult route">— Client nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Reproduced build: Not checked or not applicable; consult route">— Reproduced build</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Compose binding: Not checked or not applicable; consult route">— Compose binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="GPU evidence: Not checked or not applicable; consult route">— GPU evidence</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="HPKE key: Not checked or not applicable; consult route">— HPKE key</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Address binding: Not checked or not applicable; consult route">— Address binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Fresh nonce: Adapter pass">✓ Fresh nonce</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Production OS: Not checked or not applicable; consult route">— Production OS</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="Key binding: Adapter pass">✓ Key binding</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="Runtime config: Not checked or not applicable; consult route">— Runtime config</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-rose-100 text-rose-800" title="Serving code: Adapter rejection">× Serving code</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-emerald-100 text-emerald-800" title="TDX appraisal: Adapter pass">✓ TDX appraisal</span><span class="inline-block mr-2 mb-1 rounded px-1 bg-slate-100 text-slate-500" title="TLS key pin: Not checked or not applicable; consult route">— TLS key pin</span></div></details></td></tr>
@@ -429,7 +655,7 @@
 
 <footer class="border-t border-slate-200 bg-white mt-16">
   <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
-    <span>Adapter snapshot 2026-10-13T19:51:26Z · run legacy-f92ab80278c30d15c102f4ca · <code>35f05fb4</code></span>
+    <span>Adapter snapshot 2026-10-14T01:42:25.270249Z · run 20261014T014225.270218Z-ee0f9ceae7d3 · <code>79fff1b</code></span>
     <span>Code MIT · Data CC-BY 4.0</span>
   </div>
 </footer>
