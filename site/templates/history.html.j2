@@ -49,5 +49,6 @@ function render(){const q=$('search').value.toLowerCase();const lanes=D.lanes.fi
 for(const p of [...new Set([...D.inventory_providers,...D.lanes.map(l=>l.provider)])].sort()){$('provider').append(node('option',p));$('provider').lastChild.value=p}
 $('stat-tracks').textContent=D.lanes.length;$('stat-changes').textContent=D.events.filter(e=>e.kind!=='baseline').length;$('stat-review').textContent=D.reviews.length;
 for(const id of ['provider','family','size','group','search'])$(id).addEventListener(id==='search'?'input':'change',render);
+const requestedProvider=new URLSearchParams(location.search).get('provider');if([...$('provider').options].some(o=>o.value===requestedProvider))$('provider').value=requestedProvider;
 $('download').href=URL.createObjectURL(new Blob([JSON.stringify(D,null,2)],{type:'application/json'}));render();
 </script></main></body></html>

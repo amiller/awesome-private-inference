@@ -13,6 +13,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from probes.quality import compute as compute_quality
 from probes.schema import classify_report
 from probes.reference_history import build as build_reference_history
+from probes.assessments import build as build_assessments, AXES, STATES
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_LATEST = REPO_ROOT / "data/latest.json"
@@ -43,7 +44,7 @@ MATRIX_KEYS = (
 )
 
 OUTCOME_STYLE = {
-    "verified": ("Adapter accepted", "bg-emerald-100 text-emerald-800", "The adapter accepted its scoped checks; this is not a full route verdict."),
+    "verified": ("Adapter accepted", "bg-slate-100 text-slate-700", "The adapter accepted its scoped checks; this is not a full route verdict."),
     "rejected": ("Adapter rejected", "bg-rose-100 text-rose-800", "The adapter checked evidence and rejected it."),
     "not_checked": ("Not checked", "bg-amber-100 text-amber-800", "Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof."),
     "unsupported": ("Unsupported", "bg-slate-200 text-slate-700", "The adapter cannot check this evidence surface."),
@@ -179,7 +180,7 @@ def _render(snapshot: dict) -> None:
     timeline = _timeline()
     cards = _route_cards(routes, rows, references)
     pricing_rows = [row for group in snapshot.get("pricing", {}).values() for row in group]
-    env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=select_autoescape(["html"]))
+    env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)), autoescape=select_autoescape(["html", "j2"]))
     ctx = {"snapshot": snapshot, "generated_at": snapshot.get("generated_at", ""),
            "run_id": snapshot.get("run_id", "local"), "git_sha": snapshot.get("git_sha", ""),
            "rows": rows, "route_cards": cards, "routes_as_of": routes.get("as_of"),
@@ -191,14 +192,20 @@ def _render(snapshot: dict) -> None:
            "scorecard_labels": SCORECARD_LABELS, "outcome_style": OUTCOME_STYLE,
            "repo_url": REPO_URL}
     ctx["history"] = build_reference_history(REPO_ROOT)
+    assessment_data = _load_optional(REPO_ROOT / "data/assessments/routes.json", {"rubric_version": 1, "routes": []})
+    ctx["assessment_groups"] = build_assessments(assessment_data, cards, ctx["history"], ctx["generated_at"])
+    ctx["assessment_axes"] = AXES
+    ctx["assessment_states"] = STATES
     for page, template in (("index.html", "index.html.j2"),
+                           ("assessments.html", "assessments.html.j2"),
+                           ("measurements.html", "measurements.html.j2"),
                            ("evidence.html", "evidence.html.j2"),
                            ("methodology.html", "methodology.html.j2"),
                            ("pricing.html", "pricing.html.j2"),
                            ("history.html", "history.html.j2")):
         rendered = env.get_template(template).render(**ctx)
         (DOCS_DIR / page).write_text("\n".join(line.rstrip() for line in rendered.splitlines()) + "\n")
-    print(f"wrote {DOCS_DIR}/{{index,evidence,methodology,pricing,history}}.html")
+    print(f"wrote {DOCS_DIR}/{{index,assessments,measurements,evidence,methodology,pricing,history}}.html")
 
 
 def main() -> int:
