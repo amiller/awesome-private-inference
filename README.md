@@ -35,6 +35,12 @@ follow-up work. [AGENTS.md](AGENTS.md) gives agents the working rules;
 
 The reference history page shows exact old/new values and scoped review evidence. First seen is not deployment time. Document changes do not measure deployed code size or security risk. This is an observatory backed by retained evidence, without certificate-transparency-style append-only or consistency guarantees.
 
+A **reference value** is an expected identity used in verification policy, such
+as an approved boot measurement or software/configuration digest. Keep it distinct
+from an identity observed in workload evidence and from a hash of a downloaded
+publication. A provider publishing a value, a hardware quote reporting it, and a
+client accepting it are three different claims.
+
 Abalone and multi-provider gateways could share the verifier routines and versioned reference records while applying their own explicit acceptance policies. The [consumption contract](specifications/shared-verification.md) documents the existing adapter interfaces, machine-readable exports and an unknown-value example. These integrations are not implemented here yet.
 
 ## Read the evidence by route
@@ -42,6 +48,30 @@ Abalone and multi-provider gateways could share the verifier routines and versio
 An ordinary gateway, an encrypted request relayed through it, and a direct model connection have different plaintext holders. A valid gateway quote does not establish that a downstream model is private. A stable base-image measurement may exclude mutable serving code. A provider-authorized update is not necessarily an independently reviewed update.
 
 The [route inventory](data/routes.json) is the shared source for dashboard explanations: client mode, plaintext holders, reference authority, blockers and next verification step. It separates NEAR gateway/E2EE/direct paths, ACI hostnames, Tinfoil, Venice clients, Chutes modes, and candidate routes for Private Inference, Maple, Privatemode and Confidential AI. Candidate and publication-only rows are not live confidentiality verdicts.
+
+The [companion DevProof case studies](https://github.com/amiller/devproof-audits-guide)
+examine how operators can affect plaintext, measured software and updates. The
+[selected audit synthesis](data/audit-synthesis.json), also shown below the
+comparison, connects those dated findings to this observatory. It credits Chutes'
+hardware protection while separating the demonstrated unmeasured-operator-code
+gap; distinguishes Tinfoil's reference verifier from checks missing in our adapter;
+and shows why a gateway quote or verifier success flag can be narrower than a
+client assumes. Report links pin the reviewed source; historical stage language
+does not become a new stage award here.
+
+Assessments should name the evidence and unfinished obligation. A missing AMD
+signature check in our Python adapter is work for this repository, not evidence
+that the provider lacks hardware attestation. A demonstrated plaintext-access
+path is a different kind of finding. Method limitations are tracked as bounded
+issues with required evidence and negative controls for completion.
+
+Current tasks cover [Tinfoil's AMD check](https://github.com/amiller/awesome-private-inference/issues/26),
+[ACI's expected boot measurements](https://github.com/amiller/awesome-private-inference/issues/27),
+[Chutes' GPU/RTMR checks](https://github.com/amiller/awesome-private-inference/issues/28),
+[NEAR's request path](https://github.com/amiller/awesome-private-inference/issues/29),
+[route proof packets](https://github.com/amiller/awesome-private-inference/issues/30)
+and [Chutes' serving-code/model boundary](https://github.com/amiller/awesome-private-inference/issues/31).
+Each task states what evidence would resolve its question.
 
 ## What runs
 

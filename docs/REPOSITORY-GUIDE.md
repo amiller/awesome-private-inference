@@ -54,12 +54,33 @@ A green freshness check can coexist with unresolved reviews and incomplete proof
 | `data/continuity/events/`, `data/references/events/` | Persisted change events derived from retained evidence; inputs to review work. An event is not an approval. |
 | `data/reviews/decisions/`, `data/audits/` | Published review dispositions and historical scoped audit ledgers. Preserve review scope/date; neither grants a client policy update. Some adapters use audit matches as individual check inputs. |
 | `data/assessments/routes.json`, `providers/*.md` | Maintained, dated interpretation of route evidence and its gaps. New claims require supporting evidence, not only a wording change. |
+| `data/audit-synthesis.json` | Curated lessons from pinned companion DevProof reports, with evidence dates and scope limits. It explains existing findings; it does not create fresh deployment evidence or import historical stage ratings. |
 | `data/latest.json`, `data/references/latest.json`, `data/quality.json` | Derived current indexes and summaries. Follow their references to original evidence; do not treat regeneration time as renewed verification. |
 | `probes/observations.py`, `continuity.py`, `references.py`, `reference_history.py`, `assessments.py` | Observation, event, history and assessment transformations. Test context preservation and missing/failed evidence behavior when changing them. |
 | `site/templates/`, `probes/render.py` | Website source. Comparison and Reference values are the two primary views. Supporting assessments, methodology and stage criteria explain them. |
 | `docs/*.html`, `docs/reference-values.json`, `docs/evidence/` | Generated publication outputs. Regenerate them; do not edit them as source evidence. `docs/*.md` are maintained documentation. |
 | `research/`, `tasks/` | Dated investigations, retained validation and work records. A completed task list is not proof of current operations. |
 | `local-data/` | Ignored local working evidence and private queue state. Preserve useful sanitized results, never publish leases or credentials. |
+
+### Maintain a comparison cell
+
+Each route-axis cell in `data/assessments/routes.json` separates a concrete
+`label`, established `evidence`, the `missing` proof obligation and its
+`limitation`: `ours` for work in our method, `reviewed_system` for a finding in
+the reviewed system, `evidence` for missing supporting proof, `architecture` for
+a boundary of the named route, or `mixed` when more than one applies. Explain
+the distinction in the evidence; the enum alone cannot make a claim precise.
+Internal `state` values support aggregation and are not public security grades.
+
+Use `issue_urls` to connect unfinished work to a bounded task. The task should
+name the route and exact claim, evidence needed for completion, meaningful
+negative controls and any external blocker. Closing a task or adding a clearer
+label does not itself justify changing an assessment state: retain the proof
+and update the dated assessment together. The
+[claim-derived rubric task](https://github.com/amiller/awesome-private-inference/issues/6)
+tracks the common criteria; individual cells link their relevant implementation
+or evidence tasks. Historical companion findings belong in the audit synthesis
+with pinned sources and scope limits, not as silently renewed live verdicts.
 
 ## Trace and independently challenge one claim
 

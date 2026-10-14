@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "curated_at": "2026-10-14",
+  "source_revision": "1af8a26ac521042bb48209345d840490591e85ed",
+  "scope": "Selected lessons from committed companion DevProof reports. Dates describe their evidence; this synthesis is not a fresh deployment audit and does not import their stage ratings.",
+  "studies": [
+    {
+      "id": "chutes-operator-boundary",
+      "title": "Chutes: genuine hardware can still run unmeasured operator code",
+      "summary": "The companion study credits genuine TDX, key binding and protection from the miner host. Its application finding is different: operator-supplied serving code received decrypted prompts without that code being identified by the client's measured references.",
+      "evidence_date": "2026-06-16/17",
+      "source_url": "https://github.com/amiller/devproof-audits-guide/blob/1af8a26ac521042bb48209345d840490591e85ed/case-studies/chutes-confidential-inference/OPERATOR-EXFIL-POC.md",
+      "scope": "Controlled demonstration on the author's own deployed chute, plus SDK source review; consumer trust in the chute operator.",
+      "findings": [
+        "Operator-added middleware collected controlled callers' decrypted prompts and returned them to another controlled caller through the ordinary encrypted reply channel.",
+        "A matching base-image measurement did not distinguish that serving code. Preventing network egress alone did not close the cross-request channel."
+      ],
+      "limits": "This was not an observed breach of third-party production users. It establishes the demonstrated operator capability under the reviewed boundary; today's workload and any remediation need separate evidence. The daily registry adapter also omits GPU appraisal, a limitation of our instrument rather than this application finding.",
+      "route_ids": ["chutes-tee"],
+      "additional_sources": [
+        {"label": "Consumer report and threat model", "url": "https://github.com/amiller/devproof-audits-guide/blob/1af8a26ac521042bb48209345d840490591e85ed/case-studies/chutes-confidential-inference/REPORT-inference.md"},
+        {"label": "Hardware strengths and miner containment", "url": "https://github.com/amiller/devproof-audits-guide/blob/1af8a26ac521042bb48209345d840490591e85ed/case-studies/chutes-confidential-inference/PLATFORM.md"}
+      ]
+    },
+    {
+      "id": "tinfoil-config-scope",
+      "title": "Tinfoil: trace what an operator-controlled setting can actually affect",
+      "summary": "The report separated the router from model enclaves and traced two externally supplied router settings through the code. For the reviewed deployment, it found those settings off the prompt path; the examined model configurations had no equivalent external slots.",
+      "evidence_date": "2026-04-26",
+      "source_url": "https://github.com/amiller/devproof-audits-guide/blob/1af8a26ac521042bb48209345d840490591e85ed/case-studies/tinfoil-confidential-inference/DEVPROOF-REPORT.md",
+      "scope": "Dated managed-inference deployment/configuration inspection and router source trace; two listed model enclaves were unreachable for direct inspection.",
+      "findings": [
+        "The hostname setting and billing-HMAC secret had different effects from a hypothetical setting that redirects or logs plaintext; the mere existence of an external input did not establish prompt exposure.",
+        "The report distinguished AMD verification in Tinfoil's reference Go verifier from the missing VCEK-chain check in this repository's Python adapter."
+      ],
+      "limits": "Those configuration conclusions apply to the examined versions. They do not complete our present hardware checks, independently reproduce every build, or prove an unobserved worker. The report's historical stage language is not a stage award by this site.",
+      "route_ids": ["tinfoil-router"],
+      "additional_sources": []
+    },
+    {
+      "id": "aci-gateway-model-scope",
+      "title": "ACI gateway: a valid gateway quote is not a model attestation",
+      "summary": "The August study compared ACI's explicit gateway and session evidence with a legacy endpoint that accepted arbitrary model names while returning the gateway's quote. The same genuine hardware evidence could be interpreted as a stronger claim than it supported.",
+      "evidence_date": "2026-08-18",
+      "source_url": "https://github.com/amiller/devproof-audits-guide/blob/1af8a26ac521042bb48209345d840490591e85ed/case-studies/redpill-phala-aci-gateway/DEVPROOF-REPORT.md",
+      "scope": "Dated shared RedPill/Phala gateway deployment, protocol/source inspection, attestation and receipt checks.",
+      "findings": [
+        "Naming a model in an attestation URL did not bind that model to the quoted gateway workload.",
+        "A client's proof must follow the selected upstream and actual request; gateway identity, route policy and worker identity are different obligations."
+      ],
+      "limits": "The legacy-endpoint finding is historical. This repository now probes ACI hostnames and separately records remaining boot-policy and downstream-proof gaps. The earlier report's broader verification language does not close those instrument gaps.",
+      "route_ids": ["aci-gateway-tee-redpill", "aci-gateway-phala", "aci-gateway-api-redpill"],
+      "additional_sources": []
+    },
+    {
+      "id": "verifier-channel-closure",
+      "title": "Phala verifier: inspect what a successful result actually checks",
+      "summary": "The April source review found attestation checks without a complete encrypted client exchange. It also identified checks that compared server-supplied fields without closing the intended hardware or live-channel binding.",
+      "evidence_date": "2026-04-24",
+      "source_url": "https://github.com/amiller/devproof-audits-guide/blob/1af8a26ac521042bb48209345d840490591e85ed/case-studies/phala-private-ai-verifier/DEVPROOF-REPORT.md",
+      "scope": "Source review of Phala private-ai-verifier at revision 2d2f5cf; not a verdict on every later SDK or every provider using Phala infrastructure.",
+      "findings": [
+        "A verifier's success flag needs an explicit contract: which signatures, fields, trust roots and live session are actually checked?",
+        "Authenticating some attestation evidence is insufficient if the client sends its prompt to a key or connection outside that verified chain."
+      ],
+      "limits": "This is a dated verifier study. Current implementations must be inspected independently; the registry applies the same criticism to its own adapters and tracks their unfinished checks separately.",
+      "route_ids": [],
+      "additional_sources": []
+    }
+  ]
+}

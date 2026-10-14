@@ -1,6 +1,6 @@
 {
-  "rubric_version": 1,
-  "scope": "Dated, preliminary source/evidence assessments. No complete route proof or provider security stage is assigned.",
+  "rubric_version": 2,
+  "scope": "Dated source/evidence assessments with explicit evidence, missing obligations and limitation ownership. Internal states are not security grades; no route was promoted by this editorial clarification.",
   "reference_baselines": {
     "aci-gateway": {
       "aci-gateway|aci-gateway/shared-workload|compose_hash|reported workload": [
@@ -1690,7 +1690,7 @@
       "label": "TEE RedPill",
       "architecture": "Intel TDX",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json",
         "verifiers/aci.py",
@@ -1699,27 +1699,69 @@
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete."
+          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete.",
+          "label": "Our boot check missing",
+          "evidence": "The adapter implements TDX quote appraisal and statement/event-log bindings. Expected MRTD and RTMR0\u20132 are not fully checked.",
+          "missing": "Pin the reviewed boot profile and compare authenticated MRTD/RTMR0\u20132; reject a genuine quote for a different boot image.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/27"
+          ]
         },
         "session": {
           "state": "partial",
-          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed."
+          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed.",
+          "label": "Our backend test to do",
+          "evidence": "Gateway nonce and keyset bindings are implemented; no complete retained request test binds the selected backend.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Include keyset continuity and the selected backend.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "Compose preimage and event bindings are checked; an independently reproduced complete deployed workload is not established."
+          "reason": "Compose preimage and event bindings are checked; an independently reproduced complete deployed workload is not established.",
+          "label": "Our rebuild proof to do",
+          "evidence": "Compose preimage and event bindings are checked by the adapter; a complete independently reproduced deployment is not retained.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "Compose and keyset identities are observed, but the deployed profile lacks workload/keyset continuity endorsement. Independent client approval is not established."
+          "reason": "Compose and keyset identities are observed, but the deployed profile lacks workload/keyset continuity endorsement. Independent client approval is not established.",
+          "label": "Approval not established",
+          "evidence": "Compose/keyset identities are captured. The reviewed deployed profile lacks a continuity endorsement and independently established client approval.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Authenticate workload/keyset continuity.",
+          "limitation": "mixed",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -1729,7 +1771,7 @@
       "label": "Phala hostname",
       "architecture": "Intel TDX",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json",
         "verifiers/aci.py",
@@ -1738,27 +1780,69 @@
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete."
+          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete.",
+          "label": "Our boot check missing",
+          "evidence": "The adapter implements TDX quote appraisal and statement/event-log bindings. Expected MRTD and RTMR0\u20132 are not fully checked.",
+          "missing": "Pin the reviewed boot profile and compare authenticated MRTD/RTMR0\u20132; reject a genuine quote for a different boot image.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/27"
+          ]
         },
         "session": {
           "state": "partial",
-          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed."
+          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed.",
+          "label": "Our backend test to do",
+          "evidence": "Gateway nonce and keyset bindings are implemented; no complete retained request test binds the selected backend.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Include keyset continuity and the selected backend.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "Compose preimage and event bindings are checked; an independently reproduced complete deployed workload is not established."
+          "reason": "Compose preimage and event bindings are checked; an independently reproduced complete deployed workload is not established.",
+          "label": "Our rebuild proof to do",
+          "evidence": "Compose preimage and event bindings are checked by the adapter; a complete independently reproduced deployment is not retained.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "Compose and keyset identities are observed, but the deployed profile lacks workload/keyset continuity endorsement. Independent client approval is not established."
+          "reason": "Compose and keyset identities are observed, but the deployed profile lacks workload/keyset continuity endorsement. Independent client approval is not established.",
+          "label": "Approval not established",
+          "evidence": "Compose/keyset identities are captured. The reviewed deployed profile lacks a continuity endorsement and independently established client approval.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Authenticate workload/keyset continuity.",
+          "limitation": "mixed",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -1768,7 +1852,7 @@
       "label": "Ordinary RedPill",
       "architecture": "Intel TDX",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json",
         "verifiers/aci.py",
@@ -1777,27 +1861,69 @@
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete."
+          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete.",
+          "label": "Our boot check missing",
+          "evidence": "The adapter implements TDX quote appraisal and statement/event-log bindings. Expected MRTD and RTMR0\u20132 are not fully checked.",
+          "missing": "Pin the reviewed boot profile and compare authenticated MRTD/RTMR0\u20132; reject a genuine quote for a different boot image.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/27"
+          ]
         },
         "session": {
           "state": "partial",
-          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed."
+          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed.",
+          "label": "Our backend test to do",
+          "evidence": "Gateway nonce and keyset bindings are implemented; no complete retained request test binds the selected backend.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Include keyset continuity and the selected backend.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "Compose preimage and event bindings are checked; an independently reproduced complete deployed workload is not established."
+          "reason": "Compose preimage and event bindings are checked; an independently reproduced complete deployed workload is not established.",
+          "label": "Our rebuild proof to do",
+          "evidence": "Compose preimage and event bindings are checked by the adapter; a complete independently reproduced deployment is not retained.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "gap",
-          "reason": "The measured hostname policy permits a non-TEE backend; gateway attestation cannot constrain the whole plaintext computation."
+          "reason": "The measured hostname policy permits a non-TEE backend; gateway attestation cannot constrain the whole plaintext computation.",
+          "label": "Non-TEE backend allowed",
+          "evidence": "The measured hostname policy permits a non-TEE backend; gateway attestation cannot constrain the whole plaintext computation.",
+          "missing": "Establish and test an approved route policy that constrains every plaintext-holding backend; a gateway-only quote is insufficient.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "gap",
-          "reason": "This hostname does not enforce TEE-only serving. No request-bound backend proof closes that gap."
+          "reason": "This hostname does not enforce TEE-only serving. No request-bound backend proof closes that gap.",
+          "label": "Non-TEE backend allowed",
+          "evidence": "This hostname does not enforce TEE-only serving. No request-bound backend proof closes that gap.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback. Use a route that enforces attested serving.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "Compose and keyset identities are observed, but the deployed profile lacks workload/keyset continuity endorsement. Independent client approval is not established."
+          "reason": "Compose and keyset identities are observed, but the deployed profile lacks workload/keyset continuity endorsement. Independent client approval is not established.",
+          "label": "Approval not established",
+          "evidence": "Compose/keyset identities are captured. The reviewed deployed profile lacks a continuity endorsement and independently established client approval.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Authenticate workload/keyset continuity.",
+          "limitation": "mixed",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -1807,7 +1933,7 @@
       "label": "Gateway HTTPS",
       "architecture": "Intel TDX + GPU",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "providers/near-ai.md",
         "verifiers/near_ai.py",
@@ -1816,27 +1942,69 @@
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain."
+          "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain.",
+          "label": "Our route proof to do",
+          "evidence": "The gateway adapter implements selected TDX/GPU appraisal. There is no complete retained hardware-evidence chain for every recipient on this actual client path.",
+          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and session closure to their separate columns.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "session": {
           "state": "partial",
-          "reason": "Some quote/key and nonce checks exist, but the actual TLS/request path and selected backend are not fully bound."
+          "reason": "Some quote/key and nonce checks exist, but the actual TLS/request path and selected backend are not fully bound.",
+          "label": "Our request test to do",
+          "evidence": "Some quote/key and nonce checks exist, but the actual TLS/request path and selected backend are not fully bound.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Bind the actual TLS/request path and backend.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "Per-model anchors and compose comparisons exist; authenticated compose-manager actions and complete source-to-workload closure remain incomplete."
+          "reason": "Per-model anchors and compose comparisons exist; authenticated compose-manager actions and complete source-to-workload closure remain incomplete.",
+          "label": "Our action check missing",
+          "evidence": "Per-model anchor and compose comparisons are implemented; compose-manager action closure is incomplete.",
+          "missing": "Authenticate compose-manager actions through the quote/event chain and map the requested model to approved reproducible code/artifacts.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "The repository has per-model pinned anchors distinct from chain authorization. Approval and fail-closed behavior of the actual sending client remain unproven."
+          "reason": "The repository has per-model pinned anchors distinct from chain authorization. Approval and fail-closed behavior of the actual sending client remain unproven.",
+          "label": "Our refusal test to do",
+          "evidence": "Repository per-model pins are distinct from on-chain provider authorization; the sending client policy was not validated end to end.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -1846,7 +2014,7 @@
       "label": "E2EE through gateway",
       "architecture": "Intel TDX + GPU",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "providers/near-ai.md",
         "verifiers/near_ai.py",
@@ -1855,27 +2023,69 @@
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain."
+          "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain.",
+          "label": "Our route proof to do",
+          "evidence": "The gateway adapter implements selected TDX/GPU appraisal. There is no complete retained hardware-evidence chain for every recipient on this actual client path.",
+          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and session closure to their separate columns.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "session": {
           "state": "gap",
-          "reason": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified."
+          "reason": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified.",
+          "label": "Reply key substitutable",
+          "evidence": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified.",
+          "missing": "Verify a fixed, version-pinned client/protocol/deployment rejects reply-key substitution before reply disclosure; a later receipt is insufficient.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "Per-model anchors and compose comparisons exist; authenticated compose-manager actions and complete source-to-workload closure remain incomplete."
+          "reason": "Per-model anchors and compose comparisons exist; authenticated compose-manager actions and complete source-to-workload closure remain incomplete.",
+          "label": "Our action check missing",
+          "evidence": "Per-model anchor and compose comparisons are implemented; compose-manager action closure is incomplete.",
+          "missing": "Authenticate compose-manager actions through the quote/event chain and map the requested model to approved reproducible code/artifacts.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "downstream": {
           "state": "partial",
-          "reason": "Requested-model policy is separate from the gateway policy. The complete encrypted request, selected worker and response binding remain unverified."
+          "reason": "Requested-model policy is separate from the gateway policy. The complete encrypted request, selected worker and response binding remain unverified.",
+          "label": "Our worker test to do",
+          "evidence": "Requested-model policy is separate from the gateway policy. The complete encrypted request, selected worker and response binding remain unverified.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "The repository has per-model pinned anchors distinct from chain authorization. Approval and fail-closed behavior of the actual sending client remain unproven."
+          "reason": "The repository has per-model pinned anchors distinct from chain authorization. Approval and fail-closed behavior of the actual sending client remain unproven.",
+          "label": "Our refusal test to do",
+          "evidence": "Repository per-model pins are distinct from on-chain provider authorization; the sending client policy was not validated end to end.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -1885,7 +2095,7 @@
       "label": "Direct model",
       "architecture": "Intel TDX + GPU",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "providers/near-ai.md",
         "verifiers/near_ai.py",
@@ -1894,27 +2104,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "The experimental direct path needs its own client, workload and accepted-policy evidence. Gateway adapter findings cannot establish this route."
+          "reason": "The experimental direct path needs its own client, workload and accepted-policy evidence. Gateway adapter findings cannot establish this route.",
+          "label": "Our direct-path test",
+          "evidence": "The experimental direct path needs its own client, workload and accepted-policy evidence. Gateway adapter findings cannot establish this route.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         },
         "updates": {
           "state": "unknown",
-          "reason": "The experimental direct path needs its own client, workload and accepted-policy evidence. Gateway adapter findings cannot establish this route."
+          "reason": "The experimental direct path needs its own client, workload and accepted-policy evidence. Gateway adapter findings cannot establish this route.",
+          "label": "Our direct-path test",
+          "evidence": "The experimental direct path needs its own client, workload and accepted-policy evidence. Gateway adapter findings cannot establish this route.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -1924,7 +2176,7 @@
       "label": "Router \u2192 worker",
       "architecture": "AMD SEV-SNP",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "verifiers/tinfoil.py",
         "research/review-2026-10-13/review.md",
@@ -1934,27 +2186,70 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "Our verifier does not authenticate the AMD VCEK chain or SNP report signature. Hardware assurance is therefore unestablished here; this is a limitation of our instrument, not evidence that Tinfoil lacks hardware attestation."
+          "reason": "Our verifier does not authenticate the AMD VCEK chain or SNP report signature. Hardware assurance is therefore unestablished here; this is a limitation of our instrument, not evidence that Tinfoil lacks hardware attestation.",
+          "label": "Our AMD check missing",
+          "evidence": "Our verifier does not authenticate the AMD VCEK chain or SNP report signature. Hardware assurance is therefore unestablished here; this is a limitation of our instrument, not evidence that Tinfoil lacks hardware attestation.",
+          "missing": "Authenticate the AMD report signature and VCEK chain against explicit roots/TCB policy, then bind the authenticated report to the measurement and session keys.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/26"
+          ]
         },
         "session": {
           "state": "partial",
-          "reason": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication, authenticated session freshness and the encrypted request remain unverified."
+          "reason": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication, authenticated session freshness and the encrypted request remain unverified.",
+          "label": "Our session proof to do",
+          "evidence": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication, authenticated session freshness and the encrypted request remain unverified.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. First close the AMD authentication dependency.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/26",
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "Sigstore release provenance and measurement agreement are checked. The verifier explicitly does not independently reproduce the build."
+          "reason": "Sigstore release provenance and measurement agreement are checked. The verifier explicitly does not independently reproduce the build.",
+          "label": "Our rebuild proof to do",
+          "evidence": "Sigstore release provenance and measurement agreement are checked. The verifier explicitly does not independently reproduce the build.",
+          "missing": "Independently reproduce the exact released artifact and bind it to the authenticated measured deployment.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "An April 26 source audit traced two named external-config inputs to non-prompt uses for that deployment. The general schema permits unmeasured inputs; that historical result does not establish operator constraints for the currently observed reference."
+          "reason": "An April 26 source audit traced two named external-config inputs to non-prompt uses for that deployment. The general schema permits unmeasured inputs; that historical result does not establish operator constraints for the currently observed reference.",
+          "label": "Our re-review to do",
+          "evidence": "An April 26 source audit traced two named external-config inputs to non-prompt uses for that deployment. The general schema permits unmeasured inputs; that historical result does not establish operator constraints for the currently observed reference.",
+          "missing": "Repeat the input-to-plaintext-path analysis for the currently assessed code/configuration, retaining the exact version and relevant operator-access tests.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "The measured router configuration can pin worker repositories. Automatic release authority, client approval and a live worker request still require a scoped assessment."
+          "reason": "The measured router configuration can pin worker repositories. Automatic release authority, client approval and a live worker request still require a scoped assessment.",
+          "label": "Our refusal test to do",
+          "evidence": "The measured router configuration can pin worker repositories. Automatic release authority, client approval and a live worker request still require a scoped assessment.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Verify measured worker-repository policy on a live route.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -1964,7 +2259,7 @@
       "label": "E2EE via NEAR",
       "architecture": "NEAR backend",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json"
@@ -1972,27 +2267,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our code proof to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our policy test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2002,7 +2339,7 @@
       "label": "E2EE via Phala",
       "architecture": "Phala backend",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json"
@@ -2010,27 +2347,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our code proof to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our policy test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2040,7 +2419,7 @@
       "label": "TEE models",
       "architecture": "Intel TDX",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "verifiers/chutes.py",
         "data/audits/chutes_tee.json",
@@ -2049,27 +2428,70 @@
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "The adapter checks quote/nonce/key evidence for the base TD. This does not establish serving-code or model identity."
+          "reason": "The daily adapter implements TDX signature appraisal, nonce/key/certificate binding, debug-state and MRTD golden-set checks. It records GPU presence but does not appraise GPUs or compare the full expected boot/runtime RTMR set. The dated manual investigation performed stronger checks.",
+          "label": "Our GPU/RTMR checks missing",
+          "evidence": "The daily adapter implements TDX signature appraisal, nonce/key/certificate binding, debug-state and MRTD golden-set checks. It records GPU presence but does not appraise GPUs or compare the full expected boot/runtime RTMR set. The dated manual investigation performed stronger checks.",
+          "missing": "Wire authenticated GPU appraisal and full required-register comparison into the daily adapter; reject mismatched GPU/nonce, each required register and valid-but-unpublished images. This does not establish serving-code/model identity.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/28"
+          ]
         },
         "session": {
           "state": "partial",
-          "reason": "Nonce and key fields are checked; a complete prompt-and-reply session was not verified."
+          "reason": "Nonce and key fields are checked; a complete prompt-and-reply session was not verified.",
+          "label": "Our request test to do",
+          "evidence": "The daily adapter implements nonce/key checks. The retained route assessment does not contain a complete request/reply test for this client path.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Reconcile the dated manual encrypted-completion evidence with the exact client/mode.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30",
+            "https://github.com/amiller/awesome-private-inference/issues/19"
+          ]
         },
         "code": {
           "state": "gap",
-          "reason": "MRTD measures the dstack base TD, not serve.py or model weights. Golden-set membership is not approval of the serving workload."
+          "reason": "The reviewed Chutes base-TD measurements do not commit to serve.py or model weights. Golden-set membership is not approval of the serving workload.",
+          "label": "Serving code unmeasured",
+          "evidence": "The reviewed Chutes base-TD measurements do not commit to serve.py or model weights. Golden-set membership is not approval of the serving workload.",
+          "missing": "Establish authenticated commitments to the actual serving code/model and test that malicious code or weight substitution is rejected before payload release.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/31"
+          ]
         },
         "operator": {
           "state": "gap",
-          "reason": "Serving code is outside the measured registers; the base-image check cannot constrain changes to that code."
+          "reason": "Serving code is outside the measured registers; the base-image check cannot constrain changes to that code.",
+          "label": "Code can change unmeasured",
+          "evidence": "Serving code is outside the measured registers; the base-image check cannot constrain changes to that code.",
+          "missing": "Show the measured/approved boundary prevents operator serving-code changes that log or disclose prompts; retain a controlled rejection test.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/31"
+          ]
         },
         "downstream": {
           "state": "gap",
-          "reason": "The requested model artifact and serving code are not established by the measured registers."
+          "reason": "The requested model artifact and serving code are not established by the measured registers.",
+          "label": "Model not committed",
+          "evidence": "The requested model artifact and serving code are not established by the measured registers.",
+          "missing": "Bind requested model/weights and serving code to the verified request; reject a model or artifact substitution.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/31"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "The provider golden set is captured and compared; it is not an independently approved complete workload policy."
+          "reason": "The provider golden set is captured and compared; it is not an independently approved complete workload policy.",
+          "label": "Provider set only",
+          "evidence": "The provider golden set is captured and compared; it is not an independently approved complete workload policy.",
+          "missing": "Define independently approved complete workload expectations and test the actual client refuses unapproved code/model updates.",
+          "limitation": "mixed",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/31"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2079,7 +2501,7 @@
       "label": "Standard",
       "architecture": "Provider routing",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/privateinference.md",
         "data/routes.json"
@@ -2087,27 +2509,63 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "No attested-route claim",
+          "evidence": "The documented standard/ZDR path is not a client-verified TEE route.",
+          "missing": "Keep this path outside an attested-confidentiality claim; evaluate any future private mode as a separate client/request path.",
+          "limitation": "architecture",
+          "issue_urls": []
         },
         "session": {
           "state": "gap",
-          "reason": "Standard routing terminates prompt confidentiality at the provider proxy; it makes no client-to-attested-model encryption claim."
+          "reason": "Standard routing terminates prompt confidentiality at the provider proxy; it makes no client-to-attested-model encryption claim.",
+          "label": "Proxy sees prompts",
+          "evidence": "Standard routing terminates prompt confidentiality at the provider proxy; it makes no client-to-attested-model encryption claim.",
+          "missing": "Client-to-attested-recipient confidentiality requires a separately verified encrypted route; retention policy alone cannot establish it.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "No attested-route claim",
+          "evidence": "The documented standard/ZDR path is not a client-verified TEE route.",
+          "missing": "Keep this path outside an attested-confidentiality claim; evaluate any future private mode as a separate client/request path.",
+          "limitation": "architecture",
+          "issue_urls": []
         },
         "operator": {
           "state": "gap",
-          "reason": "The documented standard route gives the proxy and selected supplier plaintext access outside a client-verified computation."
+          "reason": "The documented standard route gives the proxy and selected supplier plaintext access outside a client-verified computation.",
+          "label": "Proxy sees prompts",
+          "evidence": "The documented standard route gives the proxy and selected supplier plaintext access outside a client-verified computation.",
+          "missing": "Use a separately verified confidential route if the proxy/supplier must not read prompts; document any retained plaintext holders.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "No attested-route claim",
+          "evidence": "The documented standard/ZDR path is not a client-verified TEE route.",
+          "missing": "Keep this path outside an attested-confidentiality claim; evaluate any future private mode as a separate client/request path.",
+          "limitation": "architecture",
+          "issue_urls": []
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2117,7 +2575,7 @@
       "label": "Zero data retention",
       "architecture": "Provider routing",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/privateinference.md",
         "data/routes.json"
@@ -2125,27 +2583,63 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "No attested-route claim",
+          "evidence": "The documented standard/ZDR path is not a client-verified TEE route.",
+          "missing": "Keep this path outside an attested-confidentiality claim; evaluate any future private mode as a separate client/request path.",
+          "limitation": "architecture",
+          "issue_urls": []
         },
         "session": {
           "state": "gap",
-          "reason": "Zero data retention is a retention policy, not client-to-attested-model encryption."
+          "reason": "Zero data retention is a retention policy, not client-to-attested-model encryption.",
+          "label": "Proxy sees prompts",
+          "evidence": "Zero data retention is a retention policy, not client-to-attested-model encryption.",
+          "missing": "Client-to-attested-recipient confidentiality requires a separately verified encrypted route; retention policy alone cannot establish it.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "No attested-route claim",
+          "evidence": "The documented standard/ZDR path is not a client-verified TEE route.",
+          "missing": "Keep this path outside an attested-confidentiality claim; evaluate any future private mode as a separate client/request path.",
+          "limitation": "architecture",
+          "issue_urls": []
         },
         "operator": {
           "state": "gap",
-          "reason": "The documented ZDR proxy still processes plaintext outside a client-verified computation; retention enforcement was not verified."
+          "reason": "The documented ZDR proxy still processes plaintext outside a client-verified computation; retention enforcement was not verified.",
+          "label": "Proxy sees prompts",
+          "evidence": "The documented ZDR proxy still processes plaintext outside a client-verified computation; retention enforcement was not verified.",
+          "missing": "Use a separately verified confidential route if the proxy/supplier must not read prompts; document any retained plaintext holders.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "No attested-route claim",
+          "evidence": "The documented standard/ZDR path is not a client-verified TEE route.",
+          "missing": "Keep this path outside an attested-confidentiality claim; evaluate any future private mode as a separate client/request path.",
+          "limitation": "architecture",
+          "issue_urls": []
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2155,7 +2649,7 @@
       "label": "Private beta via NEAR",
       "architecture": "Intel TDX + GPU",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/privateinference.md",
         "data/routes.json"
@@ -2163,27 +2657,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "gap",
-          "reason": "The inspected client leaves the reply-key header substitutable by a relay. No fixed deployment or complete session was verified."
+          "reason": "The inspected client leaves the reply-key header substitutable by a relay. No fixed deployment or complete session was verified.",
+          "label": "Reply key substitutable",
+          "evidence": "The inspected client leaves the reply-key header substitutable by a relay. No fixed deployment or complete session was verified.",
+          "missing": "Verify a fixed client/protocol/deployment rejects substituted reply keys before disclosure.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "gap",
-          "reason": "The inspected browser checks quote consistency but does not compare compose/OS identity against an independently approved baseline."
+          "reason": "The inspected browser checks quote consistency but does not compare compose/OS identity against an independently approved baseline.",
+          "label": "No approved baseline",
+          "evidence": "The inspected browser checks quote consistency but does not compare compose/OS identity against an independently approved baseline.",
+          "missing": "Authenticate and enforce an explicitly approved model-to-compose/OS/artifact baseline; reject a genuine quote for a different workload.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "partial",
-          "reason": "The browser requests a model, but rejection of a substituted attested model was not established."
+          "reason": "The browser requests a model, but rejection of a substituted attested model was not established.",
+          "label": "Our model test to do",
+          "evidence": "The browser requests a model, but rejection of a substituted attested model was not established.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "gap",
-          "reason": "The inspected client lacks an independent approved workload baseline; self-consistency does not require client approval of code changes."
+          "reason": "The inspected client lacks an independent approved workload baseline; self-consistency does not require client approval of code changes.",
+          "label": "No approved baseline",
+          "evidence": "The inspected client lacks an independent approved workload baseline; self-consistency does not require client approval of code changes.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Establish an authority independent of self-consistency.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2193,7 +2729,7 @@
       "label": "Via Tinfoil",
       "architecture": "Nitro \u2192 Tinfoil",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/maple.md",
         "data/routes.json"
@@ -2201,27 +2737,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "PCR0 publication and SDK policy were source-reviewed; no independent EIF rebuild or live source-to-deployment mapping was established."
+          "reason": "PCR0 publication and SDK policy were source-reviewed; no independent EIF rebuild or live source-to-deployment mapping was established.",
+          "label": "Our EIF proof to do",
+          "evidence": "PCR0 publication and SDK policy were source-reviewed; no independent EIF rebuild or live source-to-deployment mapping was established.",
+          "missing": "Reproduce the exact Nitro EIF on a remote builder, map all included binaries to source, and bind a live authenticated measurement to that artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "Embedded roots and signed PCR0 histories can admit old values. This is source-reviewed policy, not verified live update enforcement."
+          "reason": "Embedded roots and signed PCR0 histories can admit old values. This is source-reviewed policy, not verified live update enforcement.",
+          "label": "Our policy test to do",
+          "evidence": "Embedded roots and signed PCR0 histories can admit old values. This is source-reviewed policy, not verified live update enforcement.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Include embedded-root and signed-history admission plus onward backend policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2231,7 +2809,7 @@
       "label": "Via Privatemode",
       "architecture": "Nitro \u2192 Privatemode",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/maple.md",
         "data/routes.json"
@@ -2239,27 +2817,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "The Nitro source includes a Continuum sidecar; no independent EIF rebuild or deployed source-to-binary mapping was established."
+          "reason": "The Nitro source includes a Continuum sidecar; no independent EIF rebuild or deployed source-to-binary mapping was established.",
+          "label": "Our EIF proof to do",
+          "evidence": "The Nitro source includes a Continuum sidecar; no independent EIF rebuild or deployed source-to-binary mapping was established.",
+          "missing": "Reproduce the exact Nitro EIF on a remote builder, map all included binaries to source, and bind a live authenticated measurement to that artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "PCR0 history and embedded policy were inspected; sidecar admission and onward update enforcement remain unverified."
+          "reason": "PCR0 history and embedded policy were inspected; sidecar admission and onward update enforcement remain unverified.",
+          "label": "Our policy test to do",
+          "evidence": "PCR0 history and embedded policy were inspected; sidecar admission and onward update enforcement remain unverified.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Include embedded-root and signed-history admission plus onward backend policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2269,7 +2889,7 @@
       "label": "Automatic manifest",
       "architecture": "Attesting proxy",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json"
@@ -2277,27 +2897,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our code proof to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "gap",
-          "reason": "Documented default behavior may adopt the latest provider manifest after a validation failure; this does not require independent approval of the changed reference."
+          "reason": "Documented default behavior may adopt the latest provider manifest after a validation failure; this does not require independent approval of the changed reference.",
+          "label": "Provider updates auto-adopted",
+          "evidence": "Documented default behavior may adopt the latest provider manifest after a validation failure; this does not require independent approval of the changed reference.",
+          "missing": "Demonstrate independent approval before changed manifest admission if that guarantee is claimed; preserve the documented automatic mode as a distinct policy.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2307,7 +2969,7 @@
       "label": "Pinned manifest",
       "architecture": "Attesting proxy",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json"
@@ -2315,27 +2977,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our code proof to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "A local manifest pin provides an approval boundary in the documented configuration. A mutated-reference fail-closed request test remains outstanding."
+          "reason": "A local manifest pin provides an approval boundary in the documented configuration. A mutated-reference fail-closed request test remains outstanding.",
+          "label": "Our pin-refusal test",
+          "evidence": "A local manifest pin provides an approval boundary in the documented configuration. A mutated-reference fail-closed request test remains outstanding.",
+          "missing": "Pin the exact client and manifest, then retain a harmless accepted request plus refusal of changed/unapproved manifest values and rollback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2345,7 +3049,7 @@
       "label": "Proxyless API",
       "architecture": "Provider-mediated",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json"
@@ -2353,27 +3057,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "gap",
-          "reason": "The reviewed documentation describes no client-side attestation for this path; the client does not verify the recipient through the proxy protocol."
+          "reason": "The reviewed documentation describes no client-side attestation for this path; the client does not verify the recipient through the proxy protocol.",
+          "label": "No client attestation",
+          "evidence": "The reviewed documentation describes no client-side attestation for this path; the client does not verify the recipient through the proxy protocol.",
+          "missing": "Establish and test client-side recipient verification for any confidential claim; provider-side checks alone are a different trust model.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our code proof to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace the deployed measured artifact to reviewed source/build and model identities, including mutable configuration; test an unapproved artifact.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our access review to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our policy test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
@@ -2383,7 +3129,7 @@
       "label": "Inference API",
       "architecture": "TDX mesh",
       "reviewed_at": "2026-10-14",
-      "source_revision": "4b50d3c2987dbc264856ef1098c746ebd64ee2a4",
+      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json"
@@ -2391,27 +3137,69 @@
       "axes": {
         "hardware": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our hardware test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "session": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our session test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "code": {
           "state": "partial",
-          "reason": "Release and allowlist bytes were captured, but signatures, live measurements and source-to-artifact mapping were not verified."
+          "reason": "Release and allowlist bytes were captured, but signatures, live measurements and source-to-artifact mapping were not verified.",
+          "label": "Our release check to do",
+          "evidence": "Release and allowlist bytes were captured, but signatures, live measurements and source-to-artifact mapping were not verified.",
+          "missing": "Authenticate the exact release and allowlist, link them to measured live artifacts, and preserve source/build mapping with rejection controls.",
+          "limitation": "ours",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "operator": {
           "state": "gap",
-          "reason": "The dated threat-model review identifies operator key and unencrypted control-plane access paths; public attestation alone does not close them."
+          "reason": "The dated threat-model review identifies operator key and unencrypted control-plane access paths; public attestation alone does not close them.",
+          "label": "Operator access paths",
+          "evidence": "The dated threat-model review identifies operator key and unencrypted control-plane access paths; public attestation alone does not close them.",
+          "missing": "For the reviewed deployment, establish that operator-key/control-plane access cannot alter or read protected computation; retain evidence of enforcement.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient."
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our worker test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         },
         "updates": {
           "state": "partial",
-          "reason": "Published allowlists and client pins exist in the design; actual update refusal and the same-session proof were not tested."
+          "reason": "Published allowlists and client pins exist in the design; actual update refusal and the same-session proof were not tested.",
+          "label": "Our refusal test to do",
+          "evidence": "Published allowlists and client pins exist in the design; actual update refusal and the same-session proof were not tested.",
+          "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback. Bind the actual same-session client pins and release policy.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
         }
       },
       "reviewer": "codex-source-review (not independent audit approval)"
