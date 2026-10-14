@@ -1,6 +1,47 @@
 {
-  "changes": [],
-  "generated_at": "2026-10-14T03:24:03.003800Z",
+  "changes": [
+    {
+      "affected_routes": [
+        "confidential-ai-api"
+      ],
+      "current_sha256": "7cb82dea3c4165c7ca68fc27c37f95675573a8d74095c6d405805e76c1a14201",
+      "current_status": "observed",
+      "event_id": "3d9ea558820140b727492964399ceecc05aff12d26e43ac559993946bfb37bf9",
+      "kind": "publication_changed",
+      "previous_sha256": "2b9142a1313a54b85dd4358c441dd2d8a08f6f6aef1ac06b81bacee6f8acfa25",
+      "previous_status": "observed",
+      "priority": "medium",
+      "provider": "confidential-ai",
+      "route_id": "publication/confidential-ai-releases",
+      "source_id": "confidential-ai-releases",
+      "timestamp": "2026-10-14T18:01:47.794413Z",
+      "type": "publication_changed",
+      "url": "https://api.github.com/repos/confidential-dot-ai/confidential-inference/releases?per_page=10",
+      "verification": "not_performed"
+    },
+    {
+      "affected_routes": [
+        "private-inference-standard",
+        "private-inference-zdr",
+        "private-inference-private"
+      ],
+      "current_sha256": "36fa2a929ca937080e184c577d319ecfc735ebfa06e592d73cdb71fe360242c0",
+      "current_status": "observed",
+      "event_id": "e630f1c3c29fabaa5ffb9316e7fe6fe39853342998abe84f934b2214e78bd097",
+      "kind": "catalog_changed",
+      "previous_sha256": "1b0072ffb405e5ed6992bc94b6e10f310fc09d11018dd43ffa33b87f57dddcb1",
+      "previous_status": "observed",
+      "priority": "medium",
+      "provider": "private-inference",
+      "route_id": "publication/private-inference-catalog",
+      "source_id": "private-inference-catalog",
+      "timestamp": "2026-10-14T18:01:49.304356Z",
+      "type": "catalog_changed",
+      "url": "https://privateinference.gg/v1/models",
+      "verification": "not_performed"
+    }
+  ],
+  "generated_at": "2026-10-14T18:01:51.069059Z",
   "meaning": "publication observation only; no signature, quote, or client acceptance verification",
   "mirror_agreements": {
     "pcrDev.json": true,
@@ -16,12 +57,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-10-14T03:23:59.107930Z",
+        "observed_at": "2026-10-14T18:01:45.274829Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrProd.json-ee689f4f0c91f20559e62c180074f3b52351134b5f6e8079f61ed33f59ad0b65.bin",
         "sha256": "ee689f4f0c91f20559e62c180074f3b52351134b5f6e8079f61ed33f59ad0b65"
       },
-      "observed_at": "2026-10-14T03:23:59.107930Z",
+      "observed_at": "2026-10-14T18:01:45.274829Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrProd.json-ee689f4f0c91f20559e62c180074f3b52351134b5f6e8079f61ed33f59ad0b65.bin",
@@ -38,12 +79,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-10-14T03:23:59.238837Z",
+        "observed_at": "2026-10-14T18:01:45.555229Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrProd.json-ee689f4f0c91f20559e62c180074f3b52351134b5f6e8079f61ed33f59ad0b65.bin",
         "sha256": "ee689f4f0c91f20559e62c180074f3b52351134b5f6e8079f61ed33f59ad0b65"
       },
-      "observed_at": "2026-10-14T03:23:59.238837Z",
+      "observed_at": "2026-10-14T18:01:45.555229Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrProd.json-ee689f4f0c91f20559e62c180074f3b52351134b5f6e8079f61ed33f59ad0b65.bin",
@@ -60,12 +101,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 82479,
-        "observed_at": "2026-10-14T03:23:59.369926Z",
+        "observed_at": "2026-10-14T18:01:45.694579Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrProdHistory.json-2b20459c263a5fb2b678d275925cadf484d933712ab98856d46450d8a2b07a24.bin",
         "sha256": "2b20459c263a5fb2b678d275925cadf484d933712ab98856d46450d8a2b07a24"
       },
-      "observed_at": "2026-10-14T03:23:59.369926Z",
+      "observed_at": "2026-10-14T18:01:45.694579Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrProdHistory.json-2b20459c263a5fb2b678d275925cadf484d933712ab98856d46450d8a2b07a24.bin",
@@ -82,12 +123,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 82479,
-        "observed_at": "2026-10-14T03:23:59.457227Z",
+        "observed_at": "2026-10-14T18:01:45.716655Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrProdHistory.json-2b20459c263a5fb2b678d275925cadf484d933712ab98856d46450d8a2b07a24.bin",
         "sha256": "2b20459c263a5fb2b678d275925cadf484d933712ab98856d46450d8a2b07a24"
       },
-      "observed_at": "2026-10-14T03:23:59.457227Z",
+      "observed_at": "2026-10-14T18:01:45.716655Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrProdHistory.json-2b20459c263a5fb2b678d275925cadf484d933712ab98856d46450d8a2b07a24.bin",
@@ -104,12 +145,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-10-14T03:23:59.556293Z",
+        "observed_at": "2026-10-14T18:01:45.886721Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrDev.json-5b0938dcbde88b0e59cd48631eafc2c27058434341ad03d435c0ef2bbbbdb41e.bin",
         "sha256": "5b0938dcbde88b0e59cd48631eafc2c27058434341ad03d435c0ef2bbbbdb41e"
       },
-      "observed_at": "2026-10-14T03:23:59.556293Z",
+      "observed_at": "2026-10-14T18:01:45.886721Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrDev.json-5b0938dcbde88b0e59cd48631eafc2c27058434341ad03d435c0ef2bbbbdb41e.bin",
@@ -126,12 +167,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-10-14T03:23:59.658573Z",
+        "observed_at": "2026-10-14T18:01:45.997446Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrDev.json-5b0938dcbde88b0e59cd48631eafc2c27058434341ad03d435c0ef2bbbbdb41e.bin",
         "sha256": "5b0938dcbde88b0e59cd48631eafc2c27058434341ad03d435c0ef2bbbbdb41e"
       },
-      "observed_at": "2026-10-14T03:23:59.658573Z",
+      "observed_at": "2026-10-14T18:01:45.997446Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrDev.json-5b0938dcbde88b0e59cd48631eafc2c27058434341ad03d435c0ef2bbbbdb41e.bin",
@@ -148,12 +189,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 84045,
-        "observed_at": "2026-10-14T03:23:59.769810Z",
+        "observed_at": "2026-10-14T18:01:46.106683Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrDevHistory.json-262a7a1060fccbe10850ec1f4a0b87b10e732e72d27c0d05fb7351b3e99d36d4.bin",
         "sha256": "262a7a1060fccbe10850ec1f4a0b87b10e732e72d27c0d05fb7351b3e99d36d4"
       },
-      "observed_at": "2026-10-14T03:23:59.769810Z",
+      "observed_at": "2026-10-14T18:01:46.106683Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrDevHistory.json-262a7a1060fccbe10850ec1f4a0b87b10e732e72d27c0d05fb7351b3e99d36d4.bin",
@@ -170,12 +211,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 84045,
-        "observed_at": "2026-10-14T03:23:59.852701Z",
+        "observed_at": "2026-10-14T18:01:46.313183Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrDevHistory.json-262a7a1060fccbe10850ec1f4a0b87b10e732e72d27c0d05fb7351b3e99d36d4.bin",
         "sha256": "262a7a1060fccbe10850ec1f4a0b87b10e732e72d27c0d05fb7351b3e99d36d4"
       },
-      "observed_at": "2026-10-14T03:23:59.852701Z",
+      "observed_at": "2026-10-14T18:01:46.313183Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrDevHistory.json-262a7a1060fccbe10850ec1f4a0b87b10e732e72d27c0d05fb7351b3e99d36d4.bin",
@@ -192,12 +233,12 @@
       "kind": "client_source_policy",
       "last_success": {
         "bytes": 16137,
-        "observed_at": "2026-10-14T03:23:59.962941Z",
+        "observed_at": "2026-10-14T18:01:46.636705Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-typescript-pcr-policy-f001d931e588c0c9b072be4b03b5b54adc94c8f82443b1bc616f7c7c87cb65fb.bin",
         "sha256": "f001d931e588c0c9b072be4b03b5b54adc94c8f82443b1bc616f7c7c87cb65fb"
       },
-      "observed_at": "2026-10-14T03:23:59.962941Z",
+      "observed_at": "2026-10-14T18:01:46.636705Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-typescript-pcr-policy-f001d931e588c0c9b072be4b03b5b54adc94c8f82443b1bc616f7c7c87cb65fb.bin",
@@ -214,12 +255,12 @@
       "kind": "client_source_policy",
       "last_success": {
         "bytes": 21909,
-        "observed_at": "2026-10-14T03:24:00.081129Z",
+        "observed_at": "2026-10-14T18:01:46.761103Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-rust-pcr-policy-03f9d8fd5dd944506a90ece4e2bb620a65a8406ed307b063d1456a3245931cd6.bin",
         "sha256": "03f9d8fd5dd944506a90ece4e2bb620a65a8406ed307b063d1456a3245931cd6"
       },
-      "observed_at": "2026-10-14T03:24:00.081129Z",
+      "observed_at": "2026-10-14T18:01:46.761103Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-rust-pcr-policy-03f9d8fd5dd944506a90ece4e2bb620a65a8406ed307b063d1456a3245931cd6.bin",
@@ -236,12 +277,12 @@
       "kind": "client_source_policy",
       "last_success": {
         "bytes": 1223,
-        "observed_at": "2026-10-14T03:24:00.196394Z",
+        "observed_at": "2026-10-14T18:01:46.907727Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-research-client-config-aa5a9c519a419e6bd8cdd6b4224d225004c4264e562090d219c17443c2a49e03.bin",
         "sha256": "aa5a9c519a419e6bd8cdd6b4224d225004c4264e562090d219c17443c2a49e03"
       },
-      "observed_at": "2026-10-14T03:24:00.196394Z",
+      "observed_at": "2026-10-14T18:01:46.907727Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-research-client-config-aa5a9c519a419e6bd8cdd6b4224d225004c4264e562090d219c17443c2a49e03.bin",
@@ -258,12 +299,12 @@
       "kind": "manifest",
       "last_success": {
         "bytes": 5992,
-        "observed_at": "2026-10-14T03:24:00.306029Z",
+        "observed_at": "2026-10-14T18:01:47.022123Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/privatemode-manifest-9f5ac6bf38431fb073c2185bd9b344140e776b4f7c32eee595716e9456bdec2a.bin",
         "sha256": "9f5ac6bf38431fb073c2185bd9b344140e776b4f7c32eee595716e9456bdec2a"
       },
-      "observed_at": "2026-10-14T03:24:00.306029Z",
+      "observed_at": "2026-10-14T18:01:47.022123Z",
       "provider": "privatemode",
       "raw_base": "data/references/observations",
       "raw_path": "raw/privatemode-manifest-9f5ac6bf38431fb073c2185bd9b344140e776b4f7c32eee595716e9456bdec2a.bin",
@@ -280,12 +321,12 @@
       "kind": "allowlist",
       "last_success": {
         "bytes": 14463,
-        "observed_at": "2026-10-14T03:24:00.882328Z",
+        "observed_at": "2026-10-14T18:01:47.557689Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/confidential-ai-allowlist-eb60199e3664fc2480688a309e50c55e5eebb42f38aa5f20b98b519f998a0dcc.bin",
         "sha256": "eb60199e3664fc2480688a309e50c55e5eebb42f38aa5f20b98b519f998a0dcc"
       },
-      "observed_at": "2026-10-14T03:24:00.882328Z",
+      "observed_at": "2026-10-14T18:01:47.557689Z",
       "provider": "confidential-ai",
       "raw_base": "data/references/observations",
       "raw_path": "raw/confidential-ai-allowlist-eb60199e3664fc2480688a309e50c55e5eebb42f38aa5f20b98b519f998a0dcc.bin",
@@ -296,22 +337,22 @@
       "verification": "not_performed"
     },
     {
-      "bytes": 167733,
+      "bytes": 160616,
       "final_url": "https://api.github.com/repos/confidential-dot-ai/confidential-inference/releases?per_page=10",
       "http_status": 200,
       "kind": "release_metadata",
       "last_success": {
-        "bytes": 167733,
-        "observed_at": "2026-10-14T03:24:01.162100Z",
+        "bytes": 160616,
+        "observed_at": "2026-10-14T18:01:47.794413Z",
         "raw_base": "data/references/observations",
-        "raw_path": "raw/confidential-ai-releases-2b9142a1313a54b85dd4358c441dd2d8a08f6f6aef1ac06b81bacee6f8acfa25.bin",
-        "sha256": "2b9142a1313a54b85dd4358c441dd2d8a08f6f6aef1ac06b81bacee6f8acfa25"
+        "raw_path": "raw/confidential-ai-releases-7cb82dea3c4165c7ca68fc27c37f95675573a8d74095c6d405805e76c1a14201.bin",
+        "sha256": "7cb82dea3c4165c7ca68fc27c37f95675573a8d74095c6d405805e76c1a14201"
       },
-      "observed_at": "2026-10-14T03:24:01.162100Z",
+      "observed_at": "2026-10-14T18:01:47.794413Z",
       "provider": "confidential-ai",
       "raw_base": "data/references/observations",
-      "raw_path": "raw/confidential-ai-releases-2b9142a1313a54b85dd4358c441dd2d8a08f6f6aef1ac06b81bacee6f8acfa25.bin",
-      "sha256": "2b9142a1313a54b85dd4358c441dd2d8a08f6f6aef1ac06b81bacee6f8acfa25",
+      "raw_path": "raw/confidential-ai-releases-7cb82dea3c4165c7ca68fc27c37f95675573a8d74095c6d405805e76c1a14201.bin",
+      "sha256": "7cb82dea3c4165c7ca68fc27c37f95675573a8d74095c6d405805e76c1a14201",
       "source_id": "confidential-ai-releases",
       "status": "observed",
       "url": "https://api.github.com/repos/confidential-dot-ai/confidential-inference/releases?per_page=10",
@@ -324,12 +365,12 @@
       "kind": "observed_release_metadata",
       "last_success": {
         "bytes": 7318,
-        "observed_at": "2026-10-14T03:24:01.475849Z",
+        "observed_at": "2026-10-14T18:01:48.159947Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/confidential-ai-observed-release-afccfe9ec2817527af7a69d668dac1ad9f1d10f8f524d1d66084cf1612c4b2d6.bin",
         "sha256": "afccfe9ec2817527af7a69d668dac1ad9f1d10f8f524d1d66084cf1612c4b2d6"
       },
-      "observed_at": "2026-10-14T03:24:01.475849Z",
+      "observed_at": "2026-10-14T18:01:48.159947Z",
       "provider": "confidential-ai",
       "raw_base": "data/references/observations",
       "raw_path": "raw/confidential-ai-observed-release-afccfe9ec2817527af7a69d668dac1ad9f1d10f8f524d1d66084cf1612c4b2d6.bin",
@@ -340,16 +381,16 @@
       "verification": "not_performed"
     },
     {
-      "bytes": 9362,
+      "bytes": 9312,
       "final_url": "https://privateinference.gg/v1/models",
       "http_status": 200,
       "kind": "model_catalog",
       "last_success": {
-        "bytes": 9362,
-        "observed_at": "2026-10-14T03:24:01.602806Z",
+        "bytes": 9312,
+        "observed_at": "2026-10-14T18:01:49.304356Z",
         "raw_base": "data/references/observations",
-        "raw_path": "raw/private-inference-catalog-1b0072ffb405e5ed6992bc94b6e10f310fc09d11018dd43ffa33b87f57dddcb1.bin",
-        "sha256": "1b0072ffb405e5ed6992bc94b6e10f310fc09d11018dd43ffa33b87f57dddcb1"
+        "raw_path": "raw/private-inference-catalog-36fa2a929ca937080e184c577d319ecfc735ebfa06e592d73cdb71fe360242c0.bin",
+        "sha256": "36fa2a929ca937080e184c577d319ecfc735ebfa06e592d73cdb71fe360242c0"
       },
       "model_ids": [
         "Qwen/Qwen3.6-35B-A3B-FP8",
@@ -379,12 +420,12 @@
         "x-ai/grok-4.7",
         "z-ai/glm-5.3-flash"
       ],
-      "observed_at": "2026-10-14T03:24:01.602806Z",
+      "observed_at": "2026-10-14T18:01:49.304356Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
-      "raw_path": "raw/private-inference-catalog-1b0072ffb405e5ed6992bc94b6e10f310fc09d11018dd43ffa33b87f57dddcb1.bin",
-      "semantic_sha256": "cf6785ea0cd1e2e47cc93fde9218aa554378bd251c9d94d7acd2457b1ebef795",
-      "sha256": "1b0072ffb405e5ed6992bc94b6e10f310fc09d11018dd43ffa33b87f57dddcb1",
+      "raw_path": "raw/private-inference-catalog-36fa2a929ca937080e184c577d319ecfc735ebfa06e592d73cdb71fe360242c0.bin",
+      "semantic_sha256": "fcad68e8596ac528b304a7a295a450d8c3ad93e335927ab6cfad31ea9f658057",
+      "sha256": "36fa2a929ca937080e184c577d319ecfc735ebfa06e592d73cdb71fe360242c0",
       "source_id": "private-inference-catalog",
       "status": "observed",
       "url": "https://privateinference.gg/v1/models",
@@ -397,12 +438,12 @@
       "kind": "browser_entrypoint",
       "last_success": {
         "bytes": 49791,
-        "observed_at": "2026-10-14T03:24:02.312672Z",
+        "observed_at": "2026-10-14T18:01:49.973550Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/private-inference-chat-html-8bc923f4c6c5f6ec9670aa2659371b8fe85c667e5230884f3c08961ab41033ce.bin",
         "sha256": "8bc923f4c6c5f6ec9670aa2659371b8fe85c667e5230884f3c08961ab41033ce"
       },
-      "observed_at": "2026-10-14T03:24:02.312672Z",
+      "observed_at": "2026-10-14T18:01:49.973550Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
       "raw_path": "raw/private-inference-chat-html-8bc923f4c6c5f6ec9670aa2659371b8fe85c667e5230884f3c08961ab41033ce.bin",
@@ -419,12 +460,12 @@
       "kind": "deployed_chat_entry_module",
       "last_success": {
         "bytes": 449618,
-        "observed_at": "2026-10-14T03:24:02.661007Z",
+        "observed_at": "2026-10-14T18:01:50.219408Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/private-inference-chat-main-1087c7ea5e1bd20abaaa94cc3a8b42ae3d4826617bcbc83a7e3f49dfa0a72e91.bin",
         "sha256": "1087c7ea5e1bd20abaaa94cc3a8b42ae3d4826617bcbc83a7e3f49dfa0a72e91"
       },
-      "observed_at": "2026-10-14T03:24:02.661007Z",
+      "observed_at": "2026-10-14T18:01:50.219408Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
       "raw_path": "raw/private-inference-chat-main-1087c7ea5e1bd20abaaa94cc3a8b42ae3d4826617bcbc83a7e3f49dfa0a72e91.bin",
@@ -441,12 +482,12 @@
       "kind": "deployed_private_verifier_module",
       "last_success": {
         "bytes": 66310,
-        "observed_at": "2026-10-14T03:24:02.784182Z",
+        "observed_at": "2026-10-14T18:01:50.408490Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/private-inference-browser-verifier-b2b1d0220cb838b9bc82baed08b1e845429632aad63c70274cc99485b6b4c49f.bin",
         "sha256": "b2b1d0220cb838b9bc82baed08b1e845429632aad63c70274cc99485b6b4c49f"
       },
-      "observed_at": "2026-10-14T03:24:02.784182Z",
+      "observed_at": "2026-10-14T18:01:50.408490Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
       "raw_path": "raw/private-inference-browser-verifier-b2b1d0220cb838b9bc82baed08b1e845429632aad63c70274cc99485b6b4c49f.bin",
