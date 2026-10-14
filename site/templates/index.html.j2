@@ -13,6 +13,7 @@
 </section>
 
 <section id="changes" class="mb-9">
+  <a href="./history.html" class="block mb-4 rounded-xl border border-indigo-200 bg-indigo-50 p-4 text-indigo-900"><strong>Explore the reference history graph →</strong><br><span class="text-sm">Observed workload changes, published reference sets, full values, and the evidence available to estimate change size.</span></a>
   <div class="flex flex-wrap justify-between items-end gap-2"><h2 class="text-xl font-semibold">Change timeline</h2><span class="text-xs text-slate-500">{{ timeline_total }} recorded events · latest 20 shown</span></div>
   <p class="mt-1 mb-3 text-sm text-slate-600">A new identity means newly observed by this sampling process. It does not establish a deployment date or authorize a new value.</p>
   {% for event in reviewed_events %}

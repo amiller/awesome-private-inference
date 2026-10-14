@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from probes.quality import compute as compute_quality
 from probes.schema import classify_report
+from probes.reference_history import build as build_reference_history
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_LATEST = REPO_ROOT / "data/latest.json"
@@ -178,12 +179,14 @@ def _render(snapshot: dict) -> None:
            "quality": quality, "pricing_rows": pricing_rows,
            "scorecard_labels": SCORECARD_LABELS, "outcome_style": OUTCOME_STYLE,
            "repo_url": REPO_URL}
+    ctx["history"] = build_reference_history(REPO_ROOT)
     for page, template in (("index.html", "index.html.j2"),
                            ("methodology.html", "methodology.html.j2"),
-                           ("pricing.html", "pricing.html.j2")):
+                           ("pricing.html", "pricing.html.j2"),
+                           ("history.html", "history.html.j2")):
         rendered = env.get_template(template).render(**ctx)
         (DOCS_DIR / page).write_text("\n".join(line.rstrip() for line in rendered.splitlines()) + "\n")
-    print(f"wrote {DOCS_DIR}/{{index,methodology,pricing}}.html")
+    print(f"wrote {DOCS_DIR}/{{index,methodology,pricing,history}}.html")
 
 
 def main() -> int:

@@ -6,6 +6,8 @@ For each client and request path, we track what software is observed, which valu
 
 [Dashboard](https://amiller.github.io/awesome-private-inference/) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Detailed project review](research/review-2026-10-13/review.md)
 
+[Reference history graph](https://amiller.github.io/awesome-private-inference/history.html) plots captured workload identities, published reference sets, client-policy inputs and document hashes. Select a point for full old/new values and scoped review evidence. Circle size can show set edits or captured text changes; neither is a measurement of deployed code size or security risk. The page is self-contained and works offline.
+
 ## Read the evidence by route
 
 An ordinary gateway, an encrypted request relayed through it, and a direct model connection have different plaintext holders. A valid gateway quote does not establish that a downstream model is private. A stable base-image measurement may exclude mutable serving code. A provider-authorized update is not necessarily an independently reviewed update.
