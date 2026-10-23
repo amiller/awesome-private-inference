@@ -1,72 +1,65 @@
 {
-  "generated_at": "2026-10-22T17:58:14.447691Z",
+  "generated_at": "2026-10-23T17:52:24.203071Z",
   "window": {
     "first": "2026-04-21",
-    "last": "2026-10-22",
-    "days": 180
+    "last": "2026-10-23",
+    "days": 181
   },
   "calibration": {
-    "observations": 3559,
+    "observations": 3576,
     "pass": 2382,
-    "transport": 842,
-    "no-error-invalid": 326,
-    "verification-failure": 9,
-    "explicit_error_bucket": 9,
+    "transport": 844,
+    "no-error-invalid": 331,
+    "verification-failure": 19,
+    "explicit_error_bucket": 19,
     "interpretation": "Historical adapter outcomes, not a security failure rate or independent trials",
     "no_error_invalid_by_provider": {
       "aci-gateway": 80,
-      "chutes": 57,
-      "near-ai": 16,
+      "chutes": 61,
+      "near-ai": 17,
       "redpill": 123,
       "venice": 50
     },
-    "note": "326 of 3559 observations were invalid with no error attached: aci-gateway 80, chutes 57, near-ai 16, redpill 123, venice 50. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Error-string classes are not a calibrated detector. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "331 of 3576 observations were invalid with no error attached: aci-gateway 80, chutes 61, near-ai 17, redpill 123, venice 50. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Error-string classes are not a calibrated detector. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
       "provider": "aci-gateway",
       "model": "api.redpill.ai",
-      "shape": "aci-gateway",
-      "status": "invalid",
-      "proven": 4,
-      "required": 6,
-      "missing": [
-        "attested_serving_enforced",
-        "prod_os_image"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "control-plane",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
       "provider": "aci-gateway",
       "model": "inference.phala.com",
-      "shape": "aci-gateway",
-      "status": "not_checked",
-      "proven": 5,
-      "required": 6,
-      "missing": [
-        "prod_os_image"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "control-plane",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
       "provider": "aci-gateway",
       "model": "tee.redpill.ai",
-      "shape": "aci-gateway",
-      "status": "not_checked",
-      "proven": 5,
-      "required": 6,
-      "missing": [
-        "prod_os_image"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "control-plane",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
@@ -87,31 +80,27 @@
     {
       "provider": "chutes",
       "model": "GLM-5.1-TEE",
-      "shape": "chutes-tee",
-      "status": "not_checked",
-      "proven": 3,
-      "required": 4,
-      "missing": [
-        "serving_code_attested"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
       "provider": "chutes",
       "model": "GLM-5.2-TEE",
-      "shape": "chutes-tee",
-      "status": "not_checked",
-      "proven": 3,
-      "required": 4,
-      "missing": [
-        "serving_code_attested"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
@@ -177,7 +166,7 @@
       ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
-      "error": "HTTP 503: {\"error\":{\"message\":\"Provider error: No provider found that supports a",
+      "error": "HTTP 503: {\"error\":{\"message\":\"Provider error: Failed to fetch attestation repor",
       "hidden_layers": []
     },
     {
@@ -238,92 +227,70 @@
     {
       "provider": "venice",
       "model": "e2ee-glm-5-1",
-      "shape": "venice",
-      "status": "partial",
-      "proven": 4,
-      "required": 9,
-      "missing": [
-        "code_measurement_reproducible",
-        "compose_hash_committed",
-        "gpu_attested",
-        "prod_os_image",
-        "serving_code_attested"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "absent",
       "version_source": "none",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
       "provider": "venice",
       "model": "e2ee-gpt-oss-120b-p",
-      "shape": "venice",
-      "status": "partial",
-      "proven": 4,
-      "required": 9,
-      "missing": [
-        "code_measurement_reproducible",
-        "compose_hash_committed",
-        "gpu_attested",
-        "prod_os_image",
-        "serving_code_attested"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "absent",
       "version_source": "none",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
       "provider": "venice",
       "model": "e2ee-qwen3-6-35b-a3b",
-      "shape": "venice",
-      "status": "partial",
-      "proven": 6,
-      "required": 9,
-      "missing": [
-        "code_measurement_reproducible",
-        "prod_os_image",
-        "serving_code_attested"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "absent",
       "version_source": "none",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     },
     {
       "provider": "venice",
       "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
-      "shape": "venice",
-      "status": "partial",
-      "proven": 5,
-      "required": 9,
-      "missing": [
-        "code_measurement_reproducible",
-        "compose_hash_committed",
-        "prod_os_image",
-        "serving_code_attested"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "absent",
       "version_source": "none",
-      "error": null,
+      "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://cloud-api.phala.",
       "hidden_layers": []
     }
   ],
   "coverage_summary": {
-    "invalid": 2,
-    "not_checked": 9,
-    "unreachable": 2,
-    "partial": 4
+    "unreachable": 11,
+    "not_checked": 5,
+    "invalid": 1
   },
   "unmeasurable_providers": [
     "venice"
   ],
   "audit_debt": {
-    "builds_observed": 95,
+    "builds_observed": 96,
     "builds_reviewed": 7,
-    "backlog": 88,
+    "backlog": 89,
     "last_audit": "2026-09-02",
-    "days_since_last_audit": 50,
+    "days_since_last_audit": 51,
     "by_provider": {
       "near-ai": {
         "builds_observed": 31,
@@ -332,9 +299,9 @@
         "last_audit": "2026-09-02"
       },
       "tinfoil": {
-        "builds_observed": 62,
+        "builds_observed": 63,
         "builds_reviewed": 1,
-        "backlog": 61,
+        "backlog": 62,
         "last_audit": "2026-09-02"
       },
       "chutes": {
@@ -347,9 +314,9 @@
   },
   "density": {
     "published_cells": 391,
-    "carrying_signal": 84,
-    "dashes": 307,
-    "signal_fraction": 0.215
+    "carrying_signal": 29,
+    "dashes": 362,
+    "signal_fraction": 0.074
   },
   "hidden_layer_targets": [],
   "cadence": [
@@ -395,14 +362,14 @@
     {
       "provider": "chutes",
       "model": "DeepSeek-V3.2-TEE",
-      "observations": 117,
-      "span_days": 126,
+      "observations": 118,
+      "span_days": 127,
       "distinct": 2,
       "novel": 1,
       "revisit": 0,
       "version_source": "instance-sampled",
       "retired": false,
-      "observed_days_per_new_identity": 126.0,
+      "observed_days_per_new_identity": 127.0,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
@@ -447,40 +414,40 @@
     {
       "provider": "chutes",
       "model": "Kimi-K2.6-TEE",
-      "observations": 116,
-      "span_days": 126,
+      "observations": 117,
+      "span_days": 127,
       "distinct": 2,
       "novel": 1,
       "revisit": 4,
       "version_source": "instance-sampled",
       "retired": false,
-      "observed_days_per_new_identity": 126.0,
+      "observed_days_per_new_identity": 127.0,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
-      "observations": 116,
-      "span_days": 126,
+      "observations": 117,
+      "span_days": 127,
       "distinct": 2,
       "novel": 1,
       "revisit": 36,
       "version_source": "instance-sampled",
       "retired": false,
-      "observed_days_per_new_identity": 126.0,
+      "observed_days_per_new_identity": 127.0,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
-      "observations": 114,
-      "span_days": 126,
+      "observations": 115,
+      "span_days": 127,
       "distinct": 2,
       "novel": 1,
       "revisit": 22,
       "version_source": "instance-sampled",
       "retired": false,
-      "observed_days_per_new_identity": 126.0,
+      "observed_days_per_new_identity": 127.0,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
@@ -525,8 +492,8 @@
     {
       "provider": "near-ai",
       "model": "zai-org/GLM-5.1-FP8",
-      "observations": 152,
-      "span_days": 156,
+      "observations": 153,
+      "span_days": 157,
       "distinct": 30,
       "novel": 29,
       "revisit": 0,
@@ -603,14 +570,14 @@
     {
       "provider": "tinfoil",
       "model": "router",
-      "observations": 175,
-      "span_days": 179,
-      "distinct": 50,
-      "novel": 49,
+      "observations": 176,
+      "span_days": 180,
+      "distinct": 51,
+      "novel": 50,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
-      "observed_days_per_new_identity": 3.7,
+      "observed_days_per_new_identity": 3.6,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     }
   ]
