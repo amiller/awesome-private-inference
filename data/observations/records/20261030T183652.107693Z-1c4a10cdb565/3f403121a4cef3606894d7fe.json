@@ -1,0 +1,168 @@
+{
+  "captured_at": "2026-10-30T18:37:02Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "venice",
+      "details": {
+        "candidates_available": 1,
+        "candidates_evaluated": 1,
+        "model_name": null,
+        "nonce_source": "client",
+        "tee_hardware": "intel-tdx",
+        "tee_provider": "phala"
+      },
+      "error": null,
+      "latency_s": 1.0,
+      "model": "e2ee-glm-5-1",
+      "provider": "venice",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": false,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": null,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": true,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": null,
+        "sessions_publish_evidence_digests": null,
+        "tdx_verified": true,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "0x79a5061efe5a46b0d1f33b11cf1c5adbedae6b79",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "04943cea0b4babf60f6e2031e9a00866a37c4ae696fb45895b3a9b38ab8cbb898f42c85b704aceaa0a396cf26f7fdf79d83205be7e11d3a5d70419a68277158c3d",
+      "valid": true,
+      "verified_at": "2026-10-30T18:37:02Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "7e858bd579cd504ae2e410cf6303dafaf02d994c2a5da24a8b635e1ef94120ef",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "7e858bd579cd504ae2e410cf6303dafaf02d994c2a5da24a8b635e1ef94120ef"
+  },
+  "identities": [],
+  "identity_trust": "adapter_accepted",
+  "instance_id": null,
+  "legacy": false,
+  "model": "e2ee-glm-5-1",
+  "observation_id": "20261030T183652.107693Z-1c4a10cdb565/3f403121a4cef3606894d7fe",
+  "observer": "daily-probe",
+  "outcome": "verified",
+  "policy_revision": "unknown",
+  "provider": "venice",
+  "reason": "adapter_accepted",
+  "reason_detail": null,
+  "route_id": "venice/e2ee-glm-5-1",
+  "run_id": "20261030T183652.107693Z-1c4a10cdb565",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "7c9b07f0594960797724b3782c31a6cabea06ed268f1cde64fbd6aa91ac81785"
+}
