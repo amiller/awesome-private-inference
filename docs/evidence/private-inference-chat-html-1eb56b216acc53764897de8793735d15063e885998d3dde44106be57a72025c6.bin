@@ -8,8 +8,9 @@
 var left=3;
 var send=function(text){if(left<=0)return;left--;
 try{fetch("/chat/client-error",{method:"POST",keepalive:true,headers:{"content-type":"application/json"},body:JSON.stringify({where:"page",message:String(text).slice(0,700)+" · "+navigator.userAgent.slice(0,290)})}).catch(function(){});}catch(e){}};
-addEventListener("error",function(e){if(!e.message)return;send(e.message+" at "+(e.filename||"?")+":"+e.lineno+":"+e.colno);});
-addEventListener("unhandledrejection",function(e){var r=e.reason;send("unhandled: "+(r&&r.stack?String(r.stack).split("\n").slice(0,3).join(" / "):r&&r.message?r.message:String(r)));});
+var foreign=function(t){return /-extension:\/\//.test(String(t||""));};
+addEventListener("error",function(e){if(!e.message||!e.filename||foreign(e.filename))return;send(e.message+" at "+(e.filename||"?")+":"+e.lineno+":"+e.colno);});
+addEventListener("unhandledrejection",function(e){var r=e.reason;if(r&&foreign(r.stack))return;send("unhandled: "+(r&&r.stack?String(r.stack).split("\n").slice(0,3).join(" / "):r&&r.message?r.message:String(r)));});
 })();</script>
 <script>(function(){
 var u=new URL(location.href);
