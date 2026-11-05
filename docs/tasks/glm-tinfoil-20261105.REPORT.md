@@ -13,7 +13,7 @@ Spec: `docs/tasks/glm-tinfoil-20261105.md`.
 | `verifiers/tinfoil.py` | Hardware chain verification runs **before** every use of parsed report fields (sigstore measurement match, report_data→TLS/HPKE/hatt bindings). `hardware_signature_verified=True` only on full chain success; per-host bundles (`vcek_b64=""`) stay `not_checked` with "no VCEK" recorded in details and error. `details["sev"]` retains `reported_tcb`/`current_tcb` (hex + decomposed parts) — #18. |
 | `verifiers/certs/` (new) | Pinned ARK-Genoa/ASK-Genoa PEMs + provenance (KDS URL, capture time, PyPI cross-check, fingerprints). |
 | `tests/fixtures/` (new) | `amd_kds_genoa_cert_chain.pem`, `amd_kds_milan_cert_chain.pem` (wrong-product negative control), `amd_kds_provenance.json`, `tinfoil_router0_v5_bundle.json` (v5 replay packet from retained daily-probe evidence, hash + capture date recorded in `_provenance`). |
-| `tests/test_tinfoil_amd_chain.py` (new) | 25 tests: positives on both retained reports + all negative controls below. |
+| `tests/test_tinfoil_amd_chain.py` (new) | 32 tests: positives on both retained reports + all negative controls below. |
 | `tests/test_tinfoil.py` | Assertions updated: error strings changed because the hardware chain now *verifies* (the fixture's VCEK is genuine), so the remaining reason names encrypted-request binding/session freshness; `hardware_signature_verified` now `True` for VCEK-carrying fixtures and stays `None` with "no VCEK" for the per-host bundle. Parser test gains product/chip_id assertions. |
 | `data/verifiers.json` | Tinfoil entry: `tinfoil_amd.py` implementation, AMD-chain checks, KDS trust-anchor delegation; AMD chain removed from `unchecked`. |
 | `providers/tinfoil.md` | Verification-steps list and capability table updated to the performed AMD-chain checks (was "skipped in v1"). |
@@ -48,11 +48,15 @@ Spec: `docs/tasks/glm-tinfoil-20261105.md`.
 | Debug bit set | `test_debug_bit_set_rejected_before_any_trust`, `test_debug_bit_parse_level` |
 | report_data not bound to key in use (swapped genuine enclaveCert) | `test_report_data_not_bound_to_key_in_use_rejected` |
 | VCEK product ≠ report product | `test_wrong_vcek_product_rejected` |
+| Parser structural checks: nonzero reserved byte (v3 FMS pad, v3 reserved, v5 MBZ, v5 ECDSA tail, reserved u32) | `test_nonzero_reserved_byte_rejected[...]` |
+| Parser policy checks: reserved bit 63 set / mandatory bit 17 cleared | `test_policy_reserved_bits_enforced` |
+| Non-VCEK signer discriminator | `test_non_vcek_signer_rejected` |
+| Unsupported report version (4) | `test_unsupported_report_version_rejected` |
 | Milan chain fixture genuineness (so the control is meaningful) | `test_milan_chain_fixture_is_genuine` |
 
 ## Validation status
 
-- Full suite: `uv run --extra dev --extra nearai pytest -q` → **176 passed** (was 4 failures at epoch start: `tbs_certificatebytes` typo; fixed).
+- Full suite: `uv run --extra dev --extra nearai pytest -q` → **184 passed** (was 4 failures at epoch start: `tbs_certificatebytes` typo; fixed).
 - All verification runs against retained real evidence (two real VCEK-signed reports, two real KDS chains). The only stub is the live-TLS transport in full-pipeline tests (offline CI), matching existing repo practice; no check substitutes a default for a failure.
 - Expected values (anchor fingerprints) come from a source independent of the observations: the KDS capture cross-checked against Tinfoil's published PyPI client; hwID/SPL expectations come from the VCEK itself (AMD-issued), not from the report.
 

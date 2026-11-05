@@ -163,6 +163,57 @@ def test_debug_bit_parse_level():
     assert tinfoil_sev.parse(bytes(raw)).debug is True
 
 
+# ------------------------------------------ parser structural checks
+
+
+def _raw_report(raw):
+    return bytearray(gzip.decompress(
+        base64.b64decode(raw["enclaveAttestationReport"]["body"])))
+
+
+@pytest.mark.parametrize(
+    "offset,version",
+    [
+        (0x18B, V3),   # v3: FMS padding
+        (0x1F8, V3),   # v3: reserved (launch_mit_vector only valid in v5)
+        (0x210, V5),   # v5: MBZ region 0x208-0x2A0
+        (0x330, V5),   # ECDSA: MBZ tail 0x318-0x4A0
+        (0x4C, V3),    # reserved u32
+    ],
+    ids=["v3-fms-pad", "v3-reserved", "v5-mbz", "v5-ecdsa-tail", "reserved-u32"],
+)
+def test_nonzero_reserved_byte_rejected(offset, version):
+    body = _raw_report(version)
+    body[offset] = 0x01
+    with pytest.raises(ValueError, match="reserved"):
+        tinfoil_sev.parse(bytes(body))
+
+
+def test_policy_reserved_bits_enforced():
+    body = _raw_report(V3)
+    body[0x0F] |= 0x40  # bit 63 of the LE policy
+    with pytest.raises(ValueError, match="reserved bits"):
+        tinfoil_sev.parse(bytes(body))
+    body = _raw_report(V3)
+    body[0x0A] &= ~(1 << 1)  # clear mandatory reserved bit 17 (byte 2, bit 1)
+    with pytest.raises(ValueError, match="bit 17"):
+        tinfoil_sev.parse(bytes(body))
+
+
+def test_non_vcek_signer_rejected():
+    body = _raw_report(V3)
+    body[0x48] |= 0x04  # signer_info signing-key discriminator != VCEK (bit 2)
+    with pytest.raises(ValueError, match="VCEK-signed"):
+        tinfoil_sev.parse(bytes(body))
+
+
+def test_unsupported_report_version_rejected():
+    body = _raw_report(V5)
+    body[0x00:0x04] = (4).to_bytes(4, "little")
+    with pytest.raises(ValueError, match="unsupported"):
+        tinfoil_sev.parse(bytes(body))
+
+
 # ------------------------------------------------- wrong / tampered anchors
 
 
