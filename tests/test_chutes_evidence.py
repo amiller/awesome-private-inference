@@ -37,7 +37,7 @@ def _run(monkeypatch, *, change_report_data=False, quote_valid=True, truncate_qu
     monkeypatch.setattr(chutes.requests, "get", get)
     monkeypatch.setattr(chutes.secrets, "token_hex", lambda n: nonce)
     monkeypatch.setattr(chutes, "_cert_spki_sha256", lambda value: cert_hash.hex())
-    monkeypatch.setattr(chutes, "load_audit_ledger", lambda *a: ({"aa" * 48}, {}))
+    monkeypatch.setattr(chutes, "load_audit_ledger", lambda *a, **k: ({"aa" * 48}, {}))
     monkeypatch.setattr(chutes.phala_tdx, "verify_tdx_quote", lambda value: {"quote": {"verified": True}})
     monkeypatch.setattr(chutes.phala_tdx, "is_verified", lambda value: quote_valid)
     monkeypatch.setattr(chutes.phala_tdx, "quote_body", lambda value: {"reportdata": "mock"})

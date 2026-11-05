@@ -55,7 +55,7 @@ _CLOUD_API_IMAGE_RE = re.compile(
 @lru_cache(maxsize=1)
 def _cloud_api_audit_set() -> Tuple[Set[str], Dict[str, Dict]]:
     """Read the analyst-pair audit ledger. Returns (digest_set, metadata_by_digest).
-    digest_set contains both full digests and truncated prefixes; match uses startswith."""
+    Keys are full 64-hex image digests; matching is exact (see audit_match)."""
     return load_audit_ledger(_CLOUD_API_AUDITS, "image_digest")
 
 
@@ -380,10 +380,10 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     details["gateway_contract"] = _contract_evidence(gateway_app, chain["block_tag"])
     chain_authorized = bool(gw_compose_hash and _allowed_on_chain(
         gateway_app, gw_compose_hash, chain["block_tag"]))
-    full_audit_key = (gw_cloud_api_digest if len(gw_cloud_api_digest) == 64
-                      and gw_cloud_api_digest in audit_set else None)
-    audit_key = full_audit_key or _audit_match(gw_cloud_api_digest, audit_set)
-    sc.gateway_reference_audited = bool(gw_self_consistent and chain_authorized and full_audit_key)
+    # Ledger keys are full 64-hex digests and matching is exact, so any match is
+    # a full-digest match; a retired legacy prefix can never authorize a build.
+    audit_key = _audit_match(gw_cloud_api_digest, audit_set)
+    sc.gateway_reference_audited = bool(gw_self_consistent and chain_authorized and audit_key)
 
     details["gateway_compose_hash"] = gw_compose_hash
     details["cloud_api_image_digest"] = gw_cloud_api_digest
@@ -395,13 +395,11 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                                        "block_hash": chain["block_hash"],
                                        "chain_id": chain["chain_id"]}
     details["audit_key"] = audit_key
-    details["full_digest_audit_key"] = full_audit_key
-    details["audit_match_scope"] = (
-        "full_digest" if full_audit_key else
-        "legacy_prefix_hint" if audit_key else "none")
-    details["gateway_review_status"] = "reviewed" if full_audit_key else "unreviewed"
-    if full_audit_key:
-        m = audit_meta[full_audit_key]
+    details["full_digest_audit_key"] = audit_key
+    details["audit_match_scope"] = "full_digest" if audit_key else "none"
+    details["gateway_review_status"] = "reviewed" if audit_key else "unreviewed"
+    if audit_key:
+        m = audit_meta[audit_key]
         details["audit"] = {
             "audited_at": m.get("audited_at"),
             "audited_by": m.get("audited_by"),

@@ -269,31 +269,30 @@ def public_compose_preimage(compose: str) -> Dict[str, str]:
     return value
 
 
-def load_audit_ledger(path, key_field: str = "image_digest"):
+def load_audit_ledger(path, key_field: str = "image_digest", key_length: int = 64):
     """Read an analyst-pair audit ledger (data/audits/*.json). Returns
-    (identity_set, metadata_by_identity). Keys are lowercased; a truncated key
-    matches a live value by startswith (see audit_match)."""
+    (identity_set, metadata_by_identity). Keys are lowercased and must be full
+    length: exactly key_length hex chars (64 for sha256-style digests, 96 for a
+    48-byte TDX MRTD). Truncated or non-hex keys are rejected, not matched."""
     data = json.loads(Path(path).read_text())
     ids: Set[str] = set()
     meta: Dict[str, Dict] = {}
     for row in data["audits"]:
         k = str(row[key_field]).lower()
-        # A short/empty key would startswith-match unrelated digests; reject it
-        # rather than silently mark everything audited.
-        if len(k) < 8 or any(c not in "0123456789abcdef" for c in k):
+        # A truncated key would prefix-match unrelated digests and a non-hex key
+        # names no build; reject both rather than silently mark things audited.
+        if len(k) != key_length or any(c not in "0123456789abcdef" for c in k):
             raise ValueError(f"{Path(path).name}: invalid {key_field} {k!r} "
-                             "(need >=8 hex chars)")
+                             f"(need exactly {key_length} hex chars)")
         ids.add(k)
         meta[k] = row
     return ids, meta
 
 
 def audit_match(value: str, audit_set: Set[str]) -> Optional[str]:
-    """Return the matching audit key (full or truncated prefix) if any, else None."""
+    """Return the ledger key if `value` equals it exactly (case-insensitive),
+    else None. Ledger keys are full-length; prefixes never match."""
     if not value:
         return None
     value = value.lower()
-    for entry in audit_set:
-        if value.startswith(entry):
-            return entry
-    return None
+    return value if value in audit_set else None

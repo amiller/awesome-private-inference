@@ -232,9 +232,11 @@ def test_tinfoil_models_catalog_shape():
         assert repo.startswith("tinfoilsh/confidential-") or model == "router"
 
 
-def test_prefix_only_legacy_ledger_does_not_authorize_digest(tmp_path, monkeypatch):
+def test_prefix_only_legacy_ledger_is_rejected(tmp_path, monkeypatch):
     (tmp_path / "tinfoil_confidential-test.json").write_text(json.dumps({
         "audits": [{"bundle_digest": "ab" * 4}],
     }))
     monkeypatch.setattr(tinfoil, "_AUDITS_DIR", tmp_path)
-    assert tinfoil._digest_audited("tinfoilsh/confidential-test", "ab" * 32) is False
+    # issue #5: truncated ledger keys are a load error, not a filtered hint
+    with pytest.raises(ValueError):
+        tinfoil._digest_audited("tinfoilsh/confidential-test", "ab" * 32)

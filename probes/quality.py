@@ -42,9 +42,9 @@ SNAPSHOTS = DATA / "snapshots"
 # tinfoil's ledger covers only the router repo, so its other models count as
 # observed-but-unaudited — real backlog.
 AUDIT_LEDGERS = {
-    "near-ai": ("near-ai_cloud-api.json", "image_digest"),
-    "tinfoil": ("tinfoil_confidential-model-router.json", "bundle_digest"),
-    "chutes": ("chutes_tee.json", "mrtd"),
+    "near-ai": ("near-ai_cloud-api.json", "image_digest", 64),
+    "tinfoil": ("tinfoil_confidential-model-router.json", "bundle_digest", 64),
+    "chutes": ("chutes_tee.json", "mrtd", 96),
 }
 
 # What string names the running code version, per provider, whether it is a content
@@ -163,9 +163,9 @@ def compute(latest: dict | None = None) -> dict:
 
     # --- audit debt (per provider, then summed) ---
     audit_by_provider, all_observed, all_reviewed, last_audits = {}, set(), set(), []
-    for prov, (fname, keyf) in AUDIT_LEDGERS.items():
+    for prov, (fname, keyf, keylen) in AUDIT_LEDGERS.items():
         path = DATA / "audits" / fname
-        entries, meta = load_audit_ledger(path, keyf)
+        entries, meta = load_audit_ledger(path, keyf, key_length=keylen)
         obs = {v for (p, _), o in versions.items() if p == prov for _, v in o}
         aud = {v for v in obs if audit_match(v, entries)}
         la = max((e["audited_at"] for e in meta.values()), default=None)
