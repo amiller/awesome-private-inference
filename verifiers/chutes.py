@@ -354,6 +354,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     details["raw_evidence"] = {
         "source": f"{api_base}/instances/{census[0]['instance_id']}/evidence",
         "chute_id": chute_id, "instance_id": census[0]["instance_id"],
+        "fleet_size": len(census),
         "nonce": nonce, "e2e_pubkey": census[0]["e2e_pubkey"],
         "quote_b64": census[0].get("quote_b64"),
         "certificate_der_b64": census[0].get("certificate_der_b64"),
