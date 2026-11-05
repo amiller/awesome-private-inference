@@ -25,3 +25,23 @@ jobs:
         run: |
           source .venv/bin/activate
           pytest
+
+  site-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install deps
+        run: |
+          uv sync --frozen --python 3.11 --extra dev
+
+      - name: Site-quality rubric (R1-R10)
+        run: |
+          source .venv/bin/activate
+          python -m probes.rubric
