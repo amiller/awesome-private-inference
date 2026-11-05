@@ -63,6 +63,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
         "prod_os_image", "serving_code_attested", "code_measurement_reproducible",
+        "tee_debug_disabled", "event_log_replayed", "tcb_current",
+        "boot_registers_derived",
     },
     # Tinfoil SEV-SNP: hardware signature, HPKE/TLS key bindings and measured
     # runtime configuration. This set does not establish complete route proof.
@@ -106,7 +108,12 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
         "layers are exactly where Venice's prompt-path exposure lives, so they are now "
         "required and read as unproven rather than not-applicable. backend_attested stays "
         "excluded and is reported False: Venice has no gateway hop of its own, and the "
-        "upstream backend's own row carries that check."},
+        "upstream backend's own row carries that check. Added 2026-11-05 (teep parity): "
+        "tcb_current requires an UpToDate Intel PCS verdict from the local dcap-qvl "
+        "appraisal (Phala's hosted verifier returns no TCB verdict; that is retained as "
+        "phala_tcb_status); tee_debug_disabled, event_log_replayed and "
+        "boot_registers_derived apply to the aci/1 evidence shape and read as unproven "
+        "(None) on the legacy shape, which exposes no event log or vm_config."},
     "tinfoil-sev-snp-v2": {"disputed": False, "note":
         "SEV-SNP rather than TDX. Sigstore provenance and measurement agreement are "
         "separate from AMD report-signature verification and independent reproduction. "
