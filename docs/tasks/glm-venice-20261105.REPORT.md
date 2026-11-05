@@ -20,7 +20,7 @@
   RTMR3 app-id event is recorded, and `unproven_reasons` names what the format
   cannot prove (backend, gpu when omitted, prod_os_image,
   serving_code_attested, code_measurement_reproducible).
-- `tests/test_venice_aci1.py` — 20 tests over retained live evidence.
+- `tests/test_venice_aci1.py` — 21 tests over retained live evidence.
 - `tests/fixtures/venice_*` — fresh captures (2026-11-05) from the public
   `https://api.venice.ai/api/v1/tee/attestation?model=<id>&nonce=<64 hex>`
   (no credential; endpoint ignores Authorization): 6 ACI/1 models, 1 dstack
@@ -62,7 +62,8 @@
    mismatched signing key (fresh secp256k1 pair) and swapped address; gateway
    quote presented as backend (`serving: "direct"`, `num_gpus: 8` tampered →
    `backend_attested` stays False); unknown/empty `api_version` fails closed;
-   missing quote is an error; dstack path regression on a real dstack capture.
+   missing quote is an error; the 404 capture path; dstack path regression on
+   a real dstack capture.
 
 ## Test-changes note
 
@@ -75,7 +76,7 @@
 ## Validation status
 
 - Full suite: `~/.local/bin/uv run --extra dev --extra nearai pytest -q` →
-  172 passed (includes the 20 new tests).
+  173 passed (includes the 21 new tests).
 - Live collection: yes — the fixtures above, plus one live adapter run
   (2026-11-05) against `e2ee-glm-5-2-p` through the real Phala verifier.
 - Not proved by this change (unchanged, stated in details): the inference

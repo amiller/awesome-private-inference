@@ -349,6 +349,19 @@ def test_missing_quote_is_an_error_not_a_zero_score():
     assert report.error == "no gateway quote in ACI/1 evidence"
 
 
+def test_404_capture_still_reports_unavailable():
+    fixture = load("venice_404_e2ee-gemma-4-31b.json")
+    mp = pytest.MonkeyPatch()
+    mp.setattr(venice.requests, "get", Mock(return_value=Mock(
+        status_code=fixture["http_status"], json=lambda: fixture["response"])))
+    try:
+        report = venice.verify("", "https://api.venice.ai/api/v1", fixture["model"])
+    finally:
+        mp.undo()
+    assert report.valid is False
+    assert report.error == "no TEE attestation available for this model (404)"
+
+
 # ---------------------------------------------------------------------------
 # The dstack path (no api_version) must keep working unchanged.
 # ---------------------------------------------------------------------------
