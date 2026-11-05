@@ -43,7 +43,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
     # difference is the whole risk the row exists to show.
     "aci-gateway": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
-        "compose_hash_committed", "prod_os_image", "attested_serving_enforced",
+        "compose_hash_committed", "boot_registers_match_pinned", "prod_os_image",
+        "attested_serving_enforced",
     },
     "chutes-tee": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
@@ -149,6 +150,7 @@ class ScoreCard:
     sessions_publish_evidence_digests: Optional[bool] = None  # ACI list metadata only
     catalog_nonempty: Optional[bool] = None  # /v1/models lists at least one entry
     os_image_archive_declares_production: Optional[bool] = None  # metadata for the bound event hash, not boot MRs
+    boot_registers_match_pinned: Optional[bool] = None  # ACI: quote-body MRTD/RTMR0-2 equal the reviewed expected set for the measured OS image + VM shape (independently derived with dstack-mr, verifiers/aci_boot_registers.json)
     code_measurement_reproducible: Optional[bool] = None  # independent source-to-measurement rebuild
     release_provenance_verified: Optional[bool] = None  # signed release provenance under pinned issuer
     measurement_matches_release: Optional[bool] = None  # parsed report field equals signed predicate

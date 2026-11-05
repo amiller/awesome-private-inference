@@ -32,6 +32,7 @@ SCORECARD_LABELS = {
     "backend_attested": "Backend check", "gateway_reference_audited": "Gateway review",
     "catalog_serves": "Catalog serving", "sessions_publish_evidence_digests": "Session digest listing",
     "catalog_nonempty": "Catalog nonempty", "os_image_archive_declares_production": "OS archive metadata",
+    "boot_registers_match_pinned": "Boot registers vs pinned set",
     "code_measurement_reproducible": "Reproduced build", "release_provenance_verified": "Release provenance",
     "measurement_matches_release": "Release measurement", "hardware_signature_verified": "Hardware signature",
     "tls_pubkey_pinned": "TLS key pin", "hpke_pubkey_attested": "HPKE key",

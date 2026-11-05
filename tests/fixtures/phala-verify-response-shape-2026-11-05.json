@@ -1,0 +1,36 @@
+{
+  "captured_at": "2026-11-05T19:46:06+00:00",
+  "url": "https://cloud-api.phala.network/api/v1/attestations/verify",
+  "request": "POST {\"hex\": <retained quote from evidence 01680c7c\u2026>}",
+  "purpose": "issue #18, ACI part: why details.tcb_status was null. Phala's verify endpoint returns no computed TCB status or advisory IDs: the quote object's keys are exactly these four. It does return raw signed Intel collateral under quote_collateral (including tcb_info with TCB levels for fmspc 20A06F000000), from which a status could be computed, but computes no verdict itself. The adapter therefore verifies the quote locally with dcap-qvl against the same Intel collateral source and retains status + advisory IDs verbatim.",
+  "top_level_keys": [
+    "can_download",
+    "checksum",
+    "id",
+    "node_provider",
+    "proof_of_cloud",
+    "quote",
+    "quote_collateral",
+    "success",
+    "uploaded_at",
+    "verified_at"
+  ],
+  "quote_keys": [
+    "body",
+    "cert_data",
+    "header",
+    "verified"
+  ],
+  "quote_collateral_keys": [
+    "pck_crl",
+    "pck_crl_issuer_chain",
+    "root_ca_crl",
+    "tcb_info",
+    "tcb_info_issuer_chain",
+    "tcb_info_signature",
+    "qe_identity",
+    "qe_identity_issuer_chain",
+    "qe_identity_signature"
+  ],
+  "verified": true
+}

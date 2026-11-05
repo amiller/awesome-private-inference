@@ -1,0 +1,41 @@
+{
+  "schema": "aci-boot-registers/1",
+  "policy_revision": "2026-11-05.1",
+  "provenance": {
+    "derived_at": "2026-11-05",
+    "tool": "dstack-mr 0.6.3 (dstack-TEE/dstack commit d7e15dc, branch next), Machine::measure() — the full-image TDX path dstack's own verifier uses (dstack/verifier/src/verification.rs::compute_measurements)",
+    "reproduction": "research/dstack-mr-derivation-2026-11-05/ (harness source, vm_config, derived-registers.json)",
+    "os_image_archive": "https://download.dstack.org/os-images/mr_bd369a8c2f9edb2b52dad48ac8e0b32dde5f1337c423a506b48d07403a7d8033.tar.gz",
+    "os_image": {
+      "image": "dstack-0.5.9-bd369a8c",
+      "version": "0.5.9",
+      "git_revision": "e3655d1390feee3736476f4bda35c4354b4a12fc",
+      "is_dev": false,
+      "hash_chain": "sha256(sha256sum.txt) == bd369a8c2f9edb2b52dad48ac8e0b32dde5f1337c423a506b48d07403a7d8033; manifest pins ovmf.fd, bzImage, initramfs.cpio.gz, metadata.json; all four member digests re-verified on download 2026-11-05"
+    },
+    "independence": "values computed from the downloaded image files and the deployment's authenticated vm_config before any comparison with observed quotes; the observed quote body of evidence 01680c7c matched all four afterwards",
+    "review": "values accepted by this repo's review workflow; a provider-published or newly observed value is not automatically added"
+  },
+  "registers": ["mrtd", "rtmr0", "rtmr1", "rtmr2"],
+  "entries": [
+    {
+      "os_image_hash": "bd369a8c2f9edb2b52dad48ac8e0b32dde5f1337c423a506b48d07403a7d8033",
+      "os_image": "dstack-0.5.9-bd369a8c",
+      "vm_shape": {
+        "cpu_count": 32,
+        "memory_size": 34359738368,
+        "qemu_version": "8.2.2",
+        "pci_hole64_size": 0,
+        "hugepages": false,
+        "num_gpus": 0,
+        "num_nvswitches": 0,
+        "hotplug_off": false,
+        "host_share_mode": "9p"
+      },
+      "mrtd": "f06dfda6dce1cf904d4e2bab1dc370634cf95cefa2ceb2de2eee127c9382698090d7a4a13e14c536ec6c9c3c8fa87077",
+      "rtmr0": "46a83f6bbbeaa274aaf04861ef47d7e8898d4e699126b642f72f582e8d7f5349cb266a188bbabf619940d4fece06594b",
+      "rtmr1": "07e6f51aa763abfe75c3ddfbf4f425fe3f0ceff66d807a75e049303dce9addf68e7218729bd419638af63a370f65878c",
+      "rtmr2": "df67e467e60edc1737bcf8e682d48131bfb427f523226aa7f197a7608e9b3784783fa759ef5b28191fa12f9ddb36b858"
+    }
+  ]
+}

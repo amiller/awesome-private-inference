@@ -65,7 +65,8 @@ configs:
   gateway-config:
     content: '{"middleware":{"tee_only_domains":["tee.example.test"]}}'
 """})
-    os_hash = "aa" * 32
+    policy = aci.load_boot_register_policy()["entries"][0]
+    os_hash = policy["os_image_hash"]
     events = [_event("compose-hash", bytes.fromhex(aci.sha256_hex(compose))),
               _event("boot-mr-done", b""),
               _event("os-image-hash", bytes.fromhex(os_hash))]
@@ -74,13 +75,15 @@ configs:
     nonce = "00" * 32
     statement = {"keyset_digest": keyset_digest, "nonce": nonce, "purpose": aci.PURPOSE}
     expected = aci.sha256_hex(aci._jcs(statement))
+    vm_config = {"os_image_hash": os_hash, "image": "prod", **policy["vm_shape"]}
     envelope = {"workload_keyset_digest": keyset_digest, "attestation": {
         "workload_keyset": keyset, "report_data": expected,
         "evidence": {"quote": "mock", "event_log": json.dumps(events),
                      "app_compose": compose,
-                     "vm_config": json.dumps({"os_image_hash": os_hash, "image": "prod"})}}}
+                     "vm_config": json.dumps(vm_config)}}}
     quote = {"reportdata": quote_reportdata or expected + "00" * 32,
-             "rtmr3": aci._replayed_rtmr3(events)}
+             "rtmr3": aci._replayed_rtmr3(events),
+             **{r: policy[r] for r in aci.BOOT_REGISTERS}}
     if mutate:
         mutate(envelope, quote)
     monkeypatch.setattr(aci.os, "urandom", lambda n: bytes(n))
@@ -89,6 +92,9 @@ configs:
     monkeypatch.setattr(aci, "verify_tdx_quote", lambda value: {"quote": {"verified": True}})
     monkeypatch.setattr(aci, "quote_body", lambda value: quote)
     monkeypatch.setattr(aci, "is_verified", lambda value: True)
+    monkeypatch.setattr(aci, "_tcb_status_for_quote",
+                        lambda quote_hex: {"tcb_status": "UpToDate", "advisory_ids": [],
+                                           "source": "dcap-qvl local verification"})
     if archive_too_large:
         monkeypatch.setattr(aci, "_os_image_is_production", lambda value: (_ for _ in ()).throw(
             aci.ArchiveTooLarge("cap")))
@@ -100,11 +106,12 @@ configs:
 
 def test_aci_accepts_consistent_quoted_bindings(monkeypatch):
     report = _verify_fixture(monkeypatch)
-    assert not report.valid  # base OS boot registers are not checked yet
+    assert report.valid  # pinned MRTD/RTMR0-2 now match the authenticated body
     assert report.details["event_payloads_bound"] is True
-    assert report.details["verification_status"] == "not_checked"
+    assert report.details["verification_status"] == "verified"
     assert report.scorecard.os_image_archive_declares_production is True
-    assert report.scorecard.prod_os_image is None
+    assert report.scorecard.boot_registers_match_pinned is True
+    assert report.scorecard.prod_os_image is True
     assert report.scorecard.backend_attested is None
     assert report.scorecard.catalog_serves is None
     assert report.scorecard.sessions_publish_evidence_digests is True
