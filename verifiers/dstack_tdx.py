@@ -153,3 +153,33 @@ def single_runtime_event(entries: List[Dict], name: str) -> str:
     if len(matches) != 1:
         raise EventLogError(f"runtime event {name!r}: expected exactly one, got {len(matches)}")
     return matches[0]
+
+
+def attestation_measurements(quote_hex: str, event_log: List[Dict]) -> Dict:
+    """Bind one attestation's quote registers to its event log.
+
+    Returns per-IMR replay equality plus the log-authenticated app-id,
+    compose-hash and os-image-hash. Raises EventLogError/ValueError on any
+    malformation; callers report the failure, never a default.
+    """
+    quoted = parse_quote(quote_hex)
+    replayed = replayed_registers(event_log)
+    covered = covered_imrs(event_log)
+    if 3 not in covered:
+        raise EventLogError("event log extends no RTMR3 entries")
+    mismatches = [f"rtmr{i}" for i in sorted(covered)
+                  if replayed[f"rtmr{i}"] != quoted[f"rtmr{i}"]]
+    if mismatches:
+        raise EventLogError(
+            f"event log does not replay to the quote: {', '.join(mismatches)} mismatch")
+    return {
+        "registers": {k: quoted[k] for k in ("mrtd", "rtmr0", "rtmr1", "rtmr2", "rtmr3")},
+        "replay_matches_quote": True,
+        "covered_imrs": sorted(covered),
+        "log_app_id": single_runtime_event(event_log, "app-id"),
+        "log_compose_hash": single_runtime_event(event_log, "compose-hash"),
+        "log_os_image_hash": single_runtime_event(event_log, "os-image-hash"),
+        "td_attributes": quoted["td_attributes"],
+        "debug_disabled": tee_debug_disabled(quoted["td_attributes"]),
+        "mrconfigid": quoted["mrconfigid"],
+    }
