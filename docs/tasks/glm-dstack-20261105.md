@@ -101,7 +101,12 @@ and Venice's GPU/NRAS path (owned by another lane).
   retained captures have none), and RTMR0-2 depend on the VM shape
   (cpu/memory/gpus/qemu version; teep dstack_integrity.md). Only MRTD is
   image-derived; RTMR0-2 stay replay-bound (item 4) and un-pinned, layer False
-  with reason.
+  with reason. Empirically RTMR1/RTMR2 proved shape-independent, so they are
+  pinned per image; only RTMR0 remains blocked.
+- os image a6eafc5f007f642d… (NEAR model CVMs, 18/27 attestations): no longer
+  served at download.dstack.org (404 on 2026-11-05), so no independent
+  derivation exists; quotes on it fail boot_registers_derived with that
+  reason (discovered during M4; recorded here and in the policy provenance).
 - No NEAR or Venice API key: NEAR checks run against retained evidence only;
   Venice attestation is unauthenticated so live capture works. Venice GPU/NRAS
   path untouched (other lane).
