@@ -1,0 +1,47 @@
+{
+  "genoa": {
+    "url": "https://kdsintf.amd.com/vcek/v1/Genoa/cert_chain",
+    "fetched_utc": "2026-11-05T13:35:00Z",
+    "certs": {
+      "ask": {
+        "subject_cn": "SEV-Genoa",
+        "der_sha256": "5464738c1546aed5f2cecf1dc98c5c960a92e8913238a61711bc90ec6e828521",
+        "spki_sha256": "0324d55bcd48ba877a8fd87c0e1b4934dec8448e3807a24384a34dc6a6c9ebb8",
+        "not_before": "2022-10-31T13:33:48+00:00",
+        "not_after": "2047-10-31T13:33:48+00:00"
+      },
+      "ark": {
+        "subject_cn": "ARK-Genoa",
+        "der_sha256": "4c6598d19c18719c5dfd4a7d335f674e5bfe1d8f800cea2cf270c10d103db2f1",
+        "spki_sha256": "429a69c9422aa258ee4d8db5fcda9c6470ef15f8cd5a9cebd6cbc7d90b863831",
+        "not_before": "2022-01-26T15:34:37+00:00",
+        "not_after": "2047-01-26T15:34:37+00:00"
+      }
+    },
+    "independent_cross_check": {
+      "source": "PyPI package tinfoil==0.15.0 (tinfoil/attestation/genoa_cert_chain.py)",
+      "result": "ARK and ASK byte-identical (DER) to KDS fetch"
+    }
+  },
+  "milan": {
+    "url": "https://kdsintf.amd.com/vcek/v1/Milan/cert_chain",
+    "fetched_utc": "2026-11-05T13:44:00Z",
+    "certs": {
+      "ask": {
+        "subject_cn": "SEV-Milan",
+        "der_sha256": "67d303bd3905fd38db8b20e0793699870e7fa612eaad5dec358293fd8c0bac1b",
+        "spki_sha256": "42491669ccb851d627ea9846cd24eccbeb7de7c2a62740120fff88001d38ebb6",
+        "not_before": "2020-10-22T18:24:20+00:00",
+        "not_after": "2045-10-22T18:24:20+00:00"
+      },
+      "ark": {
+        "subject_cn": "ARK-Milan",
+        "der_sha256": "69d063b45344d26a2e94e1f4210de49ef555308287d4c174445c95639a540bcd",
+        "spki_sha256": "9f056bee44377e29308cb5ffa895bdfb62d18881fa6bed8d6f075b0204089cb9",
+        "not_before": "2020-10-22T17:23:05+00:00",
+        "not_after": "2045-10-22T17:23:05+00:00"
+      }
+    },
+    "purpose": "negative control: wrong-product chain"
+  }
+}
