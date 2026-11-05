@@ -5,7 +5,9 @@ tests/fixtures/gce-tcb/. Negative controls mutate one authenticated input at a
 time; where a mutation must stay internally consistent to isolate a single check,
 a synthetic endorsement is built and signed by a test-generated RSA-PSS CA.
 """
+import base64
 import datetime
+import hashlib
 import importlib.util
 import json
 import pathlib
@@ -405,6 +407,96 @@ def test_lookup_flags_unendorsed_and_age():
     older = gce.lookup(history, "a" * 192)
     assert older["endorsed"] is True
     assert older["newer_firmware_releases"] == 1
+
+
+# --- intel_rims content retention ---
+
+RIM_MANIFEST = json.loads((FIXTURES / "intel_rims" / "manifest.json").read_text())
+
+
+def test_retained_rim_fixtures_match_listing_md5():
+    """Download fidelity of the retained real evidence: base64(md5(fixture bytes))
+    equals the md5 the bucket listing reported at capture time (independent claim
+    from a different channel than our download)."""
+    for name, meta in RIM_MANIFEST["objects"].items():
+        content = (FIXTURES / "intel_rims" / name).read_bytes()
+        assert len(content) == meta["size"], name
+        assert base64.b64encode(hashlib.md5(content).digest()).decode() \
+            == meta["listing_md5_base64"], name
+        assert hashlib.md5(content).hexdigest() == meta["listing_md5_hex"], name
+
+
+def test_tampered_rim_content_fails_listing_md5():
+    """Negative control: one flipped byte must break the listing-md5 fidelity check."""
+    name = "intel-tdx-rim-prod.textproto"
+    meta = RIM_MANIFEST["objects"][name]
+    content = bytearray((FIXTURES / "intel_rims" / name).read_bytes())
+    content[100] ^= 1
+    digest = base64.b64encode(hashlib.md5(bytes(content)).digest()).decode()
+    assert digest != meta["listing_md5_base64"]
+
+
+def test_history_rim_retention_is_self_consistent():
+    """The committed history's retained rim versions must exist on disk, match their
+    recorded md5, match the current listing md5, and have a change-log entry for
+    the rewrite that produced them."""
+    import base64
+    import hashlib
+    repo = pathlib.Path(__file__).parent.parent
+    history = json.loads((repo / "data" / "gce-tcb-endorsements.json").read_text())
+    for name, entry in history["intel_rims"].items():
+        versions = entry.get("retained_versions", [])
+        assert versions, f"{name} has no retained version"
+        for change in entry.get("changes", []):
+            assert change["from_md5"] != change["to_md5"], "no-op change logged"
+        for version in versions:
+            content = (repo / version["path"]).read_bytes()
+            assert hashlib.md5(content).hexdigest() == version["md5"], version["path"]
+            assert len(content) == version["size"]
+        latest_hex = versions[-1]["md5"]
+        assert base64.b64encode(bytes.fromhex(latest_hex)).decode() == entry["md5"], name
+        if entry.get("changes"):
+            assert entry["changes"][-1]["to_md5"] == entry["md5"], name
+
+
+def test_retain_rim_contents_downloads_and_verifies_md5(tmp_path, monkeypatch):
+    """Unit test of the retention path with transport mocked: new md5 triggers a
+    download stored at the md5-named path; mismatched listing md5 raises."""
+    import base64
+    import hashlib
+    content = b"rim-content-v1"
+    listing = {"intel_rims/rim.textproto": {
+        "md5Hash": base64.b64encode(hashlib.md5(content).digest()).decode(),
+        "generation": "7", "updated": "2026-11-05T21:00:00Z", "size": str(len(content))}}
+    monkeypatch.setattr(gce, "fetch_object", lambda name: content)
+    store = tmp_path / "data" / "gce-tcb-intel-rims"
+    history = {"intel_rims": {}}
+    gce.retain_rim_contents(history, listing, store, NOW.isoformat())
+    version = history["intel_rims"]["intel_rims/rim.textproto"]["retained_versions"][0]
+    assert version["md5"] == hashlib.md5(content).hexdigest()
+    assert version["path"] == f"data/gce-tcb-intel-rims/rim/{version['md5']}.textproto"
+    assert (tmp_path / version["path"]).read_bytes() == content
+    # second run with the same md5: no new download, no duplicate version
+    gce.retain_rim_contents(history, listing, store, NOW.isoformat())
+    assert len(history["intel_rims"]["intel_rims/rim.textproto"]["retained_versions"]) == 1
+    # negative control: listing md5 that does not match the served bytes must raise
+    bad = {"intel_rims/rim.textproto": dict(listing["intel_rims/rim.textproto"],
+                                             md5Hash=base64.b64encode(b"x" * 16).decode())}
+    history2 = {"intel_rims": {}}
+    with pytest.raises(ValueError, match="listing md5"):
+        gce.retain_rim_contents(history2, bad, store, NOW.isoformat())
+
+
+def test_retain_rim_contents_ignores_directory_marker(tmp_path, monkeypatch):
+    """GCS listings include a synthetic 'intel_rims/' folder marker; it must not be
+    retained as a rim version."""
+    listing = {"intel_rims/": {"md5Hash": "1B2M2Y8AsgTpgAmY7PhCfg==", "generation": "1",
+                              "updated": "2026-03-06T21:58:45.276Z", "size": "0"}}
+    monkeypatch.setattr(gce, "fetch_object", lambda name: pytest.fail("marker must not be fetched"))
+    history = {"intel_rims": {}}
+    gce.retain_rim_contents(history, listing, tmp_path / "data" / "gce-tcb-intel-rims",
+                            NOW.isoformat())
+    assert history["intel_rims"] == {}
 
 
 def test_history_digest_cross_check_record_is_consistent():

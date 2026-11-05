@@ -17,6 +17,7 @@ Daily use: python3 watch/gce_tcb_endorsements.py [--history PATH] [--root PATH]
 Lookup:    python3 watch/gce_tcb_endorsements.py --lookup <mrtd-hex>
 """
 import argparse
+import base64
 import datetime
 import hashlib
 import json
@@ -337,6 +338,35 @@ def update_history(history, current_names, records, now, now_iso):
     return history
 
 
+def retain_rim_contents(history, rims, store_dir, now_iso):
+    """Download and retain the current bytes of each intel_rims object whose md5 is
+    new or changed since the last retained version, so rewrites stay diffable.
+    The md5 comparison only checks download fidelity against the bucket listing's
+    checksum; embedded Intel TCB-info signatures and certificates are retained
+    verbatim, not verified here."""
+    for name, meta in sorted(rims.items()):
+        if not name.endswith(".textproto"):
+            continue
+        entry = history["intel_rims"].setdefault(name, {})
+        md5_hex = base64.b64decode(meta["md5Hash"]).hex()
+        retained = entry.get("retained_versions", [])
+        if entry.get("md5") == meta["md5Hash"] or (retained and retained[-1]["md5"] == md5_hex):
+            continue
+        content = fetch_object(name)
+        listed = base64.b64encode(hashlib.md5(content).digest()).decode()
+        if listed != meta["md5Hash"]:
+            raise ValueError(f"{name}: downloaded content md5 {listed} != listing md5 {meta['md5Hash']}")
+        md5_hex = hashlib.md5(content).hexdigest()
+        base = name.rsplit("/", 1)[-1][: -len(".textproto")]
+        path = pathlib.Path(store_dir) / base / f"{md5_hex}.textproto"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content)
+        entry.setdefault("retained_versions", []).append(
+            {"at": now_iso, "md5": md5_hex, "generation": meta["generation"],
+             "updated": meta["updated"], "size": int(meta["size"]),
+             "path": str(path.relative_to(pathlib.Path(store_dir).parent.parent))})
+
+
 def cross_check_fd(digest):
     """Download one firmware binary and check sha384(content) == endorsed digest == object name."""
     name = f"ovmf_x64_csm/{digest}.fd"
@@ -445,6 +475,7 @@ def main(argv=None):
                                          **cross_check_fd(entry["firmware_sha384"]),
                                          "checked_at": now_iso}
 
+    retain_rim_contents(history, rims, args.history.parent / "gce-tcb-intel-rims", now_iso)
     update_history(history, current, records, now, now_iso)
     refs = cross_reference_audits(history, REPO / "data" / "audits", now_iso)
     args.history.parent.mkdir(parents=True, exist_ok=True)
@@ -457,6 +488,11 @@ def main(argv=None):
         print(f"FAILED {name}: {reason}", file=sys.stderr)
     withdrawn = sum(1 for e in history["endorsements"].values() if e.get("removed"))
     print(f"withdrawn-from-bucket endorsements in history: {withdrawn}")
+    for name, entry in sorted(history["intel_rims"].items()):
+        versions = entry.get("retained_versions", [])
+        if versions:
+            print(f"intel_rims {name}: {len(versions)} retained version(s), "
+                  f"latest md5 {versions[-1]['md5']} updated {versions[-1]['updated']}")
     for ledger, rows in refs.items():
         unendorsed = [r for r in rows if not r["endorsed"]]
         print(f"provider mrtd ledger {ledger}: {len(rows)} retained, "

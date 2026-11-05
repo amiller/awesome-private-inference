@@ -1,0 +1,23 @@
+{
+  "captured_at": "2026-11-05T20:31:04Z",
+  "source": "https://storage.googleapis.com/gce_tcb_integrity/intel_rims/",
+  "note": "Real bucket objects retained verbatim (byte-identical to data/gce-tcb-intel-rims/<base>/<md5>.textproto captured in the same run). Structure (as of capture): intel-tdx-rim-prod carries three FMSPC-tagged Intel TCB-info JSON records (issueDate 2025-10-27, each with an embedded Intel signature) plus a DER GCE-uefi-signer leaf (serialNumber 36, valid 2026-11-03 to 2031-11-03) chaining to the pinned GCE-cc-tcb-root (serialNumber 1); confidential-space-rim-prod carries four self-signed 'UEFI DB Key' COS certificates (v10, v20250203, v20260706, v20251004) plus the same signer leaf. The embedded Intel TCB-info signatures and COS keys are retained for diffing, NOT verified by the gce_tcb_endorsements module.",
+  "objects": {
+    "intel-tdx-rim-prod.textproto": {
+      "url": "https://storage.googleapis.com/gce_tcb_integrity/intel_rims/intel-tdx-rim-prod.textproto",
+      "generation": "1793910565198833",
+      "updated": "2026-11-05T20:29:25.303Z",
+      "size": 24480,
+      "listing_md5_base64": "z7foBm7h9FenUEHjS4KJNQ==",
+      "listing_md5_hex": "cfb7e8066ee1f457a75041e34b828935"
+    },
+    "confidential-space-rim-prod.textproto": {
+      "url": "https://storage.googleapis.com/gce_tcb_integrity/intel_rims/confidential-space-rim-prod.textproto",
+      "generation": "1793910564955136",
+      "updated": "2026-11-05T20:29:25.062Z",
+      "size": 73915,
+      "listing_md5_base64": "q2S9qXghSJaq82jpz+y+FA==",
+      "listing_md5_hex": "ab64bda978214896aaf368e9cfecbe14"
+    }
+  }
+}
