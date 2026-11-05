@@ -41,6 +41,7 @@ from .common import (
     sha256_hex,
 )
 from . import dstack_tdx
+from . import dstack_boot_registers
 
 # Issue #18 / teep tee_tcb_current parity: only UpToDate passes. Every other
 # Intel PCS verdict (OutOfDate, SWHardeningNeeded, ConfigurationAndSWHardeningNeeded,
@@ -219,7 +220,10 @@ def _measurement_checks(att: Dict, intel: Dict) -> Dict:
         measurements = dstack_tdx.attestation_measurements(intel["intel_quote"], event_log)
     except (dstack_tdx.EventLogError, ValueError, TypeError) as exc:
         return {"ok": False, "error": str(exc),
-                "event_log_present": event_log is not None}
+                "event_log_present": event_log is not None,
+                "boot_registers": {"ok": False, "per_register": {}, "reasons": [
+                    f"quote/event-log binding failed ({exc}); "
+                    "registers not checked against pins"]}}
     detached = {
         "app_id": str(info.get("app_id") or "").lower().removeprefix("0x"),
         "compose_hash": str(tcb_info.get("compose_hash") or "").lower().removeprefix("0x"),
@@ -228,9 +232,12 @@ def _measurement_checks(att: Dict, intel: Dict) -> Dict:
     disagreements = {key: {"log": measurements[f"log_{key}"], "detached": value}
                      for key, value in detached.items()
                      if value and value != measurements[f"log_{key}"]}
+    boot = dstack_boot_registers.check_boot_registers(
+        measurements["log_os_image_hash"], measurements["registers"])
     ok = not disagreements
     return {**{k: v for k, v in measurements.items() if k != "mrconfigid"},
-            "ok": ok, "detached_json_disagreements": disagreements}
+            "ok": ok, "detached_json_disagreements": disagreements,
+            "boot_registers": boot}
 
 
 def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
@@ -330,6 +337,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     model_names_match = True
     debug_disabled = gw_meas["ok"] and gw_meas["debug_disabled"]
     event_log_replayed = gw_meas["ok"]
+    boot_registers_derived = gw_meas["boot_registers"]["ok"]
 
     for i, m in enumerate(models):
         m_intel = _sync(_check_tdx(m))
@@ -338,6 +346,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         details["tdx"]["models"].append({**_tdx_evidence(m_intel), "measurements": m_meas})
         debug_disabled = debug_disabled and m_meas["ok"] and m_meas["debug_disabled"]
         event_log_replayed = event_log_replayed and m_meas["ok"]
+        boot_registers_derived = (boot_registers_derived
+                                  and m_meas["boot_registers"]["ok"])
         if not m_intel["verified"]:
             model_ok = False
             gpu_ok = False
@@ -414,6 +424,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     sc.compose_hash_committed = bool(compose_checks and all(compose_checks))
     sc.tee_debug_disabled = debug_disabled
     sc.event_log_replayed = event_log_replayed
+    sc.boot_registers_derived = boot_registers_derived
     if all(tcb_statuses):
         sc.tcb_current = all(s in TCB_CURRENT_STATUSES for s in tcb_statuses)
     details["tcb_statuses"] = {"gateway": gw_intel["tcb_status"],
@@ -489,6 +500,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         and sc.tee_debug_disabled is True
         and sc.event_log_replayed is True
         and sc.tcb_current is True
+        and sc.boot_registers_derived is True
         and model_ok
         and model_names_match
         and sc.compose_hash_committed is True

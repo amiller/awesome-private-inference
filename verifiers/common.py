@@ -30,7 +30,7 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
         "backend_attested", "tee_debug_disabled", "event_log_replayed",
-        "tcb_current",
+        "tcb_current", "boot_registers_derived",
     },
     # Chutes direct (api.chutes.ai): crypto core is sound, but the serve.py on the
     # prompt-plaintext path (and the model) are unmeasured, so serving_code_attested
@@ -146,6 +146,7 @@ class ScoreCard:
     tcb_current: Optional[bool] = None       # Intel PCS verdict is UpToDate; any other verdict (OutOfDate, Revoked, …) is False with advisories retained
     tee_debug_disabled: Optional[bool] = None  # TD_ATTRIBUTES debug bit clear in every quote (host cannot inspect TD memory)
     event_log_replayed: Optional[bool] = None  # dstack event log replays to the quote's RTMRs and authenticates app-id/compose-hash/os-image-hash
+    boot_registers_derived: Optional[bool] = None  # MRTD/RTMR0-2 equal values derived with dstack-mr from the published OS image (per image; RTMR0 per pinned VM shape)
     report_data_binds_key: Optional[bool] = None  # report_data commits to signing addr
     gpu_attested: Optional[bool] = None      # NRAS returned PASS
     key_derives_to_address: Optional[bool] = None  # keccak(pubkey) == signing_address

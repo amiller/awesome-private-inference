@@ -27,7 +27,7 @@ REPO_URL = "https://github.com/amiller/awesome-private-inference/blob/main/"
 SCORECARD_LABELS = {
     "nonce_bound": "Fresh nonce", "tdx_verified": "TDX appraisal",
     "tcb_current": "TCB current", "tee_debug_disabled": "Debug disabled",
-    "event_log_replayed": "Event-log replay",
+    "event_log_replayed": "Event-log replay", "boot_registers_derived": "Derived boot registers",
     "report_data_binds_key": "Key binding", "gpu_attested": "GPU evidence",
     "key_derives_to_address": "Address binding", "compose_hash_committed": "Compose binding",
     "prod_os_image": "Production OS", "serving_code_attested": "Serving code",

@@ -113,6 +113,17 @@ def test_retained_evidence_replays_with_new_layers_true(monkeypatch):
     assert gw_meas["debug_disabled"] is True
     assert gw_meas["log_compose_hash"] == gw_meas["detached_json_disagreements"] == {} \
         or not gw_meas["detached_json_disagreements"]
+    # gateway image da9a3d5c… is published: pins match, but RTMR0 is un-pinnable
+    # without vm_config, so the layer honestly fails with that reason.
+    assert report.scorecard.boot_registers_derived is False
+    gw_boot = gw_meas["boot_registers"]
+    assert gw_boot["per_register"] == {"mrtd": True, "rtmr1": True,
+                                       "rtmr2": True, "rtmr0": None}
+    assert any("vm_config" in r for r in gw_boot["reasons"])
+    # model image a6eafc5f… has no published archive: rejected with that reason
+    m_boot = report.details["tdx"]["models"][0]["measurements"]["boot_registers"]
+    assert m_boot["ok"] is False
+    assert any("no pinned derivation" in r for r in m_boot["reasons"])
 
 
 def test_outofdate_gateway_flips_tcb_current_and_keeps_advisories(monkeypatch):
