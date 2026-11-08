@@ -2,25 +2,48 @@
   "changes": [
     {
       "affected_routes": [
-        "confidential-ai-api"
+        "privatemode-proxy-auto",
+        "privatemode-proxy-pinned",
+        "privatemode-proxyless"
       ],
-      "current_sha256": "ddf0eeabec35beee43bcbcf8b65712c43d32d399bbcf7a27c24d8eeac436fe54",
+      "current_sha256": "5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1",
       "current_status": "observed",
-      "event_id": "52f70a90d78f958e0546334f8ae0f0febe2f71c3a303944992503823e2e745da",
+      "event_id": "420e7e9827d24b7847903f3ddd6c8fe7c41e59f267aa2499d2ea11f4713a44fc",
       "kind": "publication_changed",
-      "previous_sha256": "eb974105d5013ef90b372252a018e26bb436e0a08ca32d3257f1a36731e02aa9",
+      "previous_sha256": "ac2bb4c5dc2aba45bdff1a7f44b8e9ad2f2b4666c5957f54d9a821ac596dca40",
       "previous_status": "observed",
       "priority": "medium",
-      "provider": "confidential-ai",
-      "route_id": "publication/confidential-ai-releases",
-      "source_id": "confidential-ai-releases",
-      "timestamp": "2026-11-07T18:01:56.118184Z",
+      "provider": "privatemode",
+      "route_id": "publication/privatemode-manifest",
+      "source_id": "privatemode-manifest",
+      "timestamp": "2026-11-08T18:20:39.727184Z",
       "type": "publication_changed",
-      "url": "https://api.github.com/repos/confidential-dot-ai/confidential-inference/releases?per_page=10",
+      "url": "https://cdn.confidential.cloud/privatemode/v2/manifest.json",
+      "verification": "not_performed"
+    },
+    {
+      "affected_routes": [
+        "private-inference-standard",
+        "private-inference-zdr",
+        "private-inference-private"
+      ],
+      "current_sha256": "d91809a9755eb0077dbef1f9565106999ce7f4dcef8d364b9124d62b156b1df3",
+      "current_status": "observed",
+      "event_id": "e2da38ed94d434e1185798848166e7e96ada63c8aa422396065460b33da52d16",
+      "kind": "catalog_changed",
+      "previous_sha256": "47eb6ac71c5366ab59d6b5d9f19e35124a7c57a786f4517ddc26aa3fb866d68e",
+      "previous_status": "observed",
+      "priority": "medium",
+      "provider": "private-inference",
+      "route_id": "publication/private-inference-catalog",
+      "source_id": "private-inference-catalog",
+      "timestamp": "2026-11-08T18:20:40.794358Z",
+      "type": "catalog_changed",
+      "url": "https://privateinference.gg/v1/models",
       "verification": "not_performed"
     }
   ],
-  "generated_at": "2026-11-07T18:01:57.574024Z",
+  "generated_at": "2026-11-08T18:20:41.819645Z",
   "meaning": "publication observation only; no signature, quote, or client acceptance verification",
   "mirror_agreements": {
     "pcrDev.json": true,
@@ -36,12 +59,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-11-07T18:01:54.089453Z",
+        "observed_at": "2026-11-08T18:20:39.060922Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrProd.json-a9a0f91cce3b713a4c8007ffa4ca015fb759c57f86f2e5b97c647629a3766fc0.bin",
         "sha256": "a9a0f91cce3b713a4c8007ffa4ca015fb759c57f86f2e5b97c647629a3766fc0"
       },
-      "observed_at": "2026-11-07T18:01:54.089453Z",
+      "observed_at": "2026-11-08T18:20:39.060922Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrProd.json-a9a0f91cce3b713a4c8007ffa4ca015fb759c57f86f2e5b97c647629a3766fc0.bin",
@@ -58,12 +81,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-11-07T18:01:54.267029Z",
+        "observed_at": "2026-11-08T18:20:39.142812Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrProd.json-a9a0f91cce3b713a4c8007ffa4ca015fb759c57f86f2e5b97c647629a3766fc0.bin",
         "sha256": "a9a0f91cce3b713a4c8007ffa4ca015fb759c57f86f2e5b97c647629a3766fc0"
       },
-      "observed_at": "2026-11-07T18:01:54.267029Z",
+      "observed_at": "2026-11-08T18:20:39.142812Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrProd.json-a9a0f91cce3b713a4c8007ffa4ca015fb759c57f86f2e5b97c647629a3766fc0.bin",
@@ -80,12 +103,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 89265,
-        "observed_at": "2026-11-07T18:01:54.394675Z",
+        "observed_at": "2026-11-08T18:20:39.193107Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrProdHistory.json-d7ff57af0a8d5c6ac3b9bd2c240aacfcaffe2f53d6deddfaecf1bf6425d02da6.bin",
         "sha256": "d7ff57af0a8d5c6ac3b9bd2c240aacfcaffe2f53d6deddfaecf1bf6425d02da6"
       },
-      "observed_at": "2026-11-07T18:01:54.394675Z",
+      "observed_at": "2026-11-08T18:20:39.193107Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrProdHistory.json-d7ff57af0a8d5c6ac3b9bd2c240aacfcaffe2f53d6deddfaecf1bf6425d02da6.bin",
@@ -102,12 +125,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 89265,
-        "observed_at": "2026-11-07T18:01:54.424845Z",
+        "observed_at": "2026-11-08T18:20:39.201045Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrProdHistory.json-d7ff57af0a8d5c6ac3b9bd2c240aacfcaffe2f53d6deddfaecf1bf6425d02da6.bin",
         "sha256": "d7ff57af0a8d5c6ac3b9bd2c240aacfcaffe2f53d6deddfaecf1bf6425d02da6"
       },
-      "observed_at": "2026-11-07T18:01:54.424845Z",
+      "observed_at": "2026-11-08T18:20:39.201045Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrProdHistory.json-d7ff57af0a8d5c6ac3b9bd2c240aacfcaffe2f53d6deddfaecf1bf6425d02da6.bin",
@@ -124,12 +147,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-11-07T18:01:54.530662Z",
+        "observed_at": "2026-11-08T18:20:39.257622Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrDev.json-d04eafaedcb8df1ca1f615ab2adff652a45b09b1d2db0716b9cf56d702b83c90.bin",
         "sha256": "d04eafaedcb8df1ca1f615ab2adff652a45b09b1d2db0716b9cf56d702b83c90"
       },
-      "observed_at": "2026-11-07T18:01:54.530662Z",
+      "observed_at": "2026-11-08T18:20:39.257622Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrDev.json-d04eafaedcb8df1ca1f615ab2adff652a45b09b1d2db0716b9cf56d702b83c90.bin",
@@ -146,12 +169,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 370,
-        "observed_at": "2026-11-07T18:01:54.639636Z",
+        "observed_at": "2026-11-08T18:20:39.324443Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrDev.json-d04eafaedcb8df1ca1f615ab2adff652a45b09b1d2db0716b9cf56d702b83c90.bin",
         "sha256": "d04eafaedcb8df1ca1f615ab2adff652a45b09b1d2db0716b9cf56d702b83c90"
       },
-      "observed_at": "2026-11-07T18:01:54.639636Z",
+      "observed_at": "2026-11-08T18:20:39.324443Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrDev.json-d04eafaedcb8df1ca1f615ab2adff652a45b09b1d2db0716b9cf56d702b83c90.bin",
@@ -168,12 +191,12 @@
       "kind": "pcr_publication",
       "last_success": {
         "bytes": 92397,
-        "observed_at": "2026-11-07T18:01:54.768511Z",
+        "observed_at": "2026-11-08T18:20:39.407696Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-canonical-pcrDevHistory.json-07b20dd3506923a5284fc026c94e27da0a6ef660226e8e6a5cd79639e0b8d27c.bin",
         "sha256": "07b20dd3506923a5284fc026c94e27da0a6ef660226e8e6a5cd79639e0b8d27c"
       },
-      "observed_at": "2026-11-07T18:01:54.768511Z",
+      "observed_at": "2026-11-08T18:20:39.407696Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-canonical-pcrDevHistory.json-07b20dd3506923a5284fc026c94e27da0a6ef660226e8e6a5cd79639e0b8d27c.bin",
@@ -190,12 +213,12 @@
       "kind": "pcr_compatibility_mirror",
       "last_success": {
         "bytes": 92397,
-        "observed_at": "2026-11-07T18:01:54.888319Z",
+        "observed_at": "2026-11-08T18:20:39.471083Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-legacy-pcrDevHistory.json-07b20dd3506923a5284fc026c94e27da0a6ef660226e8e6a5cd79639e0b8d27c.bin",
         "sha256": "07b20dd3506923a5284fc026c94e27da0a6ef660226e8e6a5cd79639e0b8d27c"
       },
-      "observed_at": "2026-11-07T18:01:54.888319Z",
+      "observed_at": "2026-11-08T18:20:39.471083Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-legacy-pcrDevHistory.json-07b20dd3506923a5284fc026c94e27da0a6ef660226e8e6a5cd79639e0b8d27c.bin",
@@ -212,12 +235,12 @@
       "kind": "client_source_policy",
       "last_success": {
         "bytes": 16137,
-        "observed_at": "2026-11-07T18:01:55.016416Z",
+        "observed_at": "2026-11-08T18:20:39.549196Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-typescript-pcr-policy-f001d931e588c0c9b072be4b03b5b54adc94c8f82443b1bc616f7c7c87cb65fb.bin",
         "sha256": "f001d931e588c0c9b072be4b03b5b54adc94c8f82443b1bc616f7c7c87cb65fb"
       },
-      "observed_at": "2026-11-07T18:01:55.016416Z",
+      "observed_at": "2026-11-08T18:20:39.549196Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-typescript-pcr-policy-f001d931e588c0c9b072be4b03b5b54adc94c8f82443b1bc616f7c7c87cb65fb.bin",
@@ -234,12 +257,12 @@
       "kind": "client_source_policy",
       "last_success": {
         "bytes": 21909,
-        "observed_at": "2026-11-07T18:01:55.153414Z",
+        "observed_at": "2026-11-08T18:20:39.608540Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-rust-pcr-policy-03f9d8fd5dd944506a90ece4e2bb620a65a8406ed307b063d1456a3245931cd6.bin",
         "sha256": "03f9d8fd5dd944506a90ece4e2bb620a65a8406ed307b063d1456a3245931cd6"
       },
-      "observed_at": "2026-11-07T18:01:55.153414Z",
+      "observed_at": "2026-11-08T18:20:39.608540Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-rust-pcr-policy-03f9d8fd5dd944506a90ece4e2bb620a65a8406ed307b063d1456a3245931cd6.bin",
@@ -256,12 +279,12 @@
       "kind": "client_source_policy",
       "last_success": {
         "bytes": 1255,
-        "observed_at": "2026-11-07T18:01:55.259092Z",
+        "observed_at": "2026-11-08T18:20:39.666970Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/maple-research-client-config-646fa8962420650e74df69efa9a5e4df480a56d9a4a23ab0fca5297b562d428f.bin",
         "sha256": "646fa8962420650e74df69efa9a5e4df480a56d9a4a23ab0fca5297b562d428f"
       },
-      "observed_at": "2026-11-07T18:01:55.259092Z",
+      "observed_at": "2026-11-08T18:20:39.666970Z",
       "provider": "maple",
       "raw_base": "data/references/observations",
       "raw_path": "raw/maple-research-client-config-646fa8962420650e74df69efa9a5e4df480a56d9a4a23ab0fca5297b562d428f.bin",
@@ -278,16 +301,16 @@
       "kind": "manifest",
       "last_success": {
         "bytes": 5992,
-        "observed_at": "2026-11-07T18:01:55.389214Z",
+        "observed_at": "2026-11-08T18:20:39.727184Z",
         "raw_base": "data/references/observations",
-        "raw_path": "raw/privatemode-manifest-ac2bb4c5dc2aba45bdff1a7f44b8e9ad2f2b4666c5957f54d9a821ac596dca40.bin",
-        "sha256": "ac2bb4c5dc2aba45bdff1a7f44b8e9ad2f2b4666c5957f54d9a821ac596dca40"
+        "raw_path": "raw/privatemode-manifest-5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1.bin",
+        "sha256": "5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1"
       },
-      "observed_at": "2026-11-07T18:01:55.389214Z",
+      "observed_at": "2026-11-08T18:20:39.727184Z",
       "provider": "privatemode",
       "raw_base": "data/references/observations",
-      "raw_path": "raw/privatemode-manifest-ac2bb4c5dc2aba45bdff1a7f44b8e9ad2f2b4666c5957f54d9a821ac596dca40.bin",
-      "sha256": "ac2bb4c5dc2aba45bdff1a7f44b8e9ad2f2b4666c5957f54d9a821ac596dca40",
+      "raw_path": "raw/privatemode-manifest-5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1.bin",
+      "sha256": "5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1",
       "source_id": "privatemode-manifest",
       "status": "observed",
       "url": "https://cdn.confidential.cloud/privatemode/v2/manifest.json",
@@ -300,12 +323,12 @@
       "kind": "allowlist",
       "last_success": {
         "bytes": 65973,
-        "observed_at": "2026-11-07T18:01:55.904966Z",
+        "observed_at": "2026-11-08T18:20:40.198760Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/confidential-ai-allowlist-251eaf57d70dda5b2f6e292bf898cb339993a81a99381d195d45f580708da113.bin",
         "sha256": "251eaf57d70dda5b2f6e292bf898cb339993a81a99381d195d45f580708da113"
       },
-      "observed_at": "2026-11-07T18:01:55.904966Z",
+      "observed_at": "2026-11-08T18:20:40.198760Z",
       "provider": "confidential-ai",
       "raw_base": "data/references/observations",
       "raw_path": "raw/confidential-ai-allowlist-251eaf57d70dda5b2f6e292bf898cb339993a81a99381d195d45f580708da113.bin",
@@ -322,12 +345,12 @@
       "kind": "release_metadata",
       "last_success": {
         "bytes": 160472,
-        "observed_at": "2026-11-07T18:01:56.118184Z",
+        "observed_at": "2026-11-08T18:20:40.480040Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/confidential-ai-releases-ddf0eeabec35beee43bcbcf8b65712c43d32d399bbcf7a27c24d8eeac436fe54.bin",
         "sha256": "ddf0eeabec35beee43bcbcf8b65712c43d32d399bbcf7a27c24d8eeac436fe54"
       },
-      "observed_at": "2026-11-07T18:01:56.118184Z",
+      "observed_at": "2026-11-08T18:20:40.480040Z",
       "provider": "confidential-ai",
       "raw_base": "data/references/observations",
       "raw_path": "raw/confidential-ai-releases-ddf0eeabec35beee43bcbcf8b65712c43d32d399bbcf7a27c24d8eeac436fe54.bin",
@@ -344,12 +367,12 @@
       "kind": "observed_release_metadata",
       "last_success": {
         "bytes": 7318,
-        "observed_at": "2026-11-07T18:01:56.416259Z",
+        "observed_at": "2026-11-08T18:20:40.694549Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/confidential-ai-observed-release-5bd314d094d6e3798bc75024afcf1e56360d260c03854fe94c056ffa2f433303.bin",
         "sha256": "5bd314d094d6e3798bc75024afcf1e56360d260c03854fe94c056ffa2f433303"
       },
-      "observed_at": "2026-11-07T18:01:56.416259Z",
+      "observed_at": "2026-11-08T18:20:40.694549Z",
       "provider": "confidential-ai",
       "raw_base": "data/references/observations",
       "raw_path": "raw/confidential-ai-observed-release-5bd314d094d6e3798bc75024afcf1e56360d260c03854fe94c056ffa2f433303.bin",
@@ -360,16 +383,16 @@
       "verification": "not_performed"
     },
     {
-      "bytes": 17112,
+      "bytes": 17026,
       "final_url": "https://privateinference.gg/v1/models",
       "http_status": 200,
       "kind": "model_catalog",
       "last_success": {
-        "bytes": 17112,
-        "observed_at": "2026-11-07T18:01:56.571238Z",
+        "bytes": 17026,
+        "observed_at": "2026-11-08T18:20:40.794358Z",
         "raw_base": "data/references/observations",
-        "raw_path": "raw/private-inference-catalog-47eb6ac71c5366ab59d6b5d9f19e35124a7c57a786f4517ddc26aa3fb866d68e.bin",
-        "sha256": "47eb6ac71c5366ab59d6b5d9f19e35124a7c57a786f4517ddc26aa3fb866d68e"
+        "raw_path": "raw/private-inference-catalog-d91809a9755eb0077dbef1f9565106999ce7f4dcef8d364b9124d62b156b1df3.bin",
+        "sha256": "d91809a9755eb0077dbef1f9565106999ce7f4dcef8d364b9124d62b156b1df3"
       },
       "model_ids": [
         "anthropic/claude-fable-5.1",
@@ -397,12 +420,12 @@
         "x-ai/grok-4.7",
         "z-ai/glm-5.3-flash"
       ],
-      "observed_at": "2026-11-07T18:01:56.571238Z",
+      "observed_at": "2026-11-08T18:20:40.794358Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
-      "raw_path": "raw/private-inference-catalog-47eb6ac71c5366ab59d6b5d9f19e35124a7c57a786f4517ddc26aa3fb866d68e.bin",
-      "semantic_sha256": "8871f7b45d865bac6f3ea275602c64e0f00a721f4da872a748a738512fdeab9d",
-      "sha256": "47eb6ac71c5366ab59d6b5d9f19e35124a7c57a786f4517ddc26aa3fb866d68e",
+      "raw_path": "raw/private-inference-catalog-d91809a9755eb0077dbef1f9565106999ce7f4dcef8d364b9124d62b156b1df3.bin",
+      "semantic_sha256": "4b4c4a3018ba5b98f0bbf98ae1cc55d5a2a9ac5940406ced39f7635c1e7be46f",
+      "sha256": "d91809a9755eb0077dbef1f9565106999ce7f4dcef8d364b9124d62b156b1df3",
       "source_id": "private-inference-catalog",
       "status": "observed",
       "url": "https://privateinference.gg/v1/models",
@@ -415,12 +438,12 @@
       "kind": "browser_entrypoint",
       "last_success": {
         "bytes": 55349,
-        "observed_at": "2026-11-07T18:01:57.140085Z",
+        "observed_at": "2026-11-08T18:20:41.166122Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/private-inference-chat-html-4363bcce6da9fda8b015004e119a3f540c181aa188921a6d77c057bb16f50772.bin",
         "sha256": "4363bcce6da9fda8b015004e119a3f540c181aa188921a6d77c057bb16f50772"
       },
-      "observed_at": "2026-11-07T18:01:57.140085Z",
+      "observed_at": "2026-11-08T18:20:41.166122Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
       "raw_path": "raw/private-inference-chat-html-4363bcce6da9fda8b015004e119a3f540c181aa188921a6d77c057bb16f50772.bin",
@@ -437,12 +460,12 @@
       "kind": "deployed_chat_entry_module",
       "last_success": {
         "bytes": 858423,
-        "observed_at": "2026-11-07T18:01:57.358334Z",
+        "observed_at": "2026-11-08T18:20:41.324148Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/private-inference-chat-main-21a63e32e8d146f9470aa459f9d7441cd0c54366947af5b9b92785cc7bb8832a.bin",
         "sha256": "21a63e32e8d146f9470aa459f9d7441cd0c54366947af5b9b92785cc7bb8832a"
       },
-      "observed_at": "2026-11-07T18:01:57.358334Z",
+      "observed_at": "2026-11-08T18:20:41.324148Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
       "raw_path": "raw/private-inference-chat-main-21a63e32e8d146f9470aa459f9d7441cd0c54366947af5b9b92785cc7bb8832a.bin",
@@ -459,12 +482,12 @@
       "kind": "deployed_private_verifier_module",
       "last_success": {
         "bytes": 66437,
-        "observed_at": "2026-11-07T18:01:57.500928Z",
+        "observed_at": "2026-11-08T18:20:41.406720Z",
         "raw_base": "data/references/observations",
         "raw_path": "raw/private-inference-browser-verifier-c8577b6d734756c33d6f48bd6d375ba5f4ce36d09e1c55da7e0baf783e0b3780.bin",
         "sha256": "c8577b6d734756c33d6f48bd6d375ba5f4ce36d09e1c55da7e0baf783e0b3780"
       },
-      "observed_at": "2026-11-07T18:01:57.500928Z",
+      "observed_at": "2026-11-08T18:20:41.406720Z",
       "provider": "private-inference",
       "raw_base": "data/references/observations",
       "raw_path": "raw/private-inference-browser-verifier-c8577b6d734756c33d6f48bd6d375ba5f4ce36d09e1c55da7e0baf783e0b3780.bin",

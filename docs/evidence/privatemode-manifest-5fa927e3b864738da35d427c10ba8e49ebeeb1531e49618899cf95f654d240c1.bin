@@ -1,0 +1,129 @@
+{
+  "Policies": {
+    "2e4247564198b08060ff49d1ed7822de22a31edd1cbd7034e610c7e9cb6d9f95": {
+      "SANs": [
+        "root",
+        "secret-service",
+        "secret-service-internal.continuum-a225c8.svc.cluster.local",
+        "*.secret-service-headless.continuum-a225c8.svc.cluster.local"
+      ],
+      "WorkloadSecretID": "apps/v1/StatefulSet/continuum-a225c8/secret-service"
+    },
+    "382f8395b01ff5203de61f71dbc29044a00177263c0740c17e84f941d83ab8c7": {
+      "SANs": [
+        "continuum-etcd-client",
+        "workload-whisper-qwen3-voxtral"
+      ],
+      "WorkloadSecretID": "apps/v1/Deployment/continuum-a225c8/workload-whisper-qwen3-voxtral"
+    },
+    "539dda33477fdbf4ae248556fc489450ba4c9f9c0b3bcc07f8f1b9ef848760c3": {
+      "SANs": [
+        "continuum-etcd-client",
+        "workload-deepseek-ocr-2"
+      ],
+      "WorkloadSecretID": "apps/v1/Deployment/continuum-a225c8/workload-deepseek-ocr-2"
+    },
+    "67cb2afc964dee742d9ee007824a989906d52a55b6d7a39c67f929f5e45fdb0d": {
+      "SANs": [
+        "continuum-etcd-client",
+        "workload-gpt-oss-120b"
+      ],
+      "WorkloadSecretID": "apps/v1/Deployment/continuum-a225c8/workload-gpt-oss-120b"
+    },
+    "8db3cfedc949f9a1e0702f5ca19ac96eb935fd1ff9cff6a0b2a94d1ceff9575d": {
+      "SANs": [
+        "continuum-etcd-client",
+        "workload-glm-5-3"
+      ],
+      "WorkloadSecretID": "apps/v1/Deployment/continuum-a225c8/workload-glm-5-3"
+    },
+    "abb78b0c3985a8eeb63c86f9ec9b544abeddadaa2868737379e18c531d906360": {
+      "SANs": [
+        "continuum-etcd-client",
+        "workload-glm-5-3-flash"
+      ],
+      "WorkloadSecretID": "apps/v1/Deployment/continuum-a225c8/workload-glm-5-3-flash"
+    },
+    "b6b4a3d3a25a40e76c881decc848da766e46e5accf0ce71cf5c64a651d393529": {
+      "SANs": [
+        "coordinator"
+      ],
+      "WorkloadSecretID": "apps/v1/StatefulSet/continuum-a225c8/coordinator",
+      "Role": "coordinator"
+    },
+    "f62cb117f1f9e2ba8dfca0b67db2e04c8dde069d6a7ed59a560c1912c6561856": {
+      "SANs": [
+        "continuum-etcd-client",
+        "unstructured-api"
+      ],
+      "WorkloadSecretID": "apps/v1/Deployment/continuum-a225c8/unstructured-api"
+    }
+  },
+  "ReferenceValues": {
+    "snp": [
+      {
+        "Platform": "Metal-QEMU-SNP-GPU",
+        "ProductName": "Genoa",
+        "TrustedMeasurement": "e9a2ec65b58870be28896100a881427af162c877521ea647b882234dcc8983f31232d4cad2743c86ee4d2a0a8c9971a7",
+        "APEIP": "0080b004",
+        "MinimumTCB": {
+          "BootloaderVersion": 12,
+          "TEEVersion": 0,
+          "SNPVersion": 28,
+          "MicrocodeVersion": 88
+        },
+        "GuestPolicy": {
+          "ABIMinor": 58,
+          "ABIMajor": 1,
+          "SMT": false,
+          "MigrateMA": false,
+          "Debug": false,
+          "SingleSocket": true,
+          "CXLAllowed": false,
+          "MemAES256XTS": true,
+          "RAPLDis": false,
+          "CipherTextHidingDRAM": false,
+          "PageSwapDisable": true
+        },
+        "PlatformInfo": {
+          "SMTEnabled": false,
+          "ECCEnabled": true,
+          "AliasCheckComplete": true
+        },
+        "MinimumMitigationVector": 15,
+        "AllowedChipIDs": [
+          "06B3977C15C8E92E9897EBC3A0BE1E6EF6E2E70F9B57A327854F8E735A608EC1E528821C2FA770E0DD175CFD421E492C45A164457C4C669674B695368C08D36D",
+          "11495177E7796396BC5E4B8F239727AE12D8E8B0A7C2D3866D14ADC385D931DB6EC9AC27810CF8B8593E6C278C16DEA882036ABBF6820BC4EBF10E9A8F44FBF9",
+          "1886AFB73CF8656295B87CC64457DF576C43F95F00B713B7F79F88239582CF423EFD9023E211AFEC216696078D30F39D13149699F184B4B30411F91FAF3F0D86",
+          "5050718946CB028EAB9D7BB648468B4807F25229C3EE639B70F1D80251EF19CC18D3E47A991178A1A841112461D297E522F4E9C166EB20E612AB35F60E29FB1C"
+        ]
+      }
+    ],
+    "tdx": [
+      {
+        "Platform": "Metal-QEMU-TDX-GPU",
+        "MinTCBEvaluationDataNumber": 21,
+        "MrTd": "4cbcbc26afb42fb85650ab12dfaa2de47a98c0a3603495c21901902afd907bcbb61a1fa035a5502c4f1726e458c3ca7a",
+        "MrSeam": "ab62561a173acbd18ee50ff37750db44184c6cf5e886df74247cc575e163b04c34b9e18374757c235affa614d4127f6b",
+        "Rtmrs": [
+          "3a57ae743d61d8431a9996cfeb262ee920de9072295e53352959b96c6dee54b46bf251291efb428de418a571d11a5244",
+          "a79021d3cc13952efd0d1c2888269b7e7a21fd72a640f51530212e90a0aa4e2dfdafe177d599f928cdd508e38c6dec6b",
+          "6793f01eb1bccb5bdae186d92e41ac83155a3e6d5f2e480bece4ea6f4b2bd1f9d59f181fd076e610d4ea02d8c09a7221",
+          "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "Xfam": "e702060000000000",
+        "AllowedPIIDs": [
+          "0c47f6f7587ddb0cfbb0fed9e4537ea7",
+          "6454aa54f4f7490d2b946b6a3c20742c",
+          "8aa932ac20e69d905aa0a5deb1666ab7"
+        ],
+        "MemoryIntegrity": false,
+        "SMTDisabled": false,
+        "StaticPlatform": false
+      }
+    ]
+  },
+  "SeedshareOwnerPubKeys": [
+    "3082020a0282020100bbd40e4d660476f913f60d0c2660700de25e08e2c7ab71073287ea9ae255f54d050f22a972c63c6a3981940a964672d3e4b4dff2620cae9865b8b942e3f8138ffb428a291d173a76b13ffb6b492d0d991056cc28e770da8ba59db088c149e86db35a9423dd1be4d4c73b6f553169cf3c441fc3419988e47e575195a86776ca103748b9682a860377beb28668f2ec691f42dc05c84f1886677b3d3eedba2c804d66ecdb1882570512dcf0d146138cca02ca4400996804ec3f5cb829a3728824077103ea6efbb011c819e531f140d8bc1a15f4c18209340b10b7436ab90554abc8791c3430972f317bcd410aaf6fc0d1d08ddce1aa482585e847f186ebcc3250e510a1f54112e3725ce9394c2fda834cdce2ef1f757fb858830a40fb79de60c522c6f52aa0549772c70bd159797dfc4eb878e897ad3a12aff41192e087c2df7c36772c9950a1cc3b99b42861ff16ac836e2d5b7e31e4fef48e284f2c2eccb98269f934a3c0da27b5eeb00fcd0bc8b302f2ed0e8752412031587cbcd720e496e8ab8eb5cfbdaa32c50a599f737af54d757aa7a431209ec112dfd96f53231867948136bcea985808891010e281805070d46196e14476b9da98e66f0cb9639494557d6cb9d89e7a838f0f30d953976b769db8738d0909cca20bf1cb8bfece7fdc3c539b7bff579f2f182bd66c882452f1c0577fcc95521da6a8bc3bace89cff9daf610203010001"
+  ]
+}
