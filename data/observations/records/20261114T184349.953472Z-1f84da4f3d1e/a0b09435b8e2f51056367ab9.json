@@ -1,0 +1,182 @@
+{
+  "captured_at": "2026-11-14T18:44:10Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "chutes-tee",
+      "details": {
+        "cert_spki_bound": true,
+        "debug_disabled": true,
+        "golden_set_sha256": "c963886235920712a731f98bb2fcdcc4063c2bef6375aa9a9af89668aae90d1b",
+        "gpu_evidence_count": 8,
+        "instance_id": "213ce0fe-7c39-4518-8dc5-bf2b6f8fe903",
+        "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+        "mrtd_audited": true,
+        "mrtd_in_golden_set": true,
+        "raw_evidence_ref": "observations/evidence/sha256/6de975635f39551504cd17dd9027c75e7243b90be92badb3917ff6ad6febcc00.json",
+        "raw_evidence_sha256": "6de975635f39551504cd17dd9027c75e7243b90be92badb3917ff6ad6febcc00",
+        "shape": "chutes-tee",
+        "verification_reason": "serving code and selected model are not measured or verified",
+        "verification_status": "not_checked"
+      },
+      "error": null,
+      "latency_s": 3.94,
+      "model": "DeepSeek-V3.2-TEE",
+      "provider": "chutes",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": null,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": null,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": null,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": false,
+        "sessions_publish_evidence_digests": null,
+        "tdx_verified": true,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "213ce0fe-7c39-4518-8dc5-bf2b6f8fe903",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "d9wx1dbBsPSH6EO11PdGU1V4F8cQZ9ROMWul66Axf4kNliuZKUurj6ZAFAZgUcab+icP7marHDsyk4eRv7mH6CEe3SNnOPt8QCq1dZwvsUJ0grG90DN4rsUCx1papeo16Qs53/QsIFwcSsC6wkoYjLWj85yNKadRPgtKP7aRunh88ghqi8mhihOpdJM+u8lS9jR4taZck8K2Ahp6LHdncnp6dXSJNZcFWPGQb0pFBRRMHyke8lxk3tK1kko+E4q0Kdl7YbEZodK5l0SBgXKQLnkv6ls14yIMLLN1Y1xgjsu7g6rNOQhKkfi99NPDDrqe64geS7LJsJuywOg9U+lruMJqgeynmikYY/wJjobEHTiwXMIlXxKeCvLA3DpKnMdA2OyAdJyJZiUWK5FblDMDzxJbJjd/OzKwGAhB0AhRAzNpNAscbBWTPVoQy3VVJPNydpVLEZioJ7Sgyxo1AGmPtyezJDc0BsxncqieBZrBGcVKJfjPKYWrqHal4sKkojhsKinAzecDBYFEs3Iyn0iV+4FH+iEZbyE/+nKCDmmHXoq4mJVeeHVOSCMd9Um6dRAjRfh69RdINkpQf1V7v5xjCezERLK40pYYDLDASDkobENWDWcSAZty9BvPbRl94+Z/qYOaRNy0K4Y9WzC9WsfHS0pvUgVZ8AQLYDdYFbVWg0BaZUK/LTdFZ1WYgZckCGO4wwFyCPCej7p/t7XPhAk9texYhkq6BFiRw2WL+BFp+EQYg5qWlQDGjfMiabAny+VN0kZ9kVdwR/BpVyeLIsJYs1Y6YFGT3ehE6LyAMvB8ZMJBG3PNHrBxBthtv2BKrfwx6JFy9aUEyZOxDEa3E3yx+qQt+GSXI5jCCCJT6nlUdyS+o1ChozQ5ZJrFd4R9UrtuU9Znf0dAbLmbubkgYVUdqoEhnQasp+Z07+V6rIAFHXvK0vum77RyEVvMzajHsBuZOCkh9lIab8iCYaqZKHM6ehmM8Js8vsoaGdB//fRlaMTDtKoVOpFTiuKs5HWSExFMciWwPRhngzZJY2UPXqJNq4M/NoCLoEnBZjp9Ved85piJeQc3XabNRjLIu2JwrCt9vfvGrWsEVIgta6V1/EabbEGuYleFDONGZHSqU1NASXVeZUZ6JFtg5CCjZxOz98CHHsA9NUyoRplv4HmVqAc3zxye7pdzsauTKBISEtOlbfPA2fpPIxFCKpA1qNlGBFC0owCmErKCh0WfrpsxI8qT9ZNBd5VRgjR3tem0m/WHWPdN6bStYUZofoM11DJ0X9XPrRCfYmdRX+y7HhQMuUJaRWcT8HTG/lahDDIEP9daJ7g5TOK0EUsAFbhf+0stvJPMx1d+ZKga/QRt7WiW/KpSeJvOjQMiZ6N32CsMUWTH+1KyI1m9tZGZU/MPmOiGX7xrOzETl+eDSpfMnvfIlLOtyByCwlq9SUvIwJBGHZaRH5Y+83k4/QY3oMIi6zyvual160SB0bdHfOoegjZ9/bsm/lAIUJu7Q9EoFuddCtQf5sygGVsShOCTE0h5F+MZXIcDgqUYYnyNS9LYS7z/8Anw6DOno8ZPZkji/4avyN+47e0=",
+      "valid": false,
+      "verified_at": "2026-11-14T18:44:10Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "c28e51944feed5c2f6b317ed318cd222af7f3d21d68ff5cd9ec25b258c0effc4",
+    "raw_evidence_ref": "observations/evidence/sha256/6de975635f39551504cd17dd9027c75e7243b90be92badb3917ff6ad6febcc00.json",
+    "raw_evidence_sha256": "6de975635f39551504cd17dd9027c75e7243b90be92badb3917ff6ad6febcc00",
+    "raw_evidence_status": "stored_separately",
+    "stored_report_sha256": "d6fab18952eb53e480bfe0a35abed4e3d0ee3d0f5cd3e6e2953eb4cf76244e6d"
+  },
+  "identities": [
+    {
+      "component_id": "chutes/instance",
+      "kind": "mrtd",
+      "model_scope": "DeepSeek-V3.2-TEE",
+      "value": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
+    }
+  ],
+  "identity_trust": "untrusted_report",
+  "instance_id": "213ce0fe-7c39-4518-8dc5-bf2b6f8fe903",
+  "legacy": false,
+  "model": "DeepSeek-V3.2-TEE",
+  "observation_id": "20261114T184349.953472Z-1f84da4f3d1e/a0b09435b8e2f51056367ab9",
+  "observer": "daily-probe",
+  "outcome": "not_checked",
+  "policy_revision": "unknown",
+  "provider": "chutes",
+  "reason": "verification_incomplete",
+  "reason_detail": "serving code and selected model are not measured or verified",
+  "route_id": "chutes/DeepSeek-V3.2-TEE",
+  "run_id": "20261114T184349.953472Z-1f84da4f3d1e",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "7c9b07f0594960797724b3782c31a6cabea06ed268f1cde64fbd6aa91ac81785"
+}

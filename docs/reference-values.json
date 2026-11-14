@@ -63278,6 +63278,202 @@
         "removed": 1,
         "unit": "captured document lines, not deployed code LOC"
       }
+    },
+    {
+      "added": [
+        "2643bc7ae47ecf4cf84509a647d2c2cc3bcacad95a87b8a73d543e6c48ad3b22"
+      ],
+      "at": "2026-11-14T18:43:49.953509Z",
+      "code_delta": null,
+      "evidence": "data/snapshots/2026-11-14.json",
+      "id": "b283d4d40dfce738ac2f",
+      "kind": "new set",
+      "lane": "near-ai|near-ai/gateway|compose_hash|reported workload",
+      "new": [
+        "2643bc7ae47ecf4cf84509a647d2c2cc3bcacad95a87b8a73d543e6c48ad3b22"
+      ],
+      "old": [
+        "7c15cbaa24e4e9aa70f4b1aae215e55268d08f64dbadbbcdd791287de191a255"
+      ],
+      "previous_at": "2026-11-13T20:28:42.542251Z",
+      "previous_evidence": "data/snapshots/2026-11-13.json",
+      "provider": "near-ai",
+      "removed": [
+        "7c15cbaa24e4e9aa70f4b1aae215e55268d08f64dbadbbcdd791287de191a255"
+      ],
+      "reviews": [],
+      "scope": "historical adapter report; not independently verified",
+      "text_delta": null
+    },
+    {
+      "added": [
+        "4cde8bc2e09b78452a2b7c6706a4072c7a46417d56eef8e75ccd6b6d91640ffb"
+      ],
+      "at": "2026-11-14T18:43:49.953509Z",
+      "code_delta": null,
+      "evidence": "data/snapshots/2026-11-14.json",
+      "id": "e01c16fdb1a7fe11303b",
+      "kind": "new set",
+      "lane": "near-ai|near-ai/cloud-api|image_digest|reported workload",
+      "new": [
+        "4cde8bc2e09b78452a2b7c6706a4072c7a46417d56eef8e75ccd6b6d91640ffb"
+      ],
+      "old": [
+        "1b34e13125f3366f60df9612deaf5c0d6df17d83d859545b30192a2aede5b6f5"
+      ],
+      "previous_at": "2026-11-13T20:28:42.542251Z",
+      "previous_evidence": "data/snapshots/2026-11-13.json",
+      "provider": "near-ai",
+      "removed": [
+        "1b34e13125f3366f60df9612deaf5c0d6df17d83d859545b30192a2aede5b6f5"
+      ],
+      "reviews": [],
+      "scope": "historical adapter report; not independently verified",
+      "text_delta": null
+    },
+    {
+      "added": [
+        "d63eb5cf91cb3079fe25a848573a4d0e9d869f462dab4f71fd02bdb372f8e833"
+      ],
+      "at": "2026-11-14T18:44:15.234656Z",
+      "code_delta": null,
+      "evidence": "data/references/observations/raw/privatemode-manifest-d63eb5cf91cb3079fe25a848573a4d0e9d869f462dab4f71fd02bdb372f8e833.bin",
+      "id": "b25a229c78335a3f9581",
+      "kind": "new set",
+      "lane": "privatemode|privatemode-manifest|document SHA-256|published document",
+      "new": [
+        "d63eb5cf91cb3079fe25a848573a4d0e9d869f462dab4f71fd02bdb372f8e833"
+      ],
+      "old": [
+        "5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1"
+      ],
+      "previous_at": "2026-11-13T20:29:09.642546Z",
+      "previous_evidence": "data/references/observations/raw/privatemode-manifest-5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1.bin",
+      "provider": "privatemode",
+      "removed": [
+        "5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1"
+      ],
+      "reviews": [],
+      "scope": "publication bytes only; no signature or runtime verification",
+      "text_delta": {
+        "added": 43,
+        "removed": 43,
+        "unit": "captured document lines, not deployed code LOC"
+      }
+    },
+    {
+      "added": [
+        "/Policies/policy-key=0d738b8dbf259a85d176381626d8bcf04f1319b5539aa9a9a363efc73d4d3fba",
+        "/Policies/policy-key=10a2265576c135aedcd427e3b66772a4ff4f4e65a9546771270d6b8cde45a715",
+        "/Policies/policy-key=2ca27d0c361dfe4e098a9d650f013729113d0fde3496612eaee959cd47e7b7dc",
+        "/Policies/policy-key=3ce42aa373d6bede62c11d8cd22a74f899af62c79da5d303f0adc4a3b1a37ac3",
+        "/Policies/policy-key=69b8c49ca751575b9ef0128479932b53a63e38479e6aeed5b2e8319aa2a28457",
+        "/Policies/policy-key=76935b0a1e35bc078815c8439ecf9f8aab336e04c40c56fd4c6cffcd057804e8",
+        "/Policies/policy-key=d1e6c4f1bf1388244d04d587d45913133ef9dfaaac5f1b2149823abf14226c19",
+        "/Policies/policy-key=f095242202b4ff2549344ea9674601515e1eecaedd7cc6ae80ac8ac5e903b151",
+        "/ReferenceValues/snp/*/TrustedMeasurement=a25667a52d291e4595100ae13a57b334f2aa2dd218fd6328b7bb6db634b2e63b3540e87e2ee9540b2c00ebfdbd3c39b2",
+        "/ReferenceValues/tdx/*/Rtmrs/*=3f935d9ee9a6bff4c997fef1b133ee4444bcb9fc1f0781f7e8026d9188c3f5c6d718c473510d8ed2303da3763636f1f3",
+        "/SeedshareOwnerPubKeys/*=3082020a02820201009eb7f023da4fd8ed56e6e1963e53d6434840259bcc2e9f90ce6414d9dac79be36fef1d542e188a5864b6bf4495534c53e5d29880bd053002957d5f80317e8da44a5aca09ab99c9d7ad7820d922b000488f51531e3ad4e981aaca1629cdec436ae55d8953605af919fa4e069610989d8ee146d8a55c89bb5166f98115721f881c955fb03a51bb5b7829da80a67f0ca75f659750ba91f07255b644b8814e7cacd85fdbf34c24933bd3ce61e4e1088ce388f28479ac983d5c7535e1e787c82686601a92c1bd0a2b2e0be549d55afba32392bb22e28f62b150d9dddd2e31b153e074713a739cd12aa4f66b2bf51c9910af6f2d56d470d906fd88b94f3e8942fcc68ad4a4b0d7809f611983ffba051951d2845f761948f9cd347f843dac3b3b4fd5b1cb0b42f6d663e548ee2bd8095f8e2547c462471dc129a21cf3b8913c12ca7f7edbee8b741d124b688a190e1c38402eb78199fc8648fb04580d87cca1c4d5194760eaf35fe66cc80b4c46627c065eae9a9478a3d2eb02d0c9dbe0fc5a4452427abf31648af76112f8c23d59f38e9319828a813f7447c1eda60847de41233628d1a0055e951329c412b59e96bef11159ad960d886fe6c4e78c58b11055c2539d38f8ac75bbae7af6b36de7df79864155872a7d9b518255283e1ac516dc35d7786d4347768dd69e68a248ccebf80f7dd57da1aea4c67fd64fba2cdae0fde74bf6430203010001"
+      ],
+      "at": "2026-11-14T18:44:15.234656Z",
+      "code_delta": null,
+      "evidence": "data/references/observations/raw/privatemode-manifest-d63eb5cf91cb3079fe25a848573a4d0e9d869f462dab4f71fd02bdb372f8e833.bin",
+      "id": "fd52f90c9f928a359b46",
+      "kind": "new set",
+      "lane": "privatemode|privatemode-manifest|reference entries|published reference set",
+      "new": [
+        "/Policies/policy-key=0d738b8dbf259a85d176381626d8bcf04f1319b5539aa9a9a363efc73d4d3fba",
+        "/Policies/policy-key=10a2265576c135aedcd427e3b66772a4ff4f4e65a9546771270d6b8cde45a715",
+        "/Policies/policy-key=2ca27d0c361dfe4e098a9d650f013729113d0fde3496612eaee959cd47e7b7dc",
+        "/Policies/policy-key=3ce42aa373d6bede62c11d8cd22a74f899af62c79da5d303f0adc4a3b1a37ac3",
+        "/Policies/policy-key=69b8c49ca751575b9ef0128479932b53a63e38479e6aeed5b2e8319aa2a28457",
+        "/Policies/policy-key=76935b0a1e35bc078815c8439ecf9f8aab336e04c40c56fd4c6cffcd057804e8",
+        "/Policies/policy-key=d1e6c4f1bf1388244d04d587d45913133ef9dfaaac5f1b2149823abf14226c19",
+        "/Policies/policy-key=f095242202b4ff2549344ea9674601515e1eecaedd7cc6ae80ac8ac5e903b151",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=06B3977C15C8E92E9897EBC3A0BE1E6EF6E2E70F9B57A327854F8E735A608EC1E528821C2FA770E0DD175CFD421E492C45A164457C4C669674B695368C08D36D",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=11495177E7796396BC5E4B8F239727AE12D8E8B0A7C2D3866D14ADC385D931DB6EC9AC27810CF8B8593E6C278C16DEA882036ABBF6820BC4EBF10E9A8F44FBF9",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=1886AFB73CF8656295B87CC64457DF576C43F95F00B713B7F79F88239582CF423EFD9023E211AFEC216696078D30F39D13149699F184B4B30411F91FAF3F0D86",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=5050718946CB028EAB9D7BB648468B4807F25229C3EE639B70F1D80251EF19CC18D3E47A991178A1A841112461D297E522F4E9C166EB20E612AB35F60E29FB1C",
+        "/ReferenceValues/snp/*/TrustedMeasurement=a25667a52d291e4595100ae13a57b334f2aa2dd218fd6328b7bb6db634b2e63b3540e87e2ee9540b2c00ebfdbd3c39b2",
+        "/ReferenceValues/tdx/*/MrSeam=ab62561a173acbd18ee50ff37750db44184c6cf5e886df74247cc575e163b04c34b9e18374757c235affa614d4127f6b",
+        "/ReferenceValues/tdx/*/MrTd=4cbcbc26afb42fb85650ab12dfaa2de47a98c0a3603495c21901902afd907bcbb61a1fa035a5502c4f1726e458c3ca7a",
+        "/ReferenceValues/tdx/*/Rtmrs/*=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "/ReferenceValues/tdx/*/Rtmrs/*=3a57ae743d61d8431a9996cfeb262ee920de9072295e53352959b96c6dee54b46bf251291efb428de418a571d11a5244",
+        "/ReferenceValues/tdx/*/Rtmrs/*=3f935d9ee9a6bff4c997fef1b133ee4444bcb9fc1f0781f7e8026d9188c3f5c6d718c473510d8ed2303da3763636f1f3",
+        "/ReferenceValues/tdx/*/Rtmrs/*=a79021d3cc13952efd0d1c2888269b7e7a21fd72a640f51530212e90a0aa4e2dfdafe177d599f928cdd508e38c6dec6b",
+        "/SeedshareOwnerPubKeys/*=3082020a02820201009eb7f023da4fd8ed56e6e1963e53d6434840259bcc2e9f90ce6414d9dac79be36fef1d542e188a5864b6bf4495534c53e5d29880bd053002957d5f80317e8da44a5aca09ab99c9d7ad7820d922b000488f51531e3ad4e981aaca1629cdec436ae55d8953605af919fa4e069610989d8ee146d8a55c89bb5166f98115721f881c955fb03a51bb5b7829da80a67f0ca75f659750ba91f07255b644b8814e7cacd85fdbf34c24933bd3ce61e4e1088ce388f28479ac983d5c7535e1e787c82686601a92c1bd0a2b2e0be549d55afba32392bb22e28f62b150d9dddd2e31b153e074713a739cd12aa4f66b2bf51c9910af6f2d56d470d906fd88b94f3e8942fcc68ad4a4b0d7809f611983ffba051951d2845f761948f9cd347f843dac3b3b4fd5b1cb0b42f6d663e548ee2bd8095f8e2547c462471dc129a21cf3b8913c12ca7f7edbee8b741d124b688a190e1c38402eb78199fc8648fb04580d87cca1c4d5194760eaf35fe66cc80b4c46627c065eae9a9478a3d2eb02d0c9dbe0fc5a4452427abf31648af76112f8c23d59f38e9319828a813f7447c1eda60847de41233628d1a0055e951329c412b59e96bef11159ad960d886fe6c4e78c58b11055c2539d38f8ac75bbae7af6b36de7df79864155872a7d9b518255283e1ac516dc35d7786d4347768dd69e68a248ccebf80f7dd57da1aea4c67fd64fba2cdae0fde74bf6430203010001"
+      ],
+      "old": [
+        "/Policies/policy-key=2e4247564198b08060ff49d1ed7822de22a31edd1cbd7034e610c7e9cb6d9f95",
+        "/Policies/policy-key=382f8395b01ff5203de61f71dbc29044a00177263c0740c17e84f941d83ab8c7",
+        "/Policies/policy-key=539dda33477fdbf4ae248556fc489450ba4c9f9c0b3bcc07f8f1b9ef848760c3",
+        "/Policies/policy-key=67cb2afc964dee742d9ee007824a989906d52a55b6d7a39c67f929f5e45fdb0d",
+        "/Policies/policy-key=8db3cfedc949f9a1e0702f5ca19ac96eb935fd1ff9cff6a0b2a94d1ceff9575d",
+        "/Policies/policy-key=abb78b0c3985a8eeb63c86f9ec9b544abeddadaa2868737379e18c531d906360",
+        "/Policies/policy-key=b6b4a3d3a25a40e76c881decc848da766e46e5accf0ce71cf5c64a651d393529",
+        "/Policies/policy-key=f62cb117f1f9e2ba8dfca0b67db2e04c8dde069d6a7ed59a560c1912c6561856",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=06B3977C15C8E92E9897EBC3A0BE1E6EF6E2E70F9B57A327854F8E735A608EC1E528821C2FA770E0DD175CFD421E492C45A164457C4C669674B695368C08D36D",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=11495177E7796396BC5E4B8F239727AE12D8E8B0A7C2D3866D14ADC385D931DB6EC9AC27810CF8B8593E6C278C16DEA882036ABBF6820BC4EBF10E9A8F44FBF9",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=1886AFB73CF8656295B87CC64457DF576C43F95F00B713B7F79F88239582CF423EFD9023E211AFEC216696078D30F39D13149699F184B4B30411F91FAF3F0D86",
+        "/ReferenceValues/snp/*/AllowedChipIDs/*=5050718946CB028EAB9D7BB648468B4807F25229C3EE639B70F1D80251EF19CC18D3E47A991178A1A841112461D297E522F4E9C166EB20E612AB35F60E29FB1C",
+        "/ReferenceValues/snp/*/TrustedMeasurement=e9a2ec65b58870be28896100a881427af162c877521ea647b882234dcc8983f31232d4cad2743c86ee4d2a0a8c9971a7",
+        "/ReferenceValues/tdx/*/MrSeam=ab62561a173acbd18ee50ff37750db44184c6cf5e886df74247cc575e163b04c34b9e18374757c235affa614d4127f6b",
+        "/ReferenceValues/tdx/*/MrTd=4cbcbc26afb42fb85650ab12dfaa2de47a98c0a3603495c21901902afd907bcbb61a1fa035a5502c4f1726e458c3ca7a",
+        "/ReferenceValues/tdx/*/Rtmrs/*=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "/ReferenceValues/tdx/*/Rtmrs/*=3a57ae743d61d8431a9996cfeb262ee920de9072295e53352959b96c6dee54b46bf251291efb428de418a571d11a5244",
+        "/ReferenceValues/tdx/*/Rtmrs/*=6793f01eb1bccb5bdae186d92e41ac83155a3e6d5f2e480bece4ea6f4b2bd1f9d59f181fd076e610d4ea02d8c09a7221",
+        "/ReferenceValues/tdx/*/Rtmrs/*=a79021d3cc13952efd0d1c2888269b7e7a21fd72a640f51530212e90a0aa4e2dfdafe177d599f928cdd508e38c6dec6b",
+        "/SeedshareOwnerPubKeys/*=3082020a0282020100bbd40e4d660476f913f60d0c2660700de25e08e2c7ab71073287ea9ae255f54d050f22a972c63c6a3981940a964672d3e4b4dff2620cae9865b8b942e3f8138ffb428a291d173a76b13ffb6b492d0d991056cc28e770da8ba59db088c149e86db35a9423dd1be4d4c73b6f553169cf3c441fc3419988e47e575195a86776ca103748b9682a860377beb28668f2ec691f42dc05c84f1886677b3d3eedba2c804d66ecdb1882570512dcf0d146138cca02ca4400996804ec3f5cb829a3728824077103ea6efbb011c819e531f140d8bc1a15f4c18209340b10b7436ab90554abc8791c3430972f317bcd410aaf6fc0d1d08ddce1aa482585e847f186ebcc3250e510a1f54112e3725ce9394c2fda834cdce2ef1f757fb858830a40fb79de60c522c6f52aa0549772c70bd159797dfc4eb878e897ad3a12aff41192e087c2df7c36772c9950a1cc3b99b42861ff16ac836e2d5b7e31e4fef48e284f2c2eccb98269f934a3c0da27b5eeb00fcd0bc8b302f2ed0e8752412031587cbcd720e496e8ab8eb5cfbdaa32c50a599f737af54d757aa7a431209ec112dfd96f53231867948136bcea985808891010e281805070d46196e14476b9da98e66f0cb9639494557d6cb9d89e7a838f0f30d953976b769db8738d0909cca20bf1cb8bfece7fdc3c539b7bff579f2f182bd66c882452f1c0577fcc95521da6a8bc3bace89cff9daf610203010001"
+      ],
+      "previous_at": "2026-11-13T20:29:09.642546Z",
+      "previous_evidence": "data/references/observations/raw/privatemode-manifest-5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1.bin",
+      "provider": "privatemode",
+      "removed": [
+        "/Policies/policy-key=2e4247564198b08060ff49d1ed7822de22a31edd1cbd7034e610c7e9cb6d9f95",
+        "/Policies/policy-key=382f8395b01ff5203de61f71dbc29044a00177263c0740c17e84f941d83ab8c7",
+        "/Policies/policy-key=539dda33477fdbf4ae248556fc489450ba4c9f9c0b3bcc07f8f1b9ef848760c3",
+        "/Policies/policy-key=67cb2afc964dee742d9ee007824a989906d52a55b6d7a39c67f929f5e45fdb0d",
+        "/Policies/policy-key=8db3cfedc949f9a1e0702f5ca19ac96eb935fd1ff9cff6a0b2a94d1ceff9575d",
+        "/Policies/policy-key=abb78b0c3985a8eeb63c86f9ec9b544abeddadaa2868737379e18c531d906360",
+        "/Policies/policy-key=b6b4a3d3a25a40e76c881decc848da766e46e5accf0ce71cf5c64a651d393529",
+        "/Policies/policy-key=f62cb117f1f9e2ba8dfca0b67db2e04c8dde069d6a7ed59a560c1912c6561856",
+        "/ReferenceValues/snp/*/TrustedMeasurement=e9a2ec65b58870be28896100a881427af162c877521ea647b882234dcc8983f31232d4cad2743c86ee4d2a0a8c9971a7",
+        "/ReferenceValues/tdx/*/Rtmrs/*=6793f01eb1bccb5bdae186d92e41ac83155a3e6d5f2e480bece4ea6f4b2bd1f9d59f181fd076e610d4ea02d8c09a7221",
+        "/SeedshareOwnerPubKeys/*=3082020a0282020100bbd40e4d660476f913f60d0c2660700de25e08e2c7ab71073287ea9ae255f54d050f22a972c63c6a3981940a964672d3e4b4dff2620cae9865b8b942e3f8138ffb428a291d173a76b13ffb6b492d0d991056cc28e770da8ba59db088c149e86db35a9423dd1be4d4c73b6f553169cf3c441fc3419988e47e575195a86776ca103748b9682a860377beb28668f2ec691f42dc05c84f1886677b3d3eedba2c804d66ecdb1882570512dcf0d146138cca02ca4400996804ec3f5cb829a3728824077103ea6efbb011c819e531f140d8bc1a15f4c18209340b10b7436ab90554abc8791c3430972f317bcd410aaf6fc0d1d08ddce1aa482585e847f186ebcc3250e510a1f54112e3725ce9394c2fda834cdce2ef1f757fb858830a40fb79de60c522c6f52aa0549772c70bd159797dfc4eb878e897ad3a12aff41192e087c2df7c36772c9950a1cc3b99b42861ff16ac836e2d5b7e31e4fef48e284f2c2eccb98269f934a3c0da27b5eeb00fcd0bc8b302f2ed0e8752412031587cbcd720e496e8ab8eb5cfbdaa32c50a599f737af54d757aa7a431209ec112dfd96f53231867948136bcea985808891010e281805070d46196e14476b9da98e66f0cb9639494557d6cb9d89e7a838f0f30d953976b769db8738d0909cca20bf1cb8bfece7fdc3c539b7bff579f2f182bd66c882452f1c0577fcc95521da6a8bc3bace89cff9daf610203010001"
+      ],
+      "reviews": [],
+      "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
+      "text_delta": null
+    },
+    {
+      "added": [
+        "60960f1baaa3958a750ad36d65103cf7c56d1b044c3f2a1ff8b03dec078b3abd"
+      ],
+      "at": "2026-11-14T18:44:16.001798Z",
+      "code_delta": null,
+      "evidence": "data/references/observations/raw/confidential-ai-releases-60960f1baaa3958a750ad36d65103cf7c56d1b044c3f2a1ff8b03dec078b3abd.bin",
+      "id": "ac280ac151c159e1f523",
+      "kind": "new set",
+      "lane": "confidential-ai|confidential-ai-releases|document SHA-256|published document",
+      "new": [
+        "60960f1baaa3958a750ad36d65103cf7c56d1b044c3f2a1ff8b03dec078b3abd"
+      ],
+      "old": [
+        "b7053cf95f877a1249aa9969f2a68a8c673b80154b6503440ae6f92be60059a8"
+      ],
+      "previous_at": "2026-11-13T20:29:10.529373Z",
+      "previous_evidence": "data/references/observations/raw/confidential-ai-releases-b7053cf95f877a1249aa9969f2a68a8c673b80154b6503440ae6f92be60059a8.bin",
+      "provider": "confidential-ai",
+      "removed": [
+        "b7053cf95f877a1249aa9969f2a68a8c673b80154b6503440ae6f92be60059a8"
+      ],
+      "reviews": [],
+      "scope": "publication bytes only; no signature or runtime verification",
+      "text_delta": {
+        "added": 1,
+        "removed": 1,
+        "unit": "captured document lines, not deployed code LOC"
+      }
     }
   ],
   "evidence_base": "https://github.com/amiller/awesome-private-inference/blob/main/",
@@ -63294,7 +63490,7 @@
     "venice"
   ],
   "kind": "reference-observations",
-  "last_observed_at": "2026-11-13T20:29:12.158470Z",
+  "last_observed_at": "2026-11-14T18:44:18.135088Z",
   "limits": [
     "All extracted tracked values, not all provider values or models.",
     "First observed is not deployment time; absence is not retirement.",
@@ -63407,12 +63603,12 @@
         "bf789b420bb22211ee82",
         "81d78317f9e17b65a297"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "compose_hash",
       "first": "2026-08-18T23:19:49Z",
       "id": "aci-gateway|aci-gateway/shared-workload|compose_hash|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "66e91ac6c2325537851bc95fc0e4489df119b7b0204d27f2bae91ec1324ecf1f"
       ],
@@ -63506,9 +63702,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 89,
+      "samples": 90,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 20
     },
@@ -63524,12 +63721,12 @@
         "c2ad4eddbf31eee54d8a",
         "1c805c1a75e8928e9885"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "os_image",
       "first": "2026-08-18T23:19:49Z",
       "id": "aci-gateway|aci-gateway/shared-workload|os_image|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "dstack-0.5.12"
       ],
@@ -63623,9 +63820,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 89,
+      "samples": 90,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 3
     },
@@ -63652,12 +63850,12 @@
         "f802b83d867edeefab95",
         "804df5dab54f895b6d1a"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "repo_commit",
       "first": "2026-08-18T23:19:49Z",
       "id": "aci-gateway|aci-gateway/shared-workload|repo_commit|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "e9b6ae8a22ff9d8623b280d53bb4164cfe9d0521"
       ],
@@ -63751,9 +63949,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 89,
+      "samples": 90,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 17
     },
@@ -63794,12 +63993,12 @@
         "5e35500930398155d675",
         "25ddd153fd9a4d919b4f"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "workload_keyset_digest",
       "first": "2026-08-18T23:19:49Z",
       "id": "aci-gateway|aci-gateway/shared-workload|workload_keyset_digest|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "sha256:338c049d02ba75455b770174735d81cfdca26b045509a3563eeffae302405b98"
       ],
@@ -63893,9 +64092,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 89,
+      "samples": 90,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 29
     },
@@ -63914,12 +64114,12 @@
         "44c65583e4686b009edc",
         "3cdfcc22d4b1ed02f256"
       ],
-      "evidence": "data/observations/evidence/sha256/80a3fa7ce3e668f20fca864fa9fec8b9a77f3d604fe80721b2756b88ce0b9ade.json",
+      "evidence": "data/observations/evidence/sha256/dda8ad4e71a901509e7607fda252f235b055dd0d658abc3d29715ad58bd25a49.json",
       "family": "published document",
       "field": "document SHA-256",
       "first": "2026-10-14T01:42:25.270249Z",
       "id": "aci-gateway|gateway compose|document SHA-256|published document",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "66e91ac6c2325537851bc95fc0e4489df119b7b0204d27f2bae91ec1324ecf1f"
       ],
@@ -63960,9 +64160,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 36,
+      "samples": 37,
       "scope": "measured compose preimage captured by adapter; not a full source tree",
       "unique_values": 9
     },
@@ -63976,12 +64177,12 @@
         "93d94a0500ca85ad1b16",
         "eaa32aa27777aeaf32bb"
       ],
-      "evidence": "data/observations/evidence/sha256/fb0e1ff008f527a9488fe43e43063cc66191f8d7a27e434f42077bb499abe85b.json",
+      "evidence": "data/observations/evidence/sha256/6de975635f39551504cd17dd9027c75e7243b90be92badb3917ff6ad6febcc00.json",
       "family": "published reference set",
       "field": "reference entries",
       "first": "2026-10-14T01:56:45.833793Z",
       "id": "chutes|Chutes golden measurements|reference entries|published reference set",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "{\"boot_rtmrs\": {\"RTMR0\": \"052183AD6CCA5AD4AEF7E31DC3F6C47BE2BA90C288A55420BF432301374F1BD9932EA7D6B5DA999C4FECF578C4B0A21A\", \"RTMR1\": \"D3A862FF47357F374FC72C7F02A480A13790D1805E24AAA8DE1F03994256625CE0F593AE35EA8F0C24D09F7DF36CB0ED\", \"RTMR2\": \"DA23F73E0FDDEB8128F706ECFBECBCF8CEE34AF7E4907D8FBC85E9B216ACEE27BF6CC3655EAF4D33CAB76ADEA79FA153\", \"RTMR3\": \"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\"}, \"expected_gpus\": [\"h200\"], \"fingerprint\": \"10767e27ad390eefa76198b17671809cd21a940cee24dd28bf26d1ed438d8cd9\", \"gpu_count\": 8, \"mrtd\": \"261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D\", \"name\": \"8xh200 [10.2.1, numa-188c-1128g-nvsw-node0]\", \"runtime_rtmrs\": {\"RTMR0\": \"052183AD6CCA5AD4AEF7E31DC3F6C47BE2BA90C288A55420BF432301374F1BD9932EA7D6B5DA999C4FECF578C4B0A21A\", \"RTMR1\": \"D3A862FF47357F374FC72C7F02A480A13790D1805E24AAA8DE1F03994256625CE0F593AE35EA8F0C24D09F7DF36CB0ED\", \"RTMR2\": \"DA23F73E0FDDEB8128F706ECFBECBCF8CEE34AF7E4907D8FBC85E9B216ACEE27BF6CC3655EAF4D33CAB76ADEA79FA153\", \"RTMR3\": \"D9DC4C6079FB12A21AD2AA8E329D8BFA61AAA13D3FFD10A93A2C4E82F0E35EFBF28F5CF3BED0C0C1B517A7C327A25226\"}, \"version\": \"1.4.1\"}",
         "{\"boot_rtmrs\": {\"RTMR0\": \"052183AD6CCA5AD4AEF7E31DC3F6C47BE2BA90C288A55420BF432301374F1BD9932EA7D6B5DA999C4FECF578C4B0A21A\", \"RTMR1\": \"D3A862FF47357F374FC72C7F02A480A13790D1805E24AAA8DE1F03994256625CE0F593AE35EA8F0C24D09F7DF36CB0ED\", \"RTMR2\": \"E1DE99043052F3E1AB5A4463D3310B5680E851631ADF10E071B15CBD8B4D664EA435B0EC33E7F18E908DDA60734056F7\", \"RTMR3\": \"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000\"}, \"expected_gpus\": [\"h200\"], \"fingerprint\": \"10767e27ad390eefa76198b17671809cd21a940cee24dd28bf26d1ed438d8cd9\", \"gpu_count\": 8, \"mrtd\": \"261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D\", \"name\": \"8xh200 [10.2.1, numa-188c-1128g-nvsw-node0]\", \"runtime_rtmrs\": {\"RTMR0\": \"052183AD6CCA5AD4AEF7E31DC3F6C47BE2BA90C288A55420BF432301374F1BD9932EA7D6B5DA999C4FECF578C4B0A21A\", \"RTMR1\": \"D3A862FF47357F374FC72C7F02A480A13790D1805E24AAA8DE1F03994256625CE0F593AE35EA8F0C24D09F7DF36CB0ED\", \"RTMR2\": \"E1DE99043052F3E1AB5A4463D3310B5680E851631ADF10E071B15CBD8B4D664EA435B0EC33E7F18E908DDA60734056F7\", \"RTMR3\": \"9617BE835BEAC8C62093A9DB424F015F3E12651235D0101C112729E7225B7A70836A184DEE0B45F28CD190F1871AFE6E\"}, \"version\": \"1.5.0\"}",
@@ -64081,9 +64282,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 36,
+      "samples": 37,
       "scope": "captured policy input; enforcement and workload coverage require separate checks",
       "unique_values": 61
     },
@@ -64095,12 +64297,12 @@
         "7262f327cd44eba73799",
         "82d4f468b1ebdbc8e387"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "mrtd",
       "first": "2026-06-18T17:34:06Z",
       "id": "chutes|chutes/instance/DeepSeek-V3.2-TEE|mrtd|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
       ],
@@ -64248,9 +64450,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 144,
+      "samples": 145,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 2
     },
@@ -64336,12 +64539,12 @@
       "events": [
         "ee75e93be62d395a821a"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "mrtd",
       "first": "2026-08-18T23:19:49Z",
       "id": "chutes|chutes/instance/GLM-5.1-TEE|mrtd|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
       ],
@@ -64429,9 +64632,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 84,
+      "samples": 85,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 1
     },
@@ -64442,12 +64646,12 @@
       "events": [
         "325a06f31dcec094dc15"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "mrtd",
       "first": "2026-08-18T23:19:49Z",
       "id": "chutes|chutes/instance/GLM-5.2-TEE|mrtd|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
       ],
@@ -64534,9 +64738,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 83,
+      "samples": 84,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 1
     },
@@ -64552,12 +64757,12 @@
         "2dbcafd9727c39fc3ae0",
         "5c46c4f713debf5adffd"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "mrtd",
       "first": "2026-06-18T17:34:06Z",
       "id": "chutes|chutes/instance/Kimi-K2.6-TEE|mrtd|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
       ],
@@ -64704,9 +64909,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 143,
+      "samples": 144,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 2
     },
@@ -64923,12 +65129,12 @@
         "00ba0206f66717c5446b",
         "31e21618aaf015c4cb77"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "mrtd",
       "first": "2026-06-18T17:34:06Z",
       "id": "chutes|chutes/instance/gemma-4-31B-TEE|mrtd|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
       ],
@@ -65073,9 +65279,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 141,
+      "samples": 142,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 2
     },
@@ -65095,7 +65302,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:26.178325Z",
       "id": "confidential-ai|confidential-ai-allowlist|document SHA-256|published document",
-      "last": "2026-11-13T20:29:10.287283Z",
+      "last": "2026-11-14T18:44:15.756501Z",
       "latest": [
         "251eaf57d70dda5b2f6e292bf898cb339993a81a99381d195d45f580708da113"
       ],
@@ -65135,9 +65342,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 5
     },
@@ -65157,7 +65365,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:26.178325Z",
       "id": "confidential-ai|confidential-ai-allowlist|reference entries|published reference set",
-      "last": "2026-11-13T20:29:10.287283Z",
+      "last": "2026-11-14T18:44:15.756501Z",
       "latest": [
         "/workloads/armtls-mesh-7d136dc13d67-f02bdd3e/containers/*/digest=sha256:7d136dc13d675a17ba8f50c25eabdb3c16bad0180910e9be362b2960b777d17e",
         "/workloads/c8s-operator-38e2c52da58d-926442cd/containers/*/digest=sha256:38e2c52da58dc80e1e7591373b0881672c4412098394147bb44c0619b8552b75",
@@ -65214,9 +65422,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 81
     },
@@ -65233,7 +65442,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:25:42.248288Z",
       "id": "confidential-ai|confidential-ai-observed-release|document SHA-256|published document",
-      "last": "2026-11-13T20:29:10.776119Z",
+      "last": "2026-11-14T18:44:16.267456Z",
       "latest": [
         "5bd314d094d6e3798bc75024afcf1e56360d260c03854fe94c056ffa2f433303"
       ],
@@ -65272,9 +65481,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 38,
+      "samples": 39,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 2
     },
@@ -65290,7 +65500,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:25:42.248288Z",
       "id": "confidential-ai|confidential-ai-observed-release|reference entries|published reference set",
-      "last": "2026-11-13T20:29:10.776119Z",
+      "last": "2026-11-14T18:44:16.267456Z",
       "latest": [
         "/assets/*/digest=sha256:4ea39bd42d892e974744f64cf65981f0258e70384de0e79b21db75d95d08dc25",
         "/assets/*/digest=sha256:82859291c495814e7fe6347d58d526bb5152cff88f520db1eba19cc6258a5586",
@@ -65332,14 +65542,15 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 38,
+      "samples": 39,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 4
     },
     {
-      "changes": 31,
+      "changes": 32,
       "client_acceptance": null,
       "component": "confidential-ai-releases",
       "events": [
@@ -65374,16 +65585,17 @@
         "5f401c74c65fbed8182d",
         "6b8e0cae5fcdc41f5aa4",
         "2d78662ece01b05a6d0e",
-        "30cea58f0734fd6a7bce"
+        "30cea58f0734fd6a7bce",
+        "ac280ac151c159e1f523"
       ],
-      "evidence": "data/references/observations/raw/confidential-ai-releases-b7053cf95f877a1249aa9969f2a68a8c673b80154b6503440ae6f92be60059a8.bin",
+      "evidence": "data/references/observations/raw/confidential-ai-releases-60960f1baaa3958a750ad36d65103cf7c56d1b044c3f2a1ff8b03dec078b3abd.bin",
       "family": "published document",
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:26.453439Z",
       "id": "confidential-ai|confidential-ai-releases|document SHA-256|published document",
-      "last": "2026-11-13T20:29:10.529373Z",
+      "last": "2026-11-14T18:44:16.001798Z",
       "latest": [
-        "b7053cf95f877a1249aa9969f2a68a8c673b80154b6503440ae6f92be60059a8"
+        "60960f1baaa3958a750ad36d65103cf7c56d1b044c3f2a1ff8b03dec078b3abd"
       ],
       "provider": "confidential-ai",
       "provider_authorization": null,
@@ -65420,11 +65632,12 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 39,
+      "samples": 40,
       "scope": "publication bytes only; no signature or runtime verification",
-      "unique_values": 32
+      "unique_values": 33
     },
     {
       "changes": 10,
@@ -65443,12 +65656,12 @@
         "e4c6b7d5251a90ca29d0",
         "4890ec1100ee5a72a0aa"
       ],
-      "evidence": "data/references/observations/raw/confidential-ai-releases-b7053cf95f877a1249aa9969f2a68a8c673b80154b6503440ae6f92be60059a8.bin",
+      "evidence": "data/references/observations/raw/confidential-ai-releases-60960f1baaa3958a750ad36d65103cf7c56d1b044c3f2a1ff8b03dec078b3abd.bin",
       "family": "published reference set",
       "field": "reference entries",
       "first": "2026-10-14T01:24:26.453439Z",
       "id": "confidential-ai|confidential-ai-releases|reference entries|published reference set",
-      "last": "2026-11-13T20:29:10.529373Z",
+      "last": "2026-11-14T18:44:16.001798Z",
       "latest": [
         "/*/assets/*/digest=sha256:04a74de02cdeb4cdd1e71ad671b0c2f7e161db32f67200b093c02ff9ee3d4b62",
         "/*/assets/*/digest=sha256:04c1ebcd95b24afe30336036e83ee127dc1e7fc9f4888237102f2a99e5e5b7ce",
@@ -65549,9 +65762,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 39,
+      "samples": 40,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 418
     },
@@ -65582,7 +65796,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.524929Z",
       "id": "maple|maple-canonical-pcrDev.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:08.625047Z",
+      "last": "2026-11-14T18:44:14.525496Z",
       "latest": [
         "11d8848f990620637ae1bb7c31aea5f492f6a630513148ac502e4a78a5e593cd"
       ],
@@ -65623,9 +65837,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 16
     },
@@ -65656,7 +65871,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.524929Z",
       "id": "maple|maple-canonical-pcrDev.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:08.625047Z",
+      "last": "2026-11-14T18:44:14.525496Z",
       "latest": [
         "/PCR0=0d4f48b9b453e6206a95c0a5b6bc9d397270bb04a39af2fd2a5a865a9509c0f49d5d1e25103278b6e7afe9fe04e0348d",
         "/PCR1=a91689e37a54303051f68263010f397ddfa92d66e17df7a03a6777c33ff1e4fc12b69bbbe786894d43dcba1cf6d60aaa",
@@ -65699,9 +65914,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 34
     },
@@ -65732,7 +65948,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.579166Z",
       "id": "maple|maple-canonical-pcrDevHistory.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:08.935239Z",
+      "last": "2026-11-14T18:44:14.681297Z",
       "latest": [
         "dc43bfe2a32c5602cf3fb606950b573d1e7b239d96e5b3fbec0d9bca9f08473b"
       ],
@@ -65773,9 +65989,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 16
     },
@@ -65806,7 +66023,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.579166Z",
       "id": "maple|maple-canonical-pcrDevHistory.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:08.935239Z",
+      "last": "2026-11-14T18:44:14.681297Z",
       "latest": [
         "/*/PCR0=01bc3b66d17e3c4683b9c0b7f7a62133cfb00676c539115b1cd78ce7da7cbad79ce241c359ccebe3c310150da69d4ace",
         "/*/PCR0=0212378a181f55e7c2a6d46abe3ed6f3311753b4cff71090722b5f759974a281cea7cb458124cf6b5ef9e9a3c371448a",
@@ -66212,9 +66429,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 366
     },
@@ -66242,7 +66460,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.250298Z",
       "id": "maple|maple-canonical-pcrProd.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:08.057986Z",
+      "last": "2026-11-14T18:44:14.252995Z",
       "latest": [
         "99f23fa41ba869aa2aa6544d84ee6fa3b6c3688d1f51bdbe6e04ccc0001c0401"
       ],
@@ -66283,9 +66501,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 13
     },
@@ -66313,7 +66532,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.250298Z",
       "id": "maple|maple-canonical-pcrProd.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:08.057986Z",
+      "last": "2026-11-14T18:44:14.252995Z",
       "latest": [
         "/PCR0=4d867ac23d7a42b46a458452fe59f2f2c831b0c553d768287c9ca01f2015b177272b9e807ad585b498ff8a5f3b4141c2",
         "/PCR1=a91689e37a54303051f68263010f397ddfa92d66e17df7a03a6777c33ff1e4fc12b69bbbe786894d43dcba1cf6d60aaa",
@@ -66356,9 +66575,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 28
     },
@@ -66386,7 +66606,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.437053Z",
       "id": "maple|maple-canonical-pcrProdHistory.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:08.385815Z",
+      "last": "2026-11-14T18:44:14.428640Z",
       "latest": [
         "38cfc43bda6c7a36dedf2882463616e9b562012de30d2251e61d420d114e534a"
       ],
@@ -66427,9 +66647,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 13
     },
@@ -66457,7 +66678,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.437053Z",
       "id": "maple|maple-canonical-pcrProdHistory.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:08.385815Z",
+      "last": "2026-11-14T18:44:14.428640Z",
       "latest": [
         "/*/PCR0=01184a3d1334e46083545043ead8e6afadf8991252bd4e322bafa969d106184bf59d021a5b83a783565c024a5af3920e",
         "/*/PCR0=02a41da2df084fd1dee420d7717bef6dc0120f1d6a0b7fded3f4c7a539be4044b3061c71bc7156731db1fb66494097b0",
@@ -66851,9 +67072,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 354
     },
@@ -66883,7 +67105,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.552693Z",
       "id": "maple|maple-legacy-pcrDev.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:08.755076Z",
+      "last": "2026-11-14T18:44:14.605629Z",
       "latest": [
         "11d8848f990620637ae1bb7c31aea5f492f6a630513148ac502e4a78a5e593cd"
       ],
@@ -66924,9 +67146,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 15
     },
@@ -66956,7 +67179,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.552693Z",
       "id": "maple|maple-legacy-pcrDev.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:08.755076Z",
+      "last": "2026-11-14T18:44:14.605629Z",
       "latest": [
         "/PCR0=0d4f48b9b453e6206a95c0a5b6bc9d397270bb04a39af2fd2a5a865a9509c0f49d5d1e25103278b6e7afe9fe04e0348d",
         "/PCR1=a91689e37a54303051f68263010f397ddfa92d66e17df7a03a6777c33ff1e4fc12b69bbbe786894d43dcba1cf6d60aaa",
@@ -66999,9 +67222,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 32
     },
@@ -67031,7 +67255,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.612262Z",
       "id": "maple|maple-legacy-pcrDevHistory.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:09.050774Z",
+      "last": "2026-11-14T18:44:14.893668Z",
       "latest": [
         "dc43bfe2a32c5602cf3fb606950b573d1e7b239d96e5b3fbec0d9bca9f08473b"
       ],
@@ -67072,9 +67296,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 15
     },
@@ -67104,7 +67329,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.612262Z",
       "id": "maple|maple-legacy-pcrDevHistory.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:09.050774Z",
+      "last": "2026-11-14T18:44:14.893668Z",
       "latest": [
         "/*/PCR0=01bc3b66d17e3c4683b9c0b7f7a62133cfb00676c539115b1cd78ce7da7cbad79ce241c359ccebe3c310150da69d4ace",
         "/*/PCR0=0212378a181f55e7c2a6d46abe3ed6f3311753b4cff71090722b5f759974a281cea7cb458124cf6b5ef9e9a3c371448a",
@@ -67510,9 +67735,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 366
     },
@@ -67540,7 +67766,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.408990Z",
       "id": "maple|maple-legacy-pcrProd.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:08.198363Z",
+      "last": "2026-11-14T18:44:14.354234Z",
       "latest": [
         "99f23fa41ba869aa2aa6544d84ee6fa3b6c3688d1f51bdbe6e04ccc0001c0401"
       ],
@@ -67581,9 +67807,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 13
     },
@@ -67611,7 +67838,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.408990Z",
       "id": "maple|maple-legacy-pcrProd.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:08.198363Z",
+      "last": "2026-11-14T18:44:14.354234Z",
       "latest": [
         "/PCR0=4d867ac23d7a42b46a458452fe59f2f2c831b0c553d768287c9ca01f2015b177272b9e807ad585b498ff8a5f3b4141c2",
         "/PCR1=a91689e37a54303051f68263010f397ddfa92d66e17df7a03a6777c33ff1e4fc12b69bbbe786894d43dcba1cf6d60aaa",
@@ -67654,9 +67881,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 28
     },
@@ -67684,7 +67912,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.486636Z",
       "id": "maple|maple-legacy-pcrProdHistory.json|document SHA-256|published document",
-      "last": "2026-11-13T20:29:08.501788Z",
+      "last": "2026-11-14T18:44:14.477430Z",
       "latest": [
         "38cfc43bda6c7a36dedf2882463616e9b562012de30d2251e61d420d114e534a"
       ],
@@ -67725,9 +67953,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 13
     },
@@ -67755,7 +67984,7 @@
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.486636Z",
       "id": "maple|maple-legacy-pcrProdHistory.json|reference entries|published reference set",
-      "last": "2026-11-13T20:29:08.501788Z",
+      "last": "2026-11-14T18:44:14.477430Z",
       "latest": [
         "/*/PCR0=01184a3d1334e46083545043ead8e6afadf8991252bd4e322bafa969d106184bf59d021a5b83a783565c024a5af3920e",
         "/*/PCR0=02a41da2df084fd1dee420d7717bef6dc0120f1d6a0b7fded3f4c7a539be4044b3061c71bc7156731db1fb66494097b0",
@@ -68149,9 +68378,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
       "unique_values": 354
     },
@@ -68168,7 +68398,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.696035Z",
       "id": "maple|maple-research-client-config|document SHA-256|published document",
-      "last": "2026-11-13T20:29:09.495249Z",
+      "last": "2026-11-14T18:44:15.190910Z",
       "latest": [
         "646fa8962420650e74df69efa9a5e4df480a56d9a4a23ab0fca5297b562d428f"
       ],
@@ -68209,9 +68439,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 2
     },
@@ -68227,7 +68458,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.674243Z",
       "id": "maple|maple-rust-pcr-policy|document SHA-256|published document",
-      "last": "2026-11-13T20:29:09.309725Z",
+      "last": "2026-11-14T18:44:15.024097Z",
       "latest": [
         "03f9d8fd5dd944506a90ece4e2bb620a65a8406ed307b063d1456a3245931cd6"
       ],
@@ -68268,9 +68499,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 1
     },
@@ -68286,7 +68518,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.643317Z",
       "id": "maple|maple-typescript-pcr-policy|document SHA-256|published document",
-      "last": "2026-11-13T20:29:09.187364Z",
+      "last": "2026-11-14T18:44:14.948035Z",
       "latest": [
         "f001d931e588c0c9b072be4b03b5b54adc94c8f82443b1bc616f7c7c87cb65fb"
       ],
@@ -68327,9 +68559,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 1
     },
@@ -68340,12 +68573,12 @@
       "events": [
         "2c4b6e410c7c8d3cb7e2"
       ],
-      "evidence": "data/observations/evidence/sha256/76f81d42b99ea7851e204e1f55e596c32362a5db7ffd94b24d95c678012f4db4.json",
+      "evidence": "data/observations/evidence/sha256/08d91c8eba0e546542b5b29aae28d740ed6e41e965edb3016b349a92e4d59b27.json",
       "family": "client policy",
       "field": "reference entries",
       "first": "2026-10-14T01:56:45.833793Z",
       "id": "near-ai|NEAR client anchor|reference entries|client policy",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "/_pending_review/compose_hashes/*/compose_hash=bcbccccf457a8f2dcd837b615ef56f63eaa707e3675f1ecd08ee81cb06ec2b28",
         "/_pending_review/compose_hashes/*/compose_hash=f39bd7632c0276908889a9a02ad5c530a22c1be94925c994458d1dbd84086534",
@@ -68410,14 +68643,15 @@
         "2026-11-08",
         "2026-11-10",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 33,
+      "samples": 34,
       "scope": "captured policy input; enforcement and workload coverage require separate checks",
       "unique_values": 27
     },
     {
-      "changes": 37,
+      "changes": 38,
       "client_acceptance": null,
       "component": "near-ai/cloud-api",
       "events": [
@@ -68458,16 +68692,17 @@
         "6d2c526303ba953aa402",
         "ab3b6e079c76267041ab",
         "8eafd30cd90f37c93295",
-        "2a72fe736f4e35c7ceff"
+        "2a72fe736f4e35c7ceff",
+        "e01c16fdb1a7fe11303b"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "image_digest",
       "first": "2026-05-17T23:44:52Z",
       "id": "near-ai|near-ai/cloud-api|image_digest|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
-        "1b34e13125f3366f60df9612deaf5c0d6df17d83d859545b30192a2aede5b6f5"
+        "4cde8bc2e09b78452a2b7c6706a4072c7a46417d56eef8e75ccd6b6d91640ffb"
       ],
       "provider": "near-ai",
       "provider_authorization": null,
@@ -68648,14 +68883,15 @@
         "2026-11-08",
         "2026-11-10",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 179,
+      "samples": 180,
       "scope": "historical adapter report; not independently verified",
-      "unique_values": 37
+      "unique_values": 38
     },
     {
-      "changes": 60,
+      "changes": 61,
       "client_acceptance": null,
       "component": "near-ai/gateway",
       "events": [
@@ -68719,16 +68955,17 @@
         "cd80a75b357b9ce54d71",
         "f8ff7dee1d598ff196bc",
         "b3808b84d4fbd1179ce4",
-        "91d1b43581e7e33304d8"
+        "91d1b43581e7e33304d8",
+        "b283d4d40dfce738ac2f"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "compose_hash",
       "first": "2026-05-05T23:48:17Z",
       "id": "near-ai|near-ai/gateway|compose_hash|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
-        "7c15cbaa24e4e9aa70f4b1aae215e55268d08f64dbadbbcdd791287de191a255"
+        "2643bc7ae47ecf4cf84509a647d2c2cc3bcacad95a87b8a73d543e6c48ad3b22"
       ],
       "provider": "near-ai",
       "provider_authorization": null,
@@ -68921,11 +69158,12 @@
         "2026-11-08",
         "2026-11-10",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 191,
+      "samples": 192,
       "scope": "historical adapter report; not independently verified",
-      "unique_values": 59
+      "unique_values": 60
     },
     {
       "changes": 10,
@@ -68944,12 +69182,12 @@
         "194ccad16829bd0ef1e9",
         "c687345b0c17405932b5"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "compose_hash",
       "first": "2026-10-12T22:42:48Z",
       "id": "near-ai|near-ai/model/zai-org/GLM-5.1-FP8|compose_hash|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "a7de0bba194b6466c5c7b8dcfb907b6b60404ab2ba6de8b5d0cf63c2145d6868",
         "c900dc7304663b73b623cd5d941fbdab6f02858017b371ae28de445a16d2e2d0",
@@ -68990,9 +69228,10 @@
         "2026-11-08",
         "2026-11-10",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 35,
+      "samples": 36,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 7
     },
@@ -69043,7 +69282,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:36:51.513651Z",
       "id": "private-inference|private-inference-browser-verifier|document SHA-256|published document",
-      "last": "2026-11-13T20:29:12.158470Z",
+      "last": "2026-11-14T18:44:18.135088Z",
       "latest": [
         "00df62161a7edf2dae2fcbc816784a992534622e3172f4dc5bd57eb60fa5d4ee"
       ],
@@ -69085,9 +69324,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 37,
+      "samples": 38,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 6
     },
@@ -69114,7 +69354,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:27.288380Z",
       "id": "private-inference|private-inference-chat-html|document SHA-256|published document",
-      "last": "2026-11-13T20:29:11.666493Z",
+      "last": "2026-11-14T18:44:16.952935Z",
       "latest": [
         "bbb9965ef104f335056acbf2b52c4be9b9ccd08657790a5e943101d9ec00f76b"
       ],
@@ -69156,9 +69396,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 12
     },
@@ -69182,7 +69423,7 @@
       "field": "document SHA-256",
       "first": "2026-10-14T01:36:51.358139Z",
       "id": "private-inference|private-inference-chat-main|document SHA-256|published document",
-      "last": "2026-11-13T20:29:11.954275Z",
+      "last": "2026-11-14T18:44:17.168152Z",
       "latest": [
         "b88cfae3dbae6996b7aeac573d64c6b4238474045e7f53bb3f8a558b8830d2d2"
       ],
@@ -69224,14 +69465,15 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 37,
+      "samples": 38,
       "scope": "publication bytes only; no signature or runtime verification",
       "unique_values": 9
     },
     {
-      "changes": 4,
+      "changes": 5,
       "client_acceptance": null,
       "component": "privatemode-manifest",
       "events": [
@@ -69239,16 +69481,17 @@
         "b24f93b444013b7ea4d7",
         "b6d637169b225714a494",
         "e8cee6c7d387e83fdedd",
-        "889f18899f6749861f18"
+        "889f18899f6749861f18",
+        "b25a229c78335a3f9581"
       ],
-      "evidence": "data/references/observations/raw/privatemode-manifest-5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1.bin",
+      "evidence": "data/references/observations/raw/privatemode-manifest-d63eb5cf91cb3079fe25a848573a4d0e9d869f462dab4f71fd02bdb372f8e833.bin",
       "family": "published document",
       "field": "document SHA-256",
       "first": "2026-10-14T01:24:25.730881Z",
       "id": "privatemode|privatemode-manifest|document SHA-256|published document",
-      "last": "2026-11-13T20:29:09.642546Z",
+      "last": "2026-11-14T18:44:15.234656Z",
       "latest": [
-        "5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1"
+        "d63eb5cf91cb3079fe25a848573a4d0e9d869f462dab4f71fd02bdb372f8e833"
       ],
       "provider": "privatemode",
       "provider_authorization": null,
@@ -69288,14 +69531,15 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "publication bytes only; no signature or runtime verification",
-      "unique_values": 5
+      "unique_values": 6
     },
     {
-      "changes": 4,
+      "changes": 5,
       "client_acceptance": null,
       "component": "privatemode-manifest",
       "events": [
@@ -69303,35 +69547,36 @@
         "9f10a439e7e91081bd40",
         "e0220a796e1826ce05fd",
         "cf3889d412c5b4c39a04",
-        "cf4be0e6a614b710c899"
+        "cf4be0e6a614b710c899",
+        "fd52f90c9f928a359b46"
       ],
-      "evidence": "data/references/observations/raw/privatemode-manifest-5fa927e3b864738da35d427c10ba8e49ebeeb1531e49618899cf95f654d240c1.bin",
+      "evidence": "data/references/observations/raw/privatemode-manifest-d63eb5cf91cb3079fe25a848573a4d0e9d869f462dab4f71fd02bdb372f8e833.bin",
       "family": "published reference set",
       "field": "reference entries",
       "first": "2026-10-14T01:24:25.730881Z",
       "id": "privatemode|privatemode-manifest|reference entries|published reference set",
-      "last": "2026-11-13T20:29:09.642546Z",
+      "last": "2026-11-14T18:44:15.234656Z",
       "latest": [
-        "/Policies/policy-key=2e4247564198b08060ff49d1ed7822de22a31edd1cbd7034e610c7e9cb6d9f95",
-        "/Policies/policy-key=382f8395b01ff5203de61f71dbc29044a00177263c0740c17e84f941d83ab8c7",
-        "/Policies/policy-key=539dda33477fdbf4ae248556fc489450ba4c9f9c0b3bcc07f8f1b9ef848760c3",
-        "/Policies/policy-key=67cb2afc964dee742d9ee007824a989906d52a55b6d7a39c67f929f5e45fdb0d",
-        "/Policies/policy-key=8db3cfedc949f9a1e0702f5ca19ac96eb935fd1ff9cff6a0b2a94d1ceff9575d",
-        "/Policies/policy-key=abb78b0c3985a8eeb63c86f9ec9b544abeddadaa2868737379e18c531d906360",
-        "/Policies/policy-key=b6b4a3d3a25a40e76c881decc848da766e46e5accf0ce71cf5c64a651d393529",
-        "/Policies/policy-key=f62cb117f1f9e2ba8dfca0b67db2e04c8dde069d6a7ed59a560c1912c6561856",
+        "/Policies/policy-key=0d738b8dbf259a85d176381626d8bcf04f1319b5539aa9a9a363efc73d4d3fba",
+        "/Policies/policy-key=10a2265576c135aedcd427e3b66772a4ff4f4e65a9546771270d6b8cde45a715",
+        "/Policies/policy-key=2ca27d0c361dfe4e098a9d650f013729113d0fde3496612eaee959cd47e7b7dc",
+        "/Policies/policy-key=3ce42aa373d6bede62c11d8cd22a74f899af62c79da5d303f0adc4a3b1a37ac3",
+        "/Policies/policy-key=69b8c49ca751575b9ef0128479932b53a63e38479e6aeed5b2e8319aa2a28457",
+        "/Policies/policy-key=76935b0a1e35bc078815c8439ecf9f8aab336e04c40c56fd4c6cffcd057804e8",
+        "/Policies/policy-key=d1e6c4f1bf1388244d04d587d45913133ef9dfaaac5f1b2149823abf14226c19",
+        "/Policies/policy-key=f095242202b4ff2549344ea9674601515e1eecaedd7cc6ae80ac8ac5e903b151",
         "/ReferenceValues/snp/*/AllowedChipIDs/*=06B3977C15C8E92E9897EBC3A0BE1E6EF6E2E70F9B57A327854F8E735A608EC1E528821C2FA770E0DD175CFD421E492C45A164457C4C669674B695368C08D36D",
         "/ReferenceValues/snp/*/AllowedChipIDs/*=11495177E7796396BC5E4B8F239727AE12D8E8B0A7C2D3866D14ADC385D931DB6EC9AC27810CF8B8593E6C278C16DEA882036ABBF6820BC4EBF10E9A8F44FBF9",
         "/ReferenceValues/snp/*/AllowedChipIDs/*=1886AFB73CF8656295B87CC64457DF576C43F95F00B713B7F79F88239582CF423EFD9023E211AFEC216696078D30F39D13149699F184B4B30411F91FAF3F0D86",
         "/ReferenceValues/snp/*/AllowedChipIDs/*=5050718946CB028EAB9D7BB648468B4807F25229C3EE639B70F1D80251EF19CC18D3E47A991178A1A841112461D297E522F4E9C166EB20E612AB35F60E29FB1C",
-        "/ReferenceValues/snp/*/TrustedMeasurement=e9a2ec65b58870be28896100a881427af162c877521ea647b882234dcc8983f31232d4cad2743c86ee4d2a0a8c9971a7",
+        "/ReferenceValues/snp/*/TrustedMeasurement=a25667a52d291e4595100ae13a57b334f2aa2dd218fd6328b7bb6db634b2e63b3540e87e2ee9540b2c00ebfdbd3c39b2",
         "/ReferenceValues/tdx/*/MrSeam=ab62561a173acbd18ee50ff37750db44184c6cf5e886df74247cc575e163b04c34b9e18374757c235affa614d4127f6b",
         "/ReferenceValues/tdx/*/MrTd=4cbcbc26afb42fb85650ab12dfaa2de47a98c0a3603495c21901902afd907bcbb61a1fa035a5502c4f1726e458c3ca7a",
         "/ReferenceValues/tdx/*/Rtmrs/*=000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
         "/ReferenceValues/tdx/*/Rtmrs/*=3a57ae743d61d8431a9996cfeb262ee920de9072295e53352959b96c6dee54b46bf251291efb428de418a571d11a5244",
-        "/ReferenceValues/tdx/*/Rtmrs/*=6793f01eb1bccb5bdae186d92e41ac83155a3e6d5f2e480bece4ea6f4b2bd1f9d59f181fd076e610d4ea02d8c09a7221",
+        "/ReferenceValues/tdx/*/Rtmrs/*=3f935d9ee9a6bff4c997fef1b133ee4444bcb9fc1f0781f7e8026d9188c3f5c6d718c473510d8ed2303da3763636f1f3",
         "/ReferenceValues/tdx/*/Rtmrs/*=a79021d3cc13952efd0d1c2888269b7e7a21fd72a640f51530212e90a0aa4e2dfdafe177d599f928cdd508e38c6dec6b",
-        "/SeedshareOwnerPubKeys/*=3082020a0282020100bbd40e4d660476f913f60d0c2660700de25e08e2c7ab71073287ea9ae255f54d050f22a972c63c6a3981940a964672d3e4b4dff2620cae9865b8b942e3f8138ffb428a291d173a76b13ffb6b492d0d991056cc28e770da8ba59db088c149e86db35a9423dd1be4d4c73b6f553169cf3c441fc3419988e47e575195a86776ca103748b9682a860377beb28668f2ec691f42dc05c84f1886677b3d3eedba2c804d66ecdb1882570512dcf0d146138cca02ca4400996804ec3f5cb829a3728824077103ea6efbb011c819e531f140d8bc1a15f4c18209340b10b7436ab90554abc8791c3430972f317bcd410aaf6fc0d1d08ddce1aa482585e847f186ebcc3250e510a1f54112e3725ce9394c2fda834cdce2ef1f757fb858830a40fb79de60c522c6f52aa0549772c70bd159797dfc4eb878e897ad3a12aff41192e087c2df7c36772c9950a1cc3b99b42861ff16ac836e2d5b7e31e4fef48e284f2c2eccb98269f934a3c0da27b5eeb00fcd0bc8b302f2ed0e8752412031587cbcd720e496e8ab8eb5cfbdaa32c50a599f737af54d757aa7a431209ec112dfd96f53231867948136bcea985808891010e281805070d46196e14476b9da98e66f0cb9639494557d6cb9d89e7a838f0f30d953976b769db8738d0909cca20bf1cb8bfece7fdc3c539b7bff579f2f182bd66c882452f1c0577fcc95521da6a8bc3bace89cff9daf610203010001"
+        "/SeedshareOwnerPubKeys/*=3082020a02820201009eb7f023da4fd8ed56e6e1963e53d6434840259bcc2e9f90ce6414d9dac79be36fef1d542e188a5864b6bf4495534c53e5d29880bd053002957d5f80317e8da44a5aca09ab99c9d7ad7820d922b000488f51531e3ad4e981aaca1629cdec436ae55d8953605af919fa4e069610989d8ee146d8a55c89bb5166f98115721f881c955fb03a51bb5b7829da80a67f0ca75f659750ba91f07255b644b8814e7cacd85fdbf34c24933bd3ce61e4e1088ce388f28479ac983d5c7535e1e787c82686601a92c1bd0a2b2e0be549d55afba32392bb22e28f62b150d9dddd2e31b153e074713a739cd12aa4f66b2bf51c9910af6f2d56d470d906fd88b94f3e8942fcc68ad4a4b0d7809f611983ffba051951d2845f761948f9cd347f843dac3b3b4fd5b1cb0b42f6d663e548ee2bd8095f8e2547c462471dc129a21cf3b8913c12ca7f7edbee8b741d124b688a190e1c38402eb78199fc8648fb04580d87cca1c4d5194760eaf35fe66cc80b4c46627c065eae9a9478a3d2eb02d0c9dbe0fc5a4452427abf31648af76112f8c23d59f38e9319828a813f7447c1eda60847de41233628d1a0055e951329c412b59e96bef11159ad960d886fe6c4e78c58b11055c2539d38f8ac75bbae7af6b36de7df79864155872a7d9b518255283e1ac516dc35d7786d4347768dd69e68a248ccebf80f7dd57da1aea4c67fd64fba2cdae0fde74bf6430203010001"
       ],
       "provider": "privatemode",
       "provider_authorization": null,
@@ -69371,11 +69616,12 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 40,
+      "samples": 41,
       "scope": "digest-shaped entries in captured JSON; not proof of client acceptance",
-      "unique_values": 64
+      "unique_values": 75
     },
     {
       "changes": 0,
@@ -70251,12 +70497,12 @@
         "13524eb46a493d7a5969",
         "789b981cfe8fbd6fea4a"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "bundle_digest",
       "first": "2026-04-26T22:43:04Z",
       "id": "tinfoil|tinfoil/router|bundle_digest|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "cb88bff73bab5456370c79eb63ec06d6e46452ad678593db2ad4a316f7ca007c"
       ],
@@ -70462,9 +70708,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 202,
+      "samples": 203,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 59
     },
@@ -70533,12 +70780,12 @@
         "9d2a3986fad6309f820b",
         "9dd9ce1615364902b65f"
       ],
-      "evidence": "data/snapshots/2026-11-13.json",
+      "evidence": "data/snapshots/2026-11-14.json",
       "family": "reported workload",
       "field": "measurement",
       "first": "2026-04-26T22:43:04Z",
       "id": "tinfoil|tinfoil/router|measurement|reported workload",
-      "last": "2026-11-13T20:28:42.542251Z",
+      "last": "2026-11-14T18:43:49.953509Z",
       "latest": [
         "07c3b78a46e4035b122d84aeb24674f96781d01101cb4b20b6d9a576c370331bb60a66041b287a56c3a859341bf6f124"
       ],
@@ -70744,9 +70991,10 @@
         "2026-11-10",
         "2026-11-11",
         "2026-11-12",
-        "2026-11-13"
+        "2026-11-13",
+        "2026-11-14"
       ],
-      "samples": 202,
+      "samples": 203,
       "scope": "historical adapter report; not independently verified",
       "unique_values": 59
     }
