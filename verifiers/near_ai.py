@@ -395,8 +395,6 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                                        "block_hash": chain["block_hash"],
                                        "chain_id": chain["chain_id"]}
     details["audit_key"] = audit_key
-    details["full_digest_audit_key"] = audit_key
-    details["audit_match_scope"] = "full_digest" if audit_key else "none"
     details["gateway_review_status"] = "reviewed" if audit_key else "unreviewed"
     if audit_key:
         m = audit_meta[audit_key]

@@ -91,7 +91,7 @@ The October implementation repairs ACI detached quote/event bindings and NEAR cr
 
 ## Known limitations
 
-- Attestation verification here takes the hardware root of trust as sound. [TEE.fail](https://tee.fail/) (IEEE S&P '26) showed that a cheap DDR5 memory-bus interposer can extract keys from Intel TDX and AMD SEV-SNP machines — including attestation keys from fully patched hosts in trusted status, which then also unlocks Nvidia GPU Confidential Computing. A cryptographically verified quote therefore does not bound an adversary with physical access to the host's memory bus.
+- Attestation verification here takes the hardware root of trust as sound. [TEE.fail](https://tee.fail/) (IEEE S&P '26) showed that a cheap DDR5 memory-bus interposer can extract keys from Intel TDX and AMD SEV-SNP machines — including, in some cases, attestation keys from fully patched hosts in trusted status, which then also unlocks Nvidia GPU Confidential Computing. A cryptographically verified quote therefore does not bound an adversary with physical access to the host's memory bus.
 
 ## Run locally
 

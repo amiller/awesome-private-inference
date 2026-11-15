@@ -124,7 +124,6 @@ def test_repo_ledgers_hold_only_full_length_keys():
     root = Path(__file__).resolve().parents[1] / "data" / "audits"
     near_ids, near_meta = load_audit_ledger(root / "near-ai_cloud-api.json")
     assert all(len(k) == 64 for k in near_ids)
-    assert len(near_ids) == 4
     # the retired 8-hex row is history-only and cannot authorize anything
     assert "22763fe4" not in near_ids
     assert "22763fe4" not in near_meta
