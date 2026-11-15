@@ -87,7 +87,7 @@ prompt path."
 | Client-supplied nonce in `report_data` | ❌ (no nonce slot — freshness is via live TLS pin) |
 | Live GPU attestation (NRAS) | ❌ (Tinfoil checks GPU at boot inside the CVM, not per-request) |
 | VCEK chain → AMD Genoa root | ✅ ARK/ASK pinned by DER SHA-256 (AMD KDS 2026-11-05, cross-checked against `tinfoil==0.15.0`); ARK self-signature, ARK→ASK, ASK→VCEK (RSA-PSS); hwID/SPL bound to the report; ECDSA P-384 report signature verified ([`tinfoil_amd.py`](../verifiers/tinfoil_amd.py)) |
-| TCB at or above AMD-published minimum | ❌ router-0 reports snp SPL 0x1B (2026-11-04), below 0x1D required by AMD-SB-3037/3038; the verifier rejects it |
+| TCB at or above AMD-published minimum | ❌ router-0 reports snp SPL 0x1B (live fetch 2026-11-15), below 0x1D required by AMD-SB-3037/3038; the verifier rejects it |
 
 ## Runtime-config audit
 
