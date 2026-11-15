@@ -4,14 +4,15 @@ published JWKS, nonce binding, CPU↔GPU association and GPU-count policy.
 Real-evidence paths replay the owner's keyed Chutes capture
 (tests/fixtures/chutes_capture_sample.json) and the live NRAS response it
 produced (tests/fixtures/nras_attest_response.json, captured 2026-11-05)
-against the pinned production JWKS (tests/fixtures/nras_jwks.json) — no
-mocks. Signature negatives use locally generated EC P-384 keys whose x5c
+against the production JWKS captured with it (tests/fixtures/nras_jwks.json),
+with the clock pinned to the capture time. Signature negatives use locally generated EC P-384 keys whose x5c
 chain pins to a test intermediate (the pinned SPKI set is swapped for the
 test key's) so every rejection path is exercised without touching NVIDIA.
 """
 import base64
 import datetime
 import json
+import time
 from pathlib import Path
 
 import cryptography.hazmat.primitives.hashes as chashes
@@ -22,6 +23,7 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.asymmetric.utils import decode_dss_signature
 from cryptography.x509.oid import NameOID
 
+from tests.nras_capture import JWKS, pin_clock
 from verifiers import nvidia_nras
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -83,6 +85,7 @@ def _platform_payload(**overrides):
         "x-nvidia-ver": "2.0",
         "x-nvidia-overall-att-result": True,
         "eat_nonce": NONCE,
+        "exp": int(time.time()) + 3600,
     }
     payload.update(overrides)
     return {k: v for k, v in payload.items() if v is not None}
@@ -97,6 +100,7 @@ def _gpu_payload(index, **overrides):
         "dbgstat": "disabled",
         "x-nvidia-gpu-driver-version": "595.71.05",
         "x-nvidia-gpu-attestation-report-nonce-match": True,
+        "exp": int(time.time()) + 3600,
     }
     payload.update(overrides)
     return {k: v for k, v in payload.items() if v is not None}
@@ -139,11 +143,12 @@ def test_full_policy_pass(pinned_jwks):
     assert result["platform"]["signature_verified"] and result["platform"]["nonce_bound"]
 
 
-def test_real_captured_evidence_and_live_nras_response_pass():
+def test_real_captured_evidence_and_live_nras_response_pass(monkeypatch):
     """GLM-5.1-TEE instance c4dcc862: the owner's keyed capture, the live NRAS
     response it produced, and NVIDIA's pinned production JWKS — no mocks."""
     capture = json.loads((FIXTURES / "chutes_capture_sample.json").read_text())
     nras = json.loads((FIXTURES / "nras_attest_response.json").read_text())
+    pin_clock(monkeypatch, nras["captured_utc"])
     entry = nras["responses"]["GLM-5.1-TEE"]
     quote = capture["models"]["GLM-5.1-TEE"]["evidence"]["quote"]
     report_data = base64.b64decode(quote)[48:][520:584]
@@ -151,25 +156,26 @@ def test_real_captured_evidence_and_live_nras_response_pass():
     assert entry["submitted_nonce"] == expected  # blob nonce == report_data[0:32]
     result = nvidia_nras.appraise_gpu_attestation(
         capture["models"]["GLM-5.1-TEE"]["evidence"]["gpu_evidence"],
-        expected, nvidia_nras.load_pinned_jwks(), 8,
+        expected, JWKS, 8,
         attest_response=entry["response"])
     assert result["gpu_attested"] is True
     assert result["verified_gpu_count"] == 8
 
 
-def test_real_gemma_evidence_records_count_mismatch():
+def test_real_gemma_evidence_records_count_mismatch(monkeypatch):
     """Real finding pinned as a regression test: every gemma-4-31B-TEE
     instance returns 1 GPU token while its matched published row
     (8xpro_6000) declares gpu_count 8 — the published GPU set is not
     covered, so this must reject, not pass."""
     capture = json.loads((FIXTURES / "chutes_capture_sample.json").read_text())
     nras = json.loads((FIXTURES / "nras_attest_response.json").read_text())
+    pin_clock(monkeypatch, nras["captured_utc"])
     entry = nras["responses"]["gemma-4-31B-TEE"]
     quote = capture["models"]["gemma-4-31B-TEE"]["evidence"]["quote"]
     expected = base64.b64decode(quote)[48:][520:584][:32].hex()
     result = nvidia_nras.appraise_gpu_attestation(
         capture["models"]["gemma-4-31B-TEE"]["evidence"]["gpu_evidence"],
-        expected, nvidia_nras.load_pinned_jwks(), 8,
+        expected, JWKS, 8,
         attest_response=entry["response"])
     assert result["gpu_attested"] is False
     assert "gpu_count_mismatch" in result["reason"]
@@ -237,17 +243,38 @@ def test_tampered_per_gpu_payload_fails_signature(pinned_jwks):
 def test_unknown_kid_rejected_against_pinned_production_jwks(pinned_jwks):
     leaf_key, _ = pinned_jwks
     token = _sign_token(leaf_key, _platform_payload())
-    production = nvidia_nras.load_pinned_jwks()
-    record = nvidia_nras.appraise_jwt(token, NONCE, production, require_verdict=True)
+    record = nvidia_nras.appraise_jwt(token, NONCE, JWKS, require_verdict=True)
     assert record["ok"] is False
     assert record["reason"] == "unknown_kid_not_in_published_jwks"
 
 
-def test_production_jwks_fixture_pins_nvidia_intermediates():
-    jwks = nvidia_nras.load_pinned_jwks()
-    assert jwks["keys"]
-    for jwk in jwks["keys"]:
+def test_production_jwks_fixture_pins_nvidia_intermediates(monkeypatch):
+    pin_clock(monkeypatch, "2026-11-05T20:32:04+00:00")
+    assert JWKS["keys"]
+    for jwk in JWKS["keys"]:
         nvidia_nras._validated_key(jwk)  # raises unless the chain pins
+
+
+def test_captured_leaf_outside_validity_window_rejects(monkeypatch):
+    for iso in ("2026-11-05T18:00:00+00:00", "2026-11-06T08:00:00+00:00"):
+        pin_clock(monkeypatch, iso)
+        with pytest.raises(ValueError, match="validity window"):
+            nvidia_nras._validated_key(JWKS["keys"][0])
+
+
+def test_wrong_issuer_rejects(pinned_jwks):
+    leaf_key, jwks = pinned_jwks
+    token = _sign_token(leaf_key, _platform_payload(iss="https://evil.example"))
+    record = nvidia_nras.appraise_jwt(token, NONCE, jwks, require_verdict=True)
+    assert record["reason"] == "iss_mismatch: 'https://evil.example'"
+
+
+def test_expired_or_missing_exp_rejects(pinned_jwks):
+    leaf_key, jwks = pinned_jwks
+    for exp in (int(time.time()) - 1, None, "9999999999"):
+        token = _sign_token(leaf_key, _platform_payload(exp=exp))
+        record = nvidia_nras.appraise_jwt(token, NONCE, jwks, require_verdict=True)
+        assert record["reason"].startswith("expired_or_missing_exp"), exp
 
 
 def test_alg_mismatch_rejects(pinned_jwks):

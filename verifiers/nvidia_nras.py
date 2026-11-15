@@ -27,9 +27,11 @@ Policy (recorded; sources cited per rule):
               and the intermediate's SPKI digest must be one of the pinned
               NVIDIA intermediates below (captured 2026-11-05 from the same
               endpoint). The JWS signature must verify under the leaf key
-              with the header alg matching the key type. No x5c, unknown
-              intermediate, alg/key mismatch or bad signature rejects the
-              token.
+              with the header alg matching the key type, and the leaf must be
+              inside its validity window now. No x5c, unknown intermediate,
+              expired leaf, alg/key mismatch or bad signature rejects the
+              token. A verified token must carry `iss` == ISSUER and an
+              integer `exp` in the future.
   platform    The platform JWT must carry `x-nvidia-overall-att-result`
               boolean true or the string "PASS" (NRAS v3 returns boolean
               true/false; NEAR's production verifier accepts "PASS" — both
@@ -43,17 +45,17 @@ Policy (recorded; sources cited per rule):
 
 Claims reference: docs.nvidia.com/attestation GPU Claims Guide (v3.0 claims
 table; EAT nonce claim). JWKS endpoint and certificate subjects are
-NVIDIA-published; the pinned fixtures with capture time and URL are
+NVIDIA-published; test fixtures with capture time and URL are
 tests/fixtures/nras_jwks.json and tests/fixtures/nras_attest_response.json.
 """
 from __future__ import annotations
 
 import base64
 import binascii
+import datetime
 import hashlib
 import json
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 
@@ -65,7 +67,7 @@ from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 
 ATTEST_URL = "https://nras.attestation.nvidia.com/v3/attest/gpu"
 DEFAULT_JWKS_URL = "https://nras.attestation.nvidia.com/.well-known/jwks.json"
-PINNED_JWKS_FIXTURE = Path(__file__).resolve().parents[1] / "tests" / "fixtures" / "nras_jwks.json"
+ISSUER = "https://nras.attestation.nvidia.com"
 
 # SPKI-SHA256 of the NVIDIA Attestation Service GPU intermediates ("…GPU
 # Intermediate 004"/"005", issuer "NVIDIA Attestation Service CA 001"),
@@ -91,10 +93,8 @@ def fetch_jwks(url: str = DEFAULT_JWKS_URL, timeout: int = 20) -> Dict[str, Any]
     return body
 
 
-def load_pinned_jwks(path: Path = PINNED_JWKS_FIXTURE) -> Dict[str, Any]:
-    """The fixture-captured JWKS (tests and offline replay)."""
-    fixture = json.loads(Path(path).read_text())
-    return fixture["jwks"]
+def _now() -> datetime.datetime:
+    return datetime.datetime.now(datetime.timezone.utc)
 
 
 def _b64url_decode(value: str) -> bytes:
@@ -131,6 +131,8 @@ def _validated_key(jwk: Dict[str, Any]) -> Tuple[Any, str]:
     certs = [x509.load_der_x509_certificate(base64.b64decode(c)) for c in chain_b64]
     leaf, intermediate = certs[0], certs[1]
     _verify_cert_signature(leaf, intermediate.public_key())
+    if not leaf.not_valid_before_utc <= _now() <= leaf.not_valid_after_utc:
+        raise ValueError("x5c leaf certificate outside its validity window")
     if _spki_sha256(intermediate.public_key()) not in PINNED_INTERMEDIATE_SPKI_SHA256:
         raise ValueError("x5c intermediate is not a pinned NVIDIA intermediate")
     alg = _ALG_FOR_KEY.get((jwk.get("kty"), jwk.get("crv")))
@@ -252,6 +254,13 @@ def appraise_jwt(token: str, nonce: str, jwks: Dict[str, Any],
         return record
     record["signature_verified"] = True
     record["iss"] = payload.get("iss")
+    if record["iss"] != ISSUER:
+        record["reason"] = f"iss_mismatch: {record['iss']!r}"
+        return record
+    exp = payload.get("exp")
+    if not isinstance(exp, int) or exp <= _now().timestamp():
+        record["reason"] = f"expired_or_missing_exp: {exp!r}"
+        return record
     for field in ("ueid", "hwmodel", "x-nvidia-gpu-driver-version", "dbgstat"):
         if field in payload:
             record[field] = payload[field]
@@ -357,8 +366,3 @@ def appraise_gpu_attestation(items: Any, expected_nonce: str, jwks: Dict[str, An
     result["gpu_attested"] = True
     result["verified_gpu_count"] = len(per_gpu)
     return result
-
-
-def decode_payload(token: str) -> Dict[str, Any]:
-    """Decoded (unverified) payload — for retaining claim details in evidence."""
-    return json.loads(_b64url_decode(token.split(".")[1]))

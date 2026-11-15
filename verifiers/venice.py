@@ -142,7 +142,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                     None, allow_unknown_count=True)
                 sc.gpu_attested = result["gpu_attested"]
                 details["gpu_appraisal"] = result
-            except (requests.RequestException, ValueError) as exc:
+                details["gpu_count_pinned"] = False  # policy gap: no published GPU count, any count passes
+            except requests.RequestException as exc:
                 details["gpu_error"] = f"nras_unreachable: {type(exc).__name__}: {exc}"
                 sc.gpu_attested = None
 

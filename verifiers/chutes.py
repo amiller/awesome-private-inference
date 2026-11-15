@@ -16,8 +16,8 @@ Per `-TEE` instance, we verify the crypto core (live-confirmed sound):
     /servers/tee/measurements (boot RTMR0-2, runtime RTMR3) — recording which
     configuration row matched and the digest of the captured publication
   - TDX quote accepted by Phala's DCAP verifier, plus a local dcap_qvl
-    appraisal that keeps the TCB status (UpToDate/OutOfDate) and advisory IDs
-    Phala's response does not carry (#18)
+    appraisal that keeps the TCB status and advisory IDs Phala's response does
+    not carry (#18); only UpToDate passes (teep's policy)
   - GPU evidence: the per-GPU evidence blobs are submitted to NVIDIA's public
     NRAS endpoint; every returned JWT is signature-verified against NVIDIA's
     published JWKS, nonce-bound to the TD's report_data[0:32] (which the blobs
@@ -148,7 +148,7 @@ def _tcb_appraisal(quote_hex: str) -> Dict[str, Any]:
     Phala's verify response carries no TCB field at all (established live
     2026-11-05 by replaying a retained quote: only body/cert_data/header/
     verified are returned), which is why retained evidence holds tcb_status
-    null. Errors propagate to the caller and are recorded per instance.
+    null. Errors propagate.
     """
     import dcap_qvl
     import asyncio
@@ -221,7 +221,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     jwks: Optional[Dict[str, Any]] = None
     for inst in instances:
         entry: Dict[str, Any] = {
-            "instance_id": inst.get("instance_id"), "e2e_pubkey": inst.get("e2e_pubkey"),
+            "instance_id": inst["instance_id"], "e2e_pubkey": inst["e2e_pubkey"],
         }
         census.append(entry)
         try:
@@ -245,7 +245,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
 
         entry["measurements"] = {k: q[k] for k in ("mrtd", "rtmr0", "rtmr1", "rtmr2", "rtmr3")}
         entry["report_data_binds_key"] = sha256_nonce_pubkey_binding(
-            q["report_data"], nonce, entry["e2e_pubkey"] or "")
+            q["report_data"], nonce, entry["e2e_pubkey"])
         entry["cert_spki_bound"] = q["report_data"][64:128] == cert_spki
         entry["debug_disabled"] = (int(q["td_attributes"], 16) & 1) == 0
         entry["mrtd_in_golden_set"] = q["mrtd"] in golden
@@ -261,18 +261,15 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         entry["quote_appraisal"] = {
             "verified": entry["tdx_verified"], "body": phala_tdx.quote_body(tdx),
         }
-        try:
-            entry.update(_tcb_appraisal(base64.b64decode(ev["quote"]).hex()))
-            entry["tcb_status_source"] = "dcap_qvl"
-        except Exception as exc:  # recorded, never silently None (#18)
-            entry["tcb_status_error"] = f"{type(exc).__name__}: {exc}"
+        entry.update(_tcb_appraisal(base64.b64decode(ev["quote"]).hex()))
+        entry["tcb_status_source"] = "dcap_qvl"
         # A plausible detached report_data is not an authenticated binding when
         # the hardware quote itself was rejected.
         entry["report_data_binds_key"] = bool(entry["tdx_verified"] and entry["report_data_binds_key"])
 
         gpu_counts = {r.get("gpu_count") for r in matched}
-        gpu_count = gpu_counts.pop() if len(gpu_counts) == 1 else None
         entry["gpu_count_ambiguous"] = len(gpu_counts) != 1 and bool(matched)
+        gpu_count = gpu_counts.pop() if len(gpu_counts) == 1 else None
         if entry["gpu_evidence"] in (None, []):
             entry["gpu_attested"] = None
             entry["gpu_reason"] = "no_gpu_evidence_in_response"
@@ -286,7 +283,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                 entry["gpu_appraisal"] = nvidia_nras.appraise_gpu_attestation(
                     entry["gpu_evidence"], q["report_data"][:64], jwks, gpu_count)
                 entry["gpu_attested"] = entry["gpu_appraisal"]["gpu_attested"]
-            except (requests.RequestException, ValueError) as exc:
+            except requests.RequestException as exc:
                 # NVIDIA's endpoints unreachable: the GPU layer is unverified,
                 # not silently passed. Same distinction the Phala verifier draws
                 # between "could not ask" and "quote rejected".
@@ -296,6 +293,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         failures = [f"{k}=False" for k in
                     ("tdx_verified", "report_data_binds_key", "cert_spki_bound",
                      "debug_disabled") if entry.get(k) is False]
+        if entry["tcb_status"] != "UpToDate":
+            failures.append(f"tcb_status={entry['tcb_status']}")
         if entry.get("golden_row_full_match") is False:
             failures.append(str(entry.get("no_match_reason") or "golden_row_full_match"))
         if entry.get("gpu_attested") is False:
@@ -330,7 +329,6 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                    "matched_rows": e.get("matched_rows"),
                    "no_match_reason": e.get("no_match_reason"),
                    "tcb_status": e.get("tcb_status"),
-                   "tcb_status_error": e.get("tcb_status_error"),
                    "advisory_ids": e.get("advisory_ids"),
                    "gpu_attested": e.get("gpu_attested"), "gpu_reason": e.get("gpu_reason")}
                   for e in census],

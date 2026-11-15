@@ -3,7 +3,8 @@ request. Replays the live unauthenticated capture of Venice's
 /tee/attestation (tests/fixtures/venice_attestation_sample.json, captured
 2026-11-05 with a fresh 32-byte nonce) and the live NRAS response it
 produced (tests/fixtures/nras_venice_response.json) against NVIDIA's
-pinned production JWKS. Only Phala's TDX verifier is mocked (transport);
+production JWKS captured the same day, with the clock pinned to the NRAS
+capture time. Only Phala's TDX verifier is mocked (transport);
 negative controls mutate one authenticated input at a time and must each
 reject.
 """
@@ -14,6 +15,7 @@ from pathlib import Path
 import pytest
 import requests
 
+from tests.nras_capture import JWKS, pin_clock
 from verifiers import nvidia_nras, venice
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -49,14 +51,16 @@ def _run(monkeypatch, *, att=None, nvidia_payload=None, nras_response=None,
     monkeypatch.setattr(venice.phala_tdx, "is_verified", lambda v: True)
     monkeypatch.setattr(venice.phala_tdx, "quote_body", lambda v: {
         "reportdata": reportdata, "mrconfig": ""})
-    monkeypatch.setattr(nvidia_nras, "fetch_jwks", lambda: nvidia_nras.load_pinned_jwks())
+    monkeypatch.setattr(nvidia_nras, "fetch_jwks", lambda: JWKS)
+    pin_clock(monkeypatch, NRAS["captured_utc"])
     if nras_error is not None:
         def unreachable(payload, timeout=90):
             raise nras_error
         monkeypatch.setattr(nvidia_nras, "attest_payload", unreachable)
-    elif nras_response is not None:
+    else:
+        response = nras_response if nras_response is not None else NRAS["response"]
         monkeypatch.setattr(nvidia_nras, "attest_payload",
-                            lambda payload, timeout=90: nras_response)
+                            lambda payload, timeout=90: response)
     return venice.verify("key", venice.DEFAULT_BASE_URL, MODEL)
 
 
@@ -68,6 +72,7 @@ def test_real_capture_passes_signature_verified_gpu_appraisal(monkeypatch):
     assert report.scorecard.gpu_attested is True
     assert report.scorecard.nonce_bound is True
     assert report.scorecard.report_data_binds_key is True
+    assert report.details["gpu_count_pinned"] is False
 
 
 def test_payload_nonce_for_another_session_rejects(monkeypatch):

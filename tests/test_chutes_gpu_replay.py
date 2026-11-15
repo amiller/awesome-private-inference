@@ -3,8 +3,9 @@
 Chutes transport is mocked (the capture stands in for the keyed endpoints);
 everything else is real: the actual quotes, certificates, gpu_evidence blobs,
 the live NRAS response pinned in tests/fixtures/nras_attest_response.json and
-NVIDIA's pinned production JWKS. Register matching runs against the real
-published measurements.
+NVIDIA's production JWKS captured alongside it, with the clock pinned to the
+NRAS capture time. Register matching runs against the real published
+measurements.
 """
 import base64
 import json
@@ -12,6 +13,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.nras_capture import JWKS, pin_clock
 from verifiers import chutes, nvidia_nras
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
@@ -29,7 +31,8 @@ class Response:
         return self.value
 
 
-def _run(monkeypatch, model, *, gpu_items=None, nras_response=None, jwks=None):
+def _run(monkeypatch, model, *, gpu_items=None, nras_response=None, nras_error=None,
+         now=NRAS["captured_utc"]):
     entry = CAPTURE["models"][model]
     evidence = dict(entry["evidence"])
     if gpu_items is not None:
@@ -47,11 +50,15 @@ def _run(monkeypatch, model, *, gpu_items=None, nras_response=None, jwks=None):
 
     monkeypatch.setattr(chutes.requests, "get", get)
     monkeypatch.setattr(chutes.secrets, "token_hex", lambda n: nonce)
-    monkeypatch.setattr(chutes.nvidia_nras, "fetch_jwks",
-                        lambda: jwks or nvidia_nras.load_pinned_jwks())
-    if nras_response is not None:
-        monkeypatch.setattr(chutes.nvidia_nras, "attest_gpu_evidence",
-                            lambda items, n, timeout=90: nras_response)
+    monkeypatch.setattr(chutes.nvidia_nras, "fetch_jwks", lambda: JWKS)
+    pin_clock(monkeypatch, now)
+    response = nras_response if nras_response is not None else NRAS["responses"][model]["response"]
+
+    def attest(items, n, timeout=90):
+        if nras_error is not None:
+            raise nras_error
+        return response
+    monkeypatch.setattr(chutes.nvidia_nras, "attest_gpu_evidence", attest)
     monkeypatch.setattr(chutes.phala_tdx, "verify_tdx_quote", lambda v: {"quote": {"verified": True}})
     monkeypatch.setattr(chutes.phala_tdx, "is_verified", lambda v: True)
     monkeypatch.setattr(chutes.phala_tdx, "quote_body", lambda v: {"reportdata": "x"})
@@ -102,7 +109,9 @@ def test_tampered_gpu_item_nonce_rejects_real_instance(monkeypatch):
 def test_dropped_gpu_item_rejects_real_instance(monkeypatch):
     entry = CAPTURE["models"]["GLM-5.1-TEE"]
     items = entry["evidence"]["gpu_evidence"][:-1]
-    report, fleet = _run(monkeypatch, "GLM-5.1-TEE", gpu_items=items)
+    response = json.loads(json.dumps(NRAS["responses"]["GLM-5.1-TEE"]["response"]))
+    response[1].pop("GPU-7")
+    report, fleet = _run(monkeypatch, "GLM-5.1-TEE", gpu_items=items, nras_response=response)
     assert fleet["gpu_attested"] is False
     assert "gpu_count_mismatch" in fleet["reason"]
 
@@ -128,10 +137,8 @@ def test_platform_verdict_false_in_nras_response_rejects(monkeypatch):
 
 
 def test_nras_transport_failure_leaves_gpu_layer_unverified_not_passed(monkeypatch):
-    def unreachable(items, n, timeout=90):
-        raise nvidia_nras.requests.ConnectionError("nras down")
-    monkeypatch.setattr(chutes.nvidia_nras, "attest_gpu_evidence", unreachable)
-    report, fleet = _run(monkeypatch, "GLM-5.1-TEE")
+    report, fleet = _run(monkeypatch, "GLM-5.1-TEE",
+                         nras_error=nvidia_nras.requests.ConnectionError("nras down"))
     assert fleet["gpu_attested"] is None
     assert "nras_unreachable" in fleet["gpu_reason"]
     # an unverified layer must not read as a pass anywhere
@@ -145,3 +152,9 @@ def test_absent_gpu_evidence_is_unverified_not_passed(monkeypatch):
     assert fleet["reason"].startswith("gpu_layer_unverified")
     assert fleet["reason"].count("no_gpu_evidence_in_response")
     assert report.details["verification_status"] == "rejected"
+
+
+def test_real_tokens_rejected_after_exp(monkeypatch):
+    report, fleet = _run(monkeypatch, "GLM-5.1-TEE", now="2026-11-05T21:32:06+00:00")
+    assert fleet["gpu_attested"] is False
+    assert "expired_or_missing_exp" in fleet["reason"]

@@ -6,6 +6,8 @@ against real retained evidence in test_chutes_registers.py."""
 import base64
 import hashlib
 
+import pytest
+
 from verifiers import chutes
 
 
@@ -127,6 +129,7 @@ def test_fleet_census_retains_every_instance(monkeypatch):
     census = report.details["raw_evidence"]["fleet_census"]
     assert [c["instance_id"] for c in census] == ["inst-1", "inst-2"]
     assert all(c["quote_b64"] for c in census)
+    assert all(c["gpu_count_ambiguous"] is False for c in census)
     pub = report.details["golden_publication"]
     assert pub["url"] == "https://api.chutes.ai/servers/tee/measurements"
     assert pub["rows"] == 1 and len(pub["canonical_json_sha256"]) == 64
@@ -163,7 +166,7 @@ def test_instance_with_unavailable_evidence_fails_row(monkeypatch):
     assert "chutes_version" in report.details["verification_reason"]
     assert report.scorecard.tdx_verified is True  # verified core of inst-1 stands
     # the scorecard describes the appraised instances; the row verdict carries
-    # the unavailability (documented semantics in docs/tasks/glm-chutes-20261105.md)
+    # the unavailability
     assert report.details["fleet_all_instances_pass"] is False
 
 
@@ -184,6 +187,18 @@ def test_mutating_each_register_independently_rejects(monkeypatch):
         assert report.details["verification_status"] == "rejected", register
 
 
+def test_matched_rows_with_different_gpu_counts_are_ambiguous(monkeypatch):
+    report, _ = _run(monkeypatch, _golden((GOLDEN_ROW, dict(GOLDEN_ROW, gpu_count=4))), [
+        (_instance("inst-1"), _evidence()),
+    ])
+    assert report.details["raw_evidence"]["fleet_census"][0]["gpu_count_ambiguous"] is True
+
+
+def test_missing_e2e_pubkey_raises(monkeypatch):
+    with pytest.raises(KeyError, match="e2e_pubkey"):
+        _run(monkeypatch, _golden(), [({"instance_id": "inst-1"}, _evidence())])
+
+
 def test_ambiguous_boot_runtime_row_never_matches(monkeypatch):
     ambiguous = dict(GOLDEN_ROW)
     ambiguous["boot_rtmrs"] = dict(GOLDEN_ROW["boot_rtmrs"],
@@ -196,22 +211,19 @@ def test_ambiguous_boot_runtime_row_never_matches(monkeypatch):
     assert fleet["no_match_reason"] == "mrtd-matching row has ambiguous boot/runtime RTMR0-2"
 
 
-def test_tcb_appraisal_error_is_recorded_not_silenced(monkeypatch):
-    report, _ = _run(monkeypatch, _golden(), [(_instance("inst-1"), _evidence())],
-                     tcb=ValueError("pcs unreachable"))
-    fleet = report.details["fleet"][0]
-    assert fleet["tcb_status"] is None
-    assert fleet["tcb_status_error"] == "ValueError: pcs unreachable"
-    assert fleet["outcome"] == "verified_core"  # TCB retention is recorded evidence
+def test_tcb_appraisal_error_propagates(monkeypatch):
+    with pytest.raises(ValueError, match="pcs unreachable"):
+        _run(monkeypatch, _golden(), [(_instance("inst-1"), _evidence())],
+             tcb=ValueError("pcs unreachable"))
 
 
-def test_out_of_date_tcb_status_is_retained_verbatim(monkeypatch):
-    """#18: status and advisories must survive; OutOfDate is not a rejection
-    (same semantics as the NEAR verifier: both count as verified)."""
+def test_out_of_date_tcb_status_is_retained_and_rejects(monkeypatch):
+    """#18: status and advisories survive; only UpToDate passes (teep policy)."""
     report, _ = _run(monkeypatch, _golden(), [(_instance("inst-1"), _evidence())],
                      tcb={"tcb_status": "OutOfDate",
                           "advisory_ids": ["INTEL-SA-01192", "INTEL-SA-01245"]})
     fleet = report.details["fleet"][0]
     assert fleet["tcb_status"] == "OutOfDate"
     assert fleet["advisory_ids"] == ["INTEL-SA-01192", "INTEL-SA-01245"]
-    assert fleet["outcome"] == "verified_core"
+    assert fleet["outcome"] == "rejected"
+    assert "tcb_status=OutOfDate" in fleet["reason"]
