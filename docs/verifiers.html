@@ -495,6 +495,39 @@
           <td>yes</td>
         </tr>
 
+        <tr id="maple">
+          <th><a class="underline" href="https://github.com/MaplePrivacyLabs/Maple">Maple proxy and SDKs (OpenSecret)</a>
+            <small>0944a86 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-p-vendor-sdks.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Nitro gateway enclave that decrypts the prompt: nonce, E2EE to the attested key, authenticated replies, blocks on failure. Accepts any PCR0 OpenSecret has signed; GPU host checked only by the enclave.</td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
       </tbody>
     </table>
   </div>
@@ -708,6 +741,72 @@
 
           <td>yes</td>
           <td>yes</td>
+        </tr>
+
+        <tr id="nilai-sdk">
+          <th><a class="underline" href="https://github.com/NillionNetwork/nilai-py">Nillion nilai-py / nilai-ts</a>
+            <small>e49b528 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-p-vendor-sdks.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>No attestation checks; nilai-py fetches the server key with TLS verification off (client.py:104).</td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="secretvm-verify">
+          <th><a class="underline" href="https://github.com/scrtlabs/secretvm-verify">Secret AI secretvm-verify</a>
+            <small>a5d0d7c · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-p-vendor-sdks.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>TDX quote, TLS key bound in the quote, RTMR3 replayed from payloads, NVIDIA. Compose unpinned, dev images and an auto-downloaded registry accepted, GPU optional, no client nonce.</td>
+
+          <td>yes</td>
+          <td>n/a</td>
         </tr>
 
       </tbody>
@@ -1569,6 +1668,72 @@
           <td>yes</td>
         </tr>
 
+        <tr id="nilai-n8n">
+          <th><a class="underline" href="https://github.com/NillionNetwork/n8n-nodes-nilai">Nillion n8n-nodes-nilai</a>
+            <small>f5dac94 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-p-vendor-sdks.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>SEV-SNP chain and reply signature checked, AMD root unpinned; no nonce or TLS-key binding; measurement pin keyed by a server-claimed version; prompt sent whatever the result.</td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="secretai-chatbot">
+          <th><a class="underline" href="https://github.com/scrtlabs/secretai-chatbot-2026">Secret AI chatbot (reference app)</a>
+            <small>e2da664 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-p-vendor-sdks.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Chats to raw IPs with TLS verification off process-wide (server.js:2); attestation only feeds a badge, which shows valid when checks are missing.</td>
+
+          <td>yes</td>
+          <td>no</td>
+        </tr>
+
       </tbody>
     </table>
   </div>
@@ -1630,7 +1795,7 @@
 <section class="mt-8 max-w-3xl">
   <h2 class="text-xl font-semibold">Reviewed and out of scope</h2>
   <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
-  <li><a class="underline" href="https://github.com/crow-004/attestation-verifier">crow-004/attestation-verifier</a>: Verifies Tachpawl&#39;s threshold-signing nodes, not inference. <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-k-other.md">review</a></li>
+  <li><a class="underline" href="https://github.com/crow-004/attestation-verifier">crow-004/attestation-verifier</a>: Verifies Tachpawl&#39;s threshold-signing nodes, not inference. <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-k-other.md">review</a></li><li><a class="underline" href="https://github.com/scrtlabs/verifiers">scrtlabs/verifiers (proofofcloud.org backend)</a>: Hands verification to Phala&#39;s and Nillion&#39;s APIs and reports success on any 2xx from Nillion. <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-p-vendor-sdks.md">review</a></li><li><a class="underline" href="https://github.com/scrtlabs/antseed-verification">scrtlabs/antseed-verification</a>: Proves which GitHub account owns an AntSeed peer id; no link to an attestation. <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-p-vendor-sdks.md">review</a></li>
   </ul>
 </section>
 

@@ -891,6 +891,91 @@
         }
       },
       "notes": "Recipient is NEAR's gateway CVM, not the model. Brave issue #55247 calls client-side attestation out of scope."
+    },
+    {
+      "id": "nilai-sdk",
+      "name": "Nillion nilai-py / nilai-ts",
+      "repo": "https://github.com/NillionNetwork/nilai-py",
+      "commit": "e49b528",
+      "kind": "library",
+      "review": "research/client-comparison-2026-11-15/part-p-vendor-sdks.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "own": {
+          "grade": "weak",
+          "cell": "No attestation checks; nilai-py fetches the server key with TLS verification off (client.py:104)."
+        }
+      }
+    },
+    {
+      "id": "nilai-n8n",
+      "name": "Nillion n8n-nodes-nilai",
+      "repo": "https://github.com/NillionNetwork/n8n-nodes-nilai",
+      "commit": "f5dac94",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-p-vendor-sdks.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "own": {
+          "grade": "weak",
+          "cell": "SEV-SNP chain and reply signature checked, AMD root unpinned; no nonce or TLS-key binding; measurement pin keyed by a server-claimed version; prompt sent whatever the result."
+        }
+      }
+    },
+    {
+      "id": "secretvm-verify",
+      "name": "Secret AI secretvm-verify",
+      "repo": "https://github.com/scrtlabs/secretvm-verify",
+      "commit": "a5d0d7c",
+      "kind": "library",
+      "review": "research/client-comparison-2026-11-15/part-p-vendor-sdks.md",
+      "event_log_hashed": true,
+      "fails_closed": null,
+      "cites_prior_work": null,
+      "providers": {
+        "own": {
+          "grade": "partial",
+          "cell": "TDX quote, TLS key bound in the quote, RTMR3 replayed from payloads, NVIDIA. Compose unpinned, dev images and an auto-downloaded registry accepted, GPU optional, no client nonce."
+        }
+      }
+    },
+    {
+      "id": "secretai-chatbot",
+      "name": "Secret AI chatbot (reference app)",
+      "repo": "https://github.com/scrtlabs/secretai-chatbot-2026",
+      "commit": "e2da664",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-p-vendor-sdks.md",
+      "event_log_hashed": true,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "own": {
+          "grade": "weak",
+          "cell": "Chats to raw IPs with TLS verification off process-wide (server.js:2); attestation only feeds a badge, which shows valid when checks are missing."
+        }
+      }
+    },
+    {
+      "id": "maple",
+      "name": "Maple proxy and SDKs (OpenSecret)",
+      "repo": "https://github.com/MaplePrivacyLabs/Maple",
+      "commit": "0944a86",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-p-vendor-sdks.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "own": {
+          "grade": "partial",
+          "cell": "Nitro gateway enclave that decrypts the prompt: nonce, E2EE to the attested key, authenticated replies, blocks on failure. Accepts any PCR0 OpenSecret has signed; GPU host checked only by the enclave."
+        }
+      }
     }
   ],
   "out_of_scope": [
@@ -899,6 +984,18 @@
       "repo": "https://github.com/crow-004/attestation-verifier",
       "reason": "Verifies Tachpawl's threshold-signing nodes, not inference.",
       "review": "research/client-comparison-2026-11-15/part-k-other.md"
+    },
+    {
+      "name": "scrtlabs/verifiers (proofofcloud.org backend)",
+      "repo": "https://github.com/scrtlabs/verifiers",
+      "reason": "Hands verification to Phala's and Nillion's APIs and reports success on any 2xx from Nillion.",
+      "review": "research/client-comparison-2026-11-15/part-p-vendor-sdks.md"
+    },
+    {
+      "name": "scrtlabs/antseed-verification",
+      "repo": "https://github.com/scrtlabs/antseed-verification",
+      "reason": "Proves which GitHub account owns an AntSeed peer id; no link to an attestation.",
+      "review": "research/client-comparison-2026-11-15/part-p-vendor-sdks.md"
     }
   ],
   "notes": "NEAR hackathon apps: 15 surveyed in research/client-comparison-2026-11-15/part-l-near-hackathon.md; the strongest and weakest are listed here."
