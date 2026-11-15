@@ -754,6 +754,57 @@
           "cell": "Hides the prompt from the Routstr node via two-party TLS and ZK proofs; Venice still sees plaintext; no attestation. Open PRs; not externally reviewed."
         }
       }
+    },
+    {
+      "id": "near-inference-sdk",
+      "name": "NEAR inference-sdk",
+      "repo": "https://github.com/nearai/inference-sdk",
+      "commit": "9cc67f72",
+      "kind": "library",
+      "review": "research/client-comparison-2026-11-15/part-n-first-party.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Every instance quoted, event log replayed, deployment-log hash checked when served but skipped if absent (attestation-model.ts:98-107). Defaults: E2EE off (v3 when on), no compose pin, OutOfDate and missing GPU accepted."
+        }
+      }
+    },
+    {
+      "id": "near-private-chat",
+      "name": "NEAR Private Chat (web, iOS)",
+      "repo": "https://github.com/nearai/private-chat",
+      "commit": "5cf5b0d7",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-n-first-party.md",
+      "event_log_hashed": false,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Prompt goes in plaintext to chat-api, then to cloud-api; no hop verifies. 'Verified' means the report fetched without error (ModelVerifier.tsx:222)."
+        }
+      }
+    },
+    {
+      "id": "tinfoil-chat",
+      "name": "Tinfoil Chat (webapp, harness)",
+      "repo": "https://github.com/tinfoilsh/tinfoil-webapp",
+      "commit": "bdfa6372",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-n-first-party.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Browser attests the harness enclave (latest release), which holds plaintext and attests the router once at boot; the router checks the model replica."
+        }
+      }
     }
   ],
   "out_of_scope": [
