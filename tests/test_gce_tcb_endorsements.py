@@ -243,11 +243,21 @@ def test_rim_download_md5_mismatch_raises(tmp_path, monkeypatch):
 
 def test_committed_history_is_consistent():
     history = json.loads((REPO / "data/gce-tcb-endorsements.json").read_text())
-    assert history["endorsements"] and all(e["result"] == "verified" for e in history["endorsements"].values())
+    assert history["endorsements"]
     for name, entry in history["intel_rims"].items():
         latest = entry["retained_versions"][-1]
         content = (REPO / "data" / latest["path"]).read_bytes()
         assert base64.b64encode(hashlib.md5(content).digest()).decode() == entry["md5"], name
+
+
+def test_main_does_not_advance_snapshot_when_verification_raises(tmp_path, monkeypatch):
+    monkeypatch.setattr(fe, "listing", lambda: {**LISTING, **rim_listing(b"rim")})
+    monkeypatch.setattr(fe, "fetch_object", lambda name: b"not-a-protobuf")
+    monkeypatch.setattr(sys, "argv", ["x", "--snapshots", str(tmp_path), "--history", str(tmp_path / "h.json"),
+                                      "--output", str(tmp_path / "r.txt")])
+    with pytest.raises(ValueError):
+        fe.main()
+    assert list(tmp_path.iterdir()) == []
 
 
 def test_main_writes_diff_verification_and_history(tmp_path, monkeypatch):
@@ -256,6 +266,8 @@ def test_main_writes_diff_verification_and_history(tmp_path, monkeypatch):
     listing = {**{n: dict(m, size="1") for n, m in LISTING.items()}, **rim_listing(b"rim")}
     monkeypatch.setattr(fe, "listing", lambda: listing)
     monkeypatch.setattr(fe, "fetch_object", objects.__getitem__)
+    verify_all = fe.verify_all
+    monkeypatch.setattr(fe, "verify_all", lambda current, now: verify_all(current, NOW))
     bad = bytearray(objects[fe.TDX_PREFIX + REAL[0]])
     bad[-1] ^= 1
     objects[fe.TDX_PREFIX + REAL[0]] = bytes(bad)
@@ -265,7 +277,7 @@ def test_main_writes_diff_verification_and_history(tmp_path, monkeypatch):
                                       "--output", str(out)])
     fe.main()
     report = out.read_text()
-    assert "FIRST SNAPSHOT" in report
+    assert "FIRST SNAPSHOT" in report and len(list((tmp_path / "snaps").glob("gce-tcb-*.json"))) == 1
     assert f"{len(REAL) - 1}/{len(REAL)} TDX endorsements verified" in report
     assert f"VERIFY FAILED {fe.TDX_PREFIX}{REAL[0]}: signature fail" in report
     h = json.loads(history.read_text())

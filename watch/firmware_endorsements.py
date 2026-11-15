@@ -131,7 +131,7 @@ def verify_endorsement(parsed, object_name, root, root_der, fd_names, now):
     check("signature", _verifies(leaf.public_key(), parsed["signature"], parsed["golden_raw"],
                                  PSS_SHA256_SALT32, hashes.SHA256()),
           "RSA-PSS(SHA-256, salt 32) verification failed")
-    check("chain_to_root", _verifies(root.public_key(), leaf.signature, leaf.tbs_certificate_bytes,
+    check("chain_to_root", leaf.issuer == root.subject and _verifies(root.public_key(), leaf.signature, leaf.tbs_certificate_bytes,
                                      leaf.signature_algorithm_parameters, leaf.signature_hash_algorithm),
           "root does not verify leaf certificate")
     bundle = x509.load_pem_x509_certificates(parsed["ca_bundle"])
@@ -217,7 +217,6 @@ def main():
     old = json.loads(prior[-1].read_text()) if prior else None
     new = listing()
     stamp = max(i["updated"] for i in new.values())
-    (snaps / f"gce-tcb-{stamp[:19].replace(':', '')}.json").write_text(json.dumps(new, indent=1, sort_keys=True))
     lines = [f"GCE TCB endorsement bucket gce_tcb_integrity: {len(new)} objects, newest update {stamp}"]
     if old is None:
         lines.append(f"FIRST SNAPSHOT: no prior snapshot in {snaps}; nothing to diff.")
@@ -241,6 +240,7 @@ def main():
     history = json.loads(a.history.read_text()) if a.history.exists() else {"schema": "gce-tcb-endorsements/2"}
     update_history(history, new, records, a.history.parent / "gce-tcb-intel-rims", now.isoformat(timespec="seconds"))
     a.history.write_text(json.dumps(history, indent=1, sort_keys=True) + "\n")
+    (snaps / f"gce-tcb-{stamp[:19].replace(':', '')}.json").write_text(json.dumps(new, indent=1, sort_keys=True))
     pathlib.Path(a.output).write_text("\n".join(lines) + "\n")
 
 
