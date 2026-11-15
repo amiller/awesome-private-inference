@@ -152,6 +152,18 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
   </section>
 
   <section class="prose">
+    <h2>Other verifiers, not yet reviewed</h2>
+    <p>Found by GitHub search on 2026-11-15. The descriptions are each project's own; none of these has been read yet.</p>
+    <ul>
+      <li><strong>Routers and markets:</strong> <a href="https://github.com/Antseed/antseed">Antseed/antseed</a> (P2P inference market with a TEE seller image and buyer-side verifier; review running), <a href="https://github.com/SPIKESPIGEL404/private-flex-inference-auctions">SPIKESPIGEL404/private-flex-inference-auctions</a> (BitRouter co-founder's NEAR hackathon proposal; review running), <a href="https://github.com/anonrouter/anonrouter-sdk">anonrouter/anonrouter-sdk</a> ("independently verify AnonRouter's confidential inference routes"), <a href="https://github.com/alien-id/alien-compute">alien-id/alien-compute</a> (confidential market for distributed inference), <a href="https://github.com/astrea-foundation/axiom-web-gateway">astrea-foundation/axiom-web-gateway</a> (attested gateway with verified upstream inference).</li>
+      <li><strong>Agent and editor plugins:</strong> <a href="https://github.com/ariofrio/pi-tee">ariofrio/pi-tee</a> (NEAR AI and Tinfoil), <a href="https://github.com/privateer-agent/pi-privacy">privateer-agent/pi-privacy</a>, <a href="https://github.com/rndmcnlly/opencode-tinfoil">rndmcnlly/opencode-tinfoil</a>.</li>
+      <li><strong>Provider clients:</strong> <a href="https://github.com/tinfoilsh/tinfoil-cli">tinfoilsh/tinfoil-cli</a>; Venice E2EE libraries and proxies by <a href="https://github.com/elkimek/venice-e2ee">elkimek</a>, <a href="https://github.com/clawdbotatg/venice-e2ee-proxy">clawdbotatg</a> and <a href="https://github.com/M0dEx/venice-e2ee-proxy">M0dEx</a>; <a href="https://github.com/teemoonai/teemoon-android">teemoonai/teemoon-android</a> (on-device verification, E2EE to NEAR AI).</li>
+      <li><strong>Other TEE platforms and policy:</strong> <a href="https://github.com/crow-004/attestation-verifier">crow-004/attestation-verifier</a> (Tachpawl nodes, AWS Nitro and dstack), <a href="https://github.com/AdverserialAI/confidential-policy">AdverserialAI/confidential-policy</a> (published policies and release manifests), <a href="https://github.com/ethanolivertroy/tee-proof-demo">ethanolivertroy/tee-proof-demo</a> (browser verification for NEAR and Phala).</li>
+      <li><strong>NEAR hackathon apps:</strong> more than a dozen apps pushed this week each verify NEAR AI attestation themselves, often in the browser, for example <a href="https://github.com/indaga-ai/private-dna-reading">indaga-ai/private-dna-reading</a> and <a href="https://github.com/oocoder/saferedline">oocoder/saferedline</a>.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
     <h2>Problems that recur across clients</h2>
     <ul>
       <li><strong>Event-log values trusted without hashing.</strong> Replaying digests to RTMR3 proves nothing about a payload unless the digest is recomputed from it. private-ai-gateway's TS client (<code>clients/verifier-ts/src/report.ts:173-182</code>), abalone and BitRouter's removed verifier skip this. teep (<code>internal/attestation/eventlog.go:57-68</code>), the Rust <code>aci-verify</code> crate and the NEAR AI Gateway's staging build do it.</li>
