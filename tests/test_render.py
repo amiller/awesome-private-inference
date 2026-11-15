@@ -126,8 +126,8 @@ def test_venice_requires_its_prompt_path_layers():
             f"{layer} was excluded from Venice's bar once; it must stay required"
 
 
-def _cell(value, shape, layer, checked_count=2, retired=False):
-    return render.check_cell(value, shape=shape, layer=layer, checked_count=checked_count, retired=retired)
+def _cell(value, shape, layer, checked_count=2, retired=False, rejected=False):
+    return render.check_cell(value, shape=shape, layer=layer, checked_count=checked_count, retired=retired, rejected=rejected)
 
 
 def test_none_cells_render_distinct_states():
@@ -143,7 +143,8 @@ def test_none_cells_render_distinct_states():
     assert empty["mark"] == "—" and "No evidence captured" in empty["meaning"]
     retired = _cell(None, "retired", "tdx_verified", checked_count=0, retired=True)
     assert retired["mark"] == "n/a" and "retired" in retired["meaning"]
-    assert {c["mark"] for c in (ours, provider, na, empty)} == render.NONE_MARKS
+    unreached = _cell(None, "tinfoil-sev-snp-v2", "hpke_pubkey_attested", rejected=True)
+    assert {c["mark"] for c in (ours, provider, na, empty, unreached)} == render.NONE_MARKS
     assert _cell(True, "venice", "prod_os_image", checked_count=0)["mark"] == "✓"
 
 
@@ -174,3 +175,9 @@ def test_retired_row_shows_its_reason_not_a_provider_failure():
 def test_venice_legacy_shape_required_layers_render():
     for layer in ("event_log_replayed", "tee_boot_config", "tee_hardware_config"):
         assert _cell(None, "venice", layer)["mark"] == "∅"
+
+
+def test_layer_not_reached_on_rejected_row():
+    assert _cell(None, "tinfoil-sev-snp-v2", "hpke_pubkey_attested", rejected=True)["mark"] == "·"
+    with pytest.raises(KeyError):
+        _cell(None, "tinfoil-sev-snp-v2", "hpke_pubkey_attested")
