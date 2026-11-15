@@ -1,0 +1,187 @@
+<title>Private Inference Verifiers</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column; a client x provider matrix that scrolls on its own; one section per provider */
+:root {
+  --bg: #f7f8f6; --fg: #1d2421; --muted: #5d6a64; --rule: #d8ddd9; --panel: #eef1ee;
+  --accent: #2f6f5e;
+  --ok-bg: #dcefe5; --ok-fg: #1e5a3f; --mid-bg: #f4ead0; --mid-fg: #6b5210; --no-bg: #f5dcd8; --no-fg: #7d2a20;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141917; --fg: #e3e8e5; --muted: #98a59f; --rule: #2d3632; --panel: #1b221f; --accent: #7cc4ab;
+  --ok-bg: #1e3a2d; --ok-fg: #9fdcbd; --mid-bg: #3a3218; --mid-fg: #e8cf86; --no-bg: #43221d; --no-fg: #f1aea3; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141917; --fg: #e3e8e5; --muted: #98a59f; --rule: #2d3632; --panel: #1b221f; --accent: #7cc4ab;
+  --ok-bg: #1e3a2d; --ok-fg: #9fdcbd; --mid-bg: #3a3218; --mid-fg: #e8cf86; --no-bg: #43221d; --no-fg: #f1aea3; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.6 var(--sans); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 36px; }
+.prose { max-width: 70ch; display: grid; gap: 12px; min-width: 0; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0; font-weight: 600; text-wrap: balance; }
+h2 { font-size: 20px; margin: 0; font-weight: 600; text-wrap: balance; }
+h3 { font-size: 16px; margin: 0; font-weight: 600; }
+p, ul, ol { margin: 0; } ul, ol { padding-left: 22px; display: grid; gap: 8px; }
+ol.chain li::marker { font: 600 14px var(--mono); color: var(--accent); }
+.meta { color: var(--muted); font-size: 13px; }
+code { font: 13px var(--mono); background: var(--panel); padding: 1px 4px; border-radius: 3px; overflow-wrap: anywhere; }
+a { color: var(--accent); }
+.tablebox { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 1100px; font-size: 13px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--rule); }
+thead th { background: var(--panel); font-size: 12px; color: var(--muted); font-weight: 600; }
+tbody th { font-weight: 600; min-width: 140px; }
+tbody th small { display: block; font: 400 11.5px var(--mono); color: var(--muted); }
+td.na { color: var(--muted); }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+.chip { display: inline-block; font: 500 11px var(--mono); padding: 1px 6px; border-radius: 3px; margin-bottom: 3px; }
+.ok { background: var(--ok-bg); color: var(--ok-fg); } .mid { background: var(--mid-bg); color: var(--mid-fg); } .no { background: var(--no-bg); color: var(--no-fg); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+.providers { display: grid; gap: 28px; }
+</style>
+
+<div class="wrap">
+  <header class="prose">
+    <h1>Private inference verifiers</h1>
+    <p>The clients that check TEE attestation for private inference, compared across seven providers. Each was read from source at a pinned commit on 2026-11-15; live runs are noted where they happened.</p>
+    <p>A verifying client has to establish four things before it sends a prompt. The hardware is genuine and current. The code that will read the prompt is known, and changes to it are public. The prompt is encrypted to a key that the attested code holds. And the request is refused if any of these fails. Every provider places the code that reads the prompt somewhere different, so the hard part differs by provider.</p>
+  </header>
+
+  <section style="display:grid;gap:12px">
+    <h2>Who checks what</h2>
+    <div class="legend"><span><span class="chip ok">blocks</span> checks that reach the serving code, enforced before sending</span><span><span class="chip mid">partial</span> checks something, but stops short of the serving code or doesn't block</span><span><span class="chip no">weak</span> little or nothing is checked</span><span>— not supported</span></div>
+    <div class="tablebox"><table>
+      <thead><tr><th>Client</th><th>NEAR AI</th><th>Tinfoil</th><th>Phala Cloud (ACI)</th><th>Chutes</th><th>Venice</th><th>NanoGPT</th><th>Privatemode</th></tr></thead>
+      <tbody>
+        <tr><th>teep<small>6548996</small></th>
+          <td><span class="chip mid">partial</span> Every instance; E2EE v2 to the model key; static compose pin. Deployment log unchecked (#166).</td>
+          <td><span class="chip mid">partial</span> Router only, latest release auto-adopted. Direct mode disabled 2026-11-12.</td>
+          <td><span class="chip mid">partial</span> Gateway and sessions pinned, receipt verified, but after the stream. Upstream workload unchecked.</td>
+          <td><span class="chip mid">partial</span> MRTD/MRSEAM pinned; ML-KEM to the instance key. Serving code is outside the measurement.</td>
+          <td><span class="chip mid">partial</span> Legacy E2EE blocks. ACI/1: gateway only, reply forgeable.</td>
+          <td><span class="chip no">weak</span> E2EE off by default.</td>
+          <td class="na">—</td></tr>
+        <tr><th>private-ai-gateway<small>e9b6ae8a, as a client</small></th>
+          <td><span class="chip no">weak</span> NEAR's gateway quote only.</td>
+          <td><span class="chip no">weak</span> Router via Tinfoil's SDK, no nonce, one session cached for an hour.</td>
+          <td><span class="chip mid">partial</span> Is the gateway; its own sessions.</td>
+          <td><span class="chip no">weak</span> Measurement profiles fetched from Chutes, unauthenticated.</td>
+          <td class="na">—</td>
+          <td class="na">—</td>
+          <td><span class="chip no">weak</span> Delegated to Privatemode's proxy.</td></tr>
+        <tr><th>pap<small>e9b6ae8a, ACI CLI</small></th>
+          <td class="na">—</td><td class="na">—</td>
+          <td><span class="chip mid">partial</span> TLS pinned to the attested keyset; receipt checked after printing. Key custody only with two flags.</td>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr><th>tinfoil-go / tinfoil-python<small>rc.9</small></th>
+          <td class="na">—</td>
+          <td><span class="chip mid">partial</span> Strongest Tinfoil client: local AMD chain, nonce, SPKI pin, 7-day freshness. Router route covers the router, not the model enclave; adopts any release Tinfoil signs.</td>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr><th>Venice proxies<small>jooray / AxLabs</small></th>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td>
+          <td><span class="chip mid">partial</span> jooray refuses GPU models without NVIDIA evidence; AxLabs only warns. Neither parses ACI/1.</td>
+          <td class="na">—</td><td class="na">—</td></tr>
+        <tr><th>Privatemode proxy</th>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td>
+          <td><span class="chip mid">partial</span> Default manifest comes from a CDN, unsigned, auto-adopted. Pin it with <code>--manifest-path</code>.</td></tr>
+        <tr><th>abalone<small>53655796</small></th>
+          <td><span class="chip no">weak</span> Warns and sends on TCB; E2EE v1; event-log values unhashed.</td>
+          <td class="na">—</td>
+          <td><span class="chip no">weak</span> Vendored TS verifier; no custody, no session pins; receipt check only in tests.</td>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr><th>hermes-agent<small>1f92ab10, unmaintained</small></th>
+          <td><span class="chip no">weak</span> Checks the deployment log's quote but never hashes the list. E2EE v1; sends without E2EE unless strict.</td>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr><th>BitRouter<small>f8763b1, removed in #701</small></th>
+          <td><span class="chip no">weak</span> Never wired into requests; event-log values unhashed.</td>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr><th>BitRouter inference auctions<small>SPIKESPIGEL404, review running</small></th>
+          <td colspan="7" class="na">Review in progress.</td></tr>
+        <tr><th>NEAR AI Gateway / IronWire<small>df2e821 / ac919ac</small></th>
+          <td><span class="chip no">weak</span> Plain HTTPS to NEAR's API. Checks each reply's receipt after delivery, for trace provenance.</td>
+          <td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td></tr>
+        <tr><th>awesome-private-inference<small>406b535, monitor</small></th>
+          <td><span class="chip mid">partial</span> Every instance and the deployment log, with public files aged 24 h. Sends no prompts.</td>
+          <td><span class="chip mid">partial</span> Router; local AMD chain and TCB check.</td>
+          <td><span class="chip mid">partial</span> Gateway keyset and sessions.</td>
+          <td><span class="chip mid">partial</span> Full register match and census.</td>
+          <td><span class="chip mid">partial</span> Legacy dstack rows; ACI/1 rows marked gateway-only.</td>
+          <td class="na">—</td><td class="na">—</td></tr>
+      </tbody>
+    </table></div>
+    <p class="meta">No cell is green. On every provider, the best available client still stops short of the serving code somewhere. The sections below say where.</p>
+  </section>
+
+  <section class="providers">
+    <h2>Where each provider's serving code is, and who checks it</h2>
+
+    <div class="prose">
+      <h3>Tinfoil</h3>
+      <p>The router's attested config names each model's repo, and the router admits a model enclave only if it matches that repo's Sigstore release, with weights pinned by dm-verity. Every release is in Sigstore's public Rekor log, so changes are public. Gaps: the client attests the router, not the model enclave; clients adopt the latest release immediately; and the control plane can rewrite <code>model: "auto"</code> requests outside the measurement.</p>
+    </div>
+
+    <div class="prose">
+      <h3>NEAR AI</h3>
+      <p>The measured compose runs only compose-manager, NEAR's update service. compose-manager then deploys the serving code from commits in <code>nearai/cvm-compose-files</code>, and reports what it deployed in a log bound to its own quote. A client has to follow the chain to the end:</p>
+      <ol class="chain">
+        <li>Model quote verifies, current TCB, NVIDIA evidence, our nonce.</li>
+        <li>The measured compose is pinned or authorized on-chain on Base.</li>
+        <li>compose-manager's quote verifies, comes from the same machine, and its report data is <code>sha256(log) || our nonce</code>.</li>
+        <li>Every running file is public at its commit and has been seen by an archive for some minimum time.</li>
+        <li>The prompt is encrypted to the attested model key, and nothing is sent if a step fails.</li>
+      </ol>
+      <p>teep does 1, 2 and 5. Our monitor added 3 and 4 on 2026-11-15 (<code>verifiers/near_deployments.py</code>). On live glm-5.3-flash and Qwen3.8-27B every check passed except age; the archive started that day with 43 files, all matching their public commits. Some were deployed from personal branches and <code>experiments/</code> files, not release tags.</p>
+      <p>Two limits remain on NEAR's side. dstack's GetQuote signs any report data the caller supplies, and since dstack 0.6.0 apps can't extend RTMR3. NEAR's compose gives GetQuote to the inference proxies and a third-party <code>levantolabs/sage2-hopper-pod</code> container, so a deployed container could serve a quote over a different log; the public commit history is the anchor it can't forge. And compose-manager doesn't log the environment values it substitutes into each file.</p>
+    </div>
+
+    <div class="prose">
+      <h3>Phala Cloud and other ACI services</h3>
+      <p>The client attests the ACI gateway and can pin the sessions the gateway holds with upstream workloads. Nobody applies a policy to those upstream workloads today (teep reports "workload policy not checked"), and the receipt naming the serving session arrives after the stream is delivered. Behind the gateway, "the operator" can be several companies.</p>
+    </div>
+
+    <div class="prose">
+      <h3>Chutes</h3>
+      <p>The serving code is excluded from the measurement (<code>cfsv_wrapper.py:54</code>), so no client policy over the quote can cover it.</p>
+    </div>
+
+    <div class="prose">
+      <h3>Venice and NanoGPT</h3>
+      <p>Venice's newer ACI/1 route exposes only the gateway; there has been no GPU evidence since 2026-11-12. Its legacy dstack route still gives per-host evidence, and teep blocks on it. NanoGPT's dstack route sends the prompt to NanoGPT unless E2EE is turned on.</p>
+    </div>
+  </section>
+
+  <section class="prose">
+    <h2>Problems that recur across clients</h2>
+    <ul>
+      <li><strong>Event-log values trusted without hashing.</strong> Replaying digests to RTMR3 proves nothing about a payload unless the digest is recomputed from it. private-ai-gateway's TS client (<code>clients/verifier-ts/src/report.ts:173-182</code>), abalone and BitRouter's removed verifier skip this. teep (<code>internal/attestation/eventlog.go:57-68</code>), the Rust <code>aci-verify</code> crate and the NEAR AI Gateway's staging build do it.</li>
+      <li><strong>Releases adopted on sight.</strong> teep and tinfoil-go take the latest Tinfoil release, Privatemode's proxy takes any CDN manifest, and nobody waits before accepting a NEAR deployment. A public log gives visibility; a waiting period is what gives an observer time to object.</li>
+      <li><strong>Reply authenticity.</strong> Only ACI receipts on Phala Cloud are verified (teep, pap), and only after delivery. NEAR's E2EE v3 binds the reply key (inference-proxy #321), but no client sends v3.</li>
+      <li><strong>Fail-open defaults.</strong> Warn-and-send on TCB, skipping NVIDIA checks during an outage, sending without E2EE after a failed check, and gateways that forward unless a request is marked "required".</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>Suggestions</h2>
+    <ul>
+      <li><strong>teep:</strong> add steps 3 and 4 for NEAR (#166). The answer to #166's open question: compose-manager doesn't extend RTMR3; it binds the log through a second quote (<code>compose-manager/src/main.rs:1236-1243</code>). Consider a waiting period before adopting a new Tinfoil release.</li>
+      <li><strong>private-ai-gateway:</strong> recompute event digests in the TS client, and carry Tinfoil's <code>Tinfoil-Enclave</code> response header into the receipt.</li>
+      <li><strong>NEAR:</strong> log environment values, measure each deployment into a register apps can't write, set a nonzero minimum tag age, and check the log in cloud-api.</li>
+      <li><strong>NEAR AI Gateway:</strong> ship the staging checks, and send prompts with E2EE to the attested model key if users expect them to stay private.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://github.com/13rac1/teep">13rac1/teep</a> at <code>6548996</code>; <a href="https://github.com/13rac1/teep/issues/166">issue #166</a></li>
+      <li><a href="https://github.com/Dstack-TEE/private-ai-gateway">Dstack-TEE/private-ai-gateway</a> at <code>e9b6ae8a</code> (gateway, pap, verifier-ts)</li>
+      <li><a href="https://github.com/tinfoilsh/tinfoil-go">tinfoilsh/tinfoil-go</a> rc.9; jooray and AxLabs Venice E2EE proxies; edgelesssys privatemode-public</li>
+      <li><a href="https://github.com/nearai/compose-manager">nearai/compose-manager</a> at <code>2140f20c</code>; <a href="https://github.com/Dstack-TEE/dstack">Dstack-TEE/dstack</a> <code>next</code> at <code>aa8805a917</code></li>
+      <li><a href="https://github.com/nearai/ironwire">nearai/ironwire</a> at <code>ac919ac</code>; <a href="https://github.com/TraceCommons/trace-commons">TraceCommons/trace-commons</a> at <code>df2e821</code></li>
+      <li><a href="https://github.com/bitrouter/bitrouter">bitrouter/bitrouter</a> at <code>f8763b1</code>; <a href="https://github.com/SPIKESPIGEL404/private-flex-inference-auctions">SPIKESPIGEL404/private-flex-inference-auctions</a></li>
+      <li>hermes-agent <code>feat/near-ai-attestation</code> at <code>1f92ab10</code>; abalone at <code>53655796</code></li>
+      <li><a href="https://github.com/amiller/awesome-private-inference">amiller/awesome-private-inference</a> branch <code>refresh/2026-11-15</code> (not yet pushed)</li>
+    </ul>
+  </section>
+</div>
