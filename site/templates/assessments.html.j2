@@ -10,7 +10,7 @@
 <h1 class="text-2xl font-bold">Route assessments</h1>
 <p class="mt-2 text-slate-600">Dated explanations of what is established, what is missing, and which operator powers remain relevant. These are preliminary source/evidence reviews, not completed end-to-end devproof audits.</p>
 <section id="rubric" class="my-6">
-  <h2 class="text-xl font-semibold">Assessment obligations · version 2</h2>
+  <h2 class="text-xl font-semibold">Assessment obligations · version 3</h2>
   <p class="mt-2 text-sm">A route is a named client mode, recipient and model path. Plaintext inside approved attested code does not imply operator access. The question is whether an operator can obtain it or alter the computation without the client refusing.</p>
   <p class="mt-3 text-sm">Each cell names a concrete finding or task. “Our … missing/pending” identifies unfinished verification or evidence in this repository. It is not evidence of a provider defect. Select a cell for what was checked, what remains to prove, and a linked issue with acceptance tests.</p>
   <dl class="mt-3 text-sm space-y-2">
@@ -25,7 +25,8 @@
   <p class="mt-3 text-sm">Promotion requires a recorded reviewer, exact client and workload versions, linked proof records and reproducible negative controls. No overall security stages are assigned. Existing internal states are retained without promotion; visible labels describe the actual work or finding. Dates refer to source review, not fresh deployment certification.</p>
   {% for key, axis in assessment_axes.items() %}<div id="rubric-{{ key }}" class="axis-detail"><h3 class="font-semibold">{{ axis[0] }}</h3><p>{{ axis[1] }}</p>
     {% if key == 'hardware' %}<p>Authenticate the vendor-root chain, quote signature, TCB/debug policy and any GPU evidence required by the route. Release-signature verification alone is insufficient. Changed signatures and unacceptable TCB must reject.</p>
-    {% elif key == 'session' %}<p>Bind the live channel, prompt recipient, reply key and freshness before sensitive data leaves the client. Test key replacement, replay and reply-key substitution. A receipt after disclosure is insufficient.</p>
+    {% elif key == 'recipient' %}<p>Bind the key the prompt is encrypted to, or the TLS key that carries it, to the attested workload and the live channel before the prompt leaves the client. Test a substituted recipient key, a substituted TLS endpoint and a key from an earlier quote.</p>
+    {% elif key == 'reply' %}<p>Bind the reply key to the same attested workload, and tie the evidence to this exchange with a nonce or an authenticated session. Test reply-key substitution, replay and stale evidence. A receipt checked after disclosure authenticates the reply but does not protect the prompt.</p>
     {% elif key == 'code' %}<p>Trace source, build, artifact and measurement to the approved workload, including serving code and model identity where claimed. Distinguish reproducibility from signed provenance and matching digests.</p>
     {% elif key == 'operator' %}<p>Trace root/debug access, unmeasured configuration, secrets, control-plane inputs and mutable routing to actual effects on prompts and replies. A configuration finding is specific to the reviewed code and deployment.</p>
     {% elif key == 'downstream' %}<p>Close necessary gateway-to-worker trust links and requested-model mapping. Test substituted workers, models and route fallback. A direct route can eliminate a gateway hop but still needs its model proof.</p>
@@ -42,7 +43,8 @@
 <article id="route-{{ route.id }}" class="review-heading mt-7">
   <h3 class="font-semibold text-lg">{{ route.label }} <span class="font-normal text-sm text-slate-500">{{ route.architecture|default(route.protocol) }}</span></h3>
   <p class="text-xs text-slate-500 mt-1">Reviewed {{ route.reviewed_at or 'not yet' }} by {{ route.reviewer|default('not assigned') }} · source revision {{ (route.source_revision or '')[:12] }} · <a class="underline" href="./evidence.html#route-{{ route.id }}">Route inventory and raw checks</a></p>
-  {% for key, cell in route.axes.items() %}<details id="{{ route.id }}-{{ key }}" class="axis-detail"><summary><span class="signal {{ cell.state }}">{{ cell.label }}</span> {{ assessment_axes[key][0] }}</summary>{{ obligation(cell) }}<p class="text-xs text-slate-500">Evidence scope: dated repository source/review; no new live route proof is implied.</p><p class="text-xs">{% for source in route.sources_linked %}<a class="underline text-indigo-700 mr-3" href="{{ source.url }}">{{ source.label }}</a>{% endfor %}</p></details>{% endfor %}
+  {% if not route.assessed %}<p class="text-sm text-slate-600 mt-1">Not assessed on the comparison page: no automated adapter in this repository. Cells below are from the dated source review.</p>{% endif %}
+  {% for key in assessment_axes %}{% set cell = route.axes[key] %}<details id="{{ route.id }}-{{ key }}" class="axis-detail"><summary><span class="signal {{ cell.state }}">{{ cell.label }}</span> {{ assessment_axes[key][0] }}</summary>{{ obligation(cell) }}<p class="text-xs text-slate-500">Evidence scope: dated repository source/review; no new live route proof is implied.</p><p class="text-xs">{% for source in route.sources_linked %}<a class="underline text-indigo-700 mr-3" href="{{ source.url }}">{{ source.label }}</a>{% endfor %}</p></details>{% endfor %}
 </article>{% endfor %}
 </section>{% endfor %}
 <script>function reveal(){const e=document.getElementById(location.hash.slice(1));if(e){if(e.tagName==='DETAILS')e.open=true;e.scrollIntoView({block:'start'});}}addEventListener('hashchange',reveal);reveal();</script>

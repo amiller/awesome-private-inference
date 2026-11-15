@@ -71,6 +71,9 @@ the reviewed system, `evidence` for missing supporting proof, `architecture` for
 a boundary of the named route, or `mixed` when more than one applies. Explain
 the distinction in the evidence; the enum alone cannot make a claim precise.
 Internal `state` values support aggregation and are not public security grades.
+A route with `"assessed": false` has no automated adapter in this repository.
+The comparison page shows it as one “Not assessed” cell with its count of
+`reviewed_system` gaps; its axis cells appear only on the assessments page.
 
 Use `issue_urls` to connect unfinished work to a bounded task. The task should
 name the route and exact claim, evidence needed for completion, meaningful
