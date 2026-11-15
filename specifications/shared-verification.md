@@ -112,7 +112,7 @@ cannot authorize sending a prompt.
 
 The [stage criteria proposal](../docs/stages.html) is draft-1. No stages are awarded
 by this release. Current route assessments remain separately versioned in
-`data/assessments/routes.json`, with dated source evidence and six obligations.
+`data/assessments/routes.json`, with dated source evidence and seven obligations.
 Future stage records must include the rubric version, endpoint/client/mode/model,
 protected fields, workload/policy revisions, reviewer/date, scoped proof records,
 negative controls and every unmet or unknown obligation.
