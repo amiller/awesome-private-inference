@@ -30,16 +30,15 @@ from verifiers.common import REQUIRED_LAYERS_BY_SHAPE
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
-# R1: the not-checked mark ("—", rendered "Not checked or not applicable") is the
-# current encoding of the rubric's "N/A". A tie for most common still counts: a
-# grid half-covered by grey is the failure the rubric names.
-NOT_CHECKED_MARK = "—"
+# R1: every mark a None value renders as (render.NONE_MARKS) counts as one
+# unchecked state, so relabeling empty cells cannot pass the check. A tie for
+# most common still counts.
 REJECT_MARK = "×"
 REVIEW_PENDING_MARK = "○"
 
 # R4: shapes that explicitly claim no architecture. Anything else a row emits
 # must have a required-layer set, or the required-but-missing semantics vanish.
-SHAPE_SENTINELS = {"", "skipped", "error"}
+SHAPE_SENTINELS = {"", "skipped", "error", "retired", "missing"}
 
 # R9 thresholds from the rubric, derived from the measured ~4.2-day deploy
 # cadence: a 14-day-old ledger means at least three unreviewed builds.
@@ -75,10 +74,11 @@ def r1_density(rows: list) -> dict:
     if not marks:
         return _result("R1", "information density",
                        ["no rendered cells: the matrix shows nothing"])
-    if marks[NOT_CHECKED_MARK] == max(marks.values()):
+    unchecked = sum(marks[mark] for mark in render.NONE_MARKS)
+    if unchecked >= max((n for mark, n in marks.items() if mark not in render.NONE_MARKS), default=0):
         violations.append(
-            f"modal cell state is the not-checked mark {NOT_CHECKED_MARK!r} "
-            f"({marks[NOT_CHECKED_MARK]}/{sum(marks.values())} cells)")
+            f"modal cell state is unchecked {sorted(render.NONE_MARKS)} "
+            f"({unchecked}/{sum(marks.values())} cells)")
     if len(rows) >= 2:
         for key, counts in sorted(by_column.items()):
             if len(counts) == 1:
@@ -127,12 +127,10 @@ def _computed_signal(rows: list) -> dict:
 def _editorial_signal(routes: dict, assessments: dict) -> dict:
     """Provider -> {'positive'|'negative': [assessment cells]} from rendered routes."""
     signal: dict = {}
-    route_provider = {route["id"]: route.get("provider")
-                      for route in routes.get("routes", [])}
-    for definition in assessments.get("routes", []):
-        provider = route_provider.get(definition["id"])
-        if provider is None:
-            continue  # not a rendered route; there is no page to contradict
+    route_provider = {route["id"]: route["provider"]
+                      for route in routes["routes"]}
+    for definition in assessments["routes"]:
+        provider = route_provider[definition["id"]]
         for cell in definition.get("axes", {}).values():
             if cell.get("state") in ("established", "gap"):
                 kind = "positive" if cell["state"] == "established" else "negative"
@@ -258,18 +256,14 @@ def r9_audit_liveness(audit_debt: dict) -> dict:
                    last_audit=audit_debt.get("last_audit"))
 
 
-def _load(path: Path, default):
-    return json.loads(path.read_text()) if path.exists() else default
-
-
 def run(snapshot: dict | None = None, repo_root: Path | None = None) -> dict:
     """Run the implemented rubric checks. Fails closed: a check with nothing to
     grade is a violation, never a silent pass."""
     root = repo_root or REPO_ROOT
     snapshot = snapshot if snapshot is not None else json.loads((root / "data/latest.json").read_text())
     rows = render._rows(snapshot)
-    routes = _load(root / "data/routes.json", {"routes": []})
-    assessments = _load(root / "data/assessments/routes.json", {"routes": []})
+    routes = json.loads((root / "data/routes.json").read_text())
+    assessments = json.loads((root / "data/assessments/routes.json").read_text())
     quality = compute_quality(latest=snapshot)
     provider_stems = {p.stem for p in (root / "providers").glob("*.md")} - {"_template"}
     templates = {
