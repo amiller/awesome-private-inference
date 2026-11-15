@@ -873,6 +873,24 @@
           "cell": "Own Python verifier with dcap-qvl and TLS fingerprint binding; NVIDIA token not signature-checked; any one passing instance accepted."
         }
       }
+    },
+    {
+      "id": "brave-leo",
+      "name": "Brave Leo (browser, ai-gateway, near-verifier)",
+      "repo": "https://github.com/brave/near-verifier",
+      "commit": "72a1a994",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-o-brave.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Brave's server verifies deeply (pinned OS, reproducible builds, deployment-log hash, NVIDIA). The browser verifies nothing: OHTTP to whatever gateway key Brave serves, signature fields ignored, 'Verified' badge hardcoded true."
+        }
+      },
+      "notes": "Recipient is NEAR's gateway CVM, not the model. Brave issue #55247 calls client-side attestation out of scope."
     }
   ],
   "out_of_scope": [
