@@ -20,7 +20,7 @@ V = Venice, N = NEAR cloud, C = Chutes, T = Tinfoil router, A = ACI gateway. ✓
 | event_log_integrity | ~ | ✓ | n/a | n/a | ✓ | All four RTMRs must equal the replay. V: ACI/1-shaped responses only; the legacy shape has no event log. |
 | sigstore / build provenance | ✗ | ✗ | n/a | ✓ | ✗ | |
 | gateway_* | n/a | ~ | n/a | n/a | ✓ | N: gateway quote and compose, chain authorization via live `eth_call`. |
-| NEAR cloud every instance | n/a | pending | n/a | n/a | n/a | Branch `pass/near-instances` (teep c1f253a, da6cbcf). |
+| NEAR cloud every instance | n/a | ✓ | n/a | n/a | n/a | Every instance appraised; instance id bound to RTMR3; shared key required; cap 8 (teep c1f253a, da6cbcf). We bind the id on single-instance models too. |
 | tls_key_binding | n/a | ✗ | n/a | ✓ | ✓ | N: #29. |
 | e2ee_usable, aci_session / receipt | ✗ | ✗ | ✗ | ✗ | ✗ | Not in the daily probe. teep captures from zed are retained instead (`data/evidence/teep-2026-11-15/`, `/data/amiller/teep-refresh-20261115/run.sh`). |
 | measured_model_weights | ✗ | ✗ | ✗ | ✗ | ✗ | teep passes this only on Tinfoil direct (dm-verity), which teep disabled on 2026-11-12. |
