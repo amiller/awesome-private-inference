@@ -84,14 +84,14 @@ def test_reviewed_routes_have_exact_sources_and_keep_known_distinctions():
             assert (root/p).is_file()
     assert all(set(r['axes']) == set(AXES) and 'session' not in r['axes'] for r in routes.values())
     assert routes['near-ai-gateway-e2ee']['axes']['reply']['state'] == 'gap'
-    assert routes['near-ai-gateway-e2ee']['axes']['recipient']['state'] == 'unknown'
+    assert routes['near-ai-gateway-e2ee']['axes']['recipient']['state'] == 'partial'
     assert routes['private-inference-private']['axes']['reply']['limitation'] == 'reviewed_system'
     assert routes['tinfoil-router']['axes']['recipient']['state'] == 'partial'
     assert routes['near-ai-direct']['axes']['reply']['state'] == 'unknown'
     assert {r for r in routes if not routes[r]['assessed']} == {
         'maple-tinfoil', 'maple-privatemode', 'privatemode-proxy-auto', 'privatemode-proxy-pinned', 'privatemode-proxyless',
         'private-inference-standard', 'private-inference-zdr', 'private-inference-private', 'confidential-ai-api'}
-    assert routes['tinfoil-router']['axes']['hardware']['state'] == 'unknown'
+    assert routes['tinfoil-router']['axes']['hardware']['state'] == 'gap'
     assert routes['privatemode-proxy-auto']['axes']['updates']['state'] != routes['privatemode-proxy-pinned']['axes']['updates']['state']
 
 
@@ -131,13 +131,14 @@ def test_chutes_method_tasks_are_distinct_from_application_findings():
     root = Path(__file__).resolve().parents[1]
     routes = {r['id']: r for r in json.loads((root/'data/assessments/routes.json').read_text())['routes']}
     chutes = routes['chutes-tee']['axes']
-    assert chutes['hardware']['limitation'] == 'ours'
-    assert 'GPU/RTMR' in chutes['hardware']['label']
+    assert chutes['hardware']['limitation'] == 'evidence'
+    assert chutes['hardware']['label'] == 'Our live run to do'
     assert chutes['hardware']['issue_urls'] == ['https://github.com/amiller/awesome-private-inference/issues/28']
     assert chutes['code']['limitation'] == 'reviewed_system'
     assert 'dstack' not in chutes['code']['evidence'].lower()
     assert '31' in chutes['code']['issue_urls'][0]
-    assert routes['tinfoil-router']['axes']['hardware']['limitation'] == 'ours'
+    assert routes['tinfoil-router']['axes']['hardware']['limitation'] == 'reviewed_system'
+    assert 'TCB' in routes['tinfoil-router']['axes']['hardware']['label']
 
 
 def test_companion_lessons_pin_primary_evidence_and_name_real_routes():
