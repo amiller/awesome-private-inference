@@ -37,7 +37,7 @@ routes to one "not assessed" cell; run teep on zed (keys already in zed `~/.conf
 
 ## Open (Andrew)
 - Push decision. The operator commit publishes a Tinfoil finding (control plane can rewrite model:"auto" requests) and the Tinfoil TCB finding: consider notifying Tinfoil first.
-- hermes anchor (feat/near-ai-attestation) lacks z-ai/glm-5.3-flash and Qwen/Qwen3.8-27B -> both NEAR rows reject on our side.
+- hermes anchor (feat/near-ai-attestation) lacks z-ai/glm-5.3-flash and Qwen/Qwen3.8-27B -> both NEAR rows reject on our side. hermes is unmaintained (2026-11-15): replace this anchor with teep's NEAR policy or our own, rather than updating hermes.
 - Venice key on zed 401s on chat; no Tinfoil key on zed (teep can't test Tinfoil E2EE).
 - PR #34 (2026-11-04 note) is wrong on NEAR v3 reply-key binding.
 - #3 closing note: close only the ack-on-spawn rule; liveness stays open (ledger 74 days stale, R9).
