@@ -54,4 +54,9 @@ It writes its history to `~/.local/share/tee-beat/` and its public digests to
 `watch/tee-beat/`. A prompt containing `{{FIRMWARE}}` triggers
 `watch/firmware_endorsements.py`, which snapshots Google's public `gce_tcb_integrity`
 bucket into `~/.local/share/tee-beat/gce-tcb/` and diffs against the previous
-snapshot. A dry run diffs against a copy and does not advance the live snapshot.
+snapshot. The same run verifies each TDX launch endorsement to the vendored
+`data/GCE-cc-tcb-root_1.der`, updates `data/gce-tcb-endorsements.json` (first sighting,
+withdrawal, verification result per endorsement and firmware build; retained
+`intel_rims` versions under `data/gce-tcb-intel-rims/`), and the live run commits
+those files with the digest. It runs under `uv run` because it needs `cryptography>=42`.
+A dry run diffs and verifies against copies and does not advance the live snapshot or history.

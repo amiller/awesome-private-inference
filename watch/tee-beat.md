@@ -11,6 +11,7 @@ Sources to check, covering roughly the last 26 hours:
 1. Cloud firmware endorsements. Pre-collected diff of Google's public GCE TCB endorsement bucket (`gce_tcb_integrity`): {{FIRMWARE}}.
    - An ADDED `ovmf_x64_csm/<sha384>.fd` is a new GCP Confidential VM firmware build. An ADDED `ovmf_x64_csm/tdx/<MRTD>.binarypb` is its signed TDX launch endorsement. Report the MRTD in full, its creation time, and how long since the previous TDX endorsement.
    - REMOVED or CHANGED endorsements are rare and important. Report them first, with full names.
+   - The report also verifies every TDX endorsement's signature chain to Google's GCE-cc-tcb-root. Any VERIFY FAILED line is the lead item: give the object name and the failing checks verbatim.
    - CHANGED `intel_rims/*.textproto` is Google's copy of Intel TDX TCB info. It is rewritten often; report it only if a TCB level, tcbStatus, advisory ID or tcbEvaluationDataNumber changed. Fetch https://storage.googleapis.com/gce_tcb_integrity/intel_rims/intel-tdx-rim-prod.textproto to check.
    - "FIRST SNAPSHOT" means there is no baseline yet. Say so in one line; it is not news.
 2. Vendor TCB and advisories (WebFetch/WebSearch):

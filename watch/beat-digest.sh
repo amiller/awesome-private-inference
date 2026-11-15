@@ -27,15 +27,21 @@ git pull --ff-only -q
 THREAD_ACTIVITY="$ARCHIVE/evidence/$RUN_ID-thread-activity.json"
 python3 watch/thread_activity.py --output "$THREAD_ACTIVITY"
 FIRMWARE="$ARCHIVE/evidence/$RUN_ID-firmware.txt"
+COMMIT=("$PUB/$DATE.md")
 if grep -q '{{FIRMWARE}}' "$PROMPT"; then
   SNAPS="$HISTORY/gce-tcb"
+  GCE_HISTORY=data/gce-tcb-endorsements.json
   if [ "$MODE" = dry ]; then
-    # Dry runs diff against the live snapshot without advancing it.
-    mkdir -p "$ARCHIVE/gce-tcb"
+    # Dry runs diff against copies of the live snapshot and history without advancing them.
+    mkdir -p "$ARCHIVE/gce-tcb" "$ARCHIVE/gce-tcb-history"
     cp "$(ls "$SNAPS"/gce-tcb-*.json | tail -1)" "$ARCHIVE/gce-tcb/"
+    cp "$GCE_HISTORY" "$ARCHIVE/gce-tcb-history/"
     SNAPS="$ARCHIVE/gce-tcb"
+    GCE_HISTORY="$ARCHIVE/gce-tcb-history/gce-tcb-endorsements.json"
+  else
+    COMMIT+=(data/gce-tcb-endorsements.json data/gce-tcb-intel-rims)
   fi
-  python3 watch/firmware_endorsements.py --snapshots "$SNAPS" --output "$FIRMWARE"
+  uv run --locked python watch/firmware_endorsements.py --snapshots "$SNAPS" --history "$GCE_HISTORY" --output "$FIRMWARE"
 fi
 # Dry mode has no shell tool; retain bounded repository evidence before the agent.
 REFERENCE_ACTIVITY="$ARCHIVE/evidence/$RUN_ID-reference-activity.txt"
@@ -81,11 +87,11 @@ PYTHON
     --allowedTools "$TOOLS" --add-dir "$ARCHIVE" --add-dir "$HISTORY"
 test -s "$ARCHIVE/$DATE.md"
 if [ "$MODE" = live ]; then
-  # Public archive in this repo: the script commits only the new digest, never the agent.
+  # Public archive in this repo: the script commits only the new digest and firmware history, never the agent.
   mkdir -p "$PUB"
   cp "$ARCHIVE/$DATE.md" "$PUB/$DATE.md"
-  git add "$PUB/$DATE.md"
-  git diff --cached --quiet || git commit -q -m "${PUB#watch/}: $DATE digest" -- "$PUB/$DATE.md"
+  git add "${COMMIT[@]}"
+  git diff --cached --quiet || git commit -q -m "${PUB#watch/}: $DATE digest" -- "${COMMIT[@]}"
   git pull --rebase -q
   git push -q
 fi
