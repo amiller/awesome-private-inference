@@ -16,9 +16,14 @@ def _run(monkeypatch, *, change_report_data=False, quote_valid=True, truncate_qu
     quote = base64.b64encode(bytes(48) + body).decode()
     if truncate_quote:
         quote = base64.b64encode(b"short").decode()
-    golden = [{"mrtd": "aa" * 48, "name": "sample", "version": "1"}]
+    golden = [{"mrtd": "aa" * 48, "name": "sample", "version": "1",
+               "boot_rtmrs": {"RTMR0": "00" * 48, "RTMR1": "00" * 48,
+                               "RTMR2": "00" * 48, "RTMR3": "00" * 48},
+               "runtime_rtmrs": {"RTMR0": "00" * 48, "RTMR1": "00" * 48,
+                                  "RTMR2": "00" * 48, "RTMR3": "00" * 48}}]
     instance = {"instance_id": "instance-1", "e2e_pubkey": pubkey}
-    evidence = {"quote": quote, "certificate": "public-certificate", "gpu_evidence": []}
+    evidence = {"quote": quote, "certificate": "public-certificate",
+                "gpu_evidence": [{"arch": "HOPPER", "certificate": "x", "evidence": "eA=="}]}
     responses = [golden, {"instances": [instance]}, evidence]
 
     class Response:
@@ -38,9 +43,15 @@ def _run(monkeypatch, *, change_report_data=False, quote_valid=True, truncate_qu
     monkeypatch.setattr(chutes.secrets, "token_hex", lambda n: nonce)
     monkeypatch.setattr(chutes, "_cert_spki_sha256", lambda value: cert_hash.hex())
     monkeypatch.setattr(chutes, "load_audit_ledger", lambda *a, **k: ({"aa" * 48}, {}))
+    monkeypatch.setattr(chutes, "_tcb_appraisal",
+                        lambda q: {"tcb_status": "UpToDate", "advisory_ids": []})
     monkeypatch.setattr(chutes.phala_tdx, "verify_tdx_quote", lambda value: {"quote": {"verified": True}})
     monkeypatch.setattr(chutes.phala_tdx, "is_verified", lambda value: quote_valid)
     monkeypatch.setattr(chutes.phala_tdx, "quote_body", lambda value: {"reportdata": "mock"})
+    monkeypatch.setattr(chutes.nvidia_nras, "fetch_jwks", lambda: {"keys": []})
+    monkeypatch.setattr(chutes.nvidia_nras, "appraise_gpu_attestation",
+                        lambda items, n, jwks, gc, **kw: {"gpu_attested": True,
+                                                          "verified_gpu_count": 8})
     report = chutes.verify("test-token", "https://api.chutes.ai", "Qwen3-32B-TEE")
     assert len(seen) == 3
     return report

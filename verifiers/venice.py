@@ -19,7 +19,9 @@ Venice exposes an undocumented /api/v1/tee/attestation endpoint that returns:
   }
 
 We re-run TDX against Phala's verifier (not Venice's server_verification) and
-re-run GPU against NRAS to avoid trusting Venice's self-report.
+re-run GPU against NRAS — signature-verifying the returned JWTs against
+NVIDIA's published JWKS and binding their nonces to our request — to avoid
+trusting Venice's self-report (verifiers/nvidia_nras.py).
 """
 from __future__ import annotations
 
@@ -126,13 +128,24 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     if nvidia_payload:
         if isinstance(nvidia_payload, str):
             nvidia_payload = json.loads(nvidia_payload)
-        try:
-            verdict = nvidia_nras.attest_gpu(nvidia_payload)
-            sc.gpu_attested = verdict in ("PASS", True)
-            details["gpu_verdict"] = verdict
-        except Exception as exc:
-            details["gpu_error"] = str(exc)
+        # The payload's nonce must be OUR fresh nonce — the same one bound into
+        # the TDX quote's report_data — or the GPU evidence belongs to another
+        # session and cannot count for this row.
+        if nvidia_payload.get("nonce") != nonce:
+            details["gpu_error"] = "nvidia_payload_nonce_is_not_the_request_nonce"
             sc.gpu_attested = False
+        else:
+            try:
+                jwks = nvidia_nras.fetch_jwks()
+                result = nvidia_nras.appraise_gpu_attestation(
+                    nvidia_payload.get("evidence_list"), nonce, jwks,
+                    None, allow_unknown_count=True)
+                sc.gpu_attested = result["gpu_attested"]
+                details["gpu_appraisal"] = result
+                details["gpu_count_pinned"] = False  # policy gap: no published GPU count, any count passes
+            except requests.RequestException as exc:
+                details["gpu_error"] = f"nras_unreachable: {type(exc).__name__}: {exc}"
+                sc.gpu_attested = None
 
     required = [sc.tdx_verified, sc.report_data_binds_key]
     if spk:

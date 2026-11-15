@@ -5,7 +5,6 @@ an AttestationReport whose `scorecard` populates one row of the matrix.
 """
 from __future__ import annotations
 
-import base64
 import hashlib
 import json
 import re
@@ -231,14 +230,6 @@ def sha256_nonce_pubkey_binding(
         return rd[:64] == expected
     except Exception:
         return False
-
-
-def decode_nvidia_jwt_verdict(jwt_token: str) -> str:
-    """Extract x-nvidia-overall-att-result from a NRAS JWT (without signature check)."""
-    payload_b64 = jwt_token.split(".")[1]
-    padded = payload_b64 + "=" * ((4 - len(payload_b64) % 4) % 4)
-    payload = json.loads(base64.urlsafe_b64decode(padded).decode())
-    return payload.get("x-nvidia-overall-att-result", "UNKNOWN")
 
 
 def sha256_hex(s: str | bytes) -> str:
