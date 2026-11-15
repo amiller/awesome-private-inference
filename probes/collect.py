@@ -44,6 +44,11 @@ def main() -> int:
     observations.seed_current(data_dir)
     requested = {p: catalog.MODELS.get(p, []) for p in providers}
     complete = set(providers) == set(catalog.MODELS)
+    for provider, entries in catalog.RETIRED.items():
+        for entry in entries:
+            if provider in providers and not observations.retirement_recorded(data_dir, provider, entry["model"]):
+                observations.record_retirement(data_dir, provider, entry["model"], evidence=entry)
+                print(f"recorded retirement: {provider}/{entry['model']}", flush=True)
     provenance = instrument.capture(REPO_ROOT, os.environ.get("NEARAI_VERIFIER_PATH", ""))
     if "near-ai" in providers and provenance["upstream_actual_revision"] != provenance["upstream_expected_revision"]:
         print("NEAR verifier checkout differs from data/instrument.json; refusing unpinned run", file=sys.stderr)

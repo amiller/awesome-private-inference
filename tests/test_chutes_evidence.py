@@ -52,7 +52,7 @@ def _run(monkeypatch, *, change_report_data=False, quote_valid=True, truncate_qu
     monkeypatch.setattr(chutes.nvidia_nras, "appraise_gpu_attestation",
                         lambda items, n, jwks, gc, **kw: {"gpu_attested": True,
                                                           "verified_gpu_count": 8})
-    report = chutes.verify("test-token", "https://api.chutes.ai", "Qwen3-32B-TEE")
+    report = chutes.verify("test-token", "https://api.chutes.ai", "GLM-5.1-TEE")
     assert len(seen) == 3
     return report
 

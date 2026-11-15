@@ -105,7 +105,7 @@ def _run(monkeypatch, golden, instances_evidence,
     monkeypatch.setattr(chutes.nvidia_nras, "appraise_gpu_attestation",
                         lambda items, n, jwks, gc, **kw: {"gpu_attested": True,
                                                           "verified_gpu_count": 8})
-    report = chutes.verify("test-token", "https://api.chutes.ai", "Qwen3-32B-TEE")
+    report = chutes.verify("test-token", "https://api.chutes.ai", "GLM-5.1-TEE")
     return report, seen
 
 

@@ -4,6 +4,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from probes import render
 
 
@@ -25,7 +27,7 @@ def test_render_produces_html(tmp_path, monkeypatch):
                         "key_derives_to_address": True,
                         "report_data_binds_key": True,
                         "nonce_bound": True,
-                        "compose_hash_committed": None,
+                        "compose_hash_committed": True,
                         "backend_attested": None,
                         "catalog_serves": True,
                     },
@@ -115,3 +117,48 @@ def test_venice_requires_its_prompt_path_layers():
     for layer in ("prod_os_image", "serving_code_attested", "code_measurement_reproducible"):
         assert layer in REQUIRED_LAYERS_BY_SHAPE["venice"], \
             f"{layer} was excluded from Venice's bar once; it must stay required"
+
+
+def _cell(value, shape, layer, checked_count=2, retired=False):
+    return render.check_cell(value, shape=shape, layer=layer, checked_count=checked_count, retired=retired)
+
+
+def test_none_cells_render_distinct_states():
+    ours = _cell(None, "aci-gateway", "prod_os_image")
+    assert ours["mark"] == "?" and "Not checked by us" in ours["meaning"]
+    assert ours["issue_url"].endswith("/issues/27")
+    provider = _cell(None, "venice", "prod_os_image")
+    assert provider["mark"] == "∅" and "Not exposed by provider" in provider["meaning"]
+    assert "issue_url" not in _cell(None, "venice", "gpu_attested")
+    na = _cell(None, "chutes-tee", "gpu_attested")
+    assert na["mark"] == "n/a" and "Not applicable" in na["meaning"]
+    empty = _cell(None, "chutes-tee", "tdx_verified", checked_count=0)
+    assert empty["mark"] == "—" and "No evidence captured" in empty["meaning"]
+    retired = _cell(None, "retired", "tdx_verified", checked_count=0, retired=True)
+    assert retired["mark"] == "n/a" and "retired" in retired["meaning"]
+    assert {c["mark"] for c in (ours, provider, na, empty)} == render.NONE_MARKS
+    assert _cell(True, "venice", "prod_os_image", checked_count=0)["mark"] == "✓"
+
+
+def test_unclassified_required_gap_raises():
+    with pytest.raises(KeyError):
+        _cell(None, "venice", "tdx_verified")
+    with pytest.raises(KeyError):
+        _cell(None, "unknown-shape", "tdx_verified")
+
+
+def test_retired_row_shows_its_reason_not_a_provider_failure():
+    rows = render._rows({"attestations": {"near-ai": [
+        {"provider": "near-ai", "model": "gone", "valid": False, "verified_at": "2026-11-15T01:02:03Z",
+         "attestation_type": "retired", "scorecard": {}, "details": {}, "error": "retired",
+         "row_status": "retired", "outcome": "not_applicable", "outcome_reason": "retired",
+         "retirement_evidence": {"retired_at": "2026-11-15T00:00:00Z", "summary": "gateway stopped serving it"}},
+        {"provider": "near-ai", "model": "down", "valid": False, "verified_at": "2026-11-15T01:02:03Z",
+         "attestation_type": "tdx+gpu", "scorecard": {}, "details": {}, "error": "HTTP 503",
+         "row_status": "unknown", "outcome": "unavailable", "outcome_reason": "http_error"},
+    ]}})
+    down, gone = rows
+    assert gone["outcome_label"] == "Retired" and down["outcome_label"] == "Unavailable"
+    assert gone["error"] == "Removed from the probe catalog on 2026-11-15: gateway stopped serving it"
+    assert gone["matrix_cells"]["nonce_bound"]["mark"] == "n/a"
+    assert down["matrix_cells"]["nonce_bound"]["mark"] == "—"

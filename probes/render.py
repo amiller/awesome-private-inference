@@ -15,6 +15,7 @@ from probes.schema import classify_report
 from probes.reference_history import build as build_reference_history
 from probes.assessments import build as build_assessments, AXES, STATES, LIMITATIONS, validate_audit_synthesis
 from probes.directory import reference_export
+from verifiers.common import LAYER_GAPS, REQUIRED_LAYERS_BY_SHAPE
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_LATEST = REPO_ROOT / "data/latest.json"
@@ -23,6 +24,9 @@ REFERENCES_PATH = REPO_ROOT / "data/references/latest.json"
 DOCS_DIR = REPO_ROOT / "docs"
 TEMPLATE_DIR = REPO_ROOT / "site/templates"
 REPO_URL = "https://github.com/amiller/awesome-private-inference/blob/main/"
+ISSUES_URL = "https://github.com/amiller/awesome-private-inference/issues/"
+# Every mark a None scorecard value can render as; the rubric counts them all as unchecked.
+NONE_MARKS = {"n/a", "—", "?", "∅"}
 
 SCORECARD_LABELS = {
     "nonce_bound": "Fresh nonce", "tdx_verified": "TDX appraisal",
@@ -59,7 +63,7 @@ def source_link(source: str) -> str:
     return source if source.startswith("https://") else REPO_URL + source.lstrip("/")
 
 
-def check_cell(value) -> dict:
+def check_cell(value, *, shape: str, layer: str, checked_count: int, retired: bool) -> dict:
     if value is True:
         return {"mark": "✓", "meaning": "Adapter pass", "css": "bg-emerald-100 text-emerald-800"}
     if value is False:
@@ -67,7 +71,19 @@ def check_cell(value) -> dict:
     if value == "audit_pending":
         return {"mark": "○", "meaning": "Review pending", "css": "bg-amber-100 text-amber-800"}
     if value is None:
-        return {"mark": "—", "meaning": "Not checked or not applicable; consult route", "css": "bg-slate-100 text-slate-500"}
+        if retired:
+            return {"mark": "n/a", "meaning": "Route retired from the probe catalog", "css": "bg-slate-100 text-slate-400"}
+        if checked_count == 0:
+            return {"mark": "—", "meaning": "No evidence captured: the row failed before any check ran", "css": "bg-slate-200 text-slate-500"}
+        if layer not in REQUIRED_LAYERS_BY_SHAPE[shape]:
+            return {"mark": "n/a", "meaning": "Not applicable: not in this route's required layer set", "css": "bg-slate-100 text-slate-400"}
+        gap = LAYER_GAPS[shape][layer]
+        cell = ({"mark": "∅", "meaning": f"Not exposed by provider: {gap['reason']}", "css": "bg-indigo-100 text-indigo-800"}
+                if gap["kind"] == "prov" else
+                {"mark": "?", "meaning": f"Not checked by us: {gap['reason']}", "css": "bg-amber-100 text-amber-800"})
+        if "issue" in gap:
+            cell.update(meaning=f"{cell['meaning']} (issue #{gap['issue']})", issue=gap["issue"], issue_url=f"{ISSUES_URL}{gap['issue']}")
+        return cell
     return {"mark": "?", "meaning": "Unsupported cell value", "css": "bg-slate-200 text-slate-700"}
 
 
@@ -138,21 +154,29 @@ def _rows(snapshot: dict) -> list[dict]:
             if legacy and outcome in ("verified", "rejected"):
                 label = "Legacy adapter accepted" if outcome == "verified" else "Legacy adapter rejected"
                 description = "Historical adapter valid flag; this predates typed observations and is not a complete route verdict."
+            retired = report.get("row_status") == "retired"
+            if retired:
+                evidence = report["retirement_evidence"]
+                label, css = "Retired", "bg-slate-100 text-slate-500"
+                description = f"Removed from the probe catalog on {evidence['retired_at'][:10]}: {evidence['summary']}"
             scorecard = report.get("scorecard") or {}
+            checked_count = sum(value is True or value is False for value in scorecard.values())
+            cell = {"shape": report.get("attestation_type", ""), "checked_count": checked_count, "retired": retired}
             rows.append({"provider": provider, "model": report.get("model", ""),
                          "route_id": f"{provider}/{report.get('model', '')}",
                          "outcome": outcome, "outcome_label": label, "outcome_css": css,
                          "outcome_title": description,
                          "reason": "legacy_adapter_result" if legacy and outcome in ("verified", "rejected") else
                                    (report.get("outcome_reason") or classify_report(report)[1]),
-                         "error": report.get("error"), "checked_at": report.get("verified_at"),
+                         "error": description if retired else report.get("error"), "checked_at": report.get("verified_at"),
                          "observation_id": report.get("observation_id"),
                          "freshness": report.get("freshness") or {},
                          "attestation_type": report.get("attestation_type", ""),
-                         "matrix_cells": {key: check_cell(scorecard.get(key)) for key in MATRIX_KEYS},
-                         "checks": [{"key": key, "label": SCORECARD_LABELS.get(key, key.replace("_", " ").title()), **check_cell(value)}
+                         "matrix_cells": {key: check_cell(scorecard.get(key), layer=key, **cell) for key in MATRIX_KEYS},
+                         "checks": [{"key": key, "label": SCORECARD_LABELS.get(key, key.replace("_", " ").title()),
+                                     **check_cell(value, layer=key, **cell)}
                                     for key, value in sorted(scorecard.items())],
-                         "checked_count": sum(value is True or value is False for value in scorecard.values())})
+                         "checked_count": checked_count})
     rows.sort(key=lambda row: (row["provider"], row["model"]))
     for index, row in enumerate(rows):
         row["evidence_id"] = f"observation-{index + 1}"

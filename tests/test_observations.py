@@ -164,6 +164,7 @@ def test_collector_same_day_full_and_targeted_runs_keep_first_snapshot(tmp_path,
     monkeypatch.setattr(collect, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(collect, "SNAPSHOT_DIR", tmp_path / "data" / "snapshots")
     monkeypatch.setattr(collect.catalog, "MODELS", {"aci-gateway": ["host"], "near-ai": ["model"]})
+    monkeypatch.setattr(collect.catalog, "RETIRED", {})
     monkeypatch.setattr(collect.attestation, "PROVIDERS", {"aci-gateway": object(), "near-ai": object()})
     counter = {"aci-gateway": 0, "near-ai": 0}
 
@@ -220,3 +221,72 @@ def test_freshness_clocks_do_not_promote_adapter_pass_to_crypto_proof(tmp_path):
     assert clocks["last_cryptographic_verification_at"] is None
     assert clocks["last_triage_at"] == "2026-10-14T09:00:00Z"
     assert clocks["last_policy_review_at"] is None
+
+
+def _retire_args(tmp_path, monkeypatch, providers):
+    monkeypatch.setattr(collect.instrument, "capture", lambda *_: {
+        "revision": "test-instrument", "repository_commit": "test-commit",
+        "upstream_actual_revision": "test-upstream", "upstream_expected_revision": "test-upstream"})
+    monkeypatch.setattr(collect, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(collect, "SNAPSHOT_DIR", tmp_path / "data" / "snapshots")
+    monkeypatch.setattr(collect.catalog, "MODELS", {"near-ai": []})
+    monkeypatch.setattr(collect.catalog, "RETIRED", {"near-ai": [
+        {"model": "gone", "retired_at": "2026-11-15T00:00:00Z", "summary": "provider stopped serving it"}]})
+    monkeypatch.setattr(collect.attestation, "PROVIDERS", {"near-ai": object()})
+    monkeypatch.setattr(collect.attestation, "probe_provider", lambda provider, models: [])
+    monkeypatch.setattr(sys, "argv", ["collect", "--providers", providers])
+
+
+def test_collector_records_a_retirement_once_and_again_after_a_later_observation(tmp_path, monkeypatch):
+    data = tmp_path / "data"
+    run = observations.start_run(data, {"near-ai": ["gone"]}, captured_at="2026-11-10T00:00:00Z")
+    observations.finish_attempt(data, run, "near-ai", "gone", None, captured_at="2026-11-10T00:00:01Z")
+    observations.finish_run(data, run)
+    _retire_args(tmp_path, monkeypatch, "near-ai")
+    assert collect.main() == 0
+    assert collect.main() == 0
+    assert [o["reason"] for o in observations.load_observations(data)] == ["missing_response", "retired"]
+    later = observations.start_run(data, {"near-ai": ["gone"]})
+    observations.finish_attempt(data, later, "near-ai", "gone", None)
+    observations.finish_run(data, later)
+    assert not observations.retirement_recorded(data, "near-ai", "gone")
+    assert collect.main() == 0
+    assert observations.retirement_recorded(data, "near-ai", "gone")
+    row = observations.derive_latest(data)["attestations"]["near-ai"][0]
+    assert row["row_status"] == "retired" and row["attestation_type"] == "retired"
+    assert row["retirement_evidence"]["summary"] == "provider stopped serving it"
+    assert "T" in row["verified_at"]
+
+
+def test_collector_does_not_record_retirements_for_unrequested_providers(tmp_path, monkeypatch):
+    _retire_args(tmp_path, monkeypatch, "near-ai")
+    monkeypatch.setattr(collect.catalog, "MODELS", {"near-ai": [], "aci-gateway": []})
+    monkeypatch.setattr(collect.attestation, "PROVIDERS", {"near-ai": object(), "aci-gateway": object()})
+    monkeypatch.setattr(sys, "argv", ["collect", "--providers", "aci-gateway"])
+    assert collect.main() == 0
+    assert observations.load_observations(tmp_path / "data") == []
+
+
+def _chutes_attempt(data, at, row):
+    run = observations.start_run(data, {"chutes": ["m"]}, captured_at=at)
+    observations.finish_attempt(data, run, "chutes", "m", row, captured_at=at)
+    observations.finish_run(data, run)
+
+
+def test_capture_clock_counts_unverified_captures_but_not_failures(tmp_path):
+    captured = report("chutes", "m", valid=False, verification_status="not_checked",
+                      raw_evidence={"quote": "public quote bytes"})
+    _chutes_attempt(tmp_path, "2026-11-04T20:00:01Z", captured)
+    failed = report("chutes", "m", valid=False)
+    failed.update(scorecard={}, error="RuntimeError: HTTP 404 on /e2e/instances/x")
+    _chutes_attempt(tmp_path, "2026-11-05T20:00:01Z", failed)
+    no_key = report("chutes", "m", valid=False)
+    no_key.update(attestation_type="skipped", scorecard={}, error="CHUTES_API_KEY not set")
+    _chutes_attempt(tmp_path, "2026-11-05T21:00:01Z", no_key)
+    assert [(o["outcome"], o["reason"]) for o in observations.load_observations(tmp_path)][1:] == [
+        ("unavailable", "http_error"), ("not_checked", "missing_credentials")]
+    assert observations.load_observations(tmp_path)[0]["outcome"] == "not_checked"
+    clocks = observations.derive_latest(tmp_path)["attestations"]["chutes"][0]["freshness"]
+    assert clocks["last_attempt_at"] == "2026-11-05T21:00:01Z"
+    assert clocks["last_capture_at"] == "2026-11-04T20:00:01Z"
+    assert clocks["last_adapter_verified_at"] is None

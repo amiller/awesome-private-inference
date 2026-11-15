@@ -69,7 +69,6 @@ DEFAULT_BASE_URL = "https://api.chutes.ai"
 
 # Model label → chute_id. Add/prune as the catalog rotates.
 CHUTE_IDS: Dict[str, str] = {
-    "Qwen3-32B-TEE": "ac059e33-eb27-541c-b9a9-24b214036475",
     "gemma-4-31B-TEE": "42ee92ba-a537-5a73-8741-876067750db7",
     "GLM-5.1-TEE": "b048fe26-0352-5c46-acf7-335e527e7f3d",
     "GLM-5.2-TEE": "08901219-159f-55a7-87cf-9d0d02744668",
