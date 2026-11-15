@@ -1,0 +1,653 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-15",
+  "meaning": "Clients that verify TEE attestation for private inference, reviewed from source at a pinned commit. A cell grades what the client establishes on that provider: 'serving' = reaches the code that reads the prompt and blocks before sending; 'partial' = checks real evidence but stops short of the serving code or doesn't block; 'weak' = little is authenticated. No cell is 'serving' today.",
+  "providers": {
+    "near": "NEAR AI",
+    "tinfoil": "Tinfoil",
+    "phala": "Phala Cloud (ACI)",
+    "chutes": "Chutes",
+    "venice": "Venice",
+    "nanogpt": "NanoGPT",
+    "privatemode": "Privatemode",
+    "own": "Its own service"
+  },
+  "kinds": {
+    "client": "Clients and proxies",
+    "library": "Libraries and SDKs",
+    "gateway": "Gateways, routers and markets",
+    "app": "Apps",
+    "monitor": "Monitors"
+  },
+  "clients": [
+    {
+      "id": "teep",
+      "name": "teep",
+      "repo": "https://github.com/13rac1/teep",
+      "commit": "6548996",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-a.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Every instance appraised, E2EE v2 to the attested model key, static compose pin. Deployment log not checked (#166)."
+        },
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Router only; latest Sigstore release adopted. Direct mode disabled 2026-11-12."
+        },
+        "phala": {
+          "grade": "partial",
+          "cell": "Gateway and sessions pinned; receipt verified after the stream. Upstream workload policy not checked."
+        },
+        "chutes": {
+          "grade": "partial",
+          "cell": "MRTD/MRSEAM pinned; ML-KEM to the instance key. Serving code is outside the measurement."
+        },
+        "venice": {
+          "grade": "partial",
+          "cell": "Legacy dstack E2EE blocks. ACI/1: gateway only, reply forgeable."
+        },
+        "nanogpt": {
+          "grade": "weak",
+          "cell": "E2EE off by default, so NanoGPT reads the prompt."
+        }
+      }
+    },
+    {
+      "id": "private-ai-gateway",
+      "name": "private-ai-gateway (as a client of its upstreams)",
+      "repo": "https://github.com/Dstack-TEE/private-ai-gateway",
+      "commit": "e9b6ae8a",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-a.md",
+      "event_log_hashed": true,
+      "fails_closed": false,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "NEAR's gateway quote and TLS key only; model attestations not fetched; any dstack CVM passes."
+        },
+        "tinfoil": {
+          "grade": "weak",
+          "cell": "Router via Tinfoil's Python SDK, no nonce, one session cached for an hour."
+        },
+        "phala": {
+          "grade": "partial",
+          "cell": "Is the ACI gateway; signs receipts naming its upstream sessions."
+        },
+        "chutes": {
+          "grade": "weak",
+          "cell": "Measurement profiles fetched live from Chutes, unauthenticated."
+        },
+        "privatemode": {
+          "grade": "weak",
+          "cell": "Delegated to Privatemode's own proxy."
+        }
+      },
+      "notes": "Blocks only requests marked required; otherwise forwards and records the failure in the receipt."
+    },
+    {
+      "id": "pap",
+      "name": "pap (ACI CLI)",
+      "repo": "https://github.com/Dstack-TEE/private-ai-gateway",
+      "commit": "e9b6ae8a",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-a.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": true,
+      "providers": {
+        "phala": {
+          "grade": "partial",
+          "cell": "TLS pinned to the attested keyset; receipt checked after printing. Key custody only with two flags."
+        }
+      }
+    },
+    {
+      "id": "verifier-ts",
+      "name": "private-ai-gateway verifier-ts",
+      "repo": "https://github.com/Dstack-TEE/private-ai-gateway/tree/main/clients/verifier-ts",
+      "commit": "e9b6ae8a",
+      "kind": "library",
+      "review": "notes/2026-11-15-client-comparison.md",
+      "event_log_hashed": false,
+      "fails_closed": null,
+      "cites_prior_work": true,
+      "providers": {
+        "phala": {
+          "grade": "weak",
+          "cell": "Replays RTMR3 from stored digests, then trusts the compose-hash payload unhashed (report.ts:173-182). Vendored by abalone."
+        }
+      }
+    },
+    {
+      "id": "tinfoil-sdk",
+      "name": "tinfoil-go / tinfoil-python",
+      "repo": "https://github.com/tinfoilsh/tinfoil-go",
+      "commit": "99112212",
+      "kind": "library",
+      "review": "research/client-comparison-2026-11-15/part-b.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Local AMD chain, client nonce, SPKI pin, 7-day freshness. Router route covers the router, not the model enclave; adopts any release Tinfoil signs."
+        }
+      }
+    },
+    {
+      "id": "jooray-venice",
+      "name": "jooray venice-e2ee-proxy",
+      "repo": "https://github.com/jooray/venice-e2ee-proxy",
+      "commit": "4b5602ef",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-b.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "venice": {
+          "grade": "partial",
+          "cell": "Refuses GPU models without NVIDIA evidence. If DCAP fails to load it warns and continues. Doesn't parse ACI/1."
+        }
+      }
+    },
+    {
+      "id": "axlabs-venice",
+      "name": "AxLabs venice-e2ee-proxy",
+      "repo": "https://github.com/AxLabs/venice-e2ee-proxy",
+      "commit": "70ef39f6",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-b.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "venice": {
+          "grade": "weak",
+          "cell": "Trusts Venice's own GPU verdict; missing GPU evidence only logs a warning."
+        }
+      }
+    },
+    {
+      "id": "elkimek-venice",
+      "name": "elkimek venice-e2ee",
+      "repo": "https://github.com/elkimek/venice-e2ee",
+      "commit": "d8e37d15",
+      "kind": "library",
+      "review": "research/client-comparison-2026-11-15/part-j-venice-teemoon.md",
+      "event_log_hashed": null,
+      "fails_closed": null,
+      "cites_prior_work": null,
+      "providers": {
+        "venice": {
+          "grade": "weak",
+          "cell": "By default the quote isn't authenticated: DCAP and NVIDIA checks are opt-in. Strong when the caller enables them. ACI/1 receipt verifier unused."
+        }
+      }
+    },
+    {
+      "id": "clawdbotatg-venice",
+      "name": "clawdbotatg venice-e2ee-proxy",
+      "repo": "https://github.com/clawdbotatg/venice-e2ee-proxy",
+      "commit": "4311d554",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-j-venice-teemoon.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "venice": {
+          "grade": "weak",
+          "cell": "Trusts Venice's verified flag (attestation.ts:66); passes plaintext replies and empties chunks that fail to decrypt."
+        }
+      }
+    },
+    {
+      "id": "m0dex-venice",
+      "name": "M0dEx venice-e2ee-proxy",
+      "repo": "https://github.com/M0dEx/venice-e2ee-proxy",
+      "commit": "0999259d",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-j-venice-teemoon.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "venice": {
+          "grade": "weak",
+          "cell": "No DCAP or NVIDIA check linked; nonce checked in JSON only; Venice's verified flag is the real gate."
+        }
+      }
+    },
+    {
+      "id": "privatemode-proxy",
+      "name": "Privatemode proxy",
+      "repo": "https://github.com/edgelesssys/privatemode-public",
+      "commit": "3c98e0ab",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-b.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "privatemode": {
+          "grade": "partial",
+          "cell": "Default manifest comes from a CDN, unsigned and auto-adopted; pin it with --manifest-path."
+        }
+      }
+    },
+    {
+      "id": "nearai-cloud-verifier",
+      "name": "nearai-cloud-verifier",
+      "repo": "https://github.com/nearai/nearai-cloud-verifier",
+      "commit": "94554726",
+      "kind": "library",
+      "review": "research/client-comparison-2026-11-15/part-b.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Demo CLI that prints booleans and never refuses. Its E2EE example encrypts to a key fetched with no nonce or quote check."
+        }
+      }
+    },
+    {
+      "id": "teemoon",
+      "name": "teemoon (Android, iOS)",
+      "repo": "https://github.com/teemoonai/teemoon-android",
+      "commit": "63cef559",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-j-venice-teemoon.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "On-device DCAP, NVIDIA token signature, E2EE v2. Only the first instance; OutOfDate accepted; deployment list unhashed."
+        }
+      }
+    },
+    {
+      "id": "hermes",
+      "name": "hermes-agent (unmaintained)",
+      "repo": "https://github.com/amiller/hermes-agent/tree/feat/near-ai-attestation",
+      "commit": "1f92ab10",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-b.md",
+      "event_log_hashed": false,
+      "fails_closed": false,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Checks the deployment log's quote but never hashes the list. E2EE v1; sends without E2EE unless strict."
+        }
+      }
+    },
+    {
+      "id": "abalone",
+      "name": "abalone",
+      "repo": null,
+      "commit": "53655796",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-c-abalone.md",
+      "event_log_hashed": false,
+      "fails_closed": false,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "TCB policy warns and sends; NVIDIA check skipped on outage; E2EE v1; event-log values unhashed."
+        },
+        "phala": {
+          "grade": "weak",
+          "cell": "Vendored verifier-ts; no custody, no session pins; receipt check only in tests."
+        }
+      }
+    },
+    {
+      "id": "bitrouter-attestation",
+      "name": "BitRouter attestation plugin (removed)",
+      "repo": "https://github.com/bitrouter/bitrouter/tree/f8763b1/plugins/bitrouter-attestation",
+      "commit": "f8763b1",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-d-bitrouter.md",
+      "event_log_hashed": false,
+      "fails_closed": false,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Removed in #701, never wired into requests. Pins read from unhashed event-log values; no key binding."
+        }
+      }
+    },
+    {
+      "id": "bitrouter-auctions",
+      "name": "BitRouter inference auctions",
+      "repo": "https://github.com/SPIKESPIGEL404/private-flex-inference-auctions",
+      "commit": "583ccd9c",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-f-bitrouter-auctions.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Wraps NEAR's SDK with no measurement pins; the 2026-11-11 run used plain HTTPS."
+        },
+        "chutes": {
+          "grade": "partial",
+          "cell": "Their own Chutes TEE, checked per request by the Market (all RTMRs, NVIDIA, ML-KEM); the buyer never sees it."
+        },
+        "own": {
+          "grade": "partial",
+          "cell": "Buyer pins the Market's MRTD/RTMR0-2, compose and nonce, TLS pinned. The Market sees prompts. Verify command skips event-log hashing."
+        }
+      }
+    },
+    {
+      "id": "antseed",
+      "name": "AntSeed",
+      "repo": "https://github.com/Antseed/antseed",
+      "commit": "cda310ed",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-g-antseed.md",
+      "event_log_hashed": true,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "own": {
+          "grade": "weak",
+          "cell": "Strict check of its own relay (MRTD/RTMR0-2, compose whitelist, Sigstore image, channel-bound quote), but the relay forwards plaintext to any upstream URL. Fail-open by default."
+        }
+      }
+    },
+    {
+      "id": "anonrouter",
+      "name": "AnonRouter SDK",
+      "repo": "https://github.com/anonrouter/anonrouter-sdk",
+      "commit": "39e416b6",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-h-routers.md",
+      "event_log_hashed": true,
+      "fails_closed": false,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Provider quote and NVIDIA signatures not checked; evidence arrives through AnonRouter's relay."
+        },
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Official SDK plus pinned TLS; router only; latest release; prompt passes through AnonRouter's relay."
+        },
+        "chutes": {
+          "grade": "weak",
+          "cell": "Quote signature not checked; allowlist adopted from Chutes's list."
+        },
+        "venice": {
+          "grade": "weak",
+          "cell": "Quote parsed, signature not checked; relay-fetched evidence."
+        },
+        "own": {
+          "grade": "partial",
+          "cell": "Own relay checked well (DCAP UpToDate, event digests recomputed, TLS on the content socket), but off by default in chat()."
+        }
+      }
+    },
+    {
+      "id": "alien-fleet",
+      "name": "Alien Fleet",
+      "repo": "https://github.com/alien-id/alien-compute",
+      "commit": "6a6be6f8",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-h-routers.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": false,
+      "providers": {
+        "own": {
+          "grade": "weak",
+          "cell": "No TEE: consumer GPUs whose operators see plaintext. Node keys come from the gateway over plain HTTP, unauthenticated."
+        }
+      }
+    },
+    {
+      "id": "axiom",
+      "name": "Axiom web gateway (Astrea)",
+      "repo": "https://github.com/astrea-foundation/axiom-web-gateway",
+      "commit": "1b535ed8",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-h-routers.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "NVIDIA signature and signed completion receipt checked; code identity only mr_config_id = manifest hash; no debug check."
+        },
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Via tinfoil-rs; router only; latest release; no client nonce."
+        },
+        "own": {
+          "grade": "partial",
+          "cell": "Browser verifies the gateway (a Tinfoil container) with tinfoil-go; the gateway verifies upstreams the browser doesn't re-check."
+        }
+      }
+    },
+    {
+      "id": "tee-proof-demo",
+      "name": "tee-proof-demo",
+      "repo": "https://github.com/ethanolivertroy/tee-proof-demo",
+      "commit": "5226ef12",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-k-other.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Browser checks quote, TCB, 8-GPU NVIDIA, exact RTMRs, and the reply signature. Reply key unbound (v2); the relay serves the verifier JS."
+        },
+        "phala": {
+          "grade": "partial",
+          "cell": "RTMR3 replay, source commit, KMS custody; receipt checked before display. Upstream session audited only after sending."
+        }
+      }
+    },
+    {
+      "id": "adverserial",
+      "name": "Adverserial confidential-sdk and policy",
+      "repo": "https://github.com/AdverserialAI/confidential-policy",
+      "commit": "26fb9a5d",
+      "kind": "library",
+      "review": "research/client-comparison-2026-11-15/part-k-other.md",
+      "event_log_hashed": true,
+      "fails_closed": null,
+      "cites_prior_work": null,
+      "providers": {
+        "own": {
+          "grade": "partial",
+          "cell": "Live policy pins MRTD/RTMR0-2/compose, but is served unsigned, kept out of Git and adopted immediately."
+        }
+      }
+    },
+    {
+      "id": "near-ai-gateway",
+      "name": "NEAR AI Gateway / IronWire",
+      "repo": "https://github.com/TraceCommons/trace-commons",
+      "commit": "df2e821",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-e-ironwire.md",
+      "event_log_hashed": false,
+      "fails_closed": false,
+      "cites_prior_work": false,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Plain HTTPS to NEAR's API. Checks each reply's receipt after delivery, for trace provenance. Pins only in a staging build."
+        }
+      }
+    },
+    {
+      "id": "awesome-private-inference",
+      "name": "awesome-private-inference monitor",
+      "repo": "https://github.com/amiller/awesome-private-inference",
+      "commit": "406b535",
+      "kind": "monitor",
+      "review": "notes/2026-11-15-only-tinfoil-constrains.md",
+      "event_log_hashed": true,
+      "fails_closed": null,
+      "cites_prior_work": true,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Every instance and the deployment log, with public files aged 24 h. Sends no prompts."
+        },
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Router, local AMD chain and TCB check."
+        },
+        "phala": {
+          "grade": "partial",
+          "cell": "Gateway keyset and sessions."
+        },
+        "chutes": {
+          "grade": "partial",
+          "cell": "Full register match and census."
+        },
+        "venice": {
+          "grade": "partial",
+          "cell": "Legacy dstack rows; ACI/1 rows marked gateway-only."
+        }
+      }
+    },
+    {
+      "id": "near-private-triage",
+      "name": "near-private-triage",
+      "repo": "https://github.com/mickeyjoes/near-private-triage",
+      "commit": "01fcfe33",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-l-near-hackathon.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Best of the hackathon apps: UpToDate only, every instance verified, MRTD/RTMR1-2/app-id/KMS pinned from captures, runs on localhost."
+        }
+      }
+    },
+    {
+      "id": "sealed-review",
+      "name": "sealed-review",
+      "repo": "https://github.com/greenlima/sealed-review",
+      "commit": "33f0ff35",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-l-near-hackathon.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Recomputes MRTD/RTMR0-2 from NEAR's published OS image; refuses machines nobody reviewed; E2EE v2."
+        }
+      }
+    },
+    {
+      "id": "private-dna-reading",
+      "name": "private-dna-reading (indaga)",
+      "repo": "https://github.com/indaga-ai/private-dna-reading",
+      "commit": "905216b9",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-l-near-hackathon.md",
+      "event_log_hashed": false,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Browser app; the only client found that sends E2EE v3. First instance only; accepts OutOfDate; trusts a stored event digest (event-log.mjs:15)."
+        }
+      }
+    },
+    {
+      "id": "symbolon",
+      "name": "Symbolon",
+      "repo": "https://github.com/0d1026/Symbolon",
+      "commit": "c1baaead",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-l-near-hackathon.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "partial",
+          "cell": "Quote verified on-chain by NEAR One's TDX verifier contract; gates payment only, after the prompt has been sent."
+        }
+      }
+    },
+    {
+      "id": "nexora",
+      "name": "NEXORA",
+      "repo": "https://github.com/Ved-Malkunaik/NEXORA",
+      "commit": "17601fad",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-l-near-hackathon.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "Trusts Phala's remote quote.verified with no TCB check; NVIDIA token unsigned; first instance only; remote check can be switched off."
+        }
+      }
+    },
+    {
+      "id": "antrepreneur",
+      "name": "antrepreneur",
+      "repo": "https://github.com/agarwal-tanmay-work/antrepreneur",
+      "commit": "a751a6c7",
+      "kind": "app",
+      "review": "research/client-comparison-2026-11-15/part-l-near-hackathon.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "No quote signature check; report_data matched with includes() (tee.js:66-67); NVIDIA token unsigned; sends regardless. Copies near-examples' gaps."
+        }
+      }
+    }
+  ],
+  "out_of_scope": [
+    {
+      "name": "crow-004/attestation-verifier",
+      "repo": "https://github.com/crow-004/attestation-verifier",
+      "reason": "Verifies Tachpawl's threshold-signing nodes, not inference.",
+      "review": "research/client-comparison-2026-11-15/part-k-other.md"
+    }
+  ],
+  "notes": "NEAR hackathon apps: 15 surveyed in research/client-comparison-2026-11-15/part-l-near-hackathon.md; the strongest and weakest are listed here."
+}

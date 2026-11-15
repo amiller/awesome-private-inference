@@ -56,6 +56,8 @@ def test_render_produces_html(tmp_path, monkeypatch):
     assert "Observed identity" in history
     assert "Document fingerprint" in history
     assert 'aria-label="Primary"' in html
+    verifiers = (docs / "verifiers.html").read_text()
+    assert ">Verifiers</h1>" in verifiers and 'id="teep"' in verifiers
     measurements = (docs / "measurements.html").read_text()
     assert "Attestation checks across providers and models" in measurements
     assert (docs / "assessments.html").exists()
@@ -66,9 +68,7 @@ def test_render_produces_html(tmp_path, monkeypatch):
     assert "#rubric-recipient" in html and "#rubric-reply" in html and '-session"' not in html
     assessments = (docs / "assessments.html").read_text()
     assert 'id="private-inference-private-reply"' in assessments and '-session"' not in assessments
-    assert not (docs / "verifiers.html").exists()
-    assert not (docs / "verifiers.json").exists()
-    assert "verifiers.html" not in html
+    assert 'href="./verifiers.html"' in html
     assert "Private Inference Beat" in html
     assert "no stages awarded" in (docs / "stages.html").read_text()
     feed = json.loads((docs / "reference-values.json").read_text())
@@ -181,3 +181,11 @@ def test_layer_not_reached_on_rejected_row():
     assert _cell(None, "tinfoil-sev-snp-v2", "hpke_pubkey_attested", rejected=True)["mark"] == "·"
     with pytest.raises(KeyError):
         _cell(None, "tinfoil-sev-snp-v2", "hpke_pubkey_attested")
+
+
+def test_clients_registry_validates_and_rejects_unknown_grade():
+    data = json.loads(render.CLIENTS_PATH.read_text())
+    assert render.validate_clients(data) is data
+    data["clients"][0]["providers"]["near"]["grade"] = "great"
+    with pytest.raises(AssertionError):
+        render.validate_clients(data)

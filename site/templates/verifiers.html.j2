@@ -1,0 +1,67 @@
+{% extends "_base.html.j2" %}
+{% set primary_view = 'verifiers' %}
+{% block title %}Verifiers · Private Inference Beat{% endblock %}
+{% block content %}
+<style>
+  .grade { display:inline-block; font:500 11px ui-monospace,monospace; padding:1px 6px; border-radius:4px; margin-bottom:3px; }
+  .grade-serving { background:#dcefe5; color:#1e5a3f; }
+  .grade-partial { background:#f4ead0; color:#6b5210; }
+  .grade-weak { background:#f5dcd8; color:#7d2a20; }
+  .vt th, .vt td { text-align:left; vertical-align:top; padding:9px 10px; border-bottom:1px solid #e2e8f0; }
+  .vt thead th { background:#f1f5f9; font-size:12px; color:#475569; font-weight:600; }
+  .vt td { font-size:12.5px; min-width:150px; }
+  .vt tbody th { font-size:13px; font-weight:600; min-width:170px; }
+  .vt small { display:block; font:400 11px ui-monospace,monospace; color:#64748b; }
+</style>
+
+<h1 class="text-3xl font-bold tracking-tight">Verifiers</h1>
+<p class="mt-3 max-w-3xl text-slate-600">{{ clients.meaning }} Reviewed {{ clients.as_of }}; each row links its review with file:line citations.</p>
+<p class="mt-2 max-w-3xl text-sm text-slate-500">Two questions recur in every review: are event-log values hashed before they are trusted (the dstack RTMR3 replay must recompute each digest from its payload), and does a failed check stop the prompt from being sent?</p>
+
+<div class="mt-4 flex flex-wrap gap-4 text-xs text-slate-600">
+  <span><span class="grade grade-serving">serving</span> reaches the serving code, blocks before sending</span>
+  <span><span class="grade grade-partial">partial</span> real evidence, stops short of the serving code or doesn't block</span>
+  <span><span class="grade grade-weak">weak</span> little is authenticated</span>
+  <span>— not supported</span>
+</div>
+
+{% for kind, kind_label in clients.kinds.items() %}
+{% set rows = clients.clients | selectattr("kind", "equalto", kind) | list %}
+{% if rows %}
+<section class="mt-8">
+  <h2 class="text-xl font-semibold">{{ kind_label }}</h2>
+  <div class="mt-3 overflow-x-auto rounded border border-slate-200 bg-white">
+    <table class="vt w-full border-collapse">
+      <thead><tr><th>Client</th>
+        {% for pid, plabel in clients.providers.items() %}<th>{{ plabel }}</th>{% endfor %}
+        <th>Event log hashed</th><th>Blocks on failure</th></tr></thead>
+      <tbody>
+      {% for c in rows %}
+        <tr id="{{ c.id }}">
+          <th>{% if c.repo %}<a class="underline" href="{{ c.repo }}">{{ c.name }}</a>{% else %}{{ c.name }}{% endif %}
+            <small>{{ c.commit }} · <a class="underline" href="{{ repo_url }}{{ c.review }}">review</a></small>
+            {% if c.notes %}<small>{{ c.notes }}</small>{% endif %}</th>
+          {% for pid in clients.providers %}
+            {% set cell = c.providers.get(pid) %}
+            <td>{% if cell %}<span class="grade grade-{{ cell.grade }}">{{ cell.grade }}</span><br>{{ cell.cell }}{% else %}<span class="text-slate-400">—</span>{% endif %}</td>
+          {% endfor %}
+          <td>{{ {True: "yes", False: "no", None: "n/a"}[c.event_log_hashed] }}</td>
+          <td>{{ {True: "yes", False: "no", None: "n/a"}[c.fails_closed] }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+{% endfor %}
+
+{% if clients.out_of_scope %}
+<section class="mt-8 max-w-3xl">
+  <h2 class="text-xl font-semibold">Reviewed and out of scope</h2>
+  <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+  {% for o in clients.out_of_scope %}<li><a class="underline" href="{{ o.repo }}">{{ o.name }}</a>: {{ o.reason }} <a class="underline" href="{{ repo_url }}{{ o.review }}">review</a></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

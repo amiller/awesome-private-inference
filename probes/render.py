@@ -22,6 +22,8 @@ DATA_LATEST = REPO_ROOT / "data/latest.json"
 ROUTES_PATH = REPO_ROOT / "data/routes.json"
 REFERENCES_PATH = REPO_ROOT / "data/references/latest.json"
 DOCS_DIR = REPO_ROOT / "docs"
+CLIENTS_PATH = REPO_ROOT / "data/clients.json"
+GRADES = ("serving", "partial", "weak")
 TEMPLATE_DIR = REPO_ROOT / "site/templates"
 REPO_URL = "https://github.com/amiller/awesome-private-inference/blob/main/"
 ISSUES_URL = "https://github.com/amiller/awesome-private-inference/issues/"
@@ -60,6 +62,18 @@ OUTCOME_STYLE = {
     "stale": ("Stale", "bg-amber-100 text-amber-800", "The latest evidence is too old for the stated freshness policy."),
     "not_applicable": ("Not applicable", "bg-slate-100 text-slate-500", "This check does not apply to this route."),
 }
+
+
+def validate_clients(data: dict) -> dict:
+    """Every cell names a known provider and grade, and every review file exists."""
+    for c in data["clients"]:
+        assert c["kind"] in data["kinds"], c["id"]
+        assert (CLIENTS_PATH.parents[1] / c["review"]).exists(), c["review"]
+        for pid, cell in c["providers"].items():
+            assert pid in data["providers"] and cell["grade"] in GRADES and cell["cell"], (c["id"], pid)
+    ids = [c["id"] for c in data["clients"]]
+    assert len(ids) == len(set(ids)), "duplicate client id"
+    return data
 
 
 def source_link(source: str) -> str:
@@ -232,6 +246,7 @@ def _render(snapshot: dict) -> None:
     ctx["assessment_limitations"] = LIMITATIONS
     ctx["audit_synthesis"] = _load_optional(REPO_ROOT / "data/audit-synthesis.json", {"schema_version": 1, "studies": []})
     validate_audit_synthesis(ctx["audit_synthesis"], cards)
+    ctx["clients"] = validate_clients(json.loads(CLIENTS_PATH.read_text()))
     for page, template in (("index.html", "index.html.j2"),
                            ("stages.html", "stages.html.j2"),
                            ("assessments.html", "assessments.html.j2"),
@@ -239,7 +254,8 @@ def _render(snapshot: dict) -> None:
                            ("evidence.html", "evidence.html.j2"),
                            ("methodology.html", "methodology.html.j2"),
                            ("pricing.html", "pricing.html.j2"),
-                           ("history.html", "history.html.j2")):
+                           ("history.html", "history.html.j2"),
+                           ("verifiers.html", "verifiers.html.j2")):
         rendered = env.get_template(template).render(**ctx)
         (DOCS_DIR / page).write_text("\n".join(line.rstrip() for line in rendered.splitlines()) + "\n")
     print(f"wrote dashboard, stage criteria and reference exports to {DOCS_DIR}")
