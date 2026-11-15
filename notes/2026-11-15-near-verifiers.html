@@ -1,0 +1,137 @@
+<title>NEAR AI Verifiers Compared</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, a wide comparison table that scrolls on its own, notes below */
+:root {
+  --bg: #f7f8f6; --fg: #1d2421; --muted: #5d6a64; --rule: #d8ddd9; --panel: #eef1ee;
+  --accent: #2f6f5e;
+  --ok-bg: #dcefe5; --ok-fg: #1e5a3f; --mid-bg: #f4ead0; --mid-fg: #6b5210; --no-bg: #f5dcd8; --no-fg: #7d2a20;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #141917; --fg: #e3e8e5; --muted: #98a59f; --rule: #2d3632; --panel: #1b221f; --accent: #7cc4ab;
+  --ok-bg: #1e3a2d; --ok-fg: #9fdcbd; --mid-bg: #3a3218; --mid-fg: #e8cf86; --no-bg: #43221d; --no-fg: #f1aea3; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #141917; --fg: #e3e8e5; --muted: #98a59f; --rule: #2d3632; --panel: #1b221f; --accent: #7cc4ab;
+  --ok-bg: #1e3a2d; --ok-fg: #9fdcbd; --mid-bg: #3a3218; --mid-fg: #e8cf86; --no-bg: #43221d; --no-fg: #f1aea3; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.6 var(--sans); }
+.wrap { max-width: 1100px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 36px; }
+.prose { max-width: 68ch; display: grid; gap: 12px; }
+h1 { font-size: 30px; line-height: 1.2; margin: 0; font-weight: 600; text-wrap: balance; }
+h2 { font-size: 19px; margin: 0; font-weight: 600; text-wrap: balance; }
+p, ul { margin: 0; } ul { padding-left: 20px; display: grid; gap: 8px; }
+.meta { color: var(--muted); font-size: 13px; }
+code { font: 13px var(--mono); background: var(--panel); padding: 1px 4px; border-radius: 3px; overflow-wrap: anywhere; }
+a { color: var(--accent); }
+.tablebox { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 13.5px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+thead th { background: var(--panel); font-size: 12px; letter-spacing: .03em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+tbody th { font-weight: 600; min-width: 150px; }
+tbody th small { display: block; font: 400 12px var(--mono); color: var(--muted); }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+.chip { display: inline-block; font: 500 11.5px var(--mono); padding: 1px 6px; border-radius: 3px; margin-bottom: 3px; }
+.ok { background: var(--ok-bg); color: var(--ok-fg); } .mid { background: var(--mid-bg); color: var(--mid-fg); } .no { background: var(--no-bg); color: var(--no-fg); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <header class="prose">
+    <h1>NEAR AI verifiers compared</h1>
+    <p>Seven clients that check NEAR AI's TEE attestation, read from source at pinned commits on 2026-11-15. Nothing here was run against NEAR except where noted. The question for each: what does it check, does the check tie the prompt to the attested machine, and does a failure stop the request.</p>
+    <p class="meta">From the awesome-private-inference review notes. Cells say what the code does at the pinned commit, with file:line in the notes.</p>
+  </header>
+
+  <section style="display:grid;gap:12px">
+    <div class="legend"><span><span class="chip ok">blocks</span> enforced before the prompt is sent</span><span><span class="chip mid">checks</span> computed, doesn't stop anything</span><span><span class="chip no">no</span> not checked</span></div>
+    <div class="tablebox"><table>
+      <thead><tr><th>Client</th><th>What it attests</th><th>Event log hashed from payloads</th><th>Prompt bound to attested key</th><th>Reply authenticated</th><th>On failure</th></tr></thead>
+      <tbody>
+        <tr><th>teep<small>6548996, nearcloud</small></th>
+          <td><span class="chip ok">blocks</span> Every model instance's TDX quote, TCB, debug bit, NVIDIA GPU evidence, and the NEAR gateway quote. MRTD and compose pinned from a static list.</td>
+          <td>Not covered in this review.</td>
+          <td><span class="chip ok">blocks</span> E2EE v2 to the attested model key; gateway TLS pinned.</td>
+          <td><span class="chip no">no</span> v2 doesn't bind the reply key.</td>
+          <td>Refuses to send.</td></tr>
+        <tr><th>private-ai-gateway<small>e9b6ae8a, as a client of NEAR</small></th>
+          <td><span class="chip mid">checks</span> NEAR's gateway quote only. No compose or app pin; GPU token signature not checked; <code>model_attestations</code> not fetched.</td>
+          <td><span class="chip ok">yes</span> Rust <code>aci-verify</code> recomputes each digest (<code>dstack.rs:160-171</code>).</td>
+          <td><span class="chip mid">checks</span> TLS key of NEAR's gateway, not the model.</td>
+          <td><span class="chip no">no</span></td>
+          <td>Blocks only for "required" requests; otherwise records it in the receipt and forwards.</td></tr>
+        <tr><th>abalone<small>53655796</small></th>
+          <td><span class="chip mid">checks</span> Model quote. TCB policy "reported" warns and sends; NVIDIA check skipped if NVIDIA's key list is unreachable. No MRTD/RTMR0-2 or app id pin.</td>
+          <td><span class="chip no">no</span> Vendored TS client; a payload swap on a recorded NEAR fixture was accepted.</td>
+          <td><span class="chip mid">checks</span> E2EE v1.</td>
+          <td><span class="chip mid">checks</span> On one route, after delivery.</td>
+          <td>Warns and sends (strict only in one profile).</td></tr>
+        <tr><th>hermes-agent<small>1f92ab10, unmaintained</small></th>
+          <td><span class="chip mid">checks</span> Model quote and a compose allowlist; binds the <code>actions_hash</code> field but never hashes the <code>actions</code> list it checks.</td>
+          <td>—</td>
+          <td><span class="chip mid">checks</span> E2EE v1.</td>
+          <td><span class="chip no">no</span></td>
+          <td>Sends without E2EE unless strict mode is on.</td></tr>
+        <tr><th>BitRouter<small>f8763b1, deleted in #701</small></th>
+          <td><span class="chip mid">checks</span> Model nodes: DCAP, TCB UpToDate, NVIDIA token with nonce; pins from env lists.</td>
+          <td><span class="chip no">no</span> <code>eventlog.rs:22-71</code></td>
+          <td><span class="chip no">no</span></td>
+          <td><span class="chip no">no</span></td>
+          <td>Never wired into the request path.</td></tr>
+        <tr><th>IronWire<small>ac919ac, standalone</small></th>
+          <td><span class="chip no">no</span> Ships <code>NoQuoteVerification</code>; every receipt settles as "unattested".</td>
+          <td>—</td>
+          <td><span class="chip no">no</span> HTTPS and API key, system roots.</td>
+          <td><span class="chip mid">checks</span> NEAR's <code>/v1/signature</code> receipt against the wire bytes, after delivery; signer not attested.</td>
+          <td>Ledger label only.</td></tr>
+        <tr><th>Near AI Gateway<small>TraceCommons df2e821, release build</small></th>
+          <td><span class="chip mid">checks</span> Per-model key quotes via dcap-qvl, TCB UpToDate, our nonce in <code>report_data</code> (per model, per hour). No MRTD or compose pin, no NVIDIA check.</td>
+          <td><span class="chip no">no</span> No replay in this build.</td>
+          <td><span class="chip no">no</span> HTTPS and API key.</td>
+          <td><span class="chip mid">checks</span> Per-response receipt signed by an attested model key, after delivery.</td>
+          <td>Ledger label only, by design.</td></tr>
+        <tr><th>Near AI Gateway<small>near-ai-staging feature</small></th>
+          <td><span class="chip mid">checks</span> Adds signed pins (mrtd, rtmr0-2, mrconfigid) with rollback protection and a compose-manager <code>actions_hash</code> check.</td>
+          <td><span class="chip ok">yes</span> Recomputes each digest from <code>event_payload</code>.</td>
+          <td>As release.</td>
+          <td>As release.</td>
+          <td>Release CI refuses builds with this feature.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="prose">
+    <h2>Problems that recur across these clients</h2>
+    <ul>
+      <li><strong>Event-log values trusted without hashing.</strong> The dstack event log has a digest and a payload per entry. Replaying digests to RTMR3 proves nothing about the payload unless the digest is recomputed from it. private-ai-gateway's TS client (<code>clients/verifier-ts/src/report.ts:173-182</code>), abalone and BitRouter read <code>app-id</code> and <code>compose-hash</code> from payloads they never hashed, so a report server can keep genuine digests and substitute the values. The Rust <code>aci-verify</code> crate and the Gateway's staging build do it right.</li>
+      <li><strong>The compose doesn't contain the serving code.</strong> NEAR's compose-manager pulls the proxy and model containers after boot from git tags in <code>nearai/cvm-compose-files</code>, with no minimum tag age. Pinning the compose hash pins the manager, not what reads the prompt.</li>
+      <li><strong>One key, several deployments.</strong> On 2026-11-15, glm-5.3-flash ran on 3 instances with 3 different composes and one shared signing key. A receipt signed by that key doesn't say which one served the request.</li>
+      <li><strong>E2EE v3 is the only version that binds the reply key</strong> (nearai inference-proxy #321). teep sends v2; abalone and hermes send v1; nobody sends v3.</li>
+      <li><strong>Fail-open defaults.</strong> Warn-and-send on TCB, skipping the NVIDIA check when its key list is unreachable, and sending without E2EE after a failed check all leave the prompt going to an unverified machine.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>Where the Near AI Gateway overlaps, and where it adds something</h2>
+    <p>The quote, nonce and per-model key binding repeat what teep and <code>aci-verify</code> already do. The goal is different: the Gateway labels traces with their provenance after the fact, while teep protects the prompt before it is sent. The per-response receipt checked against an attested model key is something none of the other clients do. teep doesn't check NEAR reply signatures at all.</p>
+    <p>Suggestions, in order of how much they change:</p>
+    <ul>
+      <li>Ship the staging checks. Without the pins and the event-log replay, any genuine TDX machine's key counts as a NEAR model key.</li>
+      <li>Reject receipts that don't name a model, and don't fall back to the requested model name when looking up the key set.</li>
+      <li>If Gateway users expect their prompts to be private, send the NEAR lane with E2EE to the attested model key, ideally v3, or through teep. Today the prompt goes to NEAR's API over plain HTTPS.</li>
+      <li>For the Rust verifier, <code>aci-verify</code> already has the dstack replay and could be shared rather than maintained twice.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>Sources</h2>
+    <ul>
+      <li><a href="https://github.com/13rac1/teep">13rac1/teep</a> at <code>6548996</code></li>
+      <li><a href="https://github.com/Dstack-TEE/private-ai-gateway">Dstack-TEE/private-ai-gateway</a> at <code>e9b6ae8a</code></li>
+      <li><a href="https://github.com/nearai/ironwire">nearai/ironwire</a> at <code>ac919ac</code>; <a href="https://github.com/TraceCommons/trace-commons">TraceCommons/trace-commons</a> at <code>df2e821</code>, PRs #2070, #2073, #2075, #2086</li>
+      <li><a href="https://github.com/bitrouter/bitrouter">bitrouter/bitrouter</a> at <code>f8763b1</code> (verifier removed in #701)</li>
+      <li>hermes-agent branch <code>feat/near-ai-attestation</code> at <code>1f92ab10</code>; abalone at <code>53655796</code></li>
+    </ul>
+  </section>
+</div>
