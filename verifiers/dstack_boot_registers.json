@@ -1,13 +1,13 @@
 {
   "schema": "dstack-boot-registers/1",
-  "policy_revision": "2026-11-05.1",
+  "policy_revision": "2026-11-15.1",
   "provenance": {
     "derived_at": "2026-11-05",
     "tool": "dstack-mr 0.6.3 (dstack-TEE/dstack commit d7e15dc, branch next), Machine::measure() — the full-image TDX path dstack's own verifier uses (dstack/verifier/src/verification.rs::compute_measurements)",
     "reproduction": "research/dstack-mr-derivation-2026-11-05/ (harness source, vm_configs, per-image derivation and shape-sensitivity records)",
     "independence": "values computed from published OS image archives (hash chain and manifest member digests re-verified on download 2026-11-05) before any comparison with observed quotes; all retained NEAR quotes whose image is published matched afterwards, as did the 2026-11-05 Venice capture and the aci lane's derivation of the same image and VM shape",
     "mrtd_two_variants": "MRTD depends on the QEMU page-add order; qemu 8.x measures two-pass and qemu 9.x single-pass. Both derived variants are accepted per image because NEAR does not expose vm_config. teep's capture-derived MRTD pins {b24d3b24…, f06dfda6…, df4d77c8…} are exactly three of these build-derived variants.",
-    "rtmr0_policy": "RTMR0 depends on the VM shape (cpu, memory, gpus, hugepages, hotplug, qemu). It is pinned only under vm_shapes for providers that expose vm_config in their attestation (Venice); elsewhere rtmr0_pinned is false and quotes cannot pass boot_registers_derived on RTMR0 grounds, with the reason recorded per quote.",
+    "rtmr0_policy": "RTMR0 depends on the VM shape (cpu, memory, gpus, hugepages, hotplug, qemu, ovmf variant). Each vm_shapes entry pins one derived (mrtd, rtmr0) tuple; the shape is derivation input, not something matched against a served vm_config. Images without vm_shapes leave tee_hardware_config unproven (None).",
     "review": "values accepted by this repo's review workflow; a provider-published or newly observed value is not automatically added"
   },
   "registers": ["mrtd", "rtmr0", "rtmr1", "rtmr2"],
@@ -19,7 +19,6 @@
       "mrtd_single_pass": "b24d3b24e9e3c16012376b52362ca09856c4adecb709d5fac33addf1c47e193da075b125b6c364115771390a5461e217",
       "rtmr1": "a7b523278d4f914ee8df0ec80cd1c3d498cbf1152b0c5eaf65bad9425072874a3fcf891e8b01713d3d9937e3e0d26c15",
       "rtmr2": "24847f5c5a2360d030bc4f7b8577ce32e87c4d051452c937e91220cab69542daef83433947c492b9c201182fc9769bbe",
-      "rtmr0_pinned": false,
       "observed_roles": "NEAR gateway"
     },
     {
@@ -29,8 +28,15 @@
       "mrtd_single_pass": "df4d77c857de652bd0fafa343a2026b51071ee03773d076d283abf1a7d36ff91ffa279ee4a617ac664f7e2a2c8d5891b",
       "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
       "rtmr2": "764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d",
-      "rtmr0_pinned": false,
-      "observed_roles": "NEAR gateway"
+      "vm_shapes": [
+        {
+          "shape": {"cpu_count": 16, "memory_size": 34359738368, "qemu_version": "8.2.2", "num_gpus": 0, "hugepages": false, "hotplug_off": false, "num_nvswitches": 0, "host_share_mode": "9p", "pci_hole64_size": 0, "ovmf_variant": "pre202505"},
+          "mrtd": "7fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c1409173",
+          "rtmr0": "d6118f0eeb30e9d9178d2b9106dddd002d979b6fa79bdec415051afae2021384c29a32d2f6454fa369617598378ffb5e",
+          "derived": "dstack-mr on zed 2026-11-15, see research/dstack-mr-derivation-2026-11-05/README.md; full-length rtmr0 hex copied from the matching quote in evidence 2d27859e (the review recorded the derivation output by prefix)"
+        }
+      ],
+      "observed_roles": "NEAR gateway, redpill ACI gateway"
     },
     {
       "os_image_hash": "91fd5d69ccee3e5ea4f2aeb8c9b632c4358c4ecfc29ba1aa6fb1e402af209829",
@@ -39,7 +45,6 @@
       "mrtd_single_pass": "df4d77c857de652bd0fafa343a2026b51071ee03773d076d283abf1a7d36ff91ffa279ee4a617ac664f7e2a2c8d5891b",
       "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
       "rtmr2": "bd67ab7554dc27ab03a077bc1447a1a67d0624ff547c4c809a8626f12d6a89712f8ec60e781e99b98208574065d21a71",
-      "rtmr0_pinned": false,
       "observed_roles": "NEAR model CVM"
     },
     {
@@ -49,7 +54,6 @@
       "mrtd_single_pass": "b24d3b24e9e3c16012376b52362ca09856c4adecb709d5fac33addf1c47e193da075b125b6c364115771390a5461e217",
       "rtmr1": "07e6f51aa763abfe75c3ddfbf4f425fe3f0ceff66d807a75e049303dce9addf68e7218729bd419638af63a370f65878c",
       "rtmr2": "df67e467e60edc1737bcf8e682d48131bfb427f523226aa7f197a7608e9b3784783fa759ef5b28191fa12f9ddb36b858",
-      "rtmr0_pinned": true,
       "vm_shapes": [
         {
           "shape": {"cpu_count": 32, "memory_size": 34359738368, "qemu_version": "8.2.2", "num_gpus": 0, "hugepages": false, "hotplug_off": false, "num_nvswitches": 0, "host_share_mode": "9p", "pci_hole64_size": 0},

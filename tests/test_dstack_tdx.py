@@ -50,7 +50,7 @@ def test_replay_matches_all_four_quote_rtmrs():
         quoted = dstack_tdx.parse_quote(att["intel_quote"])
         for i in range(4):
             assert replayed[f"rtmr{i}"] == quoted[f"rtmr{i}"], (name, i)
-        assert dstack_tdx.covered_imrs(log) == {0, 1, 2, 3}
+        assert {e["imr"] for e in log} == {0, 1, 2, 3}
 
 
 def test_debug_bit_clear_on_real_quotes_and_set_when_flipped():
@@ -70,6 +70,15 @@ def test_replayed_register_mismatch_is_visible(register):
         quoted = dstack_tdx.parse_quote(_flip_byte(
             att["intel_quote"], OFF_RTMR[int(register[-1])], bit=3))
         assert quoted[register] != replayed[register]
+
+
+@pytest.mark.parametrize("imr", [0, 1, 2])
+def test_log_omitting_a_boot_rtmr_is_rejected(imr):
+    """Every RTMR must equal the replay, not only those the log happens to extend."""
+    _, att = _attestations()[0]
+    log = [e for e in att["info"]["tcb_info"]["event_log"] if e["imr"] != imr]
+    with pytest.raises(dstack_tdx.EventLogError, match=f"rtmr{imr} mismatch"):
+        dstack_tdx.attestation_measurements(att["intel_quote"], log)
 
 
 def test_runtime_events_carry_authenticated_values():
@@ -112,9 +121,8 @@ def test_replay_rejects_dropped_and_added_events():
     # dropping any event changes the replay
     for i in range(len(log)):
         dropped = log[:i] + log[i + 1:]
-        if dstack_tdx.covered_imrs(dropped) == {0, 1, 2, 3}:
-            replayed = dstack_tdx.replayed_registers(dropped)
-            assert any(replayed[f"rtmr{k}"] != quoted[f"rtmr{k}"] for k in range(4))
+        replayed = dstack_tdx.replayed_registers(dropped)
+        assert any(replayed[f"rtmr{k}"] != quoted[f"rtmr{k}"] for k in range(4))
     # replaying a runtime event twice changes RTMR3
     twice = log + [dict(e) for e in log if e.get("event") == "system-ready"]
     assert dstack_tdx.replayed_registers(twice)["rtmr3"] != quoted["rtmr3"]

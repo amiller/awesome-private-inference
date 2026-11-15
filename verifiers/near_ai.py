@@ -7,7 +7,6 @@ Relies on the vendored nearai-cloud-verifier modules (`model_verifier`,
 """
 from __future__ import annotations
 
-import asyncio
 import contextlib
 import hashlib
 import io
@@ -42,12 +41,6 @@ from .common import (
 )
 from . import dstack_tdx
 from . import dstack_boot_registers
-
-# Issue #18 / teep tee_tcb_current parity: only UpToDate passes. Every other
-# Intel PCS verdict (OutOfDate, SWHardeningNeeded, ConfigurationAndSWHardeningNeeded,
-# OutOfDateConfigurationNeeded, Revoked, ...) means known-vulnerable firmware or
-# missing mitigations, so tcb_current goes False and the row records the advisories.
-TCB_CURRENT_STATUSES = frozenset({"UpToDate"})
 
 DEFAULT_BASE_URL = "https://cloud-api.near.ai"
 _STDOUT_LOCK = threading.Lock()
@@ -167,30 +160,13 @@ def _public_attestation_fields(att: dict) -> dict:
 _audit_match = audit_match
 
 
-def _sync(coro):
-    try:
-        asyncio.get_running_loop()
-    except RuntimeError:
-        return asyncio.run(coro)
-    from concurrent.futures import ThreadPoolExecutor
-    def _worker():
-        loop = asyncio.new_event_loop()
-        try:
-            return loop.run_until_complete(coro)
-        finally:
-            loop.close()
-    with ThreadPoolExecutor(max_workers=1) as ex:
-        return ex.submit(_worker).result()
-
-
-async def _check_tdx(att: Dict) -> Dict:
+def _check_tdx(att: Dict) -> Dict:
     """Same verdict as upstream check_tdx_quote, but keeps the TCB status, advisories and
     raw quote that it only prints. `verified` mirrors dcap_qvl: the quote's signature
     and collateral verify, for UpToDate and OutOfDate alike; the TCB currency policy
     is applied separately via TCB_CURRENT_STATUSES (tcb_current)."""
-    import dcap_qvl
     quote = att["intel_quote"]
-    result = await dcap_qvl.get_collateral_and_verify(bytes.fromhex(quote))
+    result = dstack_tdx.dcap_verify(quote)
     td10 = json.loads(result.to_json())["report"]["TD10"]
     return {
         "quote": {"body": {"reportdata": td10["report_data"], "mrconfig": td10["mr_config_id"]}},
@@ -218,12 +194,10 @@ def _measurement_checks(att: Dict, intel: Dict) -> Dict:
     event_log = tcb_info.get("event_log")
     try:
         measurements = dstack_tdx.attestation_measurements(intel["intel_quote"], event_log)
-    except (dstack_tdx.EventLogError, ValueError, TypeError) as exc:
+    except dstack_tdx.EventLogError as exc:
         return {"ok": False, "error": str(exc),
-                "event_log_present": event_log is not None,
-                "boot_registers": {"ok": False, "per_register": {}, "reasons": [
-                    f"quote/event-log binding failed ({exc}); "
-                    "registers not checked against pins"]}}
+                "boot_registers": {"boot_config": False, "hardware_config": False, "reasons": [
+                    f"quote/event-log binding failed ({exc}); image identity unauthenticated"]}}
     detached = {
         "app_id": str(info.get("app_id") or "").lower().removeprefix("0x"),
         "compose_hash": str(tcb_info.get("compose_hash") or "").lower().removeprefix("0x"),
@@ -302,10 +276,11 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     details["model_contract"] = _contract_evidence(_MODELS_APP, chain["block_tag"])
 
     # Gateway TDX + report_data
-    gw_intel = _sync(_check_tdx(gateway))
+    gw_intel = _check_tdx(gateway)
     gw_meas = _measurement_checks(gateway, gw_intel)
-    details["tdx"] = {"gateway": {**_tdx_evidence(gw_intel), "measurements": gw_meas},
-                     "models": []}
+    gw_debug = dstack_tdx.quote_debug_disabled(gw_intel["intel_quote"])
+    details["tdx"] = {"gateway": {**_tdx_evidence(gw_intel), "measurements": gw_meas,
+                                  "debug_disabled": gw_debug}, "models": []}
     sc.tdx_verified = gw_intel["verified"]
     if not sc.tdx_verified:
         return _fail("gateway TDX quote did not verify", gateway_intel=gw_intel,
@@ -316,7 +291,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     # passes; any other verdict leaves the advisories on the row.
     tcb_statuses = [gw_intel["tcb_status"]]
     details["tcb_policy"] = {
-        "passing_status": sorted(TCB_CURRENT_STATUSES),
+        "passing_status": sorted(dstack_tdx.TCB_CURRENT_STATUSES),
         "effect": "tcb_current=False for every other Intel PCS verdict; "
                   "tdx_verified still reflects quote signature appraisal",
     }
@@ -335,19 +310,18 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     key_ok = True
     compose_checks = []
     model_names_match = True
-    debug_disabled = gw_meas["ok"] and gw_meas["debug_disabled"]
-    event_log_replayed = gw_meas["ok"]
-    boot_registers_derived = gw_meas["boot_registers"]["ok"]
+    debug_flags = [gw_debug]
+    measurements = [gw_meas]
 
     for i, m in enumerate(models):
-        m_intel = _sync(_check_tdx(m))
+        m_intel = _check_tdx(m)
         m_meas = _measurement_checks(m, m_intel)
+        m_debug = dstack_tdx.quote_debug_disabled(m_intel["intel_quote"])
         tcb_statuses.append(m_intel["tcb_status"])
-        details["tdx"]["models"].append({**_tdx_evidence(m_intel), "measurements": m_meas})
-        debug_disabled = debug_disabled and m_meas["ok"] and m_meas["debug_disabled"]
-        event_log_replayed = event_log_replayed and m_meas["ok"]
-        boot_registers_derived = (boot_registers_derived
-                                  and m_meas["boot_registers"]["ok"])
+        debug_flags.append(m_debug)
+        measurements.append(m_meas)
+        details["tdx"]["models"].append({**_tdx_evidence(m_intel), "measurements": m_meas,
+                                         "debug_disabled": m_debug})
         if not m_intel["verified"]:
             model_ok = False
             gpu_ok = False
@@ -422,13 +396,13 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     sc.key_derives_to_address = key_ok
     sc.gpu_attested = gpu_ok
     sc.compose_hash_committed = bool(compose_checks and all(compose_checks))
-    sc.tee_debug_disabled = debug_disabled
-    sc.event_log_replayed = event_log_replayed
-    sc.boot_registers_derived = boot_registers_derived
-    if all(tcb_statuses):
-        sc.tcb_current = all(s in TCB_CURRENT_STATUSES for s in tcb_statuses)
-    details["tcb_statuses"] = {"gateway": gw_intel["tcb_status"],
-                               "models": [m for m in tcb_statuses[1:]]}
+    sc.tee_debug_disabled = all(debug_flags)
+    sc.event_log_replayed = all(x["ok"] for x in measurements)
+    sc.tee_boot_config = all(x["boot_registers"]["boot_config"] for x in measurements)
+    # RTMR0 is not derived for NEAR's VM shapes (no vm_config exposed): unproven, not checked.
+    sc.tee_hardware_config = None
+    sc.tcb_current = all(s in dstack_tdx.TCB_CURRENT_STATUSES for s in tcb_statuses)
+    details["tcb_statuses"] = {"gateway": gw_intel["tcb_status"], "models": tcb_statuses[1:]}
     details["model_names_match_request"] = model_names_match
 
     # These are gateway reference facts, not proof that the gateway verified the
@@ -496,7 +470,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         and sc.tee_debug_disabled is True
         and sc.event_log_replayed is True
         and sc.tcb_current is True
-        and sc.boot_registers_derived is True
+        and sc.tee_boot_config is True
         and model_ok
         and model_names_match
         and sc.compose_hash_committed is True
@@ -508,7 +482,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     details["verification_reason"] = (
         "model/compose-manager actions and encrypted request are not quote-bound end to end"
         if checked_ok else "quote, model mapping, compose, key, GPU, TCB currency, "
-        "debug-bit, event-log or chain-policy check failed")
+        "debug-bit, event-log, boot-config or chain-policy check failed")
     details["raw_evidence"] = {
         "source": f"{base}/v1/attestation/report",
         "requested_model": model, "nonce": nonce,

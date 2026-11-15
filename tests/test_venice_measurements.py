@@ -8,6 +8,8 @@ the quote, event log, vm_config and app_compose are the real captured bytes.
 import json
 from pathlib import Path
 
+from types import SimpleNamespace
+
 import pytest
 
 from verifiers import dstack_tdx, venice
@@ -20,7 +22,7 @@ def _capture():
     return json.loads(FIXTURE.read_text())["response"]
 
 
-def _patch(monkeypatch, att, dcap_status="UpToDate", dcap_error=None):
+def _patch(monkeypatch, att, dcap_status="UpToDate"):
     parsed = dstack_tdx.parse_quote(att["intel_quote"] or att["attestation"]["evidence"]["quote"])
 
     class Resp:
@@ -38,12 +40,8 @@ def _patch(monkeypatch, att, dcap_status="UpToDate", dcap_error=None):
                             "rtmr3": parsed["rtmr3"]},
                             "tcb_status": None}})
 
-    async def appraisal(q):
-        if dcap_error:
-            raise dcap_error
-        return {"tcb_status": dcap_status, "advisory_ids": []}
-
-    monkeypatch.setattr(venice, "_local_dcap_appraisal", appraisal)
+    monkeypatch.setattr(venice.dstack_tdx, "dcap_verify",
+                        lambda q: SimpleNamespace(status=dcap_status, advisory_ids=[]))
 
 
 def _verify(monkeypatch, att, **kw):
@@ -57,7 +55,8 @@ def test_live_capture_passes_measurement_layers(monkeypatch):
     assert sc.tdx_verified is True
     assert sc.event_log_replayed is True
     assert sc.tee_debug_disabled is True
-    assert sc.boot_registers_derived is True  # vm_config exposes the shape
+    assert sc.tee_boot_config is True
+    assert sc.tee_hardware_config is True
     assert sc.compose_hash_committed is True
     assert sc.tcb_current is True
     assert report.details["phala_tcb_status"] is None  # Phala returns no verdict
@@ -72,11 +71,14 @@ def test_outofdate_dcap_verdict_fails_tcb_current(monkeypatch):
     assert report.scorecard.tdx_verified is True  # Phala appraisal unaffected
 
 
-def test_dcap_failure_is_recorded_not_swallowed(monkeypatch):
-    report = _verify(monkeypatch, _capture(),
-                     dcap_error=RuntimeError("PCS unreachable"))
-    assert report.scorecard.tcb_current is None
-    assert "PCS unreachable" in report.details["dcap_appraisal"]["error"]
+def test_dcap_failure_propagates(monkeypatch):
+    _patch(monkeypatch, _capture())
+
+    def unreachable(q):
+        raise RuntimeError("PCS unreachable")
+    monkeypatch.setattr(venice.dstack_tdx, "dcap_verify", unreachable)
+    with pytest.raises(RuntimeError, match="PCS unreachable"):
+        venice.verify("key", venice.DEFAULT_BASE_URL, "e2ee-glm-5-1")
 
 
 def test_debug_bit_flip_fails_debug_layer(monkeypatch):
@@ -110,17 +112,20 @@ def test_event_log_tamper_fails_replay_compose_and_boot(monkeypatch):
     report = _verify(monkeypatch, att)
     assert report.scorecard.event_log_replayed is False
     assert report.scorecard.compose_hash_committed is not True
-    assert report.scorecard.boot_registers_derived is False
+    assert report.scorecard.tee_boot_config is False
+    assert report.scorecard.tee_hardware_config is False
+    assert report.scorecard.tee_debug_disabled is True  # read from the quote alone
 
-def test_vm_config_shape_swap_fails_boot_registers(monkeypatch):
+
+def test_debug_bit_survives_replay_failure(monkeypatch):
     att = json.loads(json.dumps(_capture()))
-    vc = json.loads(att["attestation"]["evidence"]["vm_config"])
-    vc["cpu_count"] = 8
-    att["attestation"]["evidence"]["vm_config"] = json.dumps(vc)
+    raw = bytearray(bytes.fromhex(att["attestation"]["evidence"]["quote"]))
+    raw[168] |= 0x01
+    raw[520] ^= 0x08  # RTMR3: replay now fails too
+    att["attestation"]["evidence"]["quote"] = att["intel_quote"] = raw.hex()
     report = _verify(monkeypatch, att)
-    assert report.scorecard.boot_registers_derived is False
-    assert any("not pinned" in r for r in report.details["measurements"]
-               ["boot_registers"]["reasons"])
+    assert report.scorecard.event_log_replayed is False
+    assert report.scorecard.tee_debug_disabled is False
 
 
 def test_os_image_hash_disagreement_between_log_and_vm_config(monkeypatch):
@@ -155,6 +160,6 @@ def test_legacy_shape_reports_layers_unproven(monkeypatch):
     report = _verify(monkeypatch, legacy)
     sc = report.scorecard
     assert sc.event_log_replayed is None
-    assert sc.boot_registers_derived is None
+    assert sc.tee_boot_config is None and sc.tee_hardware_config is None
     assert sc.tee_debug_disabled is True  # the quote itself still carries the bit
     assert sc.tcb_current is True

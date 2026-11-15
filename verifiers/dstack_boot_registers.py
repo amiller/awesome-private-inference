@@ -5,24 +5,20 @@ dstack-mr from published OS image archives (provenance inside the file and in
 research/dstack-mr-derivation-2026-11-05/). Copying an observed register into
 that file is not how entries are accepted; see the file's review note.
 
-Missing expectations are rejections with reasons, never a quiet pass: an OS
-image with no pinned entry (e.g. an unpublished archive) fails
-boot_registers_derived, and so does an unpinned VM shape where shapes are the
-only way to pin RTMR0.
+Two checks, split as teep splits tee_boot_config / tee_hardware_config:
+  boot_config      MRTD (either QEMU page-add variant) + RTMR1 + RTMR2 equal the
+                   per-image derivation. An unpinned image fails.
+  hardware_config  (MRTD, RTMR0) is one of the derived tuples pinned for the
+                   image's VM shapes. None when the image has no derived RTMR0.
 """
 from __future__ import annotations
 
 import json
 from functools import lru_cache
 from pathlib import Path
-from typing import Dict, Optional
+from typing import Dict
 
 POLICY_PATH = Path(__file__).resolve().parent / "dstack_boot_registers.json"
-
-# vm_config keys that change dstack-mr's output for a given image (see the
-# shape-sensitivity record); everything else is ignored when matching a shape.
-SHAPE_KEYS = ("cpu_count", "memory_size", "qemu_version", "num_gpus", "num_nvswitches",
-              "hugepages", "hotplug_off", "host_share_mode", "pci_hole64_size", "swtpm")
 
 
 class PolicyError(ValueError):
@@ -32,76 +28,41 @@ class PolicyError(ValueError):
 @lru_cache(maxsize=1)
 def _policy() -> Dict:
     data = json.loads(POLICY_PATH.read_text())
-    if data.get("schema") != "dstack-boot-registers/1":
+    if data["schema"] != "dstack-boot-registers/1":
         raise PolicyError("unsupported dstack boot-register policy schema")
-    entries = {e["os_image_hash"].lower(): e for e in data.get("entries", [])}
+    entries = {e["os_image_hash"]: e for e in data["entries"]}
     if not entries:
         raise PolicyError("dstack boot-register policy has no entries")
+    hexes = [(h, h, 64) for h in entries]
     for os_hash, e in entries.items():
-        if len(os_hash) != 64 or any(c not in "0123456789abcdef" for c in os_hash):
-            raise PolicyError(f"invalid os_image_hash {os_hash!r}")
-        for field in ("mrtd_two_pass", "mrtd_single_pass", "rtmr1", "rtmr2"):
-            if len(e.get(field, "")) != 96:
-                raise PolicyError(f"{os_hash[:8]}: malformed {field}")
-        for shape in e.get("vm_shapes", []):
-            if len(shape.get("rtmr0", "")) != 96 or len(shape.get("mrtd", "")) != 96:
-                raise PolicyError(f"{os_hash[:8]}: malformed vm_shape register")
+        hexes += [(os_hash, e[f], 96) for f in ("mrtd_two_pass", "mrtd_single_pass", "rtmr1", "rtmr2")]
+        hexes += [(os_hash, s[f], 96) for s in e.get("vm_shapes", []) for f in ("mrtd", "rtmr0")]
+    for os_hash, value, length in hexes:
+        if len(value) != length or any(c not in "0123456789abcdef" for c in value):
+            raise PolicyError(f"{os_hash[:8]}: malformed value {value!r}")
     return {"revision": data["policy_revision"], "entries": entries}
 
 
-def check_boot_registers(os_image_hash: str, registers: Dict[str, str],
-                         vm_config: Optional[Dict] = None) -> Dict:
-    """Compare one quote's registers against the pinned derivation.
-
-    Returns {"ok": bool, "per_register": {...}, "reasons": [...]} plus the
-    policy revision. RTMR0 is only checkable when the provider's vm_config
-    matches a pinned shape; otherwise its reason says so.
-    """
-    os_hash = str(os_image_hash or "").lower().removeprefix("0x")
+def check_boot_registers(os_image_hash: str, registers: Dict[str, str]) -> Dict:
+    """Compare one quote's MRTD/RTMR0-2 with the derivation for its log-bound image."""
+    os_hash = os_image_hash.lower().removeprefix("0x")
     policy = _policy()
     entry = policy["entries"].get(os_hash)
     if entry is None:
-        return {"ok": False, "policy_revision": policy["revision"],
-                "per_register": {},
-                "reasons": [f"os image {os_hash[:16]}… has no pinned derivation; "
-                            "archive not derivable or not yet reviewed"]}
-    per: Dict[str, Optional[bool]] = {}
-    reasons = []
-    mrtd = registers.get("mrtd", "")
-    per["mrtd"] = mrtd in (entry["mrtd_two_pass"], entry["mrtd_single_pass"])
-    if not per["mrtd"]:
-        reasons.append("mrtd matches neither derived page-add variant for this image")
-    for reg in ("rtmr1", "rtmr2"):
-        per[reg] = registers.get(reg, "") == entry[reg]
-        if not per[reg]:
-            reasons.append(f"{reg} does not match the derived value for this image")
-
+        return {"boot_config": False, "hardware_config": None,
+                "policy_revision": policy["revision"],
+                "reasons": [f"os image {os_hash[:16]}… has no pinned derivation"]}
+    boot = {"mrtd": registers["mrtd"] in (entry["mrtd_two_pass"], entry["mrtd_single_pass"]),
+            "rtmr1": registers["rtmr1"] == entry["rtmr1"],
+            "rtmr2": registers["rtmr2"] == entry["rtmr2"]}
+    reasons = [f"{r} does not match the derivation for this image" for r, ok in boot.items() if not ok]
+    hardware = None
     if entry.get("vm_shapes"):
-        if vm_config is None:
-            per["rtmr0"] = None
-            reasons.append("rtmr0 requires the deployment vm_config, which this "
-                           "attestation does not expose")
-        else:
-            shape = {k: vm_config.get(k) for k in SHAPE_KEYS}
-            pinned = next((s for s in entry["vm_shapes"]
-                           if {k: s["shape"].get(k) for k in SHAPE_KEYS} == shape), None)
-            if pinned is None:
-                per["rtmr0"] = False
-                reasons.append("vm shape is not pinned for this os image")
-            else:
-                per["rtmr0"] = registers.get("rtmr0", "") == pinned["rtmr0"]
-                per["mrtd"] = mrtd == pinned["mrtd"]
-                if not per["rtmr0"]:
-                    reasons.append("rtmr0 does not match the derived value for this "
-                                   "os image and vm shape")
-                if not per["mrtd"]:
-                    reasons.append("mrtd does not match the derived value for this "
-                                   "os image and vm shape")
+        hardware = (registers["mrtd"], registers["rtmr0"]) in {
+            (s["mrtd"], s["rtmr0"]) for s in entry["vm_shapes"]}
+        if not hardware:
+            reasons.append("(mrtd, rtmr0) matches no derived vm shape for this image")
     else:
-        per["rtmr0"] = None
-        reasons.append("rtmr0 depends on the VM shape and no shape is pinned for "
-                       "this os image (provider does not expose vm_config)")
-
-    ok = all(v is True for v in per.values())
-    return {"ok": ok, "policy_revision": policy["revision"],
-            "per_register": per, "reasons": reasons}
+        reasons.append("rtmr0 not derived for this image; hardware config unproven")
+    return {"boot_config": all(boot.values()), "hardware_config": hardware,
+            "policy_revision": policy["revision"], "reasons": reasons}

@@ -1,33 +1,39 @@
 """Full-verify controls for the NEAR dstack measurement wiring.
 
-Replays retained real evidence 03fc9bdac… through near_ai.verify(). Transport
-is mocked (attestation fetch, Base RPC replayed from the captured block,
-anchor = the pinned policy captured with the evidence); dcap-qvl collateral
-appraisal is stubbed with a parameterizable status because it needs Intel PCS.
+Replays retained real evidence through near_ai.verify(). Transport is mocked
+(attestation fetch, Base RPC replayed from the captured block, anchor = the
+pinned policy captured with the evidence); dcap-qvl collateral appraisal is
+stubbed with a parameterizable status because it needs Intel PCS, and the
+upstream nearai-cloud-verifier report-data/GPU checks are stubbed so the test
+needs only the retained fixtures.
 Quotes, event logs and compose preimages are the real retained bytes; every
 negative control mutates one authenticated input and asserts the wired layer
 rejects it.
 """
 import json
+import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 from verifiers import near_ai
 
-EVIDENCE = (Path(__file__).resolve().parents[1] / "data" / "observations"
-            / "evidence" / "sha256"
-            / "03fc9bdac69490b0b77366cbabb4644396184d2bbe6de299ec702e992fa30213.json")
+EVIDENCE_DIR = Path(__file__).resolve().parents[1] / "data" / "observations" / "evidence" / "sha256"
+# gateway da9a3d5c + model a6eafc5f (unpublished archive)
+EVIDENCE = EVIDENCE_DIR / "03fc9bdac69490b0b77366cbabb4644396184d2bbe6de299ec702e992fa30213.json"
+# gateway 8db40cb2 + three model CVMs on 91fd5d69 (all published)
+CURRENT = EVIDENCE_DIR / "08d91c8eba0e546542b5b29aae28d740ed6e41e965edb3016b349a92e4d59b27.json"
 
 
-def _load():
-    return json.loads(EVIDENCE.read_text())
+def _load(path=EVIDENCE):
+    return json.loads(path.read_text())
 
 
 def _fake_check_tdx(status="UpToDate", advisories=None, gateway_status=None):
     from verifiers import dstack_tdx
 
-    async def check(att):
+    def check(att):
         parsed = dstack_tdx.parse_quote(att["intel_quote"])
         s = gateway_status if (gateway_status and not att.get("model_name")) else status
         return {
@@ -43,7 +49,9 @@ def _fake_check_tdx(status="UpToDate", advisories=None, gateway_status=None):
 
 def _patch(monkeypatch, evidence, status="UpToDate", advisories=None,
            gateway_status=None):
-    monkeypatch.setenv("NEARAI_VERIFIER_PATH", "")
+    monkeypatch.setitem(sys.modules, "model_verifier", SimpleNamespace(
+        check_report_data=lambda att, nonce, intel: {"embeds_nonce": True, "binds_address": True},
+        check_gpu=lambda att, nonce: {"verdict": "PASS", "nonce_matches": True}))
     monkeypatch.setattr(near_ai, "_check_tdx",
                         _fake_check_tdx(status, advisories, gateway_status))
     monkeypatch.setattr(near_ai, "_anchored_model_composes",
@@ -110,20 +118,27 @@ def test_retained_evidence_replays_with_new_layers_true(monkeypatch):
     gw_meas = report.details["tdx"]["gateway"]["measurements"]
     assert gw_meas["ok"] and gw_meas["replay_matches_quote"]
     assert len(gw_meas["registers"]["mrtd"]) == 96
-    assert gw_meas["debug_disabled"] is True
-    assert gw_meas["log_compose_hash"] == gw_meas["detached_json_disagreements"] == {} \
-        or not gw_meas["detached_json_disagreements"]
-    # gateway image da9a3d5c… is published: pins match, but RTMR0 is un-pinnable
-    # without vm_config, so the layer honestly fails with that reason.
-    assert report.scorecard.boot_registers_derived is False
-    gw_boot = gw_meas["boot_registers"]
-    assert gw_boot["per_register"] == {"mrtd": True, "rtmr1": True,
-                                       "rtmr2": True, "rtmr0": None}
-    assert any("vm_config" in r for r in gw_boot["reasons"])
-    # model image a6eafc5f… has no published archive: rejected with that reason
+    assert not gw_meas["detached_json_disagreements"]
+    assert report.details["tdx"]["gateway"]["debug_disabled"] is True
+    # gateway image da9a3d5c… is published and matches; model image a6eafc5f…
+    # has no published archive, so boot config fails with that reason.
+    assert gw_meas["boot_registers"]["boot_config"] is True
     m_boot = report.details["tdx"]["models"][0]["measurements"]["boot_registers"]
-    assert m_boot["ok"] is False
+    assert m_boot["boot_config"] is False
     assert any("no pinned derivation" in r for r in m_boot["reasons"])
+    assert sc.tee_boot_config is False
+    assert sc.tee_hardware_config is None
+
+
+def test_current_deployment_passes_boot_config(monkeypatch):
+    evidence = _load(CURRENT)
+    report = _verify(monkeypatch, evidence)
+    sc = report.scorecard
+    assert sc.event_log_replayed is True
+    assert sc.tee_debug_disabled is True
+    assert sc.tee_boot_config is True
+    assert sc.tee_hardware_config is None  # RTMR0 not derived for NEAR shapes; not gated
+    assert len(report.details["tdx"]["models"]) == 3
 
 
 def test_outofdate_gateway_flips_tcb_current_and_keeps_advisories(monkeypatch):
@@ -161,7 +176,7 @@ def test_debug_bit_flip_in_gateway_quote_fails_only_debug_layer(monkeypatch):
     report = _verify(monkeypatch, tampered)
     assert report.scorecard.tee_debug_disabled is False
     assert report.scorecard.event_log_replayed is True  # registers untouched
-    assert report.details["tdx"]["gateway"]["measurements"]["debug_disabled"] is False
+    assert report.details["tdx"]["gateway"]["debug_disabled"] is False
 
 
 def test_event_log_tamper_fails_replay_and_compose(monkeypatch):

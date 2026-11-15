@@ -13,11 +13,15 @@ swapped while the replay still matches the quote.
 """
 from __future__ import annotations
 
+import asyncio
 import hashlib
-import json
+from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List
 
 DSTACK_RUNTIME_EVENT_TYPE = 0x08000001
+# teep tee_tcb_current parity: every other Intel PCS verdict means known-vulnerable
+# firmware or missing mitigations, so tcb_current is False with advisories retained.
+TCB_CURRENT_STATUSES = frozenset({"UpToDate"})
 RTMR_COUNT = 4
 RTMR_LEN = 48
 
@@ -51,6 +55,25 @@ def parse_quote(quote_hex: str) -> Dict[str, str]:
         if len(fields[name]) != 2 * RTMR_LEN:
             raise ValueError(f"quote field {name} has unexpected length {len(fields[name]) // 2}")
     return fields
+
+
+def _run(coro):
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(coro)
+    with ThreadPoolExecutor(max_workers=1) as ex:
+        return ex.submit(asyncio.run, coro).result()
+
+
+def dcap_verify(quote_hex: str):
+    """dcap-qvl collateral fetch + appraisal (Intel PCS); errors propagate."""
+    import dcap_qvl
+    return _run(dcap_qvl.get_collateral_and_verify(bytes.fromhex(quote_hex.removeprefix("0x"))))
+
+
+def quote_debug_disabled(quote_hex: str) -> bool:
+    return tee_debug_disabled(parse_quote(quote_hex)["td_attributes"])
 
 
 def tee_debug_disabled(td_attributes_hex: str) -> bool:
@@ -125,12 +148,6 @@ def replayed_registers(entries: List[Dict]) -> Dict[str, str]:
     return {f"rtmr{i}": rtmrs[i].hex() for i in range(RTMR_COUNT)}
 
 
-def covered_imrs(entries: List[Dict]) -> set:
-    """IMR indices the log extends. Equality with the quote is required for
-    exactly these; MRTD is never log-replayable."""
-    return {event["imr"] for event in entries}
-
-
 def runtime_events(entries: List[Dict], name: str) -> List[str]:
     """Authenticated payload hex of every runtime event with this name."""
     payloads = []
@@ -158,16 +175,13 @@ def single_runtime_event(entries: List[Dict], name: str) -> str:
 def attestation_measurements(quote_hex: str, event_log: List[Dict]) -> Dict:
     """Bind one attestation's quote registers to its event log.
 
-    Returns per-IMR replay equality plus the log-authenticated app-id,
-    compose-hash and os-image-hash. Raises EventLogError/ValueError on any
-    malformation; callers report the failure, never a default.
+    All four RTMRs must equal the replay (teep parity). Returns the quote
+    registers plus the log-authenticated app-id, compose-hash and os-image-hash.
+    Raises EventLogError on any mismatch or malformation.
     """
     quoted = parse_quote(quote_hex)
     replayed = replayed_registers(event_log)
-    covered = covered_imrs(event_log)
-    if 3 not in covered:
-        raise EventLogError("event log extends no RTMR3 entries")
-    mismatches = [f"rtmr{i}" for i in sorted(covered)
+    mismatches = [f"rtmr{i}" for i in range(RTMR_COUNT)
                   if replayed[f"rtmr{i}"] != quoted[f"rtmr{i}"]]
     if mismatches:
         raise EventLogError(
@@ -175,11 +189,8 @@ def attestation_measurements(quote_hex: str, event_log: List[Dict]) -> Dict:
     return {
         "registers": {k: quoted[k] for k in ("mrtd", "rtmr0", "rtmr1", "rtmr2", "rtmr3")},
         "replay_matches_quote": True,
-        "covered_imrs": sorted(covered),
         "log_app_id": single_runtime_event(event_log, "app-id"),
         "log_compose_hash": single_runtime_event(event_log, "compose-hash"),
         "log_os_image_hash": single_runtime_event(event_log, "os-image-hash"),
-        "td_attributes": quoted["td_attributes"],
-        "debug_disabled": tee_debug_disabled(quoted["td_attributes"]),
         "mrconfigid": quoted["mrconfigid"],
     }
