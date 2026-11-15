@@ -46,7 +46,8 @@ A green freshness check can coexist with unresolved reviews and incomplete proof
 | --- | --- |
 | `data/routes.json` | Maintained client/request-path inventory: plaintext holders, reference authority, dependencies and blockers. Use its route IDs in claims. |
 | `data/candidates.json` | Maintained discovery candidates, inclusion reasons and unresolved onboarding work. Inclusion is not verification. |
-| `data/verifiers.json`, `verifiers/` | Curated implementation/scope directory and executable adapters. Check the actual code, external appraisal and unchecked links before relying on a label. |
+| `data/clients.json` | Registry of third-party verifying clients, rendered as the Verifiers tab: pinned commit, per-provider grade and cell, and a review file with file:line citations. Grades describe the client, not the provider. |
+| `data/verifiers.json`, `verifiers/` | Our own adapters: curated scope directory and executable code. Check the actual code, external appraisal and unchecked links before relying on a label. |
 | `data/instrument.json`, `uv.lock`, `probes/instrument.py` | Dependency pin and recorded instrument provenance. An instrument change can change results without a provider change. |
 | `probes/catalog.py`, `probes/attestation.py` | Sentinel selection and adapter dispatch. Catalog discovery does not automatically change the monitored sample. |
 | `data/observations/{runs,attempts,records}/`, `data/snapshots/` | Retained attempts and reports, including rejected, incomplete and legacy observations. Preserve their original scope and time. |

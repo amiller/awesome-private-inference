@@ -19,14 +19,15 @@ The website has two views:
 | --- | --- |
 | [Comparison](https://amiller.github.io/awesome-private-inference/) | What the client verifies, who can access plaintext, and who can approve software changes. Expand each provider into its request paths and follow each assessment to its evidence. |
 | [Reference values](https://amiller.github.io/awesome-private-inference/history.html) | Captured measurements, image/compose digests, published reference sets and policy documents. Inspect full values, changes, dates and review evidence. |
+| [Verifiers](https://amiller.github.io/awesome-private-inference/verifiers.html) | Every third-party client we found that checks TEE attestation for private inference, graded per provider from a source review at a pinned commit. |
 
 The comparison publishes dated, preliminary assessments. [Proposed stage criteria](https://amiller.github.io/awesome-private-inference/stages.html) explain what stronger assurance would require; no stages are awarded.
 
-The repository remains **awesome-private-inference**. Its [verifier directory](data/verifiers.json) records the implementations behind the reference process, their checks, delegated trust and missing proof. This is maintained in Git alongside the verifier routines, evidence and review records.
+The repository remains **awesome-private-inference**. Its [adapter scope directory](data/verifiers.json) records our own adapters behind the reference process, their checks, delegated trust and missing proof. This is maintained in Git alongside the verifier routines, evidence and review records.
 
 **Observed, provider-authorized, reviewed and accepted by a client are independent facts.** A newly observed value creates review work; it never silently expands a client allowlist. An assessment applies to a named client mode and request path, rather than a whole provider brand.
 
-[Verifier directory data](data/verifiers.json) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Shared verification contract](specifications/shared-verification.md)
+[Adapter scope directory](data/verifiers.json) · [Client registry](data/clients.json) · [Route inventory](data/routes.json) · [Review workflow](docs/REVIEW-WORKFLOW.md) · [Shared verification contract](specifications/shared-verification.md)
 
 Start with the [repository guide](docs/REPOSITORY-GUIDE.md) to locate authoritative
 inputs, follow a claim to evidence, run independent checks and choose useful
