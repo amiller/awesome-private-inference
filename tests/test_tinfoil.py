@@ -11,6 +11,8 @@ from verifiers import tinfoil, tinfoil_sev
 
 FIXTURE = Path(__file__).parent / "fixtures" / "tinfoil_atc_bundle.json"
 
+pytestmark = pytest.mark.usefixtures("retained_tcb_minimum")
+
 
 @pytest.fixture(scope="module")
 def bundle():

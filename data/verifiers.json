@@ -97,7 +97,7 @@
       ],
       "checks": [
         "Release provenance, release/report measurement agreement, selected TLS/HPKE key and runtime configuration checks.",
-        "AMD vendor chain: pinned ARK-Genoa/ASK-Genoa anchors (AMD KDS capture 2026-11-05, cross-checked byte-identical to the chain embedded in PyPI tinfoil==0.15.0), ARK self-signature, ARK->ASK and ASK->VCEK (RSA-PSS), VCEK hwID==report chip_id, VCEK bl/tee/snp/ucode SPL==report reported_tcb, ECDSA P-384/SHA-384 report signature over the exact signed bytes; debug policy and structural MBZ checks per report version (2/3/5)."
+        "AMD vendor chain: pinned ARK-Genoa/ASK-Genoa anchors (AMD KDS capture 2026-11-05, cross-checked byte-identical to the chain embedded in PyPI tinfoil==0.15.0), ARK self-signature, ARK->ASK and ASK->VCEK (RSA-PSS), VCEK hwID==report chip_id, VCEK bl/tee/snp/ucode SPL==report reported_tcb and >= the pinned Genoa minimum in verifiers/certs/amd_genoa_tcb_minimum.json, ECDSA P-384/SHA-384 report signature over the exact signed bytes; debug policy and structural MBZ checks per report version (3/5)."
       ],
       "delegates": [
         "Sigstore release verification; router trust policy for downstream workers.",

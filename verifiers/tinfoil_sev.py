@@ -1,9 +1,10 @@
-"""AMD SEV-SNP attestation report parser (1184-byte layout, ABI revs 1.55/1.56/1.58).
+"""AMD SEV-SNP attestation report parser (1184-byte layout, report versions 3 and 5).
 
 Report layout per AMD's SEV-SNP ABI specification as encoded in Tinfoil's
 published reference client (PyPI ``tinfoil`` 0.15.0, ``attestation/abi_sev.py``)
-and confirmed against every retained deployment report: report version 2 covers
-ABI rev 1.55, version 3 rev 1.56, version 5 rev 1.58. The total structure is
+and confirmed against every retained deployment report: version 3 covers ABI
+rev 1.56, version 5 rev 1.58. Version 2 is rejected: it carries no
+family/model/stepping. The total structure is
 0x4A0 bytes; the signature covers bytes [0x000, 0x2A0).
 
 Offsets that matter to authentication, each independently corroborated:
@@ -23,7 +24,7 @@ REPORT_SIZE = 0x4A0
 SIGNATURE_OFFSET = 0x2A0
 ECDSA_RS_SIZE = 72  # each of R, S occupies 72 bytes; value < 2^384, rest zero
 
-SUPPORTED_VERSIONS = (2, 3, 5)
+SUPPORTED_VERSIONS = (3, 5)
 
 ZEN3ZEN4_FAMILY = 0x19
 ZEN5_FAMILY = 0x1A
@@ -146,21 +147,16 @@ def parse(report: bytes) -> SnpReport:
     reported_tcb = int.from_bytes(report[0x180:0x188], "little")
     _mbz64(reported_tcb, "reported_tcb", 47, 16)
 
-    if version >= 3:
-        family, model, stepping = report[0x188], report[0x189], report[0x18A]
-        product_name = "Unknown"
-        if family == ZEN3ZEN4_FAMILY:
-            if model == MILAN_MODEL:
-                product_name = "Milan"
-            elif model == GENOA_MODEL:
-                product_name = "Genoa"
-        elif family == ZEN5_FAMILY and model == TURIN_MODEL:
-            product_name = "Turin"
-        _mbz(report, 0x18B, 0x1A0, "report")
-    else:  # version 2 pre-dates the FMS fields; ABI reserved them to Genoa
-        family, model, stepping = ZEN3ZEN4_FAMILY, GENOA_MODEL, 1
-        product_name = "Genoa"
-        _mbz(report, 0x188, 0x1A0, "report")
+    family, model, stepping = report[0x188], report[0x189], report[0x18A]
+    product_name = "Unknown"
+    if family == ZEN3ZEN4_FAMILY:
+        if model == MILAN_MODEL:
+            product_name = "Milan"
+        elif model == GENOA_MODEL:
+            product_name = "Genoa"
+    elif family == ZEN5_FAMILY and model == TURIN_MODEL:
+        product_name = "Turin"
+    _mbz(report, 0x18B, 0x1A0, "report")
 
     committed_tcb = int.from_bytes(report[0x1E0:0x1E8], "little")
     _mbz64(committed_tcb, "committed_tcb", 47, 16)

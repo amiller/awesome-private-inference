@@ -1,0 +1,17 @@
+{
+  "minimum": {
+    "bl": 10,
+    "tee": 0,
+    "snp": 29,
+    "ucode_by_stepping": {"1": 86, "2": 81}
+  },
+  "sources": {
+    "snp": "29 = 0x1D. AMD-SB-3037 and AMD-SB-3038 (both initial version 2026-11-10), EPYC 9004 rows: GenoaPI_1.0.0.J released 2026-06-26, SEV FW 1.3A.03, 'TCB[SNP]=0x1D'. https://www.amd.com/en/resources/product-security/bulletin/AMD-SB-3037.html https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3038.html",
+    "ucode": "Keyed by report stepping (family 0x19, model 0x11). Stepping 1 = Genoa B1 (CPUID 0x00A10F11): 86 = 0x56; stepping 2 = Genoa-X B2 (0x00A10F12): 81 = 0x51. AMD-SB-3027 (rev 2026-02-27), EPYC 9004 'TCB Value for Attestation': 'TCB[MICROCODE] >= 56' (Genoa), '>= 51' (Genoa-X), microcode 0x0A101156 / 0x0A101251. https://www.amd.com/en/resources/product-security/bulletin/AMD-SB-3027.html",
+    "bl": "No AMD bulletin states a Genoa bootloader SPL. Pinned to the value observed in both retained Tinfoil captures (router.inf6 v3, router-0 v5 observed 2026-11-04): 10. Observed, not authoritative.",
+    "tee": "No AMD bulletin states a Genoa TEE SPL. Pinned to the observed value in both retained captures: 0. Observed, not authoritative.",
+    "not_enforced": "AMD-SB-3059 (CVE-2026-0462) gives TCB[SNP]=0x1E for Genoa but GenoaPI_1.0.0.K is 'Target release planned for Dec'26'. AMD-SB-3061 (CVE-2026-40671) lists Genoa microcode 0x0A10115B / 0x0A10125B (2026-08-12) with no attestation TCB value. Raise the pins when these ship with TCB values."
+  },
+  "fetched_utc": "2026-11-15",
+  "observed_at_pin_time": "router.inf6 v3: bl=10 tee=0 snp=0x17 ucode=0x54; router-0 v5 (2026-11-04): bl=10 tee=0 snp=0x1B ucode=0x58. Both are below the snp minimum; v3 is also below the ucode minimum."
+}

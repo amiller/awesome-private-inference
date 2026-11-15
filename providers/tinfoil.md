@@ -24,15 +24,17 @@ hash of the attestation document.
 re-runs the trust chain end-to-end with no provider-supplied trust roots:
 
 1. Fetch the ATC bundle.
-2. Decompress + parse the 1184-byte SEV-SNP report, report versions 2/3/5
+2. Decompress + parse the 1184-byte SEV-SNP report, report versions 3/5
    ([`tinfoil_sev.py`](../verifiers/tinfoil_sev.py)).
 3. Verify the AMD vendor chain
    ([`tinfoil_amd.py`](../verifiers/tinfoil_amd.py)): pinned ARK-Genoa/ASK-Genoa
    anchors (captured from AMD KDS 2026-11-05, cross-checked byte-identical to
    the chain embedded in Tinfoil's published client `tinfoil==0.15.0`), ARK
    self-signature, ARK→ASK and ASK→VCEK RSA-PSS signatures, VCEK
-   hwID == report `chip_id`, VCEK SPLs == report `reported_tcb`, and the
-   ECDSA P-384/SHA-384 signature over the report's signed bytes. Bundles
+   hwID == report `chip_id`, VCEK SPLs == report `reported_tcb`, SPLs at or
+   above a pinned Genoa minimum (snp/ucode from AMD bulletins SB-3037/3038 and
+   SB-3027, bl/tee as observed; [`amd_genoa_tcb_minimum.json`](../verifiers/certs/amd_genoa_tcb_minimum.json)),
+   and the ECDSA P-384/SHA-384 signature over the report's signed bytes. Bundles
    without a VCEK (per-host path) stay unverified with that reason recorded.
 4. Verify the Sigstore in-toto DSSE for the bundle's digest against
    `tinfoilsh/confidential-model-router`'s GitHub Actions release workflow
@@ -85,6 +87,7 @@ prompt path."
 | Client-supplied nonce in `report_data` | ❌ (no nonce slot — freshness is via live TLS pin) |
 | Live GPU attestation (NRAS) | ❌ (Tinfoil checks GPU at boot inside the CVM, not per-request) |
 | VCEK chain → AMD Genoa root | ✅ ARK/ASK pinned by DER SHA-256 (AMD KDS 2026-11-05, cross-checked against `tinfoil==0.15.0`); ARK self-signature, ARK→ASK, ASK→VCEK (RSA-PSS); hwID/SPL bound to the report; ECDSA P-384 report signature verified ([`tinfoil_amd.py`](../verifiers/tinfoil_amd.py)) |
+| TCB at or above AMD-published minimum | ❌ router-0 reports snp SPL 0x1B (2026-11-04), below 0x1D required by AMD-SB-3037/3038; the verifier rejects it |
 
 ## Runtime-config audit
 

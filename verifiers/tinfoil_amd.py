@@ -39,6 +39,8 @@ OID_UCODE_SPL = "1.3.6.1.4.1.3704.1.3.8"
 OID_HWID = "1.3.6.1.4.1.3704.1.4"
 OID_CSP_ID = "1.3.6.1.4.1.3704.1.5"
 
+TCB_MINIMUM = json.loads((_CERTS_DIR / "amd_genoa_tcb_minimum.json").read_text())["minimum"]
+
 
 class ChainError(ValueError):
     pass
@@ -134,6 +136,17 @@ def _check_validity(cert: x509.Certificate, label: str) -> None:
         )
 
 
+def _check_tcb_minimum(spl: Dict[str, int], stepping: int) -> None:
+    by_stepping = TCB_MINIMUM["ucode_by_stepping"]
+    if str(stepping) not in by_stepping:
+        raise ChainError(f"no TCB minimum pinned for Genoa stepping {stepping}")
+    minimum = {"bl": TCB_MINIMUM["bl"], "tee": TCB_MINIMUM["tee"], "snp": TCB_MINIMUM["snp"],
+               "ucode": by_stepping[str(stepping)]}
+    low = {k: f"0x{spl[k]:x} < 0x{minimum[k]:x}" for k in minimum if spl[k] < minimum[k]}
+    if low:
+        raise ChainError(f"TCB below pinned minimum: {low}")
+
+
 @dataclass
 class VcekCheck:
     ark_der_sha256: str
@@ -160,7 +173,8 @@ def verify_vcek_chain(
     vcek_der: bytes, report: tinfoil_sev.SnpReport, *, anchors=None
 ) -> VcekCheck:
     """Verify ARK self-signature, ARK->ASK, ASK->VCEK, and bind the VCEK to the
-    report (product, hwID==chip_id, SPLs==reported_tcb). Raises ChainError.
+    report (product, hwID==chip_id, SPLs==reported_tcb), and require the SPLs to
+    meet TCB_MINIMUM (certs/amd_genoa_tcb_minimum.json). Raises ChainError.
     ``anchors`` overrides the pinned Genoa trust anchors (negative controls)."""
     if anchors is None:
         anchors = load_genoa_anchors()
@@ -216,6 +230,7 @@ def verify_vcek_chain(
     expected = tinfoil_sev.tcb_parts(report.reported_tcb)
     if spl != expected:
         raise ChainError(f"VCEK SPLs {spl} != report reported_tcb {expected}")
+    _check_tcb_minimum(spl, report.stepping)
 
     return VcekCheck(
         ark_der_sha256=_der_fp(ark),

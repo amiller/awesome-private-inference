@@ -21,7 +21,8 @@ Out of scope for v1:
 Hardware chain (performed when the bundle carries a VCEK):
   - ARK-Genoa/ASK-Genoa trust anchors pinned by fingerprint (verifiers/certs),
     ARK self-signature, ARK->ASK, ASK->VCEK (RSA-PSS), VCEK hwID == report
-    chip_id, VCEK SPLs == report reported_tcb, ECDSA P-384 report signature
+    chip_id, VCEK SPLs == report reported_tcb and >= the pinned Genoa TCB
+    minimum (certs/amd_genoa_tcb_minimum.json), ECDSA P-384 report signature
     over the exact signed bytes. Bundles without a VCEK (per-host path) stay
     unverified with that reason recorded.
 """
@@ -462,6 +463,7 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
                 "VCEK X.509 v3, ECDSA P-384 key, CN=SEV-VCEK, product=Genoa, no CSP_ID",
                 "VCEK hwID == report chip_id",
                 "VCEK bl/tee/snp/ucode SPL == report reported_tcb",
+                "VCEK SPLs >= pinned Genoa TCB minimum (certs/amd_genoa_tcb_minimum.json)",
                 f"ECDSA P-384/SHA-384 report signature over bytes [0x0, 0x{tinfoil_sev.SIGNATURE_OFFSET:x})",
             ],
             **vcek_check.as_dict(),
