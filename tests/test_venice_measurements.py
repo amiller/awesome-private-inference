@@ -177,7 +177,7 @@ def test_live_capture_binds_gateway_keyset_but_is_not_valid(monkeypatch):
     assert report.details["downstream_tls_binding"]["domain"] == "api.redpill.ai"
     assert report.valid is False
     assert report.error is None
-    assert report.details["rejection_reason"] == venice.GATEWAY_ONLY
+    assert report.details["verification_reason"] == venice.GATEWAY_ONLY
 
 
 @pytest.mark.parametrize("mutation", [

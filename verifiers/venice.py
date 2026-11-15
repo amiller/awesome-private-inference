@@ -229,7 +229,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     if aci1:
         # the only CVM aci/1 attests is the private-ai-gateway, which forwards
         # to a downstream API; nothing in it is evidence about the model host
-        details["rejection_reason"] = GATEWAY_ONLY
+        details["verification_reason"] = GATEWAY_ONLY
         valid = False
 
     return AttestationReport(
