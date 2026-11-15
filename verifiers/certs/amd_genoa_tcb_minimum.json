@@ -13,5 +13,5 @@
     "not_enforced": "AMD-SB-3059 (CVE-2026-0462) gives TCB[SNP]=0x1E for Genoa but GenoaPI_1.0.0.K is 'Target release planned for Dec'26'. AMD-SB-3061 (CVE-2026-40671) lists Genoa microcode 0x0A10115B / 0x0A10125B (2026-08-12) with no attestation TCB value. Raise the pins when these ship with TCB values."
   },
   "fetched_utc": "2026-11-15",
-  "observed_at_pin_time": "router.inf6 v3: bl=10 tee=0 snp=0x17 ucode=0x54; router-0 v5 (2026-11-04, and unchanged on a live fetch 2026-11-15): bl=10 tee=0 snp=0x1B ucode=0x58. Both are below the snp minimum; v3 is also below the ucode minimum."
+  "observed_at_pin_time": "router.inf6 v3: bl=10 tee=0 snp=0x17 ucode=0x54; router-0 v5 (2026-11-04, and unchanged on a live fetch 2026-11-15): bl=10 tee=0 snp=0x1B ucode=0x58; inference.tinfoil.sh live fetch 2026-11-15T17:15Z: bl=10 tee=0 snp=0x17 ucode=0x54 (stepping 1). All are below the snp minimum; the 0x17/0x54 readings are also below the ucode minimum."
 }

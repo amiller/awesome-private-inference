@@ -40,6 +40,7 @@ OID_HWID = "1.3.6.1.4.1.3704.1.4"
 OID_CSP_ID = "1.3.6.1.4.1.3704.1.5"
 
 TCB_MINIMUM = json.loads((_CERTS_DIR / "amd_genoa_tcb_minimum.json").read_text())["minimum"]
+TCB_MINIMUM_SOURCE = "AMD-SB-3037/3038 GenoaPI_1.0.0.J 2026-06-26 (snp), AMD-SB-3027 (ucode), observed (bl, tee)"
 
 
 class ChainError(ValueError):
@@ -136,7 +137,9 @@ def _check_validity(cert: x509.Certificate, label: str) -> None:
         )
 
 
-def _check_tcb_minimum(spl: Dict[str, int], stepping: int) -> None:
+def check_tcb_minimum(spl: Dict[str, int], stepping: int) -> Dict[str, int]:
+    """Require VCEK-bound SPLs >= TCB_MINIMUM for this stepping; return the
+    minimum applied. Raises ChainError."""
     by_stepping = TCB_MINIMUM["ucode_by_stepping"]
     if str(stepping) not in by_stepping:
         raise ChainError(f"no TCB minimum pinned for Genoa stepping {stepping}")
@@ -144,7 +147,8 @@ def _check_tcb_minimum(spl: Dict[str, int], stepping: int) -> None:
                "ucode": by_stepping[str(stepping)]}
     low = {k: f"0x{spl[k]:x} < 0x{minimum[k]:x}" for k in minimum if spl[k] < minimum[k]}
     if low:
-        raise ChainError(f"TCB below pinned minimum: {low}")
+        raise ChainError(f"TCB below AMD-published minimum: {low}")
+    return minimum
 
 
 @dataclass
@@ -173,8 +177,8 @@ def verify_vcek_chain(
     vcek_der: bytes, report: tinfoil_sev.SnpReport, *, anchors=None
 ) -> VcekCheck:
     """Verify ARK self-signature, ARK->ASK, ASK->VCEK, and bind the VCEK to the
-    report (product, hwID==chip_id, SPLs==reported_tcb), and require the SPLs to
-    meet TCB_MINIMUM (certs/amd_genoa_tcb_minimum.json). Raises ChainError.
+    report (product, hwID==chip_id, SPLs==reported_tcb). Raises ChainError.
+    TCB policy is separate: check_tcb_minimum.
     ``anchors`` overrides the pinned Genoa trust anchors (negative controls)."""
     if anchors is None:
         anchors = load_genoa_anchors()
@@ -230,7 +234,6 @@ def verify_vcek_chain(
     expected = tinfoil_sev.tcb_parts(report.reported_tcb)
     if spl != expected:
         raise ChainError(f"VCEK SPLs {spl} != report reported_tcb {expected}")
-    _check_tcb_minimum(spl, report.stepping)
 
     return VcekCheck(
         ark_der_sha256=_der_fp(ark),

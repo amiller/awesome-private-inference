@@ -31,8 +31,6 @@ FIXTURES = Path(__file__).parent / "fixtures"
 V3 = json.loads((FIXTURES / "tinfoil_atc_bundle.json").read_text())
 V5 = json.loads((FIXTURES / "tinfoil_router0_v5_bundle.json").read_text())
 
-pytestmark = pytest.mark.usefixtures("retained_tcb_minimum")
-
 
 def _bundle(raw):
     return tinfoil._Bundle.from_json(raw)
@@ -66,6 +64,7 @@ def test_hardware_chain_and_report_signature_verify(raw):
     tinfoil_amd.verify_report_signature(report, vcek_der)
 
 
+@pytest.mark.usefixtures("retained_tcb_minimum")
 def test_v5_bundle_full_pipeline_hardware_verified():
     bundle = _bundle(V5)
     with _offline_tls(bundle):
@@ -390,6 +389,7 @@ def test_tampered_vcek_spl_extension_rejected():
 # ---------------------------------------------- detached-key binding attacks
 
 
+@pytest.mark.usefixtures("retained_tcb_minimum")
 def test_report_data_not_bound_to_key_in_use_rejected():
     """router.inf6's report replayed with router-0's genuine enclaveCert: the
     report_data -> (TLS SPKI, HPKE SAN, hatt) bindings must reject it."""
@@ -417,43 +417,55 @@ def test_wrong_vcek_product_rejected():
 # ------------------------------------------------------------- TCB policy
 
 
-def test_pinned_tcb_minimum_rejects_retained_captures(monkeypatch):
+def _spl(raw):
+    return tinfoil_sev.tcb_parts(_bundle(raw).sev_report().reported_tcb)
+
+
+def test_pinned_tcb_minimum_rejects_retained_captures():
     """AMD-published Genoa minimum (snp 0x1D per SB-3037/3038, ucode 0x56 per
-    SB-3027): both retained Tinfoil reports are below it, chain otherwise valid."""
-    pinned = json.loads((Path(tinfoil_amd.__file__).parent / "certs" / "amd_genoa_tcb_minimum.json")
-                        .read_text())["minimum"]
-    monkeypatch.setattr(tinfoil_amd, "TCB_MINIMUM", pinned)
+    SB-3027): both retained Tinfoil reports are below it."""
     for raw, low in ((V3, "'snp': '0x17 < 0x1d', 'ucode': '0x54 < 0x56'"), (V5, "'snp': '0x1b < 0x1d'")):
-        bundle = _bundle(raw)
-        with pytest.raises(ValueError, match="below pinned minimum") as exc:
-            tinfoil_amd.verify_vcek_chain(base64.b64decode(bundle.vcek_b64), bundle.sev_report())
+        with pytest.raises(ValueError, match="below AMD-published minimum") as exc:
+            tinfoil_amd.check_tcb_minimum(_spl(raw), 1)
         assert "{" + low + "}" in str(exc.value)
-        with _offline_tls(bundle):
-            result = tinfoil.verify_bundle(bundle, model="router")
-        assert not result.valid and "below pinned minimum" in result.error
+
+
+@pytest.mark.parametrize("raw", [V3, V5], ids=["router.inf6-v3", "router-0-v5"])
+def test_below_minimum_row_rejected_but_hardware_verified(raw):
+    bundle = _bundle(raw)
+    with _offline_tls(bundle):
+        result = tinfoil.verify_bundle(bundle, model="router")
+    assert not result.valid and "below AMD-published minimum" in result.error
+    assert result.scorecard.hardware_signature_verified is True
+    tcb = result.details["tcb_minimum"]
+    assert tcb["status"] == "rejected" and tcb["reported"] == _spl(raw)
+    assert tcb["minimum"]["snp"] == 0x1D
+
+
+@pytest.mark.usefixtures("retained_tcb_minimum")
+def test_at_minimum_row_records_ok():
+    bundle = _bundle(V3)
+    with _offline_tls(bundle):
+        result = tinfoil.verify_bundle(bundle, model="router")
+    assert result.details["tcb_minimum"]["status"] == "ok"
+    assert result.details["tcb_minimum"]["minimum"] == _spl(V3)
 
 
 @pytest.mark.parametrize("raw", [V3, V5], ids=["router.inf6-v3", "router-0-v5"])
 def test_tcb_minimum_enforced_per_component(raw, monkeypatch):
-    bundle = _bundle(raw)
-    report = bundle.sev_report()
-    vcek_der = base64.b64decode(bundle.vcek_b64)
-    own = tinfoil_sev.tcb_parts(report.reported_tcb)
-    exact = {"bl": own["bl"], "tee": own["tee"], "snp": own["snp"],
-             "ucode_by_stepping": {str(report.stepping): own["ucode"]}}
+    own = _spl(raw)
+    exact = {"bl": own["bl"], "tee": own["tee"], "snp": own["snp"], "ucode_by_stepping": {"1": own["ucode"]}}
     monkeypatch.setattr(tinfoil_amd, "TCB_MINIMUM", exact)
-    tinfoil_amd.verify_vcek_chain(vcek_der, report)
+    assert tinfoil_amd.check_tcb_minimum(own, 1) == own
     for part in ("bl", "tee", "snp", "ucode"):
-        bumped = {**exact, "ucode_by_stepping": {str(report.stepping): own["ucode"] + (part == "ucode")}}
+        bumped = {**exact, "ucode_by_stepping": {"1": own["ucode"] + (part == "ucode")}}
         if part != "ucode":
             bumped[part] = own[part] + 1
         monkeypatch.setattr(tinfoil_amd, "TCB_MINIMUM", bumped)
-        with pytest.raises(ValueError, match=f"below pinned minimum: {{'{part}'"):
-            tinfoil_amd.verify_vcek_chain(vcek_der, report)
+        with pytest.raises(ValueError, match=f"below AMD-published minimum: {{'{part}'"):
+            tinfoil_amd.check_tcb_minimum(own, 1)
 
 
-def test_unpinned_stepping_rejected(monkeypatch):
-    monkeypatch.setattr(tinfoil_amd, "TCB_MINIMUM", {**tinfoil_amd.TCB_MINIMUM, "ucode_by_stepping": {"2": 0}})
-    bundle = _bundle(V5)
-    with pytest.raises(ValueError, match="no TCB minimum pinned for Genoa stepping 1"):
-        tinfoil_amd.verify_vcek_chain(base64.b64decode(bundle.vcek_b64), bundle.sev_report())
+def test_unpinned_stepping_rejected():
+    with pytest.raises(ValueError, match="no TCB minimum pinned for Genoa stepping 3"):
+        tinfoil_amd.check_tcb_minimum(_spl(V5), 3)

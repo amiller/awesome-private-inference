@@ -21,10 +21,12 @@ Out of scope for v1:
 Hardware chain (performed when the bundle carries a VCEK):
   - ARK-Genoa/ASK-Genoa trust anchors pinned by fingerprint (verifiers/certs),
     ARK self-signature, ARK->ASK, ASK->VCEK (RSA-PSS), VCEK hwID == report
-    chip_id, VCEK SPLs == report reported_tcb and >= the pinned Genoa TCB
-    minimum (certs/amd_genoa_tcb_minimum.json), ECDSA P-384 report signature
+    chip_id, VCEK SPLs == report reported_tcb, ECDSA P-384 report signature
     over the exact signed bytes. Bundles without a VCEK (per-host path) stay
     unverified with that reason recorded.
+  - TCB policy, reported separately from authenticity: VCEK SPLs >= the pinned
+    Genoa minimum (certs/amd_genoa_tcb_minimum.json); below it the row rejects
+    with hardware_signature_verified still True.
 """
 from __future__ import annotations
 
@@ -463,7 +465,6 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
                 "VCEK X.509 v3, ECDSA P-384 key, CN=SEV-VCEK, product=Genoa, no CSP_ID",
                 "VCEK hwID == report chip_id",
                 "VCEK bl/tee/snp/ucode SPL == report reported_tcb",
-                "VCEK SPLs >= pinned Genoa TCB minimum (certs/amd_genoa_tcb_minimum.json)",
                 f"ECDSA P-384/SHA-384 report signature over bytes [0x0, 0x{tinfoil_sev.SIGNATURE_OFFSET:x})",
             ],
             **vcek_check.as_dict(),
@@ -471,6 +472,14 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
         details["verification_reason"] = (
             "hardware chain verified; encrypted request binding and session freshness not verified"
         )
+        tcb = {"reported": vcek_check.spl, "source": tinfoil_amd.TCB_MINIMUM_SOURCE}
+        try:
+            tcb["minimum"] = tinfoil_amd.check_tcb_minimum(vcek_check.spl, report.stepping)
+        except ValueError as exc:
+            details["tcb_minimum"] = {"status": "rejected", **tcb,
+                                      "minimum": tinfoil_amd.TCB_MINIMUM, "reason": str(exc)}
+            return _err(model, str(exc), details, started, sc)
+        details["tcb_minimum"] = {"status": "ok", **tcb}
 
     predicate, predicate_type = _verify_sigstore(bundle, repo)
     sc.release_provenance_verified = True

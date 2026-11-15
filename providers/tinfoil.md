@@ -31,10 +31,10 @@ re-runs the trust chain end-to-end with no provider-supplied trust roots:
    anchors (captured from AMD KDS 2026-11-05, cross-checked byte-identical to
    the chain embedded in Tinfoil's published client `tinfoil==0.15.0`), ARK
    self-signature, ARK→ASK and ASK→VCEK RSA-PSS signatures, VCEK
-   hwID == report `chip_id`, VCEK SPLs == report `reported_tcb`, SPLs at or
-   above a pinned Genoa minimum (snp/ucode from AMD bulletins SB-3037/3038 and
-   SB-3027, bl/tee as observed; [`amd_genoa_tcb_minimum.json`](../verifiers/certs/amd_genoa_tcb_minimum.json)),
-   and the ECDSA P-384/SHA-384 signature over the report's signed bytes. Bundles
+   hwID == report `chip_id`, VCEK SPLs == report `reported_tcb`, and the
+   ECDSA P-384/SHA-384 signature over the report's signed bytes. Separately,
+   TCB policy: SPLs at or above a pinned Genoa minimum (snp/ucode from AMD bulletins SB-3037/3038 and
+   SB-3027, bl/tee as observed; [`amd_genoa_tcb_minimum.json`](../verifiers/certs/amd_genoa_tcb_minimum.json)). Bundles
    without a VCEK (per-host path) stay unverified with that reason recorded.
 4. Verify the Sigstore in-toto DSSE for the bundle's digest against
    `tinfoilsh/confidential-model-router`'s GitHub Actions release workflow
@@ -87,7 +87,7 @@ prompt path."
 | Client-supplied nonce in `report_data` | ❌ (no nonce slot — freshness is via live TLS pin) |
 | Live GPU attestation (NRAS) | ❌ (Tinfoil checks GPU at boot inside the CVM, not per-request) |
 | VCEK chain → AMD Genoa root | ✅ ARK/ASK pinned by DER SHA-256 (AMD KDS 2026-11-05, cross-checked against `tinfoil==0.15.0`); ARK self-signature, ARK→ASK, ASK→VCEK (RSA-PSS); hwID/SPL bound to the report; ECDSA P-384 report signature verified ([`tinfoil_amd.py`](../verifiers/tinfoil_amd.py)) |
-| TCB at or above AMD-published minimum | ❌ router-0 reports snp SPL 0x1B (live fetch 2026-11-15), below 0x1D required by AMD-SB-3037/3038; the verifier rejects it |
+| TCB at or above AMD-published minimum | ❌ below snp SPL 0x1D required by AMD-SB-3037/3038 (GenoaPI_1.0.0.J, 2026-06-26). router-0.tinfoil.sh: snp 0x1B ucode 0x58 (2026-11-04 capture, again 2026-11-15 live fetch). inference.tinfoil.sh: snp 0x17 ucode 0x54 (live fetch 2026-11-15T17:15Z), also below ucode 0x56 (AMD-SB-3027). The chain verifies; the verifier rejects the row on TCB |
 
 ## Runtime-config audit
 
