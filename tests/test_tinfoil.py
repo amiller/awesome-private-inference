@@ -11,6 +11,8 @@ from verifiers import tinfoil, tinfoil_sev
 
 FIXTURE = Path(__file__).parent / "fixtures" / "tinfoil_atc_bundle.json"
 
+pytestmark = pytest.mark.usefixtures("retained_tcb_minimum")
+
 
 @pytest.fixture(scope="module")
 def bundle():
@@ -23,8 +25,10 @@ def test_sev_report_parses(bundle):
     assert rep.debug is False
     assert rep.vmpl == 0
     assert rep.signature_algo == 1
+    assert rep.product_name == "Genoa"
     assert len(rep.measurement) == 48
     assert len(rep.report_data) == 64
+    assert len(rep.chip_id) == 64
 
 
 def test_att_doc_hash_matches_hatt_san(bundle):
@@ -69,7 +73,7 @@ def test_verify_bundle_offline_skips_live_tls(bundle, monkeypatch):
     monkeypatch.setattr(tinfoil, "_live_tls_spki_sha256", lambda host, **kw: expected)
     report = tinfoil.verify_bundle(bundle, model="test")
     assert not report.valid
-    assert "VCEK" in report.error
+    assert "encrypted request binding and session freshness" in report.error
     assert report.details["verification_status"] == "not_checked"
     raw = report.details["raw_evidence"]
     assert raw["report_body_b64"] == bundle.report_body_b64
@@ -79,11 +83,13 @@ def test_verify_bundle_offline_skips_live_tls(bundle, monkeypatch):
     assert sc.release_provenance_verified is True
     assert sc.measurement_matches_release is True
     assert sc.code_measurement_reproducible is None
-    assert sc.hardware_signature_verified is None
+    assert sc.hardware_signature_verified is True
     assert sc.tls_pubkey_pinned is True
     assert sc.hpke_pubkey_attested is True
     assert sc.client_nonce_supported is False
     assert report.attestation_type == "tinfoil-sev-snp-v2"
+    hw = report.details["hardware_signature_verification"]
+    assert hw["status"] == "verified"
 
 
 def test_verify_detects_measurement_mismatch(bundle, monkeypatch):
@@ -210,7 +216,12 @@ def test_per_host_bundle_fully_attested(per_host_bundle, monkeypatch):
         repo="tinfoilsh/confidential-gpt-oss-120b",
     )
     assert not report.valid
-    assert "VCEK" in report.error
+    # No VCEK in the per-host bundle: hardware chain must stay unverified,
+    # with the reason recorded — never pass.
+    assert report.scorecard.hardware_signature_verified is None
+    hw = report.details["hardware_signature_verification"]
+    assert hw.startswith("not_checked") and "no VCEK" in hw
+    assert "no VCEK" in report.error
     assert report.scorecard.runtime_config_fully_attested is True
     cfg = report.details["attested_config"]
     assert cfg["total_env_external"] == 0

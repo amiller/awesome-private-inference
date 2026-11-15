@@ -14,11 +14,19 @@ Checks this adapter performs on a bundle (incomplete hardware chain):
      hash == sha256(format||body) of the attestation document.
 
 Out of scope for v1:
-  - VCEK chain verification to AMD's Genoa root (we trust the report's
-    self-claimed measurement to be checked structurally + by sigstore equality).
   - HPKE handshake to actually encrypt a prompt.
   - Authenticated session freshness and an encrypted request. A per-request
     nonce is one possible freshness mechanism, not a universal requirement.
+
+Hardware chain (performed when the bundle carries a VCEK):
+  - ARK-Genoa/ASK-Genoa trust anchors pinned by fingerprint (verifiers/certs),
+    ARK self-signature, ARK->ASK, ASK->VCEK (RSA-PSS), VCEK hwID == report
+    chip_id, VCEK SPLs == report reported_tcb, ECDSA P-384 report signature
+    over the exact signed bytes. Bundles without a VCEK (per-host path) stay
+    unverified with that reason recorded.
+  - TCB policy, reported separately from authenticity: VCEK SPLs >= the pinned
+    Genoa minimum (certs/amd_genoa_tcb_minimum.json); below it the row rejects
+    with hardware_signature_verified still True.
 """
 from __future__ import annotations
 
@@ -43,7 +51,7 @@ from sigstore.models import Bundle as SigstoreBundle
 from sigstore.verify import Verifier as SigstoreVerifier
 from sigstore.verify import policy as sigstore_policy
 
-from . import tinfoil_sev
+from . import tinfoil_amd, tinfoil_sev
 from .common import (
     AttestationReport, ScoreCard, audit_match, load_audit_ledger, now_iso,
 )
@@ -406,7 +414,7 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
             "enclave_cert_pem": bundle.enclave_cert_pem,
             "vcek_b64": bundle.vcek_b64,
         },
-        "hardware_signature_verification": "not_checked: AMD VCEK chain and SNP report signature",
+        "hardware_signature_verification": "not_checked: bundle carries no VCEK certificate",
         "build_reproduction": "not_checked",
         "encrypted_request_binding": "not_checked",
         "freshness": "not_checked: no authenticated session freshness test",
@@ -424,11 +432,54 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
         "policy_hex": hex(report.policy),
         "debug": report.debug,
         "vmpl": report.vmpl,
+        "product_name": report.product_name,
         "measurement": report.measurement_hex,
         "report_data": report.report_data_hex,
+        "reported_tcb": report.reported_tcb_hex,
+        "reported_tcb_parts": tinfoil_sev.tcb_parts(report.reported_tcb),
+        "current_tcb": report.current_tcb_hex,
+        "current_tcb_parts": tinfoil_sev.tcb_parts(report.current_tcb),
     }
     if report.debug:
         return _err(model, "SEV report has DEBUG bit set", details, started, sc)
+
+    # Hardware authentication must precede any use of parsed report fields:
+    # measurement/report_data below are only trustworthy once signed by the
+    # VCEK and bound to the AMD chain.
+    if bundle.vcek_b64:
+        vcek_der = base64.b64decode(bundle.vcek_b64)
+        try:
+            vcek_check = tinfoil_amd.verify_vcek_chain(vcek_der, report)
+            tinfoil_amd.verify_report_signature(report, vcek_der)
+        except ValueError as exc:
+            details["hardware_signature_verification"] = f"rejected: {exc}"
+            return _err(model, f"AMD chain/report verification failed: {exc}",
+                        details, started, sc)
+        sc.hardware_signature_verified = True
+        details["hardware_signature_verification"] = {
+            "status": "verified",
+            "checks": [
+                "ARK-Genoa self-signature (RSA-PSS) + pinned DER SHA-256",
+                "ARK->ASK (RSA-PSS), issuer DN + validity window",
+                "ASK->VCEK (RSA-PSS), issuer DN + validity window",
+                "VCEK X.509 v3, ECDSA P-384 key, CN=SEV-VCEK, product=Genoa, no CSP_ID",
+                "VCEK hwID == report chip_id",
+                "VCEK bl/tee/snp/ucode SPL == report reported_tcb",
+                f"ECDSA P-384/SHA-384 report signature over bytes [0x0, 0x{tinfoil_sev.SIGNATURE_OFFSET:x})",
+            ],
+            **vcek_check.as_dict(),
+        }
+        details["verification_reason"] = (
+            "hardware chain verified; encrypted request binding and session freshness not verified"
+        )
+        tcb = {"reported": vcek_check.spl, "source": tinfoil_amd.TCB_MINIMUM_SOURCE}
+        try:
+            tcb["minimum"] = tinfoil_amd.check_tcb_minimum(vcek_check.spl, report.stepping)
+        except ValueError as exc:
+            details["tcb_minimum"] = {"status": "rejected", **tcb,
+                                      "minimum": tinfoil_amd.TCB_MINIMUM, "reason": str(exc)}
+            return _err(model, str(exc), details, started, sc)
+        details["tcb_minimum"] = {"status": "ok", **tcb}
 
     predicate, predicate_type = _verify_sigstore(bundle, repo)
     sc.release_provenance_verified = True
@@ -497,12 +548,36 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
             details, started, sc,
         )
 
+    if not sc.hardware_signature_verified:
+        # Everything else checked out, but the report is not hardware
+        # authenticated: name exactly what is missing rather than passing.
+        reason = (
+            "per-host bundle carries no VCEK certificate: AMD SNP report signature "
+            "and VCEK chain not verified"
+            if not bundle.vcek_b64
+            else "AMD SNP report signature and VCEK chain not verified"
+        )
+        return AttestationReport(
+            provider="tinfoil",
+            model=model or bundle.domain,
+            valid=False,
+            verified_at=now_iso(),
+            attestation_type="tinfoil-sev-snp-v2",
+            signing_address="",
+            signing_public_key=hpke_from_san,
+            signing_algo="hpke",
+            scorecard=sc,
+            details=details,
+            error=reason,
+            latency_s=round(time.time() - started, 2),
+        )
+
     return AttestationReport(
         provider="tinfoil",
         model=model or bundle.domain,
-        # The parsed SNP report is not hardware authenticated until its VCEK
-        # chain and signature verify. Agreement with a signed release alone is
-        # not a hardware attestation or independent source reproduction.
+        # Hardware chain, release provenance, measurement match and key bindings
+        # verified — but an encrypted request to this enclave has not been made,
+        # so the row stays not a complete verification.
         valid=False,
         verified_at=now_iso(),
         attestation_type="tinfoil-sev-snp-v2",
@@ -511,7 +586,7 @@ def verify_bundle(bundle: _Bundle, *, model: str = "", repo: str = DEFAULT_REPO)
         signing_algo="hpke",
         scorecard=sc,
         details=details,
-        error="AMD SNP report signature and VCEK chain not verified",
+        error="hardware chain verified; encrypted request binding and session freshness not verified",
         latency_s=round(time.time() - started, 2),
     )
 
