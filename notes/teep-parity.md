@@ -11,8 +11,8 @@ V = Venice, N = NEAR cloud, C = Chutes, T = Tinfoil router, A = ACI gateway. ✓
 | nonce_match | ~ | ✓ | ✓ | ✗ | ✓ | V: trusted only when `nonce_source=="client"`. C: freshness rests on REPORTDATA, since the evidence echoes no nonce (teep 6967376). T: no client nonce on the router path. |
 | quote_signature / cert_chain | ✓ | ✓ | ✓ | ✓ | ✓ | T: ARK/ASK/VCEK chain and report signature (#26, merged 2026-11-15). |
 | tee_debug_disabled | ✓ | ✓ | ✓ | ✓ | ✓ | Read from the parsed quote alone. |
-| tee_measurement / boot_config (MRTD, RTMR1-2) | ✓ | ✓ | ✓ | n/a | ✓ | Compared with dstack-mr derivations (N, V, A) or with Chutes' published rows (C). |
-| tee_hardware_config (RTMR0) | ✓ | ✗ | ✓ | n/a | ✓ | N exposes no vm_config, so RTMR0 is reported unproven. teep pins it from captures. |
+| tee_measurement / boot_config (MRTD, RTMR1-2) | ~ | ✓ | ✓ | n/a | ✓ | Compared with dstack-mr derivations (N, V, A) or with Chutes' published rows (C). V: ACI/1 shape only. |
+| tee_hardware_config (RTMR0) | ~ | ✗ | ✓ | n/a | ✓ | N exposes no vm_config, so RTMR0 is reported unproven. teep pins it from captures. |
 | tee_tcb_current | ✓ | ✓ | ✓ | ✓ | ✓ | Intel: UpToDate only. AMD: the AMD-SB-3037/3038 minimum (snp 0x1D), stricter than teep's 0x0e. The Tinfoil router fails ours. |
 | reportdata_binding | ✓ | ✓ | ✓ | ✓ | ✓ | |
 | nvidia_signature / claims / nonce | ✓ | ~ | ✓ | ✗ | n/a | Signed NRAS JWT with JWKS chain, iss and exp (chutes lane). V: GPU count unpinned. N: vendored `check_gpu`. V ACI/1 carries no GPU evidence since 2026-11-12. |
