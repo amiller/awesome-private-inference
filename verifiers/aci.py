@@ -15,6 +15,10 @@ Layers proved here:
   tdx_verified             Phala's appraisal service accepts the quote
   compose_hash_committed   the dstack event log replays to the quote's RTMR3 and
                            its compose-hash event equals sha256(app_compose)
+  tee_boot_config          the quote's MRTD/RTMR1/RTMR2 equal the dstack-mr
+                           derivation for the log-bound OS image
+  tee_hardware_config      the quote's (MRTD, RTMR0) is a derived tuple pinned for
+                           that image (verifiers/dstack_boot_registers.json)
   os_image_archive_declares_production  the RTMR3 os-image-hash resolves to an
                            archive whose metadata says `is_dev: false`
   attested_serving_enforced  this hostname is in the measured tee_only_domains
@@ -22,10 +26,8 @@ Layers proved here:
   catalog_nonempty         /v1/models lists at least one model
 
 Not proved here: the receipt path (needs a paid request), upstream model CVMs,
-the actual ability to serve the catalog entries. The base OS boot registers
-are not compared with independently computed image measurements, so whether
-the production OS actually ran remains unproven. The deployed gateway uses
-the older ACI draft without workload_id or keyset endorsement. That profile
+the actual ability to serve the catalog entries. The deployed gateway uses
+the older ACI draft without workload_id or keyset endorsement; that profile
 binds its keyset directly in the quote but does not prove identity continuity.
 """
 from __future__ import annotations
@@ -44,6 +46,7 @@ from cryptography.hazmat.primitives.asymmetric import ec, ed25519, utils
 import requests
 import yaml
 
+from verifiers import dstack_boot_registers, dstack_tdx
 from verifiers.common import AttestationReport, ScoreCard, now_iso, public_compose_preimage, sha256_hex
 from verifiers.phala_tdx import is_verified, quote_body, verify_tdx_quote
 
@@ -270,6 +273,17 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     os_hash = vm_config["os_image_hash"].removeprefix("0x").lower()
     os_bound = (event_log_bound and os_event is not None and
                 _event_payload(os_event).hex() == os_hash)
+
+    if tdx_verified and os_bound:
+        boot = dstack_boot_registers.check_boot_registers(
+            os_hash, dstack_tdx.parse_quote(evidence["quote"]))
+    else:
+        boot = {"boot_config": False, "hardware_config": False, "reasons": [
+            "quote was not authenticated by the appraisal service" if not tdx_verified else
+            "os-image event not bound to the quote; no authenticated image identity"]}
+    boot_ok = boot["boot_config"] is True and boot["hardware_config"] is True
+
+    tcb = dstack_tdx.dcap_verify(evidence["quote"])
     app_compose = json.loads(evidence["app_compose"])
     tee_only = _tee_only_domains(app_compose["docker_compose_file"])
 
@@ -292,7 +306,10 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         report_data_binds_key=keyset_recomputes and nonce_bound and identity_ok,
         tdx_verified=tdx_verified,
         compose_hash_committed=compose_bound,
-        prod_os_image=None,
+        tee_boot_config=boot["boot_config"],
+        tee_hardware_config=boot["hardware_config"],
+        prod_os_image=(boot_ok if archive_prod is True
+                       else None if archive_prod is None else False),
         os_image_archive_declares_production=archive_prod,
         attested_serving_enforced=compose_bound and host in tee_only,
         sessions_publish_evidence_digests=sessions_ok,
@@ -301,7 +318,16 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     binding_ok = all(getattr(scorecard, f) is True for f in (
         "nonce_bound", "report_data_binds_key", "tdx_verified", "compose_hash_committed",
         "attested_serving_enforced")) and os_bound
-    checked_ok = binding_ok and archive_prod is True
+    checked_ok = binding_ok and archive_prod is True and boot_ok
+    failed = [name for name, ok in (
+        ("quote or nonce binding", scorecard.nonce_bound and scorecard.tdx_verified),
+        ("keyset binding", scorecard.report_data_binds_key),
+        ("compose commitment", scorecard.compose_hash_committed),
+        ("os-image event binding", os_bound),
+        (f"boot-register policy ({'; '.join(boot['reasons'])})", boot_ok),
+        ("os image archive", archive_prod is True),
+        ("attested serving for this hostname", scorecard.attested_serving_enforced),
+    ) if not ok]
     raw_evidence = {
         "source": f"{base}/v1/aci/attestation",
         "nonce": nonce,
@@ -315,15 +341,21 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         "event_log": event_log,
         "vm_config": evidence["vm_config"],
         "source_provenance": attestation.get("source_provenance"),
-        "appraisal": {"verified": tdx_verified, "body": body,
-                      "tcb_status": (quote_response.get("quote") or {}).get("tcb_status")},
+        "appraisal": {"verified": tdx_verified, "body": body},
     }
     raw_evidence.update(public_compose_preimage(evidence["app_compose"]))
+    if checked_ok:
+        verification_status = "verified"
+    elif binding_ok and boot_ok and archive_prod is None:
+        verification_status = "not_checked"
+    else:
+        verification_status = "rejected"
     return AttestationReport(
         provider="aci-gateway", model=host,
-        valid=all(getattr(scorecard, f) for f in (
+        valid=all(getattr(scorecard, f) is True for f in (
             "nonce_bound", "report_data_binds_key", "tdx_verified",
-            "compose_hash_committed", "prod_os_image", "attested_serving_enforced")),
+            "compose_hash_committed", "tee_boot_config", "tee_hardware_config", "prod_os_image",
+            "attested_serving_enforced")),
         verified_at=now_iso(), attestation_type="aci-gateway",
         scorecard=scorecard,
         details={
@@ -338,12 +370,14 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
             "identity_continuity": "not available in deployed ACI draft" if workload_id is None else "checked",
             "backend_evidence_verified": False,
             "catalog_serving_tested": False,
-            "verification_status": "not_checked" if binding_ok and archive_prod is not False else "rejected",
+            "verification_status": verification_status,
             "verification_reason": (
-                "OS archive exceeded bounded metadata check; boot measurements and request path remain unverified"
-                if binding_ok and archive_prod is None else
-                "OS boot measurements MRTD/RTMR0-2 and request path were not verified"
-                if checked_ok else "one or more authenticated quote, event, OS event, or host-policy checks failed"),
+                "quote, event log, compose, keyset, pinned boot registers and production image archive all verified; upstream model CVMs and the paid request path remain unverified"
+                if checked_ok else
+                "OS archive exceeded bounded metadata check; request path remains unverified"
+                if verification_status == "not_checked" else
+                "failed: " + "; ".join(failed)),
+            "boot_registers": boot,
             "raw_evidence": raw_evidence,
             "raw_evidence_completeness": (
                 "complete" if raw_evidence["app_compose_preimage_status"] == "captured"
@@ -353,7 +387,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
             "tee_only_domains": tee_only,
             "models": len(catalog.get("data") or []),
             "sessions": sessions_note,
-            "tcb_status": (quote_response.get("quote") or {}).get("tcb_status"),
+            "tcb_status": tcb.status,
+            "advisory_ids": list(tcb.advisory_ids),
         },
     )
 

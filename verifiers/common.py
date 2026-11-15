@@ -44,7 +44,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
     # difference is the whole risk the row exists to show.
     "aci-gateway": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
-        "compose_hash_committed", "prod_os_image", "attested_serving_enforced",
+        "compose_hash_committed", "tee_boot_config", "tee_hardware_config",
+        "prod_os_image", "attested_serving_enforced",
     },
     "chutes-tee": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
@@ -96,8 +97,10 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
     "aci-gateway": {"disputed": False, "note":
         "One workload, several hostnames. The adapter binds quote, keyset and measured "
         "compose events, but does not verify upstream session bundles or an inference request; "
-        "backend_attested therefore remains unknown. The OS archive's production flag "
-        "does not establish boot measurements, so prod_os_image is unknown. "
+        "backend_attested therefore remains unknown. tee_boot_config and "
+        "tee_hardware_config require the quote's (MRTD, RTMR0, RTMR1, RTMR2) to be a "
+        "dstack-mr-derived tuple for the log-bound OS image; prod_os_image additionally "
+        "requires that image's archive to declare is_dev false. "
         "attested_serving_enforced is required for each hostname."},
     "chutes-tee": {"disputed": False, "note":
         "The quote can bind the sampled instance key and golden MRTD, but serving code and "
