@@ -137,16 +137,16 @@ def bar_note(shape: str) -> Dict[str, object]:
 # no evidence for it. render.check_cell raises on a required None not listed here.
 LAYER_GAPS: Dict[str, Dict[str, Dict[str, object]]] = {
     "aci-gateway": {
-        "prod_os_image": {"kind": "impl", "issue": 27, "reason":
-            "OS boot measurements (MRTD/RTMR0-2) are not compared with independently computed image measurements"},
+        "prod_os_image": {"kind": "prov", "reason":
+            "the archive for the log-bound OS image declares no build type, so production cannot be established"},
     },
     "tdx+gpu": {
         "backend_attested": {"kind": "impl", "issue": 29, "reason":
             "the gateway's verification of the model backend's quote is never checked"},
     },
     "tinfoil-sev-snp-v2": {
-        "hardware_signature_verified": {"kind": "impl", "issue": 26, "reason":
-            "AMD VCEK chain and SNP report signature are not verified"},
+        "hardware_signature_verified": {"kind": "prov", "reason":
+            "this attestation bundle carries no VCEK certificate, so the AMD chain cannot be checked"},
     },
     "venice": {
         "prod_os_image": {"kind": "prov", "issue": 11, "reason":

@@ -124,9 +124,9 @@ def _cell(value, shape, layer, checked_count=2, retired=False):
 
 
 def test_none_cells_render_distinct_states():
-    ours = _cell(None, "aci-gateway", "prod_os_image")
+    ours = _cell(None, "tdx+gpu", "backend_attested")
     assert ours["mark"] == "?" and "Not checked by us" in ours["meaning"]
-    assert ours["issue_url"].endswith("/issues/27")
+    assert ours["issue_url"].endswith("/issues/29")
     provider = _cell(None, "venice", "prod_os_image")
     assert provider["mark"] == "∅" and "Not exposed by provider" in provider["meaning"]
     assert "issue_url" not in _cell(None, "venice", "gpu_attested")
