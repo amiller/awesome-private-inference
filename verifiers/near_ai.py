@@ -62,6 +62,11 @@ def _cloud_api_audit_set() -> Tuple[Set[str], Dict[str, Dict]]:
 
 _MODELS_APP = "0x2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b"  # DstackApp shared by every NEAR AI model CVM
 _EIP1967_IMPLEMENTATION_SLOT = "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc"
+_MAX_INSTANCES = 8  # teep's cap on model_attestations entries for one model
+_INSTANCE_ID_RE = re.compile(r"(?:[0-9a-f]{2}){1,32}")
+_INSTANCE_LIMIT = ("every listed instance must pass every layer; the instances share one signing "
+                   "key and the gateway picks one per request. Any holder of that key that the "
+                   "gateway does not list is invisible to this check.")
 _HERMES_ANCHOR = ("https://raw.githubusercontent.com/amiller/hermes-agent/"
                   "feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json")
 
@@ -138,7 +143,7 @@ def _public_attestation_fields(att: dict) -> dict:
         "signing_address", "tls_cert_fingerprint", "model_name") if key in att}
     info = att.get("info") or {}
     if isinstance(info, dict):
-        kept = {key: info[key] for key in ("app_id", "compose_hash")
+        kept = {key: info[key] for key in ("app_id", "compose_hash", "instance_id")
                 if key in info}
         tcb = info.get("tcb_info") or {}
         if isinstance(tcb, str):
@@ -181,6 +186,19 @@ def _tdx_evidence(intel: Dict) -> Dict:
     return {k: intel[k] for k in ("tcb_status", "advisory_ids", "intel_quote")}
 
 
+def _tcb_info(att: Dict) -> Dict:
+    tcb_info = (att.get("info") or {}).get("tcb_info") or {}
+    return json.loads(tcb_info) if isinstance(tcb_info, str) else tcb_info
+
+
+def _instance_id_bound(att: Dict, meas: Dict) -> bool:
+    """teep da6cbcf: the id equals the payload of the one RTMR3 instance-id event
+    of the replayed log, so it is quote-bound only when the replay passed."""
+    iid = att["info"]["instance_id"].lower()
+    return bool(meas["ok"] and _INSTANCE_ID_RE.fullmatch(iid) and
+                dstack_tdx.runtime_events(_tcb_info(att)["event_log"], "instance-id") == [iid])
+
+
 def _measurement_checks(att: Dict, intel: Dict) -> Dict:
     """Replay this attestation's event log against its quote registers.
 
@@ -188,9 +206,7 @@ def _measurement_checks(att: Dict, intel: Dict) -> Dict:
     come from the replayed log; the detached JSON info fields must merely agree.
     """
     info = att.get("info") or {}
-    tcb_info = info.get("tcb_info") or {}
-    if isinstance(tcb_info, str):
-        tcb_info = json.loads(tcb_info)
+    tcb_info = _tcb_info(att)
     event_log = tcb_info.get("event_log")
     try:
         measurements = dstack_tdx.attestation_measurements(intel["intel_quote"], event_log)
@@ -263,6 +279,16 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         return _fail("no gateway_attestation")
     if not models:
         return _fail("no model_attestations")
+    if len(models) > _MAX_INSTANCES:
+        return _fail(f"{len(models)} model_attestations entries exceed the cap of {_MAX_INSTANCES}")
+    ids = [(m.get("info") or {}).get("instance_id") for m in models]
+    if not all(ids) or len(set(ids)) != len(ids):
+        return _fail("model_attestations entries need distinct instance ids", instance_ids=ids)
+    keys = {tuple(str(m.get(k) or "").lower() for k in (
+        "signing_public_key", "signing_address", "signing_algo")) for m in models}
+    if len(keys) != 1 or not all(next(iter(keys))):
+        return _fail("model_attestations entries do not share one signing key",
+                     signing_key_shared=False, instance_ids=ids)
 
     sc = ScoreCard()
     details: Dict[str, Any] = {"inner_models": len(models)}
@@ -289,7 +315,6 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
 
     # Explicit TCB currency policy (teep tee_tcb_current parity): only UpToDate
     # passes; any other verdict leaves the advisories on the row.
-    tcb_statuses = [gw_intel["tcb_status"]]
     details["tcb_policy"] = {
         "passing_status": sorted(dstack_tdx.TCB_CURRENT_STATUSES),
         "effect": "tcb_current=False for every other Intel PCS verdict; "
@@ -302,71 +327,39 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     sc.nonce_bound = bool(gw_rd.get("embeds_nonce"))
     sc.report_data_binds_key = bool(gw_rd.get("binds_address"))
 
-    # Model-level TDX + GPU + key derivation
-    model_spk = ""
-    first_model_addr = ""
-    model_ok = True
-    gpu_ok = True
-    key_ok = True
-    compose_checks = []
-    model_names_match = True
-    debug_flags = [gw_debug]
-    measurements = [gw_meas]
-
-    for i, m in enumerate(models):
+    model_spk = models[0]["signing_public_key"]
+    first_model_addr = models[0]["signing_address"]
+    instances: Dict[str, Dict[str, Any]] = {}
+    for iid, m in zip(ids, models):
         m_intel = _check_tdx(m)
         m_meas = _measurement_checks(m, m_intel)
-        m_debug = dstack_tdx.quote_debug_disabled(m_intel["intel_quote"])
-        tcb_statuses.append(m_intel["tcb_status"])
-        debug_flags.append(m_debug)
-        measurements.append(m_meas)
-        details["tdx"]["models"].append({**_tdx_evidence(m_intel), "measurements": m_meas,
-                                         "debug_disabled": m_debug})
-        if not m_intel["verified"]:
-            model_ok = False
-            gpu_ok = False
-            key_ok = False
-            compose_checks.append(False)
-            continue
-        buf_m2 = io.StringIO()
-        with _STDOUT_LOCK, contextlib.redirect_stdout(buf_m2):
-            m_rd = check_report_data(m, nonce, m_intel)
-        if not (m_rd.get("binds_address") and m_rd.get("embeds_nonce")):
-            model_ok = False
-
-        buf_m3 = io.StringIO()
-        with _STDOUT_LOCK, contextlib.redirect_stdout(buf_m3):
-            g = check_gpu(m, nonce)
-        if g.get("verdict") not in ("PASS", True) or not g.get("nonce_matches"):
-            gpu_ok = False
-        if i == 0:
-            details["gpu_verdict"] = g.get("verdict")
-
-        spk = m.get("signing_public_key", "")
-        addr = m.get("signing_address", "")
-        key_ok = key_ok and bool(spk and addr)
-        if spk and addr:
-            try:
-                derives = keccak_eth_address(spk).lower() == addr.lower()
-            except Exception:
-                derives = False
-            key_ok = key_ok and derives
-            if i == 0:
-                model_spk = spk
-                first_model_addr = addr
-
-        # compose_hash
-        info = m.get("info", {})
         observed_model_name = m.get("model_name")
-        model_names_match = model_names_match and observed_model_name == model
-        tcb_info = info.get("tcb_info") or {}
-        if isinstance(tcb_info, str):
-            try:
-                tcb_info = json.loads(tcb_info)
-            except Exception:
-                tcb_info = {}
-        app_compose = tcb_info.get("app_compose")
-        mr_config = (m_intel.get("quote", {}).get("body", {}) or {}).get("mrconfig", "")
+        r = {"tdx_verified": m_intel["verified"], "tcb_status": m_intel["tcb_status"],
+             "tcb_current": m_intel["tcb_status"] in dstack_tdx.TCB_CURRENT_STATUSES,
+             "debug_disabled": dstack_tdx.quote_debug_disabled(m_intel["intel_quote"]),
+             "event_log_replayed": m_meas["ok"], "instance_id_bound": _instance_id_bound(m, m_meas),
+             "boot_config": m_meas["boot_registers"]["boot_config"],
+             "model_name_matches": observed_model_name == model,
+             "nonce_bound": False, "report_data_binds_key": False, "gpu_attested": False,
+             "key_derives_to_address": False, "compose_hash_committed": False}
+        instances[iid] = r
+        details["tdx"]["models"].append({**_tdx_evidence(m_intel), "measurements": m_meas,
+                                         "debug_disabled": r["debug_disabled"],
+                                         "instance_id": iid})
+        if not m_intel["verified"]:
+            continue
+        with _STDOUT_LOCK, contextlib.redirect_stdout(io.StringIO()):
+            m_rd = check_report_data(m, nonce, m_intel)
+            g = check_gpu(m, nonce)
+        r["nonce_bound"] = bool(m_rd.get("embeds_nonce"))
+        r["report_data_binds_key"] = bool(m_rd.get("binds_address"))
+        r["gpu_verdict"] = g.get("verdict")
+        r["gpu_attested"] = g.get("verdict") in ("PASS", True) and bool(g.get("nonce_matches"))
+        r["key_derives_to_address"] = (keccak_eth_address(m["signing_public_key"]).lower()
+                                       == m["signing_address"].lower())
+
+        app_compose = _tcb_info(m).get("app_compose")
+        mr_config = m_intel["quote"]["body"]["mrconfig"]
         if app_compose and mr_config and m_meas["ok"]:
             # h is authorized only because the detached preimage hashes to the
             # log-authenticated compose-hash event and MRCONFIGID commits to it.
@@ -379,9 +372,10 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
             expected_app_id = str(anchor_policy.get("app_id") or "").lower().removeprefix("0x")
             anchored = _anchor_matches_model(anchor, model, observed_model_name, app_id, h)
             authorized = _allowed_on_chain(_MODELS_APP, h, chain["block_tag"])
-            compose_checks.append(quote_compose_matches and anchored and authorized and
-                                  observed_model_name == model)
+            r["compose_hash_committed"] = (quote_compose_matches and anchored and authorized and
+                                           observed_model_name == model)
             details.setdefault("model_composes", []).append({
+                "instance_id": iid,
                 "observed_model_name": observed_model_name, "requested_model_name": model,
                 "app_id": app_id, "expected_app_id": expected_app_id,
                 "compose_hash": h, "log_compose_hash": log_compose,
@@ -390,28 +384,36 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                 "anchor_policy_revision_sha256": anchor_revision,
                 "chain_block_number": chain["block_number"],
                 "chain_block_hash": chain["block_hash"]})
-        else:
-            compose_checks.append(False)
 
-    sc.key_derives_to_address = key_ok
-    sc.gpu_attested = gpu_ok
-    sc.compose_hash_committed = bool(compose_checks and all(compose_checks))
-    sc.tee_debug_disabled = all(debug_flags)
-    sc.event_log_replayed = all(x["ok"] for x in measurements)
-    sc.tee_boot_config = all(x["boot_registers"]["boot_config"] for x in measurements)
+    def every(layer: str) -> bool:
+        return all(r[layer] for r in instances.values())
+
+    sc.tdx_verified = every("tdx_verified")
+    sc.nonce_bound = sc.nonce_bound and every("nonce_bound")
+    sc.report_data_binds_key = sc.report_data_binds_key and every("report_data_binds_key")
+    sc.key_derives_to_address = every("key_derives_to_address")
+    sc.gpu_attested = every("gpu_attested")
+    sc.compose_hash_committed = every("compose_hash_committed")
+    sc.tee_debug_disabled = gw_debug and every("debug_disabled")
+    sc.event_log_replayed = gw_meas["ok"] and every("event_log_replayed") and every("instance_id_bound")
+    sc.tee_boot_config = gw_meas["boot_registers"]["boot_config"] and every("boot_config")
     # RTMR0 is not derived for NEAR's VM shapes (no vm_config exposed): unproven, not checked.
     sc.tee_hardware_config = None
-    sc.tcb_current = all(s in dstack_tdx.TCB_CURRENT_STATUSES for s in tcb_statuses)
-    details["tcb_statuses"] = {"gateway": gw_intel["tcb_status"], "models": tcb_statuses[1:]}
+    sc.tcb_current = gw_intel["tcb_status"] in dstack_tdx.TCB_CURRENT_STATUSES and every("tcb_current")
+    model_names_match = every("model_name_matches")
+    details["tcb_statuses"] = {"gateway": gw_intel["tcb_status"],
+                               "models": [r["tcb_status"] for r in instances.values()]}
     details["model_names_match_request"] = model_names_match
+    details["instances"] = instances
+    details["instance_count"] = len(models)
+    details["instance_ids"] = ids
+    details["signing_key_shared"] = True
+    details["instance_limit"] = _INSTANCE_LIMIT
 
     # These are gateway reference facts, not proof that the gateway verified the
     # downstream model's quote. Historical short ledger prefixes remain metadata
     # and cannot authorize a full digest.
-    gw_tcb = (gateway.get("info") or {}).get("tcb_info") or {}
-    if isinstance(gw_tcb, str):
-        gw_tcb = json.loads(gw_tcb)
-    gw_app_compose = gw_tcb.get("app_compose") or ""
+    gw_app_compose = _tcb_info(gateway).get("app_compose") or ""
     gw_mr_config = (gw_intel.get("quote", {}).get("body", {}) or {}).get("mrconfig", "") or ""
     gw_compose_hash = sha256_hex(gw_app_compose) if gw_app_compose else ""
     gw_log_compose_hash = gw_meas.get("log_compose_hash") if gw_meas["ok"] else None
@@ -471,7 +473,6 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         and sc.event_log_replayed is True
         and sc.tcb_current is True
         and sc.tee_boot_config is True
-        and model_ok
         and model_names_match
         and sc.compose_hash_committed is True
         and gw_self_consistent

@@ -27,7 +27,14 @@ CURRENT = EVIDENCE_DIR / "08d91c8eba0e546542b5b29aae28d740ed6e41e965edb3016b349a
 
 
 def _load(path=EVIDENCE):
-    return json.loads(path.read_text())
+    """These captures predate keeping info.instance_id in raw evidence; restore it
+    from each entry's instance-id event so the other layers can be exercised.
+    The id binding itself is tested on a capture that kept it (test_near_instances)."""
+    evidence = json.loads(path.read_text())
+    for m in evidence["model_attestations"]:
+        m["info"]["instance_id"] = next(e["event_payload"] for e in m["info"]["tcb_info"]["event_log"]
+                                        if e["event"] == "instance-id")
+    return evidence
 
 
 def _fake_check_tdx(status="UpToDate", advisories=None, gateway_status=None):
