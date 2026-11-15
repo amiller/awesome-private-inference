@@ -95,7 +95,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     api_version = att.get("api_version")
     if api_version not in (None, "aci/1"):
         return _fail(f"unsupported attestation api_version: {api_version!r}")
-    aci1 = api_version == "aci/1"
+    aci1 = api_version == "aci/1" or "attestation" in att
     sc = ScoreCard(backend_attested=False)  # Venice sits downstream of Phala/NEAR
     details: Dict[str, Any] = {
         "tee_provider": att.get("tee_provider"),

@@ -180,10 +180,14 @@ def test_live_capture_binds_gateway_keyset_but_is_not_valid(monkeypatch):
     assert report.details["rejection_reason"] == venice.GATEWAY_ONLY
 
 
-@pytest.mark.parametrize("serving", [None, "model"])
-def test_unattested_serving_field_cannot_make_gateway_valid(monkeypatch, serving):
+@pytest.mark.parametrize("mutation", [
+    lambda a: a["service_capabilities"].update(serving=None),
+    lambda a: a["service_capabilities"].update(serving="model"),
+    lambda a: a.pop("api_version"),
+])
+def test_unattested_fields_cannot_make_gateway_valid(monkeypatch, mutation):
     att = json.loads(json.dumps(_capture()))
-    att["service_capabilities"]["serving"] = serving
+    mutation(att)
     assert _verify(monkeypatch, att).valid is False
 
 
