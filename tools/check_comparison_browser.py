@@ -27,6 +27,7 @@ def main():
         assert page.locator('.signal').filter(has_text='Unknown').count() == 0
         assert page.locator('#audit-lessons article').count() == 4
         assert page.locator('.route-row:visible').count() == 0
+        assert page.locator('.provider-row td.unassessed').count() == 4
         top = page.locator('table').bounding_box()['y']
         heights = page.locator('.provider-row').evaluate_all('(es)=>es.map(e=>e.getBoundingClientRect().height)')
         assert top < 250 and max(heights) <= 56
@@ -36,13 +37,13 @@ def main():
         button.focus();page.keyboard.press('Enter')
         assert page.locator('#routes-near-ai .route-row:visible').count() == 3
         page.screenshot(path=str(out/'near-expanded.png'), full_page=True)
-        href = './assessments.html#near-ai-gateway-e2ee-session'
+        href = './assessments.html#near-ai-gateway-e2ee-reply'
         page.locator(f'a[href="{href}"]').click()
-        page.wait_for_url('**/assessments.html#near-ai-gateway-e2ee-session')
-        target=page.locator('#near-ai-gateway-e2ee-session')
+        page.wait_for_url('**/assessments.html#near-ai-gateway-e2ee-reply')
+        target=page.locator('#near-ai-gateway-e2ee-reply')
         target.wait_for();assert target.evaluate('(e)=>e.open')
         assert 'response-key substitution' in target.inner_text()
-        target.screenshot(path=str(out/'session-evidence.png'))
+        target.screenshot(path=str(out/'reply-evidence.png'))
         page.goto((docs/'index.html').as_uri(), wait_until='networkidle')
         page.locator('tbody[data-provider="tinfoil"] .signal').first.click()
         page.wait_for_url('**/assessments.html#provider-tinfoil-hardware')
@@ -62,6 +63,12 @@ def main():
         page.goto((docs/'index.html').as_uri(), wait_until='networkidle')
         page.locator('#expand-all').click()
         assert page.locator('.route-row:visible').count() == 19
+        assert page.locator('.route-row td.unassessed:visible').count() == 9
+        page.locator('td.unassessed a[href="./assessments.html#route-private-inference-private"]').click()
+        page.wait_for_url('**/assessments.html#route-private-inference-private')
+        assert 'Reply key substitutable' in page.locator('#route-private-inference-private').inner_text()
+        page.goto((docs/'index.html').as_uri(), wait_until='networkidle')
+        page.locator('#expand-all').click()
         page.select_option('#provider-filter', 'aci-gateway')
         assert page.locator('.provider-row:visible').count() == 1
         assert page.locator('.route-row:visible').count() == 3

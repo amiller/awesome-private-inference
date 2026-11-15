@@ -57,6 +57,13 @@ def test_render_produces_html(tmp_path, monkeypatch):
     measurements = (docs / "measurements.html").read_text()
     assert "Attestation checks across providers and models" in measurements
     assert (docs / "assessments.html").exists()
+    assert html.count("Not assessed — dated source review only (2026-10-14)") == 13
+    assert html.count('colspan="7" class="unassessed"') == 13
+    assert 'href="./assessments.html#route-private-inference-private">Not assessed — dated source review only (2026-10-14)</a> · 3 findings' in html
+    assert 'href="./assessments.html#route-privatemode-proxy-pinned">Not assessed — dated source review only (2026-10-14)</a></td>' in html
+    assert "#rubric-recipient" in html and "#rubric-reply" in html and '-session"' not in html
+    assessments = (docs / "assessments.html").read_text()
+    assert 'id="private-inference-private-reply"' in assessments and '-session"' not in assessments
     assert not (docs / "verifiers.html").exists()
     assert not (docs / "verifiers.json").exists()
     assert "verifiers.html" not in html

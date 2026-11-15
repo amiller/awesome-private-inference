@@ -1,5 +1,5 @@
 {
-  "rubric_version": 2,
+  "rubric_version": 3,
   "scope": "Dated source/evidence assessments with explicit evidence, missing obligations and limitation ownership. Internal states are not security grades; no route was promoted by this editorial clarification.",
   "reference_baselines": {
     "aci-gateway": {
@@ -1708,12 +1708,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/27"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "partial",
-          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed.",
-          "label": "Our backend test to do",
-          "evidence": "Gateway nonce and keyset bindings are implemented; no complete retained request test binds the selected backend.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Include keyset continuity and the selected backend.",
+          "reason": "Gateway keyset binding is checked. No harmless request binds the selected backend; keyset continuity is unendorsed.",
+          "label": "Our backend key test to do",
+          "evidence": "Gateway keyset binding is implemented; no complete retained request test binds the selected backend.",
+          "missing": "Verify a harmless prompt is encrypted to a key bound to the selected backend and the live channel; reject a substituted recipient key before release. Include keyset continuity.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "partial",
+          "reason": "Gateway nonce binding is checked. No harmless prompt/reply exchange through the selected backend is retained.",
+          "label": "Our backend reply test to do",
+          "evidence": "Gateway nonce binding is implemented; no complete retained request test covers the reply from the selected backend.",
+          "missing": "Verify a harmless prompt/reply exchange through the selected backend; reject substituted reply keys, stale evidence and replay.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -1764,7 +1775,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "aci-gateway-phala",
@@ -1789,12 +1801,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/27"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "partial",
-          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed.",
-          "label": "Our backend test to do",
-          "evidence": "Gateway nonce and keyset bindings are implemented; no complete retained request test binds the selected backend.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Include keyset continuity and the selected backend.",
+          "reason": "Gateway keyset binding is checked. No harmless request binds the selected backend; keyset continuity is unendorsed.",
+          "label": "Our backend key test to do",
+          "evidence": "Gateway keyset binding is implemented; no complete retained request test binds the selected backend.",
+          "missing": "Verify a harmless prompt is encrypted to a key bound to the selected backend and the live channel; reject a substituted recipient key before release. Include keyset continuity.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "partial",
+          "reason": "Gateway nonce binding is checked. No harmless prompt/reply exchange through the selected backend is retained.",
+          "label": "Our backend reply test to do",
+          "evidence": "Gateway nonce binding is implemented; no complete retained request test covers the reply from the selected backend.",
+          "missing": "Verify a harmless prompt/reply exchange through the selected backend; reject substituted reply keys, stale evidence and replay.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -1845,7 +1868,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "aci-gateway-api-redpill",
@@ -1870,12 +1894,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/27"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "partial",
-          "reason": "Gateway nonce/keyset bindings are checked. No harmless request is bound through the selected backend; keyset continuity is unendorsed.",
-          "label": "Our backend test to do",
-          "evidence": "Gateway nonce and keyset bindings are implemented; no complete retained request test binds the selected backend.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Include keyset continuity and the selected backend.",
+          "reason": "Gateway keyset binding is checked. No harmless request binds the selected backend; keyset continuity is unendorsed.",
+          "label": "Our backend key test to do",
+          "evidence": "Gateway keyset binding is implemented; no complete retained request test binds the selected backend.",
+          "missing": "Verify a harmless prompt is encrypted to a key bound to the selected backend and the live channel; reject a substituted recipient key before release. Include keyset continuity.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "partial",
+          "reason": "Gateway nonce binding is checked. No harmless prompt/reply exchange through the selected backend is retained.",
+          "label": "Our backend reply test to do",
+          "evidence": "Gateway nonce binding is implemented; no complete retained request test covers the reply from the selected backend.",
+          "missing": "Verify a harmless prompt/reply exchange through the selected backend; reject substituted reply keys, stale evidence and replay.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -1926,7 +1961,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "near-ai-gateway-plain",
@@ -1945,18 +1981,29 @@
           "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain.",
           "label": "Our route proof to do",
           "evidence": "The gateway adapter implements selected TDX/GPU appraisal. There is no complete retained hardware-evidence chain for every recipient on this actual client path.",
-          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and session closure to their separate columns.",
+          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and recipient/reply key binding to their separate columns.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "partial",
-          "reason": "Some quote/key and nonce checks exist, but the actual TLS/request path and selected backend are not fully bound.",
+          "reason": "Some quote/key checks exist, but the actual TLS/request path and selected backend are not fully bound.",
           "label": "Our request test to do",
-          "evidence": "Some quote/key and nonce checks exist, but the actual TLS/request path and selected backend are not fully bound.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Bind the actual TLS/request path and backend.",
+          "evidence": "Some quote/key checks exist, but the actual TLS/request path and selected backend are not fully bound.",
+          "missing": "Bind the actual TLS/request path and selected backend to the attested key; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
+        },
+        "reply": {
+          "state": "partial",
+          "reason": "Some nonce checks exist, but no actual prompt/reply exchange through the selected backend was verified.",
+          "label": "Our reply test to do",
+          "evidence": "Some nonce checks exist, but no actual prompt/reply exchange through the selected backend was verified.",
+          "missing": "Verify a harmless prompt/reply exchange through the selected backend; reject substituted reply keys, stale evidence and replay.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
@@ -2007,7 +2054,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "near-ai-gateway-e2ee",
@@ -2026,13 +2074,24 @@
           "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain.",
           "label": "Our route proof to do",
           "evidence": "The gateway adapter implements selected TDX/GPU appraisal. There is no complete retained hardware-evidence chain for every recipient on this actual client path.",
-          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and session closure to their separate columns.",
+          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and recipient/reply key binding to their separate columns.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
         },
-        "session": {
+        "recipient": {
+          "state": "unknown",
+          "reason": "No fixed deployed exchange was verified. Prompt-field encryption to the attested model key has no retained test on this route.",
+          "label": "Our recipient test to do",
+          "evidence": "No fixed deployed exchange was verified. Prompt-field encryption to the attested model key has no retained test on this route.",
+          "missing": "Verify a harmless prompt is encrypted only to a key bound to the attested model workload and the pinned route; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
+        },
+        "reply": {
           "state": "gap",
           "reason": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified.",
           "label": "Reply key substitutable",
@@ -2088,7 +2147,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "near-ai-direct",
@@ -2113,12 +2173,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/29"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
@@ -2169,7 +2240,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "tinfoil-router",
@@ -2195,12 +2267,24 @@
             "https://github.com/amiller/awesome-private-inference/issues/26"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "partial",
-          "reason": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication, authenticated session freshness and the encrypted request remain unverified.",
-          "label": "Our session proof to do",
-          "evidence": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication, authenticated session freshness and the encrypted request remain unverified.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. First close the AMD authentication dependency.",
+          "reason": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication and the encrypted request remain unverified.",
+          "label": "Our recipient proof to do",
+          "evidence": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication and the encrypted request remain unverified.",
+          "missing": "Verify a harmless prompt is encrypted to the HPKE key bound to the attested workload and the pinned TLS channel; reject a substituted recipient key. First close the AMD authentication dependency.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/26",
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "Authenticated session freshness and the encrypted reply remain unverified.",
+          "label": "Our freshness proof to do",
+          "evidence": "Authenticated session freshness and the encrypted reply remain unverified.",
+          "missing": "Verify authenticated freshness for the exchange and a harmless encrypted reply; reject substituted reply keys, stale evidence and replay. First close the AMD authentication dependency.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/26",
@@ -2252,7 +2336,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "venice-near",
@@ -2276,12 +2361,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2332,7 +2428,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "venice-phala",
@@ -2356,12 +2453,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2412,7 +2520,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "chutes-tee",
@@ -2437,12 +2546,24 @@
             "https://github.com/amiller/awesome-private-inference/issues/28"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "partial",
-          "reason": "Nonce and key fields are checked; a complete prompt-and-reply session was not verified.",
+          "reason": "Key fields are checked; a complete prompt-and-reply session was not verified.",
           "label": "Our request test to do",
-          "evidence": "The daily adapter implements nonce/key checks. The retained route assessment does not contain a complete request/reply test for this client path.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released. Reconcile the dated manual encrypted-completion evidence with the exact client/mode.",
+          "evidence": "The daily adapter implements key checks. The retained route assessment does not contain a complete request test for this client path.",
+          "missing": "Verify a harmless prompt is encrypted to a key bound to the attested workload; reject a substituted recipient key before release. Reconcile the dated manual encrypted-completion evidence with the exact client/mode.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30",
+            "https://github.com/amiller/awesome-private-inference/issues/19"
+          ]
+        },
+        "reply": {
+          "state": "partial",
+          "reason": "Nonce fields are checked; a complete prompt-and-reply session was not verified.",
+          "label": "Our reply test to do",
+          "evidence": "The daily adapter implements nonce checks. The retained route assessment does not contain a complete request/reply test for this client path.",
+          "missing": "Verify a harmless reply is bound to the same attested workload; reject substituted reply keys, stale evidence and replay. Reconcile the dated manual encrypted-completion evidence with the exact client/mode.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30",
@@ -2494,7 +2615,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": true
     },
     {
       "id": "private-inference-standard",
@@ -2516,12 +2638,23 @@
           "limitation": "architecture",
           "issue_urls": []
         },
-        "session": {
+        "recipient": {
           "state": "gap",
           "reason": "Standard routing terminates prompt confidentiality at the provider proxy; it makes no client-to-attested-model encryption claim.",
           "label": "Proxy sees prompts",
           "evidence": "Standard routing terminates prompt confidentiality at the provider proxy; it makes no client-to-attested-model encryption claim.",
           "missing": "Client-to-attested-recipient confidentiality requires a separately verified encrypted route; retention policy alone cannot establish it.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "gap",
+          "reason": "Standard routing makes no client-to-attested-model encryption claim; no reply key is bound to an attested workload.",
+          "label": "No attested reply key",
+          "evidence": "Standard routing makes no client-to-attested-model encryption claim; no reply key is bound to an attested workload.",
+          "missing": "Reply confidentiality from the provider proxy requires a separately verified encrypted route; retention policy alone cannot establish it.",
           "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2568,7 +2701,8 @@
           "issue_urls": []
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "private-inference-zdr",
@@ -2590,12 +2724,23 @@
           "limitation": "architecture",
           "issue_urls": []
         },
-        "session": {
+        "recipient": {
           "state": "gap",
           "reason": "Zero data retention is a retention policy, not client-to-attested-model encryption.",
           "label": "Proxy sees prompts",
           "evidence": "Zero data retention is a retention policy, not client-to-attested-model encryption.",
           "missing": "Client-to-attested-recipient confidentiality requires a separately verified encrypted route; retention policy alone cannot establish it.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "gap",
+          "reason": "Zero data retention is a retention policy, not client-to-attested-model encryption; no reply key is bound to an attested workload.",
+          "label": "No attested reply key",
+          "evidence": "Zero data retention is a retention policy, not client-to-attested-model encryption; no reply key is bound to an attested workload.",
+          "missing": "Reply confidentiality from the provider proxy requires a separately verified encrypted route; retention policy alone cannot establish it.",
           "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2642,7 +2787,8 @@
           "issue_urls": []
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "private-inference-private",
@@ -2666,7 +2812,18 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
+          "state": "unknown",
+          "reason": "No fixed deployment or complete session was verified.",
+          "label": "Our recipient test to do",
+          "evidence": "No fixed deployment or complete session was verified.",
+          "missing": "Verify a harmless prompt is encrypted only to a key bound to the attested model workload; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
           "state": "gap",
           "reason": "The inspected client leaves the reply-key header substitutable by a relay. No fixed deployment or complete session was verified.",
           "label": "Reply key substitutable",
@@ -2722,7 +2879,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "maple-tinfoil",
@@ -2746,12 +2904,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2802,7 +2971,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "maple-privatemode",
@@ -2826,12 +2996,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2882,7 +3063,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "privatemode-proxy-auto",
@@ -2906,12 +3088,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2962,7 +3155,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "privatemode-proxy-pinned",
@@ -2986,12 +3180,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -3042,7 +3247,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "privatemode-proxyless",
@@ -3066,12 +3272,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "gap",
           "reason": "The reviewed documentation describes no client-side attestation for this path; the client does not verify the recipient through the proxy protocol.",
           "label": "No client attestation",
           "evidence": "The reviewed documentation describes no client-side attestation for this path; the client does not verify the recipient through the proxy protocol.",
           "missing": "Establish and test client-side recipient verification for any confidential claim; provider-side checks alone are a different trust model.",
+          "limitation": "reviewed_system",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "gap",
+          "reason": "The reviewed documentation describes no client-side attestation for this path; the client binds no reply key to an attested workload.",
+          "label": "No client attestation",
+          "evidence": "The reviewed documentation describes no client-side attestation for this path; the client binds no reply key to an attested workload.",
+          "missing": "Establish and test client-side reply-key binding and freshness for any confidential claim; provider-side checks alone are a different trust model.",
           "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -3122,7 +3339,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     },
     {
       "id": "confidential-ai-api",
@@ -3146,12 +3364,23 @@
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
         },
-        "session": {
+        "recipient": {
           "state": "unknown",
           "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our session test to do",
+          "label": "Our recipient test to do",
           "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify a harmless actual prompt/reply exchange and reject substituted recipient/reply keys, stale evidence and replay before protected data is released.",
+          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "limitation": "evidence",
+          "issue_urls": [
+            "https://github.com/amiller/awesome-private-inference/issues/30"
+          ]
+        },
+        "reply": {
+          "state": "unknown",
+          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "label": "Our reply test to do",
+          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "missing": "Verify that the reply key is bound to the same attested workload; reject a substituted reply key, stale evidence and replay before the reply is disclosed.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -3202,7 +3431,8 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)"
+      "reviewer": "codex-source-review (not independent audit approval)",
+      "assessed": false
     }
   ]
 }

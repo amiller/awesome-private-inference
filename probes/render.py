@@ -195,7 +195,7 @@ def _render(snapshot: dict) -> None:
     ctx["history"] = build_reference_history(REPO_ROOT)
     (DOCS_DIR / "reference-values.json").write_text(
         json.dumps(reference_export(ctx["history"]), indent=2, sort_keys=True) + "\n")
-    assessment_data = _load_optional(REPO_ROOT / "data/assessments/routes.json", {"rubric_version": 2, "routes": []})
+    assessment_data = _load_optional(REPO_ROOT / "data/assessments/routes.json", {"rubric_version": 3, "routes": []})
     ctx["assessment_groups"] = build_assessments(assessment_data, cards, ctx["history"], ctx["generated_at"])
     ctx["assessment_axes"] = AXES
     ctx["assessment_states"] = STATES

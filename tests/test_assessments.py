@@ -9,7 +9,7 @@ from probes.assessments import AXES, build, collection, rollup, validate
 
 
 def definition(route='one', state='unknown'):
-    return {'id': route, 'label': route, 'reviewed_at': '2026-10-14',
+    return {'id': route, 'label': route, 'reviewed_at': '2026-10-14', 'assessed': True,
             'source_revision': 'a' * 40, 'sources': ['providers/example.md'], 'reviewer': 'test source review',
             'axes': {a: {'state': state, 'reason': 'Specific scoped evidence or absence.', 'label': 'Our test pending', 'evidence': 'Retained source review only.', 'missing': 'Retain scoped positive and negative tests.', 'limitation': 'evidence', 'issue_urls': ['https://github.com/amiller/awesome-private-inference/issues/30']} for a in AXES}}
 
@@ -20,7 +20,7 @@ def card(route='one'):
 
 
 def data(*routes):
-    return {'rubric_version': 2, 'routes': list(routes), 'reference_baselines': {}}
+    return {'rubric_version': 3, 'routes': list(routes), 'reference_baselines': {}}
 
 
 def test_group_never_selects_best_route_or_drops_unknown():
@@ -28,7 +28,7 @@ def test_group_never_selects_best_route_or_drops_unknown():
     assert rollup([{'state': 'established'}, {'state': 'unknown'}]) == 'varies'
     assert rollup([{'state': 'unknown'}, {'state': 'unknown'}]) == 'unknown'
     groups = build(data(definition('one','gap'),definition('two','partial')), [card(),card('two')], {}, '2026-10-14T02:00:00Z')
-    assert groups[0]['axes']['session']['state'] == 'varies'
+    assert groups[0]['axes']['reply']['state'] == 'varies'
     assert groups[0]['collection'] == '1/1 returned'  # aliases are deduplicated
     assert len(groups[0]['routes']) == 2
 
@@ -69,7 +69,7 @@ def test_established_requires_explicit_proof_records():
     with pytest.raises(ValueError, match='proof records'):
         validate(data(definition(state='established')))
     r=definition();del r['axes']['hardware']
-    with pytest.raises(ValueError,match='all six'):
+    with pytest.raises(ValueError,match='all assessment axes'):
         validate(data(r))
 
 
@@ -82,8 +82,15 @@ def test_reviewed_routes_have_exact_sources_and_keep_known_distinctions():
     for r in routes.values():
         for p in r['sources']:
             assert (root/p).is_file()
-    assert routes['near-ai-gateway-e2ee']['axes']['session']['state'] == 'gap'
-    assert routes['near-ai-direct']['axes']['session']['state'] == 'unknown'
+    assert all(set(r['axes']) == set(AXES) and 'session' not in r['axes'] for r in routes.values())
+    assert routes['near-ai-gateway-e2ee']['axes']['reply']['state'] == 'gap'
+    assert routes['near-ai-gateway-e2ee']['axes']['recipient']['state'] == 'unknown'
+    assert routes['private-inference-private']['axes']['reply']['limitation'] == 'reviewed_system'
+    assert routes['tinfoil-router']['axes']['recipient']['state'] == 'partial'
+    assert routes['near-ai-direct']['axes']['reply']['state'] == 'unknown'
+    assert {r for r in routes if not routes[r]['assessed']} == {
+        'maple-tinfoil', 'maple-privatemode', 'privatemode-proxy-auto', 'privatemode-proxy-pinned', 'privatemode-proxyless',
+        'private-inference-standard', 'private-inference-zdr', 'private-inference-private', 'confidential-ai-api'}
     assert routes['tinfoil-router']['axes']['hardware']['state'] == 'unknown'
     assert routes['privatemode-proxy-auto']['axes']['updates']['state'] != routes['privatemode-proxy-pinned']['axes']['updates']['state']
 
@@ -147,3 +154,16 @@ def test_companion_lessons_pin_primary_evidence_and_name_real_routes():
     invalid['studies'][0]['route_ids'] = ['unreviewed-route']
     with pytest.raises(ValueError, match='outside'):
         validate_audit_synthesis(invalid, cards)
+
+
+def test_assessed_flag_is_required_and_counts_findings():
+    r = definition()
+    del r['assessed']
+    with pytest.raises(KeyError):
+        validate(data(r))
+    r = definition(state='gap')
+    r['assessed'] = False
+    r['axes']['reply']['limitation'] = 'reviewed_system'
+    r['axes']['code']['limitation'] = 'reviewed_system'
+    group = build(data(r), [card()], {}, '2026-10-14T02:00:00Z')[0]
+    assert not group['assessed'] and group['findings'] == 2 and group['routes'][0]['findings'] == 2

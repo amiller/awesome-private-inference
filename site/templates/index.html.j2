@@ -4,6 +4,7 @@
 {% block content %}
 {% include "_assessment_style.html.j2" %}
 {% macro badge(cell, href, title) %}<a class="signal {{ cell.state }}" href="{{ href }}" title="{{ title }}">{{ cell.label }}</a>{% endmacro %}
+{% macro unassessed(item, href) %}<td colspan="{{ assessment_axes|length }}" class="unassessed"><a href="{{ href }}">Not assessed — dated source review only ({{ item.reviewed_at }})</a>{% if item.findings %} · {{ item.findings }} {{ 'finding' if item.findings == 1 else 'findings' }}{% endif %}</td>{% endmacro %}
 <section class="mb-4">
   <h1 class="text-2xl font-bold tracking-tight">Comparison</h1>
   <p class="mt-1 text-sm text-slate-600">Who can read your prompts and replies, and what does the client verify? Compare the evidence and unfinished checks for each request path.</p>
@@ -22,7 +23,7 @@
   <tbody data-provider="{{ group.id }}">
     <tr class="provider-row">
       <td><button type="button" class="provider-toggle" aria-expanded="false" aria-controls="routes-{{ group.id }}"><span class="chevron" aria-hidden="true">›</span>{{ group.name }}</button> <span class="provider-meta">{{ group.routes|length }} {{ 'path' if group.routes|length == 1 else 'paths' }}</span></td>
-      {% for key, cell in group.axes.items() %}<td>{{ badge(cell, './assessments.html#provider-' ~ group.id ~ '-' ~ key, group.name ~ ': ' ~ cell.label ~ '. Open path-specific evidence, missing proof and tasks.') }}</td>{% endfor %}
+      {% if group.assessed %}{% for key, cell in group.axes.items() %}<td>{{ badge(cell, './assessments.html#provider-' ~ group.id ~ '-' ~ key, group.name ~ ': ' ~ cell.label ~ '. Open path-specific evidence, missing proof and tasks.') }}</td>{% endfor %}{% else %}{{ unassessed(group, './assessments.html#provider-' ~ group.id) }}{% endif %}
       <td class="collection" title="{{ group.observations|length }} distinct model/endpoint observations. Collection status is separate from proof or audit status.">{{ group.collection }}</td>
       <td><a class="history-link" href="{{ group.history_url }}">{{ group.last_new[5:10] if group.last_new else ('Baseline' if group.baseline_only else 'No history') }}</a>{% if group.changed_surfaces %}<span class="needs-review">{{ group.changed_surfaces }} changed since review</span>{% endif %}{% if group.missing_surfaces %}<span class="needs-review">Coverage missing</span>{% endif %}</td>
       <td><a class="detail-link" href="./assessments.html#provider-{{ group.id }}">{{ group.reviewed_at[5:] if group.reviewed_at != 'Unreviewed' else 'Unreviewed' }}</a></td>
@@ -31,14 +32,14 @@
   <tbody id="routes-{{ group.id }}" data-provider="{{ group.id }}" class="route-body" hidden>
     {% for route in group.routes %}<tr class="route-row">
       <td><a href="./assessments.html#route-{{ route.id }}" class="detail-link" title="{{ route.architecture|default(route.protocol) }}">{{ route.label }}</a></td>
-      {% for key, cell in route.axes.items() %}<td>{{ badge(cell, './assessments.html#' ~ route.id ~ '-' ~ key, assessment_limitations[cell.limitation] ~ ': ' ~ cell.evidence ~ ' Next: ' ~ cell.missing) }}</td>{% endfor %}
+      {% if route.assessed %}{% for key in assessment_axes %}{% set cell = route.axes[key] %}<td>{{ badge(cell, './assessments.html#' ~ route.id ~ '-' ~ key, assessment_limitations[cell.limitation] ~ ': ' ~ cell.evidence ~ ' Next: ' ~ cell.missing) }}</td>{% endfor %}{% else %}{{ unassessed(route, './assessments.html#route-' ~ route.id) }}{% endif %}
       <td class="collection">{{ route.collection }}</td><td colspan="2"><a class="detail-link" href="./evidence.html#route-{{ route.id }}">Source &amp; probe details</a></td>
     </tr>{% endfor %}
   </tbody>
   {% endfor %}
 </table>
 </div>
-<p class="mt-3 text-xs text-slate-500">{{ assessment_groups|length }} providers · {{ route_cards|length }} paths · Dates refer to source review. Cells name documented system findings or work still missing in our method. Select one for evidence, limits and a linked task. Collection counts do not measure privacy.</p>
+<p class="mt-3 text-xs text-slate-500">“Not assessed” paths have no automated adapter here; their dated source review, including any findings, is on the assessments page. {{ assessment_groups|length }} providers · {{ route_cards|length }} paths · Dates refer to source review. Cells name documented system findings or work still missing in our method. Select one for evidence, limits and a linked task. Collection counts do not measure privacy.</p>
 <p class="mt-2 text-xs text-slate-500">Reference dates are provider-wide first sightings of new sets. Later reference differences flag review work; they never authorize a new value. <a href="./history.html" class="text-indigo-700 underline">Explore reference history →</a></p>
 <p class="mt-3 text-sm"><a href="./measurements.html" class="text-indigo-700 underline">All {{ rows|length }} model / endpoint measurements →</a></p>
 {% include "_comparison_explainers.html.j2" %}
