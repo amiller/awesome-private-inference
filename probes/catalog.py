@@ -12,7 +12,12 @@ MODELS: dict[str, list[str]] = {
         "inference.phala.com",
         "api.redpill.ai",
     ],
-    "near-ai": [],
+    # 2026-11-15: both previous rows retired (see RETIRED). These are the two
+    # models teep verified end to end on neardirect/nearcloud that day.
+    "near-ai": [
+        "z-ai/glm-5.3-flash",
+        "Qwen/Qwen3.8-27B",
+    ],
     # Refreshed 2026-08-18: Venice renamed its whole e2ee line, so the old ids
     # 404'd or returned an unusable body. Every id here answered /tee/attestation
     # with 200 on that date.
