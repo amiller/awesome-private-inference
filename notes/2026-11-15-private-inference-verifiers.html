@@ -45,9 +45,41 @@ tr:last-child td, tr:last-child th { border-bottom: 0; }
 <div class="wrap">
   <header class="prose">
     <h1>Private inference verifiers</h1>
-    <p>Every client we could find that checks TEE attestation for private inference, compared across seven providers and their own services. Each was read from source at a pinned commit on 2026-11-15; live runs are noted where they happened.</p>
-    <p>A verifying client has to establish four things before it sends a prompt. The hardware is genuine and current. The code that will read the prompt is known, and changes to it are public. The prompt is encrypted to a key that the attested code holds. And the request is refused if any of these fails. Every provider places the code that reads the prompt somewhere different, so the hard part differs by provider.</p>
+    <p>A private inference provider runs the model inside a TEE and publishes an attestation: a signed statement from the hardware about what code is running. The attestation protects nobody by itself. Someone has to fetch it, check it, and refuse to send the prompt if it doesn't check out. That someone is the client. This page compares every client we could find that does this, read from source at pinned commits on 2026-11-15.</p>
   </header>
+
+  <section class="prose">
+    <h2>What a client has to check</h2>
+    <p>Start with the naive version. The client asks the provider for an attestation, sees a valid Intel or AMD signature, shows a green badge, and sends the prompt over HTTPS. That proves a genuine TEE exists somewhere. It doesn't prove the prompt goes to it, that the code inside is the code anyone reviewed, or that the reply came back from it.</p>
+    <p>Closing those gaps takes four checks, all before the prompt leaves:</p>
+    <ol class="chain">
+      <li><strong>Hardware.</strong> The quote is signed by the vendor, the firmware is current, debug is off, the GPU evidence verifies, and the client's own nonce is in it.</li>
+      <li><strong>Code.</strong> The measurement covers the code that will read the prompt, and changes to that code are public. This is the hard one, because each provider puts that code somewhere different.</li>
+      <li><strong>Recipient.</strong> The prompt is encrypted to a key that only the attested code holds, so whatever sits in between can't read it.</li>
+      <li><strong>Refusal.</strong> If any of these fails, nothing is sent. A warning that's logged while the prompt goes out anyway doesn't count.</li>
+    </ol>
+  </section>
+
+  <section class="prose">
+    <h2>Three kinds of client</h2>
+    <ul>
+      <li><strong>Direct clients</strong> talk to the provider themselves: teep, the Tinfoil SDKs, the Venice proxies, pi-tee, the provider's own apps. Their quality varies mostly by how far down the four checks they get.</li>
+      <li><strong>Relays and markets</strong> put their own TEE in the middle: AntSeed, BitRouter's auctions, AnonRouter, Routstr, the Axiom gateway, private-ai-gateway. Most of them attest their own hop well and the upstream poorly, so the buyer ends up trusting the relay to have checked the model.</li>
+      <li><strong>Apps</strong> embed a verifier in a product: a phone app, a browser page, a hackathon project. Many of these were written in the last week, independently, and few cite the earlier work.</li>
+    </ul>
+  </section>
+
+  <section class="prose">
+    <h2>What we found</h2>
+    <ul>
+      <li>No client reaches the serving code and blocks on every provider, and on no provider does any client do both. Every cell in the table is partial or weak.</li>
+      <li>The same bug keeps reappearing: replaying a TEE event log from its stored digests and then trusting the values next to them, which lets those values be swapped. Some projects fixed it independently; others copied it.</li>
+      <li>Relays usually attest themselves, not the model. AntSeed checks its own relay strictly (pinned measurements, a whitelisted compose, a signed image), and the relay then forwards the prompt to any upstream URL its operator chooses.</li>
+      <li>Defaults fail open. Many clients warn and send, or show a green badge that comes from matching strings in a JSON document.</li>
+      <li>Reply authenticity is rare. NEAR's E2EE v3 binds the reply key; one client found sends it.</li>
+    </ul>
+    <p>The table below has one row per client and one column per provider. Each cell gives a grade and a one-line reason; the review behind each row, with file:line citations, is in the repository.</p>
+  </section>
 
   <section style="display:grid;gap:12px">
     <h2>Who checks what</h2>
