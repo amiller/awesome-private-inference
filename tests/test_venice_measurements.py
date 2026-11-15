@@ -163,3 +163,75 @@ def test_legacy_shape_reports_layers_unproven(monkeypatch):
     assert sc.tee_boot_config is None and sc.tee_hardware_config is None
     assert sc.tee_debug_disabled is True  # the quote itself still carries the bit
     assert sc.tcb_current is True
+
+
+def test_live_capture_binds_gateway_keyset_but_is_not_valid(monkeypatch):
+    report = _verify(monkeypatch, _capture())
+    sc = report.scorecard
+    assert sc.nonce_bound is True
+    assert sc.report_data_binds_key is True
+    assert sc.key_derives_to_address is True
+    assert all(report.details["keyset_binding"].values())
+    assert sc.gpu_attested is None
+    assert report.details["gpu_evidence_omitted"] is True
+    assert report.details["downstream_tls_binding"]["domain"] == "api.redpill.ai"
+    assert report.valid is False
+    assert report.error is None
+    assert report.details["rejection_reason"] == venice.GATEWAY_ONLY
+
+
+@pytest.mark.parametrize("serving", [None, "model"])
+def test_unattested_serving_field_cannot_make_gateway_valid(monkeypatch, serving):
+    att = json.loads(json.dumps(_capture()))
+    att["service_capabilities"]["serving"] = serving
+    assert _verify(monkeypatch, att).valid is False
+
+
+def _mutate(path_fn):
+    att = json.loads(json.dumps(_capture()))
+    path_fn(att)
+    return att
+
+
+@pytest.mark.parametrize("mutation,check", [
+    (lambda a: a["attestation"]["workload_keyset"]["e2ee_public_keys"][0].update(
+        public_key="04" + "11" * 64), "keyset_digest_recomputes"),
+    (lambda a: a.update(workload_keyset_digest="sha256:" + "00" * 32), "keyset_digest_recomputes"),
+    (lambda a: a["attestation"]["workload_keyset"].update(e2ee_public_keys=[]), "signing_key_in_keyset"),
+    (lambda a: a["attestation"].update(report_data="0x" + "00" * 64), "report_data_echo_matches_quote"),
+])
+def test_keyset_binding_tamper_fails_report_data_binding(monkeypatch, mutation, check):
+    report = _verify(monkeypatch, _mutate(mutation))
+    assert report.details["keyset_binding"][check] is False
+    assert report.scorecard.report_data_binds_key is False
+
+
+def test_nonce_echo_mismatch_fails_nonce_binding(monkeypatch):
+    report = _verify(monkeypatch, _mutate(lambda a: a.update(nonce="ff" * 32)))
+    assert report.scorecard.nonce_bound is False
+
+
+def test_malformed_signing_key_fails_closed(monkeypatch):
+    report = _verify(monkeypatch, _mutate(lambda a: a.update(signing_public_key="04abcd")))
+    assert report.scorecard.key_derives_to_address is False
+    assert "unexpected pubkey length" in report.details["key_derivation_error"]
+
+
+def test_unknown_api_version_fails_closed(monkeypatch):
+    report = _verify(monkeypatch, _mutate(lambda a: a.update(api_version="aci/2")))
+    assert report.error == "unsupported attestation api_version: 'aci/2'"
+    assert report.valid is False
+
+
+def test_aci1_without_evidence_raises(monkeypatch):
+    with pytest.raises(KeyError, match="evidence"):
+        _verify(monkeypatch, _mutate(lambda a: a["attestation"].pop("evidence")))
+
+
+def test_404_reports_no_attestation(monkeypatch):
+    class Resp:
+        status_code = 404
+    monkeypatch.setattr(venice.requests, "get", lambda *a, **k: Resp())
+    report = venice.verify("key", venice.DEFAULT_BASE_URL, "e2ee-gemma-4-31b")
+    assert report.error == "no TEE attestation available for this model (404)"
+    assert report.valid is False

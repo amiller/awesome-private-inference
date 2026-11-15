@@ -5,7 +5,12 @@ Venice's /api/v1/tee/attestation serves two shapes:
   legacy: quote/intel_quote + tcb_info.app_compose at the top level
   aci/1 (observed live 2026-11-05): an ACI-style document whose
     attestation.evidence carries quote, event_log, vm_config and app_compose,
-    with signing fields and nonce_source at the top level
+    with signing fields and nonce_source at the top level. The attested CVM is
+    the private-ai-gateway (serving=aggregator, num_gpus=0, a downstream TLS
+    pin), so aci/1 rows are never valid: the gateway does not cover the model
+    host. The keyset digest, the signing key's membership in it and the
+    report_data echo are still checked so the gateway layer reads correctly.
+  any other api_version fails closed.
 
 We re-run TDX against Phala's verifier (not Venice's server_verification) to
 avoid trusting Venice's self-report, retain whatever TCB verdict that verifier
@@ -33,14 +38,10 @@ from .common import (
     phala_report_data_binds_addr_nonce,
     sha256_hex,
 )
-from . import dstack_tdx, dstack_boot_registers, nvidia_nras, phala_tdx
+from . import aci, dstack_tdx, dstack_boot_registers, nvidia_nras, phala_tdx
 
 DEFAULT_BASE_URL = "https://api.venice.ai/api/v1"
-
-
-def _aci1_evidence(att: Dict) -> Dict | None:
-    evidence = (att.get("attestation") or {}).get("evidence")
-    return evidence if isinstance(evidence, dict) and evidence.get("quote") else None
+GATEWAY_ONLY = "gateway attestation does not cover the model host"
 
 
 def _measurement_view(evidence: Dict, quote_hex: str) -> Dict[str, Any]:
@@ -91,6 +92,10 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         return _fail(f"HTTP {resp.status_code}: {resp.text[:200]}")
 
     att = resp.json()
+    api_version = att.get("api_version")
+    if api_version not in (None, "aci/1"):
+        return _fail(f"unsupported attestation api_version: {api_version!r}")
+    aci1 = api_version == "aci/1"
     sc = ScoreCard(backend_attested=False)  # Venice sits downstream of Phala/NEAR
     details: Dict[str, Any] = {
         "tee_provider": att.get("tee_provider"),
@@ -99,17 +104,17 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         "candidates_available": att.get("candidates_available"),
         "candidates_evaluated": att.get("candidates_evaluated"),
         "model_name": att.get("model_name"),
-        "api_version": att.get("api_version"),
+        "api_version": api_version,
+        "upstream_model": att.get("upstream_model"),
+        "serving": (att.get("service_capabilities") or {}).get("serving"),
+        "gpu_evidence_omitted": att.get("gpu_evidence_omitted"),
     }
-
-    # Nonce binding — Venice reports nonce_source == "client" when we sent one.
-    sc.nonce_bound = att.get("nonce_source") == "client"
 
     quote_hex = att.get("intel_quote") or att.get("quote") or ""
     if isinstance(quote_hex, dict):
         quote_hex = quote_hex.get("hex") or quote_hex.get("intel_quote") or ""
-    evidence = _aci1_evidence(att)
-    if evidence is not None:
+    if aci1:
+        evidence = att["attestation"]["evidence"]
         # the evidence copy is the one bound to the event log; a top-level
         # duplicate that disagrees with it is a rejection, not a tiebreak
         duplicate = att.get("intel_quote") or att.get("quote")
@@ -122,6 +127,9 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     tdx = phala_tdx.verify_tdx_quote(quote_hex)
     sc.tdx_verified = phala_tdx.is_verified(tdx)
     body = phala_tdx.quote_body(tdx)
+    reportdata = body.get("reportdata", "").removeprefix("0x").lower()
+    sc.nonce_bound = (att.get("nonce_source") == "client" and reportdata[64:128] == nonce
+                      and (not aci1 or att["nonce"] == nonce))
     details["phala_tcb_status"] = (tdx.get("quote") or {}).get("tcb_status")
 
     dcap = dstack_tdx.dcap_verify(quote_hex)
@@ -129,7 +137,6 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     sc.tcb_current = dcap.status in dstack_tdx.TCB_CURRENT_STATUSES
     sc.tee_debug_disabled = dstack_tdx.quote_debug_disabled(quote_hex)
 
-    aci1 = evidence is not None
     if aci1:
         try:
             measurements = _measurement_view(evidence, quote_hex)
@@ -149,17 +156,28 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     signing_addr = att.get("signing_address", "")
     spk = att.get("signing_public_key", "")
 
-    sc.report_data_binds_key = phala_report_data_binds_addr_nonce(
-        body.get("reportdata", ""), signing_addr, nonce,
-    )
+    sc.report_data_binds_key = phala_report_data_binds_addr_nonce(reportdata, signing_addr, nonce)
+    if aci1:
+        block = att["attestation"]
+        keyset = block["workload_keyset"]
+        binding = {
+            "keyset_digest_recomputes":
+                att["workload_keyset_digest"] == "sha256:" + sha256_hex(aci._jcs(keyset)),
+            "signing_key_in_keyset": spk in [k["public_key"] for k in keyset["e2ee_public_keys"]],
+            "report_data_echo_matches_quote":
+                block["report_data"].removeprefix("0x").lower() == reportdata,
+        }
+        details["keyset_binding"] = binding
+        details["downstream_tls_binding"] = evidence.get("downstream_tls_binding")
+        details["source_repo"] = (block.get("source_provenance") or {}).get("repo_url")
+        sc.report_data_binds_key = sc.report_data_binds_key and all(binding.values())
 
     if spk and signing_addr:
         try:
-            sc.key_derives_to_address = (
-                keccak_eth_address(spk).lower() == signing_addr.lower()
-            )
-        except Exception:
+            sc.key_derives_to_address = keccak_eth_address(spk).lower() == signing_addr.lower()
+        except ValueError as exc:
             sc.key_derives_to_address = False
+            details["key_derivation_error"] = str(exc)
 
     # compose hash
     if aci1 and measurements["ok"]:
@@ -172,10 +190,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     else:
         tcb_info = att.get("tcb_info") or (att.get("info") or {}).get("tcb_info") or {}
         if isinstance(tcb_info, str):
-            try:
-                tcb_info = json.loads(tcb_info)
-            except Exception:
-                tcb_info = {}
+            tcb_info = json.loads(tcb_info)
         app_compose = tcb_info.get("app_compose")
         mr_config = body.get("mrconfig", "")
         if app_compose and mr_config:
@@ -211,6 +226,11 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     if nvidia_payload:
         required.append(sc.gpu_attested)
     valid = all(required) and sc.tdx_verified is True
+    if aci1:
+        # the only CVM aci/1 attests is the private-ai-gateway, which forwards
+        # to a downstream API; nothing in it is evidence about the model host
+        details["rejection_reason"] = GATEWAY_ONLY
+        valid = False
 
     return AttestationReport(
         provider="venice", model=model, valid=valid,
