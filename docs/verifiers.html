@@ -1,0 +1,1186 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verifiers · Private Inference Beat</title>
+  <meta name="description" content="Private inference reference-value observations and evidence-based route assessments.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .dot { display:inline-block; width:0.5rem; height:0.5rem; border-radius:9999px; margin-right:0.4rem; vertical-align:middle; }
+    .view-tab { display:inline-block; padding:8px 0; border-bottom:2px solid transparent; color:#546779; }
+    .view-tab:hover { color:#172b3c; }
+    .view-tab[aria-current="page"] { color:#4338ca; border-color:#4338ca; font-weight:600; }
+  </style>
+</head>
+<body class="h-full text-slate-900">
+<header class="border-b border-slate-200 bg-white">
+  <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap gap-4 items-center justify-between">
+    <a href="./index.html" class="flex items-baseline gap-2">
+      <span class="text-xl font-bold tracking-tight">Private Inference Beat</span>
+
+    </a>
+    <nav aria-label="Primary" class="text-sm flex gap-6">
+      <a href="./index.html" class="view-tab">Comparison</a>
+      <a href="./history.html" class="view-tab">Reference values</a>
+      <a href="./verifiers.html" class="view-tab" aria-current="page">Verifiers</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 py-8">
+
+<style>
+  .grade { display:inline-block; font:500 11px ui-monospace,monospace; padding:1px 6px; border-radius:4px; margin-bottom:3px; }
+  .grade-serving { background:#dcefe5; color:#1e5a3f; }
+  .grade-partial { background:#f4ead0; color:#6b5210; }
+  .grade-weak { background:#f5dcd8; color:#7d2a20; }
+  .vt th, .vt td { text-align:left; vertical-align:top; padding:9px 10px; border-bottom:1px solid #e2e8f0; }
+  .vt thead th { background:#f1f5f9; font-size:12px; color:#475569; font-weight:600; }
+  .vt td { font-size:12.5px; min-width:150px; }
+  .vt tbody th { font-size:13px; font-weight:600; min-width:170px; }
+  .vt small { display:block; font:400 11px ui-monospace,monospace; color:#64748b; }
+</style>
+
+<h1 class="text-3xl font-bold tracking-tight">Verifiers</h1>
+<p class="mt-3 max-w-3xl text-slate-600">Clients that verify TEE attestation for private inference, reviewed from source at a pinned commit. A cell grades what the client establishes on that provider: &#39;serving&#39; = reaches the code that reads the prompt and blocks before sending; &#39;partial&#39; = checks real evidence but stops short of the serving code or doesn&#39;t block; &#39;weak&#39; = little is authenticated. No cell is &#39;serving&#39; today. Reviewed 2026-11-15; each row links its review with file:line citations.</p>
+<p class="mt-2 max-w-3xl text-sm text-slate-500">Two questions recur in every review: are event-log values hashed before they are trusted (the dstack RTMR3 replay must recompute each digest from its payload), and does a failed check stop the prompt from being sent?</p>
+
+<div class="mt-4 flex flex-wrap gap-4 text-xs text-slate-600">
+  <span><span class="grade grade-serving">serving</span> reaches the serving code, blocks before sending</span>
+  <span><span class="grade grade-partial">partial</span> real evidence, stops short of the serving code or doesn't block</span>
+  <span><span class="grade grade-weak">weak</span> little is authenticated</span>
+  <span>— not supported</span>
+</div>
+
+
+
+
+<section class="mt-8">
+  <h2 class="text-xl font-semibold">Clients and proxies</h2>
+  <div class="mt-3 overflow-x-auto rounded border border-slate-200 bg-white">
+    <table class="vt w-full border-collapse">
+      <thead><tr><th>Client</th>
+        <th>NEAR AI</th><th>Tinfoil</th><th>Phala Cloud (ACI)</th><th>Chutes</th><th>Venice</th><th>NanoGPT</th><th>Privatemode</th><th>Its own service</th>
+        <th>Event log hashed</th><th>Blocks on failure</th></tr></thead>
+      <tbody>
+
+        <tr id="teep">
+          <th><a class="underline" href="https://github.com/13rac1/teep">teep</a>
+            <small>6548996 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-a.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Every instance appraised, E2EE v2 to the attested model key, static compose pin. Deployment log not checked (#166).</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Router only; latest Sigstore release adopted. Direct mode disabled 2026-11-12.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Gateway and sessions pinned; receipt verified after the stream. Upstream workload policy not checked.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>MRTD/MRSEAM pinned; ML-KEM to the instance key. Serving code is outside the measurement.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Legacy dstack E2EE blocks. ACI/1: gateway only, reply forgeable.</td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>E2EE off by default, so NanoGPT reads the prompt.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="pap">
+          <th><a class="underline" href="https://github.com/Dstack-TEE/private-ai-gateway">pap (ACI CLI)</a>
+            <small>e9b6ae8a · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-a.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>TLS pinned to the attested keyset; receipt checked after printing. Key custody only with two flags.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="jooray-venice">
+          <th><a class="underline" href="https://github.com/jooray/venice-e2ee-proxy">jooray venice-e2ee-proxy</a>
+            <small>4b5602ef · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-b.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Refuses GPU models without NVIDIA evidence. If DCAP fails to load it warns and continues. Doesn&#39;t parse ACI/1.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="axlabs-venice">
+          <th><a class="underline" href="https://github.com/AxLabs/venice-e2ee-proxy">AxLabs venice-e2ee-proxy</a>
+            <small>70ef39f6 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-b.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Trusts Venice&#39;s own GPU verdict; missing GPU evidence only logs a warning.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="clawdbotatg-venice">
+          <th><a class="underline" href="https://github.com/clawdbotatg/venice-e2ee-proxy">clawdbotatg venice-e2ee-proxy</a>
+            <small>4311d554 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-j-venice-teemoon.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Trusts Venice&#39;s verified flag (attestation.ts:66); passes plaintext replies and empties chunks that fail to decrypt.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="m0dex-venice">
+          <th><a class="underline" href="https://github.com/M0dEx/venice-e2ee-proxy">M0dEx venice-e2ee-proxy</a>
+            <small>0999259d · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-j-venice-teemoon.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>No DCAP or NVIDIA check linked; nonce checked in JSON only; Venice&#39;s verified flag is the real gate.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="privatemode-proxy">
+          <th><a class="underline" href="https://github.com/edgelesssys/privatemode-public">Privatemode proxy</a>
+            <small>3c98e0ab · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-b.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Default manifest comes from a CDN, unsigned and auto-adopted; pin it with --manifest-path.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="hermes">
+          <th><a class="underline" href="https://github.com/amiller/hermes-agent/tree/feat/near-ai-attestation">hermes-agent (unmaintained)</a>
+            <small>1f92ab10 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-b.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Checks the deployment log&#39;s quote but never hashes the list. E2EE v1; sends without E2EE unless strict.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>no</td>
+          <td>no</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+<section class="mt-8">
+  <h2 class="text-xl font-semibold">Libraries and SDKs</h2>
+  <div class="mt-3 overflow-x-auto rounded border border-slate-200 bg-white">
+    <table class="vt w-full border-collapse">
+      <thead><tr><th>Client</th>
+        <th>NEAR AI</th><th>Tinfoil</th><th>Phala Cloud (ACI)</th><th>Chutes</th><th>Venice</th><th>NanoGPT</th><th>Privatemode</th><th>Its own service</th>
+        <th>Event log hashed</th><th>Blocks on failure</th></tr></thead>
+      <tbody>
+
+        <tr id="verifier-ts">
+          <th><a class="underline" href="https://github.com/Dstack-TEE/private-ai-gateway/tree/main/clients/verifier-ts">private-ai-gateway verifier-ts</a>
+            <small>e9b6ae8a · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/notes/2026-11-15-client-comparison.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Replays RTMR3 from stored digests, then trusts the compose-hash payload unhashed (report.ts:173-182). Vendored by abalone.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>no</td>
+          <td>n/a</td>
+        </tr>
+
+        <tr id="tinfoil-sdk">
+          <th><a class="underline" href="https://github.com/tinfoilsh/tinfoil-go">tinfoil-go / tinfoil-python</a>
+            <small>99112212 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-b.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Local AMD chain, client nonce, SPKI pin, 7-day freshness. Router route covers the router, not the model enclave; adopts any release Tinfoil signs.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="elkimek-venice">
+          <th><a class="underline" href="https://github.com/elkimek/venice-e2ee">elkimek venice-e2ee</a>
+            <small>d8e37d15 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-j-venice-teemoon.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>By default the quote isn&#39;t authenticated: DCAP and NVIDIA checks are opt-in. Strong when the caller enables them. ACI/1 receipt verifier unused.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>n/a</td>
+        </tr>
+
+        <tr id="nearai-cloud-verifier">
+          <th><a class="underline" href="https://github.com/nearai/nearai-cloud-verifier">nearai-cloud-verifier</a>
+            <small>94554726 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-b.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Demo CLI that prints booleans and never refuses. Its E2EE example encrypts to a key fetched with no nonce or quote check.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="adverserial">
+          <th><a class="underline" href="https://github.com/AdverserialAI/confidential-policy">Adverserial confidential-sdk and policy</a>
+            <small>26fb9a5d · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-k-other.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Live policy pins MRTD/RTMR0-2/compose, but is served unsigned, kept out of Git and adopted immediately.</td>
+
+          <td>yes</td>
+          <td>n/a</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+<section class="mt-8">
+  <h2 class="text-xl font-semibold">Gateways, routers and markets</h2>
+  <div class="mt-3 overflow-x-auto rounded border border-slate-200 bg-white">
+    <table class="vt w-full border-collapse">
+      <thead><tr><th>Client</th>
+        <th>NEAR AI</th><th>Tinfoil</th><th>Phala Cloud (ACI)</th><th>Chutes</th><th>Venice</th><th>NanoGPT</th><th>Privatemode</th><th>Its own service</th>
+        <th>Event log hashed</th><th>Blocks on failure</th></tr></thead>
+      <tbody>
+
+        <tr id="private-ai-gateway">
+          <th><a class="underline" href="https://github.com/Dstack-TEE/private-ai-gateway">private-ai-gateway (as a client of its upstreams)</a>
+            <small>e9b6ae8a · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-a.md">review</a></small>
+            <small>Blocks only requests marked required; otherwise forwards and records the failure in the receipt.</small></th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>NEAR&#39;s gateway quote and TLS key only; model attestations not fetched; any dstack CVM passes.</td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Router via Tinfoil&#39;s Python SDK, no nonce, one session cached for an hour.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Is the ACI gateway; signs receipts naming its upstream sessions.</td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Measurement profiles fetched live from Chutes, unauthenticated.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Delegated to Privatemode&#39;s own proxy.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>yes</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="bitrouter-attestation">
+          <th><a class="underline" href="https://github.com/bitrouter/bitrouter/tree/f8763b1/plugins/bitrouter-attestation">BitRouter attestation plugin (removed)</a>
+            <small>f8763b1 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-d-bitrouter.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Removed in #701, never wired into requests. Pins read from unhashed event-log values; no key binding.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>no</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="bitrouter-auctions">
+          <th><a class="underline" href="https://github.com/SPIKESPIGEL404/private-flex-inference-auctions">BitRouter inference auctions</a>
+            <small>583ccd9c · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-f-bitrouter-auctions.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Wraps NEAR&#39;s SDK with no measurement pins; the 2026-11-11 run used plain HTTPS.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Their own Chutes TEE, checked per request by the Market (all RTMRs, NVIDIA, ML-KEM); the buyer never sees it.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Buyer pins the Market&#39;s MRTD/RTMR0-2, compose and nonce, TLS pinned. The Market sees prompts. Verify command skips event-log hashing.</td>
+
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="antseed">
+          <th><a class="underline" href="https://github.com/Antseed/antseed">AntSeed</a>
+            <small>cda310ed · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-g-antseed.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Strict check of its own relay (MRTD/RTMR0-2, compose whitelist, Sigstore image, channel-bound quote), but the relay forwards plaintext to any upstream URL. Fail-open by default.</td>
+
+          <td>yes</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="anonrouter">
+          <th><a class="underline" href="https://github.com/anonrouter/anonrouter-sdk">AnonRouter SDK</a>
+            <small>39e416b6 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-h-routers.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Provider quote and NVIDIA signatures not checked; evidence arrives through AnonRouter&#39;s relay.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Official SDK plus pinned TLS; router only; latest release; prompt passes through AnonRouter&#39;s relay.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Quote signature not checked; allowlist adopted from Chutes&#39;s list.</td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Quote parsed, signature not checked; relay-fetched evidence.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Own relay checked well (DCAP UpToDate, event digests recomputed, TLS on the content socket), but off by default in chat().</td>
+
+          <td>yes</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="alien-fleet">
+          <th><a class="underline" href="https://github.com/alien-id/alien-compute">Alien Fleet</a>
+            <small>6a6be6f8 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-h-routers.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>No TEE: consumer GPUs whose operators see plaintext. Node keys come from the gateway over plain HTTP, unauthenticated.</td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="axiom">
+          <th><a class="underline" href="https://github.com/astrea-foundation/axiom-web-gateway">Axiom web gateway (Astrea)</a>
+            <small>1b535ed8 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-h-routers.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>NVIDIA signature and signed completion receipt checked; code identity only mr_config_id = manifest hash; no debug check.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Via tinfoil-rs; router only; latest release; no client nonce.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Browser verifies the gateway (a Tinfoil container) with tinfoil-go; the gateway verifies upstreams the browser doesn&#39;t re-check.</td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+<section class="mt-8">
+  <h2 class="text-xl font-semibold">Apps</h2>
+  <div class="mt-3 overflow-x-auto rounded border border-slate-200 bg-white">
+    <table class="vt w-full border-collapse">
+      <thead><tr><th>Client</th>
+        <th>NEAR AI</th><th>Tinfoil</th><th>Phala Cloud (ACI)</th><th>Chutes</th><th>Venice</th><th>NanoGPT</th><th>Privatemode</th><th>Its own service</th>
+        <th>Event log hashed</th><th>Blocks on failure</th></tr></thead>
+      <tbody>
+
+        <tr id="teemoon">
+          <th><a class="underline" href="https://github.com/teemoonai/teemoon-android">teemoon (Android, iOS)</a>
+            <small>63cef559 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-j-venice-teemoon.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>On-device DCAP, NVIDIA token signature, E2EE v2. Only the first instance; OutOfDate accepted; deployment list unhashed.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="abalone">
+          <th>abalone
+            <small>53655796 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-c-abalone.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>TCB policy warns and sends; NVIDIA check skipped on outage; E2EE v1; event-log values unhashed.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Vendored verifier-ts; no custody, no session pins; receipt check only in tests.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>no</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="tee-proof-demo">
+          <th><a class="underline" href="https://github.com/ethanolivertroy/tee-proof-demo">tee-proof-demo</a>
+            <small>5226ef12 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-k-other.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Browser checks quote, TCB, 8-GPU NVIDIA, exact RTMRs, and the reply signature. Reply key unbound (v2); the relay serves the verifier JS.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>RTMR3 replay, source commit, KMS custody; receipt checked before display. Upstream session audited only after sending.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="near-ai-gateway">
+          <th><a class="underline" href="https://github.com/TraceCommons/trace-commons">NEAR AI Gateway / IronWire</a>
+            <small>df2e821 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-e-ironwire.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Plain HTTPS to NEAR&#39;s API. Checks each reply&#39;s receipt after delivery, for trace provenance. Pins only in a staging build.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>no</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="near-private-triage">
+          <th><a class="underline" href="https://github.com/mickeyjoes/near-private-triage">near-private-triage</a>
+            <small>01fcfe33 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-l-near-hackathon.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Best of the hackathon apps: UpToDate only, every instance verified, MRTD/RTMR1-2/app-id/KMS pinned from captures, runs on localhost.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="sealed-review">
+          <th><a class="underline" href="https://github.com/greenlima/sealed-review">sealed-review</a>
+            <small>33f0ff35 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-l-near-hackathon.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Recomputes MRTD/RTMR0-2 from NEAR&#39;s published OS image; refuses machines nobody reviewed; E2EE v2.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="private-dna-reading">
+          <th><a class="underline" href="https://github.com/indaga-ai/private-dna-reading">private-dna-reading (indaga)</a>
+            <small>905216b9 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-l-near-hackathon.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Browser app; the only client found that sends E2EE v3. First instance only; accepts OutOfDate; trusts a stored event digest (event-log.mjs:15).</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>no</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="symbolon">
+          <th><a class="underline" href="https://github.com/0d1026/Symbolon">Symbolon</a>
+            <small>c1baaead · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-l-near-hackathon.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Quote verified on-chain by NEAR One&#39;s TDX verifier contract; gates payment only, after the prompt has been sent.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="nexora">
+          <th><a class="underline" href="https://github.com/Ved-Malkunaik/NEXORA">NEXORA</a>
+            <small>17601fad · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-l-near-hackathon.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Trusts Phala&#39;s remote quote.verified with no TCB check; NVIDIA token unsigned; first instance only; remote check can be switched off.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="antrepreneur">
+          <th><a class="underline" href="https://github.com/agarwal-tanmay-work/antrepreneur">antrepreneur</a>
+            <small>a751a6c7 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-l-near-hackathon.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>No quote signature check; report_data matched with includes() (tee.js:66-67); NVIDIA token unsigned; sends regardless. Copies near-examples&#39; gaps.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+<section class="mt-8">
+  <h2 class="text-xl font-semibold">Monitors</h2>
+  <div class="mt-3 overflow-x-auto rounded border border-slate-200 bg-white">
+    <table class="vt w-full border-collapse">
+      <thead><tr><th>Client</th>
+        <th>NEAR AI</th><th>Tinfoil</th><th>Phala Cloud (ACI)</th><th>Chutes</th><th>Venice</th><th>NanoGPT</th><th>Privatemode</th><th>Its own service</th>
+        <th>Event log hashed</th><th>Blocks on failure</th></tr></thead>
+      <tbody>
+
+        <tr id="awesome-private-inference">
+          <th><a class="underline" href="https://github.com/amiller/awesome-private-inference">awesome-private-inference monitor</a>
+            <small>406b535 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/notes/2026-11-15-only-tinfoil-constrains.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Every instance and the deployment log, with public files aged 24 h. Sends no prompts.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Router, local AMD chain and TCB check.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Gateway keyset and sessions.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Full register match and census.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Legacy dstack rows; ACI/1 rows marked gateway-only.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>yes</td>
+          <td>n/a</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+<section class="mt-8 max-w-3xl">
+  <h2 class="text-xl font-semibold">Reviewed and out of scope</h2>
+  <ul class="mt-2 list-disc pl-5 text-sm text-slate-600">
+  <li><a class="underline" href="https://github.com/crow-004/attestation-verifier">crow-004/attestation-verifier</a>: Verifies Tachpawl&#39;s threshold-signing nodes, not inference. <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-k-other.md">review</a></li>
+  </ul>
+</section>
+
+
+</main>
+
+<footer class="border-t border-slate-200 bg-white mt-16">
+  <div class="max-w-6xl mx-auto px-4 py-6 text-xs text-slate-500 flex flex-wrap gap-4 justify-between">
+    <span>Adapter snapshot 2026-11-14T18:43:49.953509Z · run 20261114T184349.953472Z-1f84da4f3d1e · <code>b8219ba4</code></span>
+    <span><a class="underline" href="./methodology.html">Methodology</a> · <a class="underline" href="./measurements.html">Measurements</a> · <a class="underline" href="./pricing.html">Pricing</a> · <a class="underline" href="https://github.com/amiller/awesome-private-inference">GitHub ↗</a></span>
+    <span>Code MIT · Data CC-BY 4.0</span>
+  </div>
+</footer>
+</body>
+</html>

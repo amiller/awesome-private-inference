@@ -24,6 +24,7 @@
     <nav aria-label="Primary" class="text-sm flex gap-6">
       <a href="./index.html" class="view-tab">Comparison</a>
       <a href="./history.html" class="view-tab">Reference values</a>
+      <a href="./verifiers.html" class="view-tab">Verifiers</a>
     </nav>
   </div>
 </header>
@@ -52,7 +53,7 @@
     <a class="text-indigo-700 hover:underline" href="./evidence.html#routes">Provider audits &amp; routes</a>
   </div>
 </section>
-<p class="mb-3 text-xs text-slate-600"><span class="text-emerald-700">✓</span> check passed · <span class="text-rose-700">×</span> check rejected · <span class="text-amber-700">○</span> review pending · — not checked / not applicable. These are scoped adapter results, not full provider verdicts.</p>
+<p class="mb-3 text-xs text-slate-600"><span class="text-emerald-700">✓</span> check passed · <span class="text-rose-700">×</span> check rejected · <span class="text-amber-700">○</span> review pending · <span class="text-amber-700">?</span> required, not checked by us · <span class="text-indigo-700">∅</span> required, not exposed by the provider · n/a not in this route's required set, or route retired · — no evidence captured (the row failed before any check ran) · <span class="text-slate-500">·</span> not reached (the adapter rejected the row at an earlier check). Hover a cell for the reason. These are scoped adapter results, not full provider verdicts.</p>
 <p class="mb-2 text-xs text-slate-500 lg:hidden">Scroll sideways for all check columns.</p>
 <div class="matrix-wrap">
 <table class="matrix">
@@ -74,13 +75,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-1" title="Key binding: Adapter pass. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-1" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-1" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-1" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-1" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-1" title="Compose binding: Adapter pass. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Compose binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-1" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-1" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway api.redpill.ai: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="The adapter checked evidence and rejected it. unspecified">Adapter rejected</span><a class="full-link" href="./evidence.html#observation-1">Details</a></td>
     </tr>
@@ -96,13 +97,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-2" title="Key binding: Adapter pass. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-2" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-2" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-2" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-2" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-2" title="Compose binding: Adapter pass. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Compose binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-2" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-2" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway inference.phala.com: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-2">Details</a></td>
     </tr>
@@ -118,13 +119,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-3" title="Key binding: Adapter pass. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-3" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-3" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-3" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-3" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-3" title="Compose binding: Adapter pass. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Compose binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-3" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-3" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="aci-gateway tee.redpill.ai: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-3">Details</a></td>
     </tr>
@@ -140,13 +141,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-4" title="Key binding: Adapter pass. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-4" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-4" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-4" title="Compose binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Compose binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-4" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-4" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:10Z. Open full evidence." aria-label="chutes DeepSeek-V3.2-TEE: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-4">Details</a></td>
     </tr>
@@ -162,13 +163,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-5" title="Key binding: Adapter pass. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-5" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-5" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-5" title="Compose binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Compose binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-5" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-5" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:12Z. Open full evidence." aria-label="chutes GLM-5.1-TEE: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-5">Details</a></td>
     </tr>
@@ -184,13 +185,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-6" title="Key binding: Adapter pass. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-6" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-6" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-6" title="Compose binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Compose binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-6" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-6" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes GLM-5.2-TEE: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-6">Details</a></td>
     </tr>
@@ -206,13 +207,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-7" title="Key binding: Adapter pass. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-7" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-7" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-7" title="Compose binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Compose binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-7" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-7" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:13Z. Open full evidence." aria-label="chutes Kimi-K2.6-TEE: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-7">Details</a></td>
     </tr>
@@ -222,19 +223,19 @@
       <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-8">Qwen3-32B-TEE</a></td>
       <td class="text-slate-500 text-xs">chutes-tee</td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-8" title="Fresh nonce: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Fresh nonce — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-8" title="TDX appraisal: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: TDX appraisal — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Key binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Key binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-8" title="Key binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Key binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-8" title="GPU evidence: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: GPU evidence — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-8" title="Address binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Address binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-8" title="Compose binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Compose binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-8" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-8" title="Backend check: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:06Z. Open full evidence." aria-label="chutes Qwen3-32B-TEE: Backend check — No evidence captured: the row failed before any check ran">—</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Evidence or endpoint was unavailable; this is not a cryptographic rejection. RuntimeError: HTTP 404 on /e2e/instances/ac059e33-eb27-541c-b9a9-24b214036475: {&#34;detail&#34;:&#34;Chute not found&#34;}">Unavailable</span><a class="full-link" href="./evidence.html#observation-8">Details</a></td>
     </tr>
@@ -250,13 +251,13 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-9" title="Key binding: Adapter pass. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-9" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-9" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-9" title="Compose binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Compose binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-9" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-9" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:11Z. Open full evidence." aria-label="chutes gemma-4-31B-TEE: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. verification_incomplete">Not checked</span><a class="full-link" href="./evidence.html#observation-9">Details</a></td>
     </tr>
@@ -266,19 +267,19 @@
       <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-10">openai/gpt-oss-120b</a></td>
       <td class="text-slate-500 text-xs">tdx+gpu</td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-10" title="Fresh nonce: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Fresh nonce — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-10" title="TDX appraisal: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: TDX appraisal — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Key binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Key binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-10" title="Key binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Key binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-10" title="GPU evidence: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: GPU evidence — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-10" title="Address binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Address binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-10" title="Compose binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Compose binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-10" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-10" title="Backend check: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:43:55Z. Open full evidence." aria-label="near-ai openai/gpt-oss-120b: Backend check — No evidence captured: the row failed before any check ran">—</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Evidence or endpoint was unavailable; this is not a cryptographic rejection. HTTP 400: {&#34;error&#34;:{&#34;message&#34;:&#34;Model &#39;openai/gpt-oss-120b&#39; not found. It&#39;s not a valid model name or alias.&#34;,&#34;type&#34;:&#34;invalid_request_error&#34;,&#34;param&#34;:&#34;model&#34;,&#34;code&#34;:null}}">Unavailable</span><a class="full-link" href="./evidence.html#observation-10">Details</a></td>
     </tr>
@@ -300,7 +301,7 @@
 
       <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-11" title="Compose binding: Adapter rejection. Checked 2026-11-14T18:43:59Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Compose binding — Adapter rejection">×</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-11" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:43:59Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-amber-100 text-amber-800" href="./evidence.html#observation-11" title="Backend check: Not checked by us: the gateway&#39;s verification of the model backend&#39;s quote is never checked (issue #29). Checked 2026-11-14T18:43:59Z. Open full evidence." aria-label="near-ai zai-org/GLM-5.1-FP8: Backend check — Not checked by us: the gateway&#39;s verification of the model backend&#39;s quote is never checked (issue #29)">?</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="The adapter checked evidence and rejected it. unspecified">Adapter rejected</span><a class="full-link" href="./evidence.html#observation-11">Details</a></td>
     </tr>
@@ -310,19 +311,19 @@
       <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-12">router</a></td>
       <td class="text-slate-500 text-xs">tinfoil-sev-snp-v2</td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-12" title="Fresh nonce: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Fresh nonce — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-12" title="TDX appraisal: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: TDX appraisal — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Key binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Key binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-12" title="Key binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Key binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-12" title="GPU evidence: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: GPU evidence — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-12" title="Address binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Address binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-12" title="Compose binding: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Compose binding — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-12" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-100 text-slate-400" href="./evidence.html#observation-12" title="Backend check: Not applicable: not in this route&#39;s required layer set. Checked 2026-11-14T18:44:00Z. Open full evidence." aria-label="tinfoil router: Backend check — Not applicable: not in this route&#39;s required layer set">n/a</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Complete verification is unavailable; individual checks may have passed. Consult the stated missing proof. AMD SNP report signature and VCEK chain not verified">Not checked</span><a class="full-link" href="./evidence.html#observation-12">Details</a></td>
     </tr>
@@ -332,19 +333,19 @@
       <td class="model"><a class="text-indigo-700 hover:underline" href="./evidence.html#observation-13">e2ee-gemma-4-31b</a></td>
       <td class="text-slate-500 text-xs">venice</td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Fresh nonce: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Fresh nonce — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-13" title="Fresh nonce: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Fresh nonce — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="TDX appraisal: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: TDX appraisal — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-13" title="TDX appraisal: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: TDX appraisal — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Key binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Key binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-13" title="Key binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Key binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-13" title="GPU evidence: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: GPU evidence — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Address binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Address binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-13" title="Address binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Address binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-13" title="Compose binding: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Compose binding — No evidence captured: the row failed before any check ran">—</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-13" title="Backend check: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Backend check — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-slate-200 text-slate-500" href="./evidence.html#observation-13" title="Backend check: No evidence captured: the row failed before any check ran. Checked 2026-11-14T18:44:03Z. Open full evidence." aria-label="venice e2ee-gemma-4-31b: Backend check — No evidence captured: the row failed before any check ran">—</a></td>
 
       <td><span class="outcome bg-slate-100 text-slate-700" title="Evidence or endpoint was unavailable; this is not a cryptographic rejection. no TEE attestation available for this model (404)">Unavailable</span><a class="full-link" href="./evidence.html#observation-13">Details</a></td>
     </tr>
@@ -360,11 +361,11 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-14" title="Key binding: Adapter pass. Checked 2026-11-14T18:44:01Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:01Z. Open full evidence." aria-label="venice e2ee-glm-5-1: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-indigo-100 text-indigo-800" href="./evidence.html#observation-14" title="GPU evidence: Not exposed by provider: this response carried no nvidia_payload to appraise (aci/1 responses mark it gpu_evidence_omitted since 2026-11-12). Checked 2026-11-14T18:44:01Z. Open full evidence." aria-label="venice e2ee-glm-5-1: GPU evidence — Not exposed by provider: this response carried no nvidia_payload to appraise (aci/1 responses mark it gpu_evidence_omitted since 2026-11-12)">∅</a></td>
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-14" title="Address binding: Adapter pass. Checked 2026-11-14T18:44:01Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Address binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-14" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:01Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-indigo-100 text-indigo-800" href="./evidence.html#observation-14" title="Compose binding: Not exposed by provider: this response carried no app_compose or mr_config to bind. Checked 2026-11-14T18:44:01Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Compose binding — Not exposed by provider: this response carried no app_compose or mr_config to bind">∅</a></td>
 
       <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-14" title="Backend check: Adapter rejection. Checked 2026-11-14T18:44:01Z. Open full evidence." aria-label="venice e2ee-glm-5-1: Backend check — Adapter rejection">×</a></td>
 
@@ -382,11 +383,11 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-15" title="Key binding: Adapter pass. Checked 2026-11-14T18:44:04Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Key binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-15" title="GPU evidence: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:04Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: GPU evidence — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-indigo-100 text-indigo-800" href="./evidence.html#observation-15" title="GPU evidence: Not exposed by provider: this response carried no nvidia_payload to appraise (aci/1 responses mark it gpu_evidence_omitted since 2026-11-12). Checked 2026-11-14T18:44:04Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: GPU evidence — Not exposed by provider: this response carried no nvidia_payload to appraise (aci/1 responses mark it gpu_evidence_omitted since 2026-11-12)">∅</a></td>
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-15" title="Address binding: Adapter pass. Checked 2026-11-14T18:44:04Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Address binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-15" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:04Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-indigo-100 text-indigo-800" href="./evidence.html#observation-15" title="Compose binding: Not exposed by provider: this response carried no app_compose or mr_config to bind. Checked 2026-11-14T18:44:04Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Compose binding — Not exposed by provider: this response carried no app_compose or mr_config to bind">∅</a></td>
 
       <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-15" title="Backend check: Adapter rejection. Checked 2026-11-14T18:44:04Z. Open full evidence." aria-label="venice e2ee-gpt-oss-120b-p: Backend check — Adapter rejection">×</a></td>
 
@@ -430,7 +431,7 @@
 
       <td><a class="mark bg-emerald-100 text-emerald-800" href="./evidence.html#observation-17" title="Address binding: Adapter pass. Checked 2026-11-14T18:44:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Address binding — Adapter pass">✓</a></td>
 
-      <td><a class="mark bg-slate-100 text-slate-500" href="./evidence.html#observation-17" title="Compose binding: Not checked or not applicable; consult route. Checked 2026-11-14T18:44:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Compose binding — Not checked or not applicable; consult route">—</a></td>
+      <td><a class="mark bg-indigo-100 text-indigo-800" href="./evidence.html#observation-17" title="Compose binding: Not exposed by provider: this response carried no app_compose or mr_config to bind. Checked 2026-11-14T18:44:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Compose binding — Not exposed by provider: this response carried no app_compose or mr_config to bind">∅</a></td>
 
       <td><a class="mark bg-rose-100 text-rose-800" href="./evidence.html#observation-17" title="Backend check: Adapter rejection. Checked 2026-11-14T18:44:05Z. Open full evidence." aria-label="venice e2ee-qwen3-6-35b-a3b-uncensored-p: Backend check — Adapter rejection">×</a></td>
 
