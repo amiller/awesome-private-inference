@@ -1,6 +1,6 @@
 # Drafts: teep #166 comment and NEAR issue — 2026-11-15
 
-Not posted. For Andrew to edit and post.
+Posted 2026-11-15: teep comment https://github.com/13rac1/teep/issues/166#issuecomment-6902282309 ; NEAR issue https://github.com/nearai/compose-manager/issues/85
 
 ## Comment on 13rac1/teep#166
 
