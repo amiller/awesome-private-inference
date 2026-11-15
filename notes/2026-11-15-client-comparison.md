@@ -26,6 +26,12 @@ A provider row on the dashboard says what a route exposes. What a user actually 
 - **Reply authenticity is the weak point everywhere.** Only Phala Cloud receipts get verified (teep, pap), and only after delivery. No client authenticates NEAR, Chutes or Venice dstack replies.
 - **Auto-adoption is the default.** teep and the gateway take the latest Sigstore router release for Tinfoil. tinfoil-go takes any Tinfoil-signed release or policy. Privatemode takes any CDN manifest. hermes and teep's static lists are the only pins a user controls.
 
+## Also reviewed: abalone and bitrouter
+
+- **abalone** (`53655796`, `research/client-comparison-2026-11-15/part-c-abalone.md`) is weaker than teep on NEAR and on Phala Cloud. On NEAR it fails open on TCB (`providers.json:70-71`, policy `"reported"`) and on an NVIDIA JWKS outage (`lib/near.mjs:80-81`), sends E2EE v1, and doesn't pin MRTD/RTMR0-2 or the app id. On ACI it skips key custody, pins no session, and calls `receiptVerdict` only from tests.
+- **bitrouter** (`research/client-comparison-2026-11-15/part-d-bitrouter.md`) has no verifier at HEAD. Its NEAR-only verifier was deleted in #701 (2026-07-13), and the commit message says it "was never wired into the pipeline".
+- **The private-ai-gateway TS client trusts event payloads it doesn't hash.** `clients/verifier-ts/src/report.ts:173-182` (at `e9b6ae8a`) replays RTMR3 from each event's stored `digest`, then reads `compose-hash` from `event_payload` without checking that the payload produced the digest. A report server can keep the genuine digests and swap the payload. abalone vendors this code and shows the same behavior on a recorded NEAR fixture. bitrouter's deleted verifier did the same (`eventlog.rs:22-71` at `f8763b1`). The Rust `aci-verify` crate recomputes each digest from its payload (`crates/aci-verify/src/dstack.rs:160-171`).
+
 ## Corrections to earlier notes
 
 - The 2026-11-04 note says the ACI CLI skips key custody. pap implements it (`cli/aci/verifier/policy.rs`, `appraisal.rs:447-500`) but applies it only with both `--accept-subject` and `--accept-dstack-kms-root-public-key` (`cli/args.rs:70-87`).
