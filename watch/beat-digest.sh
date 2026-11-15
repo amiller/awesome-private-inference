@@ -27,7 +27,7 @@ git pull --ff-only -q
 THREAD_ACTIVITY="$ARCHIVE/evidence/$RUN_ID-thread-activity.json"
 python3 watch/thread_activity.py --output "$THREAD_ACTIVITY"
 FIRMWARE="$ARCHIVE/evidence/$RUN_ID-firmware.txt"
-COMMIT=("$PUB/$DATE.md")
+COMMIT=("$PUB/$DATE.md" notes/teep-parity.md)
 if grep -q '{{FIRMWARE}}' "$PROMPT"; then
   SNAPS="$HISTORY/gce-tcb"
   GCE_HISTORY=data/gce-tcb-endorsements.json
