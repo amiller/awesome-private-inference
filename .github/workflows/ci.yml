@@ -19,7 +19,7 @@ jobs:
 
       - name: Install deps
         run: |
-          uv sync --frozen --python 3.11 --extra dev
+          uv sync --frozen --python 3.11 --extra dev --extra nearai
 
       - name: Run tests
         run: |

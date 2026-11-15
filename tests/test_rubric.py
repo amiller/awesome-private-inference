@@ -14,9 +14,10 @@ import pytest
 
 from probes import rubric
 from probes.render import MATRIX_KEYS, _rows
-from verifiers.common import ScoreCard
+from verifiers.common import REQUIRED_LAYERS_BY_SHAPE, ScoreCard
 
 ALL_FIELDS = [f.name for f in fields(ScoreCard)]
+TDX_GPU_KEYS = set(MATRIX_KEYS) | REQUIRED_LAYERS_BY_SHAPE["tdx+gpu"]
 
 
 def scorecard(**overrides) -> dict:
@@ -54,8 +55,8 @@ def rendered(*rows):
 
 def test_r1_passes_when_signal_dominates():
     rows = rendered(
-        row(model="a", card=scorecard(**{k: True for k in MATRIX_KEYS})),
-        row(model="b", card=scorecard(**{k: False for k in MATRIX_KEYS})),
+        row(model="a", card=scorecard(**{k: True for k in TDX_GPU_KEYS})),
+        row(model="b", card=scorecard(**{k: False for k in TDX_GPU_KEYS})),
     )
     result = rubric.r1_density(rows)
     assert result["passed"], result
@@ -77,8 +78,8 @@ def test_r1_counts_every_none_mark_as_unchecked():
 
 def test_r1_fires_on_constant_column():
     rows = rendered(
-        row(model="a", card=scorecard(**{k: True for k in MATRIX_KEYS})),
-        row(model="b", card=scorecard(**{k: True for k in MATRIX_KEYS})),
+        row(model="a", card=scorecard(**{k: True for k in TDX_GPU_KEYS})),
+        row(model="b", card=scorecard(**{k: True for k in TDX_GPU_KEYS})),
     )
     result = rubric.r1_density(rows)
     assert not result["passed"]

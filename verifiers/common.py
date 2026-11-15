@@ -28,7 +28,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
     "tdx+gpu": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
-        "backend_attested",
+        "backend_attested", "tee_debug_disabled", "event_log_replayed",
+        "tcb_current", "tee_boot_config",
     },
     # Chutes direct (api.chutes.ai): crypto core is sound, but the serve.py on the
     # prompt-plaintext path (and the model) are unmeasured, so serving_code_attested
@@ -42,7 +43,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
     # difference is the whole risk the row exists to show.
     "aci-gateway": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
-        "compose_hash_committed", "prod_os_image", "attested_serving_enforced",
+        "compose_hash_committed", "tee_boot_config", "tee_hardware_config",
+        "prod_os_image", "attested_serving_enforced",
     },
     "chutes-tee": {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
@@ -61,6 +63,8 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
         "tdx_verified", "nonce_bound", "report_data_binds_key",
         "gpu_attested", "key_derives_to_address", "compose_hash_committed",
         "prod_os_image", "serving_code_attested", "code_measurement_reproducible",
+        "tee_debug_disabled", "event_log_replayed", "tcb_current",
+        "tee_boot_config", "tee_hardware_config",
     },
     # Tinfoil SEV-SNP: hardware signature, HPKE/TLS key bindings and measured
     # runtime configuration. This set does not establish complete route proof.
@@ -80,12 +84,22 @@ REQUIRED_LAYERS_BY_SHAPE: Dict[str, Set[str]] = {
 BAR_NOTES: Dict[str, Dict[str, object]] = {
     "tdx+gpu": {"disputed": False, "note":
         "Gateway plus per-model TD, so every hop is required. Excludes the Tinfoil-specific "
-        "SEV layers, which do not exist in this architecture."},
+        "SEV layers, which do not exist in this architecture. tcb_current requires UpToDate "
+        "(teep tee_tcb_current parity): an OutOfDate quote still verifies its signature but "
+        "fails currency with its advisories retained on the row. tee_debug_disabled fails "
+        "on any TD_ATTRIBUTES debug bit. event_log_replayed fails when the log does not "
+        "replay to the quote's RTMRs or the detached app-id/compose-hash/os-image-hash "
+        "disagrees with the log. tee_boot_config (MRTD/RTMR1/RTMR2 vs the dstack-mr "
+        "derivation for the log-bound image) is required. tee_hardware_config (RTMR0) is "
+        "excluded until RTMR0 is derived for NEAR's VM shapes: NEAR exposes no vm_config, so "
+        "it reads as unproven (None)."},
     "aci-gateway": {"disputed": False, "note":
         "One workload, several hostnames. The adapter binds quote, keyset and measured "
         "compose events, but does not verify upstream session bundles or an inference request; "
-        "backend_attested therefore remains unknown. The OS archive's production flag "
-        "does not establish boot measurements, so prod_os_image is unknown. "
+        "backend_attested therefore remains unknown. tee_boot_config and "
+        "tee_hardware_config require the quote's (MRTD, RTMR0, RTMR1, RTMR2) to be a "
+        "dstack-mr-derived tuple for the log-bound OS image; prod_os_image additionally "
+        "requires that image's archive to declare is_dev false. "
         "attested_serving_enforced is required for each hostname."},
     "chutes-tee": {"disputed": False, "note":
         "The quote can bind the sampled instance key and golden MRTD, but serving code and "
@@ -99,7 +113,12 @@ BAR_NOTES: Dict[str, Dict[str, object]] = {
         "layers are exactly where Venice's prompt-path exposure lives, so they are now "
         "required and read as unproven rather than not-applicable. backend_attested stays "
         "excluded and is reported False: Venice has no gateway hop of its own, and the "
-        "upstream backend's own row carries that check."},
+        "upstream backend's own row carries that check. Added 2026-11-05 (teep parity): "
+        "tcb_current requires an UpToDate Intel PCS verdict from the local dcap-qvl "
+        "appraisal (Phala's hosted verifier returns no TCB verdict; that is retained as "
+        "phala_tcb_status); tee_debug_disabled is read from the quote. event_log_replayed, "
+        "tee_boot_config and tee_hardware_config apply to the aci/1 evidence shape and "
+        "read as unproven (None) on the legacy shape, which exposes no event log."},
     "tinfoil-sev-snp-v2": {"disputed": False, "note":
         "SEV-SNP rather than TDX. Sigstore provenance and measurement agreement are "
         "separate from AMD report-signature verification and independent reproduction. "
@@ -165,6 +184,11 @@ class ScoreCard:
 
     nonce_bound: Optional[bool] = None       # client nonce appears in report_data
     tdx_verified: Optional[bool] = None      # quote accepted by Phala TDX verifier
+    tcb_current: Optional[bool] = None       # Intel PCS verdict is UpToDate; any other verdict (OutOfDate, Revoked, …) is False with advisories retained
+    tee_debug_disabled: Optional[bool] = None  # TD_ATTRIBUTES debug bit clear in every quote (host cannot inspect TD memory)
+    event_log_replayed: Optional[bool] = None  # dstack event log replays to the quote's RTMRs and authenticates app-id/compose-hash/os-image-hash
+    tee_boot_config: Optional[bool] = None  # MRTD/RTMR1/RTMR2 equal the dstack-mr derivation for the log-bound OS image
+    tee_hardware_config: Optional[bool] = None  # (MRTD, RTMR0) equals a dstack-mr derivation for a pinned VM shape of that image; None when no shape is derived
     report_data_binds_key: Optional[bool] = None  # report_data commits to signing addr
     gpu_attested: Optional[bool] = None      # NRAS returned PASS
     key_derives_to_address: Optional[bool] = None  # keccak(pubkey) == signing_address
