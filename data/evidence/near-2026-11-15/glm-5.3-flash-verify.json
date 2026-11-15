@@ -1,0 +1,260 @@
+{
+ "provider": "near-ai",
+ "model": "z-ai/glm-5.3-flash",
+ "valid": false,
+ "verified_at": "2026-11-15T17:22:16Z",
+ "attestation_type": "tdx+gpu",
+ "signing_address": "0x3b753b4406613c5e70ae640508632b600424fa0c",
+ "signing_public_key": "42d42e51842e50841e08b096b62cdaf52786c7ce0b04577bb476cef327d42d8db9cc9dd35c9738bf7769e2b33d51c0a2d9aa01e85da0507ddb4e875a2b5bdfd1",
+ "signing_algo": "ecdsa",
+ "scorecard": {
+  "nonce_bound": true,
+  "tdx_verified": true,
+  "tcb_current": true,
+  "tee_debug_disabled": true,
+  "event_log_replayed": true,
+  "tee_boot_config": true,
+  "tee_hardware_config": null,
+  "report_data_binds_key": true,
+  "gpu_attested": true,
+  "key_derives_to_address": true,
+  "compose_hash_committed": false,
+  "prod_os_image": null,
+  "serving_code_attested": null,
+  "backend_attested": null,
+  "gateway_reference_audited": false,
+  "catalog_serves": null,
+  "sessions_publish_evidence_digests": null,
+  "catalog_nonempty": null,
+  "os_image_archive_declares_production": null,
+  "code_measurement_reproducible": null,
+  "release_provenance_verified": null,
+  "measurement_matches_release": null,
+  "hardware_signature_verified": null,
+  "tls_pubkey_pinned": null,
+  "hpke_pubkey_attested": null,
+  "client_nonce_supported": null,
+  "runtime_config_fully_attested": null,
+  "attested_serving_enforced": null
+ },
+ "details": {
+  "inner_models": 3,
+  "anchor_policy_revision_sha256": "7c6eb4999ba3f847da956076792429c236f23bfa94a96aae47bb7b8d66f2b7f2",
+  "anchor_model": "z-ai/glm-5.3-flash",
+  "chain_snapshot": {
+   "chain_id": 8453,
+   "block_number": 57864785,
+   "block_hash": "0xbfd9c4ed9910b09ba4f1da4c925de14a5243ed770bb4face51a624713d4f22f6",
+   "block_hash_rechecked": true
+  },
+  "model_contract": {
+   "contract": "0x2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
+   "code_sha256": "9e718734f9a4c65af468ed039c530c3cd94b7f107fa6a9d38e47184825a3b2eb",
+   "implementation": "0x7e5192c0aa36e35e003351bffb8ebb213e7e1ba9",
+   "implementation_code_sha256": "82851501560a8c757cd76c9f929aa51e0390b13fdc791e3c710cf67c769e4598"
+  },
+  "tdx": {
+   "gateway": {
+    "tcb_status": "UpToDate",
+    "advisory_ids": [],
+    "measurements": {
+     "registers": {
+      "mrtd": "7fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c1409173",
+      "rtmr0": "d090162bff4b1d1dc74dc59dc548838efc4b811b173da8536efa8e2a9c045da70ee092301293ad90afebee448bcd0211",
+      "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
+      "rtmr2": "764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d",
+      "rtmr3": "92ed8feffe0031e3f5b32f4dc64777e9cfc862c328c4637fb6447715989e6b7aaf8bfb0da19b2af91c2da051b17ab656"
+     },
+     "replay_matches_quote": true,
+     "log_app_id": "f550fdfb4eb8ad787c1bcd423f091cbb4a4431ae",
+     "log_compose_hash": "2643bc7ae47ecf4cf84509a647d2c2cc3bcacad95a87b8a73d543e6c48ad3b22",
+     "log_os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
+     "ok": true,
+     "detached_json_disagreements": {},
+     "boot_registers": {
+      "boot_config": true,
+      "hardware_config": false,
+      "policy_revision": "2026-11-15.1",
+      "reasons": [
+       "(mrtd, rtmr0) matches no derived vm shape for this image"
+      ]
+     }
+    },
+    "debug_disabled": true
+   },
+   "models": [
+    {
+     "tcb_status": "UpToDate",
+     "advisory_ids": [],
+     "measurements": {
+      "registers": {
+       "mrtd": "df4d77c857de652bd0fafa343a2026b51071ee03773d076d283abf1a7d36ff91ffa279ee4a617ac664f7e2a2c8d5891b",
+       "rtmr0": "bc122d143ab768565ba5c3774ff5f03a63c89a4df7c1f5ea38d3bd173409d14f8cbdcc36d40e703cccb996a9d9687590",
+       "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
+       "rtmr2": "bd67ab7554dc27ab03a077bc1447a1a67d0624ff547c4c809a8626f12d6a89712f8ec60e781e99b98208574065d21a71",
+       "rtmr3": "4023e007c239ab008b1f97ee0cfdee4478e3a94f82f3dbb20a82c932cc514f1c6b9e4117177d6ebea2ae0b313f68c3cd"
+      },
+      "replay_matches_quote": true,
+      "log_app_id": "2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
+      "log_compose_hash": "c900dc7304663b73b623cd5d941fbdab6f02858017b371ae28de445a16d2e2d0",
+      "log_os_image_hash": "91fd5d69ccee3e5ea4f2aeb8c9b632c4358c4ecfc29ba1aa6fb1e402af209829",
+      "ok": true,
+      "detached_json_disagreements": {},
+      "boot_registers": {
+       "boot_config": true,
+       "hardware_config": null,
+       "policy_revision": "2026-11-15.1",
+       "reasons": [
+        "rtmr0 not derived for this image; hardware config unproven"
+       ]
+      }
+     },
+     "debug_disabled": true
+    },
+    {
+     "tcb_status": "UpToDate",
+     "advisory_ids": [],
+     "measurements": {
+      "registers": {
+       "mrtd": "df4d77c857de652bd0fafa343a2026b51071ee03773d076d283abf1a7d36ff91ffa279ee4a617ac664f7e2a2c8d5891b",
+       "rtmr0": "bc122d143ab768565ba5c3774ff5f03a63c89a4df7c1f5ea38d3bd173409d14f8cbdcc36d40e703cccb996a9d9687590",
+       "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
+       "rtmr2": "bd67ab7554dc27ab03a077bc1447a1a67d0624ff547c4c809a8626f12d6a89712f8ec60e781e99b98208574065d21a71",
+       "rtmr3": "bbada8ce4eb49dcf9d67f987f8ce6a3a3a59e8e86374180075aa12b4cdad6b06234acb1e044902cbcac130993ef9bb46"
+      },
+      "replay_matches_quote": true,
+      "log_app_id": "2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
+      "log_compose_hash": "e8416a02d6f7ce47baaa52e3925b934fd30834b04fc9086b363db9b1d12c729d",
+      "log_os_image_hash": "91fd5d69ccee3e5ea4f2aeb8c9b632c4358c4ecfc29ba1aa6fb1e402af209829",
+      "ok": true,
+      "detached_json_disagreements": {},
+      "boot_registers": {
+       "boot_config": true,
+       "hardware_config": null,
+       "policy_revision": "2026-11-15.1",
+       "reasons": [
+        "rtmr0 not derived for this image; hardware config unproven"
+       ]
+      }
+     },
+     "debug_disabled": true
+    },
+    {
+     "tcb_status": "UpToDate",
+     "advisory_ids": [],
+     "measurements": {
+      "registers": {
+       "mrtd": "df4d77c857de652bd0fafa343a2026b51071ee03773d076d283abf1a7d36ff91ffa279ee4a617ac664f7e2a2c8d5891b",
+       "rtmr0": "bc122d143ab768565ba5c3774ff5f03a63c89a4df7c1f5ea38d3bd173409d14f8cbdcc36d40e703cccb996a9d9687590",
+       "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
+       "rtmr2": "bd67ab7554dc27ab03a077bc1447a1a67d0624ff547c4c809a8626f12d6a89712f8ec60e781e99b98208574065d21a71",
+       "rtmr3": "ed7fbabd68a1e89ca928d0d4fc5156fd8174efc4003f09e5ed340aedf197b2985ca3f7b41408cc1b2a074e2bf798a1a7"
+      },
+      "replay_matches_quote": true,
+      "log_app_id": "2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
+      "log_compose_hash": "a7de0bba194b6466c5c7b8dcfb907b6b60404ab2ba6de8b5d0cf63c2145d6868",
+      "log_os_image_hash": "91fd5d69ccee3e5ea4f2aeb8c9b632c4358c4ecfc29ba1aa6fb1e402af209829",
+      "ok": true,
+      "detached_json_disagreements": {},
+      "boot_registers": {
+       "boot_config": true,
+       "hardware_config": null,
+       "policy_revision": "2026-11-15.1",
+       "reasons": [
+        "rtmr0 not derived for this image; hardware config unproven"
+       ]
+      }
+     },
+     "debug_disabled": true
+    }
+   ]
+  },
+  "tcb_policy": {
+   "passing_status": [
+    "UpToDate"
+   ],
+   "effect": "tcb_current=False for every other Intel PCS verdict; tdx_verified still reflects quote signature appraisal"
+  },
+  "gpu_verdict": true,
+  "model_composes": [
+   {
+    "observed_model_name": "z-ai/glm-5.3-flash",
+    "requested_model_name": "z-ai/glm-5.3-flash",
+    "app_id": "2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
+    "expected_app_id": "",
+    "compose_hash": "c900dc7304663b73b623cd5d941fbdab6f02858017b371ae28de445a16d2e2d0",
+    "log_compose_hash": "c900dc7304663b73b623cd5d941fbdab6f02858017b371ae28de445a16d2e2d0",
+    "quote_compose_matches": true,
+    "chain_authorized": true,
+    "anchored": false,
+    "anchor_policy_revision_sha256": "7c6eb4999ba3f847da956076792429c236f23bfa94a96aae47bb7b8d66f2b7f2",
+    "chain_block_number": 57864785,
+    "chain_block_hash": "0xbfd9c4ed9910b09ba4f1da4c925de14a5243ed770bb4face51a624713d4f22f6"
+   },
+   {
+    "observed_model_name": "z-ai/glm-5.3-flash",
+    "requested_model_name": "z-ai/glm-5.3-flash",
+    "app_id": "2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
+    "expected_app_id": "",
+    "compose_hash": "e8416a02d6f7ce47baaa52e3925b934fd30834b04fc9086b363db9b1d12c729d",
+    "log_compose_hash": "e8416a02d6f7ce47baaa52e3925b934fd30834b04fc9086b363db9b1d12c729d",
+    "quote_compose_matches": true,
+    "chain_authorized": true,
+    "anchored": false,
+    "anchor_policy_revision_sha256": "7c6eb4999ba3f847da956076792429c236f23bfa94a96aae47bb7b8d66f2b7f2",
+    "chain_block_number": 57864785,
+    "chain_block_hash": "0xbfd9c4ed9910b09ba4f1da4c925de14a5243ed770bb4face51a624713d4f22f6"
+   },
+   {
+    "observed_model_name": "z-ai/glm-5.3-flash",
+    "requested_model_name": "z-ai/glm-5.3-flash",
+    "app_id": "2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
+    "expected_app_id": "",
+    "compose_hash": "a7de0bba194b6466c5c7b8dcfb907b6b60404ab2ba6de8b5d0cf63c2145d6868",
+    "log_compose_hash": "a7de0bba194b6466c5c7b8dcfb907b6b60404ab2ba6de8b5d0cf63c2145d6868",
+    "quote_compose_matches": true,
+    "chain_authorized": true,
+    "anchored": false,
+    "anchor_policy_revision_sha256": "7c6eb4999ba3f847da956076792429c236f23bfa94a96aae47bb7b8d66f2b7f2",
+    "chain_block_number": 57864785,
+    "chain_block_hash": "0xbfd9c4ed9910b09ba4f1da4c925de14a5243ed770bb4face51a624713d4f22f6"
+   }
+  ],
+  "tcb_statuses": {
+   "gateway": "UpToDate",
+   "models": [
+    "UpToDate",
+    "UpToDate",
+    "UpToDate"
+   ]
+  },
+  "model_names_match_request": true,
+  "gateway_contract": {
+   "contract": "0xf550fdfb4eb8ad787c1bcd423f091cbb4a4431ae",
+   "code_sha256": "9e718734f9a4c65af468ed039c530c3cd94b7f107fa6a9d38e47184825a3b2eb",
+   "implementation": "0x7e5192c0aa36e35e003351bffb8ebb213e7e1ba9",
+   "implementation_code_sha256": "82851501560a8c757cd76c9f929aa51e0390b13fdc791e3c710cf67c769e4598"
+  },
+  "gateway_compose_hash": "2643bc7ae47ecf4cf84509a647d2c2cc3bcacad95a87b8a73d543e6c48ad3b22",
+  "cloud_api_image_digest": "4cde8bc2e09b78452a2b7c6706a4072c7a46417d56eef8e75ccd6b6d91640ffb",
+  "gateway_self_consistent": true,
+  "chain_authorized": true,
+  "gateway_chain_query": {
+   "contract": "0xf550fdfb4eb8ad787c1bcd423f091cbb4a4431ae",
+   "compose_hash": "2643bc7ae47ecf4cf84509a647d2c2cc3bcacad95a87b8a73d543e6c48ad3b22",
+   "authorized": true,
+   "block_number": 57864785,
+   "block_hash": "0xbfd9c4ed9910b09ba4f1da4c925de14a5243ed770bb4face51a624713d4f22f6",
+   "chain_id": 8453
+  },
+  "audit_key": null,
+  "gateway_review_status": "unreviewed",
+  "request_path_verified": false,
+  "verification_status": "rejected",
+  "verification_reason": "quote, model mapping, compose, key, GPU, TCB currency, debug-bit, event-log, boot-config or chain-policy check failed",
+  "raw_evidence_completeness": "complete"
+ },
+ "error": null,
+ "latency_s": 3.89,
+ "method": "verifiers/near_ai.verify at d589940 (refresh/2026-11-15 merged TCB/debug/event-log/boot-config checks) over a live cloud-api.near.ai /v1/attestation/report response for z-ai/glm-5.3-flash fetched 2026-11-15; only that one HTTP GET was replayed (nonce = the report request_nonce); Intel PCS, NRAS and Base RPC calls ran live at verified_at. Raw response not retained (814 KB); sha256 80b0507f525d28f09dacc5d3f729733ec7bcf03f62af22587dd6d998a8ed194e. Quotes and event logs stripped from this record."
+}
