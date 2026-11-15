@@ -146,7 +146,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     details["cert_spki_bound"] = q["report_data"][64:128] == cert_spki
     details["debug_disabled"] = (int(q["td_attributes"], 16) & 1) == 0
     details["mrtd_in_golden_set"] = q["mrtd"] in golden
-    audit_set, _ = load_audit_ledger(_TEE_AUDITS, "mrtd")
+    audit_set, _ = load_audit_ledger(_TEE_AUDITS, "mrtd", key_length=96)
     details["mrtd_audited"] = q["mrtd"] in audit_set
 
     tdx = phala_tdx.verify_tdx_quote(base64.b64decode(ev["quote"]).hex())

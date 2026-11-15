@@ -89,6 +89,10 @@ The October implementation repairs ACI detached quote/event bindings and NEAR cr
 
 [NEAR route explanation](providers/near-ai.md) · [Maple](providers/maple.md) · [Private Inference](providers/privateinference.md) · [Privatemode](providers/privatemode.md) · [Confidential AI](providers/confidential-ai.md)
 
+## Known limitations
+
+- Attestation verification here takes the hardware root of trust as sound. [TEE.fail](https://tee.fail/) (IEEE S&P '26) showed that a cheap DDR5 memory-bus interposer can extract keys from Intel TDX and AMD SEV-SNP machines — including attestation keys from fully patched hosts in trusted status, which then also unlocks Nvidia GPU Confidential Computing. A cryptographically verified quote therefore does not bound an adversary with physical access to the host's memory bus.
+
 ## Run locally
 
 Use an existing Python environment to inspect and validate the retained evidence:

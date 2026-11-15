@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from pathlib import Path
 
 import pytest
 
@@ -79,25 +80,61 @@ def test_attestation_report_as_dict_includes_scorecard():
     assert d["provider"] == "near-ai"
 
 
-def test_audit_match_truncated_and_case(tmp_path):
+def test_audit_match_exact_and_case(tmp_path):
+    full = "abcdef0123456789" * 4  # 64 hex
     led = tmp_path / "led.json"
-    led.write_text(json.dumps({"audits": [
-        {"k": "22763fe4"},
-        {"k": "ABCDEF0123456789"},
-    ]}))
+    led.write_text(json.dumps({"audits": [{"k": full}]}))
     ids, meta = load_audit_ledger(led, "k")
-    # truncated 8-hex prefix matches a full digest that starts with it
-    assert audit_match("22763fe4aabbccddeeff", ids) == "22763fe4"
+    # exact match only
+    assert audit_match(full, ids) == full
     # keys are lowercased; an uppercase live value still matches
-    assert audit_match("ABCDEF0123456789extra", ids) == "abcdef0123456789"
-    assert audit_match("deadbeefcafebabe", ids) is None
+    assert audit_match(full.upper(), ids) == full
+    # a tampered digest (one hex char changed) must not match
+    tampered = ("b" if full[0] != "b" else "c") + full[1:]
+    assert audit_match(tampered, ids) is None
+    # a value that merely starts with a ledger key does not match
+    assert audit_match(full + "aa", ids) is None
+    assert audit_match(full[:-1], ids) is None
     assert audit_match("", ids) is None
-    assert "abcdef0123456789" in meta
+    assert full in meta
 
 
 def test_load_audit_ledger_rejects_short_or_nonhex_key(tmp_path):
-    for bad in ("", "abc", "nothexxx"):
+    # "22763fe4" is 8 hex chars and was previously accepted as a prefix key
+    for bad in ("", "abc", "nothexxx", "22763fe4", "a" * 63, "a" * 65, "g" * 64):
         led = tmp_path / "bad.json"
         led.write_text(json.dumps({"audits": [{"k": bad}]}))
         with pytest.raises(ValueError):
             load_audit_ledger(led, "k")
+
+
+def test_load_audit_ledger_enforces_declared_key_length(tmp_path):
+    mrtd = "2a" * 48  # chutes MRTD: 96 hex
+    led = tmp_path / "chutes.json"
+    led.write_text(json.dumps({"audits": [{"mrtd": mrtd}]}))
+    ids, _ = load_audit_ledger(led, "mrtd", key_length=96)
+    assert ids == {mrtd}
+    # a 64-hex digest is not a full MRTD and must be rejected at 96
+    led.write_text(json.dumps({"audits": [{"mrtd": "a" * 64}]}))
+    with pytest.raises(ValueError):
+        load_audit_ledger(led, "mrtd", key_length=96)
+
+
+def test_repo_ledgers_hold_only_full_length_keys():
+    root = Path(__file__).resolve().parents[1] / "data" / "audits"
+    near_ids, near_meta = load_audit_ledger(root / "near-ai_cloud-api.json")
+    assert all(len(k) == 64 for k in near_ids)
+    assert len(near_ids) == 4
+    # the retired 8-hex row is history-only and cannot authorize anything
+    assert "22763fe4" not in near_ids
+    assert "22763fe4" not in near_meta
+    assert audit_match("22763fe4" + "ab" * 28, near_ids) is None
+    # tamper control on real evidence: mutate one hex char of a real key
+    real = next(iter(near_ids))
+    flipped = ("0" if real[0] != "0" else "1") + real[1:]
+    assert audit_match(flipped, near_ids) is None
+    tin_ids, _ = load_audit_ledger(root / "tinfoil_confidential-model-router.json",
+                                   "bundle_digest")
+    assert all(len(k) == 64 for k in tin_ids)
+    ch_ids, _ = load_audit_ledger(root / "chutes_tee.json", "mrtd", key_length=96)
+    assert all(len(k) == 96 for k in ch_ids)
