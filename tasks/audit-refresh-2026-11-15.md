@@ -45,3 +45,7 @@ routes to one "not assessed" cell; run teep on zed (keys already in zed `~/.conf
 - Session split doubled finding counts on no-channel routes (Private Inference 9, Privatemode 3); old #...-session anchors break.
 - Stale pages: providers/redpill.md (logging, root SSH), providers/chutes.md (chutes-api archived), README verdict table.
 - gcpfw: first zed run of `uv run --locked` in beat-digest.sh untested; withdrawal history lives only in git history.
+- Final checks 2026-11-15: strict render on live snapshot crashed on rows rejected early -> new "·" not-reached mark (fixed); suite passes with and without NEARAI_VERIFIER_PATH;
+  rubric on live data: R1-R4, R6 pass, R7/R9 fail (real); beat commits notes/teep-parity.md; secret scan of branch diff clean (laptop + zed key values).
+- Caveats: Pass 1 = retained third-party teep captures, not tests in our daily probe; #30 not split; teep-only routes (NanoGPT, Phala direct, neardirect) not added; zed run.sh not scheduled;
+  AMD bulletins published 2026-11-10 (firmware dated 2026-06-26), so exposure-since-disclosure is 5 days.
