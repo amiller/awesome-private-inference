@@ -82,26 +82,34 @@
       "route_ids": [
         "tinfoil-router"
       ],
-      "reviewed_at": "2026-10-14",
+      "reviewed_at": "2026-11-05",
       "implementations": [
         {
           "source": "verifiers/tinfoil.py",
           "entrypoint": "verify(api_key, base_url, model); verify_bundle(bundle, ...)",
           "status": "repository adapter"
+        },
+        {
+          "source": "verifiers/tinfoil_amd.py",
+          "entrypoint": "verify_vcek_chain(vcek_der, report); verify_report_signature(report, vcek_der)",
+          "status": "repository adapter"
         }
       ],
       "checks": [
-        "Release provenance, release/report measurement agreement, selected TLS/HPKE key and runtime configuration checks."
+        "Release provenance, release/report measurement agreement, selected TLS/HPKE key and runtime configuration checks.",
+        "AMD vendor chain: pinned ARK-Genoa/ASK-Genoa anchors (AMD KDS capture 2026-11-05, cross-checked byte-identical to the chain embedded in PyPI tinfoil==0.15.0), ARK self-signature, ARK->ASK and ASK->VCEK (RSA-PSS), VCEK hwID==report chip_id, VCEK bl/tee/snp/ucode SPL==report reported_tcb, ECDSA P-384/SHA-384 report signature over the exact signed bytes; debug policy and structural MBZ checks per report version (2/3/5)."
       ],
       "delegates": [
-        "Sigstore release verification; router trust policy for downstream workers."
+        "Sigstore release verification; router trust policy for downstream workers.",
+        "AMD KDS trust anchors, pinned by DER SHA-256 in verifiers/certs/amd_genoa_provenance.json."
       ],
       "unchecked": [
-        "AMD report signature-chain verification, independent build reproduction and a live worker request."
+        "Independent build reproduction, an encrypted request to a live worker, and authenticated session freshness; per-host bundles without a VCEK leave the SNP report signature unverified (recorded, never passed)."
       ],
       "evidence": [
         "providers/tinfoil.md",
-        "verifiers/tinfoil.py"
+        "verifiers/tinfoil.py",
+        "verifiers/tinfoil_amd.py"
       ]
     },
     {

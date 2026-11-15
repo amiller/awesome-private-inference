@@ -24,18 +24,26 @@ hash of the attestation document.
 re-runs the trust chain end-to-end with no provider-supplied trust roots:
 
 1. Fetch the ATC bundle.
-2. Decompress + parse the 1184-byte SEV-SNP report
+2. Decompress + parse the 1184-byte SEV-SNP report, report versions 2/3/5
    ([`tinfoil_sev.py`](../verifiers/tinfoil_sev.py)).
-3. Verify the Sigstore in-toto DSSE for the bundle's digest against
+3. Verify the AMD vendor chain
+   ([`tinfoil_amd.py`](../verifiers/tinfoil_amd.py)): pinned ARK-Genoa/ASK-Genoa
+   anchors (captured from AMD KDS 2026-11-05, cross-checked byte-identical to
+   the chain embedded in Tinfoil's published client `tinfoil==0.15.0`), ARK
+   self-signature, ARK→ASK and ASK→VCEK RSA-PSS signatures, VCEK
+   hwID == report `chip_id`, VCEK SPLs == report `reported_tcb`, and the
+   ECDSA P-384/SHA-384 signature over the report's signed bytes. Bundles
+   without a VCEK (per-host path) stay unverified with that reason recorded.
+4. Verify the Sigstore in-toto DSSE for the bundle's digest against
    `tinfoilsh/confidential-model-router`'s GitHub Actions release workflow
    identity (cert SAN regex pinned to `^https://github.com/tinfoilsh/confidential-model-router/.github/workflows/.*@refs/tags/.*$`,
    issuer `https://token.actions.githubusercontent.com`).
-4. Cross-check Sigstore-published `snp_measurement` == SEV report measurement.
-5. Decode the bundle's TLS cert SANs (`NN<base32>.{hpke,hatt}.tinfoil.sh`)
+5. Cross-check Sigstore-published `snp_measurement` == SEV report measurement.
+6. Decode the bundle's TLS cert SANs (`NN<base32>.{hpke,hatt}.tinfoil.sh`)
    and confirm:
    - `hpke` SAN bytes == `report_data[32:64]`
    - `hatt` SAN string == `sha256(format ‖ body)` of the attestation doc
-6. Open a live TLS connection to `bundle.domain` and check
+7. Open a live TLS connection to `bundle.domain` and check
    `sha256(SubjectPublicKeyInfo) == report_data[:32]`.
 
 The model-router at `inference.tinfoil.sh` is **one of multiple enclaves** in
@@ -76,7 +84,7 @@ prompt path."
 | Runtime config fully attested | ⚠️ *partial* — see audit below |
 | Client-supplied nonce in `report_data` | ❌ (no nonce slot — freshness is via live TLS pin) |
 | Live GPU attestation (NRAS) | ❌ (Tinfoil checks GPU at boot inside the CVM, not per-request) |
-| VCEK chain → AMD Genoa root | ⚠️ skipped in v1 — VCEK is in the bundle but not chained to AMD's root yet |
+| VCEK chain → AMD Genoa root | ✅ ARK/ASK pinned by DER SHA-256 (AMD KDS 2026-11-05, cross-checked against `tinfoil==0.15.0`); ARK self-signature, ARK→ASK, ASK→VCEK (RSA-PSS); hwID/SPL bound to the report; ECDSA P-384 report signature verified ([`tinfoil_amd.py`](../verifiers/tinfoil_amd.py)) |
 
 ## Runtime-config audit
 
