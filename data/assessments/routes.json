@@ -1696,7 +1696,8 @@
         "verifiers/aci.py",
         "data/routes.json",
         "data/evidence/teep-2026-11-15/SUMMARY.md",
-        "tests/test_aci_boot_registers.py"
+        "tests/test_aci_boot_registers.py",
+        "research/operator-review-2026-11-15/aci.md"
       ],
       "axes": {
         "hardware": {
@@ -1744,12 +1745,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our access review to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "TEE-only routing is enforced, but the upstream list and its acceptance pins come from admin- and pull-controlled config; the phala-direct adapter pins no compose (13 live sessions across 9 unpinned compose hashes on 2026-11-15).",
+          "label": "Routes outside measurement",
+          "evidence": "private-ai-gateway e9b6ae8a; live compose 66e91ac6 and sessions 2026-11-15T17:40Z. research/operator-review-2026-11-15/aci.md",
+          "missing": "A measured or receipt-cited routing table with code pins; authenticated config secrets.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -1791,7 +1792,8 @@
         "verifiers/aci.py",
         "data/routes.json",
         "data/evidence/teep-2026-11-15/SUMMARY.md",
-        "tests/test_aci_boot_registers.py"
+        "tests/test_aci_boot_registers.py",
+        "research/operator-review-2026-11-15/aci.md"
       ],
       "axes": {
         "hardware": {
@@ -1839,12 +1841,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our access review to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "Same deployment as tee.redpill.ai: TEE-only routing is enforced, but upstreams and their pins come from admin- and pull-controlled config; phala-direct pins no compose.",
+          "label": "Routes outside measurement",
+          "evidence": "private-ai-gateway e9b6ae8a; live compose 66e91ac6 2026-11-15. research/operator-review-2026-11-15/aci.md",
+          "missing": "A measured or receipt-cited routing table with code pins; authenticated config secrets.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -1886,7 +1888,8 @@
         "verifiers/aci.py",
         "data/routes.json",
         "data/evidence/teep-2026-11-15/SUMMARY.md",
-        "tests/test_aci_boot_registers.py"
+        "tests/test_aci_boot_registers.py",
+        "research/operator-review-2026-11-15/aci.md"
       ],
       "axes": {
         "hardware": {
@@ -1935,10 +1938,10 @@
         },
         "operator": {
           "state": "gap",
-          "reason": "The measured hostname policy permits a non-TEE backend; gateway attestation cannot constrain the whole plaintext computation.",
+          "reason": "This host is not TEE-only: upstreams without a TEE serve unless the request sets aci_verified. The admin-controlled routing findings also apply.",
           "label": "Non-TEE backend allowed",
-          "evidence": "The measured hostname policy permits a non-TEE backend; gateway attestation cannot constrain the whole plaintext computation.",
-          "missing": "Establish and test an approved route policy that constrains every plaintext-holding backend; a gateway-only quote is insufficient.",
+          "evidence": "Gateway compose line 273; handlers.rs:1023 at e9b6ae8a. research/operator-review-2026-11-15/aci.md",
+          "missing": "TEE-only enforcement on this host, plus a pinned routing table.",
           "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -1981,7 +1984,8 @@
         "verifiers/near_ai.py",
         "data/routes.json",
         "data/evidence/teep-2026-11-15/SUMMARY.md",
-        "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json"
+        "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json",
+        "research/operator-review-2026-11-15/near.md"
       ],
       "axes": {
         "hardware": {
@@ -2029,12 +2033,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our access review to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "An unmeasured RDS table maps models to backends or external providers, and the gateway enforces no compose, app or image policy.",
+          "label": "Operator picks the backend",
+          "evidence": "cloud-api b26eb029 verification.rs:282,326, measurement.rs:93-110, model.rs:1626-1645; gateway compose 2643bc7a (2026-11-14). research/operator-review-2026-11-15/near.md F1",
+          "missing": "SSH in the non-dev OS images; gateway log and telemetry egress; a live substitution test.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
@@ -2076,7 +2080,8 @@
         "verifiers/near_ai.py",
         "data/routes.json",
         "data/evidence/teep-2026-11-15/SUMMARY.md",
-        "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json"
+        "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json",
+        "research/operator-review-2026-11-15/near.md"
       ],
       "axes": {
         "hardware": {
@@ -2124,12 +2129,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our access review to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "Protected fields decrypt only in model CVMs, but the signing key is derived app-wide from KMS, the app and KMS contracts are owned by one externally owned account with no timelock, and post-boot deploys set an env map the action log does not record.",
+          "label": "App-wide key, unlogged env",
+          "evidence": "inference-proxy signing.rs:149-167; compose-manager main.rs:404-425,638-645; v0.0.585 action log; Base owner() reads 2026-11-15. research/operator-review-2026-11-15/near.md F2-F4",
+          "missing": "The commit behind proxy 60d08c20; fusion and redis code; DstackKms owner powers; the full authorized-compose set.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
@@ -2170,7 +2175,8 @@
         "providers/near-ai.md",
         "verifiers/near_ai.py",
         "data/routes.json",
-        "data/evidence/teep-2026-11-15/SUMMARY.md"
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "research/operator-review-2026-11-15/near.md"
       ],
       "axes": {
         "hardware": {
@@ -2218,12 +2224,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our access review to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "Direct avoids the gateway's model mapping, but it served the same app 2c0a0c96 and compose e8416a02, so the app-wide key and unlogged deploy env apply.",
+          "label": "App-wide key, unlogged env",
+          "evidence": "teep neardirect capture 2026-11-14; inference-proxy signing.rs:149-167; compose-manager main.rs:404-425. research/operator-review-2026-11-15/near.md",
+          "missing": "An encrypted request through our client; other models' direct hosts.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
@@ -2265,7 +2271,8 @@
         "research/review-2026-10-13/review.md",
         "data/routes.json",
         "providers/tinfoil.md",
-        "verifiers/certs/amd_genoa_tcb_minimum.json"
+        "verifiers/certs/amd_genoa_tcb_minimum.json",
+        "research/operator-review-2026-11-15/tinfoil.md"
       ],
       "axes": {
         "hardware": {
@@ -2315,12 +2322,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "An April 26 source audit traced two named external-config inputs to non-prompt uses for that deployment. The general schema permits unmeasured inputs; that historical result does not establish operator constraints for the currently observed reference.",
-          "label": "Our re-review to do",
-          "evidence": "An April 26 source audit traced two named external-config inputs to non-prompt uses for that deployment. The general schema permits unmeasured inputs; that historical result does not establish operator constraints for the currently observed reference.",
-          "missing": "Repeat the input-to-plaintext-path analysis for the currently assessed code/configuration, retaining the exact version and relevant operator-access tests.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "In router v0.0.176 an unvalidated fragment from the control plane's /v1/models is deep-merged into model:\"auto\" request bodies, so the control plane can replace messages or select web search. An unsigned runtime config assigns customers to attested replicas, which run below AMD's Genoa TCB minimum.",
+          "label": "Control-plane prompt rewriting",
+          "evidence": "Read at tinfoilsh/confidential-model-router ef64384: manager/model_metadata.go:147-183 (reasoning_params from the control plane), autoroute/autoroute.go:271-304,343-359 (merge without a key allow-list), manager/manager.go:743 (router-config fetched every minute, no hash). Live TCB 2026-11-15. research/operator-review-2026-11-15/tinfoil.md",
+          "missing": "Production reasoning_params and router-config contents; the live minimum_tcb Tinfoil publishes; the admin-SSH implementation in tinfoil-config.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -2360,7 +2367,8 @@
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json",
-        "data/evidence/teep-2026-11-15/SUMMARY.md"
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "research/operator-review-2026-11-15/venice.md"
       ],
       "axes": {
         "hardware": {
@@ -2408,12 +2416,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our access review to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "The proxy and model containers that read plaintext are deployed after boot by compose-manager from cvm-compose-files git tags on a bearer token, outside the measured compose; their logs leave the CVM.",
+          "label": "Runtime-deployed serving code",
+          "evidence": "NEAR app_compose e8416a02 and action log (teep capture 2026-11-13, 114 deploys 10-21..11-13); compose-manager c7fbaaf; cvm-compose-files c330ab4a. research/operator-review-2026-11-15/venice.md",
+          "missing": "Measurement of each deploy or a client-checked tag allowlist; a pinned log policy.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -2453,7 +2461,8 @@
       "sources": [
         "research/review-2026-10-13/landscape.md",
         "data/routes.json",
-        "data/evidence/teep-2026-11-15/SUMMARY.md"
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "research/operator-review-2026-11-15/venice.md"
       ],
       "axes": {
         "hardware": {
@@ -2501,12 +2510,12 @@
           ]
         },
         "operator": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our access review to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Trace operator credentials, debug access and unmeasured inputs to their effects on protected data in the exact deployed version; retain checks and counterexamples.",
-          "limitation": "evidence",
+          "state": "gap",
+          "reason": "Venice reaches the gateway on api.redpill.ai, where TEE routing is opt-in; gateway routes are mutable and the last hop's code is unpinned.",
+          "label": "Non-TEE-only gateway host",
+          "evidence": "teep captures 2026-11-13; gateway e9b6ae8a; live sessions 2026-11-15. research/operator-review-2026-11-15/venice.md",
+          "missing": "Proof that Venice sets aci_verified or uses a TEE-only host; relayed receipts.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -2547,7 +2556,8 @@
         "verifiers/chutes.py",
         "data/audits/chutes_tee.json",
         "data/routes.json",
-        "data/evidence/teep-2026-11-15/SUMMARY.md"
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "research/operator-review-2026-11-15/chutes.md"
       ],
       "axes": {
         "hardware": {
@@ -2598,10 +2608,10 @@
         },
         "operator": {
           "state": "gap",
-          "reason": "Serving code is outside the measured registers; the base-image check cannot constrain changes to that code.",
+          "reason": "The chute code that receives plaintext is excluded from measurement; the control plane chooses the E2E key, reads default-path prompts and sets the reference values. chutesai/chutes#75 is unanswered since 2026-06-18, and the control-plane source (chutes-api) is archived since 2026-09-03.",
           "label": "Code can change unmeasured",
-          "evidence": "Serving code is outside the measured registers; the base-image check cannot constrain changes to that code.",
-          "missing": "Show the measured/approved boundary prevents operator serving-code changes that log or disclose prompts; retain a controlled rejection test.",
+          "evidence": "sek8s cfsv_wrapper.py:54 at 08d79872; chutes-api e2e/router.py:140-152, invocation/router.py:505-937 at archived 3b5609f4. research/operator-review-2026-11-15/chutes.md",
+          "missing": "Measured chute code and model revision; quote-bound key discovery; an append-only reference-value log; current control-plane source.",
           "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/31"
