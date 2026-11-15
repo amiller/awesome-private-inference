@@ -1,6 +1,6 @@
 {
   "rubric_version": 3,
-  "scope": "Dated source/evidence assessments with explicit evidence, missing obligations and limitation ownership. Internal states are not security grades; no route was promoted by this editorial clarification.",
+  "scope": "Dated source/evidence assessments with explicit evidence, missing obligations and limitation ownership. Internal states are not security grades. The 2026-11-15 re-review moved cells on new evidence; none was promoted to established.",
   "reference_baselines": {
     "aci-gateway": {
       "aci-gateway|aci-gateway/shared-workload|compose_hash|reported workload": [
@@ -1689,31 +1689,33 @@
       "id": "aci-gateway-tee-redpill",
       "label": "TEE RedPill",
       "architecture": "Intel TDX",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json",
         "verifiers/aci.py",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "tests/test_aci_boot_registers.py"
       ],
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete.",
-          "label": "Our boot check missing",
-          "evidence": "The adapter implements TDX quote appraisal and statement/event-log bindings. Expected MRTD and RTMR0\u20132 are not fully checked.",
-          "missing": "Pin the reviewed boot profile and compare authenticated MRTD/RTMR0\u20132; reject a genuine quote for a different boot image.",
-          "limitation": "ours",
+          "reason": "As of 2026-11-15 our adapter pins the gateway boot registers (MRTD, RTMR0-2 derived with dstack-mr) and replays the retained 2d27859e gateway quote (os image 8db40cb2, 16 vCPU) green. No live run with the merged adapter is retained, so the gateway TCB status comes from mocked collateral, and backend hardware evidence is not appraised by our adapter.",
+          "label": "Our live TCB run to do",
+          "evidence": "verifiers/aci.py and verifiers/dstack_boot_registers.py (merge a565dee). tests/test_aci_boot_registers.py replays data/observations/evidence/sha256/2d27859e....json with tee_boot_config and tee_hardware_config True, and rejects each tampered register and a genuine quote for an unpinned image; Intel collateral is mocked in that replay. teep 6548996 on tee.redpill.ai 2026-11-15 (data/evidence/teep-2026-11-15/runs/phalacloud_qwen_qwen3.8-27b_20261115T170151Z/report.txt): gateway quote signature, Intel chain, debug bit 0 and 4-RTMR event-log replay pass; aci_session_verified pinned 8 backend sessions as genuine TDX and GPU with allowed MRTD/MRSEAM, workload policy not checked (teep's check, not ours).",
+          "missing": "Run the merged adapter live and retain the gateway Intel PCS TCB status; appraise backend (inference host) CPU/GPU evidence in our adapter, where backend_evidence_verified is still false.",
+          "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/27"
           ]
         },
         "recipient": {
           "state": "partial",
-          "reason": "Gateway keyset binding is checked. No harmless request binds the selected backend; keyset continuity is unendorsed.",
-          "label": "Our backend key test to do",
-          "evidence": "Gateway keyset binding is implemented; no complete retained request test binds the selected backend.",
-          "missing": "Verify a harmless prompt is encrypted to a key bound to the selected backend and the live channel; reject a substituted recipient key before release. Include keyset continuity.",
+          "reason": "On 2026-11-15 teep sent an E2EE v2 prompt through tee.redpill.ai to a gateway key whose keyset digest and KMS custody chain verified, over a TLS key bound to the attestation. Our adapter has not run this test, and the gateway forwards plaintext to a backend whose workload policy no client checks.",
+          "label": "Gateway key tested by teep only",
+          "evidence": "teep 6548996, phalacloud qwen/qwen3.8-27b (data/evidence/teep-2026-11-15/runs/phalacloud_qwen_qwen3.8-27b_20261115T170151Z/report.txt): aci_key_custody, tls_key_binding and gateway_tee_reportdata_binding pass; e2ee_usable decrypted 17 fields. teep exited 1 with \"capture self-check: reverify report differs from capture\" (data/evidence/teep-2026-11-15/SUMMARY.md). For z-ai/glm-5.3-flash teep refused before sending (data/evidence/teep-2026-11-15/runs/phalacloud_z-ai_glm-5.3-flash_20261115T170116Z/report.txt): a session uses channel binding type proxy_image_sha256, which the ACI/1 draft lists as a published extension and teep 6548996 does not implement. teep docs/attestation_gaps/aci_gateway.md residual 1: the inference host is unattested to the client and the client nonce does not reach it.",
+          "missing": "Run the recipient test in our adapter and reject a substituted recipient key before send; bind the backend that receives the forwarded prompt to an approved workload policy; explain the teep capture self-check failure.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -1721,11 +1723,11 @@
         },
         "reply": {
           "state": "partial",
-          "reason": "Gateway nonce binding is checked. No harmless prompt/reply exchange through the selected backend is retained.",
-          "label": "Our backend reply test to do",
-          "evidence": "Gateway nonce binding is implemented; no complete retained request test covers the reply from the selected backend.",
-          "missing": "Verify a harmless prompt/reply exchange through the selected backend; reject substituted reply keys, stale evidence and replay.",
-          "limitation": "evidence",
+          "reason": "teep verified the signed ACI receipt, including the request hash, for a 2026-11-15 E2EE exchange on tee.redpill.ai. Until that receipt is checked, E2EE v2 response fields are not authenticated against a relay, and a streamed response reaches the client before the receipt exists.",
+          "label": "Receipt only after stream",
+          "evidence": "data/evidence/teep-2026-11-15/runs/phalacloud_qwen_qwen3.8-27b_20261115T170151Z/report.txt and manifest.json: aci_receipt_verified \"receipt verified, including the request hash\". teep docs/attestation_gaps/aci_gateway.md residual 10 (E2EE v2 responses unauthenticated except through the receipt) and 12 (stream delivered before any signed statement; on 2026-11-13 a cut stream's receipt body_hash matched no received prefix). nonce_match fails: freshness rests on the gateway REPORTDATA nonce. Our adapter does not verify receipts.",
+          "missing": "Verify receipts in our adapter and reject a response whose receipt is missing or does not match before relying on it. Authenticating chunks before delivery, or a receipt for a cancelled stream, needs a gateway change.",
+          "limitation": "mixed",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -1753,12 +1755,12 @@
           ]
         },
         "downstream": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our worker test to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
-          "limitation": "evidence",
+          "state": "partial",
+          "reason": "On 2026-11-15 teep pinned 8 attested backend sessions for qwen/qwen3.8-27b, so the gateway served the request only through verified upstreams. Sessions are gateway snapshots without the client nonce, no workload policy was applied to the backend, and the attestation names no backend for the model.",
+          "label": "Sessions pinned; workload unchecked",
+          "evidence": "data/evidence/teep-2026-11-15/runs/phalacloud_qwen_qwen3.8-27b_20261115T170151Z/report.txt: aci_session_verified \"8 attested sessions pinned: genuine TDX and GPU with allowed MRTD/MRSEAM, workload policy not checked\"; aci_backend_named fails (\"the attestation binds no backend for the requested model\"); compose_binding fails (\"ACI/1 publishes no compose manifest for the inference host\"); measured_model_weights fails. teep docs/attestation_gaps/aci_gateway.md residual 1.",
+          "missing": "Apply an approved workload policy to the backend model CVM and bind the requested model to the request in our adapter; test worker and model substitution.",
+          "limitation": "mixed",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -1775,28 +1777,30 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "aci-gateway-phala",
       "label": "Phala hostname",
       "architecture": "Intel TDX",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json",
         "verifiers/aci.py",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "tests/test_aci_boot_registers.py"
       ],
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete.",
-          "label": "Our boot check missing",
-          "evidence": "The adapter implements TDX quote appraisal and statement/event-log bindings. Expected MRTD and RTMR0\u20132 are not fully checked.",
-          "missing": "Pin the reviewed boot profile and compare authenticated MRTD/RTMR0\u20132; reject a genuine quote for a different boot image.",
-          "limitation": "ours",
+          "reason": "As of 2026-11-15 our adapter pins the gateway boot registers (MRTD, RTMR0-2 derived with dstack-mr) and replays the retained 2d27859e gateway quote (os image 8db40cb2, 16 vCPU) green. No live run with the merged adapter is retained, so the gateway TCB status comes from mocked collateral, and backend hardware evidence is not appraised by our adapter.",
+          "label": "Our live TCB run to do",
+          "evidence": "verifiers/aci.py and verifiers/dstack_boot_registers.py (merge a565dee). tests/test_aci_boot_registers.py replays data/observations/evidence/sha256/2d27859e....json with tee_boot_config and tee_hardware_config True, and rejects each tampered register and a genuine quote for an unpinned image; Intel collateral is mocked in that replay.",
+          "missing": "Run the merged adapter live and retain the gateway Intel PCS TCB status; appraise backend (inference host) CPU/GPU evidence in our adapter, where backend_evidence_verified is still false.",
+          "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/27"
           ]
@@ -1868,28 +1872,30 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "aci-gateway-api-redpill",
       "label": "Ordinary RedPill",
       "architecture": "Intel TDX",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "data/reviews/decisions/chg-b69f2fb6d3774d63dbf5612b560ea77d.json",
         "verifiers/aci.py",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "tests/test_aci_boot_registers.py"
       ],
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "Captured quote-appraisal and RTMR3 evidence support narrow gateway bindings; boot MRTD/RTMR0\u20132 verification remains incomplete.",
-          "label": "Our boot check missing",
-          "evidence": "The adapter implements TDX quote appraisal and statement/event-log bindings. Expected MRTD and RTMR0\u20132 are not fully checked.",
-          "missing": "Pin the reviewed boot profile and compare authenticated MRTD/RTMR0\u20132; reject a genuine quote for a different boot image.",
-          "limitation": "ours",
+          "reason": "As of 2026-11-15 our adapter pins the gateway boot registers (MRTD, RTMR0-2 derived with dstack-mr) and replays the retained 2d27859e gateway quote (os image 8db40cb2, 16 vCPU) green. No live run with the merged adapter is retained, so the gateway TCB status comes from mocked collateral, and backend hardware evidence is not appraised by our adapter.",
+          "label": "Our live TCB run to do",
+          "evidence": "verifiers/aci.py and verifiers/dstack_boot_registers.py (merge a565dee). tests/test_aci_boot_registers.py replays data/observations/evidence/sha256/2d27859e....json with tee_boot_config and tee_hardware_config True, and rejects each tampered register and a genuine quote for an unpinned image; Intel collateral is mocked in that replay.",
+          "missing": "Run the merged adapter live and retain the gateway Intel PCS TCB status; appraise backend (inference host) CPU/GPU evidence in our adapter, where backend_evidence_verified is still false.",
+          "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/27"
           ]
@@ -1961,28 +1967,30 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "near-ai-gateway-plain",
       "label": "Gateway HTTPS",
       "architecture": "Intel TDX + GPU",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "providers/near-ai.md",
         "verifiers/near_ai.py",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json"
       ],
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain.",
-          "label": "Our route proof to do",
-          "evidence": "The gateway adapter implements selected TDX/GPU appraisal. There is no complete retained hardware-evidence chain for every recipient on this actual client path.",
-          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and recipient/reply key binding to their separate columns.",
-          "limitation": "evidence",
+          "reason": "On 2026-11-15 the merged verifier appraised the NEAR gateway and all three z-ai/glm-5.3-flash model CVMs: Intel TCB UpToDate, debug off, event log replayed, boot registers (MRTD, RTMR1-2) pinned, GPU verdict true. RTMR0 is not derived for NEAR VM shapes, so hardware configuration is unchecked.",
+          "label": "Our RTMR0 pin missing",
+          "evidence": "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json: tcb_current, tee_debug_disabled, event_log_replayed, tee_boot_config and gpu_attested true; tee_hardware_config null; tcb_statuses gateway and 3 models UpToDate. Per-instance checks: commit ef56f97, fixture tests/fixtures/near_glm53_three_instances.json. teep 6548996 nearcloud runs agree (data/evidence/teep-2026-11-15/runs/nearcloud_*/report.txt).",
+          "missing": "Derive and pin RTMR0 for NEAR VM shapes (verifiers/near_ai.py sets tee_hardware_config to None).",
+          "limitation": "ours",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
@@ -1991,7 +1999,7 @@
           "state": "partial",
           "reason": "Some quote/key checks exist, but the actual TLS/request path and selected backend are not fully bound.",
           "label": "Our request test to do",
-          "evidence": "Some quote/key checks exist, but the actual TLS/request path and selected backend are not fully bound.",
+          "evidence": "Some quote/key checks exist, but the actual TLS/request path and selected backend are not fully bound. teep 6548996 on 2026-11-15 found the gateway TLS SPKI bound to its attestation (tls_key_binding pass, data/evidence/teep-2026-11-15/runs/nearcloud_*/report.txt); that run used E2EE, not this plain path.",
           "missing": "Bind the actual TLS/request path and selected backend to the attested key; reject a substituted recipient key before the prompt is sent.",
           "limitation": "evidence",
           "issue_urls": [
@@ -2011,10 +2019,10 @@
         },
         "code": {
           "state": "partial",
-          "reason": "Per-model anchors and compose comparisons exist; authenticated compose-manager actions and complete source-to-workload closure remain incomplete.",
-          "label": "Our action check missing",
-          "evidence": "Per-model anchor and compose comparisons are implemented; compose-manager action closure is incomplete.",
-          "missing": "Authenticate compose-manager actions through the quote/event chain and map the requested model to approved reproducible code/artifacts.",
+          "reason": "On 2026-11-15 the only failing check for z-ai/glm-5.3-flash was compose_hash_committed: the three instance compose hashes are quote-bound and authorized on chain, but the hermes anchor our verifier reads does not list the model. Compose-manager action closure is still incomplete.",
+          "label": "Our anchor lacks glm-5.3-flash",
+          "evidence": "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json: model_composes for three instances, compose hashes c900dc73..., e8416a02..., a7de0bba..., each quote_compose_matches and chain_authorized true, anchored false; verification_status rejected. Same observation in commit ef56f97. teep sigstore_verification fails for image digest sha256:079a14b41deb11e0 (HTTP 404) on nearcloud and neardirect (data/evidence/teep-2026-11-15/SUMMARY.md).",
+          "missing": "Review and anchor each compose that serves a model (three distinct composes serve glm-5.3-flash); authenticate compose-manager actions through the quote/event chain; map the requested model to approved reproducible artifacts.",
           "limitation": "ours",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
@@ -2033,11 +2041,11 @@
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our worker test to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
-          "limitation": "evidence",
+          "reason": "NEAR lists several instances per model and the gateway picks one per request. Both teep (c1f253a) and our verifier (ef56f97) now check every listed instance, but holders of the shared key that NEAR does not list are invisible to the client, and nothing binds the serving instance to the request.",
+          "label": "Gateway picks among 3 composes",
+          "evidence": "On 2026-11-15 NEAR listed z-ai/glm-5.3-flash on three instances (19aea169..., a8a25faa..., cc796618...) with three different compose hashes and one signing key 0x3b753b44...; instance a8a25faa... is also the sole instance listed for Qwen/Qwen3.8-27B (commit ef56f97, fixture tests/fixtures/near_glm53_three_instances.json). teep 4ecddb6 accepts an attested model name that differs from the requested one; our verifier records model_names_match_request, true on 2026-11-15 (data/evidence/near-2026-11-15/glm-5.3-flash-verify.json).",
+          "missing": "Bind the instance and model that served each request to that request; reject instance or model substitution and insecure fallback.",
+          "limitation": "mixed",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
@@ -2046,7 +2054,7 @@
           "state": "partial",
           "reason": "The repository has per-model pinned anchors distinct from chain authorization. Approval and fail-closed behavior of the actual sending client remain unproven.",
           "label": "Our refusal test to do",
-          "evidence": "Repository per-model pins are distinct from on-chain provider authorization; the sending client policy was not validated end to end.",
+          "evidence": "Repository per-model pins are distinct from on-chain provider authorization; the sending client policy was not validated end to end. On 2026-11-15 NEAR listed z-ai/glm-5.3-flash on three instances (19aea169..., a8a25faa..., cc796618...) with three different compose hashes and one signing key 0x3b753b44...; instance a8a25faa... is also the sole instance listed for Qwen/Qwen3.8-27B (commit ef56f97, fixture tests/fixtures/near_glm53_three_instances.json). Each compose was chain-authorized, so a client pinned to the key cannot tell which of the three composes served a request.",
           "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
           "limitation": "evidence",
           "issue_urls": [
@@ -2054,38 +2062,40 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "near-ai-gateway-e2ee",
       "label": "E2EE through gateway",
       "architecture": "Intel TDX + GPU",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "providers/near-ai.md",
         "verifiers/near_ai.py",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md",
+        "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json"
       ],
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "The repository checks available TDX/GPU evidence, but the route lacks the complete quote, workload and actual-request proof chain.",
-          "label": "Our route proof to do",
-          "evidence": "The gateway adapter implements selected TDX/GPU appraisal. There is no complete retained hardware-evidence chain for every recipient on this actual client path.",
-          "missing": "Retain the authenticated CPU/GPU evidence and policy checks for the actual gateway/worker recipients; leave workload identity and recipient/reply key binding to their separate columns.",
-          "limitation": "evidence",
+          "reason": "On 2026-11-15 the merged verifier appraised the NEAR gateway and all three z-ai/glm-5.3-flash model CVMs: Intel TCB UpToDate, debug off, event log replayed, boot registers (MRTD, RTMR1-2) pinned, GPU verdict true. RTMR0 is not derived for NEAR VM shapes, so hardware configuration is unchecked.",
+          "label": "Our RTMR0 pin missing",
+          "evidence": "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json: tcb_current, tee_debug_disabled, event_log_replayed, tee_boot_config and gpu_attested true; tee_hardware_config null; tcb_statuses gateway and 3 models UpToDate. Per-instance checks: commit ef56f97, fixture tests/fixtures/near_glm53_three_instances.json. teep 6548996 nearcloud runs agree (data/evidence/teep-2026-11-15/runs/nearcloud_*/report.txt).",
+          "missing": "Derive and pin RTMR0 for NEAR VM shapes (verifiers/near_ai.py sets tee_hardware_config to None).",
+          "limitation": "ours",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
         },
         "recipient": {
-          "state": "unknown",
-          "reason": "No fixed deployed exchange was verified. Prompt-field encryption to the attested model key has no retained test on this route.",
-          "label": "Our recipient test to do",
-          "evidence": "No fixed deployed exchange was verified. Prompt-field encryption to the attested model key has no retained test on this route.",
-          "missing": "Verify a harmless prompt is encrypted only to a key bound to the attested model workload and the pinned route; reject a substituted recipient key before the prompt is sent.",
+          "state": "partial",
+          "reason": "On 2026-11-15 teep encrypted prompts through the NEAR gateway to the ed25519 key bound in the model CVM REPORTDATA, over a TLS key bound to the gateway attestation, and decrypted the replies; for glm-5.3-flash it verified all three listed instances. Our verifier has no request test. The key is shared by three instances running different composes.",
+          "label": "Third-party E2EE test only",
+          "evidence": "teep 6548996 nearcloud z-ai/glm-5.3-flash (Instances: 3) and Qwen/Qwen3.8-27B: nonce_match, tls_key_binding, e2ee_capable, e2ee_usable pass (data/evidence/teep-2026-11-15/runs/nearcloud_*/report.txt). On 2026-11-15 NEAR listed z-ai/glm-5.3-flash on three instances (19aea169..., a8a25faa..., cc796618...) with three different compose hashes and one signing key 0x3b753b44...; instance a8a25faa... is also the sole instance listed for Qwen/Qwen3.8-27B (commit ef56f97, fixture tests/fixtures/near_glm53_three_instances.json). teep 74834db: on /v1/completions only prompt is encrypted; stop and user pass in plaintext.",
+          "missing": "Run a harmless encrypted request in our verifier and reject a substituted recipient key before send; record which request fields stay plaintext per endpoint.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
@@ -2095,7 +2105,7 @@
           "state": "gap",
           "reason": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified.",
           "label": "Reply key substitutable",
-          "evidence": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified.",
+          "evidence": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified. 2026-11-15: teep decrypted reply fields on nearcloud (data/evidence/teep-2026-11-15/runs/nearcloud_*/report.txt); an exchange through an honest gateway does not test reply-key substitution.",
           "missing": "Verify a fixed, version-pinned client/protocol/deployment rejects reply-key substitution before reply disclosure; a later receipt is insufficient.",
           "limitation": "reviewed_system",
           "issue_urls": [
@@ -2104,10 +2114,10 @@
         },
         "code": {
           "state": "partial",
-          "reason": "Per-model anchors and compose comparisons exist; authenticated compose-manager actions and complete source-to-workload closure remain incomplete.",
-          "label": "Our action check missing",
-          "evidence": "Per-model anchor and compose comparisons are implemented; compose-manager action closure is incomplete.",
-          "missing": "Authenticate compose-manager actions through the quote/event chain and map the requested model to approved reproducible code/artifacts.",
+          "reason": "On 2026-11-15 the only failing check for z-ai/glm-5.3-flash was compose_hash_committed: the three instance compose hashes are quote-bound and authorized on chain, but the hermes anchor our verifier reads does not list the model. Compose-manager action closure is still incomplete.",
+          "label": "Our anchor lacks glm-5.3-flash",
+          "evidence": "data/evidence/near-2026-11-15/glm-5.3-flash-verify.json: model_composes for three instances, compose hashes c900dc73..., e8416a02..., a7de0bba..., each quote_compose_matches and chain_authorized true, anchored false; verification_status rejected. Same observation in commit ef56f97. teep sigstore_verification fails for image digest sha256:079a14b41deb11e0 (HTTP 404) on nearcloud and neardirect (data/evidence/teep-2026-11-15/SUMMARY.md).",
+          "missing": "Review and anchor each compose that serves a model (three distinct composes serve glm-5.3-flash); authenticate compose-manager actions through the quote/event chain; map the requested model to approved reproducible artifacts.",
           "limitation": "ours",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
@@ -2126,11 +2136,11 @@
         },
         "downstream": {
           "state": "partial",
-          "reason": "Requested-model policy is separate from the gateway policy. The complete encrypted request, selected worker and response binding remain unverified.",
-          "label": "Our worker test to do",
-          "evidence": "Requested-model policy is separate from the gateway policy. The complete encrypted request, selected worker and response binding remain unverified.",
-          "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
-          "limitation": "evidence",
+          "reason": "NEAR lists several instances per model and the gateway picks one per request. Both teep (c1f253a) and our verifier (ef56f97) now check every listed instance, but holders of the shared key that NEAR does not list are invisible to the client, and nothing binds the serving instance to the request.",
+          "label": "Gateway picks among 3 composes",
+          "evidence": "On 2026-11-15 NEAR listed z-ai/glm-5.3-flash on three instances (19aea169..., a8a25faa..., cc796618...) with three different compose hashes and one signing key 0x3b753b44...; instance a8a25faa... is also the sole instance listed for Qwen/Qwen3.8-27B (commit ef56f97, fixture tests/fixtures/near_glm53_three_instances.json). teep 4ecddb6 accepts an attested model name that differs from the requested one; our verifier records model_names_match_request, true on 2026-11-15 (data/evidence/near-2026-11-15/glm-5.3-flash-verify.json).",
+          "missing": "Bind the instance and model that served each request to that request; reject instance or model substitution and insecure fallback.",
+          "limitation": "mixed",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
@@ -2139,7 +2149,7 @@
           "state": "partial",
           "reason": "The repository has per-model pinned anchors distinct from chain authorization. Approval and fail-closed behavior of the actual sending client remain unproven.",
           "label": "Our refusal test to do",
-          "evidence": "Repository per-model pins are distinct from on-chain provider authorization; the sending client policy was not validated end to end.",
+          "evidence": "Repository per-model pins are distinct from on-chain provider authorization; the sending client policy was not validated end to end. On 2026-11-15 NEAR listed z-ai/glm-5.3-flash on three instances (19aea169..., a8a25faa..., cc796618...) with three different compose hashes and one signing key 0x3b753b44...; instance a8a25faa... is also the sole instance listed for Qwen/Qwen3.8-27B (commit ef56f97, fixture tests/fixtures/near_glm53_three_instances.json). Each compose was chain-authorized, so a client pinned to the key cannot tell which of the three composes served a request.",
           "missing": "Identify the actual client approval authority and policy revision, and test refusal of unapproved updates and rollback.",
           "limitation": "evidence",
           "issue_urls": [
@@ -2147,38 +2157,39 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "near-ai-direct",
       "label": "Direct model",
       "architecture": "Intel TDX + GPU",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "providers/near-ai.md",
         "verifiers/near_ai.py",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md"
       ],
       "axes": {
         "hardware": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our hardware test to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "state": "partial",
+          "reason": "On 2026-11-15 teep appraised the neardirect model CVMs for z-ai/glm-5.3-flash and Qwen/Qwen3.8-27B: Intel TCB UpToDate, debug off, MRTD/MRSEAM in policy, event log replayed against all four RTMRs, 8 GPUs answering the client nonce. No run of our verifier on the direct path is retained.",
+          "label": "Third-party check only",
+          "evidence": "data/evidence/teep-2026-11-15/runs/neardirect_z-ai_glm-5.3-flash_20261115T165919Z/report.txt, data/evidence/teep-2026-11-15/runs/neardirect_Qwen_Qwen3.8-27B_20261115T165927Z/report.txt; tee_boot_config is an allowed failure in teep.",
+          "missing": "Run our verifier on the direct endpoints and retain the result, including boot and hardware register pins.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
         },
         "recipient": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our recipient test to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Verify that a harmless prompt is encrypted only to a key bound to the attested workload and the live channel; reject a substituted recipient key before the prompt is sent.",
+          "state": "partial",
+          "reason": "On 2026-11-15 teep encrypted prompts on neardirect to the ed25519 key bound in the model CVM REPORTDATA, over a TLS key bound to the attestation, and decrypted the replies. Our verifier has no request test on this path.",
+          "label": "Third-party E2EE test only",
+          "evidence": "data/evidence/teep-2026-11-15/runs/neardirect_*/report.txt: nonce_match, tls_key_binding, e2ee_capable, e2ee_usable pass for z-ai/glm-5.3-flash and Qwen/Qwen3.8-27B.",
+          "missing": "Run a harmless encrypted request in our verifier and reject a substituted recipient key before send; record which request fields stay plaintext per endpoint.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
@@ -2240,39 +2251,40 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "tinfoil-router",
       "label": "Router \u2192 worker",
       "architecture": "AMD SEV-SNP",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "verifiers/tinfoil.py",
         "research/review-2026-10-13/review.md",
         "data/routes.json",
-        "providers/tinfoil.md"
+        "providers/tinfoil.md",
+        "verifiers/certs/amd_genoa_tcb_minimum.json"
       ],
       "axes": {
         "hardware": {
-          "state": "unknown",
-          "reason": "Our verifier does not authenticate the AMD VCEK chain or SNP report signature. Hardware assurance is therefore unestablished here; this is a limitation of our instrument, not evidence that Tinfoil lacks hardware attestation.",
-          "label": "Our AMD check missing",
-          "evidence": "Our verifier does not authenticate the AMD VCEK chain or SNP report signature. Hardware assurance is therefore unestablished here; this is a limitation of our instrument, not evidence that Tinfoil lacks hardware attestation.",
-          "missing": "Authenticate the AMD report signature and VCEK chain against explicit roots/TCB policy, then bind the authenticated report to the measurement and session keys.",
-          "limitation": "ours",
+          "state": "gap",
+          "reason": "Our adapter now authenticates the AMD ARK/ASK/VCEK chain and the SNP report signature. On 2026-11-15 both Tinfoil hosts we read reported TCB[SNP] below 0x1D, the value AMD-SB-3037/3038 (initial version 2026-11-10) give for GenoaPI_1.0.0.J, a firmware AMD released 2026-06-26.",
+          "label": "TCB below AMD fix level",
+          "evidence": "verifiers/tinfoil_amd.py and verifiers/certs/amd_genoa_tcb_minimum.json (merge 9b4d03a). Live reads 2026-11-15: router-0.tinfoil.sh bl=0x0a tee=0 snp=0x1B ucode=0x58; inference.tinfoil.sh (17:15Z) bl=0x0a tee=0 snp=0x17 ucode=0x54, also below the AMD-SB-3027 microcode minimum 0x56. providers/tinfoil.md records that the chain verifies and the verifier rejects the row on TCB.",
+          "missing": "Tinfoil hosts reporting TCB[SNP] >= 0x1D and the stepping microcode minimum, retained as an authenticated report. The bl and tee minimums are pinned from observation; no AMD bulletin states them.",
+          "limitation": "reviewed_system",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/26"
           ]
         },
         "recipient": {
           "state": "partial",
-          "reason": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication and the encrypted request remain unverified.",
+          "reason": "Live TLS-key pin and HPKE/report-data consistency are checked, and since 2026-11-15 the AMD report is authenticated, but the platform TCB is below AMD's minimum and the encrypted request remains unverified.",
           "label": "Our recipient proof to do",
           "evidence": "Live TLS-key pin and HPKE/report-data consistency are checked, but hardware authentication and the encrypted request remain unverified.",
-          "missing": "Verify a harmless prompt is encrypted to the HPKE key bound to the attested workload and the pinned TLS channel; reject a substituted recipient key. First close the AMD authentication dependency.",
+          "missing": "Verify a harmless prompt is encrypted to the HPKE key bound to the attested workload and the pinned TLS channel; reject a substituted recipient key. AMD report authentication now passes; the platform TCB is below AMD's minimum (Hardware).",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/26",
@@ -2284,7 +2296,7 @@
           "reason": "Authenticated session freshness and the encrypted reply remain unverified.",
           "label": "Our freshness proof to do",
           "evidence": "Authenticated session freshness and the encrypted reply remain unverified.",
-          "missing": "Verify authenticated freshness for the exchange and a harmless encrypted reply; reject substituted reply keys, stale evidence and replay. First close the AMD authentication dependency.",
+          "missing": "Verify authenticated freshness for the exchange and a harmless encrypted reply; reject substituted reply keys, stale evidence and replay. AMD report authentication now passes; the platform TCB is below AMD's minimum (Hardware).",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/26",
@@ -2336,26 +2348,27 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "venice-near",
       "label": "E2EE via NEAR",
       "architecture": "NEAR backend",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "research/review-2026-10-13/landscape.md",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md"
       ],
       "axes": {
         "hardware": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our hardware test to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
+          "state": "partial",
+          "reason": "On 2026-11-15 teep appraised Venice attestations for e2ee-glm-5-3-flash and e2ee-qwen3-8-27b in the dstack format: Intel TCB UpToDate, debug off, MRTD/MRSEAM in policy, event log replayed against all four RTMRs, 8 Hopper GPUs answering the client nonce. No run of our Venice adapter is retained.",
+          "label": "Third-party check only",
+          "evidence": "data/evidence/teep-2026-11-15/runs/venice_e2ee-glm-5-3-flash_20261115T165858Z/report.txt, data/evidence/teep-2026-11-15/runs/venice_e2ee-qwen3-8-27b_20261115T165916Z/report.txt. The REPORTDATA key 0x3b753b44... of e2ee-glm-5-3-flash equals the signing address of NEAR z-ai/glm-5.3-flash (data/evidence/near-2026-11-15/glm-5.3-flash-verify.json). teep tee_boot_config and tee_hardware_config fail as allowed (RTMR0-1 not in teep policy). The models captured differ from the model list in data/routes.json.",
+          "missing": "Retain a run of our Venice adapter with boot and hardware register pins.",
           "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
@@ -2428,27 +2441,28 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "venice-phala",
       "label": "E2EE via Phala",
       "architecture": "Phala backend",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "research/review-2026-10-13/landscape.md",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md"
       ],
       "axes": {
         "hardware": {
-          "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our hardware test to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "missing": "Retain a route-scoped replay authenticating hardware signatures, TCB/debug state and required CPU/GPU evidence under the actual platform policy.",
-          "limitation": "evidence",
+          "state": "partial",
+          "reason": "On 2026-11-15 teep authenticated the ACI gateway quote behind Venice e2ee-glm-5-3-p and 8 Blackwell GPUs answering the client nonce, but the response carries no CPU quote for the inference host. No run of our Venice adapter is retained.",
+          "label": "Inference CPU unattested",
+          "evidence": "data/evidence/teep-2026-11-15/runs/venice_e2ee-glm-5-3-p_20261115T165902Z/report.txt: gateway quote, Intel chain, debug 0 and event-log replay pass; nvidia_signature, nvidia_nonce_client_bound, nvidia_nras_verified pass; tee_quote_present fails. The response has gpu_evidence_omitted false; teep docs/attestation_gaps/aci_gateway.md residual 11 records GPU evidence omitted on 2026-11-12, so its presence varies by date.",
+          "missing": "Inference-host CPU evidence bound to the GPU evidence and the request; a retained run of our adapter.",
+          "limitation": "mixed",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/30"
           ]
@@ -2499,9 +2513,9 @@
         },
         "downstream": {
           "state": "unknown",
-          "reason": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
-          "label": "Our worker test to do",
-          "evidence": "This route has no retained proof establishing this assessment axis. A source or publication capture is insufficient.",
+          "reason": "The Venice ACI response names api.redpill.ai as the gateway downstream, a hostname that is not TEE-only; the field is not covered by the keyset digest, so it is self-asserted.",
+          "label": "Downstream host self-asserted",
+          "evidence": "data/evidence/teep-2026-11-15/runs/venice_e2ee-glm-5-3-p_20261115T165902Z/report.txt: \"Gateway downstream TLS: api.redpill.ai\"; aci_backend_named fails. teep docs/attestation_gaps/aci_gateway.md residuals 1 and 5.",
           "missing": "Bind the selected worker and requested model to the actual request; reject worker/model substitution and insecure fallback.",
           "limitation": "evidence",
           "issue_urls": [
@@ -2520,28 +2534,29 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
       "id": "chutes-tee",
       "label": "TEE models",
       "architecture": "Intel TDX",
-      "reviewed_at": "2026-10-14",
-      "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
+      "reviewed_at": "2026-11-15",
+      "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
       "sources": [
         "verifiers/chutes.py",
         "data/audits/chutes_tee.json",
-        "data/routes.json"
+        "data/routes.json",
+        "data/evidence/teep-2026-11-15/SUMMARY.md"
       ],
       "axes": {
         "hardware": {
           "state": "partial",
-          "reason": "The daily adapter implements TDX signature appraisal, nonce/key/certificate binding, debug-state and MRTD golden-set checks. It records GPU presence but does not appraise GPUs or compare the full expected boot/runtime RTMR set. The dated manual investigation performed stronger checks.",
-          "label": "Our GPU/RTMR checks missing",
-          "evidence": "The daily adapter implements TDX signature appraisal, nonce/key/certificate binding, debug-state and MRTD golden-set checks. It records GPU presence but does not appraise GPUs or compare the full expected boot/runtime RTMR set. The dated manual investigation performed stronger checks.",
-          "missing": "Wire authenticated GPU appraisal and full required-register comparison into the daily adapter; reject mismatched GPU/nonce, each required register and valid-but-unpublished images. This does not establish serving-code/model identity.",
-          "limitation": "ours",
+          "reason": "Since 2026-11-15 the adapter appraises GPU evidence through signed NRAS, matches MRTD and RTMR0-3 against a published row, and keeps a fleet census; these are tested on a replay of a real 2026-11-05 capture, not yet on a retained live run. teep's 2026-11-15 run rejected GLM-5.2-TEE because MRSEAM f40772d8... is not in teep's allowlist; the cause is undetermined and our adapter has no MRSEAM check.",
+          "label": "Our live run to do",
+          "evidence": "verifiers/chutes.py and verifiers/nvidia_nras.py (merge 83fe47a); tests/test_chutes_gpu_replay.py, tests/test_chutes_registers.py. teep 6548996 (data/evidence/teep-2026-11-15/runs/chutes_*/report.txt): Intel TCB UpToDate, debug 0, GPU SPDM signatures and client-derived nonce pass (1 and 8 Blackwell GPUs); cpu_gpu_chain fails (allowed); GLM-5.2-TEE tee_measurement fails on MRSEAM.",
+          "missing": "Retain a live run of the merged adapter; set an MRSEAM (TDX module) policy and explain f40772d8.... This does not establish serving-code/model identity.",
+          "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/28"
           ]
@@ -2550,7 +2565,7 @@
           "state": "partial",
           "reason": "Key fields are checked; a complete prompt-and-reply session was not verified.",
           "label": "Our request test to do",
-          "evidence": "The daily adapter implements key checks. The retained route assessment does not contain a complete request test for this client path.",
+          "evidence": "The daily adapter implements key checks. The retained route assessment does not contain a complete request test for this client path. teep 6548996 on 2026-11-15 completed ML-KEM-768 E2EE round trips for Qwen/Qwen3.8-27B-TEE (30 chunks) and zai-org/GLM-5.2-TEE (298 chunks) (data/evidence/teep-2026-11-15/runs/chutes_*/report.txt); no echoed nonce, so freshness rests on the REPORTDATA binding. Our adapter has not run a request.",
           "missing": "Verify a harmless prompt is encrypted to a key bound to the attested workload; reject a substituted recipient key before release. Reconcile the dated manual encrypted-completion evidence with the exact client/mode.",
           "limitation": "evidence",
           "issue_urls": [
@@ -2562,7 +2577,7 @@
           "state": "partial",
           "reason": "Nonce fields are checked; a complete prompt-and-reply session was not verified.",
           "label": "Our reply test to do",
-          "evidence": "The daily adapter implements nonce checks. The retained route assessment does not contain a complete request/reply test for this client path.",
+          "evidence": "The daily adapter implements nonce checks. The retained route assessment does not contain a complete request/reply test for this client path. teep 6548996 on 2026-11-15 completed ML-KEM-768 E2EE round trips for Qwen/Qwen3.8-27B-TEE (30 chunks) and zai-org/GLM-5.2-TEE (298 chunks) (data/evidence/teep-2026-11-15/runs/chutes_*/report.txt); no echoed nonce, so freshness rests on the REPORTDATA binding. Our adapter has not run a request. Decrypting a reply does not test reply-key substitution.",
           "missing": "Verify a harmless reply is bound to the same attested workload; reject substituted reply keys, stale evidence and replay. Reconcile the dated manual encrypted-completion evidence with the exact client/mode.",
           "limitation": "evidence",
           "issue_urls": [
@@ -2615,7 +2630,7 @@
           ]
         }
       },
-      "reviewer": "codex-source-review (not independent audit approval)",
+      "reviewer": "claude-code dated re-review (not independent audit approval)",
       "assessed": true
     },
     {
