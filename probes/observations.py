@@ -124,7 +124,8 @@ def _identities(provider: str, model: str, details: dict) -> list[dict]:
 def finish_attempt(data_dir: Path, run: dict, provider: str, model: str,
                    report: dict | None, *, captured_at: str | None = None,
                    raw_evidence_ref: str | None = None, instance_id: str | None = None,
-                   outcome_override: str | None = None, reason_override: str | None = None) -> dict:
+                   outcome_override: str | None = None, reason_override: str | None = None,
+                   retirement_evidence: dict | None = None) -> dict:
     """Write a result once; missing report remains an explicit unavailable result."""
     if model not in run["requested_models"].get(provider, []):
         raise ValueError(f"unrequested route: {provider}/{model}")
@@ -191,19 +192,29 @@ def finish_attempt(data_dir: Path, run: dict, provider: str, model: str,
         "identity_trust": "legacy_adapter_result" if run["legacy"] else
                           ("adapter_accepted" if outcome == "verified" else "untrusted_report"),
     }
+    if retirement_evidence:
+        result["retirement_evidence"] = retirement_evidence
     _write_new(data_dir / "observations" / "records" / run["run_id"] / f"{_key(provider, model)}.json", result)
     return result
 
 
+def retirement_recorded(data_dir: Path, provider: str, model: str) -> bool:
+    """True only while the route's latest observation is its retirement."""
+    route = [o for o in load_observations(data_dir) if o["provider"] == provider and o["model"] == model]
+    return bool(route) and route[-1]["reason"] == "retired"
+
+
 def record_retirement(data_dir: Path, provider: str, model: str, *,
-                      retired_at: str | None = None, policy_revision: str = "unknown") -> dict:
+                      retired_at: str | None = None, policy_revision: str = "unknown",
+                      evidence: dict | None = None) -> dict:
     """Make a deliberate catalog retirement explicit; absence alone never retires."""
     run = start_run(data_dir, {provider: [model]}, complete=False,
                     captured_at=retired_at, observer="route-inventory",
                     policy_revisions={provider: policy_revision})
     result = finish_attempt(data_dir, run, provider, model, None,
                             captured_at=retired_at or run["started_at"],
-                            outcome_override="not_applicable", reason_override="retired")
+                            outcome_override="not_applicable", reason_override="retired",
+                            retirement_evidence=evidence)
     finish_run(data_dir, run)
     return result
 
@@ -364,7 +375,8 @@ def derive_latest(data_dir: Path, *, catalog_models: dict[str, list[str]] | None
         prior = freshness.get(key, {})
         clocks = dict(prior)
         clocks["last_attempt_at"] = obs["captured_at"]
-        if obs["evidence"]["adapter_report"] is not None and obs["outcome"] not in ("unavailable", "not_checked"):
+        if (obs["evidence"]["adapter_report"] is not None and obs["outcome"] != "unavailable"
+                and obs["reason"] != "missing_credentials"):
             clocks["last_capture_at"] = obs["captured_at"]
         if obs["outcome"] == "verified" and not obs["legacy"]:
             clocks["last_adapter_verified_at"] = obs["captured_at"]
@@ -372,6 +384,7 @@ def derive_latest(data_dir: Path, *, catalog_models: dict[str, list[str]] | None
                 ((obs["evidence"]["adapter_report"] or {}).get("details") or {}).get(
                     "cryptographic_verification_completed") is True):
             clocks["last_cryptographic_verification_at"] = obs["captured_at"]
+        clocks.setdefault("last_adapter_verified_at", None)
         clocks.setdefault("last_cryptographic_verification_at", None)
         clocks.setdefault("last_policy_review_at", None)
         clocks.setdefault("last_triage_at", None)
@@ -416,8 +429,11 @@ def derive_latest(data_dir: Path, *, catalog_models: dict[str, list[str]] | None
             "current" if obs["outcome"] == "verified" else "unknown")
         if report is None:
             report = {"provider": provider, "model": model, "valid": False,
-                      "verified_at": obs["captured_at"], "attestation_type": "missing",
+                      "verified_at": obs["captured_at"],
+                      "attestation_type": "retired" if obs["reason"] == "retired" else "missing",
                       "scorecard": {}, "details": {}, "error": obs["reason"]}
+            if "retirement_evidence" in obs:
+                report["retirement_evidence"] = obs["retirement_evidence"]
         else:
             report = dict(report)
         report.update({"observation_id": obs["observation_id"], "row_status": status,

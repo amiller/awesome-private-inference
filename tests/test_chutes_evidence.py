@@ -41,7 +41,7 @@ def _run(monkeypatch, *, change_report_data=False, quote_valid=True, truncate_qu
     monkeypatch.setattr(chutes.phala_tdx, "verify_tdx_quote", lambda value: {"quote": {"verified": True}})
     monkeypatch.setattr(chutes.phala_tdx, "is_verified", lambda value: quote_valid)
     monkeypatch.setattr(chutes.phala_tdx, "quote_body", lambda value: {"reportdata": "mock"})
-    report = chutes.verify("test-token", "https://api.chutes.ai", "Qwen3-32B-TEE")
+    report = chutes.verify("test-token", "https://api.chutes.ai", "GLM-5.1-TEE")
     assert len(seen) == 3
     return report
 

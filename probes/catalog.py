@@ -12,10 +12,7 @@ MODELS: dict[str, list[str]] = {
         "inference.phala.com",
         "api.redpill.ai",
     ],
-    "near-ai": [
-        "openai/gpt-oss-120b",
-        "zai-org/GLM-5.1-FP8",
-    ],
+    "near-ai": [],
     # Refreshed 2026-08-18: Venice renamed its whole e2ee line, so the old ids
     # 404'd or returned an unusable body. Every id here answered /tee/attestation
     # with 200 on that date.
@@ -41,11 +38,30 @@ MODELS: dict[str, list[str]] = {
         "router",
     ],
     "chutes": [
-        "Qwen3-32B-TEE",
         "gemma-4-31B-TEE",
         "GLM-5.1-TEE",
         "GLM-5.2-TEE",
         "DeepSeek-V3.2-TEE",
         "Kimi-K2.6-TEE",
+    ],
+}
+
+# Deliberate removals. `python -m probes.collect` records each as a visible
+# retirement observation whenever the route's latest observation is not one.
+RETIRED: dict[str, list[dict]] = {
+    "near-ai": [
+        {"model": "openai/gpt-oss-120b", "retired_at": "2026-11-15T00:00:00Z",
+         "summary": "NEAR no longer serves this model: 23 captures 2026-10-13..2026-11-14 answered "
+                    "HTTP 400 \"Model 'openai/gpt-oss-120b' not found\"; the other 15 were 503s and "
+                    "timeouts, none an attestation"},
+        {"model": "zai-org/GLM-5.1-FP8", "retired_at": "2026-11-15T00:00:00Z",
+         "summary": "NEAR serves a different model under this id: all 34 attestations 2026-10-14..2026-11-14 "
+                    "came from a model CVM reporting z-ai/glm-5.3-flash, which no anchor covers "
+                    "(anchored: false)"},
+    ],
+    "chutes": [
+        {"model": "Qwen3-32B-TEE", "retired_at": "2026-11-15T00:00:00Z",
+         "summary": "Chutes removed the chute: all 20 captures 2026-10-26..2026-11-14 answered HTTP 404 "
+                    "\"Chute not found\" for chute_id ac059e33-eb27-541c-b9a9-24b214036475"},
     ],
 }

@@ -114,6 +114,35 @@ def bar_note(shape: str) -> Dict[str, object]:
         "No required-layer set is defined for this shape, so nothing is scored."})
 
 
+# Why a required layer is None on a row that was checked. kind "impl": our
+# adapter does not implement the check; "prov": the provider's response carries
+# no evidence for it. render.check_cell raises on a required None not listed here.
+LAYER_GAPS: Dict[str, Dict[str, Dict[str, object]]] = {
+    "aci-gateway": {
+        "prod_os_image": {"kind": "impl", "issue": 27, "reason":
+            "OS boot measurements (MRTD/RTMR0-2) are not compared with independently computed image measurements"},
+    },
+    "tdx+gpu": {
+        "backend_attested": {"kind": "impl", "issue": 29, "reason":
+            "the gateway's verification of the model backend's quote is never checked"},
+    },
+    "tinfoil-sev-snp-v2": {
+        "hardware_signature_verified": {"kind": "impl", "issue": 26, "reason":
+            "AMD VCEK chain and SNP report signature are not verified"},
+    },
+    "venice": {
+        "prod_os_image": {"kind": "prov", "issue": 11, "reason":
+            "Venice /tee/attestation reports no OS image identity"},
+        "serving_code_attested": {"kind": "prov", "issue": 11, "reason":
+            "Venice /tee/attestation reports nothing about the serving code on the prompt-plaintext path"},
+        "code_measurement_reproducible": {"kind": "prov", "issue": 11, "reason":
+            "Venice /tee/attestation reports no measurement that could be independently rebuilt"},
+        "gpu_attested": {"kind": "prov", "reason": "this response carried no nvidia_payload to appraise"},
+        "compose_hash_committed": {"kind": "prov", "reason": "this response carried no app_compose or mr_config to bind"},
+    },
+}
+
+
 def has_required_check_coverage(scorecard: Dict[str, Optional[bool]], shape: str) -> bool:
     """All configured adapter checks passed; this cannot award a security stage."""
     required = REQUIRED_LAYERS_BY_SHAPE.get(shape, set())

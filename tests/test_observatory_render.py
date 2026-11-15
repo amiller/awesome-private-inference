@@ -47,7 +47,8 @@ def test_publication_and_adapter_pass_remain_scoped(tmp_path, monkeypatch):
     monkeypatch.setattr(render, "DOCS_DIR", tmp_path / "docs")
     monkeypatch.setattr(render, "compute_quality", lambda snapshot: _quality())
     render._render({"attestations": {"test": [{"model": "model", "valid": True,
-                    "attestation_type": "test", "scorecard": {"tdx_verified": True}}]}, "pricing": {}})
+                    "attestation_type": "chutes-tee", "scorecard": {"tdx_verified": True,
+                    "nonce_bound": True, "report_data_binds_key": True}}]}, "pricing": {}})
     home = (tmp_path / "docs/index.html").read_text()
     assert 'class="assessment-table"' in home
     assert "test" in home and "candidate" in home
@@ -108,7 +109,8 @@ def test_typed_outcomes_do_not_collapse_into_rejection():
         {"model": "a", "outcome": "not_checked", "scorecard": {}},
         {"model": "b", "outcome": "unsupported", "scorecard": {}},
         {"model": "c", "outcome": "unavailable", "scorecard": {}},
-        {"model": "d", "outcome": "rejected", "scorecard": {"tdx_verified": False}},
+        {"model": "d", "outcome": "rejected", "attestation_type": "chutes-tee", "scorecard": {
+            "tdx_verified": False, "nonce_bound": True, "report_data_binds_key": True}},
         {"model": "e", "outcome": "not_applicable", "scorecard": {}},
     ]}})
     assert [row["outcome_label"] for row in rows] == [
