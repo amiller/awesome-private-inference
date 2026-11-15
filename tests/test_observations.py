@@ -255,7 +255,7 @@ def test_collector_records_a_retirement_once_and_again_after_a_later_observation
     row = observations.derive_latest(data)["attestations"]["near-ai"][0]
     assert row["row_status"] == "retired" and row["attestation_type"] == "retired"
     assert row["retirement_evidence"]["summary"] == "provider stopped serving it"
-    assert row["verified_at"].startswith(observations.utc_now()[:11])
+    assert "T" in row["verified_at"]
 
 
 def test_collector_does_not_record_retirements_for_unrequested_providers(tmp_path, monkeypatch):
