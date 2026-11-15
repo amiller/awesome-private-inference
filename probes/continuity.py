@@ -24,9 +24,11 @@ def _policy_decisions(observation: dict) -> dict[str, Any]:
             decisions[field] = details[field]
     for item in details.get("model_composes") or []:
         if isinstance(item, dict) and item.get("compose_hash"):
-            for field in ("chain_authorized", "anchored"):
+            for field in ("chain_authorized", "anchored", "app_matches"):
                 if field in item:
                     decisions[f"model_compose:{item['compose_hash']}:{field}"] = item[field]
+            if "deployments" in item:
+                decisions[f"model_compose:{item['compose_hash']}:deployments_ok"] = item["deployments"]["ok"]
     return decisions
 
 

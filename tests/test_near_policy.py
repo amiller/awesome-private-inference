@@ -2,18 +2,6 @@
 from verifiers import near_ai
 
 
-def test_model_anchor_does_not_accept_another_models_compose():
-    app = near_ai._MODELS_APP.removeprefix("0x")
-    anchor = {"models": {
-        "model-a": {"app_id": app, "compose_hashes": ["aa" * 32]},
-        "model-b": {"app_id": app, "compose_hashes": ["bb" * 32]},
-    }}
-    assert near_ai._anchor_matches_model(anchor, "model-a", "model-a", app, "aa" * 32)
-    assert not near_ai._anchor_matches_model(anchor, "model-a", "model-a", app, "bb" * 32)
-    assert not near_ai._anchor_matches_model(anchor, "model-a", "model-b", app, "aa" * 32)
-    assert not near_ai._anchor_matches_model(anchor, "model-a", "model-a", "cc" * 20, "aa" * 32)
-
-
 def test_chain_authorization_uses_captured_block(monkeypatch):
     calls = []
 

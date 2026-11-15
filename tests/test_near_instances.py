@@ -29,7 +29,7 @@ def test_all_three_instances_pass_and_are_keyed_by_id(monkeypatch):
     report = _verify(monkeypatch, evidence)
     d = report.details
     assert all(getattr(report.scorecard, layer) is True for layer in LAYERS)
-    assert report.scorecard.compose_hash_committed is False  # anchor lacks glm-5.3-flash
+    assert report.scorecard.compose_hash_committed is False  # capture has no compose_manager_attestation
     assert d["instance_count"] == 3 and d["instance_ids"] == _ids(evidence)
     assert list(d["instances"]) == _ids(evidence)
     assert all(r["instance_id_bound"] for r in d["instances"].values())

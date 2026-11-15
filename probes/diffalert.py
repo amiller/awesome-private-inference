@@ -18,8 +18,9 @@ Findings:
                                data/audits/chutes_tee.json. mrtd is instance-sampled
                                and flip-flops between known values, so a ledger
                                member never fires; only a genuinely new mrtd does.
-  anchor-drift:near-ai/models — compose hashes NEAR model CVMs are serving that
-                               are not in the hermes anchor, as a delta vs last ack.
+  deployment-drift:near-ai/models — files compose-manager has running (commit:file)
+                               that our archive has not yet seen for the minimum
+                               age, as a delta vs last ack.
   unauthorized-compose:near-ai/{model} — a served model compose hash that its
                                DstackApp on Base does not allow.
   stale:latest.json          — latest.json older than 26h.
@@ -92,7 +93,9 @@ def current_values() -> dict[str, str]:
 
     served = [mc | {"model": row["model"]} for row in latest["attestations"].get("near-ai", [])
               for mc in row["details"].get("model_composes", [])]
-    vals["anchor-drift:near-ai/models"] = ",".join(sorted({mc["compose_hash"] for mc in served if not mc["anchored"]}))
+    vals["deployment-drift:near-ai/models"] = ",".join(sorted({
+        f"{d['commit']}:{d['file']}" for mc in served
+        for d in mc["deployments"].get("deployments", []) if not d["aged"]}))
     for mc in served:
         if not mc["chain_authorized"]:
             vals[f"unauthorized-compose:near-ai/{mc['model']}"] = mc["compose_hash"]
@@ -101,11 +104,11 @@ def current_values() -> dict[str, str]:
 
 
 def describe(key: str, old: str | None, new: str) -> str:
-    if key.startswith("anchor-drift:"):
+    if key.startswith("deployment-drift:"):
         added = sorted(set(new.split(",")) - set((old or "").split(",")) - {""})
         gone = sorted(set((old or "").split(",")) - set(new.split(",")) - {""})
-        parts = ([f"new unanchored compose hashes in service: {', '.join(added)}"] if added else []) + \
-                ([f"no longer served unanchored (anchored or retired): {', '.join(gone)}"] if gone else [])
+        parts = ([f"new deployments not yet aged in the archive: {', '.join(added)}"] if added else []) + \
+                ([f"aged or no longer running: {', '.join(gone)}"] if gone else [])
         return f"[{key}] {'; '.join(parts)}"
     return f"[{key}] {old} -> {new}"
 

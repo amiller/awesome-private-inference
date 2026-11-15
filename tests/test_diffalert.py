@@ -1,4 +1,4 @@
-"""anchor-drift and unauthorized-compose come from the compose hashes NEAR's model CVMs serve."""
+"""deployment-drift and unauthorized-compose come from what NEAR's model CVMs serve."""
 from __future__ import annotations
 
 import json
@@ -18,17 +18,19 @@ def _latest(tmp_path, composes):
     return tmp_path
 
 
-def test_unanchored_and_unauthorized_served_hashes_fire(tmp_path, monkeypatch):
+def test_unaged_deployments_and_unauthorized_hashes_fire(tmp_path, monkeypatch):
     monkeypatch.setattr(diffalert, "DATA", _latest(tmp_path, [
-        {"compose_hash": A, "chain_authorized": True, "anchored": True},
-        {"compose_hash": B, "chain_authorized": False, "anchored": False}]))
+        {"compose_hash": A, "chain_authorized": True,
+         "deployments": {"deployments": [{"commit": "c1", "file": "f.yaml", "aged": True}]}},
+        {"compose_hash": B, "chain_authorized": False,
+         "deployments": {"deployments": [{"commit": "c2", "file": "f.yaml", "aged": False}]}}]))
     v = diffalert.current_values()
-    assert v["anchor-drift:near-ai/models"] == B
+    assert v["deployment-drift:near-ai/models"] == "c2:f.yaml"
     assert v["unauthorized-compose:near-ai/m"] == B
     assert v["stale:latest.json"] == "fresh"
 
 
 def test_drift_delta_names_added_and_gone():
-    msg = diffalert.describe("anchor-drift:near-ai/models", A, B)
-    assert f"new unanchored compose hashes in service: {B}" in msg
-    assert f"no longer served unanchored (anchored or retired): {A}" in msg
+    msg = diffalert.describe("deployment-drift:near-ai/models", "c1:f", "c2:f")
+    assert "new deployments not yet aged in the archive: c2:f" in msg
+    assert "aged or no longer running: c1:f" in msg

@@ -1,8 +1,8 @@
 """Full-verify controls for the NEAR dstack measurement wiring.
 
 Replays retained real evidence through near_ai.verify(). Transport is mocked
-(attestation fetch, Base RPC replayed from the captured block, anchor = the
-pinned policy captured with the evidence); dcap-qvl collateral appraisal is
+(attestation fetch, Base RPC replayed from the captured block, the
+deployment archive is empty); dcap-qvl collateral appraisal is
 stubbed with a parameterizable status because it needs Intel PCS, and the
 upstream nearai-cloud-verifier report-data/GPU checks are stubbed so the test
 needs only the retained fixtures.
@@ -61,8 +61,6 @@ def _patch(monkeypatch, evidence, status="UpToDate", advisories=None,
         check_gpu=lambda att, nonce: {"verdict": "PASS", "nonce_matches": True}))
     monkeypatch.setattr(near_ai, "_check_tdx",
                         _fake_check_tdx(status, advisories, gateway_status))
-    monkeypatch.setattr(near_ai, "_anchored_model_composes",
-                        lambda: evidence["anchor_policy"])
 
     authorized = {q["compose_hash"] for q in evidence["model_authorization_queries"]
                   if q.get("chain_authorized")}
@@ -114,8 +112,8 @@ def test_retained_evidence_replays_with_new_layers_true(monkeypatch):
     assert sc.tee_debug_disabled is True
     assert sc.tcb_current is True
     # This capture honestly fails the compose policy: served model differs from
-    # the request and its compose is not in the pinned anchor (anchored=false
-    # in the retained authorization query). Those layers must stay False.
+    # the request, and the capture has no compose_manager_attestation, so no
+    # deployment can be appraised. Those layers must stay False.
     assert sc.compose_hash_committed is False
     assert report.details["verification_status"] == "rejected"
     # per-quote TCB evidence retained

@@ -109,7 +109,8 @@ def build(root: Path):
         stamp = run_times.get(obs["run_id"], obs["captured_at"])
         evidence = "data/" + raw_ref
         for field, component, family in (("golden_measurements", "Chutes golden measurements", "published reference set"),
-                                         ("anchor_policy", "NEAR client anchor", "client policy")):
+                                         ("anchor_policy", "NEAR client anchor", "client policy"),
+                                         ("deployment_archive", "NEAR deployment archive", "client policy")):
             if field in raw:
                 value = raw[field]
                 entries = [json.dumps(v, sort_keys=True) for v in value] if isinstance(value, list) else reference_leaves(value)

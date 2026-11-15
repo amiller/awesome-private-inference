@@ -41,6 +41,7 @@ from .common import (
 )
 from . import dstack_tdx
 from . import dstack_boot_registers
+from . import near_deployments
 
 DEFAULT_BASE_URL = "https://cloud-api.near.ai"
 _STDOUT_LOCK = threading.Lock()
@@ -64,13 +65,11 @@ _MODELS_APP = "0x2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b"  # DstackApp shared b
 _EIP1967_IMPLEMENTATION_SLOT = "0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc"
 _MAX_INSTANCES = 8  # teep's cap on model_attestations entries for one model
 _INSTANCE_ID_RE = re.compile(r"(?:[0-9a-f]{2}){1,32}")
+# A deployment counts only after our archive has seen its public file this long.
+DEPLOYMENT_MIN_AGE_S = 24 * 3600
 _INSTANCE_LIMIT = ("every listed instance must pass every layer; the instances share one signing "
                    "key and the gateway picks one per request. Any holder of that key that the "
                    "gateway does not list is invisible to this check.")
-_HERMES_ANCHOR = ("https://raw.githubusercontent.com/amiller/hermes-agent/"
-                  "feat/near-ai-attestation/hermes_cli/anchors/nearai_mainnet.json")
-
-
 def _rpc(method: str, params: list) -> Any:
     r = requests.post(_BASE_RPC, timeout=20, json={"jsonrpc": "2.0", "id": 1,
                                             "method": method, "params": params})
@@ -117,30 +116,14 @@ def _contract_evidence(app: str, block_tag: str) -> dict:
     return result
 
 
-@lru_cache(maxsize=1)
-def _anchored_model_composes() -> dict:
-    """Keep model, app and compose together; never union across model policies."""
-    r = requests.get(_HERMES_ANCHOR, timeout=20)
-    r.raise_for_status()
-    return r.json()
-
-
-def _anchor_matches_model(anchor: dict, requested: str, observed: str,
-                          app_id: str, compose_hash: str) -> bool:
-    policy = anchor.get("models", {}).get(requested) or {}
-    actual_app = app_id.lower().removeprefix("0x")
-    expected_app = str(policy.get("app_id") or "").lower().removeprefix("0x")
-    allowed = {h.lower().removeprefix("0x") for h in policy.get("compose_hashes", [])}
-    return (observed == requested and bool(actual_app) and
-            actual_app == expected_app == _MODELS_APP.removeprefix("0x") and
-            compose_hash.lower().removeprefix("0x") in allowed)
-
-
 def _public_attestation_fields(att: dict) -> dict:
     """Keep only protocol evidence consumed by our checks; no HTTP headers."""
     raw = {key: att[key] for key in (
         "intel_quote", "nvidia_payload", "signing_algo", "signing_public_key",
         "signing_address", "tls_cert_fingerprint", "model_name") if key in att}
+    if att.get("compose_manager_attestation"):
+        raw["compose_manager_attestation"] = {key: att["compose_manager_attestation"][key] for key in (
+            "actions", "actions_hash", "nonce", "quote", "report_data")}
     info = att.get("info") or {}
     if isinstance(info, dict):
         kept = {key: info[key] for key in ("app_id", "compose_hash", "instance_id")
@@ -292,12 +275,13 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
 
     sc = ScoreCard()
     details: Dict[str, Any] = {"inner_models": len(models)}
-    anchor = _anchored_model_composes()
-    anchor_policy = anchor.get("models", {}).get(model) or {}
-    anchor_revision = sha256_hex(json.dumps(anchor, sort_keys=True, separators=(",", ":")))
+    archive = near_deployments.load_archive()
+    archive_revision = sha256_hex(json.dumps(archive, sort_keys=True, separators=(",", ":")))
+    now = near_deployments.utcnow()
     chain = _chain_snapshot()
-    details["anchor_policy_revision_sha256"] = anchor_revision
-    details["anchor_model"] = model
+    details["policy_revision"] = archive_revision
+    details["deployment_policy"] = {"archive": "data/near-deployments-seen.json",
+                                    "min_age_s": DEPLOYMENT_MIN_AGE_S}
     details["chain_snapshot"] = {k: v for k, v in chain.items() if k != "block_tag"}
     details["model_contract"] = _contract_evidence(_MODELS_APP, chain["block_tag"])
 
@@ -369,21 +353,28 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
             quote_compose_matches = (
                 mr_config.lower().removeprefix("0x").startswith(("01" + h).lower())
                 and h == log_compose)
-            expected_app_id = str(anchor_policy.get("app_id") or "").lower().removeprefix("0x")
-            anchored = _anchor_matches_model(anchor, model, observed_model_name, app_id, h)
+            app_matches = app_id.lower() == _MODELS_APP.removeprefix("0x").lower()
             authorized = _allowed_on_chain(_MODELS_APP, h, chain["block_tag"])
-            r["compose_hash_committed"] = (quote_compose_matches and anchored and authorized and
-                                           observed_model_name == model)
+            cm = m.get("compose_manager_attestation")
+            deployments = (near_deployments.appraise(cm, m_intel["intel_quote"], nonce, archive,
+                                                     DEPLOYMENT_MIN_AGE_S, now)
+                           if cm else {"ok": False, "missing": "compose_manager_attestation"})
+            r["deployments_ok"] = deployments["ok"]
+            r["compose_hash_committed"] = (quote_compose_matches and app_matches and authorized and
+                                           deployments["ok"] and observed_model_name == model)
             details.setdefault("model_composes", []).append({
                 "instance_id": iid,
                 "observed_model_name": observed_model_name, "requested_model_name": model,
-                "app_id": app_id, "expected_app_id": expected_app_id,
+                "app_id": app_id, "app_matches": app_matches, "deployments": deployments,
                 "compose_hash": h, "log_compose_hash": log_compose,
                 "quote_compose_matches": quote_compose_matches,
-                "chain_authorized": authorized, "anchored": anchored,
-                "anchor_policy_revision_sha256": anchor_revision,
+                "chain_authorized": authorized,
                 "chain_block_number": chain["block_number"],
                 "chain_block_hash": chain["block_hash"]})
+
+    seen = [d for c in details.get("model_composes", []) for d in c["deployments"].get("deployments", [])]
+    if near_deployments.record(seen, archive, now):
+        near_deployments.save_archive(archive)
 
     def every(layer: str) -> bool:
         return all(r[layer] for r in instances.values())
@@ -490,8 +481,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         "gateway_attestation": _public_attestation_fields(gateway),
         "model_attestations": [_public_attestation_fields(m) for m in models],
         "tls_certificate": report.get("tls_certificate"),
-        "anchor_url": _HERMES_ANCHOR, "anchor_policy": anchor,
-        "anchor_sha256": anchor_revision,
+        "deployment_archive": archive, "deployment_archive_sha256": archive_revision,
         "chain_snapshot": details["chain_snapshot"],
         "model_contract": details["model_contract"],
         "gateway_contract": details["gateway_contract"],
