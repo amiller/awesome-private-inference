@@ -24,11 +24,22 @@ Start with a naive TEE inference service: an attested front door that decrypts y
 
 ACI's own related-work file states the row 1 difference: "Tinfoil's enclave router chains attestation within one vendor; ACI's aggregator model verifies heterogeneous third-party providers" (`spec/related-work.md:84`). In today's glm-5.3-flash capture, the three sessions behind ACI canonical came from Armet AI, the NEAR AI gateway and a Privatemode proxy. On that route "the operator" is several companies.
 
+## What admission is, and when it stops mattering
+
+Admission is the rule a router or gateway applies before it hands your prompt to a backend: does this backend run approved code and weights? It matters most when your client can't see the backend. If you attest only the front door, its admission rule is the only thing between your prompt and whatever the operator plugs in behind it. On Tinfoil's router the rule is a Sigstore-pinned release per model. On the ACI gateway it is configurable, and for some upstream types it amounts to "any genuine TEE".
+
+A verifying client that attests the backend itself does its own admission, and the router's rule drops out. What matters then is whether the measurement the client checks covers the code that reads the prompt, and whether that evidence belongs to this request.
+
+- **Tinfoil direct.** The client attests the model enclave and checks its config against the repo's Sigstore release; the config commits to a dm-verity root for the weights. The measurement covers the serving code and the weights. teep disabled this path on 2026-11-12 because the enclave hosts stopped answering (e732070), so a verifying client today only gets the router route.
+- **NEAR E2EE and direct.** The client encrypts to the model CVM's key and can pin the compose hash, as hermes's closed-chain client does. The compose doesn't contain the serving code: compose-manager deploys the proxy and model containers after boot from `nearai/cvm-compose-files` git tags, and the measured compose sets no minimum tag age (`research/operator-review-2026-11-15/near.md`). The signing key is also shared by 3 instances running 3 different composes, so pinning the key doesn't say which one served the request.
+- **ACI canonical.** The client can apply its own policy to the gateway's session snapshots of upstream workloads. teep pins the sessions, but its report says "workload policy not checked", so nobody does that check today. The snapshots don't answer the client's nonce, and the receipt naming the serving session arrives after the stream is delivered (residual 12).
+- **Chutes.** The serving code is excluded from measurement (`cfsv_wrapper.py:54`), so no client policy over the quote can cover it.
+
 ## Verdict
 
-"Only Tinfoil constrains the operator" is **true for admission**. Tinfoil is the only one where the front door refuses backend code or weights outside a measured, Sigstore-anchored release. ACI leaves upstream policy to the verifier, and the deployed gateway reports a Phala or Chutes upstream's software as unknown.
+A narrower claim holds: Tinfoil is the only one whose attested measurement covers the code and weights that handle the prompt. Its router enforces that as admission, and on the direct path a client can check it itself. On ACI the admission rule is weak and the upstream evidence goes unchecked. On NEAR the measured compose leaves out the serving code.
 
-It is **wrong as a general claim**. On what the client can check about the host that actually decrypts the prompt, Tinfoil's cloud route has the same class of gap that teep lists first for ACI: you attest a router, not the model host. ACI canonical and NEAR give the client more about the serving host (sessions, receipts, per-model quotes). So ACI does a better job on client-visible evidence and a worse job on admission. No deployed service gives a default client both.
+"Only Tinfoil constrains the operator" is **wrong as a general claim**. On Tinfoil's router route, the only one reachable today, the client attests a router and not the model host, the same class of gap teep lists first for ACI. The router's control plane can also rewrite `model: "auto"` requests (row 3). ACI canonical and NEAR give the client more evidence about the serving host: sessions, receipts and per-model quotes. No deployed service gives a default client both a measurement that covers the serving code and evidence about the host that served the request.
 
 ## Found while checking
 
@@ -37,7 +48,6 @@ The Tinfoil router runs SEV-SNP firmware below AMD's published mitigation level.
 ## Not verified
 
 - Production contents of the control plane's `reasoning_params` and `router-config` (source review: `research/operator-review-2026-11-15/tinfoil.md`).
-
 - Whether the deployed Tinfoil router matches source HEAD `ef64384f`.
 - Whether Tinfoil's direct hosts are down globally.
 - What teep's "reverify report differs from capture" error on the Phala qwen run means.
