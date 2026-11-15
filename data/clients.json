@@ -639,6 +639,82 @@
           "cell": "No quote signature check; report_data matched with includes() (tee.js:66-67); NVIDIA token unsigned; sends regardless. Copies near-examples' gaps."
         }
       }
+    },
+    {
+      "id": "pi-tee",
+      "name": "pi-tee",
+      "repo": "https://github.com/ariofrio/pi-tee",
+      "commit": "64e86da",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-i-plugins.md",
+      "event_log_hashed": true,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Appraises the model worker itself per request: nonce, local GPU check, release and container chain, SPKI pin plus EHBP. Stronger than teep here; auto-adopts tagged releases."
+        },
+        "near": {
+          "grade": "partial",
+          "cell": "Opt-in only. Every instance quoted, E2EE v2, reply held until the model signature verifies. No compose/MRTD/app-id pin; GPU not gated; OutOfDate accepted."
+        }
+      }
+    },
+    {
+      "id": "pi-privacy",
+      "name": "pi-privacy",
+      "repo": "https://github.com/privateer-agent/pi-privacy",
+      "commit": "93adf50",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-i-plugins.md",
+      "event_log_hashed": null,
+      "fails_closed": false,
+      "cites_prior_work": null,
+      "providers": {
+        "near": {
+          "grade": "weak",
+          "cell": "No quote verification: green when the JSON contains the nonce and words like 'nvidia' (attestation.ts:115-127). A green badge turns off its PII gate."
+        },
+        "tinfoil": {
+          "grade": "weak",
+          "cell": "Compares unsigned report bytes with the first connection's SPKI; no AMD chain or Sigstore; inference connections unpinned; fail-open."
+        }
+      }
+    },
+    {
+      "id": "opencode-tinfoil",
+      "name": "opencode-tinfoil",
+      "repo": "https://github.com/rndmcnlly/opencode-tinfoil",
+      "commit": "0bb3d3d",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-i-plugins.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "tinfoil-js SDK: router only, AMD chain, Sigstore auto-adopt, EHBP; no nonce, no CRL, verdict cached for the process lifetime."
+        }
+      }
+    },
+    {
+      "id": "tinfoil-cli",
+      "name": "tinfoil-cli",
+      "repo": "https://github.com/tinfoilsh/tinfoil-cli",
+      "commit": "97c76a7",
+      "kind": "client",
+      "review": "research/client-comparison-2026-11-15/part-i-plugins.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "tinfoil-go rc.8: nonce, SPKI pin, 7-day witness. Router and latest release by default; --enclave with --repo @sha256 pins a model enclave."
+        }
+      }
     }
   ],
   "out_of_scope": [

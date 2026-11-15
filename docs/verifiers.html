@@ -330,6 +330,138 @@
           <td>no</td>
         </tr>
 
+        <tr id="pi-tee">
+          <th><a class="underline" href="https://github.com/ariofrio/pi-tee">pi-tee</a>
+            <small>64e86da · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-i-plugins.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Opt-in only. Every instance quoted, E2EE v2, reply held until the model signature verifies. No compose/MRTD/app-id pin; GPU not gated; OutOfDate accepted.</td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Appraises the model worker itself per request: nonce, local GPU check, release and container chain, SPKI pin plus EHBP. Stronger than teep here; auto-adopts tagged releases.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="pi-privacy">
+          <th><a class="underline" href="https://github.com/privateer-agent/pi-privacy">pi-privacy</a>
+            <small>93adf50 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-i-plugins.md">review</a></small>
+            </th>
+
+
+            <td><span class="grade grade-weak">weak</span><br>No quote verification: green when the JSON contains the nonce and words like &#39;nvidia&#39; (attestation.ts:115-127). A green badge turns off its PII gate.</td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Compares unsigned report bytes with the first connection&#39;s SPKI; no AMD chain or Sigstore; inference connections unpinned; fail-open.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>no</td>
+        </tr>
+
+        <tr id="opencode-tinfoil">
+          <th><a class="underline" href="https://github.com/rndmcnlly/opencode-tinfoil">opencode-tinfoil</a>
+            <small>0bb3d3d · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-i-plugins.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>tinfoil-js SDK: router only, AMD chain, Sigstore auto-adopt, EHBP; no nonce, no CRL, verdict cached for the process lifetime.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="tinfoil-cli">
+          <th><a class="underline" href="https://github.com/tinfoilsh/tinfoil-cli">tinfoil-cli</a>
+            <small>97c76a7 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-i-plugins.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>tinfoil-go rc.8: nonce, SPKI pin, 7-day witness. Router and latest release by default; --enclave with --repo @sha256 pins a model enclave.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
       </tbody>
     </table>
   </div>
