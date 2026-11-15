@@ -16,9 +16,9 @@ routes to one "not assessed" cell; run teep on zed (keys already in zed `~/.conf
 - [x] Merge A2
 
 ## Phase C
-- [ ] Pass 1/2: retained Session tests per route from teep captures + our probes; dated cell updates in routes.json
+- [x] Pass 1/2: retained Session tests per route from teep captures + our probes; dated cell updates in routes.json
 - [x] Pass 3: NEAR cloud instance enumeration in near_ai.py
-- [ ] Pass 4: operator-access review per provider (teep audit-prompt structure)
+- [x] Pass 4: operator-access review per provider (teep audit-prompt structure)
 - [x] Pass 5: export observed measurements; parity table refresh
 - [x] Beat digest: teep change → parity row step
 
@@ -32,3 +32,16 @@ routes to one "not assessed" cell; run teep on zed (keys already in zed `~/.conf
   NEAR ×2 reject on compose anchor (hermes anchor lacks glm-5.3-flash/Qwen3.8-27B — Andrew's branch); Tinfoil rejects TCB snp 0x17<0x1d;
   Venice ACI/1 ×2 reject gateway-only, gemma 404, legacy qwen passes; Chutes ×5 reject (serving code unmeasured; gemma also gpu_count 1 vs row 8 — open: is row gpu_count per node?).
   Snapshot kept at scratchpad live-snapshot-2026-11-15.json, not committed.
+- Pass 1/2 merged (dated re-review, retained teep evidence data/evidence/teep-2026-11-15). Correction: NEAR #1061 fixed in source for v3 (inference-proxy #321) -> reply partial.
+- Pass 4: research/operator-review-2026-11-15/*; operator cells gap/reviewed_system on all 10 assessed routes (separate commit).
+
+## Open (Andrew)
+- Push decision. The operator commit publishes a Tinfoil finding (control plane can rewrite model:"auto" requests) and the Tinfoil TCB finding: consider notifying Tinfoil first.
+- hermes anchor (feat/near-ai-attestation) lacks z-ai/glm-5.3-flash and Qwen/Qwen3.8-27B -> both NEAR rows reject on our side.
+- Venice key on zed 401s on chat; no Tinfoil key on zed (teep can't test Tinfoil E2EE).
+- PR #34 (2026-11-04 note) is wrong on NEAR v3 reply-key binding.
+- #3 closing note: close only the ack-on-spawn rule; liveness stays open (ledger 74 days stale, R9).
+- Chutes gpu_count rule: is the published row's gpu_count per node or per instance? (gemma: 1 GPU vs 8-GPU row).
+- Session split doubled finding counts on no-channel routes (Private Inference 9, Privatemode 3); old #...-session anchors break.
+- Stale pages: providers/redpill.md (logging, root SSH), providers/chutes.md (chutes-api archived), README verdict table.
+- gcpfw: first zed run of `uv run --locked` in beat-digest.sh untested; withdrawal history lives only in git history.
