@@ -715,6 +715,45 @@
           "cell": "tinfoil-go rc.8: nonce, SPKI pin, 7-day witness. Router and latest release by default; --enclave with --repo @sha256 pins a model enclave."
         }
       }
+    },
+    {
+      "id": "routstr-sdk",
+      "name": "Routstr SDK / routstrd",
+      "repo": "https://github.com/Routstr/routstr-sdk",
+      "commit": "f847f91",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-m-routstr.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": null,
+      "providers": {
+        "tinfoil": {
+          "grade": "partial",
+          "cell": "Client attests the router with tinfoil-js; EHBP blinds the Routstr node. A reply without the EHBP nonce is passed through (TinfoilSecure.ts:323-325), so the node can forge replies. No nonce; cached for the process."
+        },
+        "venice": {
+          "grade": "weak",
+          "cell": "On main the node sees plaintext. Open PRs trust a node-relayed verified flag."
+        }
+      },
+      "notes": "Blocks only when the model id starts with tinfoil-; otherwise the node reads the prompt."
+    },
+    {
+      "id": "routstr-confidential",
+      "name": "routstr-confidential (2PC TLS, no TEE)",
+      "repo": "https://github.com/jooray/routstr-confidential",
+      "commit": "430604a",
+      "kind": "gateway",
+      "review": "research/client-comparison-2026-11-15/part-m-routstr.md",
+      "event_log_hashed": null,
+      "fails_closed": true,
+      "cites_prior_work": true,
+      "providers": {
+        "venice": {
+          "grade": "weak",
+          "cell": "Hides the prompt from the Routstr node via two-party TLS and ZK proofs; Venice still sees plaintext; no attestation. Open PRs; not externally reviewed."
+        }
+      }
     }
   ],
   "out_of_scope": [

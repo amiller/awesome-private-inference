@@ -892,6 +892,72 @@
           <td>yes</td>
         </tr>
 
+        <tr id="routstr-sdk">
+          <th><a class="underline" href="https://github.com/Routstr/routstr-sdk">Routstr SDK / routstrd</a>
+            <small>f847f91 · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-m-routstr.md">review</a></small>
+            <small>Blocks only when the model id starts with tinfoil-; otherwise the node reads the prompt.</small></th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-partial">partial</span><br>Client attests the router with tinfoil-js; EHBP blinds the Routstr node. A reply without the EHBP nonce is passed through (TinfoilSecure.ts:323-325), so the node can forge replies. No nonce; cached for the process.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>On main the node sees plaintext. Open PRs trust a node-relayed verified flag.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
+        <tr id="routstr-confidential">
+          <th><a class="underline" href="https://github.com/jooray/routstr-confidential">routstr-confidential (2PC TLS, no TEE)</a>
+            <small>430604a · <a class="underline" href="https://github.com/amiller/awesome-private-inference/blob/main/research/client-comparison-2026-11-15/part-m-routstr.md">review</a></small>
+            </th>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="grade grade-weak">weak</span><br>Hides the prompt from the Routstr node via two-party TLS and ZK proofs; Venice still sees plaintext; no attestation. Open PRs; not externally reviewed.</td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+
+            <td><span class="text-slate-400">—</span></td>
+
+          <td>n/a</td>
+          <td>yes</td>
+        </tr>
+
       </tbody>
     </table>
   </div>
