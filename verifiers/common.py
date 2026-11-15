@@ -157,6 +157,8 @@ LAYER_GAPS: Dict[str, Dict[str, Dict[str, object]]] = {
             "Venice /tee/attestation reports no measurement that could be independently rebuilt"},
         "gpu_attested": {"kind": "prov", "reason": "this response carried no nvidia_payload to appraise"},
         "compose_hash_committed": {"kind": "prov", "reason": "this response carried no app_compose or mr_config to bind"},
+        **{layer: {"kind": "prov", "reason": "the legacy response shape carries no event log, so replay and boot-register derivation are impossible"}
+           for layer in ("event_log_replayed", "tee_boot_config", "tee_hardware_config")},
     },
 }
 

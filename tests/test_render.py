@@ -169,3 +169,8 @@ def test_retired_row_shows_its_reason_not_a_provider_failure():
     assert gone["error"] == "Removed from the probe catalog on 2026-11-15: gateway stopped serving it"
     assert gone["matrix_cells"]["nonce_bound"]["mark"] == "n/a"
     assert down["matrix_cells"]["nonce_bound"]["mark"] == "—"
+
+
+def test_venice_legacy_shape_required_layers_render():
+    for layer in ("event_log_replayed", "tee_boot_config", "tee_hardware_config"):
+        assert _cell(None, "venice", layer)["mark"] == "∅"
