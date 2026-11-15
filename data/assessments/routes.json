@@ -2102,12 +2102,12 @@
           ]
         },
         "reply": {
-          "state": "gap",
-          "reason": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified.",
-          "label": "Reply key substitutable",
-          "evidence": "The dated route review records response-key substitution (NEAR issue 1061). Prompt-field encryption does not establish reply confidentiality; no fixed deployed exchange was verified. 2026-11-15: teep decrypted reply fields on nearcloud (data/evidence/teep-2026-11-15/runs/nearcloud_*/report.txt); an exchange through an honest gateway does not test reply-key substitution.",
-          "missing": "Verify a fixed, version-pinned client/protocol/deployment rejects reply-key substitution before reply disclosure; a later receipt is insufficient.",
-          "limitation": "reviewed_system",
+          "state": "partial",
+          "reason": "NEAR issue 1061 (reply-key substitution) is fixed in source for E2EE v3: inference-proxy #321 (merged 2026-10-28) binds the reply key into the request AAD. The deployed proxy is not tied to a release, and v1/v2 requests without the binding are still accepted.",
+          "label": "v3 fix in source only",
+          "evidence": "Read 2026-11-15 at nearai/inference-proxy 3f7e979, src/encryption.rs:62-75: request_aad() appends canonical_reply_key() under the label nearai-e2ee-request-v3, so a relay that swaps the reply key breaks decryption of the request. Issue 1061 is still open with no comments. The deployed proxy digest 60d08c20… matches no release digest (research/operator-review-2026-11-15/near.md). teep decrypted reply fields on nearcloud through an honest gateway (data/evidence/teep-2026-11-15/runs/nearcloud_*/report.txt), which does not exercise substitution.",
+          "missing": "Tie the deployed proxy to a commit containing #321, run a v3 exchange with a substituted reply key and observe the rejection, and check whether a v3 client can be downgraded to v1/v2.",
+          "limitation": "evidence",
           "issue_urls": [
             "https://github.com/amiller/awesome-private-inference/issues/29"
           ]
@@ -2256,7 +2256,7 @@
     },
     {
       "id": "tinfoil-router",
-      "label": "Router \u2192 worker",
+      "label": "Router → worker",
       "architecture": "AMD SEV-SNP",
       "reviewed_at": "2026-11-15",
       "source_revision": "e8d80e5ec8afd0e8b55a11393313100e26248167",
@@ -2900,7 +2900,7 @@
     {
       "id": "maple-tinfoil",
       "label": "Via Tinfoil",
-      "architecture": "Nitro \u2192 Tinfoil",
+      "architecture": "Nitro → Tinfoil",
       "reviewed_at": "2026-10-14",
       "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [
@@ -2992,7 +2992,7 @@
     {
       "id": "maple-privatemode",
       "label": "Via Privatemode",
-      "architecture": "Nitro \u2192 Privatemode",
+      "architecture": "Nitro → Privatemode",
       "reviewed_at": "2026-10-14",
       "source_revision": "ffb5b54e8cb7bc9ca7a7222d7c594b72d6265f8f",
       "sources": [

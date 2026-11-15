@@ -83,7 +83,7 @@ def test_reviewed_routes_have_exact_sources_and_keep_known_distinctions():
         for p in r['sources']:
             assert (root/p).is_file()
     assert all(set(r['axes']) == set(AXES) and 'session' not in r['axes'] for r in routes.values())
-    assert routes['near-ai-gateway-e2ee']['axes']['reply']['state'] == 'gap'
+    assert routes['near-ai-gateway-e2ee']['axes']['reply']['state'] == 'partial' and '#321' in routes['near-ai-gateway-e2ee']['axes']['reply']['reason']
     assert routes['near-ai-gateway-e2ee']['axes']['recipient']['state'] == 'partial'
     assert routes['private-inference-private']['axes']['reply']['limitation'] == 'reviewed_system'
     assert routes['tinfoil-router']['axes']['recipient']['state'] == 'partial'
