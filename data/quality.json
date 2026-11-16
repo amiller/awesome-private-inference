@@ -1,26 +1,26 @@
 {
-  "generated_at": "2026-11-15T19:21:52.887563Z",
+  "generated_at": "2026-11-16T22:52:50.193485Z",
   "window": {
     "first": "2026-04-21",
-    "last": "2026-11-15",
-    "days": 204
+    "last": "2026-11-16",
+    "days": 205
   },
   "calibration": {
-    "observations": 3967,
-    "pass": 2473,
-    "transport": 913,
-    "no-error-invalid": 537,
-    "verification-failure": 44,
-    "explicit_error_bucket": 44,
+    "observations": 3983,
+    "pass": 2476,
+    "transport": 914,
+    "no-error-invalid": 546,
+    "verification-failure": 47,
+    "explicit_error_bucket": 47,
     "interpretation": "Historical adapter outcomes, not a security failure rate or independent trials",
     "no_error_invalid_by_provider": {
-      "aci-gateway": 149,
-      "chutes": 178,
-      "near-ai": 37,
+      "aci-gateway": 150,
+      "chutes": 183,
+      "near-ai": 38,
       "redpill": 123,
-      "venice": 50
+      "venice": 52
     },
-    "note": "537 of 3967 observations were invalid with no error attached: aci-gateway 149, chutes 178, near-ai 37, redpill 123, venice 50. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Error-string classes are not a calibrated detector. Retired providers stay in this history; removing an integration must not improve the registry's grade."
+    "note": "546 of 3983 observations were invalid with no error attached: aci-gateway 150, chutes 183, near-ai 38, redpill 123, venice 52. Read these carefully. A row lands here when a required layer came back False without an exception, which is a genuine failure \u2014 but until 2026-08-18 it also caught a failed call to Phala's appraisal service, because the helper read an error body as `verified: false`. That is fixed (the call now raises, so it is recorded as transport), and counts from earlier snapshots mix the two. Error-string classes are not a calibrated detector. Retired providers stay in this history; removing an integration must not improve the registry's grade."
   },
   "coverage": [
     {
@@ -28,11 +28,10 @@
       "model": "api.redpill.ai",
       "shape": "aci-gateway",
       "status": "invalid",
-      "proven": 4,
-      "required": 6,
+      "proven": 7,
+      "required": 8,
       "missing": [
-        "attested_serving_enforced",
-        "prod_os_image"
+        "attested_serving_enforced"
       ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
@@ -43,12 +42,10 @@
       "provider": "aci-gateway",
       "model": "inference.phala.com",
       "shape": "aci-gateway",
-      "status": "not_checked",
-      "proven": 5,
-      "required": 6,
-      "missing": [
-        "prod_os_image"
-      ],
+      "status": "verified",
+      "proven": 8,
+      "required": 8,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -58,12 +55,10 @@
       "provider": "aci-gateway",
       "model": "tee.redpill.ai",
       "shape": "aci-gateway",
-      "status": "not_checked",
-      "proven": 5,
-      "required": 6,
-      "missing": [
-        "prod_os_image"
-      ],
+      "status": "verified",
+      "proven": 8,
+      "required": 8,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "control-plane",
       "error": null,
@@ -132,26 +127,21 @@
     {
       "provider": "chutes",
       "model": "Qwen3-32B-TEE",
-      "shape": "chutes-tee",
+      "shape": "retired",
       "status": "unreachable",
       "proven": 0,
-      "required": 4,
-      "missing": [
-        "nonce_bound",
-        "report_data_binds_key",
-        "serving_code_attested",
-        "tdx_verified"
-      ],
+      "required": 0,
+      "missing": [],
       "version_identity": "content-hash",
       "version_source": "instance-sampled",
-      "error": "RuntimeError: HTTP 404 on /e2e/instances/ac059e33-eb27-541c-b9a9-24b214036475: {",
+      "error": "retired",
       "hidden_layers": []
     },
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
       "shape": "chutes-tee",
-      "status": "not_checked",
+      "status": "invalid",
       "proven": 3,
       "required": 4,
       "missing": [
@@ -164,35 +154,13 @@
     },
     {
       "provider": "near-ai",
-      "model": "openai/gpt-oss-120b",
+      "model": "Qwen/Qwen3.8-27B",
       "shape": "tdx+gpu",
-      "status": "unreachable",
-      "proven": 0,
-      "required": 7,
+      "status": "not_checked",
+      "proven": 10,
+      "required": 11,
       "missing": [
-        "backend_attested",
-        "compose_hash_committed",
-        "gpu_attested",
-        "key_derives_to_address",
-        "nonce_bound",
-        "report_data_binds_key",
-        "tdx_verified"
-      ],
-      "version_identity": "content-hash",
-      "version_source": "control-plane",
-      "error": "HTTP 400: {\"error\":{\"message\":\"Model 'openai/gpt-oss-120b' not found. It's not a",
-      "hidden_layers": []
-    },
-    {
-      "provider": "near-ai",
-      "model": "zai-org/GLM-5.1-FP8",
-      "shape": "tdx+gpu",
-      "status": "invalid",
-      "proven": 5,
-      "required": 7,
-      "missing": [
-        "backend_attested",
-        "compose_hash_committed"
+        "backend_attested"
       ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
@@ -200,19 +168,59 @@
       "hidden_layers": []
     },
     {
+      "provider": "near-ai",
+      "model": "openai/gpt-oss-120b",
+      "shape": "retired",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": "retired",
+      "hidden_layers": []
+    },
+    {
+      "provider": "near-ai",
+      "model": "z-ai/glm-5.3-flash",
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": "ValueError: Failed to get collateral: error sending request for url (https://pcc",
+      "hidden_layers": []
+    },
+    {
+      "provider": "near-ai",
+      "model": "zai-org/GLM-5.1-FP8",
+      "shape": "retired",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
+      "version_identity": "content-hash",
+      "version_source": "control-plane",
+      "error": "retired",
+      "hidden_layers": []
+    },
+    {
       "provider": "tinfoil",
       "model": "router",
       "shape": "tinfoil-sev-snp-v2",
-      "status": "not_checked",
-      "proven": 2,
+      "status": "invalid",
+      "proven": 1,
       "required": 4,
       "missing": [
-        "hardware_signature_verified",
-        "runtime_config_fully_attested"
+        "hpke_pubkey_attested",
+        "runtime_config_fully_attested",
+        "tls_pubkey_pinned"
       ],
       "version_identity": "content-hash",
       "version_source": "control-plane",
-      "error": "AMD SNP report signature and VCEK chain not verified",
+      "error": "TCB below AMD-published minimum: {'snp': '0x17 < 0x1d', 'ucode': '0x54 < 0x56'}",
       "hidden_layers": []
     },
     {
@@ -221,17 +229,22 @@
       "shape": "venice",
       "status": "unreachable",
       "proven": 0,
-      "required": 9,
+      "required": 14,
       "missing": [
         "code_measurement_reproducible",
         "compose_hash_committed",
+        "event_log_replayed",
         "gpu_attested",
         "key_derives_to_address",
         "nonce_bound",
         "prod_os_image",
         "report_data_binds_key",
         "serving_code_attested",
-        "tdx_verified"
+        "tcb_current",
+        "tdx_verified",
+        "tee_boot_config",
+        "tee_debug_disabled",
+        "tee_hardware_config"
       ],
       "version_identity": "absent",
       "version_source": "none",
@@ -241,32 +254,25 @@
     {
       "provider": "venice",
       "model": "e2ee-glm-5-1",
-      "shape": "venice",
-      "status": "partial",
-      "proven": 4,
-      "required": 9,
-      "missing": [
-        "code_measurement_reproducible",
-        "compose_hash_committed",
-        "gpu_attested",
-        "prod_os_image",
-        "serving_code_attested"
-      ],
+      "shape": "error",
+      "status": "unreachable",
+      "proven": 0,
+      "required": 0,
+      "missing": [],
       "version_identity": "absent",
       "version_source": "none",
-      "error": null,
+      "error": "ValueError: Failed to get collateral: error sending request for url (https://pcc",
       "hidden_layers": []
     },
     {
       "provider": "venice",
       "model": "e2ee-gpt-oss-120b-p",
       "shape": "venice",
-      "status": "partial",
-      "proven": 4,
-      "required": 9,
+      "status": "invalid",
+      "proven": 10,
+      "required": 14,
       "missing": [
         "code_measurement_reproducible",
-        "compose_hash_committed",
         "gpu_attested",
         "prod_os_image",
         "serving_code_attested"
@@ -281,12 +287,15 @@
       "model": "e2ee-qwen3-6-35b-a3b",
       "shape": "venice",
       "status": "partial",
-      "proven": 6,
-      "required": 9,
+      "proven": 8,
+      "required": 14,
       "missing": [
         "code_measurement_reproducible",
+        "event_log_replayed",
         "prod_os_image",
-        "serving_code_attested"
+        "serving_code_attested",
+        "tee_boot_config",
+        "tee_hardware_config"
       ],
       "version_identity": "absent",
       "version_source": "none",
@@ -297,12 +306,11 @@
       "provider": "venice",
       "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
       "shape": "venice",
-      "status": "partial",
-      "proven": 5,
-      "required": 9,
+      "status": "invalid",
+      "proven": 11,
+      "required": 14,
       "missing": [
         "code_measurement_reproducible",
-        "compose_hash_committed",
         "prod_os_image",
         "serving_code_attested"
       ],
@@ -313,20 +321,21 @@
     }
   ],
   "coverage_summary": {
-    "invalid": 2,
-    "not_checked": 8,
-    "unreachable": 3,
-    "partial": 4
+    "invalid": 5,
+    "verified": 2,
+    "not_checked": 5,
+    "unreachable": 6,
+    "partial": 1
   },
   "unmeasurable_providers": [
     "venice"
   ],
   "audit_debt": {
-    "builds_observed": 111,
+    "builds_observed": 112,
     "builds_reviewed": 7,
-    "backlog": 104,
+    "backlog": 105,
     "last_audit": "2026-09-02",
-    "days_since_last_audit": 74,
+    "days_since_last_audit": 75,
     "by_provider": {
       "near-ai": {
         "builds_observed": 38,
@@ -335,9 +344,9 @@
         "last_audit": "2026-09-02"
       },
       "tinfoil": {
-        "builds_observed": 71,
+        "builds_observed": 72,
         "builds_reviewed": 1,
-        "backlog": 70,
+        "backlog": 71,
         "last_audit": "2026-09-02"
       },
       "chutes": {
@@ -349,18 +358,18 @@
     }
   },
   "density": {
-    "published_cells": 391,
-    "carrying_signal": 80,
-    "dashes": 311,
-    "signal_fraction": 0.205
+    "published_cells": 532,
+    "carrying_signal": 103,
+    "dashes": 429,
+    "signal_fraction": 0.194
   },
   "hidden_layer_targets": [],
   "cadence": [
     {
       "provider": "aci-gateway",
       "model": "api.redpill.ai",
-      "observations": 85,
-      "span_days": 89,
+      "observations": 86,
+      "span_days": 90,
       "distinct": 20,
       "novel": 19,
       "revisit": 1,
@@ -372,8 +381,8 @@
     {
       "provider": "aci-gateway",
       "model": "inference.phala.com",
-      "observations": 85,
-      "span_days": 89,
+      "observations": 86,
+      "span_days": 90,
       "distinct": 20,
       "novel": 19,
       "revisit": 0,
@@ -385,8 +394,8 @@
     {
       "provider": "aci-gateway",
       "model": "tee.redpill.ai",
-      "observations": 85,
-      "span_days": 89,
+      "observations": 86,
+      "span_days": 90,
       "distinct": 20,
       "novel": 19,
       "revisit": 0,
@@ -398,14 +407,14 @@
     {
       "provider": "chutes",
       "model": "DeepSeek-V3.2-TEE",
-      "observations": 141,
-      "span_days": 150,
+      "observations": 142,
+      "span_days": 151,
       "distinct": 2,
       "novel": 1,
       "revisit": 0,
       "version_source": "instance-sampled",
       "retired": false,
-      "observed_days_per_new_identity": 150.0,
+      "observed_days_per_new_identity": 151.0,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
@@ -424,8 +433,8 @@
     {
       "provider": "chutes",
       "model": "GLM-5.1-TEE",
-      "observations": 81,
-      "span_days": 89,
+      "observations": 82,
+      "span_days": 90,
       "distinct": 1,
       "novel": 0,
       "revisit": 0,
@@ -437,8 +446,8 @@
     {
       "provider": "chutes",
       "model": "GLM-5.2-TEE",
-      "observations": 80,
-      "span_days": 89,
+      "observations": 81,
+      "span_days": 90,
       "distinct": 1,
       "novel": 0,
       "revisit": 0,
@@ -450,14 +459,14 @@
     {
       "provider": "chutes",
       "model": "Kimi-K2.6-TEE",
-      "observations": 140,
-      "span_days": 150,
+      "observations": 141,
+      "span_days": 151,
       "distinct": 2,
       "novel": 1,
       "revisit": 4,
       "version_source": "instance-sampled",
       "retired": false,
-      "observed_days_per_new_identity": 150.0,
+      "observed_days_per_new_identity": 151.0,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
@@ -476,14 +485,14 @@
     {
       "provider": "chutes",
       "model": "gemma-4-31B-TEE",
-      "observations": 138,
-      "span_days": 150,
+      "observations": 139,
+      "span_days": 151,
       "distinct": 2,
       "novel": 1,
       "revisit": 22,
       "version_source": "instance-sampled",
       "retired": false,
-      "observed_days_per_new_identity": 150.0,
+      "observed_days_per_new_identity": 151.0,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
@@ -497,6 +506,19 @@
       "version_source": "control-plane",
       "retired": false,
       "observed_days_per_new_identity": 3.4,
+      "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
+    },
+    {
+      "provider": "near-ai",
+      "model": "Qwen/Qwen3.8-27B",
+      "observations": 1,
+      "span_days": 0,
+      "distinct": 1,
+      "novel": 0,
+      "revisit": 0,
+      "version_source": "control-plane",
+      "retired": false,
+      "observed_days_per_new_identity": null,
       "sampling_limit": "Newly observed identity, not confirmed deployment; gaps and fleet sampling remain unidentifiable"
     },
     {
@@ -606,10 +628,10 @@
     {
       "provider": "tinfoil",
       "model": "router",
-      "observations": 199,
-      "span_days": 203,
-      "distinct": 59,
-      "novel": 58,
+      "observations": 200,
+      "span_days": 204,
+      "distinct": 60,
+      "novel": 59,
       "revisit": 0,
       "version_source": "control-plane",
       "retired": false,
