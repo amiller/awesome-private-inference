@@ -1,0 +1,243 @@
+{
+  "captured_at": "2026-11-17T21:45:22Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_nonempty": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "event_log_replayed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "prod_os_image": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tcb_current": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_boot_config": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_debug_disabled": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tee_hardware_config": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "aci-gateway",
+      "details": {
+        "advisory_ids": [],
+        "backend_evidence_verified": false,
+        "boot_registers": {
+          "boot_config": true,
+          "hardware_config": true,
+          "policy_revision": "2026-11-15.1",
+          "reasons": []
+        },
+        "catalog_serving_tested": false,
+        "compose_hash": "04d79a230db9bb467ced4b3a0822042c5751c32d89a2b1c6801368e648356085",
+        "event_payloads_bound": true,
+        "identity_continuity": "not available in deployed ACI draft",
+        "models": 28,
+        "os_archive_metadata_status": "checked",
+        "os_image": "dstack-0.5.12",
+        "os_image_event_bound": true,
+        "quote_report_data_bound": true,
+        "raw_evidence_completeness": "complete",
+        "raw_evidence_ref": "observations/evidence/sha256/f7625280cd71e2df44fac71c1c1745510bf8ef6a6d6a38eba0ec54066f4f5f0f.json",
+        "raw_evidence_sha256": "f7625280cd71e2df44fac71c1c1745510bf8ef6a6d6a38eba0ec54066f4f5f0f",
+        "repo_commit": "8d0018f81e8dbadfe7b733bb294a0350f82b338c",
+        "sessions": "81/81 with evidence",
+        "tcb_status": "UpToDate",
+        "tee_only_domains": [
+          "tee.redpill.ai",
+          "inference.phala.com"
+        ],
+        "verification_reason": "quote, event log, compose, keyset, pinned boot registers and production image archive all verified; upstream model CVMs and the paid request path remain unverified",
+        "verification_status": "verified",
+        "workload_identity_endorsed": null,
+        "workload_keyset_digest": "sha256:31bfd7f9a90aba90795f4c83aba9a245f3b20c97a23e21829b48273dc738a1b0"
+      },
+      "error": null,
+      "latency_s": 0.0,
+      "model": "inference.phala.com",
+      "provider": "aci-gateway",
+      "scorecard": {
+        "attested_serving_enforced": true,
+        "backend_attested": null,
+        "catalog_nonempty": true,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": true,
+        "event_log_replayed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": null,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": null,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": true,
+        "prod_os_image": true,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": null,
+        "sessions_publish_evidence_digests": true,
+        "tcb_current": null,
+        "tdx_verified": true,
+        "tee_boot_config": true,
+        "tee_debug_disabled": null,
+        "tee_hardware_config": true,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "",
+      "valid": true,
+      "verified_at": "2026-11-17T21:45:22Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "daa6692e500df9a5ccb26a12fe2839115bb3a52b80365db73ad8fbdff17d92b3",
+    "raw_evidence_ref": "observations/evidence/sha256/f7625280cd71e2df44fac71c1c1745510bf8ef6a6d6a38eba0ec54066f4f5f0f.json",
+    "raw_evidence_sha256": "f7625280cd71e2df44fac71c1c1745510bf8ef6a6d6a38eba0ec54066f4f5f0f",
+    "raw_evidence_status": "stored_separately",
+    "stored_report_sha256": "6da0d200435d85a5dfe7c041f04c6ef6f95111331adf472d40485fb874935303"
+  },
+  "identities": [
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "compose_hash",
+      "model_scope": "*",
+      "value": "04d79a230db9bb467ced4b3a0822042c5751c32d89a2b1c6801368e648356085"
+    },
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "os_image",
+      "model_scope": "*",
+      "value": "dstack-0.5.12"
+    },
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "repo_commit",
+      "model_scope": "*",
+      "value": "8d0018f81e8dbadfe7b733bb294a0350f82b338c"
+    },
+    {
+      "component_id": "aci-gateway/shared-workload",
+      "kind": "workload_keyset_digest",
+      "model_scope": "*",
+      "value": "sha256:31bfd7f9a90aba90795f4c83aba9a245f3b20c97a23e21829b48273dc738a1b0"
+    }
+  ],
+  "identity_trust": "adapter_accepted",
+  "instance_id": null,
+  "legacy": false,
+  "model": "inference.phala.com",
+  "observation_id": "20261117T214516.586411Z-798345ed3a70/4437789d9406a763a912f52a",
+  "observer": "daily-probe",
+  "outcome": "verified",
+  "policy_revision": "unknown",
+  "provider": "aci-gateway",
+  "reason": "unspecified",
+  "reason_detail": "quote, event log, compose, keyset, pinned boot registers and production image archive all verified; upstream model CVMs and the paid request path remain unverified",
+  "route_id": "aci-gateway/inference.phala.com",
+  "run_id": "20261117T214516.586411Z-798345ed3a70",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "fbbacae251f699bc9a1a890984a310fb9a92ccb1c36db56182431c7bac964975"
+}
