@@ -2610,7 +2610,7 @@
           "state": "gap",
           "reason": "The chute code that receives plaintext is excluded from measurement; the control plane chooses the E2E key, reads default-path prompts and sets the reference values. chutesai/chutes#75 is unanswered since 2026-06-18, and the control-plane source (chutes-api) is archived since 2026-09-03.",
           "label": "Code can change unmeasured",
-          "evidence": "sek8s cfsv_wrapper.py:54 at 08d79872; chutes-api e2e/router.py:140-152, invocation/router.py:505-937 at archived 3b5609f4. research/operator-review-2026-11-15/chutes.md",
+          "evidence": "chutes cfsv_wrapper.py:54 at 08d79872; chutes-api e2e/router.py:140-152, invocation/router.py:505-937 at archived 3b5609f4. research/operator-review-2026-11-15/chutes.md",
           "missing": "Measured chute code and model revision; quote-bound key discovery; an append-only reference-value log; current control-plane source.",
           "limitation": "reviewed_system",
           "issue_urls": [
