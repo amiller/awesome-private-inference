@@ -90,7 +90,7 @@ source; whether production still matches it cannot be checked.
   RTMR3.
 - **Confidential chutes from different accounts share one TDX VM (2026-11-17/18).** Grouping
   quotes by `report_data[32:64]` puts several chutes in one VM. Each of five snapshots of every
-  public TEE chute (2026-11-17 20:24 to 2026-11-18 04:11 UTC) had 5 or 6 VMs holding chutes of
+  public TEE chute with running instances (2026-11-17 20:24 to 2026-11-18 04:11 UTC) had 5 or 6 VMs holding chutes of
   two or more accounts. A private chute of ours landed on 2026-11-17 in a VM with four
   instances of Chutes' own models; a second one, on 2026-11-18, landed in a VM with six instances
   belonging to two other customer accounts. All quotes in both VMs verified `UpToDate` against
@@ -121,7 +121,7 @@ source; whether production still matches it cannot be checked.
   `api/invocation/router.py:895` at `3b5609f`), `payload["model"]`
   alias rewrite (`:902-933`), `payload["messages"]` iteration (`:937`),
   `chat_template_kwargs` reasoning-effort rewrite (`:989-1000`, added `f6c817c`, 2026-06-18), and
-  `get_prompt_prefix_hashes(...)` for prefix-cache routing (`:606`, per-chute path). "Not even we can see your
+  `get_prompt_prefix_hashes(...)` for prefix-cache routing (`:606`, in `_invoke`, which the `llm.chutes.ai` handler calls at `:1111-1135`). "Not even we can see your
   data" holds only on the opt-in `/e2e/invoke` path, not the path most users hit.
 - **Reseller surface: tenant images are built and signed server-side by Chutes.** `forge` builds
   and `cosign`-signs the tenant image with Chutes' key (chutes-api `api/image/forge.py:646-677`
@@ -166,7 +166,7 @@ source; whether production still matches it cannot be checked.
 - **Lower-tier.** NVIDIA's offline `LOCAL` GPU verifier isn't offered (NRAS network-only;
   chutes-api `nv-attest/chutes_nvattest/verifier.py:10` at `3b5609f` still adds only
   `Environment.REMOTE`); a single fleet-wide static LUKS passphrase rather than per-TD sealed
-  keys (changed in source, not observed live: chutes-api `api/server/util.py:1133-1207` at
+  keys (changed in source, not observed live: chutes-api `api/server/util.py:1133-1205` at
   `3b5609f` uses a per-base-VM-version passphrase for first boot and rotates to a per-VM
   passphrase for VM >= 1.4.0, `api/constants.py:64`; the Chutes API still generates and holds
   every passphrase); the Jobs path
