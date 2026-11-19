@@ -4,8 +4,9 @@
 
 Chutes ([chutes.ai](https://chutes.ai)) is serverless AI inference on Bittensor **subnet 64**
 (Rayon Labs / chutesai). Its confidential (`-TEE`) chutes run on Intel TDX + NVIDIA
-confidential-compute GPUs with ML-KEM-768 end-to-end encryption, and the docs advertise
-"not even we can see your data" (`docs/tee-verification.md`). It is this cohort's first
+confidential-compute GPUs with ML-KEM-768 end-to-end encryption, and the docs say the host "cannot access either VM or GPU memory" and that
+third parties "can independently verify TEE integrity without having to trust Chutes"
+(chutes-api `docs/tee-verification.md:5`, `3b5609f`). It is this cohort's first
 **Bittensor-subnet** provider and first **non-dstack custom TDX stack** — its own attestation
 sidecar, measurement registry, and LUKS key release rather than Phala's dstack.
 
@@ -121,8 +122,7 @@ source; whether production still matches it cannot be checked.
   `api/invocation/router.py:895` at `3b5609f`), `payload["model"]`
   alias rewrite (`:902-933`), `payload["messages"]` iteration (`:937`),
   `chat_template_kwargs` reasoning-effort rewrite (`:989-1000`, added `f6c817c`, 2026-06-18), and
-  `get_prompt_prefix_hashes(...)` for prefix-cache routing (`:606`, in `_invoke`, which the `llm.chutes.ai` handler calls at `:1111-1135`). "Not even we can see your
-  data" holds only on the opt-in `/e2e/invoke` path, not the path most users hit.
+  `get_prompt_prefix_hashes(...)` for prefix-cache routing (`:606`, in `_invoke`, which the `llm.chutes.ai` handler calls at `:1111-1135`). The confidentiality claim holds only on the opt-in `/e2e/invoke` path, not the path most users hit.
 - **Reseller surface: tenant images are built and signed server-side by Chutes.** `forge` builds
   and `cosign`-signs the tenant image with Chutes' key (chutes-api `api/image/forge.py:646-677`
   at `3b5609f`; a Depot-based `api/image/remote_forge.py:311-338` signs with the same key and is
