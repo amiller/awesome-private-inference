@@ -1,0 +1,317 @@
+{
+  "captured_at": "2026-11-22T20:20:39Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "event_log_replayed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tcb_current": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_boot_config": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tee_debug_disabled": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_hardware_config": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "venice",
+      "details": {
+        "api_version": null,
+        "candidates_available": 1,
+        "candidates_evaluated": 1,
+        "dcap_appraisal": {
+          "advisory_ids": [],
+          "tcb_status": "UpToDate"
+        },
+        "gpu_appraisal": {
+          "gpu_attested": true,
+          "gpus": {
+            "GPU-0": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "c33c30815967fcde54e884982d3a8acf30f1b058aad7fb1c4dbe8ab07eec3a72",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "515559108827441080866224828121359967528469732474",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            },
+            "GPU-1": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "fd90a09844141aca2fabac940fd138d81c3e6852484e39ebb93f0515586d4209",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "544607359981532575299880373306315092659523876375",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            },
+            "GPU-2": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "583ea92d406eaee69f7c2b124438847abc3370f8317a24c8eca5bb17f330294d",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "403277416956605398007975764483205306699111417737",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            },
+            "GPU-3": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "aba1001d61aff4cc02aacfbc47f03e9d946344ba598d90de3937c730014245db",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "511193733722982329819490499303933004321131687051",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            },
+            "GPU-4": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "f3f6ba24dddb3de89fd3c3fcd6632fc154c35be691d59c5a1ca88d019e940c4d",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "719384196038893961499064517969946679542261376449",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            },
+            "GPU-5": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "f756df83a14d36e0de381b60316fac83847ac1fcdd551634913eafdce6bdaf9e",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "671444618620500116571512335614624770526090891662",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            },
+            "GPU-6": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "f84fd3f4c05f77d92fa845a571d96e30401fed288942134ff4c44216d3cef952",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "711309300124435772714651178016934344650961219738",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            },
+            "GPU-7": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "a85a297c6fb5bd58c36eaa494c3f96f6931e9bab8063d7062014f5c05c405d08",
+              "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "522730958467576914736922447532375274255796816636",
+              "x-nvidia-gpu-driver-version": "595.58.03"
+            }
+          },
+          "platform": {
+            "iss": "https://nras.attestation.nvidia.com",
+            "jwt_sha256": "1808189f8e06b203e44892eb8d6f68030a19a534fe63c552f99b5be8fd927764",
+            "kid": "nv-eat-kid-prod-20261122182541142-32a25b69-983b-4baa-a533-d7816f47091d",
+            "nonce_bound": true,
+            "ok": true,
+            "signature_verified": true,
+            "verdict": true
+          },
+          "verified_gpu_count": 8
+        },
+        "gpu_count_pinned": false,
+        "gpu_evidence_omitted": false,
+        "measurements": {
+          "reason": "legacy response carries no event log; replay and boot-register derivation unavailable"
+        },
+        "model_name": "Qwen/Qwen3.6-35B-A3B-FP8",
+        "nonce_source": "client",
+        "phala_tcb_status": null,
+        "serving": null,
+        "tee_hardware": "intel-tdx",
+        "tee_provider": "near-ai",
+        "upstream_model": "Qwen/Qwen3.6-35B-A3B-FP8"
+      },
+      "error": null,
+      "latency_s": 1.72,
+      "model": "e2ee-qwen3-6-35b-a3b",
+      "provider": "venice",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": false,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": true,
+        "event_log_replayed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": true,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": true,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": null,
+        "sessions_publish_evidence_digests": null,
+        "tcb_current": true,
+        "tdx_verified": true,
+        "tee_boot_config": null,
+        "tee_debug_disabled": true,
+        "tee_hardware_config": null,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "0xfdbd7952498b333206f360d71d97a1e0961e8ddf",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "046da5019dcc34e836adcf1d542cceee52f223fcd2359425f3b4b7c29bf31f2ecab8c4534912b038b75b0066816adb7680641f931dd67bbaef7a1e510a8e72510d",
+      "valid": true,
+      "verified_at": "2026-11-22T20:20:39Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "2e4444d6b9104e1110c48192d53b4f6ce864a3769a1c0f1dd20edb61c50e4a5b",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "2e4444d6b9104e1110c48192d53b4f6ce864a3769a1c0f1dd20edb61c50e4a5b"
+  },
+  "identities": [],
+  "identity_trust": "adapter_accepted",
+  "instance_id": null,
+  "legacy": false,
+  "model": "e2ee-qwen3-6-35b-a3b",
+  "observation_id": "20261122T202027.475910Z-e486c274d64f/4f3fb84ea047d1d01d3bfbd4",
+  "observer": "daily-probe",
+  "outcome": "verified",
+  "policy_revision": "unknown",
+  "provider": "venice",
+  "reason": "adapter_accepted",
+  "reason_detail": null,
+  "route_id": "venice/e2ee-qwen3-6-35b-a3b",
+  "run_id": "20261122T202027.475910Z-e486c274d64f",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "fbbacae251f699bc9a1a890984a310fb9a92ccb1c36db56182431c7bac964975"
+}
