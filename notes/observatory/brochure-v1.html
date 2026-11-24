@@ -1,0 +1,146 @@
+<title>Private Inference Observatory</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column with a wide figure band; instrument-log feel, mono for measured values */
+:root {
+  --bg: #f3f5f6; --panel: #ffffff; --fg: #15212b; --muted: #55636f; --rule: #d5dce1;
+  --accent: #0e6a73; --warn: #b8660b; --ok: #2f7d4a; --bad: #a83a32;
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11181e; --panel: #182229; --fg: #e3e9ed; --muted: #95a3ae; --rule: #2c3a44;
+  --accent: #4fb8c1; --warn: #e3a04a; --ok: #6cc28a; --bad: #e2786e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11181e; --panel: #182229; --fg: #e3e9ed; --muted: #95a3ae; --rule: #2c3a44;
+  --accent: #4fb8c1; --warn: #e3a04a; --ok: #6cc28a; --bad: #e2786e; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 16px/1.62 var(--body); }
+.wrap { max-width: 46rem; margin: 0 auto; padding-block: 3rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: grid; gap: .75rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+.eyebrow { font: 500 .78rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 700 2.4rem/1.1 var(--display); margin: 0; text-wrap: balance; }
+.lede { font-size: 1.15rem; margin: 0; }
+h2 { font: 600 1.4rem/1.25 var(--display); margin: 2.75rem 0 .75rem; text-wrap: balance; }
+h3 { font: 600 1.02rem/1.3 var(--display); margin: 0 0 .25rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--accent); }
+code, .m { font-family: var(--mono); font-size: .88em; }
+ul { margin: 0 0 1rem; padding-left: 1.2rem; display: grid; gap: .4rem; }
+figure { margin: 1.5rem 0; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; }
+figcaption { font-size: .86rem; color: var(--muted); margin-top: .5rem; }
+.fig-scroll { overflow-x: auto; }
+svg text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+svg .lab { fill: var(--fg); font-weight: 500; }
+.tbl { overflow-x: auto; margin: 1rem 0 1.5rem; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { text-align: left; vertical-align: top; padding: .55rem .6rem; border-bottom: 1px solid var(--rule); }
+th { font: 600 .78rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { font: 500 .74rem/1 var(--mono); padding: .2rem .45rem; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; }
+.have { color: var(--ok); } .part { color: var(--warn); } .need { color: var(--bad); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin: 1rem 0 1.5rem; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; min-width: 0; }
+.card p { font-size: .93rem; margin: 0; }
+.note { font-size: .9rem; color: var(--muted); border-left: 3px solid var(--rule); padding-left: .9rem; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .85rem; color: var(--muted); }
+@media (max-width: 480px) { h1 { font-size: 1.9rem; } }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Proposal · November 2026</div>
+  <h1>Private Inference Observatory</h1>
+  <p class="lede">Confidential inference providers change the software their clients trust every few days, and the clients mostly accept whatever they are shown. We propose an observatory that retains each provider's attestation evidence over time and reviews what it does and does not establish. The goal is that a client author, a provider, or a user choosing between them can check what a privacy claim rests on.</p>
+</header>
+
+<h2>A client's attestation check passes, while the exposure sits outside what it checks</h2>
+<p>We started in April 2026 by running daily attestation checks against the TEE inference providers, much like a careful client would. Over the first 111 days the checks recorded zero verification failures across 2,358 provider-model-days. Every red cell on our dashboard turned out to be network weather: timeouts, 503s, rotated endpoints. We now report reachability and verification separately.</p>
+<p>Everything that actually mattered for confidentiality was found next to the quote rather than in it, by reading code and retaining evidence:</p>
+<ul>
+  <li><b>Chutes</b> excludes <code>serve.py</code> and <code>chute.py</code> from measurement, and we demonstrated cross-user prompt exfiltration from an enclave that reported <code>verified=True</code> (chutes#75).</li>
+  <li><b>NEAR</b>'s compose-manager deploys serving code after boot from git tags with no minimum age. Production machines ran personal-branch and <code>experiments/</code> files (compose-manager#85).</li>
+  <li><b>Brave Leo</b> verifies NEAR thoroughly on Brave's server, but the browser's "Verified" badge is hardcoded, and the attested recipient is NEAR's gateway, not the model machine.</li>
+  <li><b>Tinfoil</b>'s router accepts an unsigned runtime config that assigns customers to replicas, and its control plane can rewrite <code>model:"auto"</code> request bodies.</li>
+  <li>Of 50 third-party verifying clients we reviewed at pinned commits, reply authenticity was the weak point in nearly all of them, and most adopt the provider's latest release automatically.</li>
+</ul>
+<p>Our own verifiers had the same problems. An offline counterexample made our ACI adapter accept a quote with mismatched report data, and an outside reader showed that our bar for Venice left out two layers it should have required. The observatory has to audit its own instruments as well as the providers.</p>
+
+<h2>NEAR's gateway shows what a retained timeline settles that a single check cannot</h2>
+<p>The clearest example is this month's NEAR fleet audit. We kept every gateway quote we captured from April onward and checked each one against Intel's published TCB history. Every quote from April to October was rated <b>OutOfDate</b> under the Intel data current at the time. The gateway alternated between two old firmware levels, which points to two gateway hosts with traffic landing on either. A one-time check would have reported "OutOfDate today". The timeline tells us how long, on which hosts, and when the problem ended.</p>
+
+<figure>
+  <div class="fig-scroll">
+  <svg viewBox="0 0 740 168" width="740" role="img" aria-label="NEAR gateway TCB level by date, April to December 2026">
+    <g stroke="var(--rule)" stroke-width="1">
+      <line x1="90" y1="44" x2="712" y2="44"/><line x1="90" y1="80" x2="712" y2="80"/><line x1="90" y1="116" x2="712" y2="116"/>
+    </g>
+    <text class="lab" x="8" y="48">0b0102</text><text x="8" y="60" style="font-size:9.5px">OutOfDate·9</text>
+    <text class="lab" x="8" y="84">0b0103</text><text x="8" y="96" style="font-size:9.5px">OutOfDate·4</text>
+    <text class="lab" x="8" y="120">090308</text><text x="8" y="132" style="font-size:9.5px">UpToDate</text>
+    <g fill="var(--warn)">
+      <circle cx="146.4" cy="44" r="5"/><circle cx="170.9" cy="44" r="5"/><circle cx="261.5" cy="44" r="5"/><circle cx="484.5" cy="44" r="5"/>
+      <circle cx="308" cy="80" r="5"/><circle cx="486.9" cy="80" r="5"/><circle cx="555.5" cy="80" r="5"/>
+      <rect x="565.3" y="76" width="27" height="8" rx="2"/>
+    </g>
+    <rect x="594.7" y="112" width="76" height="8" rx="2" fill="var(--ok)"/>
+    <g stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 3">
+      <line x1="592.3" y1="24" x2="592.3" y2="140"/><line x1="700" y1="24" x2="700" y2="140"/>
+    </g>
+    <text x="586" y="18" text-anchor="end" style="fill:var(--accent)">we switch to Direct, Oct 23</text>
+    <text x="712" y="18" text-anchor="end" style="fill:var(--accent)">Dec 6</text>
+    <text x="712" y="30" text-anchor="end" style="fill:var(--accent);font-size:9.5px">Direct ends</text>
+    <g>
+      <text x="90" y="158">Apr</text><text x="163.5" y="158">May</text><text x="239.5" y="158">Jun</text><text x="313" y="158">Jul</text>
+      <text x="388.9" y="158">Aug</text><text x="464.9" y="158">Sep</text><text x="538.4" y="158">Oct</text><text x="614.3" y="158">Nov</text><text x="687.8" y="158">Dec</text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>NEAR gateway firmware (TCB level) in each retained quote, rated with dcap-qvl against Intel's dated TCB evaluation data. Dots are saved captures, bars are daily checks. The May 4 dot is the live warning quoted in devproof's NEAR trust-chain analysis. New firmware arrived Oct 24.</figcaption>
+</figure>
+
+<p>The same history explains a decision we had already made. On Oct 9 Abalone recorded the gateway as OutOfDate and ran NEAR only under an explicit firmware-warning trial policy. On Oct 22 we found that teep's gateway policy admitted the out-of-date gateway without flagging it. On Oct 23 Abalone stopped trusting the gateway and pinned a single model machine through NEAR's Direct endpoints, requiring UpToDate firmware and a reviewed boot image. NEAR updated the gateway firmware the next day.</p>
+<p>Direct also let us judge machines one at a time. Following the same standard on each of five NEAR model machines, we reached a positive opinion on three and not on two. Each image is identified a different way: by digest in the log, by a tag resolved through NVIDIA's catalog, by replaying an unpinned pip build against PyPI's history, or not at all for a private image. Direct closes on Dec 6. After that the audit can still be run, but its result can no longer steer which machine a request goes to. Recording that change as it happens is another thing an observatory is for.</p>
+
+<h2>The instruments already running cover seven months of daily evidence</h2>
+<div class="grid">
+  <div class="card"><h3>Daily attestation probe</h3><p>GitHub CI, adapters for NEAR, Tinfoil, Chutes, Venice and the dstack/ACI providers. Every check reports <span class="m">verified</span>, <span class="m">rejected</span>, <span class="m">not_checked</span>, <span class="m">unavailable</span> or <span class="m">not_applicable</span>. 212 daily snapshots since Apr 21.</p></div>
+  <div class="card"><h3>Route and client registries</h3><p>19 request routes, each naming who can read plaintext on that route. 50 verifying clients reviewed at pinned commits. 7 candidate providers on weekly review.</p></div>
+  <div class="card"><h3>Reference publication monitors</h3><p>Captures of Maple PCRs, the Privatemode manifest, the Confidential AI allowlist and the Private Inference bundle, so a changed reference value is recorded alongside the changed workload.</p></div>
+  <div class="card"><h3>Daily beats</h3><p>Two digests on zed each morning: provider and verifier news, and TEE platform news (Intel, AMD, NVIDIA, GCP firmware endorsements). They caught NEAR's SGLang RCE and Phala's 18-day prompt exposure on an OpenRouter route.</p></div>
+  <div class="card"><h3>Review queue</h3><p>Detected changes become leased review jobs, drafted by agents and published only after review, with a retry budget. One reviewed decision is published so far.</p></div>
+  <div class="card"><h3>NEAR machine logbook</h3><p>New this week: one archived record per NEAR model machine per day, with quote, compose-manager log, TLS binding and TCB status, about 70 MB a year.</p></div>
+</div>
+
+<h2>A full observatory adds per-machine archives, credentialed tests and outside checks on itself</h2>
+<div class="tbl"><table>
+  <thead><tr><th>Component</th><th>Status</th><th>What it takes</th></tr></thead>
+  <tbody>
+    <tr><td>Per-machine archive for every provider</td><td><span class="pill part">NEAR only</span></td><td>Generalize the NEAR collector to Tinfoil, Chutes and ACI fleets. Machine enumeration differs per provider and is sometimes impossible from outside.</td></tr>
+    <tr><td>Credentialed session tests per route</td><td><span class="pill part">partial</span></td><td>Paid API accounts for each provider. Today there is no Tinfoil key, the Venice key gets 401 on chat, and Phala/RedPill keys block the route proof packets (#30, about 60 cells).</td></tr>
+    <tr><td>Expected reference values</td><td><span class="pill part">partial</span></td><td>Boot measurements derived from source (ACI MRTD/RTMR, Tinfoil AMD chain, Maple source-to-EIF) and published in a form teep and other clients can consume.</td></tr>
+    <tr><td>Logbook and incident timeline on the site</td><td><span class="pill part">in progress</span></td><td>Move the NEAR Logbook into the observatory site and feed machine changes into the daily beat.</td></tr>
+    <tr><td>Client verifier registry kept current</td><td><span class="pill have">running</span></td><td>Re-review the 50 clients at new commits. Today this is a manual sweep.</td></tr>
+    <tr><td>Independent heartbeat and 30-day reliability</td><td><span class="pill need">not started</span></td><td>A separately hosted watchdog, and a target of at least 95% of scheduled attempts recorded over 30 days.</td></tr>
+    <tr><td>Reader and blind-replay testing</td><td><span class="pill need">not started</span></td><td>4 of 5 unfamiliar readers answer a route question correctly within 2 minutes, and a blind replay of at least 20 past cases.</td></tr>
+    <tr><td>Tamper-evident log</td><td><span class="pill need">not started</span></td><td>The archive is retained in git today, without the append-only consistency guarantees of certificate transparency.</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Running it takes one compute host, provider accounts, and a reviewer's time</h2>
+<ul>
+  <li><b>Compute and storage.</b> GitHub Actions and Pages for the daily probe and site, plus one server (zed today) for builds, teep runs, beats and review agents. Storage is small: about 1 MB of JSON a day per fleet.</li>
+  <li><b>Provider access.</b> A funded API account at each provider for credentialed tests. This is the largest open dependency and the one that most limits coverage today.</li>
+  <li><b>Model budget.</b> Two daily beat digests and a review agent per detected change.</li>
+  <li><b>Review.</b> The judgments that matter, such as whether a bar is right or an unpinned build is acceptable, still need an informed person. Agents draft and humans decide. Most of today's open cells (about 150 of 190) are our own unfinished checks, so review time is the real limiting cost.</li>
+  <li><b>Outside readers.</b> Providers and client maintainers have acted on findings (NEAR fixed the May model substitution in cloud-api #708 and merged our compose-manager PRs), and an outside reader corrected our Venice bar. The observatory works best with those channels kept open.</li>
+</ul>
+<p class="note">We have not priced these yet. API credits and model usage are the variable costs; the host and storage are already paid for.</p>
+
+<h2>The observatory answers one question per route, for whoever relies on it</h2>
+<p>For a particular client, model and request path: who can read protected data, what evidence limits that access, and who can change the software the client accepts? Client authors such as teep, Abalone and bitrouter get reference values and known failure cases to test against. Providers get specific, reproducible reports. A user choosing a provider gets an account that separates what was observed, what the provider authorized, what was reviewed and what a given client actually accepts. A "rejected" cell means our verifier rejected the evidence within its stated scope. It does not mean the provider was compromised. We also assume the hardware roots of trust are sound.</p>
+
+<footer>Built on <a href="https://github.com/amiller/awesome-private-inference">awesome-private-inference</a>. Figures come from the repository's snapshots, audits and research notes as of 2026-11-24.</footer>
+</div>
