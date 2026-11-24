@@ -117,17 +117,20 @@ def _contract_evidence(app: str, block_tag: str) -> dict:
 
 
 def _public_attestation_fields(att: dict) -> dict:
-    """Keep only protocol evidence consumed by our checks; no HTTP headers."""
+    """Keep only protocol evidence; no HTTP headers, no compose preimage with a literal secret."""
     raw = {key: att[key] for key in (
         "intel_quote", "nvidia_payload", "signing_algo", "signing_public_key",
-        "signing_address", "tls_cert_fingerprint", "model_name") if key in att}
+        "signing_address", "tls_cert_fingerprint", "model_name", "request_nonce",
+        "ohttp_key_config", "ohttp_attestation") if key in att}
     if att.get("compose_manager_attestation"):
         raw["compose_manager_attestation"] = {key: att["compose_manager_attestation"][key] for key in (
-            "actions", "actions_hash", "nonce", "quote", "report_data")}
+            "actions", "actions_hash", "nonce", "quote", "report_data", "vm_config", "event_log",
+            "nonce_source") if key in att["compose_manager_attestation"]}
     info = att.get("info") or {}
     if isinstance(info, dict):
-        kept = {key: info[key] for key in ("app_id", "compose_hash", "instance_id")
-                if key in info}
+        kept = {key: info[key] for key in (
+            "app_id", "compose_hash", "instance_id", "vm_config", "device_id", "app_cert",
+            "key_provider_info", "mr_aggregated", "os_image_hash", "app_name") if key in info}
         tcb = info.get("tcb_info") or {}
         if isinstance(tcb, str):
             try:
@@ -213,69 +216,109 @@ def _measurement_checks(att: Dict, intel: Dict) -> Dict:
             "boot_registers": boot}
 
 
+class FetchError(RuntimeError):
+    """The attestation endpoint answered with something other than HTTP 200."""
+
+
+def _base(base_url: str) -> str:
+    return base_url.rstrip("/").removesuffix("/v1")
+
+
+def fetch_report(api_key: Optional[str], base_url: str, model: str, nonce: str) -> dict:
+    resp = requests.get(
+        f"{_base(base_url)}/v1/attestation/report",
+        params={"model": model, "nonce": nonce,
+                "signing_algo": "ecdsa", "include_tls_fingerprint": "true"},
+        headers={"Authorization": f"Bearer {api_key}"} if api_key else {}, timeout=30,
+    )
+    if resp.status_code != 200:
+        raise FetchError(f"HTTP {resp.status_code}: {resp.text[:200]}")
+    return resp.json()
+
+
+def _fail(model: str, started: float, err: str, report: Optional[dict] = None,
+          nonce: str = "", base: str = "", **details) -> AttestationReport:
+    if report is not None:
+        details["raw_evidence"] = {
+            "source": f"{base}/v1/attestation/report", "nonce": nonce,
+            "requested_model": model,
+            "gateway_attestation": _public_attestation_fields(report.get("gateway_attestation") or {}),
+            "model_attestations": [_public_attestation_fields(m) for m in
+                                   report.get("model_attestations") or []],
+        }
+    return AttestationReport(
+        provider="near-ai", model=model, valid=False,
+        verified_at=now_iso(), attestation_type="tdx+gpu",
+        error=err, details=details,
+        latency_s=round(time.time() - started, 2),
+    )
+
+
+def entry_identity(m: Dict) -> Tuple:
+    """What two entries listed under one instance id must share (quotes themselves differ)."""
+    q = dstack_tdx.parse_quote(m["intel_quote"])
+    cm = m.get("compose_manager_attestation") or {}
+    return (*(q[r] for r in ("mrtd", "rtmr0", "rtmr1", "rtmr2", "rtmr3")),
+            str(_tcb_info(m).get("compose_hash") or (m.get("info") or {}).get("compose_hash")),
+            m.get("signing_public_key"), str(m.get("signing_address")).lower(),
+            m.get("tls_cert_fingerprint"), cm.get("actions_hash"))
+
+
 def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     started = time.time()
-    base = base_url.rstrip("/")
-    if base.endswith("/v1"):
-        base = base[:-3]
     nonce = secrets.token_hex(32)
-    captured_report: dict | None = None
+    try:
+        report = fetch_report(api_key, base_url, model, nonce)
+    except FetchError as exc:
+        return _fail(model, started, str(exc))
+    archive = near_deployments.load_archive()
+    result = appraise_report(report, model, nonce, archive, base_url, started)
+    seen = [d for c in result.details.get("model_composes", [])
+            for d in c["deployments"].get("deployments", [])]
+    if near_deployments.record(seen, archive, near_deployments.utcnow()):
+        near_deployments.save_archive(archive)
+    return result
 
-    def _fail(err: str, **details) -> AttestationReport:
-        if captured_report is not None:
-            details["raw_evidence"] = {
-                "source": f"{base}/v1/attestation/report", "nonce": nonce,
-                "requested_model": model,
-                "gateway_attestation": _public_attestation_fields(
-                    captured_report.get("gateway_attestation") or {}),
-                "model_attestations": [_public_attestation_fields(m) for m in
-                                       captured_report.get("model_attestations") or []],
-            }
-        return AttestationReport(
-            provider="near-ai", model=model, valid=False,
-            verified_at=now_iso(), attestation_type="tdx+gpu",
-            error=err, details=details,
-            latency_s=round(time.time() - started, 2),
-        )
+
+def appraise_report(report: dict, model: str, nonce: str, archive: Dict[str, Dict],
+                    base_url: str = DEFAULT_BASE_URL,
+                    started: Optional[float] = None) -> AttestationReport:
+    """Appraise a fetched gateway report. A policy rejection is a returned outcome."""
+    started = started or time.time()
+    base = _base(base_url)
+
+    def fail(err: str, **details) -> AttestationReport:
+        return _fail(model, started, err, report, nonce, base, **details)
 
     try:
         from model_verifier import check_report_data, check_gpu
     except ImportError:
-        return _fail("nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH")
-
-    resp = requests.get(
-        f"{base}/v1/attestation/report",
-        params={
-            "model": model, "nonce": nonce,
-            "signing_algo": "ecdsa", "include_tls_fingerprint": "true",
-        },
-        headers={"Authorization": f"Bearer {api_key}"}, timeout=30,
-    )
-    if resp.status_code != 200:
-        return _fail(f"HTTP {resp.status_code}: {resp.text[:200]}")
-    report = resp.json()
-    captured_report = report
+        return fail("nearai-cloud-verifier not installed; set NEARAI_VERIFIER_PATH")
 
     gateway = report.get("gateway_attestation", {})
     models = report.get("model_attestations") or []
     if not gateway:
-        return _fail("no gateway_attestation")
+        return fail("no gateway_attestation")
     if not models:
-        return _fail("no model_attestations")
+        return fail("no model_attestations")
     if len(models) > _MAX_INSTANCES:
-        return _fail(f"{len(models)} model_attestations entries exceed the cap of {_MAX_INSTANCES}")
+        return fail(f"{len(models)} model_attestations entries exceed the cap of {_MAX_INSTANCES}")
     ids = [(m.get("info") or {}).get("instance_id") for m in models]
-    if not all(ids) or len(set(ids)) != len(ids):
-        return _fail("model_attestations entries need distinct instance ids", instance_ids=ids)
+    if not all(ids):
+        return fail("model_attestations entries need instance ids", instance_ids=ids)
+    instance_entries = {iid: ids.count(iid) for iid in dict.fromkeys(ids)}
+    for iid, n in instance_entries.items():
+        if n > 1 and len({entry_identity(m) for i, m in zip(ids, models) if i == iid}) != 1:
+            return fail(f"instance {iid} listed with conflicting identities",
+                        instance_ids=ids, instance_entries=instance_entries)
     keys = {tuple(str(m.get(k) or "").lower() for k in (
         "signing_public_key", "signing_address", "signing_algo")) for m in models}
     if len(keys) != 1 or not all(next(iter(keys))):
-        return _fail("model_attestations entries do not share one signing key",
-                     signing_key_shared=False, instance_ids=ids)
+        return fail("model_attestations entries do not share one signing key",
+                    signing_key_shared=False, instance_ids=ids)
 
     sc = ScoreCard()
     details: Dict[str, Any] = {"inner_models": len(models)}
-    archive = near_deployments.load_archive()
     archive_revision = sha256_hex(json.dumps(archive, sort_keys=True, separators=(",", ":")))
     now = near_deployments.utcnow()
     chain = _chain_snapshot()
@@ -293,7 +336,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                                   "debug_disabled": gw_debug}, "models": []}
     sc.tdx_verified = gw_intel["verified"]
     if not sc.tdx_verified:
-        return _fail("gateway TDX quote did not verify", gateway_intel=gw_intel,
+        return fail("gateway TDX quote did not verify", gateway_intel=gw_intel,
                      verification_status="rejected",
                      verification_reason="gateway TDX quote appraisal rejected")
 
@@ -313,12 +356,12 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
 
     model_spk = models[0]["signing_public_key"]
     first_model_addr = models[0]["signing_address"]
-    instances: Dict[str, Dict[str, Any]] = {}
-    for iid, m in zip(ids, models):
+    entries: list = []
+    for i, (iid, m) in enumerate(zip(ids, models)):
         m_intel = _check_tdx(m)
         m_meas = _measurement_checks(m, m_intel)
         observed_model_name = m.get("model_name")
-        r = {"tdx_verified": m_intel["verified"], "tcb_status": m_intel["tcb_status"],
+        r = {"instance_id": iid, "tdx_verified": m_intel["verified"], "tcb_status": m_intel["tcb_status"],
              "tcb_current": m_intel["tcb_status"] in dstack_tdx.TCB_CURRENT_STATUSES,
              "debug_disabled": dstack_tdx.quote_debug_disabled(m_intel["intel_quote"]),
              "event_log_replayed": m_meas["ok"], "instance_id_bound": _instance_id_bound(m, m_meas),
@@ -326,10 +369,10 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
              "model_name_matches": observed_model_name == model,
              "nonce_bound": False, "report_data_binds_key": False, "gpu_attested": False,
              "key_derives_to_address": False, "compose_hash_committed": False}
-        instances[iid] = r
+        entries.append(r)
         details["tdx"]["models"].append({**_tdx_evidence(m_intel), "measurements": m_meas,
                                          "debug_disabled": r["debug_disabled"],
-                                         "instance_id": iid})
+                                         "instance_id": iid, "entry": i})
         if not m_intel["verified"]:
             continue
         with _STDOUT_LOCK, contextlib.redirect_stdout(io.StringIO()):
@@ -363,7 +406,7 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
             r["compose_hash_committed"] = (quote_compose_matches and app_matches and authorized and
                                            deployments["ok"] and observed_model_name == model)
             details.setdefault("model_composes", []).append({
-                "instance_id": iid,
+                "instance_id": iid, "entry": i,
                 "observed_model_name": observed_model_name, "requested_model_name": model,
                 "app_id": app_id, "app_matches": app_matches, "deployments": deployments,
                 "compose_hash": h, "log_compose_hash": log_compose,
@@ -372,12 +415,14 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
                 "chain_block_number": chain["block_number"],
                 "chain_block_hash": chain["block_hash"]})
 
-    seen = [d for c in details.get("model_composes", []) for d in c["deployments"].get("deployments", [])]
-    if near_deployments.record(seen, archive, now):
-        near_deployments.save_archive(archive)
+    instances: Dict[str, Dict[str, Any]] = {}
+    for iid in instance_entries:  # a layer holds for an instance only if it holds for every entry
+        group = [r for r in entries if r["instance_id"] == iid]
+        layers = {k for r in group for k, v in r.items() if isinstance(v, bool)}
+        instances[iid] = {**group[0], **{k: all(r.get(k) is True for r in group) for k in layers}}
 
     def every(layer: str) -> bool:
-        return all(r[layer] for r in instances.values())
+        return all(r[layer] for r in entries)
 
     sc.tdx_verified = every("tdx_verified")
     sc.nonce_bound = sc.nonce_bound and every("nonce_bound")
@@ -393,9 +438,11 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
     sc.tcb_current = gw_intel["tcb_status"] in dstack_tdx.TCB_CURRENT_STATUSES and every("tcb_current")
     model_names_match = every("model_name_matches")
     details["tcb_statuses"] = {"gateway": gw_intel["tcb_status"],
-                               "models": [r["tcb_status"] for r in instances.values()]}
+                               "models": [r["tcb_status"] for r in entries]}
     details["model_names_match_request"] = model_names_match
     details["instances"] = instances
+    details["entries"] = entries
+    details["instance_entries"] = instance_entries
     details["instance_count"] = len(models)
     details["instance_ids"] = ids
     details["signing_key_shared"] = True
@@ -481,6 +528,8 @@ def verify(api_key: str, base_url: str, model: str) -> AttestationReport:
         "gateway_attestation": _public_attestation_fields(gateway),
         "model_attestations": [_public_attestation_fields(m) for m in models],
         "tls_certificate": report.get("tls_certificate"),
+        "ohttp_key_config": report.get("ohttp_key_config"),
+        "ohttp_attestation": report.get("ohttp_attestation"),
         "deployment_archive": archive, "deployment_archive_sha256": archive_revision,
         "chain_snapshot": details["chain_snapshot"],
         "model_contract": details["model_contract"],

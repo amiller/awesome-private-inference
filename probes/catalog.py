@@ -17,6 +17,8 @@ MODELS: dict[str, list[str]] = {
     "near-ai": [
         "z-ai/glm-5.3-flash",
         "Qwen/Qwen3.8-27B",
+        # 2026-11-24: the DeepSeek machines gpu02/gpu04 serve only this lane.
+        "deepseek-ai/DeepSeek-V4.1-Flash-1017",
     ],
     # Refreshed 2026-08-18: Venice renamed its whole e2ee line, so the old ids
     # 404'd or returned an unusable body. Every id here answered /tee/attestation

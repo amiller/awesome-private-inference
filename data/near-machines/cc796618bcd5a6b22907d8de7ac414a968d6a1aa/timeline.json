@@ -1,0 +1,4011 @@
+{
+  "captures": 10,
+  "changes": [
+    {
+      "at": "2026-11-19T21:32:19.000000Z",
+      "field": "app_compose_sha256",
+      "new": [
+        "fb81c6f2c1eae762ece8912e1f50e80697964cc93a112da03834369fa1ab5b0b"
+      ],
+      "old": [
+        "a7de0bba194b6466c5c7b8dcfb907b6b60404ab2ba6de8b5d0cf63c2145d6868"
+      ],
+      "run_id": "backfill-20261119T213219Z-2e2406f20abf"
+    },
+    {
+      "at": "2026-11-19T21:32:19.000000Z",
+      "field": "compose_hash",
+      "new": [
+        "fb81c6f2c1eae762ece8912e1f50e80697964cc93a112da03834369fa1ab5b0b"
+      ],
+      "old": [
+        "a7de0bba194b6466c5c7b8dcfb907b6b60404ab2ba6de8b5d0cf63c2145d6868"
+      ],
+      "run_id": "backfill-20261119T213219Z-2e2406f20abf"
+    },
+    {
+      "at": "2026-11-19T21:32:19.000000Z",
+      "field": "mrtd",
+      "new": [
+        "e107136c99ae1745ab299e9462927890b7b1c984d5ef53fa5830584ad4246db663fdf96563b913e9e2471906b26f7aae"
+      ],
+      "old": [
+        "df4d77c857de652bd0fafa343a2026b51071ee03773d076d283abf1a7d36ff91ffa279ee4a617ac664f7e2a2c8d5891b"
+      ],
+      "run_id": "backfill-20261119T213219Z-2e2406f20abf"
+    },
+    {
+      "at": "2026-11-19T21:32:19.000000Z",
+      "field": "os_image_hash",
+      "new": [
+        "3bb7d262416f47db06855d7b7cf7d380538747206014b3c0adcddfef9b7c4ef2"
+      ],
+      "old": [
+        "91fd5d69ccee3e5ea4f2aeb8c9b632c4358c4ecfc29ba1aa6fb1e402af209829"
+      ],
+      "run_id": "backfill-20261119T213219Z-2e2406f20abf"
+    },
+    {
+      "at": "2026-11-19T21:32:19.000000Z",
+      "field": "rtmr1",
+      "new": [
+        "786417fa26b5d90d1289025506055e511ff09fd608f4727bb3cf159279a52af23117b6248024d0b186aceabebf6f86ec"
+      ],
+      "old": [
+        "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec"
+      ],
+      "run_id": "backfill-20261119T213219Z-2e2406f20abf"
+    },
+    {
+      "at": "2026-11-19T21:32:19.000000Z",
+      "field": "rtmr2",
+      "new": [
+        "41800152afda682372d33b484e357002e2b179f64b7882e0f0529ad2373ad93898a3b4d3ffb9a433f406b986d4f4f291"
+      ],
+      "old": [
+        "bd67ab7554dc27ab03a077bc1447a1a67d0624ff547c4c809a8626f12d6a89712f8ec60e781e99b98208574065d21a71"
+      ],
+      "run_id": "backfill-20261119T213219Z-2e2406f20abf"
+    },
+    {
+      "at": "2026-11-19T21:32:19.000000Z",
+      "field": "running",
+      "new": [
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@77a6ca71d94e49aa64dcdc97ac1757abec857f85:dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@a15342105237019baf62d7b1c82a70cc19f4f4f8:a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@fb9cf6b578a45f4a0993e1b13778d31ef9d838a9:933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee"
+      ],
+      "old": [
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@77a6ca71d94e49aa64dcdc97ac1757abec857f85:dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@a15342105237019baf62d7b1c82a70cc19f4f4f8:a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+        "prod/GLM-5.3-Flash-SGL-TP4-LongContext.yaml@56fd700ac2bbe5bdeaf08176e62c2fcf698dd2df:8ab2a4520716cb06b6c3f6764ddbeeaeebdef0ebb89a82c235a598ee68a7a8de",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@7d62ec6762bb1288ea5d5cf40b05e8a7c5305df9:62cf83d0849b19400640900fc19a892bba64de376948b024bedb53a9cdb0d5a6",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@9430130293e01ecf0ecc9428aa1fbd00101d4d69:2115ee607d6292e31f95fe6399b8b881f93ba4cf7a7bb3b22732c14f4637d901",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@efc1618e8d0901a25ba302df4ea3112dad134328:467f74f0d12c8bb05875dd8cc088731f84141300b12858e57b6257b188c87f98",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml@0a51138ef3ec104706c40a53dab0c3bcea75d7b3:bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml@b177e78bc2e79664d76e9f59a64edfdf27cc1021:dec66aa4f0d712d55dcb235e7421dcbb1c54d6caaec17ca3f07ecc84fbf60b55",
+        "prod/GLM-5.3-Flash-SGL-TP4.yaml@065340e05635b885dfb238fe9f3601ad351d68a8:367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+        "prod/GLM-5.3-Flash-SGL-TP4.yaml@0a51138ef3ec104706c40a53dab0c3bcea75d7b3:b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+        "prod/GLM-5.3-Flash-SGL-TP4.yaml@8f97e8f22db8a32b915b7b59702fc09635a8ac24:dac8e7bd277ba8f6dbf51201a859374f956e92d2546637e17c73608911e65bf4",
+        "prod/GLM-5.3-Flash-SGL-TP4.yaml@e14107901d202215ab44eb027eb4792047d5ec83:2878b9c4c6db512a7538dc4e8981fd5acae72cdaace7794509f48161bcce08e3",
+        "prod/small-models.yaml@eb5fd4bc1d11c719def5e02ee93c9f82d69a971a:f5455af6fbf7763f0aaefd6a6aa31fd3632526aa2b3918dd6c11a560410eb6f8"
+      ],
+      "run_id": "backfill-20261119T213219Z-2e2406f20abf"
+    },
+    {
+      "at": "2026-11-21T20:05:07.000000Z",
+      "field": "running",
+      "new": [
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@77a6ca71d94e49aa64dcdc97ac1757abec857f85:dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@a15342105237019baf62d7b1c82a70cc19f4f4f8:a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@b24a169de18a0b67377f85e775d514bc133cd0e6:49f43d1b8879bd7f56d226820e0fb00a2b84045356f14efb870dcc65b61b5324",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@fb9cf6b578a45f4a0993e1b13778d31ef9d838a9:933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee",
+        "prod/pack-glm-53-flash-pd2-long.yaml@141adcee8057df3ea3c771ea28f3f24e54eed8e2:e558edf5a02eecb03283fd3e6bd0877bce521561b22ad98ed7995f97be49850d",
+        "prod/pack-glm-53-flash-pd2-long.yaml@b24a169de18a0b67377f85e775d514bc133cd0e6:c9c477286e5132f5ff0ddb2cce5187ce1db6028108ae52a959f68f264faefbac"
+      ],
+      "old": [
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@77a6ca71d94e49aa64dcdc97ac1757abec857f85:dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@a15342105237019baf62d7b1c82a70cc19f4f4f8:a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@fb9cf6b578a45f4a0993e1b13778d31ef9d838a9:933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee"
+      ],
+      "run_id": "backfill-20261121T200507Z-ca22cb445fa7"
+    },
+    {
+      "at": "2026-11-22T20:20:34.000000Z",
+      "field": "running",
+      "new": [
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@77a6ca71d94e49aa64dcdc97ac1757abec857f85:dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@a15342105237019baf62d7b1c82a70cc19f4f4f8:a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@b24a169de18a0b67377f85e775d514bc133cd0e6:49f43d1b8879bd7f56d226820e0fb00a2b84045356f14efb870dcc65b61b5324",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@fb9cf6b578a45f4a0993e1b13778d31ef9d838a9:933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee",
+        "prod/pack-glm-53-flash-pd2-long.yaml@b24a169de18a0b67377f85e775d514bc133cd0e6:c9c477286e5132f5ff0ddb2cce5187ce1db6028108ae52a959f68f264faefbac",
+        "prod/pack-glm-53-flash-pd2-long.yaml@cb8318506040de6d8699d39c612a2c27c7b4601f:6a4001e90fd5fdfea26d999f23e6db2d3ef315b0e6d0d1388e3481c5550d2f18"
+      ],
+      "old": [
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@77a6ca71d94e49aa64dcdc97ac1757abec857f85:dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+        "experiments/GLM-5.3-gpu23-local-engine-bench.yaml@a15342105237019baf62d7b1c82a70cc19f4f4f8:a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@b24a169de18a0b67377f85e775d514bc133cd0e6:49f43d1b8879bd7f56d226820e0fb00a2b84045356f14efb870dcc65b61b5324",
+        "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml@fb9cf6b578a45f4a0993e1b13778d31ef9d838a9:933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee",
+        "prod/pack-glm-53-flash-pd2-long.yaml@141adcee8057df3ea3c771ea28f3f24e54eed8e2:e558edf5a02eecb03283fd3e6bd0877bce521561b22ad98ed7995f97be49850d",
+        "prod/pack-glm-53-flash-pd2-long.yaml@b24a169de18a0b67377f85e775d514bc133cd0e6:c9c477286e5132f5ff0ddb2cce5187ce1db6028108ae52a959f68f264faefbac"
+      ],
+      "run_id": "backfill-20261122T202034Z-b330bb0827dd"
+    }
+  ],
+  "deploy_actions": [
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "d262fa7c50dce3d532dfdf46857a371a3bd9b2378b676622f28365efe16ed26d",
+      "timestamp": "2026-09-11T20:19:44.719655048+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "7afe577ac929410ec8a51761fd4555715753fae1",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "15e908635e75371257a092eebb713befc9a92acbca628016e862f20c0ff3e0ce",
+      "services": [
+        "download-glm53-w4afp8"
+      ],
+      "sha256": "a4a57360e99eb969e3201697d8a41b56de1703b6781ab0526ace9e5d0e5a7092",
+      "tag": "gpu23-glm53-bench-r1",
+      "timestamp": "2026-09-11T20:47:34.719491752+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "7afe577ac929410ec8a51761fd4555715753fae1",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "15e908635e75371257a092eebb713befc9a92acbca628016e862f20c0ff3e0ce",
+      "services": [
+        "download-glm53-w4afp8"
+      ],
+      "sha256": "a4be4fa1084d9b951a27b7933fa923d12a22969411e6961ab08b7c07086eb8c2",
+      "tag": "gpu23-glm53-bench-r1",
+      "timestamp": "2026-09-11T20:47:50.711794314+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "eb178262f45fa1c5544581d587ef229d29ed6e36",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "db26083e3bea7130695ba43b586a42127378cf92563e3ad9ded255e182ab2275",
+      "services": [
+        "download-glm53-w4afp8"
+      ],
+      "sha256": "7584c75976fc1e0a267860ee9294b72e567e6bb6fff7dceaa57380fb7c941387",
+      "tag": "gpu23-glm53-bench-r2",
+      "timestamp": "2026-09-11T20:48:37.699081153+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "d3d9e554cdadf8d3641486276c6ef417b208ec57",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "e778257b40b4f5056ce006d2e6a58997e11fd4ff31b8a3fd5777cc24be46fb0c",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8",
+        "dcgm-glm53-gpu23-bench",
+        "otelcol-contrib"
+      ],
+      "sha256": "a15c4cc589d9fa44a0d4af3b1f1a85af3a16e397f834cc77cd61ca0781d93f30",
+      "tag": "gpu23-glm53-bench-r3",
+      "timestamp": "2026-09-11T20:50:02.920742736+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "3ddf2bb3946bee9f3503f90d87c48207e0c5d571",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "sha256": "666e374d32bd60fc0a53ef403daa198a5127a66b61928e206e1b96b71f499cda",
+      "tag": "gpu23-glm53-bench-r4",
+      "timestamp": "2026-09-11T21:30:46.672886689+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "3ddf2bb3946bee9f3503f90d87c48207e0c5d571",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "9d5f74658a7a25cbe4110286f848767d2117a11dc1f5472b5a876edcf245a0c7",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8",
+        "dcgm-glm53-gpu23-bench",
+        "otelcol-contrib"
+      ],
+      "sha256": "456c23304149a511fe0546377ea88ef646454965aa793a5849073ed7f8eae51f",
+      "tag": "gpu23-glm53-bench-r4",
+      "timestamp": "2026-09-11T21:32:30.607493703+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e0485c0ee11dce2275c6df70db530f40f725b187",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "c6d6f917f1fdb9d082741b7bd554ee4a9b23fc7619c092732426270de00f1458",
+      "services": [
+        "dcgm-glm53-gpu23-bench",
+        "otelcol-contrib"
+      ],
+      "sha256": "de919ac63cc696ba5448ca26afea39d6a0a81d9a80a54731b1a47a024c950e6e",
+      "tag": "gpu23-glm53-bench-r6",
+      "timestamp": "2026-09-11T21:48:14.249090379+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "aca3c684a09b9219b98e409c6885901e49e15f80",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "f3aefaa3e297dc4351b69931f9c640e016e81a24291ee1365fee8d03515f9570",
+      "services": [
+        "host-probe-gpu23"
+      ],
+      "sha256": "3d8b6bb04d656e0c79d179d16a5b3145356149b2b628070e481d120ea10ce28a",
+      "tag": "gpu23-glm53-hicache-probe-r1",
+      "timestamp": "2026-09-11T23:36:12.492793182+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9616c5f71f31c21b674609dc7d19957c40b0832d",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "d61fdf333f73c5e65efb93a0fbf18c8a6a80b603c5fd004e2a842050e8d10e6e",
+      "services": [
+        "hicache-host-exporter",
+        "otelcol-contrib"
+      ],
+      "sha256": "a8f070aca751ac39e87555b60876c2bab2269822a82c2eafdc673b235dcbd240",
+      "tag": "gpu23-glm53-hicache-r1",
+      "timestamp": "2026-09-11T23:41:17.624862672+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9616c5f71f31c21b674609dc7d19957c40b0832d",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "d61fdf333f73c5e65efb93a0fbf18c8a6a80b603c5fd004e2a842050e8d10e6e",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8"
+      ],
+      "sha256": "1999c0df6b922770bf708ae2fc13ca5f7b57c80a4a3f8be1ed8afcdd7b837c8c",
+      "tag": "gpu23-glm53-hicache-r1",
+      "timestamp": "2026-09-11T23:42:11.948609044+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "77a6ca71d94e49aa64dcdc97ac1757abec857f85",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "sha256": "f8c0a09d6a875acd17a654e75fafb4dd8ad4526f4de77409f90b697411c30d61",
+      "tag": "gpu23-glm53-hicache-r3",
+      "timestamp": "2026-09-12T01:39:05.768554870+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "77a6ca71d94e49aa64dcdc97ac1757abec857f85",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+      "services": [
+        "hicache-cuda-host-probe-gpu23"
+      ],
+      "sha256": "c1b80682cdcd3dd55fd0a5a597c2cde09693c501597970c4523e346b881cfef9",
+      "tag": "gpu23-glm53-hicache-r3",
+      "timestamp": "2026-09-12T01:39:56.197912439+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "77a6ca71d94e49aa64dcdc97ac1757abec857f85",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "dab6a4a4bd927136b20851908dce43ea2f5e245906beb850324200c621219b42",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8",
+        "hicache-host-exporter",
+        "dcgm-glm53-gpu23-bench",
+        "otelcol-contrib"
+      ],
+      "sha256": "5ffcac5ec7d2bbe662094e533fbd8ac6d74ca58bf1f7ebf985e632f2a954305f",
+      "tag": "gpu23-glm53-hicache-r3",
+      "timestamp": "2026-09-12T01:41:31.716455764+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1515f4837e90a673edd2ae10502a6cbd5ce5123b",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "ea11dbb17cb3150147ea3a6e5720684da2e808a5a486137e2ace878a2fdc126b",
+      "services": [
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "b41db7387cf6a71b991bae58a2359c0c87746ac21856029bdc67b74e54bfc36e",
+      "tag": "gpu23-glm53-hicache-r4",
+      "timestamp": "2026-09-12T02:13:29.179510117+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1515f4837e90a673edd2ae10502a6cbd5ce5123b",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "ea11dbb17cb3150147ea3a6e5720684da2e808a5a486137e2ace878a2fdc126b",
+      "services": [
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "7c3d8faeaee32f13a48433f1f7a346a4b661cf56dd3fb9a507e57b5a25bd9ac8",
+      "tag": "gpu23-glm53-hicache-r4",
+      "timestamp": "2026-09-12T02:13:36.387498096+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1515f4837e90a673edd2ae10502a6cbd5ce5123b",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "ea11dbb17cb3150147ea3a6e5720684da2e808a5a486137e2ace878a2fdc126b",
+      "services": [
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "aa14bd8bb30ec248ef2f8a3d1ab77d234afa09fe6adf6321c5052368855ef336",
+      "tag": "gpu23-glm53-hicache-r4",
+      "timestamp": "2026-09-12T02:14:17.933530891+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "206fe2554b5a68f79e73815a9a1998d41ff2eb5a",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "38e74744de90f5532c0ecc8fc57f50c04e19b7bc8dd891ea7effb0a2582a3cca",
+      "services": [
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "3a31f7657356c478e70fead018c2a1533717e094c29e07ed6e92fe4c9121273a",
+      "tag": "gpu23-glm53-hicache-r5",
+      "timestamp": "2026-09-12T02:15:03.091737387+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "b8736f6d887b0596801225142950655af2fb8b0e",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "90df9feb33094ad18f63428be899dbf0478e8c65b6f855c27d4d44677f152e66",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache"
+      ],
+      "sha256": "916a421df2d40cace6a3c0189e080c7abc36e3eaee928b0ff6e6c22f325399d7",
+      "tag": "gpu23-glm53-hicache-r6",
+      "timestamp": "2026-09-12T02:22:52.040926919+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "b8736f6d887b0596801225142950655af2fb8b0e",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8"
+      ],
+      "sha256": "31d79efe4a40d6fde9c4d6b6b6c0649d7a1f871c10ae2bbe0bca4be6fb5581de",
+      "tag": "gpu23-glm53-hicache-r6",
+      "timestamp": "2026-09-12T02:24:00.191674670+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b8736f6d887b0596801225142950655af2fb8b0e",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "90df9feb33094ad18f63428be899dbf0478e8c65b6f855c27d4d44677f152e66",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache"
+      ],
+      "sha256": "10d1f6335f35fd63ca9e7286b81ba69373fce6411a93d1a173df35ba2135b497",
+      "tag": "gpu23-glm53-hicache-r6",
+      "timestamp": "2026-09-12T02:25:00.910904111+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b8736f6d887b0596801225142950655af2fb8b0e",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "90df9feb33094ad18f63428be899dbf0478e8c65b6f855c27d4d44677f152e66",
+      "services": [
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "83fd35158414ba03971d088d0a45dc309c4704ceafee51b0e3cb0057b305bac5",
+      "tag": "gpu23-glm53-hicache-r6",
+      "timestamp": "2026-09-12T02:25:22.749221683+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "f62b38c11f6ebd4e28401cc07d316ed87e57f477",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "810adb971f294c7a140909fe5fcf7439984888859ff709651992f4ed97fc460b",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache"
+      ],
+      "sha256": "53a550b519011da9244b73b55a99700c1ce8cdc5af6d3dd3c82a05e50937377b",
+      "tag": "gpu23-glm53-hicache-r7",
+      "timestamp": "2026-09-12T02:27:30.153330186+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "f62b38c11f6ebd4e28401cc07d316ed87e57f477",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "services": [
+        "gpu23-hicache-verifier",
+        "model-sg-glm53-w4afp8-tp8-hicache"
+      ],
+      "sha256": "7d0f62dca98388684c1231de693a76b12e6f93f0dde5bd9bd7ae49b752a27bb7",
+      "tag": "gpu23-glm53-hicache-r7",
+      "timestamp": "2026-09-12T02:53:36.307512422+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "a15342105237019baf62d7b1c82a70cc19f4f4f8",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+      "services": [
+        "hicache-cuda-host-probe-gpu23"
+      ],
+      "sha256": "6baf97061607e93f9af2afc2af437c34ec74105cc738a891f6969fcee792b08e",
+      "tag": "gpu23-glm53-hicache-prefetch-probe-r8",
+      "timestamp": "2026-09-12T03:00:18.228946994+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "a15342105237019baf62d7b1c82a70cc19f4f4f8",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "a509edf733e54a3cb433c0b5d910d2df8fddd0dcbda0dc87424b7ae4257eefe4",
+      "services": [
+        "hicache-cuda-host-probe-gpu23"
+      ],
+      "sha256": "51fd1e5fb8cbb5f3e35166a81ba10366d1f3d65e9295a1f51180659dbcb540f3",
+      "tag": "gpu23-glm53-hicache-prefetch-probe-r8",
+      "timestamp": "2026-09-12T03:01:17.087390150+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "86c590072aaece61014ed07a1083b28447bb7482",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "121d8deb6773f0762dbea055493b925c354f126848d86f4f747945c23372c44e",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache",
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "db5606df58904a391bc0c927ad17549b2d411931712c2666409fe32ed07c824e",
+      "tag": "gpu23-glm53-hicache-r9",
+      "timestamp": "2026-09-12T03:09:08.218078640+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "86c590072aaece61014ed07a1083b28447bb7482",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache",
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "4c42ce0a2eb2a7b3c8deab8a9fc1d2bc5d8b09dc0ad686752101c6ce7b315318",
+      "tag": "gpu23-glm53-hicache-r9",
+      "timestamp": "2026-09-12T03:43:05.465748060+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "844cfe785730f0fd680cf1fc07b4279c40b54eed",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "c7226d4194f77f43e3330d814220a756535806b307da52306466a5a2a0292d80",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache",
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "7a8cf140e3dac8a7dfe5f8b2dde28101c0be2e2f3a3b6b864d0de8aa084f1a2e",
+      "tag": "gpu23-glm53-hicache-r10",
+      "timestamp": "2026-09-12T03:44:41.726614238+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "844cfe785730f0fd680cf1fc07b4279c40b54eed",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "services": [
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "63e00211a1437a112807fcc2b2fff1a5f9c42feb1292989a37577f2a7bd0bd8b",
+      "tag": "gpu23-glm53-hicache-r10",
+      "timestamp": "2026-09-12T04:16:15.167072091+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "844cfe785730f0fd680cf1fc07b4279c40b54eed",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache"
+      ],
+      "sha256": "0cb94cc254946a23f2c7143f1b490e0d80e396ed8c835482d78a2878d14c7c3c",
+      "tag": "gpu23-glm53-hicache-r10",
+      "timestamp": "2026-09-12T04:18:14.553899115+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5b15104667b6c8676082c793e93adaae0e9393ea",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "cec709a82c363d36315f077348e2bec5062f9f8393af07bf980f27e3a8094ee2",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache",
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "565adfd5efd5f6f8dc76f873fc5a52a23a554aa27726984f71cc7b3314e3da35",
+      "tag": "gpu23-glm53-hicache-r11",
+      "timestamp": "2026-09-12T04:19:55.553854476+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "ba9d20b4a893a41e3d3357d1434d2da95f691664",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "file_sha256": "2eec115082812d4d1df81e5a2f42720225369b24a728cd88ee2469760de19148",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8-hicache",
+        "gpu23-hicache-verifier"
+      ],
+      "sha256": "898e0a921d8c3a065a7c6dd3894a1dda90621f9e971566443476a6b4fce64c85",
+      "tag": "gpu23-glm53-hicache-r12",
+      "timestamp": "2026-09-12T04:46:23.465130014+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "ba9d20b4a893a41e3d3357d1434d2da95f691664",
+      "file": "experiments/GLM-5.3-gpu23-local-engine-bench.yaml",
+      "services": [
+        "gpu23-hicache-verifier",
+        "model-sg-glm53-w4afp8-tp8-hicache"
+      ],
+      "sha256": "3c5375ea3b0a2e4b78864e14a57f881738abaaf21e4aaff77d2ce3071e9ffc9b",
+      "tag": "gpu23-glm53-hicache-r12",
+      "timestamp": "2026-09-12T05:10:42.208656017+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "4f0f3d41bdc0521502e948b8cbc2e127ce3b9e3bfc6424ca2b9d3f5a0a3ad385",
+      "timestamp": "2026-09-12T17:46:32.356444666+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "df0646a36da1395cf21dfe44c898dbac0d9f5265",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "96ba908d1966f2abfb76bb5129b035517b54f14975fe8f54bf64e9dff887e605",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp8",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "85bb1265cfe9d5fd63f3e22b3fa1ca50aeace1d87d96647b4e3fc1e7a5e9e8ba",
+      "tag": "gpu23-glm53-prod-candidate-r2",
+      "timestamp": "2026-09-14T16:34:52.369639156+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "df0646a36da1395cf21dfe44c898dbac0d9f5265",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "96ba908d1966f2abfb76bb5129b035517b54f14975fe8f54bf64e9dff887e605",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp8",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "46e4c0768f6e17a741b65fce4a808d0e9aa629bb065f751c09d4486c84de87e3",
+      "tag": "gpu23-glm53-prod-candidate-r2",
+      "timestamp": "2026-09-14T17:06:28.952244140+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "df0646a36da1395cf21dfe44c898dbac0d9f5265",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "96ba908d1966f2abfb76bb5129b035517b54f14975fe8f54bf64e9dff887e605",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp8",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "ec76acb3c13fa118bffeb6ea2e691abb0c0d7f07d38c8ea0582096be2678665b",
+      "tag": "gpu23-glm53-prod-candidate-r2",
+      "timestamp": "2026-09-14T17:19:45.308856640+00:00"
+    },
+    {
+      "action": "dstack_agent_restart",
+      "bound": true,
+      "sha256": "e88394fa5be45187437453c0ea6af4fcc749963e4a41b9dcf555e580d306e007",
+      "timestamp": "2026-09-14T17:23:59.994457888+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "8a18ea21910894e494e95b2054b0e7485869a2aa9fa1a01e7d65b96dc588cf09",
+      "timestamp": "2026-09-14T17:50:58.018460681+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "df0646a36da1395cf21dfe44c898dbac0d9f5265",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "96ba908d1966f2abfb76bb5129b035517b54f14975fe8f54bf64e9dff887e605",
+      "services": [
+        "model-downloader",
+        "model-sg-glm53-w4afp8-tp8"
+      ],
+      "sha256": "ef3f337ca33d6e4cad33e9e2cbf800a95f02530f0b1af9da5a830b26f4a2b863",
+      "tag": "gpu23-glm53-prod-candidate-r2",
+      "timestamp": "2026-09-14T17:51:56.350046703+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5b86e123f71041e0522ef3643722f9c470a0868b",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "78d85f6596d2f7f970779835750387083cc10247b2a20d305042e1b0d59af61d",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "ba12ba6bd8bb7661cbbb58b0ea927b9a88307b4b4048fbe30ff8fbc0558d7116",
+      "tag": "gpu23-glm53-prod-candidate-r3",
+      "timestamp": "2026-09-14T18:54:09.061948980+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "9517d6054bf45de126cbb330020017ff8742fc8f",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "4cf76fbc70408715246b0e1dfd28f6c73d39b7c01378f91d612d8b4e7c05dbd8",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8",
+        "proxy-glm53"
+      ],
+      "sha256": "fee180757fd9d7e4d734a3c49c6debe6c01bbc3e878a765507aabc5b4c8b323b",
+      "tag": "gpu23-glm53-prod-candidate-r4",
+      "timestamp": "2026-09-14T19:16:25.523344695+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "9517d6054bf45de126cbb330020017ff8742fc8f",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8"
+      ],
+      "sha256": "205fe255155917cb8f70b5eb1f939a37a64d007eb5d9814059f50a375d9f4f1e",
+      "tag": "gpu23-glm53-prod-candidate-r4",
+      "timestamp": "2026-09-14T19:17:05.666796800+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9517d6054bf45de126cbb330020017ff8742fc8f",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "4cf76fbc70408715246b0e1dfd28f6c73d39b7c01378f91d612d8b4e7c05dbd8",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8",
+        "proxy-glm53"
+      ],
+      "sha256": "2f842cdde5670d44c5ab9d6a22b00b7bae926fbc452c8bb60abb2ac2d55bd37b",
+      "tag": "gpu23-glm53-prod-candidate-r4",
+      "timestamp": "2026-09-14T19:18:17.325331005+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "669c0eb69ecab852e3f854ed923997c419a63301",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "cba82e0771ca5169db10fbad0ae76009bc1843dc9b5a96033a9fa4633fdf8326",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "13f7bda7d40b1f3df80473a58d357540c4f4127d485186bdd74df7a93d3d5e30",
+      "tag": "gpu23-glm53-prod-candidate-r5",
+      "timestamp": "2026-09-14T19:38:34.012096575+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "669c0eb69ecab852e3f854ed923997c419a63301",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "cba82e0771ca5169db10fbad0ae76009bc1843dc9b5a96033a9fa4633fdf8326",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "be78c91471e37d4f2afa248512bb1098e051503613984fdeaf52c5a7b9963c83",
+      "tag": "gpu23-glm53-prod-candidate-r5",
+      "timestamp": "2026-09-14T19:38:57.384630133+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "65e36f708402dc0e71090a3a66ab5b1c5f646490",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "7c62a5aea62cf75549b7e3b9d9ac9cafecf9be638a971e24eecb611389a66128",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "c96c2c4c8f8f41ed490153a416bb2c03327b69c509e295ade2d7024e631cecc6",
+      "tag": "gpu23-glm53-prod-candidate-r6",
+      "timestamp": "2026-09-14T19:53:12.188516228+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "3f9dad4ed24f693ac2a6e34af6bd679a6bbaaf3c",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "5f8a12001fab2bd66e83390d45252fb1830c2774eed53689f6a3ad15c02cea64",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8",
+        "proxy-glm53"
+      ],
+      "sha256": "3b5ebe09bfd63ad7e68f95a156bf0a9543e74d7269538abae38653176b3425eb",
+      "tag": "gpu23-glm53-prod-candidate-r7",
+      "timestamp": "2026-09-14T22:54:56.887554923+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "3f9dad4ed24f693ac2a6e34af6bd679a6bbaaf3c",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "file_sha256": "5f8a12001fab2bd66e83390d45252fb1830c2774eed53689f6a3ad15c02cea64",
+      "services": [
+        "model-sg-glm53-w4afp8-tp8",
+        "proxy-glm53"
+      ],
+      "sha256": "0241eed8638998db55faa302e25a75046826d28387c4641efd198b767c111de6",
+      "tag": "gpu23-glm53-prod-candidate-r7",
+      "timestamp": "2026-09-14T22:54:58.167260522+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "3f9dad4ed24f693ac2a6e34af6bd679a6bbaaf3c",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "sha256": "dc936825ed81ba6dcb3705b4179fffb83ac50b0ffd5ef8ddc77d81179267b8d2",
+      "tag": "gpu23-glm53-prod-candidate-r7",
+      "timestamp": "2026-09-15T04:36:19.283847568+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "3f9dad4ed24f693ac2a6e34af6bd679a6bbaaf3c",
+      "file": "prod/GLM-5.3-W4AFP8-SGL-TP8.yaml",
+      "sha256": "fbce1f5d4ad9646ecabebcfc1d5ac0ca46862a7d97553eb110f6c7b207520bbe",
+      "tag": "gpu23-glm53-prod-candidate-r7",
+      "timestamp": "2026-09-15T04:37:21.168127083+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "7eaedf19666b47a0042d9311aa7b16203b1059aa",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "41d23d888ca53dfe7c3a21228a1122af0d14e7ec4ea2df30c3aee969a3ac43ac",
+      "services": [
+        "diskcheck"
+      ],
+      "sha256": "2368e20fbe546fdfdb91717c5b31b7f11913e7dfb6903c7cd5cf5813bb7a899d",
+      "tag": "gpu23-glm53flash-bd-r1",
+      "timestamp": "2026-09-15T04:37:21.986127442+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "c6acfa4b186941de2736fbf04aa7be4265e573dd",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "f75e206f6ae0aab2edd612873c9ed33e8d856ab12f1b57cf3903b67555178c4d",
+      "services": [
+        "diskcheck"
+      ],
+      "sha256": "8e1e06498114eec140cead7dc70a96640028b32bbe98a3ea09e710cfa845e3cf",
+      "tag": "gpu23-glm53flash-bd-r2",
+      "timestamp": "2026-09-15T04:38:43.202615874+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "c6acfa4b186941de2736fbf04aa7be4265e573dd",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "f75e206f6ae0aab2edd612873c9ed33e8d856ab12f1b57cf3903b67555178c4d",
+      "services": [
+        "model-downloader",
+        "probe"
+      ],
+      "sha256": "092e574422e93746a9274fe4215cdebf850b7852e01ea15a6387429355804884",
+      "tag": "gpu23-glm53flash-bd-r2",
+      "timestamp": "2026-09-15T04:39:16.156074841+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "c6acfa4b186941de2736fbf04aa7be4265e573dd",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "f75e206f6ae0aab2edd612873c9ed33e8d856ab12f1b57cf3903b67555178c4d",
+      "services": [
+        "diskcheck"
+      ],
+      "sha256": "f389cb15d237dbf6de645d3913059986e06f6f50ae43122dee53e4387f38f021",
+      "tag": "gpu23-glm53flash-bd-r2",
+      "timestamp": "2026-09-15T04:53:06.252286587+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "c6acfa4b186941de2736fbf04aa7be4265e573dd",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "f75e206f6ae0aab2edd612873c9ed33e8d856ab12f1b57cf3903b67555178c4d",
+      "services": [
+        "glm53-a",
+        "glm53-b"
+      ],
+      "sha256": "7c564e5559a737d7ccf9b73738a289658c4045417bb1924284202e42ef9bc301",
+      "tag": "gpu23-glm53flash-bd-r2",
+      "timestamp": "2026-09-15T05:04:34.093897647+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1969f6346ab82ccb7a0e2324660a22f6c9baf812",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "d0e966beb855215c9b820c838d87a780f2bd47586aa8a55a2d6d09a7c096b5ec",
+      "services": [
+        "logserver"
+      ],
+      "sha256": "8308367b1bab93a1685ed76a66b0d2f4680d38601178f59f1766247d9ed5a6aa",
+      "tag": "gpu23-glm53flash-bd-r3",
+      "timestamp": "2026-09-15T05:24:09.084993747+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "1969f6346ab82ccb7a0e2324660a22f6c9baf812",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "services": [
+        "diskcheck",
+        "probe",
+        "logserver"
+      ],
+      "sha256": "447f02ab81159f57ab823f9f7792a40c3493813eacc5610f9bc10e80b5faa5ac",
+      "tag": "gpu23-glm53flash-bd-r3",
+      "timestamp": "2026-09-15T05:24:41.501967544+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1969f6346ab82ccb7a0e2324660a22f6c9baf812",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "d0e966beb855215c9b820c838d87a780f2bd47586aa8a55a2d6d09a7c096b5ec",
+      "services": [
+        "logserver"
+      ],
+      "sha256": "6189ed7a398de09bfa0048d1fd2f135845610259bfdd2278fcc288f2865d0160",
+      "tag": "gpu23-glm53flash-bd-r3",
+      "timestamp": "2026-09-15T05:24:57.381739491+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0d0ce3e0946c0cccdecdf1c93001c1c6469fc8c3",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "e3508b604dea710a240f7b8599e94805ea96614bff5acfeb4d4d5cdaa0916b2a",
+      "services": [
+        "probe"
+      ],
+      "sha256": "254e68128a2daea0225dad51ea549007100d8ec4001eb07654dddaff3397de28",
+      "tag": "gpu23-glm53flash-bd-r4",
+      "timestamp": "2026-09-15T05:51:14.529203164+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "334744747c07dc738fa308b2cdc8f9359ab01618",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "17820df15e59f2b7d337313edaa4ffe20bb21d2b4c51f55ba16f5d7a31cc053d",
+      "services": [
+        "microbench"
+      ],
+      "sha256": "818934152d3940ab5e94fe964766f9abbb43c3e63117443cd43c8174cb22c8c7",
+      "tag": "gpu23-glm53flash-bd-r5",
+      "timestamp": "2026-09-15T05:54:08.795021605+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4b70c8441653d28a2a82269047e592894bf47c2e",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "74ea157ae670a8db8c14cfaa23fa297b0c02bd5ce279b79edc75293937e02ad1",
+      "services": [
+        "microbench"
+      ],
+      "sha256": "7ef9705bc4cf3e6d1e93d5c377ddf0789cd39ceb4d8a70e3005aae60d1db8b2c",
+      "tag": "gpu23-glm53flash-bd-r6",
+      "timestamp": "2026-09-15T05:56:43.790125891+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "1969f6346ab82ccb7a0e2324660a22f6c9baf812",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "services": [
+        "glm53-a",
+        "glm53-b"
+      ],
+      "sha256": "26cad0e985078a4d39211de22b3fb38e604548fcfac5858a1f4906e5e31bd63e",
+      "tag": "gpu23-glm53flash-bd-r3",
+      "timestamp": "2026-09-15T05:58:00.912577731+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1969f6346ab82ccb7a0e2324660a22f6c9baf812",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "d0e966beb855215c9b820c838d87a780f2bd47586aa8a55a2d6d09a7c096b5ec",
+      "services": [
+        "glm53-prefill",
+        "glm53-decode",
+        "pd-router"
+      ],
+      "sha256": "eefb04f94b6c27b3d25bbff793f20fd9f29550df6dd2b8ddf3ebdc1a055061b0",
+      "tag": "gpu23-glm53flash-bd-r3",
+      "timestamp": "2026-09-15T05:58:38.969204170+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "26249f4ce1c9a4f67dc85ab3b1b11e62634662fc",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "34434fdc91423d94e7630f03d146d7a1dec539363638c51f77cdf03098979472",
+      "services": [
+        "pd-router"
+      ],
+      "sha256": "3d24232a46649043c6d0e3e733793de10e1cb7f38190fb7419c49037c1faf379",
+      "tag": "gpu23-glm53flash-bd-r7",
+      "timestamp": "2026-09-15T06:00:41.736876438+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5bd29b8060f3eab2cb448a111be03c90ea42dd35",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "6005967ecc56bafc0d57ade25acf6ed0d8fa90ba75889603a6dbdf19335c51b8",
+      "services": [
+        "pd-router"
+      ],
+      "sha256": "5c69a13a9a95e2d4efca26ad55204131a60eca3e85d0bc56b566a6d64ec62c44",
+      "tag": "gpu23-glm53flash-bd-r8",
+      "timestamp": "2026-09-15T06:01:56.716206634+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9bdfb1caba98efaf8650bcd02c72789e5b2000d8",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "1d9244b9c1e8e60a4371f644aea4d33f8abef567737009d22af6cea925fb7353",
+      "services": [
+        "glm53-decode"
+      ],
+      "sha256": "cfe225ba59c4f134e18e421646a1d4b0b18bd36682f1a13a62afc4deb1f5969e",
+      "tag": "gpu23-glm53flash-bd-r9",
+      "timestamp": "2026-09-15T06:21:06.304175419+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "5bd29b8060f3eab2cb448a111be03c90ea42dd35",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "services": [
+        "glm53-prefill",
+        "glm53-decode",
+        "pd-router"
+      ],
+      "sha256": "aba630a66f0b3b1342551e3ef2e3b595897da9002192d59617e1bb8612f0d725",
+      "tag": "gpu23-glm53flash-bd-r8",
+      "timestamp": "2026-09-15T06:30:53.854816638+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5bd29b8060f3eab2cb448a111be03c90ea42dd35",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "6005967ecc56bafc0d57ade25acf6ed0d8fa90ba75889603a6dbdf19335c51b8",
+      "services": [
+        "glm53-a",
+        "glm53-b"
+      ],
+      "sha256": "1d3ee8867acb7a9fa6de3851505a9a4d3f438d0bd188c295447c83589a6f8525",
+      "tag": "gpu23-glm53flash-bd-r8",
+      "timestamp": "2026-09-15T06:31:46.852193760+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "9bdfb1caba98efaf8650bcd02c72789e5b2000d8",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "services": [
+        "glm53-a",
+        "glm53-b"
+      ],
+      "sha256": "067b92e1e232fa6a6aabd00dfa87e2ad191843e71b4e5fb8060d80a0eb8e20c3",
+      "tag": "gpu23-glm53flash-bd-r9",
+      "timestamp": "2026-09-15T11:47:53.953056526+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9bdfb1caba98efaf8650bcd02c72789e5b2000d8",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "1d9244b9c1e8e60a4371f644aea4d33f8abef567737009d22af6cea925fb7353",
+      "services": [
+        "glm53-prefill",
+        "glm53-decode",
+        "pd-router"
+      ],
+      "sha256": "c8ef22c60e808c08b2d40a8ccef5b86314d3882fef1831395c5e339e0f527e29",
+      "tag": "gpu23-glm53flash-bd-r9",
+      "timestamp": "2026-09-15T11:48:29.701516762+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "9bdfb1caba98efaf8650bcd02c72789e5b2000d8",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "services": [
+        "glm53-prefill",
+        "glm53-decode",
+        "pd-router"
+      ],
+      "sha256": "01d5c0786cc9b084ce115ba58494da585fedd93121750e3a87b61ee1acdff705",
+      "tag": "gpu23-glm53flash-bd-r9",
+      "timestamp": "2026-09-15T13:30:56.239675019+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9bdfb1caba98efaf8650bcd02c72789e5b2000d8",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "file_sha256": "1d9244b9c1e8e60a4371f644aea4d33f8abef567737009d22af6cea925fb7353",
+      "services": [
+        "glm53-a",
+        "glm53-b"
+      ],
+      "sha256": "eeb8cd0a8a16b0854a3b9f37aee7581e26101c1490a013d971ee25583d2de03d",
+      "tag": "gpu23-glm53flash-bd-r9",
+      "timestamp": "2026-09-15T13:31:47.113874244+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "e39cbb00c1ff1dfa4256535bf98430db9c6d60ae",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "sha256": "d1c36ae7267b29cc58c1396c60d0231ee439d036eca38623a750284b2f5bbd9d",
+      "tag": "gpu23-glm53flash-bd-r10",
+      "timestamp": "2026-09-15T17:40:31.079089782+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "e39cbb00c1ff1dfa4256535bf98430db9c6d60ae",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "sha256": "fcc9c6a0501b4e5dd049e5ff686467a3a0404c4b25b23eaec9ec2ee8cfa823c1",
+      "tag": "gpu23-glm53flash-bd-r10",
+      "timestamp": "2026-09-15T17:41:15.366932968+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "e39cbb00c1ff1dfa4256535bf98430db9c6d60ae",
+      "file": "experiments/GLM-5.3-Flash-gpu23-tiering-pd-test.yaml",
+      "services": [
+        "logserver"
+      ],
+      "sha256": "5851d6db49be90146dc04c2135a26104036468a9a61b7f806308dc99dd1df1f4",
+      "tag": "gpu23-glm53flash-bd-r10",
+      "timestamp": "2026-09-15T17:41:38.297562986+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e14107901d202215ab44eb027eb4792047d5ec83",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "2878b9c4c6db512a7538dc4e8981fd5acae72cdaace7794509f48161bcce08e3",
+      "sha256": "fb3b0f377635783d04d0da17d1e2c7af0f220a9dd406aaf9bdce2f1e9b086f3c",
+      "tag": "v0.0.409",
+      "timestamp": "2026-09-15T18:27:56.761307873+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e14107901d202215ab44eb027eb4792047d5ec83",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "2878b9c4c6db512a7538dc4e8981fd5acae72cdaace7794509f48161bcce08e3",
+      "sha256": "27eb3ae089077d56683c3d9edc65d31f66f2c55dc4e69b3bdcffa89483257a1b",
+      "tag": "v0.0.409",
+      "timestamp": "2026-09-15T19:15:38.747807752+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "8f97e8f22db8a32b915b7b59702fc09635a8ac24",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "dac8e7bd277ba8f6dbf51201a859374f956e92d2546637e17c73608911e65bf4",
+      "services": [
+        "nginx",
+        "proxy-glm53"
+      ],
+      "sha256": "eed6e03c4caf402e5aa7b3e6ea772e958ed18b1272947dc173d27ebb228ba5f1",
+      "tag": "v0.0.422",
+      "timestamp": "2026-09-15T20:02:58.572073920+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "993a979526c23f8203015eb3a7c6a5543ace7a9e76e77abd3c09b0a7de1df695",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:44:41.535086893+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "f7e7c1628e4d8ef0e7b47f35a660564c0ad0742f027934af2d3e59c4e839536b",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:45:34.702059977+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "d6ac132287721cf1ce535ac235a86f049576cd0af094bd9e6aa4dee2b995760c",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:57:40.839915302+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "6ef6dcac6352300fa609d33ba198d1b1548a80efa27bebaf36d830bb33dde3b8",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:59:47.901156681+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "20570da47a428383a0b876565ee3ab24d70426b5e5af19666a9b3270d61a1386",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T02:02:18.918304975+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "d3f8199050c67572fc66b4256adcc5de378b08223574c8ab755626a82fc58adb",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T02:14:04.154532450+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "8e0456e79d05232550db1f53a3bc673893d378abbe7ca66ce68a7c9cbc976c89",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T16:35:51.991236166+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "8eb0540e77a66b10cbe531c8759082e5314d3e43c105f024d945f68dffc95517",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T16:40:37.949248256+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5ba5a5bb92b7b1bbbe72fe9b7a8fbaec729627a1",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "afe6a626b91b8c18d9b8addd22fc50aabfcc7824b488f635b72af96c5a324e5a",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "fd5336843bccd66ad7e5a238212c265ca3fee96ab9c3e2b7f60b939c32e0a621",
+      "tag": "v0.0.428",
+      "timestamp": "2026-09-18T00:24:38.439261900+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "model-downloader"
+      ],
+      "sha256": "baecc5b5c10e8a38593a0ee9a8bfdf93188b053ab7acb9ef1a723f938b9b291d",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:20:04.575149710+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "hf-cleanup"
+      ],
+      "sha256": "6e1b19c9524a799d4f4f98ef95c500875ec0f9e800628a0bc241a3a6a4e1bedc",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:20:53.960165681+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "hf-cleanup"
+      ],
+      "sha256": "1c15eeb920997baef0201b7d3c066904ca64e40cb782cda72fa2eb32e6deb264",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:36:08.498908958+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "hf-cleanup"
+      ],
+      "sha256": "4416d24ab41d2baff43884f49123be9561da54fc19dd44b5e3c5ec83bb0e52ae",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:38:01.125453325+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "hf-cleanup"
+      ],
+      "sha256": "a1721a8ad0ec31088219dfe0ef2aae10decff1074049847f70f55d3814154937",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:41:06.724761346+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "nginx",
+        "model-proxy-registrar",
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "6e3ea1e79744915e6e8749b67eec75821c29491709733da968137296bce2fc1b",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:18:29.018318126+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "nginx",
+        "model-proxy-registrar",
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "2ef7a6647de1c78c889b24e4c9326c0d1d3d1be426186b020a3c0c254a61c3ef",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:23:44.077700776+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1",
+        "model-sg-glm53-w4afp8-tp4-r2",
+        "proxy-glm53",
+        "otelcol-contrib",
+        "dcgm-glm53",
+        "nginx"
+      ],
+      "sha256": "5ee9c6b7f268bbcf072f1b3ba50cd9c26d8d19727a6a32766add9969ca3fed6f",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:25:14.207634068+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "56ff041ea6ee072b872f27532dd7b5001ead28337638f3038ce03d97a615bbd8",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:43:32.611748219+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "5b4b14b67fa225e8cabbfe92273d6e92211b702bc965ffbb929c08bd799ba597",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:44:01.353159181+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "services": [
+        "glm53-soak-relay",
+        "glm53-perception-check"
+      ],
+      "sha256": "bc07c37d7eaaed0973e39d6d716d7e42c39aa552eeb950d90d0952b3920fa0de",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:46:03.617460269+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "656983fc6cebfd45aa1dea26de80020c5bf51a534a5e0f4096fec163f8971405",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:46:05.546233859+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "c7c367c14829285da557537f6944fbd5eb3c6acf8b1661157279027ac6379e23",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:46:51.319854852+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "443f807baf894e21955287ae0ef682eda5ecd786581e3802a03b66335f4b66f3",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:48:34.968355871+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "services": [
+        "glm53-soak-relay",
+        "glm53-perception-check"
+      ],
+      "sha256": "7b4fed38026a487eca38f11c14adfa68d972383e29e21fa0111a5b5e79e4a0e9",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T00:49:25.979313245+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "fd0c4487ad8d4a0dd6344deeb681c47f63f53425be2928f85145641b857dee2d",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-24T02:06:56.491856990+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "bcd313cf7117b82f0f850f9b93da06a4129a3073ae4a58c017a3723eb30a7255",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "a1da5ed02def9e232b049c09dd41a02055f6e44c61d253d3630a43929bfeacf6",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-25T20:41:03.779804964+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:bc44e44e619dc003b3b5bcf53420b759a0ea058d0b81cf0caffc063a9d733193",
+      "sha256": "66de7124890b99e0fbde13b75f4af7952b68d2f4e921c85d33ed2309f18f018b",
+      "timestamp": "2026-09-25T20:57:27.560230701+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "0b9b362aab4bcb56d155ec5f46148a4d3473fe00794f520e5b004b75504841ff",
+      "timestamp": "2026-09-25T21:37:54.300209580+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b996e382492b0b19e801d70b8d357e2c9d8160d1",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "1528ba57ffeda148f400dd8b512f4f72ce1641068ca2d8bdcd4f69e73cd43386",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "3309eb504b202d687492f4b832239f9ea84583e3d39d8b5405d0cc7aa6b8ebdd",
+      "tag": "v0.0.451",
+      "timestamp": "2026-09-26T06:06:59.615517153+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "81ea8f03871957a0ed9e13eb4d526b06e2d62fb8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "4247dec8b67eea29b93d687b6c975617964519e2585611baf194128c7088aa63",
+      "services": [
+        "nginx"
+      ],
+      "sha256": "6ea4de4b888afb67ce167564ef7b8f3f216abe39831278a802d6bc4aca7851d5",
+      "tag": "v0.0.454",
+      "timestamp": "2026-09-28T15:00:54.611287826+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "81ea8f03871957a0ed9e13eb4d526b06e2d62fb8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "3cdffea9cb5792bbf597399dd177b32a4ef496581afba38074dc679f92830422",
+      "tag": "v0.0.454",
+      "timestamp": "2026-09-29T04:24:06.883666700+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "81ea8f03871957a0ed9e13eb4d526b06e2d62fb8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1",
+        "model-sg-glm53-w4afp8-tp4-r2"
+      ],
+      "sha256": "a741c9ef669b1fe0b9df8334ac05061674d0a6c318bd5ceeb1b1d09cc6533332",
+      "tag": "v0.0.454",
+      "timestamp": "2026-09-29T04:51:00.447470051+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "81ea8f03871957a0ed9e13eb4d526b06e2d62fb8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1"
+      ],
+      "sha256": "3477108ace2be333fe64771aa14140bdcd10d3fe9e0ec36035f19c24dd43fe87",
+      "tag": "v0.0.454",
+      "timestamp": "2026-09-29T04:56:25.377559413+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "74b030ad35d8868f567545d7894fe426bb5322e1",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "a3a58c3b918b3728cdc3a7f0b23c2c19cb9dddcbfa135feb71b24346ccf3ae67",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1",
+        "model-sg-glm53-w4afp8-tp4-r2"
+      ],
+      "sha256": "194682bbe8bf5b77490c6ff5a3e49d1e05665ebdfc4da03f48e99966f2ec207d",
+      "tag": "gpu23-glm53-311-offline-r1",
+      "timestamp": "2026-09-29T04:56:45.587683366+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "74b030ad35d8868f567545d7894fe426bb5322e1",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "a3a58c3b918b3728cdc3a7f0b23c2c19cb9dddcbfa135feb71b24346ccf3ae67",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "e9bd542a8844d6460f3264d2922cd749ccacd379812a2738fe02e54f0ef6731b",
+      "tag": "gpu23-glm53-311-offline-r1",
+      "timestamp": "2026-09-29T05:15:04.900088554+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "74b030ad35d8868f567545d7894fe426bb5322e1",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "a3a58c3b918b3728cdc3a7f0b23c2c19cb9dddcbfa135feb71b24346ccf3ae67",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "303e4f83767cca682e49b8b74a4cc1f09b83c9a39977c1a4c28dd017b0082910",
+      "tag": "gpu23-glm53-311-offline-r1",
+      "timestamp": "2026-09-29T05:28:40.343279035+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "3c2f033b2a44d08832ffec32417dc35a95cdbe2c",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "file_sha256": "0d1263e5169ebacdb1da157857aafff9a5bb5645aabbd921b3bd7e18d60a8ee2",
+      "services": [
+        "rotate-token"
+      ],
+      "sha256": "0d14581ccee5899d871bc5e48cc465666ee53919fc631c8f721fd60edb3df54a",
+      "tag": "v0.0.457",
+      "timestamp": "2026-09-29T06:10:47.510958783+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "bec94d63280ebd40ff2ddd4c05e7090058a7491176c8ddfd5876f3ee12a999d5",
+      "timestamp": "2026-09-29T06:11:15.372232666+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "56fd700ac2bbe5bdeaf08176e62c2fcf698dd2df",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-LongContext.yaml",
+      "file_sha256": "8ab2a4520716cb06b6c3f6764ddbeeaeebdef0ebb89a82c235a598ee68a7a8de",
+      "sha256": "094e4f7837af597baa0e7456f32f0e0e6a1cfdffe1fcca0409067ef41fbab785",
+      "tag": "v0.0.458",
+      "timestamp": "2026-09-29T15:56:49.989707348+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "e7a3faba30c43b3a4081f03f93322754de60d63b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "9772cc8ebc3e97894104f9c3b01bd0cb2dd26435311fce43efe979508da4b296",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1",
+        "model-sg-glm53-w4afp8-tp4-r2",
+        "proxy-glm53"
+      ],
+      "sha256": "9454218f8df1e3d48976e4c7aa8122736cb14af5060a3d35fc01c3e822f03d02",
+      "tag": "v0.0.459",
+      "timestamp": "2026-09-29T16:51:25.039791731+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e7a3faba30c43b3a4081f03f93322754de60d63b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "9772cc8ebc3e97894104f9c3b01bd0cb2dd26435311fce43efe979508da4b296",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1",
+        "model-sg-glm53-w4afp8-tp4-r2",
+        "proxy-glm53",
+        "dcgm-glm53"
+      ],
+      "sha256": "a5dbe3b38ee5f13e1ee8a7e194b578cdbd207354ea5765625c13dc603e534c3a",
+      "tag": "v0.0.459",
+      "timestamp": "2026-09-29T16:54:38.827279251+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "e7a3faba30c43b3a4081f03f93322754de60d63b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "438dd8151e7717140fff463b81e2f26f6da8496661710b47613e7fbcc44e68e8",
+      "tag": "v0.0.459",
+      "timestamp": "2026-09-29T17:03:18.037916223+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e7a3faba30c43b3a4081f03f93322754de60d63b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "9772cc8ebc3e97894104f9c3b01bd0cb2dd26435311fce43efe979508da4b296",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "b919eef33c303635ec72a751ddd928caac5964bd816e12719891710dcec04377",
+      "tag": "v0.0.459",
+      "timestamp": "2026-09-29T17:03:31.416493272+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "e7a3faba30c43b3a4081f03f93322754de60d63b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "759b49ae34717470fa0755ca65ed05184387d104749591efe5e95fdda4bdb0d6",
+      "tag": "v0.0.459",
+      "timestamp": "2026-09-29T17:03:49.002143552+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e7a3faba30c43b3a4081f03f93322754de60d63b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "9772cc8ebc3e97894104f9c3b01bd0cb2dd26435311fce43efe979508da4b296",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "a6d0eef1b81eb99ae12ec45d07d6e96b9b1544cd4180b36abcf43c7a6e273ea0",
+      "tag": "v0.0.459",
+      "timestamp": "2026-09-29T17:04:04.886361963+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "d42a63fdeae214e3de31f5699eba2fb0678397ec",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "09cbbffd508d7f0037f34fde22cbda57a45c950c1f91ac86ccff4e57cf7055fe",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r2"
+      ],
+      "sha256": "4e44879718e1c699fd0af49da061741b6e6cbac8d8afee26f0e570fe4fdb9c14",
+      "tag": "v0.0.460",
+      "timestamp": "2026-09-29T17:48:49.953234801+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b177e78bc2e79664d76e9f59a64edfdf27cc1021",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8.yaml",
+      "file_sha256": "dec66aa4f0d712d55dcb235e7421dcbb1c54d6caaec17ca3f07ecc84fbf60b55",
+      "services": [
+        "proxy-glm53",
+        "nginx"
+      ],
+      "sha256": "ce3b689c8cc10e3aeb44dfc5a9b5e756ba5b5ced7485a2c0ea321bd5890e9b1c",
+      "tag": "v0.0.461",
+      "timestamp": "2026-09-30T20:42:42.023494552+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b177e78bc2e79664d76e9f59a64edfdf27cc1021",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "09cbbffd508d7f0037f34fde22cbda57a45c950c1f91ac86ccff4e57cf7055fe",
+      "services": [
+        "nginx",
+        "proxy-glm53"
+      ],
+      "sha256": "805ea50aedea9508ec61bd835bee89912f5dcd42b4db08be04446fb5c076b0a9",
+      "tag": "v0.0.461",
+      "timestamp": "2026-09-30T21:03:29.400252370+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b177e78bc2e79664d76e9f59a64edfdf27cc1021",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "09cbbffd508d7f0037f34fde22cbda57a45c950c1f91ac86ccff4e57cf7055fe",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "72b0cf20c31b9b38d92b7d736f5eae4f050a96f7f700e8c9179aa6fe19f309ff",
+      "tag": "v0.0.461",
+      "timestamp": "2026-09-30T21:05:44.000005269+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b177e78bc2e79664d76e9f59a64edfdf27cc1021",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "09cbbffd508d7f0037f34fde22cbda57a45c950c1f91ac86ccff4e57cf7055fe",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "aed8e45ec956d5ce0eefb603b4638741399273fc4128d3b0ae674a8be270ebb6",
+      "tag": "v0.0.461",
+      "timestamp": "2026-09-30T21:06:03.934009498+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "b177e78bc2e79664d76e9f59a64edfdf27cc1021",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1"
+      ],
+      "sha256": "16aec943e1399f3f749dd3abfe019a4589f67eeffe9a96ced9c2e1819c6d92d9",
+      "tag": "v0.0.461",
+      "timestamp": "2026-10-06T16:59:19.758702346+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "8c9938be32f0a40fa4ea29f3b6913b0fe758b77b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "80765431a2ec9204b92af01ef3e7f7a69cca4ce676127c0b8ab0a508aaace3ce",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b",
+        "proxy-glm53"
+      ],
+      "sha256": "215e44075074f2bd0fecf84289f6c394adb7a281d63a550262e7d211ea615a1e",
+      "tag": "v0.0.472",
+      "timestamp": "2026-10-06T17:00:52.766053606+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "nginx",
+      "sha256": "b1748cb5f355bb6aa993bff4088490d92805d20a6d6953c392026a1e6325d457",
+      "timestamp": "2026-10-06T17:01:26.324700137+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "8c9938be32f0a40fa4ea29f3b6913b0fe758b77b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "80765431a2ec9204b92af01ef3e7f7a69cca4ce676127c0b8ab0a508aaace3ce",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "13a68e822e68d5df2de1716cd8325b792d445c6edfc09c1898d1bed7aaae2cab",
+      "tag": "v0.0.472",
+      "timestamp": "2026-10-06T17:01:27.598473134+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "8c9938be32f0a40fa4ea29f3b6913b0fe758b77b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r2"
+      ],
+      "sha256": "92b3691be58ab7f650d3ee34d6536abce1b095d8a77f00aea13f5311ee3e0e11",
+      "tag": "v0.0.472",
+      "timestamp": "2026-10-06T17:37:06.253230799+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "8c9938be32f0a40fa4ea29f3b6913b0fe758b77b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "80765431a2ec9204b92af01ef3e7f7a69cca4ce676127c0b8ab0a508aaace3ce",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b",
+        "proxy-glm53"
+      ],
+      "sha256": "0164cab4546a80ba528905efff9fb5e8586828605c8c8485ec425c2e8e6e2ad8",
+      "tag": "v0.0.472",
+      "timestamp": "2026-10-06T17:38:23.875561746+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "nginx",
+      "sha256": "e0ab1cd34b1b25a18811ae9e4bdcd7429df62bb615312fa7d368ceaa0cba1685",
+      "timestamp": "2026-10-06T17:39:14.908564068+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "8c9938be32f0a40fa4ea29f3b6913b0fe758b77b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "80765431a2ec9204b92af01ef3e7f7a69cca4ce676127c0b8ab0a508aaace3ce",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "971dd27817709083b2d55ddcd0e640536da7e6fe4498663802f6160a42967a88",
+      "tag": "v0.0.472",
+      "timestamp": "2026-10-06T17:39:16.471664501+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9bbcef0e013464ec42862e3ed9069afbd2942b4b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4b985d4b109b31f7a006a80aa2eb9e9fc61833d4e1904153c571b45ec28a76b",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "cf7998b83b7af4428056a0fb39a75c09fdc75839949157632942cfc352a664ef",
+      "tag": "v0.0.475",
+      "timestamp": "2026-10-06T21:51:59.518548812+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9bbcef0e013464ec42862e3ed9069afbd2942b4b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4b985d4b109b31f7a006a80aa2eb9e9fc61833d4e1904153c571b45ec28a76b",
+      "services": [
+        "glm53-ghost-aggregator",
+        "model-sg-glm53-w4afp8-tp2-r2b"
+      ],
+      "sha256": "5fab6f3ea5035db4cf189eb3dff7bd5a32b9b2cb2fde7d0e6e9577a208c6adb5",
+      "tag": "v0.0.475",
+      "timestamp": "2026-10-06T21:52:21.123993014+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "678a6b5ee3e4e7b83340f810c76530958eecc499",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a"
+      ],
+      "sha256": "36758693da941e404a53f1aa13894d686717f84e6c751cc4fc26b0d064fe0bc6",
+      "tag": "v0.0.474",
+      "timestamp": "2026-10-07T15:12:42.960850371+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9bbcef0e013464ec42862e3ed9069afbd2942b4b",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4b985d4b109b31f7a006a80aa2eb9e9fc61833d4e1904153c571b45ec28a76b",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a"
+      ],
+      "sha256": "a7ef8d0729d65b8a9d9525b692a4acc32e3d991bff2d3473d2d45a68e843db9f",
+      "tag": "v0.0.475",
+      "timestamp": "2026-10-07T15:18:16.853953954+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1121ee56851dcec7dc89e60099d7be28fc51a73e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "0055fa14dc69454bd1e02a3b18095ec3e43ef0675db4cac0e99a5ed8e25fa71e",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a"
+      ],
+      "sha256": "5a1222b9bf6b15792cba9ceb978153128aa1462c8bd58e2245357711d92405d0",
+      "tag": "v0.0.480",
+      "timestamp": "2026-10-08T17:52:02.772339108+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1121ee56851dcec7dc89e60099d7be28fc51a73e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "0055fa14dc69454bd1e02a3b18095ec3e43ef0675db4cac0e99a5ed8e25fa71e",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "229bb268ecbce6aa924f74d7b320e8757421151019304a48ae18977d4d079815",
+      "tag": "v0.0.480",
+      "timestamp": "2026-10-08T18:27:58.097325408+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1121ee56851dcec7dc89e60099d7be28fc51a73e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "0055fa14dc69454bd1e02a3b18095ec3e43ef0675db4cac0e99a5ed8e25fa71e",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a"
+      ],
+      "sha256": "73e4c624600d0f7e3876436bd551e4e7aa44e1decb11b776b670f414a378b569",
+      "tag": "v0.0.480",
+      "timestamp": "2026-10-08T18:57:09.375874261+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1121ee56851dcec7dc89e60099d7be28fc51a73e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "0055fa14dc69454bd1e02a3b18095ec3e43ef0675db4cac0e99a5ed8e25fa71e",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2b"
+      ],
+      "sha256": "aeffb064e99b8ae6d4f4d00c939c53bf7bf60c7798cacf25d233ce493ac1f7a1",
+      "tag": "v0.0.480",
+      "timestamp": "2026-10-08T19:30:16.991593417+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1121ee56851dcec7dc89e60099d7be28fc51a73e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "0055fa14dc69454bd1e02a3b18095ec3e43ef0675db4cac0e99a5ed8e25fa71e",
+      "services": [
+        "glm53-ghost-aggregator"
+      ],
+      "sha256": "3447b13cee626f6f1b34fd0d65a864d097eedb02152d4b5d0ec31674f6e2fdc1",
+      "tag": "v0.0.480",
+      "timestamp": "2026-10-08T19:58:15.460290681+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "1121ee56851dcec7dc89e60099d7be28fc51a73e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "0055fa14dc69454bd1e02a3b18095ec3e43ef0675db4cac0e99a5ed8e25fa71e",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "22b9d09563d5d4c34dd9b934d67c2f2f73a46405dae04f46048b0ae7fb44bb76",
+      "tag": "v0.0.480",
+      "timestamp": "2026-10-08T19:58:53.905298891+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "218a69238f589ce112b1a9d3c3afa415033ac7ed",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4006c232e5d5820ebcd73789f2a2afd684071c11e43cc92512182b618e0045d",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a"
+      ],
+      "sha256": "974c066f32d1bdf07a8aaf5883e5ad4eb18ceeb5547a801ec09e13ad14bc97ba",
+      "tag": "v0.0.482",
+      "timestamp": "2026-10-09T05:15:12.988177286+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "218a69238f589ce112b1a9d3c3afa415033ac7ed",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4006c232e5d5820ebcd73789f2a2afd684071c11e43cc92512182b618e0045d",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "3e3bcc5c971c0dce68c36b8fd4b830dfb2d627dfcfd5ff6d71b8c8fa5e344c36",
+      "tag": "v0.0.482",
+      "timestamp": "2026-10-09T05:59:25.892009640+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "218a69238f589ce112b1a9d3c3afa415033ac7ed",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4006c232e5d5820ebcd73789f2a2afd684071c11e43cc92512182b618e0045d",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a"
+      ],
+      "sha256": "2102292b5042e191247885e3471830ea064ee1f6121627e74c199708216cd582",
+      "tag": "v0.0.482",
+      "timestamp": "2026-10-09T06:40:39.709334942+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "218a69238f589ce112b1a9d3c3afa415033ac7ed",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4006c232e5d5820ebcd73789f2a2afd684071c11e43cc92512182b618e0045d",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2b"
+      ],
+      "sha256": "e50d5f0d253c7206eda421c2d80d95fbab90cd3e8d3b81e9d23eba968472a231",
+      "tag": "v0.0.482",
+      "timestamp": "2026-10-09T07:15:28.522309948+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "218a69238f589ce112b1a9d3c3afa415033ac7ed",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "b4006c232e5d5820ebcd73789f2a2afd684071c11e43cc92512182b618e0045d",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "fd8d0e87f3b6e70613dae3d0b62ab33fc4140e125a126c31a371d704bed1c466",
+      "tag": "v0.0.482",
+      "timestamp": "2026-10-09T07:53:42.818081202+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4addbf4ea0e7a2fc7415aa46b4cfb4b27fd5fd8e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "f77f4b5dd41f4e322d2194a3d0774235a2686c5d7105e24bc1b800b4a4842196",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a"
+      ],
+      "sha256": "47dd773ea9cbf390efbf11f19799c59d59883c156b90a11193aba4a8eab7b3ff",
+      "tag": "v0.0.492",
+      "timestamp": "2026-10-18T19:35:21.361623082+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4addbf4ea0e7a2fc7415aa46b4cfb4b27fd5fd8e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "f77f4b5dd41f4e322d2194a3d0774235a2686c5d7105e24bc1b800b4a4842196",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "5810679b662f02cd5f2752b15d663f1453a9c6443fe5c60a2faae25e12e5dc75",
+      "tag": "v0.0.492",
+      "timestamp": "2026-10-18T20:11:33.566610363+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4addbf4ea0e7a2fc7415aa46b4cfb4b27fd5fd8e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "f77f4b5dd41f4e322d2194a3d0774235a2686c5d7105e24bc1b800b4a4842196",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a"
+      ],
+      "sha256": "d0eaa065948402178f76594ea6a302e149c07c9ad7c401030458c000f636d3a2",
+      "tag": "v0.0.492",
+      "timestamp": "2026-10-18T20:45:29.478053814+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4addbf4ea0e7a2fc7415aa46b4cfb4b27fd5fd8e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "f77f4b5dd41f4e322d2194a3d0774235a2686c5d7105e24bc1b800b4a4842196",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2b"
+      ],
+      "sha256": "38ebc473614e6ccb2ea17f9f66c591f2f0a7e40108970321bdf25534275c0c9d",
+      "tag": "v0.0.492",
+      "timestamp": "2026-10-18T21:23:24.929587213+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4addbf4ea0e7a2fc7415aa46b4cfb4b27fd5fd8e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "f77f4b5dd41f4e322d2194a3d0774235a2686c5d7105e24bc1b800b4a4842196",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2b"
+      ],
+      "sha256": "e6437deaee0aedb885bad9f58fb5893ba23607bcb96f46ea85a527229d07c457",
+      "tag": "v0.0.492",
+      "timestamp": "2026-10-18T21:29:50.868719997+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4addbf4ea0e7a2fc7415aa46b4cfb4b27fd5fd8e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "f77f4b5dd41f4e322d2194a3d0774235a2686c5d7105e24bc1b800b4a4842196",
+      "services": [
+        "glm53-ghost-aggregator"
+      ],
+      "sha256": "e29c96ffab9c8b9ee92ff79d8e4dee314064440a78904d6ab1748a569f52d912",
+      "tag": "v0.0.492",
+      "timestamp": "2026-10-18T22:05:29.014899260+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4addbf4ea0e7a2fc7415aa46b4cfb4b27fd5fd8e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "f77f4b5dd41f4e322d2194a3d0774235a2686c5d7105e24bc1b800b4a4842196",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "2e7e4380e87652f75bb6fd5380a1464310dac4bfa1fc5c2bb41478a57e1679c1",
+      "tag": "v0.0.492",
+      "timestamp": "2026-10-18T22:05:51.951579183+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "8977a0e8383685752d4a43621c9226bbaccd857d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "94580ae74c8a903cf3ca7c039d8e2465c05692bc7e283de6459eb9061ddb10a7",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "77758d734c5634179ccdcf9303238dac27404e54f05e9714f494882cb667b3fe",
+      "tag": "v0.0.502",
+      "timestamp": "2026-10-22T19:37:58.538015910+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "8977a0e8383685752d4a43621c9226bbaccd857d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "2981d0a087c3324bd0b7f59692e589727635069290e7ced4fae4dd60b116f9b7",
+      "tag": "v0.0.502",
+      "timestamp": "2026-10-23T18:13:40.698935463+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "8977a0e8383685752d4a43621c9226bbaccd857d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "sha256": "27ecfa29dc80e624769c236f7617580cab8eecd3069442076ad8aa412389197d",
+      "tag": "v0.0.502",
+      "timestamp": "2026-10-23T18:38:46.470187689+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0e51e3bc9a16cce57c119c95a910f08b2cda9f8d",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "b54823e53b28f662f7066da173b32e54a3d85663a76cf39137aab371b256cc71",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "model-downloader-qwen38",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-r2",
+        "nginx-qwen38",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3vl-30b-a3b",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1",
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-qwen38-27b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib"
+      ],
+      "sha256": "6d2945ba0584c57cd6f6180566f0be9e7e608a43716fa68ac0d59ad42a882994",
+      "tag": "v0.0.508",
+      "timestamp": "2026-10-23T18:50:49.690571513+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0e51e3bc9a16cce57c119c95a910f08b2cda9f8d",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "b54823e53b28f662f7066da173b32e54a3d85663a76cf39137aab371b256cc71",
+      "services": [
+        "model-downloader",
+        "model-downloader-qwen38",
+        "model-sg-qwen38-27b-fp8-tp1-r2",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "7a89c2f8294f03c10e4f3e7aa319409cddbd5d22769793e257c5a63c6d70dfe1",
+      "tag": "v0.0.508",
+      "timestamp": "2026-10-23T19:36:13.776079813+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0e51e3bc9a16cce57c119c95a910f08b2cda9f8d",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "b54823e53b28f662f7066da173b32e54a3d85663a76cf39137aab371b256cc71",
+      "services": [
+        "model-downloader",
+        "model-downloader-qwen38",
+        "model-sg-qwen38-27b-fp8-tp1-r2",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "31b898805ec8d4afab59614d693b608dd13ba47e043d9bbeccc5a3ff42adc769",
+      "tag": "v0.0.508",
+      "timestamp": "2026-10-23T19:46:39.010656207+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0e51e3bc9a16cce57c119c95a910f08b2cda9f8d",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "b54823e53b28f662f7066da173b32e54a3d85663a76cf39137aab371b256cc71",
+      "services": [
+        "model-sg-qwen38-27b-fp8-tp1-coloc"
+      ],
+      "sha256": "ceadff6c64edadeb225f8fb5c48ad0d1a7385a60a281dafee353b132cf89f8c8",
+      "tag": "v0.0.508",
+      "timestamp": "2026-10-23T19:56:36.337349501+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "0e51e3bc9a16cce57c119c95a910f08b2cda9f8d",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-sg-qwen38-27b-fp8-tp1-coloc"
+      ],
+      "sha256": "c0bcf1012f4b131be594714a029ebe33255866a05afacf13ec126c4943126d47",
+      "tag": "v0.0.508",
+      "timestamp": "2026-10-23T20:07:04.861774986+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0e51e3bc9a16cce57c119c95a910f08b2cda9f8d",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "b54823e53b28f662f7066da173b32e54a3d85663a76cf39137aab371b256cc71",
+      "services": [
+        "qwen38-registrar"
+      ],
+      "sha256": "d46c5cd1f64cc93e7629de32481cfd6f6610d7f151fe055508fadcab74ba3277",
+      "tag": "v0.0.508",
+      "timestamp": "2026-10-23T20:15:57.919763459+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0e51e3bc9a16cce57c119c95a910f08b2cda9f8d",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "b54823e53b28f662f7066da173b32e54a3d85663a76cf39137aab371b256cc71",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "3ca48b5c15d65fd2036c8e4965e832524dc98055146b8c99bb33bcf2d5c9aafd",
+      "tag": "v0.0.508",
+      "timestamp": "2026-10-23T20:21:06.663187799+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "model-vllm-qwen3-embedding-0.6b-tp1",
+      "sha256": "56059f1d4d5dbaab67347be05fcb5fb55605bc02c8fa2f0cb908ea6bebd43547",
+      "timestamp": "2026-10-23T20:27:11.032033588+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "model-vllm-whisper-large-v3-tp1",
+      "sha256": "f206dbeca9168fe7589f4e6ef7cd1cd1dfc97e0c02e37aedf86d1832c9b1e50b",
+      "timestamp": "2026-10-23T20:32:34.401538074+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "model-sg-flux2-klein-4b-tp1",
+      "sha256": "8e7c7c0c55c9fc2ff931209a763208c999cde59fa69292601ada70adeb118421",
+      "timestamp": "2026-10-23T20:32:38.655781536+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "440f51e580a852c9a592a4caf32c340b7369d12e942ab3513bd65b93f83ffad7",
+      "services": [
+        "model-sg-qwen38-27b-fp8-tp1-coloc"
+      ],
+      "sha256": "c5a2cda303bef4b44c363622a5d4f0952af33a788183fddf6f79ce43829a5e47",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-23T20:44:16.883348971+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "440f51e580a852c9a592a4caf32c340b7369d12e942ab3513bd65b93f83ffad7",
+      "services": [
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1"
+      ],
+      "sha256": "9b300206582b1120d0932cd0786319645efaaeb3c17083cf31ea230906cc66d1",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-23T20:54:22.763333980+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "0a6542fe4f7a15efa592d877859c2a8292084c9487c511c090cda90cac16ba65",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:13:00.656157703+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "qwen38-registrar"
+      ],
+      "sha256": "61fda6a43fefa6ab5136cbf0be6b34c57b858c8bff6c7d31a7214d0e189fd732",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:13:12.291835773+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1"
+      ],
+      "sha256": "dfb4b60987e98a1c3e09143fe86af57bd97270bd687885b827b10e3f842b28f1",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:15:04.367349145+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-sg-flux2-klein-4b-tp1"
+      ],
+      "sha256": "f7e1b03982a8efd4ea74f6a8686e47c356988c1f5900faa87c3089ec6386766d",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:15:10.687327526+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-vllm-qwen3-embedding-0.6b-tp1"
+      ],
+      "sha256": "97d8c92338fa023fdb59cfbb814a4dfca5fbae1769a660ae73f097f1d633f0b9",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:15:21.062012007+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-vllm-qwen3-reranker-0.6b-tp1"
+      ],
+      "sha256": "21a4f73083a2fe427641de47f21970c8c115b6320d4fd22abc687652ea082ece",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:15:26.125682490+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-vllm-whisper-large-v3-tp1"
+      ],
+      "sha256": "6d827a2e1d25b09b60ec33dae0989d24d76b0c2a6124d602b3bf4b79c866311d",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:15:31.276919353+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1"
+      ],
+      "sha256": "e70d992f341a3e497aed97f9ccc570d74fd1b5eb70dc8471bde2a8f194581af8",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:15:41.485640742+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-sg-qwen38-27b-fp8-tp1-coloc"
+      ],
+      "sha256": "36755617d125500fcde0d4176bd183b06fd44ed20337ee76543c5fd7e293aab2",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:16:16.350747141+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-sg-qwen38-27b-fp8-tp1-r2"
+      ],
+      "sha256": "7ca7b00aa6399740e4ac68f9aa4bf2abad62b09a647166ddf9ae0e11da46440b",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:16:37.675169340+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-privacy-filter"
+      ],
+      "sha256": "70d166363c0bef9394eb335264d5942fe66b9d846821f4de4678b0881cacbeb5",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:17:08.566320191+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a"
+      ],
+      "sha256": "55b3956646448272b02c09e09c689a7c8af65d9ec0d68e29d642e9ae700584d0",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:17:13.107201547+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "454e012495866900e854cd2a8c7596973da0f863d244fdd4e36e8060de764ac2",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:17:34.314729372+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "dcgm-privacy-filter"
+      ],
+      "sha256": "5858495b7763f2ed6d559974c9133802884cbbc187a170c66144812c0b699f4b",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:17:53.338800217+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "dcgm-qwen36-35b-a3b"
+      ],
+      "sha256": "f6ca9c226b3405e803680d6d9b62dce21f851455f4b52ad7f1a7baff48826b77",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:17:55.842228005+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "dcgm-qwen38-27b"
+      ],
+      "sha256": "b25a8749466ab96eabe55ffbcb9dc0b0f64de88918f12e21129c82d5dc0ebedf",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:17:58.588881671+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "dcgm-shared-gpu3"
+      ],
+      "sha256": "234446125ec71ac8ce7715614d2e5a3e5ebfe1d48bab4efcaf2e6cbb080e37ee",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:18:00.524603888+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "dcgm-glm53"
+      ],
+      "sha256": "cbc8d8d0aaf8720076d3cb1b5cc97349f5ef11edafe9e4f6eb873e1c8a511166",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:18:03.338621136+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "c01251c37d3547043c4f4b89cac8503068a67cb7",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "nginx",
+        "nginx-qwen38",
+        "proxy-qwen36-35b-a3b",
+        "proxy-glm53",
+        "proxy-flux2-klein-4b",
+        "proxy-qwen3vl-30b-a3b",
+        "proxy-qwen3-embedding-0.6b",
+        "proxy-qwen3-reranker-0.6b",
+        "proxy-whisper-large-v3",
+        "proxy-privacy-filter",
+        "proxy-qwen38-27b",
+        "glm53-ghost-aggregator",
+        "otelcol-contrib"
+      ],
+      "sha256": "6ba9fcd28b9945e23869fe670bd603361cb1c3695324df3ad70017511fcec16a",
+      "tag": "v0.0.509",
+      "timestamp": "2026-10-24T04:18:22.876533563+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e99f50fc2c08db4081e5436113e60fad68840cb4",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e8142ee2a1ef5340bcee2ec41e1d3e1b1fe49ed9b79fadd52521a6bc68b81bab",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b",
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b",
+        "glm53-ghost-aggregator",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "156b88637eeccb14e14fb08c48349ec69eec9ed25cd67c3ce6646ff4f77e560c",
+      "tag": "v0.0.513",
+      "timestamp": "2026-10-24T04:19:16.236078677+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "e99f50fc2c08db4081e5436113e60fad68840cb4",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "81f49b62a979222c59f0d70589ff24c48adba2b5497b9ae7d2d05ab50d49ebf4",
+      "tag": "v0.0.513",
+      "timestamp": "2026-10-27T17:42:56.086038111+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "bdcab9ab2eebe871708729fea10de83f207f95562e49af771817f7fac21d55b0",
+      "timestamp": "2026-10-27T19:45:33.640296203+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "e33cb497c79f3e3ac98b8e009ac9f9f587169e65e9a637caca3b53ec92d80877",
+      "timestamp": "2026-10-27T19:45:44.849212877+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "821a8628c8c4ba210fb69bd3df0cb69d1023a44b12dfa1d3a7d7a601b8bd73d1",
+      "timestamp": "2026-10-27T19:57:51.628314368+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:6e035c8fb99c1d31f41760d25af178683a658cca4afd73cd0d366fbb5bf884be",
+      "sha256": "2e4c75d38b06f711848bbec92edd9d8529ff43ec0e173624600dc6d45ed94319",
+      "timestamp": "2026-10-27T19:58:15.072384858+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e99f50fc2c08db4081e5436113e60fad68840cb4",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e8142ee2a1ef5340bcee2ec41e1d3e1b1fe49ed9b79fadd52521a6bc68b81bab",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "e64ec95242a66957817b7c2b7b77a4b7b8442e4ca1d915409bdc11db9e052a88",
+      "tag": "v0.0.513",
+      "timestamp": "2026-10-27T19:59:22.116225686+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a320bb4882341c8e19ef1944436f6591ed73303732009ed5db9f6db6c9da756a",
+      "sha256": "f16a60b3112ff0c850962077f4f2a757bd003dcc8fc0883d2f0f65e4d9c4237a",
+      "timestamp": "2026-10-29T06:05:17.020092204+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5a5119f799409672cfd101429b01dcd6db30188e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "7a64c33b10b7a420824a8c46973b36749ef0ba6a22fa5803c75100b8e77d3627",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "053e67e3e208d495cc9b7a5c1db867675ea026d0f245a42c645f2d2687365a9b",
+      "tag": "v0.0.541",
+      "timestamp": "2026-11-04T03:22:21.985377958+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "00126aff47b56298243a738ca1251f4775497806926d9b0b85d924aa79fbc2aa",
+      "timestamp": "2026-11-04T04:16:44.351589082+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5a5119f799409672cfd101429b01dcd6db30188e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "7a64c33b10b7a420824a8c46973b36749ef0ba6a22fa5803c75100b8e77d3627",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "513b1602d789786a06ddc728ae9efcdc5f9f4de5d919a75f0573037a5c28994e",
+      "tag": "v0.0.541",
+      "timestamp": "2026-11-08T01:59:52.451136164+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "132912c5a119d6011e73c98ec2b23f806c2411cc",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "file_sha256": "3154095bde664e261c18e034f2c74419014559583e260799f1528fd9bb016371",
+      "services": [
+        "rotate-token"
+      ],
+      "sha256": "b708790693363e6317e64addde2e75e4decf06eaa57053f3055c42e7ba66d176",
+      "tag": "v0.0.550",
+      "timestamp": "2026-11-08T02:34:24.630484357+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "6168eff154c32e083e636685f7a632060ca22cee032543d6679f8e0ae62af73e",
+      "timestamp": "2026-11-08T02:34:56.164436203+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "132912c5a119d6011e73c98ec2b23f806c2411cc",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "services": [
+        "rotate-token"
+      ],
+      "sha256": "a8bd61bf0cf60e020a6354a3521ad9739c89891bfba6b757388166b8672e2be3",
+      "tag": "v0.0.550",
+      "timestamp": "2026-11-08T02:35:42.295825952+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5a5119f799409672cfd101429b01dcd6db30188e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "7a64c33b10b7a420824a8c46973b36749ef0ba6a22fa5803c75100b8e77d3627",
+      "services": [
+        "nginx"
+      ],
+      "sha256": "8747f97c6ba924e617d409ca9f88970b0cf0422af045e8f66af1a39015ac7e00",
+      "tag": "v0.0.541",
+      "timestamp": "2026-11-08T02:36:08.472427881+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "5a5119f799409672cfd101429b01dcd6db30188e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "6ca575ec8a84728b5514d185ef23e7e0aa02288639f8712210d3a17a94ddc3d6",
+      "tag": "v0.0.541",
+      "timestamp": "2026-11-08T06:37:06.689963717+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "5a5119f799409672cfd101429b01dcd6db30188e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "sha256": "eb32409f6e2c771b96cf0d8cb2a044ad38249e0321d001aae7640425650073f5",
+      "tag": "v0.0.541",
+      "timestamp": "2026-11-08T06:48:29.781479175+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "024d923a0429ab7cd2debebe35f03fa07b1d03818f915a5863839c47deee6421",
+      "timestamp": "2026-11-08T08:00:27.193943545+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "f2b0b35c9189a5a059ab3b6a795271d9d504f9af",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "27b1d5258031897cc5f13ee8bb4656176534764fc7cebeff3868e660ab39bd27",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "model-downloader-qwen38",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "nginx-qwen38",
+        "qwen38-lora-adapter-downloader",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1",
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "ce12cc605b4cd3975b1e2d06e40f83791323951df5f9a897e461900568c04939",
+      "tag": "v0.0.551",
+      "timestamp": "2026-11-08T08:04:52.591853525+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "f2b0b35c9189a5a059ab3b6a795271d9d504f9af",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "27b1d5258031897cc5f13ee8bb4656176534764fc7cebeff3868e660ab39bd27",
+      "services": [
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "proxy-qwen3vl-30b-a3b"
+      ],
+      "sha256": "f8d94068e56c8ef9726016bedfd7f92d2fc23349fc2ef6370ec41702c89bb20e",
+      "tag": "v0.0.551",
+      "timestamp": "2026-11-08T08:28:33.485244709+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "f2b0b35c9189a5a059ab3b6a795271d9d504f9af",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-proxy-registrar",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "800b523310e32b56bbdb7f14ecac9c1a2cc51b9b05ff3ff3bfe82c5ce6cddf5d",
+      "tag": "v0.0.551",
+      "timestamp": "2026-11-08T11:33:24.848540815+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "f2b0b35c9189a5a059ab3b6a795271d9d504f9af",
+      "file": "prod/small-models.yaml",
+      "sha256": "9d26048e736748fc075a204bd61dcc09910ea6d72fcd242c9b603ed63ba0c219",
+      "tag": "v0.0.551",
+      "timestamp": "2026-11-08T11:38:35.652449982+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "f2b0b35c9189a5a059ab3b6a795271d9d504f9af",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "80aadd68254ac17748590d2652b97801e9659957ffd1e4963c61fb23aadbdd97",
+      "services": [
+        "model-downloader"
+      ],
+      "sha256": "edc164881d45955e45a28ef409cf74bd470cc041a3400c956de4094fde15862f",
+      "tag": "v0.0.551",
+      "timestamp": "2026-11-08T11:39:19.782139757+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5a5119f799409672cfd101429b01dcd6db30188e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "7a64c33b10b7a420824a8c46973b36749ef0ba6a22fa5803c75100b8e77d3627",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b",
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b",
+        "glm53-ghost-aggregator",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "e94f7eeb946056ab64444e47fc40c75ea771cebf1ceebfb5ea4f95dc403b3782",
+      "tag": "v0.0.541",
+      "timestamp": "2026-11-08T11:41:32.101593831+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5a5119f799409672cfd101429b01dcd6db30188e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "7a64c33b10b7a420824a8c46973b36749ef0ba6a22fa5803c75100b8e77d3627",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "06244e696eb214a53ac2ed403ac9d8dca878dba1ee33a86e6e12ea336f63be6e",
+      "tag": "v0.0.541",
+      "timestamp": "2026-11-08T11:42:20.510665761+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "nginx",
+        "proxy-glm53"
+      ],
+      "sha256": "ba82605e21f7fb009b894b09f42e0109f96e58fea23954f31870e51471a03109",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-08T20:53:15.924435120+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "nginx",
+        "proxy-glm53"
+      ],
+      "sha256": "7a46e5c145afff8026c88c0e29a0f6942615d3227a0829e7412873517b46aab5",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-08T20:54:11.943585283+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "e24e4f5fd63b0632315f4a82676d30af8389d43e4450d462054b0f6425730d5a",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-08T21:24:48.294381177+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "311bf491c7f60d43551a26680fa2d7c63b4837bd75b3bd8197aa7d00300a2f6b",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-08T21:26:04.104821078+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "d0ac23cbdea5ef813d29664e52fb10774c9498d7c7a59e1fe1634ad37f7f986c",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-08T21:27:39.543969156+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b"
+      ],
+      "sha256": "6b23c455b9c823ce342e8604d825d8c4c633c8c260a613ff5db16ba62a9f1ec1",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-08T21:34:58.479876558+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b"
+      ],
+      "sha256": "d02777c6ed11207640387c7fc33095520f7d88c62b363fb995f2047edbdb1e3e",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-08T21:36:08.659968593+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "bfad3198f7781b03e015b93fe8fd2ac2ca923fa8caf6261b9e9f8025d3d58cc5",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T03:45:34.275081675+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "sha256": "d8efab3c73bf32e2ad56738720dca631773adb8cdb236113ee906996b548f399",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T03:47:17.748887736+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "670fbece1c2527e487ab1a9a0a3f417f965607fbac636f3a0df8e4fdefce645e",
+      "timestamp": "2026-11-09T05:09:41.130770078+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "f449fa7470bb4a833df6dc5feb2c726811b3ad987a319193dfd4fa76852b417e",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "model-downloader-qwen38",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "nginx-qwen38",
+        "qwen38-lora-adapter-downloader",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1",
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "70ad7ae4563d2acb285ec466afb3b3e73e69cc5b74c4bdf412e005d0106ed34e",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T05:26:25.709041584+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "f449fa7470bb4a833df6dc5feb2c726811b3ad987a319193dfd4fa76852b417e",
+      "services": [
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "proxy-qwen3vl-30b-a3b"
+      ],
+      "sha256": "1e8bf1ece8d7655bab040ed5037f65e0de2823fc9034ad00cf15077c9fad2027",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T06:13:57.251848570+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "model-proxy-registrar",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "1fd9ec244ec9e75c0b211e21709611b0063b6e61fe15c88ef2a8fa1a72787da0",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T07:58:45.912576811+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/small-models.yaml",
+      "services": [
+        "dcgm-glm53",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-shared-gpu3",
+        "glm53-ghost-aggregator",
+        "model-privacy-filter",
+        "model-sg-flux2-klein-4b-tp1",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "model-vllm-qwen3-reranker-0.6b-tp1",
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "model-vllm-whisper-large-v3-tp1",
+        "nginx",
+        "nginx-qwen38",
+        "otelcol-contrib",
+        "proxy-flux2-klein-4b",
+        "proxy-glm53",
+        "proxy-privacy-filter",
+        "proxy-qwen36-35b-a3b",
+        "proxy-qwen38-27b",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-qwen3-embedding-0.6b",
+        "proxy-qwen3-reranker-0.6b",
+        "proxy-qwen3vl-30b-a3b",
+        "proxy-whisper-large-v3"
+      ],
+      "sha256": "050c3fa9ea553b80ad115a8b52edac02d506f11ed22443728eafba16e24014ac",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T08:03:34.322480739+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b",
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b",
+        "glm53-ghost-aggregator",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "c7b2396820bb5b3cfecf2dc2ae9e8338cfcec94cc3f49ad77bbddbb2573110a6",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T08:04:22.170778993+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "698d337ac6b7c07aa7b21f4df2d4bc82464f2b466ae247a7e71864bf21c3b617",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T13:09:08.870490882+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "3c733adf8f422e2dcc36c6b2fe26516e71b4b1104fcfb2fb6ee2c4fafca197f9",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T13:12:46.975432500+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "nginx",
+      "sha256": "6da97fbd75a04db76dd95c091e259a97fcc5609a48efdcf152bc4967fb3f5a9d",
+      "timestamp": "2026-11-09T13:13:22.791792125+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "2df85e0738d9ceeb362d7a120c2a8cf9a59f6507e97bb4e0a42357a91cf5ab81",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T13:37:28.008475273+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "nginx",
+      "sha256": "88f57fe0766cbbb2e0ba3f93f7075199b7515e3c1d66c7ff63025b3ae5e2b331",
+      "timestamp": "2026-11-09T13:38:33.188336307+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "b1125bb996a9e8fe573e8d8ef5c778f162ec301eabe987b7696f12eb00f1a487",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T14:27:08.042992045+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "proxy-glm53",
+        "model-proxy-registrar"
+      ],
+      "sha256": "3018779b8143acb177a01a228b79a2a4da78e7f03e9be64e3e32aab72f367e99",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-09T14:28:21.110342375+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "fe7493ee3a0b3d36c1079c095de554e7b218da5c",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "file_sha256": "3154095bde664e261c18e034f2c74419014559583e260799f1528fd9bb016371",
+      "services": [
+        "rotate-token"
+      ],
+      "sha256": "93f9b5a688c16c62fb4f7861f5b03a2c7cf09409e0f125fd5e809e6c1793dea0",
+      "tag": "v0.0.554",
+      "timestamp": "2026-11-10T00:38:38.683868184+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "86f6c1b9e8d60b5c066b600d620693d9787ed888651b664985628216aa164cc1",
+      "timestamp": "2026-11-10T00:39:11.060848147+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "fe7493ee3a0b3d36c1079c095de554e7b218da5c",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "services": [
+        "rotate-token"
+      ],
+      "sha256": "31635e96708d152964aa25dcb6a48f6bc397dd9fdedfbadfe679f0d06408cac0",
+      "tag": "v0.0.554",
+      "timestamp": "2026-11-10T00:39:20.478542522+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "af17d6c9de91e08c25b1bd1d7a2b3a40108bc6ed734c1071e00bd811ea5ee415",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-10T01:19:52.473187861+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "model-proxy-registrar",
+        "proxy-glm53"
+      ],
+      "sha256": "16b864b8441a4042840a2160a2c618f6d050af2f98eb19d66492ff06a9ab0019",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-10T02:45:17.773964328+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "model-proxy-registrar",
+        "proxy-glm53"
+      ],
+      "sha256": "f3d303816652b369d76d8a4cbc7b3b4b0781a1547e514f32c6f7f8078c0cec30",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-10T03:04:00.773297665+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "model-proxy-registrar",
+        "proxy-glm53"
+      ],
+      "sha256": "077420574110140e1d745b29f56df67cf80b3af2544dc66620e2c34feac7a402",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-10T04:56:08.042311086+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "4d64477b298038f59e92b268a2a5feb34e597fe0",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "e0d8fde3710991c9e543a9560c1ac7b54e694502bdac50d7da21fdf1802e98f4",
+      "services": [
+        "otelcol-contrib"
+      ],
+      "sha256": "5e7d79e8449c16575d60a3a5588a4307cc364c2748895e413a04951e4c3e5396",
+      "tag": "v0.0.553",
+      "timestamp": "2026-11-10T22:01:26.903330246+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "d67ee4014b72d543fee8cd18cc16d2be441b17b863528561d5aaf2adb5bd15a5",
+      "timestamp": "2026-11-12T02:44:24.973136441+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "eb5fd4bc1d11c719def5e02ee93c9f82d69a971a",
+      "file": "prod/small-models.yaml",
+      "file_sha256": "f5455af6fbf7763f0aaefd6a6aa31fd3632526aa2b3918dd6c11a560410eb6f8",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "model-downloader-qwen38",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "nginx-qwen38",
+        "qwen38-lora-adapter-downloader",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3vl-30b-a3b",
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1",
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "1cc85522f153dafcbe68413ccb30f78d193161044394b3b894d39bf7c392432f",
+      "tag": "v0.0.556",
+      "timestamp": "2026-11-12T03:43:49.467295981+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "efc1618e8d0901a25ba302df4ea3112dad134328",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "467f74f0d12c8bb05875dd8cc088731f84141300b12858e57b6257b188c87f98",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b",
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b",
+        "glm53-ghost-aggregator",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "4413b56fd01dece00a5bb39d08cf83c797485aa9726ba04bfcef6716d3cb1f3c",
+      "tag": "v0.0.565",
+      "timestamp": "2026-11-12T07:42:20.530772395+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9430130293e01ecf0ecc9428aa1fbd00101d4d69",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "2115ee607d6292e31f95fe6399b8b881f93ba4cf7a7bb3b22732c14f4637d901",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a"
+      ],
+      "sha256": "ebb6274b858eff7ed2d1212f936b74a5ae9e942c1b1ed9e5e69b58d49104dff2",
+      "tag": "v0.0.575",
+      "timestamp": "2026-11-12T18:32:42.778167927+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9430130293e01ecf0ecc9428aa1fbd00101d4d69",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "2115ee607d6292e31f95fe6399b8b881f93ba4cf7a7bb3b22732c14f4637d901",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "f52d42c89101593a319117c4b18f148af025e454991678a9096ab21e12d7be52",
+      "tag": "v0.0.575",
+      "timestamp": "2026-11-12T18:44:27.192605362+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "9430130293e01ecf0ecc9428aa1fbd00101d4d69",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "2115ee607d6292e31f95fe6399b8b881f93ba4cf7a7bb3b22732c14f4637d901",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r2a"
+      ],
+      "sha256": "5b72d12b61203cbd6963cd2fef08cdeaaac9c8f79829cacfb2af0ee7b7540b92",
+      "tag": "v0.0.575",
+      "timestamp": "2026-11-12T18:57:14.796431618+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "777750741778f149fdb3932bebfe30ff4318cf1d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "6e4817f587442b5018482ca4b7f17a6f6286d8132b0ff7b7862a398f17725ed0",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "68a2b4a78587ee0381e6c5a9071f22a4facbf66dc3e38cb5189d5e424ac665af",
+      "tag": "v0.0.581",
+      "timestamp": "2026-11-13T00:58:02.394216072+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "777750741778f149fdb3932bebfe30ff4318cf1d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "6e4817f587442b5018482ca4b7f17a6f6286d8132b0ff7b7862a398f17725ed0",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "461503710c83df3b03fe081a655319fb731da2946ff8f1e15f4014834efa47fb",
+      "tag": "v0.0.581",
+      "timestamp": "2026-11-13T00:58:08.444962521+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "777750741778f149fdb3932bebfe30ff4318cf1d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "6e4817f587442b5018482ca4b7f17a6f6286d8132b0ff7b7862a398f17725ed0",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "128f74e60e183c0bad29d707fcd1d35f942d2fbd81b0322e2be7d42a6c087307",
+      "tag": "v0.0.581",
+      "timestamp": "2026-11-13T17:07:00.854156921+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "7d62ec6762bb1288ea5d5cf40b05e8a7c5305df9",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "62cf83d0849b19400640900fc19a892bba64de376948b024bedb53a9cdb0d5a6",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "258b183171db2bf8d0ebd48f722ce08b22ab566be07c58114a387af8e630a2f8",
+      "tag": "v0.0.593",
+      "timestamp": "2026-11-14T02:19:27.396633532+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "7d62ec6762bb1288ea5d5cf40b05e8a7c5305df9",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "62cf83d0849b19400640900fc19a892bba64de376948b024bedb53a9cdb0d5a6",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "2ef24c2200188f66b19c966ad05a902ccaa6be0f0aaad10bae2b25acf34fb4e9",
+      "tag": "v0.0.593",
+      "timestamp": "2026-11-14T02:38:56.685155543+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "00b9b12271dc79ec7465ad4751822164e0f942fb66eb216fafd5453cbfd1e413",
+      "timestamp": "2026-11-19T04:18:04.766394010+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:ae4332fdb0bfccf6410bc153a58d0b72a596a989cbb98fd5b6461fe32e079814",
+      "sha256": "98e59df0b3f582a452187e4700310e30d4aab72d2031b7a28cc6fe7532b114b8",
+      "timestamp": "2026-11-19T04:18:22.984514079+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:ae4332fdb0bfccf6410bc153a58d0b72a596a989cbb98fd5b6461fe32e079814",
+      "sha256": "52833797b39e5690d3a008314cb0ee24fd2d4305cc68d232b9dd5d89c87ccbac",
+      "timestamp": "2026-11-19T04:18:25.757946545+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee",
+      "services": [
+        "nginx",
+        "proxy-glm53",
+        "model-proxy-registrar"
+      ],
+      "sha256": "b39738b975a0a3176b57935ea29fcd86f2ce30889cd1b12f4c6c8a994704387e",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T12:44:21.869665186+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "7d62ec6762bb1288ea5d5cf40b05e8a7c5305df9",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "1b0775faf1eab98a19bb963da1cc6f7094a1b56a0a324490b52f6644c6b11edb",
+      "tag": "7d62ec6762bb1288ea5d5cf40b05e8a7c5305df9",
+      "timestamp": "2026-11-19T15:08:53.933462748+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee",
+      "services": [
+        "nginx",
+        "proxy-glm53",
+        "model-proxy-registrar"
+      ],
+      "sha256": "b47353c1b1441d0afa775efc0fd98a3440d8d6c62d2cae3a26025ab547d67b71",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T15:15:31.944183865+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "file": "prod/glm-5.3-flash-vllm-dep4x2.yaml",
+      "file_sha256": "36c6d1c7e62a5a8afbfc5f93501ed1e15c9d332579fe9ecc31e7f99a84124a21",
+      "services": [
+        "dcgm-glm53",
+        "model-downloader",
+        "model-proxy-registrar",
+        "model-vllm-glm53-dp0",
+        "model-vllm-glm53-dp1",
+        "model-vllm-glm53-dp2",
+        "model-vllm-glm53-dp3",
+        "model-vllm-glm53-dp4",
+        "model-vllm-glm53-dp5",
+        "model-vllm-glm53-dp6",
+        "model-vllm-glm53-dp7",
+        "nginx",
+        "otelcol-contrib",
+        "proxy-glm53"
+      ],
+      "sha256": "2ebd3483208e7edf879604702fb4744a39b731c233699d94c0848ca8075355fe",
+      "tag": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "timestamp": "2026-11-20T02:02:55.053152985+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee",
+      "services": [
+        "model-sg-glm53-w4afp8-tp4-r1",
+        "model-sg-glm53-w4afp8-tp4-r2"
+      ],
+      "sha256": "290d183fddc62284ed4e4c9e65eac6220e2b8c15224fd8866ec35e5f7e307852",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-20T02:15:54.442710252+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "933f971ffdb2069a8e8d3519c7f613751fad4286f53300c31a1fa219628434ee",
+      "services": [
+        "model-downloader",
+        "hf-cleanup",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp4-r1",
+        "model-sg-glm53-w4afp8-tp4-r2",
+        "model-sg-glm53-w4afp8-tp2-r2a",
+        "model-sg-glm53-w4afp8-tp2-r2b",
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b",
+        "glm53-perception-check",
+        "glm53-ghost-aggregator",
+        "dcgm-glm53",
+        "otelcol-contrib"
+      ],
+      "sha256": "3723e9309f43fb671aa3ba890c1c2a88ecf234532af455b5d1154baa61f77ed2",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-20T02:19:22.894545508+00:00"
+    },
+    {
+      "action": "launcher_restart",
+      "bound": true,
+      "file": "launcher-restart-request.json",
+      "services": [
+        "compose-manager"
+      ],
+      "sha256": "c74f9e854f1bbee7131c28d6b7f98ef426ccba9f9ead356b9c3b1007b7f4bba9",
+      "timestamp": "2026-11-20T22:17:04.198811248+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:ae4332fdb0bfccf6410bc153a58d0b72a596a989cbb98fd5b6461fe32e079814",
+      "sha256": "9cc83558f4ab7e6f01bd51750a87afb1b658497c20b92e4aeffd1c048076920f",
+      "timestamp": "2026-11-20T22:17:09.006341744+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "c9c477286e5132f5ff0ddb2cce5187ce1db6028108ae52a959f68f264faefbac",
+      "services": [
+        "dcgm-glm53",
+        "engine-egress-probe",
+        "model-downloader",
+        "model-proxy-registrar-long",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1",
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "nginx",
+        "otelcol-contrib",
+        "pd-router-glm53-a",
+        "proxy-glm53",
+        "proxy-glm53-long",
+        "sidecar-glm53-netns-a"
+      ],
+      "sha256": "4c4e9d05e1d988bfc8672a6921d262adaee540d345a3b3fc27fab969b37ea007",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-20T22:25:55.954641224+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "file_sha256": "49f43d1b8879bd7f56d226820e0fb00a2b84045356f14efb870dcc65b61b5324",
+      "services": [
+        "engine-egress-probe"
+      ],
+      "sha256": "7e5d3bd9bbfd946d41b6bec9aae8e48dc4dfe4e6780e1b1c1b1b9371bd68ffe1",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-20T22:27:46.920085867+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "f89ee475377ce7dbf2f43b793762f4a82a1a24f8fb977ab02d031227b05aaa5a",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-20T22:44:22.295768662+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "hf-cleanup"
+      ],
+      "sha256": "24c18aba7ee75dd020018c0f078b20f4dcae1204ef13a7de46dbbcf0ede6b0d6",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-20T23:05:39.840715061+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4-W4AFP8-LongContext.yaml",
+      "services": [
+        "model-sg-glm53-w4afp8-tp2-r1a",
+        "model-sg-glm53-w4afp8-tp2-r1b"
+      ],
+      "sha256": "dd79d1ddf6841bb33e0ddc23d90460c9c1b3b087434b445bb70eed3ee427d8a2",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-20T23:22:04.093001067+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "c9c477286e5132f5ff0ddb2cce5187ce1db6028108ae52a959f68f264faefbac",
+      "services": [
+        "dcgm-glm53",
+        "engine-egress-probe",
+        "model-downloader",
+        "model-proxy-registrar-long",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1",
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "nginx",
+        "otelcol-contrib",
+        "pd-router-glm53-a",
+        "proxy-glm53",
+        "proxy-glm53-long",
+        "sidecar-glm53-netns-a"
+      ],
+      "sha256": "b44be4ed9216630b5ed55b7f60538450175e17ac5e31bfaf4bffe8f0c52535c7",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-20T23:22:28.587630604+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "c9c477286e5132f5ff0ddb2cce5187ce1db6028108ae52a959f68f264faefbac",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "dfefbde2f35e9f7316ce15103d2740c13d689ee3d2d219a45287be9bf2f4adfc",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-21T00:41:06.229387887+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "34e8040912352206166fc21d54141b5e2da9bae1d42528082cbd2ad43abf3282",
+      "tag": "b24a169de18a0b67377f85e775d514bc133cd0e6",
+      "timestamp": "2026-11-21T00:58:18.173120380+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "141adcee8057df3ea3c771ea28f3f24e54eed8e2",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "e558edf5a02eecb03283fd3e6bd0877bce521561b22ad98ed7995f97be49850d",
+      "services": [
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1"
+      ],
+      "sha256": "d415ca6444e90d8667ead8aaf0084df26e11a7394f7cce2a308253ed6a2ac9d6",
+      "tag": "141adcee8057df3ea3c771ea28f3f24e54eed8e2",
+      "timestamp": "2026-11-21T01:22:28.573730461+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "141adcee8057df3ea3c771ea28f3f24e54eed8e2",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "e558edf5a02eecb03283fd3e6bd0877bce521561b22ad98ed7995f97be49850d",
+      "services": [
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1",
+        "model-proxy-registrar"
+      ],
+      "sha256": "09e304149ca262aaf03db845c935520eb795179a14afe385bda4b3c0e9d3db21",
+      "tag": "141adcee8057df3ea3c771ea28f3f24e54eed8e2",
+      "timestamp": "2026-11-21T01:27:40.920804594+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "6a4001e90fd5fdfea26d999f23e6db2d3ef315b0e6d0d1388e3481c5550d2f18",
+      "services": [
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1"
+      ],
+      "sha256": "bba49175aab5f0e2bc31d37ee1d204861e8dd39cc267f4850d7c26d7e8913e0b",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-21T23:37:03.004473329+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "6a4001e90fd5fdfea26d999f23e6db2d3ef315b0e6d0d1388e3481c5550d2f18",
+      "services": [
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1"
+      ],
+      "sha256": "bba49175aab5f0e2bc31d37ee1d204861e8dd39cc267f4850d7c26d7e8913e0b",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-21T23:37:03.004473329+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "83cbf169abaf77577e6d215ac32547b6942189b7d44d41b35aaa1f577179c41b",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-21T23:43:00.791608022+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "83cbf169abaf77577e6d215ac32547b6942189b7d44d41b35aaa1f577179c41b",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-21T23:43:00.791608022+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "6a4001e90fd5fdfea26d999f23e6db2d3ef315b0e6d0d1388e3481c5550d2f18",
+      "services": [
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1"
+      ],
+      "sha256": "33de50682878adfb636e013935409bebf5e85ac0efd5bd870394ff1c84a76d40",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-21T23:58:35.121390496+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "6a4001e90fd5fdfea26d999f23e6db2d3ef315b0e6d0d1388e3481c5550d2f18",
+      "services": [
+        "model-vllm-glm53-a-prefill0",
+        "model-vllm-glm53-a-prefill1",
+        "model-vllm-glm53-a-decode0",
+        "model-vllm-glm53-a-decode1"
+      ],
+      "sha256": "33de50682878adfb636e013935409bebf5e85ac0efd5bd870394ff1c84a76d40",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-21T23:58:35.121390496+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "6a4001e90fd5fdfea26d999f23e6db2d3ef315b0e6d0d1388e3481c5550d2f18",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "94c4472b9cba3e3c17373c6510dd6f46ecb855049a8aea895aaf81033e893382",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-22T00:21:44.225634767+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "file": "prod/pack-glm-53-flash-pd2-long.yaml",
+      "file_sha256": "6a4001e90fd5fdfea26d999f23e6db2d3ef315b0e6d0d1388e3481c5550d2f18",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "94c4472b9cba3e3c17373c6510dd6f46ecb855049a8aea895aaf81033e893382",
+      "tag": "cb8318506040de6d8699d39c612a2c27c7b4601f",
+      "timestamp": "2026-11-22T00:21:44.225634767+00:00"
+    }
+  ],
+  "first_seen": "2026-11-17T21:45:37.000000Z",
+  "instance_id": "cc796618bcd5a6b22907d8de7ac414a968d6a1aa",
+  "label": "gpu23",
+  "last_seen": "2026-11-24T19:36:28.124043Z"
+}
