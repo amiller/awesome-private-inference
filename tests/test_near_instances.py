@@ -72,11 +72,37 @@ def test_mismatched_signing_key_rejects(monkeypatch):
     assert report.details["signing_key_shared"] is False
 
 
-def test_duplicate_instance_rejects(monkeypatch):
-    evidence = _load()
-    evidence["model_attestations"][1] = evidence["model_attestations"][0]
+# GLM lane rejected since ~11-20: the gateway lists cc796618 twice with different quotes.
+DUPLICATE = (Path(__file__).resolve().parents[1] / "data" / "observations" / "evidence" / "sha256" /
+             "2ca9798d1dc54122816c2cd56ded9fae81b7d4fd7e6037527b213efd70b09c82.json")
+
+
+def _duplicate_listing(monkeypatch):
+    from verifiers import near_ai
+    evidence = json.loads(DUPLICATE.read_text())
+    # captured by the early-reject path, so it has no chain context; replay against an empty one
+    evidence.update(chain_snapshot={"block_number": 1, "block_hash": "0x" + "11" * 32, "chain_id": 8453},
+                    model_authorization_queries=[], gateway_authorization_query={"compose_hash": ""})
+    monkeypatch.setattr(near_ai.near_deployments, "appraise",
+                        lambda *a, **k: {"ok": False, "checks": {}, "deployments": []})
+    monkeypatch.setattr(near_ai.near_deployments, "load_archive", lambda: {})
+    return evidence
+
+
+def test_agreeing_duplicate_instance_is_appraised_twice(monkeypatch):
+    evidence = _duplicate_listing(monkeypatch)
     report = _verify(monkeypatch, evidence)
-    assert report.error == "model_attestations entries need distinct instance ids"
+    d = report.details
+    assert report.error is None
+    assert d["instance_entries"][_ids(evidence)[0]] == 2
+    assert len(d["entries"]) == 4 and len(d["tdx"]["models"]) == 4
+
+
+def test_conflicting_duplicate_instance_rejects(monkeypatch):
+    evidence = _duplicate_listing(monkeypatch)
+    evidence["model_attestations"][3]["tls_cert_fingerprint"] = "00" * 32
+    report = _verify(monkeypatch, evidence)
+    assert report.error == f"instance {_ids(evidence)[0]} listed with conflicting identities"
 
 
 def test_more_than_eight_entries_rejects(monkeypatch):
