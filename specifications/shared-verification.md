@@ -1,11 +1,10 @@
 # Shared verification and reference observations · v1
 
-The Private Inference Beat website has two primary tabs: the comparison table
-and the reference values explorer. Introductory prose explains how to read each.
-Stage criteria, methodology and raw measurements are supporting material. A
-curated verifier directory lives in Git as part of the verification and reference
-process; it has no website page or tab.
-The repository remains `awesome-private-inference`.
+The Private Inference Observatory website has three primary tabs: Private
+Inference Beat (the route comparison table), the reference values explorer, and
+Awesome Private Inference (the verifier directory). Introductory prose explains how to read each.
+Stage criteria, methodology and raw measurements are supporting material.
+The repository keeps its legacy name, `awesome-private-inference`.
 
 ## Outputs and regeneration
 

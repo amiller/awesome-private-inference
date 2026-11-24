@@ -1,4 +1,4 @@
-# Daily Beat discussion monitoring
+# Daily digest discussion monitoring
 
 The existing zed cron still invokes `watch/beat-digest.sh` at 08:30 Central.
 The discussion collector is a preflight in that same job, not a second schedule.
@@ -47,7 +47,7 @@ just to validate monitoring; it may publish a duplicate daily entry.
 These scripts do not update observatory assessment data, trust roots, accepted
 reference values or client policies.
 
-## TEE Platform Beat (variant)
+## TEE platform digest (variant)
 
 `BEAT=tee-beat watch/beat-digest.sh` runs the same job with `watch/tee-beat.md`.
 It writes its history to `~/.local/share/tee-beat/` and its public digests to

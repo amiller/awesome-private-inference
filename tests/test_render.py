@@ -48,7 +48,7 @@ def test_render_produces_html(tmp_path, monkeypatch):
     rc = render.main()
     assert rc == 0
     html = (docs / "index.html").read_text()
-    assert ">Comparison</h1>" in html
+    assert ">Private Inference Beat</h1>" in html
     assert "What makes inference private?" in html
     assert "What the companion audits establish" in html
     history = (docs / "history.html").read_text()
@@ -57,7 +57,7 @@ def test_render_produces_html(tmp_path, monkeypatch):
     assert "Document fingerprint" in history
     assert 'aria-label="Primary"' in html
     verifiers = (docs / "verifiers.html").read_text()
-    assert ">Verifiers</h1>" in verifiers and 'id="teep"' in verifiers
+    assert ">Awesome Private Inference</h1>" in verifiers and 'id="teep"' in verifiers
     measurements = (docs / "measurements.html").read_text()
     assert "Attestation checks across providers and models" in measurements
     assert (docs / "assessments.html").exists()
@@ -69,7 +69,7 @@ def test_render_produces_html(tmp_path, monkeypatch):
     assessments = (docs / "assessments.html").read_text()
     assert 'id="private-inference-private-reply"' in assessments and '-session"' not in assessments
     assert 'href="./verifiers.html"' in html
-    assert "Private Inference Beat" in html
+    assert "Private Inference Observatory" in html and "Private Inference Beat" in html
     assert "no stages awarded" in (docs / "stages.html").read_text()
     feed = json.loads((docs / "reference-values.json").read_text())
     assert feed["schema_version"] == 1
