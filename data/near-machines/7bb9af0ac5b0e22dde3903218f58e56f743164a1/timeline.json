@@ -1,0 +1,2574 @@
+{
+  "captures": 8,
+  "changes": [],
+  "deploy_actions": [
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "3e3fa7cb0a5515bbd4a60ff39e4b440e94b2976e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "a648cda7147efb69c4f4ec4e62376beb288826a5db81242ab09cb090efa7d99d",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "281fe3070ed61ed1e808efeaabeee9fa05332a7d4e5f31d998d55d7b333b193c",
+      "tag": "v0.0.382",
+      "timestamp": "2026-09-05T03:41:29.167952600+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "3e3fa7cb0a5515bbd4a60ff39e4b440e94b2976e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "a648cda7147efb69c4f4ec4e62376beb288826a5db81242ab09cb090efa7d99d",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "281fe3070ed61ed1e808efeaabeee9fa05332a7d4e5f31d998d55d7b333b193c",
+      "tag": "v0.0.382",
+      "timestamp": "2026-09-05T03:41:29.167952600+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "d36548db2486f91cc527792ea0c735068eede5de",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-downloader"
+      ],
+      "sha256": "6baee9d1d735edf2649c55d72ae8a0daef877f21747a5275214c5a04975ccca1",
+      "tag": "v0.0.380",
+      "timestamp": "2026-09-05T03:46:02.287490129+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "d36548db2486f91cc527792ea0c735068eede5de",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-downloader"
+      ],
+      "sha256": "6baee9d1d735edf2649c55d72ae8a0daef877f21747a5275214c5a04975ccca1",
+      "tag": "v0.0.380",
+      "timestamp": "2026-09-05T03:46:02.287490129+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "d36548db2486f91cc527792ea0c735068eede5de",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "d76413cd231a4e871a515e4fa829c6510a374fe335e77fae3ea5a6dccf783909",
+      "sha256": "d3c30e4a351badb090a16ce048da11ce27b3d0ea636ea8bd2377949c9b2945b0",
+      "tag": "v0.0.380",
+      "timestamp": "2026-09-05T03:46:44.426349945+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "d36548db2486f91cc527792ea0c735068eede5de",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "d76413cd231a4e871a515e4fa829c6510a374fe335e77fae3ea5a6dccf783909",
+      "sha256": "d3c30e4a351badb090a16ce048da11ce27b3d0ea636ea8bd2377949c9b2945b0",
+      "tag": "v0.0.380",
+      "timestamp": "2026-09-05T03:46:44.426349945+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "d36548db2486f91cc527792ea0c735068eede5de",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "d76413cd231a4e871a515e4fa829c6510a374fe335e77fae3ea5a6dccf783909",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "916b3755eaeb012931ad9f6198ec18a2b8b7184f2eed3f1424357c8dad2688c5",
+      "tag": "v0.0.380",
+      "timestamp": "2026-09-05T03:47:01.178182708+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "d36548db2486f91cc527792ea0c735068eede5de",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "d76413cd231a4e871a515e4fa829c6510a374fe335e77fae3ea5a6dccf783909",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "916b3755eaeb012931ad9f6198ec18a2b8b7184f2eed3f1424357c8dad2688c5",
+      "tag": "v0.0.380",
+      "timestamp": "2026-09-05T03:47:01.178182708+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "3e3fa7cb0a5515bbd4a60ff39e4b440e94b2976e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "dcgm-glm53"
+      ],
+      "sha256": "90e3ed910a3c5b54a1dba77ec184817c94e4f8aae57d390dce3a0536b5121980",
+      "tag": "v0.0.382",
+      "timestamp": "2026-09-09T20:12:54.741319839+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "3e3fa7cb0a5515bbd4a60ff39e4b440e94b2976e",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "dcgm-glm53"
+      ],
+      "sha256": "90e3ed910a3c5b54a1dba77ec184817c94e4f8aae57d390dce3a0536b5121980",
+      "tag": "v0.0.382",
+      "timestamp": "2026-09-09T20:12:54.741319839+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "0eb5c6d9f0842af579e24e39d661ede0ed79e440",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "a2d3f073aa2f01864bb8eac72ba1f4292ad8391aebdc28e29b84fe8cde48afab",
+      "services": [
+        "model-proxy-registrar",
+        "dcgm-glm53"
+      ],
+      "sha256": "3f7533990e4d3c7d1917d28d97f49ba4cab9511098f2680a2081e8215f540da2",
+      "tag": "v0.0.404",
+      "timestamp": "2026-09-09T20:13:06.681069618+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0eb5c6d9f0842af579e24e39d661ede0ed79e440",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "a2d3f073aa2f01864bb8eac72ba1f4292ad8391aebdc28e29b84fe8cde48afab",
+      "services": [
+        "model-proxy-registrar",
+        "dcgm-glm53"
+      ],
+      "sha256": "3f7533990e4d3c7d1917d28d97f49ba4cab9511098f2680a2081e8215f540da2",
+      "tag": "v0.0.404",
+      "timestamp": "2026-09-09T20:13:06.681069618+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "35072175f61fd40429890b31580196b9a35e6524b5f4357b3e2aec1cc259dc84",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:31:06.717558287+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "35072175f61fd40429890b31580196b9a35e6524b5f4357b3e2aec1cc259dc84",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:31:06.717558287+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "27170539103f366003bd6ea7654f648cf2b30e945bb93db9abc440703421af43",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:32:59.624396308+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "27170539103f366003bd6ea7654f648cf2b30e945bb93db9abc440703421af43",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:32:59.624396308+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "423a62b43d33a72dc6b175e4696f4997f67443868777037ece6c09c23c897a72",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:44:11.512410311+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "423a62b43d33a72dc6b175e4696f4997f67443868777037ece6c09c23c897a72",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:44:11.512410311+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "fc8a12a73047beef2f444f4b832a29425df48976c82d0ef9e775fa725c10e7fc",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:55:14.350473769+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "fc8a12a73047beef2f444f4b832a29425df48976c82d0ef9e775fa725c10e7fc",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:55:14.350473769+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "b26cc115f79bbcd0f97f1eea520e863ef8e3d2bbeb2361670b3cfd7238bc7f75",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:56:40.423568951+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "b26cc115f79bbcd0f97f1eea520e863ef8e3d2bbeb2361670b3cfd7238bc7f75",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T22:56:40.423568951+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "4d0ebcd59d102906d1ad7eb3a57251149f01a065a8f6d641f548be897c7e550b",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T23:08:20.613303792+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "4d0ebcd59d102906d1ad7eb3a57251149f01a065a8f6d641f548be897c7e550b",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T23:08:20.613303792+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "e14107901d202215ab44eb027eb4792047d5ec83",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "2878b9c4c6db512a7538dc4e8981fd5acae72cdaace7794509f48161bcce08e3",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "85aa06adbe977d7c9ca521de5dab61ea86843d6bf424f1d28cfed11e2946015f",
+      "tag": "v0.0.409",
+      "timestamp": "2026-09-09T23:44:01.140109908+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e14107901d202215ab44eb027eb4792047d5ec83",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "2878b9c4c6db512a7538dc4e8981fd5acae72cdaace7794509f48161bcce08e3",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "85aa06adbe977d7c9ca521de5dab61ea86843d6bf424f1d28cfed11e2946015f",
+      "tag": "v0.0.409",
+      "timestamp": "2026-09-09T23:44:01.140109908+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "c0d41149dcf8231c6d161066b0410671b0fa79106172947840b12e0d802c416f",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T23:47:41.079378949+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "676532b98f9a01da5d43f98299af297b573d242d",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "e5d80ab6e1a1188fdf8cd3e7bc2f74da5d4767da15b0644acf07dad08a3b461b",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "c0d41149dcf8231c6d161066b0410671b0fa79106172947840b12e0d802c416f",
+      "tag": "v0.0.408",
+      "timestamp": "2026-09-09T23:47:41.079378949+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "e14107901d202215ab44eb027eb4792047d5ec83",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "2878b9c4c6db512a7538dc4e8981fd5acae72cdaace7794509f48161bcce08e3",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "69eab36c912fdcdd48cd25ce19d1c6081603b6d296def8d983fa0e436af945b5",
+      "tag": "v0.0.409",
+      "timestamp": "2026-09-09T23:50:56.168509009+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "e14107901d202215ab44eb027eb4792047d5ec83",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "2878b9c4c6db512a7538dc4e8981fd5acae72cdaace7794509f48161bcce08e3",
+      "services": [
+        "proxy-glm53"
+      ],
+      "sha256": "69eab36c912fdcdd48cd25ce19d1c6081603b6d296def8d983fa0e436af945b5",
+      "tag": "v0.0.409",
+      "timestamp": "2026-09-09T23:50:56.168509009+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "8f97e8f22db8a32b915b7b59702fc09635a8ac24",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "dac8e7bd277ba8f6dbf51201a859374f956e92d2546637e17c73608911e65bf4",
+      "services": [
+        "nginx",
+        "proxy-glm53"
+      ],
+      "sha256": "221d2e59d80e1deb0eb8f0bae4541a21fa69140e262dcccd3992ef3b09857f13",
+      "tag": "v0.0.422",
+      "timestamp": "2026-09-15T20:02:01.765276686+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "8f97e8f22db8a32b915b7b59702fc09635a8ac24",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "dac8e7bd277ba8f6dbf51201a859374f956e92d2546637e17c73608911e65bf4",
+      "services": [
+        "nginx",
+        "proxy-glm53"
+      ],
+      "sha256": "221d2e59d80e1deb0eb8f0bae4541a21fa69140e262dcccd3992ef3b09857f13",
+      "tag": "v0.0.422",
+      "timestamp": "2026-09-15T20:02:01.765276686+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "d5e7c99e9e3efb8114cb5e61944c179c9202762b099e0162df4fc1e0a1d0f465",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:00:39.878329015+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "d5e7c99e9e3efb8114cb5e61944c179c9202762b099e0162df4fc1e0a1d0f465",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:00:39.878329015+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "da1e2a503db5157c4847648f806496cd192ec83b7ad7cf32ea7d0fdfe00d9f43",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:06:20.950370221+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "da1e2a503db5157c4847648f806496cd192ec83b7ad7cf32ea7d0fdfe00d9f43",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:06:20.950370221+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "529542f87bb1491d53496e27d1d7150335c8190f6070096dab3ed97eb2d56430",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:23:01.302471499+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "529542f87bb1491d53496e27d1d7150335c8190f6070096dab3ed97eb2d56430",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:23:01.302471499+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "d76f964c9af8601e112d5733de9b93177d530c49438925961ad7662c8afa69e8",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:25:04.820264887+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "d76f964c9af8601e112d5733de9b93177d530c49438925961ad7662c8afa69e8",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:25:04.820264887+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "a7e8a7263af51f4ff7c896b48f6556d5c8e38f1b7b6d290ac852f289f19c71f8",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:30:47.137982365+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "a7e8a7263af51f4ff7c896b48f6556d5c8e38f1b7b6d290ac852f289f19c71f8",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:30:47.137982365+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "8c00cb4dda334987b665fd5c081dadb522662746668b92aebb1aa0ea068fc266",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:42:28.905302129+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "8c00cb4dda334987b665fd5c081dadb522662746668b92aebb1aa0ea068fc266",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-16T01:42:28.905302129+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "51cf2800743eca782dcc2fe4aa0f640aa4876fa476c7f845c4d6e50e17c4037c",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T16:35:40.693752799+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "367d6c1324eb363e14fc76a7370b5af4019fb58272d8bdfb4de2cd14dc9283ad",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "51cf2800743eca782dcc2fe4aa0f640aa4876fa476c7f845c4d6e50e17c4037c",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T16:35:40.693752799+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "bad208a6391e04d2e4dd208ffaf534839bb8c922d4765c4937a8a6f7ae079ac5",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T16:40:31.841218646+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "glm53-soak-relay"
+      ],
+      "sha256": "bad208a6391e04d2e4dd208ffaf534839bb8c922d4765c4937a8a6f7ae079ac5",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T16:40:31.841218646+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "c63178515e7e4aafd67312da4f65fe4215e3df67d0b217582aec2db1ec01c220",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T21:12:28.404536187+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "065340e05635b885dfb238fe9f3601ad351d68a8",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "c63178515e7e4aafd67312da4f65fe4215e3df67d0b217582aec2db1ec01c220",
+      "tag": "v0.0.423",
+      "timestamp": "2026-09-17T21:12:28.404536187+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "0844864e1ba1b477cd0e57a1f98e01bbfef9f3dd535e3b8bbbacf2cac97a570f",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "66805e0dc079559e3c55256451440879493dc87690f1ab215393186696042625",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:15:02.456956455+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "0844864e1ba1b477cd0e57a1f98e01bbfef9f3dd535e3b8bbbacf2cac97a570f",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "66805e0dc079559e3c55256451440879493dc87690f1ab215393186696042625",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:15:02.456956455+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "b5bf901811d08355cf5b42f12b7647d19162e7e4befdb20d9d9324c38ae69f6e",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:28:21.565292826+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "b5bf901811d08355cf5b42f12b7647d19162e7e4befdb20d9d9324c38ae69f6e",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:28:21.565292826+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "0844864e1ba1b477cd0e57a1f98e01bbfef9f3dd535e3b8bbbacf2cac97a570f",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "2e377b5d5a3be112a53175eb66f4c131ee3dfb5bceded59f6f27598e92f724f1",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:31:13.682812688+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "0844864e1ba1b477cd0e57a1f98e01bbfef9f3dd535e3b8bbbacf2cac97a570f",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1"
+      ],
+      "sha256": "2e377b5d5a3be112a53175eb66f4c131ee3dfb5bceded59f6f27598e92f724f1",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:31:13.682812688+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "0844864e1ba1b477cd0e57a1f98e01bbfef9f3dd535e3b8bbbacf2cac97a570f",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "7dcab2797d0cb9c5436e6b630b06bbca76f111e7d471a5b7ae9ceb4074e464ae",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:41:29.017423035+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "7e8e1aba17ba2e358c29049925d59a4fe40f2ee5",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "0844864e1ba1b477cd0e57a1f98e01bbfef9f3dd535e3b8bbbacf2cac97a570f",
+      "services": [
+        "glm53-perception-check"
+      ],
+      "sha256": "7dcab2797d0cb9c5436e6b630b06bbca76f111e7d471a5b7ae9ceb4074e464ae",
+      "tag": "v0.0.427",
+      "timestamp": "2026-09-17T21:41:29.017423035+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "5ba5a5bb92b7b1bbbe72fe9b7a8fbaec729627a1",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "afe6a626b91b8c18d9b8addd22fc50aabfcc7824b488f635b72af96c5a324e5a",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "48ffaa08c27d6736b2a7746b816395632400534b764bca94d4b0d1d124897c5c",
+      "tag": "v0.0.428",
+      "timestamp": "2026-09-18T00:23:57.176489902+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "5ba5a5bb92b7b1bbbe72fe9b7a8fbaec729627a1",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "afe6a626b91b8c18d9b8addd22fc50aabfcc7824b488f635b72af96c5a324e5a",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "48ffaa08c27d6736b2a7746b816395632400534b764bca94d4b0d1d124897c5c",
+      "tag": "v0.0.428",
+      "timestamp": "2026-09-18T00:23:57.176489902+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "model-downloader"
+      ],
+      "sha256": "313a3022f8b123a5f45f81e2a58c2bd16663654e3b379d1f33d2e214f083ca21",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:19:53.114026792+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "model-downloader"
+      ],
+      "sha256": "313a3022f8b123a5f45f81e2a58c2bd16663654e3b379d1f33d2e214f083ca21",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:19:53.114026792+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "hf-cleanup"
+      ],
+      "sha256": "4ffb407d37a5c27f9cc907adeceaef3e105437a757b9c39104f4d7f73a7e6a59",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:42:21.540288890+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "file_sha256": "b2d8b87cf185ff809f662ce276c2487da852e9903fe5fe0f0dbc3980af49f4ba",
+      "services": [
+        "hf-cleanup"
+      ],
+      "sha256": "4ffb407d37a5c27f9cc907adeceaef3e105437a757b9c39104f4d7f73a7e6a59",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T22:42:21.540288890+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "6ae0c7ed71a55b4c5b155d503e90f3c155c6c8e3b5bcc2db11f989014b3bee20",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T23:47:47.470461960+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "6ae0c7ed71a55b4c5b155d503e90f3c155c6c8e3b5bcc2db11f989014b3bee20",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T23:47:47.470461960+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "ea131309b39fd8a39fd0fb50c37464414e4fc4269ae15165b6ee072ca8364c00",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T23:53:02.450486862+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "0a51138ef3ec104706c40a53dab0c3bcea75d7b3",
+      "file": "prod/GLM-5.3-Flash-SGL-TP4.yaml",
+      "services": [
+        "model-sg-glm53-fp8-tp4-r1",
+        "model-sg-glm53-fp8-tp4-r2"
+      ],
+      "sha256": "ea131309b39fd8a39fd0fb50c37464414e4fc4269ae15165b6ee072ca8364c00",
+      "tag": "v0.0.443",
+      "timestamp": "2026-09-23T23:53:02.450486862+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "cd94860052fede8d56d8f017c55b241362c75d29",
+      "file": "prod/sage-pull.yaml",
+      "file_sha256": "37a6a029e6f09587d816d5c6f56ba094a4f0393fe40b782ec3215d7501aebb0b",
+      "sha256": "f80d0f30ec787b237f1db6e2956ddec75c02e53a4fbba5eb4ac7cde3da1fa828",
+      "tag": "v0.0.500",
+      "timestamp": "2026-10-21T16:51:52.301169051+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "cd94860052fede8d56d8f017c55b241362c75d29",
+      "file": "prod/sage-pull.yaml",
+      "file_sha256": "37a6a029e6f09587d816d5c6f56ba094a4f0393fe40b782ec3215d7501aebb0b",
+      "sha256": "f80d0f30ec787b237f1db6e2956ddec75c02e53a4fbba5eb4ac7cde3da1fa828",
+      "tag": "v0.0.500",
+      "timestamp": "2026-10-21T16:51:52.301169051+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "cd94860052fede8d56d8f017c55b241362c75d29",
+      "file": "prod/sage-pull.yaml",
+      "sha256": "f0d4d0d77e5c26c62a40fc4326a1cfb037d27ed3f483bbd84b6b38ecd9fd2107",
+      "tag": "v0.0.500",
+      "timestamp": "2026-10-21T16:57:56.040576436+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "cd94860052fede8d56d8f017c55b241362c75d29",
+      "file": "prod/sage-pull.yaml",
+      "sha256": "f0d4d0d77e5c26c62a40fc4326a1cfb037d27ed3f483bbd84b6b38ecd9fd2107",
+      "tag": "v0.0.500",
+      "timestamp": "2026-10-21T16:57:56.040576436+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "92a67a08fca81e86cb27a5626bfc26df6e8b52c5",
+      "file": "prod/sage.yaml",
+      "file_sha256": "1a8a0aa79ff15ca319b0f6ea9d133adab4d06d531429d94cdc2f259cf873e9d4",
+      "sha256": "ec6865eb11676aff2264c1e2ed4e866f186ee74e18c868375233719e8acefec9",
+      "tag": "v0.0.503",
+      "timestamp": "2026-10-22T21:38:26.279114681+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "92a67a08fca81e86cb27a5626bfc26df6e8b52c5",
+      "file": "prod/sage.yaml",
+      "file_sha256": "1a8a0aa79ff15ca319b0f6ea9d133adab4d06d531429d94cdc2f259cf873e9d4",
+      "sha256": "ec6865eb11676aff2264c1e2ed4e866f186ee74e18c868375233719e8acefec9",
+      "tag": "v0.0.503",
+      "timestamp": "2026-10-22T21:38:26.279114681+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "92a67a08fca81e86cb27a5626bfc26df6e8b52c5",
+      "file": "prod/sage.yaml",
+      "services": [
+        "sage",
+        "sage-dstack"
+      ],
+      "sha256": "54a51a9c500be2a0dbb3f7936a70af22878696d0fb4dd96968f5d7e1e5e4e94e",
+      "tag": "v0.0.503",
+      "timestamp": "2026-10-24T04:13:08.074484008+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "92a67a08fca81e86cb27a5626bfc26df6e8b52c5",
+      "file": "prod/sage.yaml",
+      "services": [
+        "sage",
+        "sage-dstack"
+      ],
+      "sha256": "54a51a9c500be2a0dbb3f7936a70af22878696d0fb4dd96968f5d7e1e5e4e94e",
+      "tag": "v0.0.503",
+      "timestamp": "2026-10-24T04:13:08.074484008+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "cd94860052fede8d56d8f017c55b241362c75d29",
+      "file": "prod/sage-pull.yaml",
+      "sha256": "c893bc8aa8f2db28b2dd59fc5af2438491d6a6e60660831c0963a579b2556b94",
+      "tag": "v0.0.500",
+      "timestamp": "2026-10-24T04:13:22.012857952+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "cd94860052fede8d56d8f017c55b241362c75d29",
+      "file": "prod/sage-pull.yaml",
+      "sha256": "c893bc8aa8f2db28b2dd59fc5af2438491d6a6e60660831c0963a579b2556b94",
+      "tag": "v0.0.500",
+      "timestamp": "2026-10-24T04:13:22.012857952+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "eb5fd4bc1d11c719def5e02ee93c9f82d69a971a",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "file_sha256": "3154095bde664e261c18e034f2c74419014559583e260799f1528fd9bb016371",
+      "services": [
+        "rotate-token"
+      ],
+      "sha256": "7f4c33046851eed61cbce4d7ed22624c2befb86ee27cc2cefc8946f7a8efbdb9",
+      "tag": "v0.0.556",
+      "timestamp": "2026-11-12T05:39:26.866943862+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "eb5fd4bc1d11c719def5e02ee93c9f82d69a971a",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "file_sha256": "3154095bde664e261c18e034f2c74419014559583e260799f1528fd9bb016371",
+      "services": [
+        "rotate-token"
+      ],
+      "sha256": "7f4c33046851eed61cbce4d7ed22624c2befb86ee27cc2cefc8946f7a8efbdb9",
+      "tag": "v0.0.556",
+      "timestamp": "2026-11-12T05:39:26.866943862+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "eb5fd4bc1d11c719def5e02ee93c9f82d69a971a",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "sha256": "635b994389f82a14ad47f1a803ac778b52fc5263ed3953808923cf64ea41f6fa",
+      "tag": "v0.0.556",
+      "timestamp": "2026-11-12T05:39:42.055887219+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "eb5fd4bc1d11c719def5e02ee93c9f82d69a971a",
+      "file": "prod/rotate-compose-manager-token.yaml",
+      "sha256": "635b994389f82a14ad47f1a803ac778b52fc5263ed3953808923cf64ea41f6fa",
+      "tag": "v0.0.556",
+      "timestamp": "2026-11-12T05:39:42.055887219+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "20b565ca7c40aec8e876c7b034a319144216f3e4",
+      "file": "prod/DeepSeek-V4.1-Flash-1017-vLLM-DEP8-Abliterated.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "fcd49f3594e0efbc853bdc0945bd4e3141d65dbcbf26b306d8bb5c026e12e983",
+      "tag": "20b565ca7c40aec8e876c7b034a319144216f3e4",
+      "timestamp": "2026-11-17T07:59:06.685268549+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "file": "prod/DeepSeek-V4.1-Flash-1017-vLLM-DEP8-Abliterated.yaml",
+      "file_sha256": "d1694166ae0e5c443da61b98fb52c728d1a65d45446b88bbbae0430df6798718",
+      "services": [
+        "model-downloader",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7"
+      ],
+      "sha256": "009f74b892a70142e279aafd9247acf69da0ac7feabaa755ca438fd6b83050f1",
+      "tag": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "timestamp": "2026-11-17T08:03:16.176969838+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "file": "prod/DeepSeek-V4.1-Flash-1017-vLLM-DEP8-Abliterated.yaml",
+      "file_sha256": "d1694166ae0e5c443da61b98fb52c728d1a65d45446b88bbbae0430df6798718",
+      "services": [
+        "dcgm-dsv41",
+        "model-downloader",
+        "model-proxy-registrar",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "nginx",
+        "otelcol-contrib",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated"
+      ],
+      "sha256": "40b820677f683001802c07875abc2deba41edc73f11f4f60bf008ed72de27c07",
+      "tag": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "timestamp": "2026-11-17T08:09:46.961790795+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": false,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "303c50e964560b8008113ce6ff0fd3d1bf4bf508d5da39c3025ffd79712b42dd",
+      "timestamp": "2026-11-18T00:38:06.869981292+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "303c50e964560b8008113ce6ff0fd3d1bf4bf508d5da39c3025ffd79712b42dd",
+      "timestamp": "2026-11-18T00:38:06.869981292+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": false,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "3d6649b15fad71fc6dfaa4b7162452f0608ff403db8ab7753b1538900a267eff",
+      "timestamp": "2026-11-18T00:39:05.432765503+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:a0c073085684e12e19f31bb279fc8da663a374199bfecc47b04167ae79eaa766",
+      "sha256": "3d6649b15fad71fc6dfaa4b7162452f0608ff403db8ab7753b1538900a267eff",
+      "timestamp": "2026-11-18T00:39:05.432765503+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": false,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:854e2c6bb3d8f8c7ab216d7de5dffcc53bbb62b782336315160145f44c3235fe",
+      "sha256": "ecebec892abafdab376efd15446a93c8e76cbc9cd2939e63fca56ba1a5f7987a",
+      "timestamp": "2026-11-18T01:09:51.913179848+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:854e2c6bb3d8f8c7ab216d7de5dffcc53bbb62b782336315160145f44c3235fe",
+      "sha256": "ecebec892abafdab376efd15446a93c8e76cbc9cd2939e63fca56ba1a5f7987a",
+      "timestamp": "2026-11-18T01:09:51.913179848+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "11928bb62184067aaec222cce18dae034696e29d285d66882258f2efd876e8aa",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "b44dbf23545601585db4537363be23f6488a249d2a078b4a274a11bb1213c9eb",
+      "tag": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "timestamp": "2026-11-18T06:45:30.905591341+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "11928bb62184067aaec222cce18dae034696e29d285d66882258f2efd876e8aa",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "b44dbf23545601585db4537363be23f6488a249d2a078b4a274a11bb1213c9eb",
+      "tag": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "timestamp": "2026-11-18T06:45:30.905591341+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "file": "prod/DeepSeek-V4.1-Flash-1017-vLLM-DEP8-Abliterated.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "151ea2306ad65fc7de578d3c464afc5652102d6dd858eb924e3ba0b0169037a8",
+      "tag": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "timestamp": "2026-11-18T06:48:54.376007239+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "file": "prod/DeepSeek-V4.1-Flash-1017-vLLM-DEP8-Abliterated.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "151ea2306ad65fc7de578d3c464afc5652102d6dd858eb924e3ba0b0169037a8",
+      "tag": "ff994fd6cf4847571bb3b58956d020112a071cb1",
+      "timestamp": "2026-11-18T06:48:54.376007239+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "11928bb62184067aaec222cce18dae034696e29d285d66882258f2efd876e8aa",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "da2a87f6e8ccd910633e0ba73d63ce19c1ebdc16bc3955c26faae69a6331267e",
+      "tag": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "timestamp": "2026-11-18T07:01:54.012630162+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "11928bb62184067aaec222cce18dae034696e29d285d66882258f2efd876e8aa",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "da2a87f6e8ccd910633e0ba73d63ce19c1ebdc16bc3955c26faae69a6331267e",
+      "tag": "ea0a1a0ef14a80d008daedcb04cc76c0a6f2dcca",
+      "timestamp": "2026-11-18T07:01:54.012630162+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated"
+      ],
+      "sha256": "badc1769ff859fca3cde6d6867e075b8b945cc2f1b92d207082411307244da10",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T10:40:46.797076553+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated"
+      ],
+      "sha256": "badc1769ff859fca3cde6d6867e075b8b945cc2f1b92d207082411307244da10",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T10:40:46.797076553+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated"
+      ],
+      "sha256": "3dad7dd1c86d70feb8139b1a5a0e00aa52e355fa33eeb96fdb52f1e3d7e43e64",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T10:56:37.271938402+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated"
+      ],
+      "sha256": "3dad7dd1c86d70feb8139b1a5a0e00aa52e355fa33eeb96fdb52f1e3d7e43e64",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T10:56:37.271938402+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": false,
+      "container": "nginx",
+      "sha256": "f867cf118d53b9b94dc9975dbcd5278e16e1a1fc44deb964e029b720a8df48e9",
+      "timestamp": "2026-11-18T11:13:05.072556416+00:00"
+    },
+    {
+      "action": "docker_restart",
+      "bound": true,
+      "container": "nginx",
+      "sha256": "f867cf118d53b9b94dc9975dbcd5278e16e1a1fc44deb964e029b720a8df48e9",
+      "timestamp": "2026-11-18T11:13:05.072556416+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "6283ab0b12d96a6abd88d6048678941f3b53dd7ba2fb0e2cf8241dc9d67c9ca7",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T17:51:51.414153418+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "6283ab0b12d96a6abd88d6048678941f3b53dd7ba2fb0e2cf8241dc9d67c9ca7",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T17:51:51.414153418+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "d22649c745d7fad5f573e3ef1aa2a064336b448adef60a2e0bcd0dd4d872c60a",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T18:05:05.787102338+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "d22649c745d7fad5f573e3ef1aa2a064336b448adef60a2e0bcd0dd4d872c60a",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T18:05:05.787102338+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "7a011408b80e4e401fd9a29545342156ba5be503d6c1c9219b9ba60a0cc482a4",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T18:22:01.172089240+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "7a011408b80e4e401fd9a29545342156ba5be503d6c1c9219b9ba60a0cc482a4",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T18:22:01.172089240+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "03ac9246f890e3d9d1f589b95051ffc9cf47a7f8c7a0f68ad3fd293f615424ae",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T18:33:20.389598648+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41"
+      ],
+      "sha256": "03ac9246f890e3d9d1f589b95051ffc9cf47a7f8c7a0f68ad3fd293f615424ae",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-18T18:33:20.389598648+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "d4e6ad21619816e4dbf1f85758a5e303f64fb029cbe31b2b616b9d9b33b1f1f0",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-19T05:01:53.497489837+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "d4e6ad21619816e4dbf1f85758a5e303f64fb029cbe31b2b616b9d9b33b1f1f0",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-19T05:01:53.497489837+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": false,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:ae4332fdb0bfccf6410bc153a58d0b72a596a989cbb98fd5b6461fe32e079814",
+      "sha256": "b899066960eae73cbf6640f8b99ce5781a2596cf0d1fec9ffb0cf6f9a833e4b7",
+      "timestamp": "2026-11-19T05:36:56.810775704+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:ae4332fdb0bfccf6410bc153a58d0b72a596a989cbb98fd5b6461fe32e079814",
+      "sha256": "b899066960eae73cbf6640f8b99ce5781a2596cf0d1fec9ffb0cf6f9a833e4b7",
+      "timestamp": "2026-11-19T05:36:56.810775704+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": false,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:ae4332fdb0bfccf6410bc153a58d0b72a596a989cbb98fd5b6461fe32e079814",
+      "sha256": "56bfbd16e175f4c6cb17b3985a130041f6c43fa49514127c77355a172b8ae232",
+      "timestamp": "2026-11-19T05:38:18.410854964+00:00"
+    },
+    {
+      "action": "compose_manager_started",
+      "bound": true,
+      "container": "compose-manager",
+      "image": "nearaidev/compose-manager@sha256:ae4332fdb0bfccf6410bc153a58d0b72a596a989cbb98fd5b6461fe32e079814",
+      "sha256": "56bfbd16e175f4c6cb17b3985a130041f6c43fa49514127c77355a172b8ae232",
+      "timestamp": "2026-11-19T05:38:18.410854964+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "74bc8f9bab9e5e2b9195e6e99055bbf3a085affb957b46cdf4289a41e19b5fd9",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-19T07:18:15.366880339+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "d4cbe817f102d7c06eb81da306030197a6ac731b7a05e0e952bc0f8725d121f9",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "74bc8f9bab9e5e2b9195e6e99055bbf3a085affb957b46cdf4289a41e19b5fd9",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-19T07:18:15.366880339+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "f392013b5e0bf8a2574875df042e6745fe40cbd874793925772a687e61bf72a9",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41",
+        "otelcol-contrib"
+      ],
+      "sha256": "9a5a7273f6c9097376b5fbe65e316841cea39c4afa003912b4ddd230898b4536",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T07:36:35.064746505+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "f392013b5e0bf8a2574875df042e6745fe40cbd874793925772a687e61bf72a9",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41",
+        "otelcol-contrib"
+      ],
+      "sha256": "9a5a7273f6c9097376b5fbe65e316841cea39c4afa003912b4ddd230898b4536",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T07:36:35.064746505+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "e653d314b1c58d4cbde0758eff4f16bee3400d4fd53713d0ad969fbd9c53e565",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-19T07:39:30.836410934+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "e653d314b1c58d4cbde0758eff4f16bee3400d4fd53713d0ad969fbd9c53e565",
+      "tag": "a0e92f16bd1c79d0accc5a47d346d509da0573d2",
+      "timestamp": "2026-11-19T07:39:30.836410934+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "f392013b5e0bf8a2574875df042e6745fe40cbd874793925772a687e61bf72a9",
+      "services": [
+        "dcgm-dsv41",
+        "model-downloader",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "nginx",
+        "otelcol-contrib",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated"
+      ],
+      "sha256": "0d9f1d97dc07bd67ac9ec56dcec58c257ba1e7baacf6b8beecb2744591d3bc8b",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T07:48:19.819469435+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "f392013b5e0bf8a2574875df042e6745fe40cbd874793925772a687e61bf72a9",
+      "services": [
+        "dcgm-dsv41",
+        "model-downloader",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "nginx",
+        "otelcol-contrib",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated"
+      ],
+      "sha256": "0d9f1d97dc07bd67ac9ec56dcec58c257ba1e7baacf6b8beecb2744591d3bc8b",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T07:48:19.819469435+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "f392013b5e0bf8a2574875df042e6745fe40cbd874793925772a687e61bf72a9",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "290f3aa052a441b1b5e7a4719a0f649b1c8930e3b23d9bd93eede4aefe1ed87e",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T08:06:24.146358483+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "f392013b5e0bf8a2574875df042e6745fe40cbd874793925772a687e61bf72a9",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "290f3aa052a441b1b5e7a4719a0f649b1c8930e3b23d9bd93eede4aefe1ed87e",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T08:06:24.146358483+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "services": [
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "nginx-qwen38",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3vl-30b-a3b",
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1"
+      ],
+      "sha256": "032a49657c953472142490ab9256c2b0e8565997172b3ae9c0cf8d9e6515363e",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T22:09:39.759505162+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "services": [
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "nginx-qwen38",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3vl-30b-a3b",
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1"
+      ],
+      "sha256": "032a49657c953472142490ab9256c2b0e8565997172b3ae9c0cf8d9e6515363e",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T22:09:39.759505162+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "services": [
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib",
+        "model-downloader",
+        "model-downloader-qwen36",
+        "model-downloader-qwen38",
+        "qwen38-lora-adapter-downloader",
+        "model-downloader-flux2",
+        "model-downloader-qwen3vl",
+        "model-downloader-qwen3-embedding",
+        "model-downloader-qwen3-reranker",
+        "model-downloader-whisper",
+        "model-downloader-privacy-filter",
+        "engine-egress-probe"
+      ],
+      "sha256": "15f1448b3b19e69c998524ff7ccc6983d23ff6ae10994dff3da2dd3f4b1ee596",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T22:19:38.782883149+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "services": [
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib",
+        "model-downloader",
+        "model-downloader-qwen36",
+        "model-downloader-qwen38",
+        "qwen38-lora-adapter-downloader",
+        "model-downloader-flux2",
+        "model-downloader-qwen3vl",
+        "model-downloader-qwen3-embedding",
+        "model-downloader-qwen3-reranker",
+        "model-downloader-whisper",
+        "model-downloader-privacy-filter",
+        "engine-egress-probe"
+      ],
+      "sha256": "15f1448b3b19e69c998524ff7ccc6983d23ff6ae10994dff3da2dd3f4b1ee596",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T22:19:38.782883149+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "bd606bb33ae488d2b0c06ec871bee3c607a59d8b811167f9256812c26702ea87",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T22:26:16.252307797+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "bd606bb33ae488d2b0c06ec871bee3c607a59d8b811167f9256812c26702ea87",
+      "tag": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "timestamp": "2026-11-19T22:26:16.252307797+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "sha256": "538044ec35fe4b7c86dd1240d8de1ee1c43dd84ade96b0b6f50c6048bebaee0c",
+      "tag": "v0.0.614",
+      "timestamp": "2026-11-19T23:15:12.705038237+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "sha256": "538044ec35fe4b7c86dd1240d8de1ee1c43dd84ade96b0b6f50c6048bebaee0c",
+      "tag": "v0.0.614",
+      "timestamp": "2026-11-19T23:15:12.705038237+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "services": [
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "nginx-qwen38",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3vl-30b-a3b",
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1",
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib",
+        "model-downloader",
+        "model-downloader-qwen36",
+        "model-downloader-qwen38",
+        "qwen38-lora-adapter-downloader",
+        "model-downloader-flux2",
+        "model-downloader-qwen3vl",
+        "model-downloader-qwen3-embedding",
+        "model-downloader-qwen3-reranker",
+        "model-downloader-whisper",
+        "model-downloader-privacy-filter",
+        "engine-egress-probe",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "52fe5591be09edf9803b9ee7a2d1715ac0bdfac57663c6f8b41871b88dbe6e46",
+      "tag": "v0.0.614",
+      "timestamp": "2026-11-19T23:42:51.882118051+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "fb9cf6b578a45f4a0993e1b13778d31ef9d838a9",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "b6eeef7569051d07578968f852d57edeec4ddecbb72e1930e03def3add6dec5e",
+      "services": [
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-qwen36-35b-a3b",
+        "model-sg-qwen36-35b-a3b-fp8-tp1-r1",
+        "proxy-qwen38-27b",
+        "model-sg-qwen38-27b-fp8-tp1-coloc",
+        "nginx-qwen38",
+        "proxy-qwen38-27b-abliterated",
+        "proxy-glm53",
+        "model-sg-glm53-w4afp8-tp2-r1",
+        "model-sg-glm53-w4afp8-tp2-r2",
+        "glm53-ghost-aggregator",
+        "proxy-flux2-klein-4b",
+        "model-sg-flux2-klein-4b-tp1",
+        "proxy-qwen3vl-30b-a3b",
+        "model-vllm-qwen3vl-30b-a3b-fp8-tp1",
+        "proxy-qwen3-embedding-0.6b",
+        "model-vllm-qwen3-embedding-0.6b-tp1",
+        "proxy-qwen3-reranker-0.6b",
+        "model-vllm-qwen3-reranker-0.6b-tp1",
+        "proxy-whisper-large-v3",
+        "model-vllm-whisper-large-v3-tp1",
+        "proxy-privacy-filter",
+        "model-privacy-filter",
+        "dcgm-privacy-filter",
+        "dcgm-qwen36-35b-a3b",
+        "dcgm-glm53",
+        "dcgm-shared-gpu3",
+        "otelcol-contrib",
+        "model-downloader",
+        "model-downloader-qwen36",
+        "model-downloader-qwen38",
+        "qwen38-lora-adapter-downloader",
+        "model-downloader-flux2",
+        "model-downloader-qwen3vl",
+        "model-downloader-qwen3-embedding",
+        "model-downloader-qwen3-reranker",
+        "model-downloader-whisper",
+        "model-downloader-privacy-filter",
+        "engine-egress-probe",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "52fe5591be09edf9803b9ee7a2d1715ac0bdfac57663c6f8b41871b88dbe6e46",
+      "tag": "v0.0.614",
+      "timestamp": "2026-11-19T23:42:51.882118051+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "2a23eb9c0503d730cb87bf65628a08e0ee8f74b0",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "f4916294365d6ee89143de1a4838625b96ccc1b682812a19a8642ff857058cf4",
+      "services": [
+        "model-privacy-filter"
+      ],
+      "sha256": "13629632396e7cf871cbcedca16b52ffc1c140a3df660c057619b8c5ba0951ea",
+      "tag": "v0.0.615",
+      "timestamp": "2026-11-20T00:30:01.789969155+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "2a23eb9c0503d730cb87bf65628a08e0ee8f74b0",
+      "file": "prod/pack-small-models.yaml",
+      "file_sha256": "f4916294365d6ee89143de1a4838625b96ccc1b682812a19a8642ff857058cf4",
+      "services": [
+        "model-privacy-filter"
+      ],
+      "sha256": "13629632396e7cf871cbcedca16b52ffc1c140a3df660c057619b8c5ba0951ea",
+      "tag": "v0.0.615",
+      "timestamp": "2026-11-20T00:30:01.789969155+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "cf6e5f6eae1ee96d6efebe876740c6d33f1c75da95f0cf9be071d6b615dba5a1",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41",
+        "otelcol-contrib"
+      ],
+      "sha256": "4676c72ec765ced7b0826a227f6b8138f831ca8a8f2bc17e5710569474085cad",
+      "tag": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "timestamp": "2026-11-20T02:12:15.820292739+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "cf6e5f6eae1ee96d6efebe876740c6d33f1c75da95f0cf9be071d6b615dba5a1",
+      "services": [
+        "model-downloader",
+        "nginx",
+        "model-proxy-registrar",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41",
+        "otelcol-contrib"
+      ],
+      "sha256": "4676c72ec765ced7b0826a227f6b8138f831ca8a8f2bc17e5710569474085cad",
+      "tag": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "timestamp": "2026-11-20T02:12:15.820292739+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "2a23eb9c0503d730cb87bf65628a08e0ee8f74b0",
+      "file": "prod/pack-small-models.yaml",
+      "services": [
+        "model-proxy-registrar",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "a6cb68188faa617fdb24516122bf492c484d9d2546e1d9731cc619ef2ab50dd2",
+      "tag": "v0.0.615",
+      "timestamp": "2026-11-20T02:13:42.803966369+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "2a23eb9c0503d730cb87bf65628a08e0ee8f74b0",
+      "file": "prod/pack-small-models.yaml",
+      "services": [
+        "model-proxy-registrar",
+        "qwen38-registrar",
+        "qwen38-abliterated-registrar"
+      ],
+      "sha256": "a6cb68188faa617fdb24516122bf492c484d9d2546e1d9731cc619ef2ab50dd2",
+      "tag": "v0.0.615",
+      "timestamp": "2026-11-20T02:13:42.803966369+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "cf6e5f6eae1ee96d6efebe876740c6d33f1c75da95f0cf9be071d6b615dba5a1",
+      "sha256": "693e7b5c0d6a758f1d7a11eef5503357f1fbe95aca75721ada5ede9f5f284fc8",
+      "tag": "v0.0.619",
+      "timestamp": "2026-11-20T02:24:42.533816177+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "cf6e5f6eae1ee96d6efebe876740c6d33f1c75da95f0cf9be071d6b615dba5a1",
+      "sha256": "693e7b5c0d6a758f1d7a11eef5503357f1fbe95aca75721ada5ede9f5f284fc8",
+      "tag": "v0.0.619",
+      "timestamp": "2026-11-20T02:24:42.533816177+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": false,
+      "commit": "cdc7ce7d1ec28e93d28aef60b305eb9331261631",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "ddd3773b7fac6b85c9697b7b54085c6e8e23340d73d41fefa40e94daa9976fce",
+      "services": [
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41",
+        "nginx",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-proxy-registrar",
+        "model-downloader",
+        "otelcol-contrib"
+      ],
+      "sha256": "40b4f685b6cc6b0ebd602a1109b803daa58d98260e1a37efb41f1bb1f3c2fc5e",
+      "tag": "cdc7ce7d1ec28e93d28aef60b305eb9331261631",
+      "timestamp": "2026-11-20T07:52:06.742301900+00:00"
+    },
+    {
+      "action": "compose_stage",
+      "bound": true,
+      "commit": "cdc7ce7d1ec28e93d28aef60b305eb9331261631",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "ddd3773b7fac6b85c9697b7b54085c6e8e23340d73d41fefa40e94daa9976fce",
+      "services": [
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3",
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7",
+        "dcgm-dsv41",
+        "nginx",
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "model-proxy-registrar",
+        "model-downloader",
+        "otelcol-contrib"
+      ],
+      "sha256": "40b4f685b6cc6b0ebd602a1109b803daa58d98260e1a37efb41f1bb1f3c2fc5e",
+      "tag": "cdc7ce7d1ec28e93d28aef60b305eb9331261631",
+      "timestamp": "2026-11-20T07:52:06.742301900+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "ec5d201ff591435b0639f760d9e311d765b90d190443fe493769c8de5cc6f255",
+      "tag": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "timestamp": "2026-11-20T07:54:54.211225074+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "ec5d201ff591435b0639f760d9e311d765b90d190443fe493769c8de5cc6f255",
+      "tag": "6d9f27b532e6c40673694fdac9fac3c7925d51be",
+      "timestamp": "2026-11-20T07:54:54.211225074+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "cdc7ce7d1ec28e93d28aef60b305eb9331261631",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "ddd3773b7fac6b85c9697b7b54085c6e8e23340d73d41fefa40e94daa9976fce",
+      "sha256": "21dd95f0066e8419f24085efc8e1ff0b02676ee955c175f490c70e025f753a94",
+      "tag": "v0.0.620",
+      "timestamp": "2026-11-20T08:04:34.424097430+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "cdc7ce7d1ec28e93d28aef60b305eb9331261631",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "ddd3773b7fac6b85c9697b7b54085c6e8e23340d73d41fefa40e94daa9976fce",
+      "sha256": "21dd95f0066e8419f24085efc8e1ff0b02676ee955c175f490c70e025f753a94",
+      "tag": "v0.0.620",
+      "timestamp": "2026-11-20T08:04:34.424097430+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "sidecar-dsv41-netns-a",
+        "sidecar-dsv41-netns-b",
+        "engine-egress-probe"
+      ],
+      "sha256": "4c04ba63d690963b861b1493ff0fb1e6969d3a62c73789aea6e25acdca19c070",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:31:32.078805728+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "sidecar-dsv41-netns-a",
+        "sidecar-dsv41-netns-b",
+        "engine-egress-probe"
+      ],
+      "sha256": "4c04ba63d690963b861b1493ff0fb1e6969d3a62c73789aea6e25acdca19c070",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:31:32.078805728+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "8220ad31e8824ad7df01e6df07725a21d49f4a5b0d46ad379a6a50b5fa8b658b",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:49:07.936226345+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "8220ad31e8824ad7df01e6df07725a21d49f4a5b0d46ad379a6a50b5fa8b658b",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:49:07.936226345+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3"
+      ],
+      "sha256": "b34a3938444713e1877480699abbad3d9243baedf9f38238dde812bea0917fc4",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:58:31.908072566+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3"
+      ],
+      "sha256": "b34a3938444713e1877480699abbad3d9243baedf9f38238dde812bea0917fc4",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:58:31.908072566+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "sidecar-dsv41-netns-a"
+      ],
+      "sha256": "a5efbfe9e5e347a5a4aa3df7c1bb0a5c4cc07f9d1c5b0f00db1b5adba3bb0f9a",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:59:49.853842241+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "sidecar-dsv41-netns-a"
+      ],
+      "sha256": "a5efbfe9e5e347a5a4aa3df7c1bb0a5c4cc07f9d1c5b0f00db1b5adba3bb0f9a",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:59:49.853842241+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3"
+      ],
+      "sha256": "711ceace5186b8a74d7fabb46b2437b3113b9e471fe1e4c080f16bc7aecdd6f0",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:59:50.607705285+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "model-vllm-dsv41-dp0",
+        "model-vllm-dsv41-dp1",
+        "model-vllm-dsv41-dp2",
+        "model-vllm-dsv41-dp3"
+      ],
+      "sha256": "711ceace5186b8a74d7fabb46b2437b3113b9e471fe1e4c080f16bc7aecdd6f0",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T00:59:50.607705285+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7"
+      ],
+      "sha256": "d5cc64a293239a22ce6de9abc2e1a656b21865ec1d45d336a9d30132b7122c31",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:16:26.640645230+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7"
+      ],
+      "sha256": "d5cc64a293239a22ce6de9abc2e1a656b21865ec1d45d336a9d30132b7122c31",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:16:26.640645230+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "sidecar-dsv41-netns-b"
+      ],
+      "sha256": "c6ccc1b6cc0834c28937461d7973c7be6ea7dd3d938f7ec716616ae405f3d30d",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:17:45.316086940+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "sidecar-dsv41-netns-b"
+      ],
+      "sha256": "c6ccc1b6cc0834c28937461d7973c7be6ea7dd3d938f7ec716616ae405f3d30d",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:17:45.316086940+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7"
+      ],
+      "sha256": "b8cbf5910335ca707b4869fe36cff11f970e2d428a4042edf2c277e7aff49c59",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:17:46.024987158+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "model-vllm-dsv41-dp4",
+        "model-vllm-dsv41-dp5",
+        "model-vllm-dsv41-dp6",
+        "model-vllm-dsv41-dp7"
+      ],
+      "sha256": "b8cbf5910335ca707b4869fe36cff11f970e2d428a4042edf2c277e7aff49c59",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:17:46.024987158+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "nginx"
+      ],
+      "sha256": "17cc7d70239330d42e53fdceef731ef17dca2fb330def9729d83dea57121613e",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:35:50.833355325+00:00"
+    },
+    {
+      "action": "compose_down",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "services": [
+        "nginx"
+      ],
+      "sha256": "17cc7d70239330d42e53fdceef731ef17dca2fb330def9729d83dea57121613e",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:35:50.833355325+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "otelcol-contrib"
+      ],
+      "sha256": "51200332c73b06eae504a40743aba1e8a2a6a96ae09ec6e842e999d5115447e0",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:35:51.271771820+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "proxy-dsv41",
+        "proxy-dsv41-abliterated",
+        "otelcol-contrib"
+      ],
+      "sha256": "51200332c73b06eae504a40743aba1e8a2a6a96ae09ec6e842e999d5115447e0",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:35:51.271771820+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "nginx"
+      ],
+      "sha256": "23e076bdc1592310650db24a3022055d709a17509cf3aeb3b6ce247d9ec9b947",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:36:08.697604715+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "nginx"
+      ],
+      "sha256": "23e076bdc1592310650db24a3022055d709a17509cf3aeb3b6ce247d9ec9b947",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:36:08.697604715+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": false,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "9cff2fef1713343570701e9b34efceeb0f819b85a928f4699bb9953d567916aa",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:52:54.847282415+00:00"
+    },
+    {
+      "action": "compose_up",
+      "bound": true,
+      "commit": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "file": "prod/deepseek-v4.1-flash-1017-vllm-dep4x2.yaml",
+      "file_sha256": "0faf0a037c662094be342a5c128fc531bc0145c869e27dc55bab7b1192d605e6",
+      "services": [
+        "model-proxy-registrar"
+      ],
+      "sha256": "9cff2fef1713343570701e9b34efceeb0f819b85a928f4699bb9953d567916aa",
+      "tag": "30fbba879f83dcd046f1b5e5f47c827e57dfdc1c",
+      "timestamp": "2026-11-21T01:52:54.847282415+00:00"
+    },
+    {
+      "action": "docker_clean",
+      "bound": true,
+      "sha256": "8ba5ddf596b021e650a0520665731ae375c6b4ae60d233ada937fb9efd717e1a",
+      "timestamp": "2026-11-24T18:22:17.910342295+00:00"
+    },
+    {
+      "action": "docker_clean",
+      "bound": true,
+      "sha256": "43791ba9eb496e24a71cbbbe56048c66675a863cb0af1aafec8cef4a53c1756b",
+      "timestamp": "2026-11-24T18:33:00.430932142+00:00"
+    }
+  ],
+  "first_seen": "2026-11-22T15:41:45.000000Z",
+  "instance_id": "7bb9af0ac5b0e22dde3903218f58e56f743164a1",
+  "label": "gpu04",
+  "last_seen": "2026-11-24T19:36:28.124043Z"
+}
