@@ -1,0 +1,278 @@
+{
+  "captured_at": "2026-11-24T23:01:05Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "event_log_replayed": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tcb_current": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_boot_config": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_debug_disabled": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_hardware_config": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "venice",
+      "details": {
+        "api_version": "aci/1",
+        "candidates_available": 1,
+        "candidates_evaluated": 1,
+        "dcap_appraisal": {
+          "advisory_ids": [],
+          "tcb_status": "UpToDate"
+        },
+        "downstream_tls_binding": {
+          "domain": "api.redpill.ai",
+          "spki_sha256": "08ef73dce9d18eeec450dc0e5dabe1a3da2b1d8f06be83e9f8329574fe507e59"
+        },
+        "gpu_appraisal": {
+          "gpu_attested": true,
+          "gpus": {
+            "GPU-0": {
+              "dbgstat": "disabled",
+              "hwmodel": "GH100",
+              "iss": "https://nras.attestation.nvidia.com",
+              "jwt_sha256": "3bd4114ffa706e8ea05f35ba685737afcbed27f38686f7d11bd1086502f52216",
+              "kid": "nv-eat-kid-prod-20261124204544822-96af32b3-042f-474b-9e8f-5fc3c9b63485",
+              "nonce_bound": true,
+              "ok": true,
+              "signature_verified": true,
+              "ueid": "482286086539876047524889155368434776998366458203",
+              "x-nvidia-gpu-driver-version": "595.91.07"
+            }
+          },
+          "platform": {
+            "iss": "https://nras.attestation.nvidia.com",
+            "jwt_sha256": "7dfb410094f118dd84c018a5854e1dd633b8970efe80c1b6fccfe341ba5f8a79",
+            "kid": "nv-eat-kid-prod-20261124204544822-96af32b3-042f-474b-9e8f-5fc3c9b63485",
+            "nonce_bound": true,
+            "ok": true,
+            "signature_verified": true,
+            "verdict": true
+          },
+          "verified_gpu_count": 1
+        },
+        "gpu_count_pinned": false,
+        "gpu_evidence_omitted": false,
+        "keyset_binding": {
+          "keyset_digest_recomputes": true,
+          "report_data_echo_matches_quote": true,
+          "signing_key_in_keyset": true
+        },
+        "measurements": {
+          "boot_registers": {
+            "boot_config": true,
+            "hardware_config": true,
+            "policy_revision": "2026-11-15.1",
+            "reasons": []
+          },
+          "detached_json_disagreements": {},
+          "log_app_id": "89c51ab856bee41efe78c40309a4deb277a02a0f",
+          "log_compose_hash": "f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1",
+          "log_os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
+          "mrconfigid": "01f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1000000000000000000000000000000",
+          "ok": true,
+          "registers": {
+            "mrtd": "7fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c1409173",
+            "rtmr0": "d6118f0eeb30e9d9178d2b9106dddd002d979b6fa79bdec415051afae2021384c29a32d2f6454fa369617598378ffb5e",
+            "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
+            "rtmr2": "764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d",
+            "rtmr3": "6e49a9f9ee815f32f547da6e3c11047409a85afb1a793cfc1bb9f97a5072feba1202c4a04fb8a3fca3ed97b204cac9e3"
+          },
+          "replay_matches_quote": true
+        },
+        "model_name": null,
+        "nonce_source": "client",
+        "phala_tcb_status": null,
+        "serving": "aggregator",
+        "source_repo": "https://github.com/Dstack-TEE/private-ai-gateway.git",
+        "tee_hardware": "intel-tdx",
+        "tee_provider": "phala",
+        "upstream_model": "phala/gemma-4-26b-a4b-uncensored",
+        "verification_reason": "gateway attestation does not cover the model host",
+        "vm_config": {
+          "cpu_count": 16,
+          "host_share_mode": "9p",
+          "hotplug_off": false,
+          "hugepages": false,
+          "image": "dstack-0.5.12",
+          "memory_size": 34359738368,
+          "num_gpus": 0,
+          "num_nvswitches": 0,
+          "os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
+          "ovmf_variant": "pre202505",
+          "pci_hole64_size": 0,
+          "qemu_version": "8.2.2",
+          "spec_version": 1
+        }
+      },
+      "error": null,
+      "latency_s": 4.43,
+      "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+      "provider": "venice",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": false,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": true,
+        "event_log_replayed": true,
+        "gateway_reference_audited": null,
+        "gpu_attested": true,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": true,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": null,
+        "sessions_publish_evidence_digests": null,
+        "tcb_current": true,
+        "tdx_verified": true,
+        "tee_boot_config": true,
+        "tee_debug_disabled": true,
+        "tee_hardware_config": true,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "0x4d308a959c1ba1989fcf6953293d5820bc74e40a",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "04c4201704005a835ae62f8bffea2100cdb059a5a5bd0e79e5306bd3fd1358b7ab854994006c40b075724b3681b5ddd3ac455a2e7ec5d8e57a28b90f97a2f99c1f",
+      "valid": false,
+      "verified_at": "2026-11-24T23:01:05Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "b0e533dfc5c7f64f038fd6b6d4a4bc222ef9fb7428a9f5dc4fb080a58c009ac5",
+    "raw_evidence_ref": null,
+    "raw_evidence_sha256": null,
+    "raw_evidence_status": "not_captured_by_adapter",
+    "stored_report_sha256": "b0e533dfc5c7f64f038fd6b6d4a4bc222ef9fb7428a9f5dc4fb080a58c009ac5"
+  },
+  "identities": [],
+  "identity_trust": "untrusted_report",
+  "instance_id": null,
+  "legacy": false,
+  "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
+  "observation_id": "20261124T230038.255903Z-7d40e326e2db/66573e9817f2d95025f0dec4",
+  "observer": "daily-probe",
+  "outcome": "rejected",
+  "policy_revision": "unknown",
+  "provider": "venice",
+  "reason": "adapter_rejected",
+  "reason_detail": "gateway attestation does not cover the model host",
+  "route_id": "venice/e2ee-qwen3-6-35b-a3b-uncensored-p",
+  "run_id": "20261124T230038.255903Z-7d40e326e2db",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "fbbacae251f699bc9a1a890984a310fb9a92ccb1c36db56182431c7bac964975"
+}
