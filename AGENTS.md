@@ -1,4 +1,4 @@
-# Work on Private Inference Beat
+# Work on Private Inference Observatory
 
 Read [README.md](README.md) for the project question and
 [docs/REPOSITORY-GUIDE.md](docs/REPOSITORY-GUIDE.md) for authoritative inputs,

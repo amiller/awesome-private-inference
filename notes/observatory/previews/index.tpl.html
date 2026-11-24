@@ -1,0 +1,261 @@
+<title>Observatory View Previews</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a review sheet — each preview is a labelled plate (A–E) with the view itself, then one line on where it would live */
+:root {
+  --bg: #f2f4f5; --panel: #ffffff; --fg: #121d26; --muted: #56636e; --faint: #e3e8ec; --rule: #d3dae0;
+  --accent: #0e6a73; --s1: #2a78d6; --s2: #eb6834;
+  --ok: #2f8a4e; --ok-old: #a9d8b6; --bad: #c8423b; --bad-old: #efb3ad; --warn: #d99a1e; --nc: #9aa6b0; --xa: #b48ad6; --lim: #5fb3c2;
+  --seq1: #d6e6f7; --seq2: #7fb0e6; --seq3: #2a68b8;
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #10171c; --panel: #172128; --fg: #e3e9ed; --muted: #97a5b0; --faint: #26323b; --rule: #2c3a44; --accent: #4fb8c1; --s1: #3987e5; --s2: #d95926;
+  --ok: #4cb46f; --ok-old: #2c5a3c; --bad: #e2675f; --bad-old: #6b3431; --warn: #e3a04a; --nc: #6c7a85; --xa: #9a74bf; --lim: #3f8f9c; --seq1: #22384f; --seq2: #3f78b8; --seq3: #8dbdf0; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #10171c; --panel: #172128; --fg: #e3e9ed; --muted: #97a5b0; --faint: #26323b; --rule: #2c3a44; --accent: #4fb8c1; --s1: #3987e5; --s2: #d95926;
+  --ok: #4cb46f; --ok-old: #2c5a3c; --bad: #e2675f; --bad-old: #6b3431; --warn: #e3a04a; --nc: #6c7a85; --xa: #9a74bf; --lim: #3f8f9c; --seq1: #22384f; --seq2: #3f78b8; --seq3: #8dbdf0; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); }
+.wrap { max-width: 64rem; margin: 0 auto; padding-block: 2.6rem 4rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font: 500 .76rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 700 2.1rem/1.1 var(--display); margin: .5rem 0 .6rem; }
+.lede { max-width: 46rem; margin: 0; }
+.plate { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1.2rem 1.3rem; margin-top: 1.6rem; }
+.plate-head { display: flex; gap: .8rem; align-items: baseline; flex-wrap: wrap; }
+.letter { font: 600 .8rem/1 var(--mono); color: var(--panel); background: var(--accent); border-radius: 3px; padding: .25rem .4rem; }
+h2 { font: 600 1.2rem/1.3 var(--display); margin: 0; }
+.from { font: 400 .78rem/1 var(--mono); color: var(--muted); }
+.plate p { max-width: 48rem; margin: .5rem 0 .9rem; font-size: .93rem; }
+.where { font-size: .84rem; color: var(--muted); border-top: 1px solid var(--rule); padding-top: .6rem; margin-top: .9rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; font-size: .78rem; color: var(--muted); margin-bottom: .6rem; }
+.legend i { display: inline-block; width: .75rem; height: .75rem; border-radius: 2px; vertical-align: -1px; margin-right: .3rem; }
+.scroll { overflow-x: auto; }
+.legend i.hatch { background: repeating-linear-gradient(135deg, var(--nc) 0 1.5px, transparent 1.5px 4px); outline: 1px solid var(--nc); outline-offset: -1px; }
+.d.rel { box-shadow: inset 0 0 0 1.5px var(--s2); border-radius: 50%; }
+.d.cap { cursor: pointer; }
+.d.sel { outline: 2px solid var(--fg); outline-offset: -1px; border-radius: 50%; }
+.panel { margin-top: 1rem; border: 1px solid var(--rule); border-radius: 6px; padding: .8rem 1rem; font-size: .88rem; background: var(--bg); }
+.panel b { font-family: var(--display); }
+.panel .m { font-family: var(--mono); font-size: .8rem; overflow-wrap: anywhere; color: var(--muted); }
+.links { display: flex; flex-wrap: wrap; gap: .4rem .9rem; margin-top: .5rem; }
+.links a { color: var(--accent); font-weight: 500; }
+.links a.raw { color: var(--muted); font-weight: 400; font-size: .8rem; margin-left: auto; }
+.reason { font-size: .84rem; margin-top: .25rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .35rem; }
+.chips code { font: 400 .7rem/1 var(--mono); background: var(--bg); border: 1px solid var(--rule); border-radius: 3px; padding: .2rem .35rem; }
+svg text { font-family: var(--mono); font-size: 10.5px; fill: var(--muted); }
+svg .lab { fill: var(--fg); font-size: 10.5px; }
+svg .prov { fill: var(--fg); font-family: var(--body); font-weight: 600; font-size: 11.5px; }
+#tip { position: fixed; pointer-events: none; z-index: 20; background: var(--panel); color: var(--fg); border: 1px solid var(--rule); border-radius: 5px; padding: .4rem .55rem; font-size: .78rem; line-height: 1.4; max-width: 22rem; box-shadow: 0 4px 14px rgb(0 0 0 / .15); }
+.wb-head { font: 400 .95rem/1.4 var(--body); margin-bottom: .7rem; }
+.wb-head b { font-weight: 600; }
+.wb-hist { display: flex; align-items: flex-end; gap: 3px; height: 54px; border-bottom: 1px solid var(--rule); margin-bottom: .2rem; }
+.wb-hist div { flex: 1; background: var(--fg); opacity: .85; min-height: 1px; border-radius: 2px 2px 0 0; }
+.wb-axis { display: flex; gap: 3px; font: 400 .7rem/1 var(--mono); color: var(--muted); margin-bottom: 1rem; }
+.wb-axis span { flex: 1; text-align: center; }
+.months { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem 1.4rem; }
+@media (max-width: 760px) { .months { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.month h4 { font: 600 .74rem/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; text-align: center; margin: 0 0 .45rem; color: var(--fg); }
+.days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.d { aspect-ratio: 1; display: grid; place-items: center; font: 400 .66rem/1 var(--mono); color: var(--muted); position: relative; }
+.d span { position: relative; z-index: 1; }
+.d::before { content: ""; position: absolute; border-radius: 50%; inset: 50%; transition: inset .1s; }
+.d.cap::before { background: var(--faint); inset: 12%; }
+.d.cap.new::before { background: var(--s1); inset: 4%; }
+.d.cap.new span, .d.cap.big span { color: #fff; }
+.d.cap.rev::before { background: var(--s2); inset: 8%; }
+.d.cap.q1::before { background: var(--seq1); inset: 16%; } .d.cap.q2::before { background: var(--seq2); inset: 8%; } .d.cap.q3::before { background: var(--seq3); inset: 0; }
+.d.cap.q3 span { color: #fff; }
+.d.mark { outline: 1.5px dashed var(--accent); outline-offset: -1px; border-radius: 3px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1rem; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem; min-width: 0; }
+.card-top { display: flex; justify-content: space-between; align-items: start; gap: .6rem; }
+.card h3 { font: 600 1.05rem/1.25 var(--display); margin: 0; }
+.card .id { font: 400 .72rem/1.3 var(--mono); color: var(--muted); }
+.pill { font: 500 .72rem/1 var(--body); border: 1px solid var(--rule); border-radius: 999px; padding: .25rem .5rem; white-space: nowrap; display: inline-flex; gap: .3rem; align-items: center; }
+.pill::before { content: ""; width: .45rem; height: .45rem; border-radius: 50%; background: var(--c, var(--nc)); }
+.field { margin-top: .75rem; }
+.field .k { font: 500 .68rem/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--s2); }
+.field .v { font: 400 .86rem/1.4 var(--mono); overflow-wrap: anywhere; }
+.field .v small { font-family: var(--body); color: var(--muted); font-size: .78rem; margin-left: .3rem; }
+</style>
+
+<div class="wrap">
+<div class="eyebrow">Previews for reaction · data as of 2026-11-24</div>
+<h1>Observatory View Previews</h1>
+<p class="lede">Five candidate views, each drawn from our real snapshots and archives. A and B are the fleet overview in the OONI style, C and D are Wayback-style calendars for a single route or machine, and E is a monitor card in the style of Cloudflare's Key Transparency page. Hover any mark for its details.</p>
+
+<section class="plate">
+  <div class="plate-head"><span class="letter">A</span><h2>Every route, every day: what our probe concluded</h2><span class="from">after OONI MAT</span></div>
+  <p>One row per provider and model, one column per day since Apr 21. Before Oct 14 our verifier only reported pass or fail, and several of those passes were later shown to be unsupported, so they are drawn pale. From Oct 14 the rewritten verifier reports verified, rejected or not checked.</p>
+  <div class="legend"><span><i style="background:var(--ok)"></i>verified</span><span><i style="background:var(--bad)"></i>rejected</span><span><i style="background:var(--nc)"></i>not checked by our verifier</span><span><i style="background:var(--ok-old)"></i>passed old checks</span><span><i style="background:var(--bad-old)"></i>failed old checks</span><span><i style="background:var(--warn)"></i>provider error</span><span><i style="background:var(--xa)"></i>no attestation offered</span><span><i style="background:var(--lim)"></i>we were rate-limited</span><span><i class="hatch"></i>model retired, still in our list</span></div>
+  <div class="scroll"><svg id="grid"></svg></div>
+  <div class="where">Would live as the landing view of the observatory, linking each row to its route page.</div>
+</section>
+
+<section class="plate">
+  <div class="plate-head"><span class="letter">B</span><h2>The same data stacked per provider, as OONI draws it</h2><span class="from">after OONI MAT, rows = providers</span></div>
+  <p>Each bar counts that provider's routes by outcome for one day. This view hides which route failed but shows how much of each provider we can check on a given day.</p>
+  <div class="scroll"><svg id="stack"></svg></div>
+  <div class="where">An alternative to A when the number of routes grows past what fits on a screen.</div>
+</section>
+
+<section class="plate">
+  <div class="plate-head"><span class="letter">C</span><h2>Tinfoil's router, as a capture calendar</h2><span class="from">after the Wayback Machine</span></div>
+  <div class="wb-head" id="c-head"></div>
+  <div class="wb-hist" id="c-hist"></div><div class="wb-axis" id="c-axis"></div>
+  <div class="legend"><span><i style="background:var(--s1);border-radius:50%"></i>new identity first seen</span><span><i style="background:var(--s2);border-radius:50%"></i>returned to an earlier identity</span><span><i style="background:var(--faint);border-radius:50%"></i>captured, unchanged</span><span><i style="box-shadow:inset 0 0 0 1.5px var(--s2);border-radius:50%"></i>a release published that day was never captured</span></div>
+  <div class="months" id="c-cal"></div>
+  <div class="panel" id="c-panel">Select a day to see what was captured and where it came from.</div>
+  <div class="where">Would live at the top of each route page. The bars above count new identities per month. Each captured digest is matched to the GitHub release whose <code>tinfoil-deployment.json</code> has that sha256.</div>
+</section>
+
+<section class="plate">
+  <div class="plate-head"><span class="letter">D</span><h2>NEAR machine gpu03, as a deployment calendar</h2><span class="from">after the Wayback Machine</span></div>
+  <div class="wb-head" id="d-head"></div>
+  <div class="wb-hist" id="d-hist"></div><div class="wb-axis" id="d-axis"></div>
+  <div class="legend"><span><i style="background:var(--seq1);border-radius:50%"></i>1–2 actions</span><span><i style="background:var(--seq2);border-radius:50%"></i>3–9</span><span><i style="background:var(--seq3);border-radius:50%"></i>10 or more</span><span><i style="outline:1.5px dashed var(--accent);outline-offset:-1px"></i>Nov 13: NEAR starts pruning its log to 7 days</span></div>
+  <div class="months" id="d-cal"></div>
+  <div class="where">Would live on each machine page, above the list of logged actions for the selected day.</div>
+</section>
+
+<section class="plate">
+  <div class="plate-head"><span class="letter">E</span><h2>Monitor cards: the identity a component reports, and when we last checked it</h2><span class="from">after Cloudflare Key Transparency</span></div>
+  <p>One card per attested component. It shows the identity in force now, when we first saw it, how many identities we have seen in total, and the outcome and date of our latest check.</p>
+  <div class="cards" id="cards"></div>
+  <div class="where">Would replace the provider rows on the overview, or sit above A as its summary.</div>
+</section>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const DATA = __DATA__;
+const tip = document.getElementById('tip');
+const show = (e, h) => { tip.innerHTML = h; tip.hidden = false; tip.style.left = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; };
+const hide = () => { tip.hidden = true; };
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t, a, p) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); p && p.appendChild(n); return n; };
+const fmt = d => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+const COL = { V: 'var(--ok)', R: 'var(--bad)', N: 'var(--nc)', E: 'var(--warn)', x: 'var(--xa)', L: 'var(--lim)', g: 'url(#hatch)', p: 'var(--ok-old)', f: 'var(--bad-old)' };
+const LAB = { V: 'verified', R: 'rejected', N: 'not checked by our verifier', E: 'provider error', x: 'no attestation offered', L: 'we were rate-limited', g: 'model retired, still in our list', p: 'passed old checks', f: 'failed old checks' };
+const hatchDef = svg => { const d = el('defs', {}, svg), pt = el('pattern', { id: 'hatch', width: 4, height: 4, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, d); el('rect', { width: 4, height: 4, fill: 'var(--panel)' }, pt); el('line', { x1: 0, y1: 0, x2: 0, y2: 4, stroke: 'var(--nc)', 'stroke-width': 1.6 }, pt); };
+const PROV = { 'aci-gateway': 'Phala ACI', chutes: 'Chutes', 'near-ai': 'NEAR', redpill: 'RedPill', tinfoil: 'Tinfoil', venice: 'Venice' };
+const { days, rows } = DATA.grid;
+const ERA = days.indexOf('2026-10-14');
+
+(function grid() {
+  const svg = document.getElementById('grid'), L = 230, cw = 3.6, rh = 11, gap = 2; hatchDef(svg);
+  let y = 18, prev = null; const pos = [];
+  rows.forEach(r => { const p = r.k.split('|')[0]; if (p !== prev) { y += prev ? 10 : 0; pos.push({ head: p, y: y + 10 }); y += 14; prev = p; } pos.push({ r, y }); y += rh + gap; });
+  const W = L + days.length * cw + 6, H = y + 22;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W);
+  days.forEach((d, i) => { if (d.endsWith('-01')) { el('line', { x1: L + i * cw, x2: L + i * cw, y1: 0, y2: H - 16, stroke: 'var(--rule)' }, svg); el('text', { x: L + i * cw + 2, y: H - 4 }, svg).textContent = fmt(d).split(' ')[0]; } });
+  el('line', { x1: L + ERA * cw, x2: L + ERA * cw, y1: 0, y2: H - 16, stroke: 'var(--accent)', 'stroke-width': 1.5, 'stroke-dasharray': '3 2' }, svg);
+  el('text', { x: L + ERA * cw - 4, y: 10, 'text-anchor': 'end', style: 'fill:var(--accent)' }, svg).textContent = 'Oct 14: verifier rewritten';
+  pos.forEach(p => {
+    if (p.head) { el('text', { x: 0, y: p.y, class: 'prov' }, svg).textContent = PROV[p.head] || p.head; return; }
+    const name = p.r.k.split('|')[1];
+    el('text', { x: 8, y: p.y + 8.5, class: 'lab' }, svg).textContent = name.length > 34 ? name.slice(0, 33) + '…' : name;
+    let run = null;
+    const flush = i => { if (run && run.c !== '.') el('rect', { x: L + run.i * cw, y: p.y, width: (i - run.i) * cw - 0.4, height: rh, fill: COL[run.c] }, svg); };
+    [...p.r.s].forEach((c, i) => { if (!run || run.c !== c) { flush(i); run = { c, i }; } });
+    flush(p.r.s.length);
+    const hit = el('rect', { x: L, y: p.y, width: days.length * cw, height: rh, fill: 'transparent' }, svg);
+    hit.addEventListener('mousemove', e => { const b = hit.getBoundingClientRect(), i = Math.min(days.length - 1, Math.floor((e.clientX - b.left) / b.width * days.length)), c = p.r.s[i]; show(e, `<b>${fmt(days[i])}</b> · ${PROV[p.r.k.split('|')[0]]} ${name}<br>${c === '.' ? 'not probed' : LAB[c]}`); });
+    hit.addEventListener('mouseleave', hide);
+  });
+})();
+
+(function stack() {
+  const svg = document.getElementById('stack'), L = 90, cw = 3.6, bh = 44, gap = 16; hatchDef(svg);
+  const provs = [...new Set(rows.map(r => r.k.split('|')[0]))];
+  const H = provs.length * (bh + gap) + 18, W = L + days.length * cw + 6;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W);
+  const order = ['V', 'p', 'N', 'x', 'E', 'L', 'g', 'f', 'R'];
+  provs.forEach((p, pi) => {
+    const y0 = pi * (bh + gap) + 4, mine = rows.filter(r => r.k.startsWith(p + '|'));
+    const max = Math.max(...days.map((_, i) => mine.filter(r => r.s[i] !== '.').length));
+    el('text', { x: 0, y: y0 + bh / 2 + 4, class: 'prov' }, svg).textContent = PROV[p];
+    el('line', { x1: L, x2: W - 6, y1: y0 + bh, y2: y0 + bh, stroke: 'var(--rule)' }, svg);
+    days.forEach((d, i) => {
+      let y = y0 + bh; const counts = {};
+      mine.forEach(r => { const c = r.s[i]; if (c !== '.') counts[c] = (counts[c] || 0) + 1; });
+      order.forEach(c => { if (!counts[c]) return; const h = counts[c] / max * bh; y -= h; el('rect', { x: L + i * cw, y, width: cw - 0.6, height: h, fill: COL[c] }, svg); });
+      const hit = el('rect', { x: L + i * cw, y: y0, width: cw, height: bh, fill: 'transparent' }, svg);
+      hit.addEventListener('mousemove', e => show(e, `<b>${fmt(d)}</b> · ${PROV[p]}<br>` + (order.filter(c => counts[c]).map(c => `${counts[c]} ${LAB[c]}`).join('<br>') || 'not probed')));
+      hit.addEventListener('mouseleave', hide);
+    });
+  });
+  days.forEach((d, i) => { if (d.endsWith('-01')) el('text', { x: L + i * cw + 2, y: H - 2 }, svg).textContent = fmt(d).split(' ')[0]; });
+})();
+
+function calendar(prefix, months, dayInfo, cls, tipText, mark, extra, onPick) {
+  const cal = document.getElementById(prefix + '-cal');
+  months.forEach(([y, m]) => {
+    const first = new Date(Date.UTC(y, m, 1)), n = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    const box = document.createElement('div'); box.className = 'month';
+    box.innerHTML = `<h4>${first.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })}</h4>`;
+    const g = document.createElement('div'); g.className = 'days';
+    for (let i = 0; i < first.getUTCDay(); i++) g.appendChild(document.createElement('div'));
+    for (let d = 1; d <= n; d++) {
+      const key = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`, info = dayInfo[key];
+      const c = document.createElement('div'); c.className = 'd ' + (info ? 'cap ' + cls(info) : '') + (key === mark ? ' mark' : '') + (extra && extra[key] ? ' rel' : '');
+      c.innerHTML = `<span>${d}</span>`;
+      if (info || (extra && extra[key])) { c.addEventListener('mousemove', e => show(e, `<b>${fmt(key)}</b><br>${info ? tipText(info) : ''}${extra && extra[key] ? `<br>published, never captured: ${extra[key].join(', ')}` : ''}`)); c.addEventListener('mouseleave', hide); }
+      if (info && onPick) c.addEventListener('click', () => { cal.querySelectorAll('.sel').forEach(x => x.classList.remove('sel')); c.classList.add('sel'); onPick(key, info); });
+      g.appendChild(c);
+    }
+    box.appendChild(g); cal.appendChild(box);
+  });
+}
+function hist(prefix, months, val) {
+  const vals = months.map(val), max = Math.max(...vals, 1);
+  document.getElementById(prefix + '-hist').innerHTML = vals.map(v => `<div style="height:${v / max * 100}%" title="${v}"></div>`).join('');
+  document.getElementById(prefix + '-axis').innerHTML = months.map(([y, m]) => `<span>${new Date(Date.UTC(y, m, 1)).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' })}</span>`).join('');
+}
+
+(function c() {
+  const D = DATA.cal1.days, keys = Object.keys(D).sort(), months = [[2026, 3], [2026, 4], [2026, 5], [2026, 6], [2026, 7], [2026, 8], [2026, 9], [2026, 10]];
+  const ids = new Set(keys.map(k => D[k][1]));
+  const C1 = DATA.cal1;
+  document.getElementById('c-head').innerHTML = `Captured <b>${keys.length} times</b> between <b>${fmt(keys[0])}</b> and <b>${fmt(keys.at(-1))}</b>, reporting <b>${ids.size} distinct image digests</b>, every one of them a published release. Tinfoil published <b>${C1.n_published} releases</b> in the same period; <b>${C1.n_published - C1.n_seen_in_window}</b> were replaced before any daily capture saw them.`;
+  const REPO = 'https://github.com/amiller/awesome-private-inference/blob/main/data/snapshots/';
+  const pick = (key, info) => { const r = C1.release_of[info[1]]; const st = rows.find(x => x.k === 'tinfoil|router').s[days.indexOf(key)];
+    document.getElementById('c-panel').innerHTML = `<b>${fmt(key)}</b> · ${info[0] === 'n' ? 'new identity first seen' : 'unchanged since the previous capture'} · our verifier: ${LAB[st] || 'not probed'}<div class="m">sha256:${r ? r[2] : info[1]}</div>` +
+      (r ? `<div>Built as release <b>${r[0]}</b>, published ${fmt(r[1])}.</div>` : '') +
+      `<div class="links">${r ? `<a href="https://github.com/tinfoilsh/confidential-model-router/releases/tag/${r[0]}" target="_blank" rel="noopener">Release ${r[0]} on GitHub ↗</a><a href="https://search.sigstore.dev/?hash=sha256:${r[2]}" target="_blank" rel="noopener">Sigstore log entries ↗</a>` : ''}<a class="raw" href="${REPO}${key}.json" target="_blank" rel="noopener">raw evidence for ${fmt(key)}</a></div>`; };
+  hist('c', months, ([y, m]) => keys.filter(k => +k.slice(5, 7) === m + 1 && D[k][0] === 'n').length);
+  calendar('c', months, D, i => i[0] === 'n' ? 'new' : i[0] === 'r' ? 'rev' : '', i => (i[0] === 'n' ? 'new identity first seen' : i[0] === 'r' ? 'returned to an earlier identity' : 'unchanged') + (C1.release_of[i[1]] ? ` · release ${C1.release_of[i[1]][0]}` : '') + '<br>click for links', null, C1.unseen, pick);
+})();
+
+(function d() {
+  const D = DATA.cal2.days, keys = Object.keys(D).sort(), months = [[2026, 8], [2026, 9], [2026, 10]];
+  const total = keys.reduce((a, k) => a + D[k][0], 0);
+  document.getElementById('d-head').innerHTML = `<b>${total} deployment actions</b> logged on <b>${keys.length} days</b> between <b>${fmt(keys[0])}</b> and <b>${fmt(keys.at(-1))}</b>.`;
+  hist('d', months, ([y, m]) => keys.filter(k => +k.slice(5, 7) === m + 1).reduce((a, k) => a + D[k][0], 0));
+  calendar('d', months, D, i => i[0] >= 10 ? 'q3' : i[0] >= 3 ? 'q2' : 'q1', i => `${i[0]} actions<br>` + Object.entries(i[1]).map(([k, v]) => `${v} × ${k.replace(/_/g, ' ')}`).join('<br>'), '2026-11-13');
+})();
+
+(function cards() {
+  const box = document.getElementById('cards');
+  DATA.cards.forEach(c => {
+    const today = c.last_seen === '2026-11-24';
+    const pill = today ? `<span class="pill" style="--c:var(--ok)">Observed today</span>` : `<span class="pill" style="--c:var(--warn)">Not seen since ${fmt(c.last_seen)}</span>`;
+    const row = rows.find(x => x.k === c.key).s, last = [...row].reverse().find(x => x !== '.'), STC = { V: 'var(--ok)', R: 'var(--bad)', N: 'var(--nc)' };
+    const st = `<span style="color:${STC[last] || 'var(--fg)'}">${LAB[last]}</span><small>· ${fmt(c.last_grid)}</small>`;
+    const ROUTE = { 'tinfoil|router': 'tinfoil-router', 'near-ai|zai-org/GLM-5.1-FP8': 'near-ai-gateway-plain', 'aci-gateway|tee.redpill.ai': 'aci-gateway-tee-redpill', 'chutes|DeepSeek-V3.2-TEE': 'chutes-tee' }[c.key];
+    const rel = c.key === 'tinfoil|router' && DATA.cal1.release_of[c.current.slice(0, 16)];
+    const why = c.reason ? `<div class="reason">${c.reason}</div>` : '';
+    const chips = c.failed.length ? `<div class="chips">${c.failed.map(f => `<code>✗ ${f}</code>`).join('')}</div>` : '';
+    const links = `<div class="links">${ROUTE ? `<a href="https://amiller.github.io/awesome-private-inference/assessments.html#route-${ROUTE}" target="_blank" rel="noopener">Route assessment ↗</a>` : ''}${rel ? `<a href="https://github.com/tinfoilsh/confidential-model-router/releases/tag/${rel[0]}" target="_blank" rel="noopener">Release ${rel[0]} ↗</a>` : ''}<a class="raw" href="https://github.com/amiller/awesome-private-inference/blob/main/data/snapshots/${c.last_grid}.json" target="_blank" rel="noopener">raw evidence</a></div>`;
+    box.insertAdjacentHTML('beforeend', `<div class="card"><div class="card-top"><div><h3>${c.name}</h3><div class="id">${c.key}</div></div>${pill}</div>
+      <div class="field"><div class="k">Current ${c.kind}</div><div class="v">${c.current.slice(0, 32)}…</div></div>
+      <div class="field"><div class="k">First seen</div><div class="v">${fmt(c.first_current)}<small>this identity</small></div></div>
+      <div class="field"><div class="k">Identities seen</div><div class="v">${c.n}<small>in ${c.days} days since ${fmt(c.first)}</small></div></div>
+      <div class="field"><div class="k">Our last check</div><div class="v">${st}</div>${why}${chips}</div>${links}</div>`);
+  });
+})();
+</script>

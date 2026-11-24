@@ -1,4 +1,4 @@
-# Private Inference Beat
+# Private Inference Observatory
 
 **Compare private inference routes and explore the reference values behind them.**
 
@@ -13,17 +13,17 @@ auditors: conflicting reference publications, a verifier's missing binding,
 changes to plaintext access, or a route whose evidence has gone stale. Review
 work should resolve those questions or state the missing proof precisely.
 
-The website has two views:
+The website has three tabs:
 
 | Resource | What you can find |
 | --- | --- |
-| [Comparison](https://amiller.github.io/awesome-private-inference/) | What the client verifies, who can access plaintext, and who can approve software changes. Expand each provider into its request paths and follow each assessment to its evidence. |
+| [Private Inference Beat](https://amiller.github.io/awesome-private-inference/) | What the client verifies, who can access plaintext, and who can approve software changes. Expand each provider into its request paths and follow each assessment to its evidence. |
 | [Reference values](https://amiller.github.io/awesome-private-inference/history.html) | Captured measurements, image/compose digests, published reference sets and policy documents. Inspect full values, changes, dates and review evidence. |
-| [Verifiers](https://amiller.github.io/awesome-private-inference/verifiers.html) | Every third-party client we found that checks TEE attestation for private inference, graded per provider from a source review at a pinned commit. |
+| [Awesome Private Inference](https://amiller.github.io/awesome-private-inference/verifiers.html) | Every third-party client we found that checks TEE attestation for private inference, graded per provider from a source review at a pinned commit. |
 
-The comparison publishes dated, preliminary assessments. [Proposed stage criteria](https://amiller.github.io/awesome-private-inference/stages.html) explain what stronger assurance would require; no stages are awarded.
+Private Inference Beat is the route comparison table, assessed against stage criteria in the manner of L2Beat. It publishes dated, preliminary assessments. [Proposed stage criteria](https://amiller.github.io/awesome-private-inference/stages.html) explain what stronger assurance would require; no stages are awarded.
 
-The repository remains **awesome-private-inference**. Its [adapter scope directory](data/verifiers.json) records our own adapters behind the reference process, their checks, delegated trust and missing proof. This is maintained in Git alongside the verifier routines, evidence and review records.
+The repository keeps its legacy name, **awesome-private-inference**, which now names the verifier directory tab. Its [adapter scope directory](data/verifiers.json) records our own adapters behind the reference process, their checks, delegated trust and missing proof. This is maintained in Git alongside the verifier routines, evidence and review records.
 
 **Observed, provider-authorized, reviewed and accepted by a client are independent facts.** A newly observed value creates review work; it never silently expands a client allowlist. An assessment applies to a named client mode and request path, rather than a whole provider brand.
 

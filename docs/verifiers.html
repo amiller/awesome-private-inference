@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Verifiers · Private Inference Beat</title>
+  <title>Awesome Private Inference · Private Inference Observatory</title>
   <meta name="description" content="Private inference reference-value observations and evidence-based route assessments.">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -18,13 +18,13 @@
 <header class="border-b border-slate-200 bg-white">
   <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap gap-4 items-center justify-between">
     <a href="./index.html" class="flex items-baseline gap-2">
-      <span class="text-xl font-bold tracking-tight">Private Inference Beat</span>
+      <span class="text-xl font-bold tracking-tight">Private Inference Observatory</span>
 
     </a>
     <nav aria-label="Primary" class="text-sm flex gap-6">
-      <a href="./index.html" class="view-tab">Comparison</a>
+      <a href="./index.html" class="view-tab">Private Inference Beat</a>
       <a href="./history.html" class="view-tab">Reference values</a>
-      <a href="./verifiers.html" class="view-tab" aria-current="page">Verifiers</a>
+      <a href="./verifiers.html" class="view-tab" aria-current="page">Awesome Private Inference</a>
     </nav>
   </div>
 </header>
@@ -43,7 +43,7 @@
   .vt small { display:block; font:400 11px ui-monospace,monospace; color:#64748b; }
 </style>
 
-<h1 class="text-3xl font-bold tracking-tight">Verifiers</h1>
+<h1 class="text-3xl font-bold tracking-tight">Awesome Private Inference</h1>
 <p class="mt-3 max-w-3xl text-slate-600">Clients that verify TEE attestation for private inference, reviewed from source at a pinned commit. A cell grades what the client establishes on that provider: &#39;serving&#39; = reaches the code that reads the prompt and blocks before sending; &#39;partial&#39; = checks real evidence but stops short of the serving code or doesn&#39;t block; &#39;weak&#39; = little is authenticated. No cell is &#39;serving&#39; today. Reviewed 2026-11-15; each row links its review with file:line citations.</p>
 <p class="mt-2 max-w-3xl text-sm text-slate-500">Two questions recur in every review: are event-log values hashed before they are trusted (the dstack RTMR3 replay must recompute each digest from its payload), and does a failed check stop the prompt from being sent?</p>
 

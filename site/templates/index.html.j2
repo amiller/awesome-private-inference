@@ -1,12 +1,12 @@
 {% extends "_base.html.j2" %}
 {% set primary_view = 'comparison' %}
-{% block title %}Comparison · Private Inference Beat{% endblock %}
+{% block title %}Private Inference Beat · Private Inference Observatory{% endblock %}
 {% block content %}
 {% include "_assessment_style.html.j2" %}
 {% macro badge(cell, href, title) %}<a class="signal {{ cell.state }}" href="{{ href }}" title="{{ title }}">{{ cell.label }}</a>{% endmacro %}
 {% macro unassessed(item, href) %}<td colspan="{{ assessment_axes|length }}" class="unassessed"><a href="{{ href }}">Not assessed — dated source review only ({{ item.reviewed_at }})</a>{% if item.findings %} · {{ item.findings }} {{ 'finding' if item.findings == 1 else 'findings' }}{% endif %}</td>{% endmacro %}
 <section class="mb-4">
-  <h1 class="text-2xl font-bold tracking-tight">Comparison</h1>
+  <h1 class="text-2xl font-bold tracking-tight">Private Inference Beat</h1>
   <p class="mt-1 text-sm text-slate-600">Who can read your prompts and replies, and what does the client verify? Compare the evidence and unfinished checks for each request path.</p>
   <p class="mt-2 text-xs text-slate-500">Expand a provider for its paths. <a href="#private-inference" class="text-indigo-700 underline">What private inference requires</a> · <a href="#audit-lessons" class="text-indigo-700 underline">Companion audit findings</a> · <a href="./stages.html" class="text-indigo-700 underline">Stage criteria (proposed)</a>. Dated assessments; no stages awarded.</p>
 </section>

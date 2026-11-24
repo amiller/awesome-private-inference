@@ -1,0 +1,295 @@
+<title>Observatory Lookbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: picture-led catalogue — five "moves" as cropped tiles up top, then one plate per site: framed screenshot(s) first, then a two-column note (borrow / avoid) */
+:root {
+  --bg: #eceff1; --panel: #ffffff; --fg: #121d26; --muted: #56636e; --rule: #d1d8de; --frame: #dfe4e8;
+  --accent: #0e6a73; --tag: #e0eeef; --avoid: #a83a32;
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f161b; --panel: #172128; --fg: #e3e9ed; --muted: #97a5b0; --rule: #2c3a44; --frame: #24313a; --accent: #4fb8c1; --tag: #19343a; --avoid: #e2786e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f161b; --panel: #172128; --fg: #e3e9ed; --muted: #97a5b0; --rule: #2c3a44; --frame: #24313a; --accent: #4fb8c1; --tag: #19343a; --avoid: #e2786e; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15.5px/1.6 var(--body); }
+.wrap { max-width: 72rem; margin: 0 auto; padding-block: 3rem 4rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font: 500 .76rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 700 clamp(2rem, 4.5vw, 3rem)/1.05 var(--display); margin: .6rem 0 .8rem; }
+.lede { max-width: 46rem; font-size: 1.06rem; margin: 0; }
+h2 { font: 600 1.4rem/1.25 var(--display); margin: 3rem 0 1rem; text-wrap: balance; max-width: 48rem; }
+.moves { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+@media (max-width: 760px) { .moves { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 440px) { .moves { grid-template-columns: 1fr; } }
+.move { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.move img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-bottom: 1px solid var(--rule); }
+.move div { padding: .7rem .8rem .8rem; font-size: .88rem; }
+.move b { display: block; font: 600 .95rem/1.3 var(--display); margin-bottom: .25rem; }
+.move .fit { font: 500 .74rem/1.4 var(--mono); color: var(--accent); display: block; margin-top: .35rem; }
+.site { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1.2rem; margin-bottom: 1.4rem; }
+.site-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1rem; margin-bottom: .9rem; }
+.rank { font: 500 .85rem/1 var(--mono); color: var(--muted); }
+.site h3 { font: 600 1.3rem/1.2 var(--display); margin: 0; }
+.site .what { color: var(--muted); font-size: .92rem; }
+.shots { display: grid; gap: .8rem; grid-template-columns: 1fr; }
+.shots.three { grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; }
+.shots.three figure:first-child { grid-row: span 2; }
+.shots.two { grid-template-columns: 1fr 1fr; }
+figure { margin: 0; min-width: 0; }
+.browser { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--frame); }
+.browser .bar { font: 400 .72rem/1 var(--mono); color: var(--muted); padding: .45rem .6rem; display: flex; gap: .5rem; align-items: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.browser .bar::before { content: ""; width: 34px; height: 8px; flex: none; background: radial-gradient(circle, var(--rule) 3.5px, transparent 4px) 0 0 / 12px 8px repeat-x; }
+.browser img { display: block; width: 100%; height: auto; }
+.browser.tallcap img { max-height: 34rem; object-fit: cover; object-position: top; }
+figcaption { font-size: .82rem; color: var(--muted); margin-top: .4rem; }
+.notes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; font-size: .93rem; }
+.notes > div { min-width: 0; }
+.notes h4 { font: 500 .72rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 .25rem; color: var(--accent); }
+.notes .av h4 { color: var(--avoid); }
+.notes .borrow { background: var(--tag); border-radius: 5px; padding: .6rem .75rem; }
+.notes .av { padding: .6rem .75rem 0; }
+.notes p { margin: 0; }
+.notes .fit { font: 500 .76rem/1.4 var(--mono); color: var(--accent); display: block; margin-top: .35rem; }
+@media (max-width: 720px) { .shots.three, .shots.two, .notes { grid-template-columns: 1fr; } .shots.three figure:first-child { grid-row: auto; } }
+.site.single { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 0 1.2rem; align-items: start; }
+.site.single .site-head { grid-column: 1 / -1; }
+.site.single .notes { grid-template-columns: 1fr; margin-top: 0; }
+.site.single .browser img { max-height: 30rem; object-fit: cover; object-position: top; }
+@media (max-width: 720px) { .site.single { grid-template-columns: 1fr; } .site.single .notes { margin-top: 1rem; } }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .84rem; color: var(--muted); }
+</style>
+
+<div class="wrap">
+<div class="eyebrow">Design reference · captured 2026-11-24</div>
+<h1>Observatory Lookbook</h1>
+<p class="lede">These are 26 public observatories, monitors and registries whose designs fit a Private Inference Observatory. They are grouped by kind: rating sites, long-running measurements, permanent records, and flows and events. All screenshots were taken on Nov 24. Merkle Town, Cloudflare's certificate transparency monitor, now lives inside Cloudflare Radar, and its two transparency pages were captured through a regular browser session. Electricity Maps and Software Heritage blocked the capture, so they are left out.</p>
+<h2>Six design moves to borrow first</h2>
+<div class="moves">
+  <div class="move"><img src="shots/l2beat.jpg" alt="" style="object-position: 78% 92%"><div><b>A stage badge whose hover lists the missing criteria</b>From L2BEAT.<span class="fit">→ stage criteria per route</span></div></div>
+  <div class="move"><img src="shots/scorecard.jpg" alt="" style="object-position: 30% 25%"><div><b>An overall score with every check scored under it, at a named commit</b>From OpenSSF Scorecard.<span class="fit">→ client registry</span></div></div>
+  <div class="move"><img src="shots/ooni.jpg" alt="" style="object-position: 30% 100%"><div><b>Rows of entities by columns of days</b>From OONI, with the query kept in the URL.<span class="fit">→ 212 daily snapshots</span></div></div>
+  <div class="move"><img src="shots/noaa.jpg" alt="" style="object-position: 50% 70%"><div><b>The recent window and the full record side by side</b>From NOAA&#x27;s Mauna Loa record.<span class="fit">→ identity and TCB history</span></div></div>
+  <div class="move"><img src="shots/wayback.jpg" alt="" style="object-position: 50% 22%"><div><b>A calendar of the days that were captured</b>From the Wayback Machine.<span class="fit">→ evidence retention</span></div></div>
+  <div class="move"><img src="shots/osv.jpg" alt="" style="object-position: 20% 30%"><div><b>A permanent record page with aliases and the raw JSON</b>From OSV.<span class="fit">→ finding pages</span></div></div>
+</div>
+
+<h2>Rating sites grade each target against stated criteria, and the best show the checks behind the grade</h2>
+<section class="site">
+  <div class="site-head"><h3>L2BEAT</h3><span class="what">Rates Ethereum rollups against published stage criteria. l2beat.com now redirects to ethbeat.org.</span></div>
+  <div class="shots three"><figure><div class="browser"><div class="bar">l2beat.com/scaling/summary</div><img src="shots/l2beat.jpg" alt="L2BEAT summary table with risk rosettes and stage badges"></div><figcaption>Summary: risk rosette, stage badge, value secured.</figcaption></figure><figure><div class="browser"><div class="bar">l2beat.com/scaling/liveness</div><img src="shots/l2beat-liveness.jpg" alt="L2BEAT liveness table"></div><figcaption>Liveness: a 30-day strip, one tick per day.</figcaption></figure><figure><div class="browser"><div class="bar">l2beat.com/scaling/projects/arbitrum</div><img src="shots/l2beat-project.jpg" alt="L2BEAT Arbitrum project page"></div><figcaption>Project page with an index of anchored sections.</figcaption></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>The stage badge. Hovering it names the stage, lists the items missing for the next one, and says that stages are not a measure of security. Also the daily anomaly strip.</p><span class="fit">fits: stage criteria per route; daily pass/fail per provider</span></div>
+    <div class="av"><h4>Avoid</h4><p>The summary explains almost nothing without hovering, and project pages run to about twenty sections.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>OpenSSF Scorecard</h3><span class="what">Scores open-source repositories on supply-chain security checks.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">scorecard.dev/viewer/?uri=github.com/sigstore/cosign</div><img src="shots/scorecard.jpg" alt="Scorecard report for sigstore/cosign: 8.6 overall, then each check with its own 0-10 score and risk tag"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>An overall score with every check listed under it, each with its own score, a risk weight (critical, high, medium) and a short explanation, plus the commit and date the report was generated at.</p><span class="fit">fits: client registry, reviewed at a pinned commit; per-route checks</span></div>
+    <div class="av"><h4>Avoid</h4><p>An aggregate score invites readers to stop at one number.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Can I use</h3><span class="what">Shows which browser versions support each web feature.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">caniuse.com/webgpu</div><img src="shots/caniuse.jpg" alt="caniuse WebGPU support grid by browser and version, coloured by support level with numbered notes"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A feature-by-client grid coloured by support level, with numbered footnotes inside the cells and a tab for known issues. Partial support is a first-class state.</p><span class="fit">fits: verifier grid; check-by-client parity table with teep</span></div>
+    <div class="av"><h4>Avoid</h4><p>Dense version ranges become hard to read on small screens.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Repology</h3><span class="what">Tracks which version of each package every distribution ships.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">repology.org/project/openssl/versions</div><img src="shots/repology.jpg" alt="Repology versions table for openssl with coloured version badges per repository"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>One row per repository with the version it carries, coloured newest, outdated or legacy. It shows at a glance who is behind.</p><span class="fit">fits: which reference values each client&#x27;s allowlist carries versus the newest observed</span></div>
+    <div class="av"><h4>Avoid</h4><p>The rows run long and have no summary at the top.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Mozilla HTTP Observatory</h3><span class="what">Grades a website&#x27;s security headers.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">developer.mozilla.org/en-US/observatory/analyze?host=mozilla.org</div><img src="shots/mozilla.jpg" alt="HTTP Observatory report for mozilla.org with grade tile and scoring table"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A grade shown with the number of checks behind it and a trend since the last scan, with raw headers, history and a benchmark one tab away.</p><span class="fit">fits: each client-by-provider cell of the verifier grid</span></div>
+    <div class="av"><h4>Avoid</h4><p>Scores that can exceed 100 out of 100.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>clientdiversity.org</h3><span class="what">Tracks the share of Ethereum validators running each client.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">clientdiversity.org</div><img src="shots/clientdiversity.jpg" alt="Client share bars with goal and danger thresholds"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>Bar tracks shaded with the goal and danger thresholds, a toggle between independent data sources, and a &quot;data is stale&quot; banner.</p><span class="fit">fits: comparing what teep, tinfoil-go and our adapters conclude about one route</span></div>
+    <div class="av"><h4>Avoid</h4><p>No history: only the current share is shown.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Artificial Analysis</h3><span class="what">Benchmarks LLM API endpoints across hosts.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">artificialanalysis.ai/leaderboards/providers</div><img src="shots/aa.jpg" alt="Provider leaderboard table with grouped sortable columns"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>The endpoint, meaning one provider serving one model, as the unit of a row, so the same model appears under each host.</p><span class="fit">fits: routes in the Private Inference Beat table</span></div>
+    <div class="av"><h4>Avoid</h4><p>Density, paywalled features, and no raw evidence.</p></div>
+  </div>
+</section>
+
+<h2>Measurement sites show the same quantity daily for years, and the strongest put the raw data one click away</h2>
+<section class="site single">
+  <div class="site-head"><h3>OONI Explorer, Measurement Aggregation Toolkit</h3><span class="what">Aggregates network censorship measurements from volunteer probes.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">explorer.ooni.org/chart/mat</div><img src="shots/ooni.jpg" alt="OONI MAT grid of daily stacked bars, one row per country"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>One row per entity, shared day columns, and an independent scale per row. Every filter lives in the URL, each chart has JSON and CSV links, and each measurement opens as its own page.</p><span class="fit">fits: the 212 daily snapshots by provider and model</span></div>
+    <div class="av"><h4>Avoid</h4><p>A bad filter combination returns a bare &quot;No Data Found&quot;.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>NOAA Global Monitoring Laboratory</h3><span class="what">Publishes the Mauna Loa carbon dioxide record, kept since 1958.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">gml.noaa.gov/ccgg/trends</div><img src="shots/noaa.jpg" alt="Mauna Loa CO2: year-over-year callout above recent-months and full-record charts side by side"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>The same series at two time scales side by side, the last few years and the full record, under a callout comparing this month with the same month last year. Data, growth-rate and PNG or PDF versions are each one tab away.</p><span class="fit">fits: gateway identity and TCB history: last 30 days beside the full record</span></div>
+    <div class="av"><h4>Avoid</h4><p>The page is long, and the explanatory text sits below the charts.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Google Transparency Report, HTTPS</h3><span class="what">Measures how much Chrome traffic is encrypted, by platform, since 2015.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">transparencyreport.google.com/https/overview</div><img src="shots/gtr.jpg" alt="HTTPS encryption report: explanation above a percentage line chart by platform"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A plain explanation of why the measure matters, placed above one long-running percentage line per platform.</p><span class="fit">fits: share of routes whose evidence verified, by provider, over time</span></div>
+    <div class="av"><h4>Avoid</h4><p>A lot of scrolling before the first chart.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Let&#x27;s Encrypt stats</h3><span class="what">Publishes daily counts of active certificates and certificates issued.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">letsencrypt.org/stats</div><img src="shots/letsencrypt.jpg" alt="Let&#x27;s Encrypt usage line chart and HTTPS percentage chart citing Google&#x27;s report"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A last-updated date at the top, a zoom and download toolbar on each chart, and a chart that openly reuses another observatory&#x27;s data with credit.</p><span class="fit">fits: daily counts of observations and new identities</span></div>
+    <div class="av"><h4>Avoid</h4><p>Charts sit one after another with little to say what each shows.</p></div>
+  </div>
+</section>
+<section class="site">
+  <div class="site-head"><h3>Reproducible Builds CI</h3><span class="what">Reports whether each Debian package rebuilds bit for bit.</span></div>
+  <div class="shots two"><figure><div class="browser"><div class="bar">tests.reproducible-builds.org/debian/unstable/…stats</div><img src="shots/rb-stats.jpg" alt="Stacked area of Debian reproducibility states since 2014"></div><figcaption>Package counts by state, daily since October 2014.</figcaption></figure><figure><div class="browser"><div class="bar">tests.reproducible-builds.org/debian/rb-pkg/…/coreutils</div><img src="shots/rb-package.jpg" alt="coreutils package page"></div><figcaption>Package page with a status rail, buildinfo, logs and diffoscope.</figcaption></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>An entity page where status and raw artifacts sit to one side and the diff that explains a change fills the main pane.</p><span class="fit">fits: per-machine deployment logs; diffs on a new identity</span></div>
+    <div class="av"><h4>Avoid</h4><p>A dated look and a cryptic weather-icon legend.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Our World in Data</h3><span class="what">Publishes charts of long-run global statistics with their sources.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">ourworldindata.org/grapher/co2-emissions-per-capita</div><img src="shots/owid.jpg" alt="OWID grapher: line chart with entity selector, source line, and Table/Map/Line tabs"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A source line under every chart that gives the last update and the next expected update, Table, Map and Line tabs, and an entity picker beside the chart.</p><span class="fit">fits: every chart; &quot;next expected update&quot; maps onto the probe cadence</span></div>
+    <div class="av"><h4>Avoid</h4><p>A cookie banner covers the foot of the chart on first load.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>mevboost.pics</h3><span class="what">Tracks relay and builder market share for MEV-Boost.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">mevboost.pics</div><img src="shots/mevboost.jpg" alt="Stacked 100% daily area charts of relay and builder share"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>100% stacked daily share, with the share that can&#x27;t be attributed drawn as its own muted band.</p><span class="fit">fits: days a route was unreachable or not checked</span></div>
+    <div class="av"><h4>Avoid</h4><p>The latest slot was 18 days old with no staleness warning, and two series share a color.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>OpenRouter rankings</h3><span class="what">Ranks models by tokens served through OpenRouter each week.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">openrouter.ai/rankings</div><img src="shots/openrouter.jpg" alt="Weekly stacked token volume by model, above a ranked leaderboard with weekly change"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>Weekly stacked volume by model over a year, with a ranked list beneath giving each model&#x27;s share and its change since last week.</p><span class="fit">fits: weekly newly observed identities, stacked by provider</span></div>
+    <div class="av"><h4>Avoid</h4><p>Dozens of stacked colours can&#x27;t be told apart.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Epoch AI data hub</h3><span class="what">Tracks notable AI models and their training compute.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">epoch.ai/data/ai-models</div><img src="shots/epoch.jpg" alt="Epoch AI models scatter with settings panel"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>An &quot;Updated&quot; date badge, a prominent download button, a graph and table toggle, and axes the reader can choose.</p><span class="fit">fits: every chart on the observatory site</span></div>
+    <div class="av"><h4>Avoid</h4><p>A cookie banner sits over the chart on first load.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>ultrasound.money</h3><span class="what">Tracks ETH supply and burn.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">ultrasound.money</div><img src="shots/ultrasound.jpg" alt="ultrasound.money dark dashboard"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>One timeframe toggle that controls every chart on the page.</p></div>
+    <div class="av"><h4>Avoid</h4><p>Gauges and slogans carry most of the page, and it shows no evidence.</p></div>
+  </div>
+</section>
+
+<h2>Record sites give every entry a permanent page with its identifiers, aliases and raw data</h2>
+<section class="site">
+  <div class="site-head"><h3>Cloudflare Radar: Key Transparency and Certificate Transparency</h3><span class="what">Cloudflare's monitors for the logs behind WhatsApp and Messenger keys, and for TLS certificates. ct.cloudflare.com, once Merkle Town, now redirects here.</span></div>
+  <div class="shots two"><figure><div class="browser"><div class="bar">radar.cloudflare.com/key-transparency</div><img src="shots/keytransparency.jpg" alt="Key Transparency: one card per log with last signed epoch, last verified epoch and time, root hash, and Online or Disabled status"></div><figcaption>Key Transparency: one card per log, with what the log signed and what Cloudflare verified.</figcaption></figure><figure><div class="browser"><div class="bar">radar.cloudflare.com/certificate-transparency</div><img src="shots/cfct.jpg" alt="Certificate Transparency: issuance volume over seven days with previous-period overlay, and certificate characteristics"></div><figcaption>Certificate Transparency: issuance volume against the previous seven days.</figcaption></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>The monitor card. Each log shows the last epoch it signed next to the last epoch an independent party verified, with the time of that check, the current root hash, and whether the log is online. A disabled log keeps its card with the date it was last verified.</p><span class="fit">fits: one card per provider reference publication or per machine, with &quot;published&quot; beside &quot;last verified by us&quot;</span></div>
+    <div class="av"><h4>Avoid</h4><p>The certificate page loads its lower charts lazily, and on our visit they stayed as grey placeholders.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Sigstore Rekor Search</h3><span class="what">Searches the Sigstore transparency log.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">search.sigstore.dev/?logIndex=100000000</div><img src="shots/rekor.jpg" alt="Rekor entry card with UUID, log index, integrated time, hash, signature, certificate"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>The entry card. It shows the UUID, type, log index and integrated time (both relative and absolute), then the hash, signature and decoded certificate in monospace.</p><span class="fit">fits: an on-chain compose-hash addition; a firmware endorsement</span></div>
+    <div class="av"><h4>Avoid</h4><p>An empty search that says only &quot;No matching entries&quot;.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>OSV</h3><span class="what">An open database of vulnerabilities across package ecosystems.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">osv.dev/vulnerability/GHSA-xvch-5gv4-984h</div><img src="shots/osv.jpg" alt="OSV advisory page: ID header, aliases, dates, severity, raw JSON and references"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A canonical record page with the ID as its heading, its aliases in other databases, published and modified dates, the raw JSON inline with a link to fetch it, and every reference.</p><span class="fit">fits: a finding&#x27;s own page, cross-linked to the provider issue and the teep issue</span></div>
+    <div class="av"><h4>Avoid</h4><p>A long list of references with no indication of which matter.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>deps.dev</h3><span class="what">Google&#x27;s package insight service for open-source dependencies.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">deps.dev/npm/react</div><img src="shots/deps.jpg" alt="deps.dev react page with a SLSA provenance attestation box marked verified"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A provenance box beside the package that says Verified and lists the repository, build config, workflow and transparency-log entry, with instructions for checking it yourself.</p><span class="fit">fits: an image&#x27;s provenance on the machine page, such as a Sigstore entry for a release</span></div>
+    <div class="av"><h4>Avoid</h4><p>The provenance box is easy to miss at the side of a dense page.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>Internet Archive Wayback Machine</h3><span class="what">Archives web pages over time.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">web.archive.org/web/2026*/l2beat.com</div><img src="shots/wayback.jpg" alt="Wayback calendar for l2beat.com: captures-per-year histogram above a calendar of capture days"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A captures-per-year histogram above a full calendar where each captured day is marked, under a single line: saved 472 times between April 9, 2021 and November 15, 2026.</p><span class="fit">fits: retention coverage: the days we hold raw evidence for each machine or route</span></div>
+    <div class="av"><h4>Avoid</h4><p>The calendar shows that a capture exists, not what changed.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>AI Incident Database</h3><span class="what">Catalogues reported harms and failures of AI systems.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">incidentdatabase.ai/apps/discover</div><img src="shots/aiid.jpg" alt="AIID discover view: filters and a grid of incident cards, 1815 results"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A searchable incident catalogue with filters for classification, source, incident date and published date, and table, list, entity and taxonomy views of the same records.</p><span class="fit">fits: findings and incidents the daily digest catches, such as the SGLang RCE</span></div>
+    <div class="av"><h4>Avoid</h4><p>The card view leans on stock news images.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>relayscan.io</h3><span class="what">Reports relay and builder statistics.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">relayscan.io</div><img src="shots/relayscan.jpg" alt="Relay and builder tables with a time-window switch"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>Plain tables with the time window in the URL, a snapshot timestamp, copy-as-markdown, and a caveat placed beside the figure it qualifies.</p><span class="fit">fits: daily digest tables</span></div>
+    <div class="av"><h4>Avoid</h4><p>No charts at all.</p></div>
+  </div>
+</section>
+
+<h2>Flow and event sites draw a pipeline or a live feed, and tie the list to the picture</h2>
+<section class="site single">
+  <div class="site-head"><h3>orderflow.art</h3><span class="what">Flashbots&#x27; map of Ethereum order flow from frontend to block builder.</span></div>
+  <div class="shots"><figure><div class="browser tallcap"><div class="bar">orderflow.art</div><img src="shots/orderflow.jpg" alt="orderflow.art Sankey with filters above each column"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A filter directly above each stage of the pipeline, a switch between two volume measures, and a methodology page with a numbered list of known limitations.</p><span class="fit">fits: the trust chain from hardware vendor to firmware, image, gateway and model route</span></div>
+    <div class="av"><h4>Avoid</h4><p>Thin grey links that are hard to follow, a long tail labelled by hex address, and no export.</p></div>
+  </div>
+</section>
+<section class="site single">
+  <div class="site-head"><h3>USGS Earthquake Hazards</h3><span class="what">Maps earthquakes worldwide as they are reported.</span></div>
+  <div class="shots"><figure><div class="browser"><div class="bar">earthquake.usgs.gov/earthquakes/map</div><img src="shots/usgs.jpg" alt="USGS map with list of recent earthquakes, magnitude first, synced to the map"></div></figure></div>
+  <div class="notes">
+    <div class="borrow"><h4>Borrow</h4><p>A live event list kept in step with the picture, with the magnitude as the first thing on each row and the time in UTC.</p><span class="fit">fits: the feed of newly observed identities and TCB changes beside the timeline</span></div>
+    <div class="av"><h4>Avoid</h4><p>The map takes most of the space, and ours has no geography to show.</p></div>
+  </div>
+</section>
+
+<footer>Compiled for the Private Inference Observatory. Screenshots taken 2026-11-24 at 1440 px wide. The sites may have changed since.</footer>
+</div>

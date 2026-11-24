@@ -1,6 +1,6 @@
 # Repository guide
 
-Private Inference Beat connects three kinds of work: observing what providers
+Private Inference Observatory connects three kinds of work: observing what providers
 publish and serve, auditing what those observations actually constrain, and
 critically testing the verifiers and policies used to interpret them. Its public
 outputs are a route comparison and a reference values explorer. The verifier

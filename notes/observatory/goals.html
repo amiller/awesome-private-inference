@@ -1,0 +1,171 @@
+<title>Private Inference Observatory Goals</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, figures in framed panels; measured values set in mono like an instrument log */
+:root {
+  --bg: #f3f5f6; --panel: #ffffff; --fg: #15212b; --muted: #55636f; --rule: #d5dce1;
+  --accent: #0e6a73; --accent-soft: #e2eff0; --warn: #b8660b; --ok: #2f7d4a; --bad: #a83a32;
+  --display: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11181e; --panel: #182229; --fg: #e3e9ed; --muted: #95a3ae; --rule: #2c3a44;
+  --accent: #4fb8c1; --accent-soft: #19343a; --warn: #e3a04a; --ok: #6cc28a; --bad: #e2786e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11181e; --panel: #182229; --fg: #e3e9ed; --muted: #95a3ae; --rule: #2c3a44;
+  --accent: #4fb8c1; --accent-soft: #19343a; --warn: #e3a04a; --ok: #6cc28a; --bad: #e2786e; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 16px/1.65 var(--body); }
+.wrap { max-width: 46rem; margin: 0 auto; padding-block: 3rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { display: grid; gap: .8rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+.eyebrow { font: 500 .78rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 700 2.4rem/1.1 var(--display); margin: 0; text-wrap: balance; }
+.lede { font-size: 1.13rem; margin: 0; }
+h2 { font: 600 1.4rem/1.25 var(--display); margin: 2.9rem 0 .8rem; text-wrap: balance; }
+p { margin: 0 0 1rem; }
+a { color: var(--accent); }
+code, .m { font-family: var(--mono); font-size: .87em; }
+ul, ol { margin: 0 0 1rem; padding-left: 1.25rem; display: grid; gap: .45rem; }
+figure { margin: 1.5rem 0; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 1rem; }
+figcaption { font-size: .86rem; color: var(--muted); margin-top: .6rem; }
+.fig-scroll { overflow-x: auto; }
+svg text { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+svg .lab { fill: var(--fg); font-weight: 500; }
+svg .box { fill: var(--panel); stroke: var(--rule); stroke-width: 1.2; }
+svg .obs { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+svg .arrow { stroke: var(--muted); stroke-width: 1.3; fill: none; }
+svg .tap { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 3 3; fill: none; }
+.tbl { overflow-x: auto; margin: 1rem 0 1.5rem; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { text-align: left; vertical-align: top; padding: .55rem .6rem; border-bottom: 1px solid var(--rule); }
+th { font: 600 .76rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.goals { list-style: none; padding: 0; gap: .9rem; }
+.goals li { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: .9rem 1rem; }
+.goals b { font-family: var(--display); font-weight: 600; }
+blockquote { margin: 1.2rem 0; padding-left: 1rem; border-left: 3px solid var(--accent); font-style: italic; }
+blockquote footer { font-style: normal; font-size: .85rem; color: var(--muted); margin-top: .3rem; }
+.page-foot { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .85rem; color: var(--muted); }
+@media (max-width: 480px) { h1 { font-size: 1.9rem; } }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Proposal · November 2026</div>
+  <h1>Private Inference Observatory</h1>
+  <p class="lede">A private inference client decides which software to trust by comparing an attestation against a list of reference values, and today that list is written by the provider, adopted by the client automatically, and rarely checked against what actually runs. The observatory we propose keeps an independent, dated record of every reference value that was published, observed in a live attestation, and accepted by a client. Its goal is to make a transparency policy workable: a client should be able to accept only values that have been public for a while, and anyone should be able to settle later what was running and whether it was acceptable at the time.</p>
+</header>
+
+<h2>Attestation moves trust from the provider's machines to whoever writes the reference list</h2>
+<p>Start with what a careful client does. It sends a fresh nonce to the inference machine and gets back a quote, a statement signed by the CPU vendor's key that reports the machine's measurements (boot firmware, kernel, the compose file that lists its containers) along with the nonce. The client checks the signature chain up to Intel, AMD or NVIDIA, checks the nonce, and then compares each measurement against a list of expected values. If they match, it sends the prompt.</p>
+<p>The first two checks are mechanical, and in the first 111 days of our daily runs they recorded no verification failures. The third check is where the decision is made, because the signature only proves that the machine is running <em>some</em> measured software. Which software is acceptable is whatever the list says. So the question becomes who writes the list and how a client gets updates to it. In the 50 verifying clients we reviewed, the usual answer is that the provider writes it and the client takes each new version without asking:</p>
+<ul>
+  <li>teep and NEAR's gateway accept the latest Sigstore-signed router release.</li>
+  <li>tinfoil-go accepts any release or policy Tinfoil signs.</li>
+  <li>Privatemode accepts any manifest served from its CDN, over plain HTTPS, unsigned.</li>
+  <li>Maple's signatures cover the PCR0 text only, not PCR1 and PCR2, their order, or their retirement.</li>
+</ul>
+<p>A client like this has trust-on-first-use, with the first use delegated to the list's author. That is a reasonable design, as long as somebody is watching what the author publishes.</p>
+
+<figure>
+  <div class="fig-scroll">
+  <svg viewBox="0 0 720 250" width="720" role="img" aria-label="Diagram: provider publishes reference values, machine returns a quote, client compares them; the observatory records all three with dates">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+    <rect class="box" x="20" y="20" width="190" height="62" rx="5"/>
+    <text class="lab" x="34" y="44">Provider publishes</text><text x="34" y="62">release, golden set,</text><text x="34" y="76">on-chain compose list</text>
+    <rect class="box" x="20" y="112" width="190" height="62" rx="5"/>
+    <text class="lab" x="34" y="136">Machine attests</text><text x="34" y="154">quote over measurements</text><text x="34" y="168">and the client's nonce</text>
+    <rect class="box" x="300" y="64" width="170" height="68" rx="5"/>
+    <text class="lab" x="314" y="88">Client compares</text><text x="314" y="106">quote vs. its list,</text><text x="314" y="120">then sends the prompt</text>
+    <path class="arrow" d="M210 51 H255 V86 H298" marker-end="url(#ah)"/>
+    <path class="arrow" d="M210 143 H255 V110 H298" marker-end="url(#ah)"/>
+    <rect class="obs" x="20" y="200" width="680" height="40" rx="5"/>
+    <text class="lab" x="34" y="225">Observatory: dated record of published, observed and accepted values</text>
+    <path class="tap" d="M20 51 H10 V220 H20"/><path class="tap" d="M60 174 V200"/><path class="tap" d="M385 132 V200"/>
+    <rect class="box" x="540" y="64" width="160" height="68" rx="5"/>
+    <text class="lab" x="554" y="88">Readers</text><text x="554" y="106">client authors,</text><text x="554" y="120">providers, auditors</text>
+    <path class="arrow" d="M620 200 V134" marker-end="url(#ah)"/>
+  </svg>
+  </div>
+  <figcaption>The client's decision rests on two inputs that change independently. The observatory sits beside the flow and keeps each input with the date it was seen, so a disagreement between them can be found and argued about afterwards.</figcaption>
+</figure>
+
+<h2>Pinning breaks on every redeploy, so a transparency policy needs a monitor</h2>
+<p>The obvious alternative is to pin: write the expected values into the client and refuse anything else. One of our own clients did this against a Phala gateway, and it broke the next time the gateway was redeployed and its compose hash changed. Our observations show why. The router and gateway layers of these services get a new identity every few days, while the per-model machines behind them stay almost static. Any client that pins the outer layer goes stale within a week.</p>
+<blockquote>That's really unacceptable rigid pinning, we know the data on how often they do this because of our observatory awesome-private-inference. We have to be more robust.<footer>Andrew Miller, 2026-11-22</footer></blockquote>
+<p>The middle path is the one certificate transparency took for TLS. A client accepts a value only if it appears in a public, timestamped log, optionally after a waiting period, so that a bad release has to sit in public view before anyone trusts it. Most of the pieces already exist. Tinfoil's releases go to Sigstore's log. NEAR's compose hashes are added on chain with an <code>addComposeHash</code> call, so a client can require that a hash has been on chain for some minimum time. Seen this way, the gap between providers is mostly a difference in client policy. But a log only protects anyone when someone reads it. In certificate transparency that job belongs to monitors, which watch the logs for certificates that shouldn't be there. The observatory is meant to be that monitor for private inference.</p>
+
+<h2>Published, observed and accepted values are three records that often disagree</h2>
+<p>The observatory keeps the three apart. A value appearing in a publication says nothing about whether any machine runs it. A value appearing in a quote says nothing about whether the provider approved it or any client accepts it. The daily export, <code>reference-values.json</code>, says this in its own policy field: it is a read-only feed of observations and must never be used as a client allowlist. The first time we see a value is also not the time it was deployed, since a long-running machine may simply be sampled for the first time.</p>
+<p>Keeping the three records separate is what makes disagreements visible:</p>
+<ul>
+  <li><b>Chutes.</b> On Oct 12 an instance returned a valid, current quote bound to our nonce whose MRTD matched none of the 55 published rows. It was an older golden-set value that had since been withdrawn. We had not kept the raw quote, so the case cannot be replayed today, and the observatory now retains raw quotes for exactly this reason. Chutes' published set has grown to 62 rows over four base-VM versions, and none of the rows varies by model or image. The published values constrain the base VM, not the code that serves a given model.</li>
+  <li><b>RedPill.</b> Its Chutes verifier reads no MRTD or RTMR at all. Its policy for dstack upstreams pins app IDs, KMS roots and the compose hash instead.</li>
+  <li><b>teep.</b> teep's allowlist lagged NEAR's Nov 4 OS measurements (teep#233). The export exists so that teep and other clients can diff their allowlists against what is actually being served.</li>
+</ul>
+
+<h2>Some reference evidence exists only if someone keeps it at the time</h2>
+<p>NEAR runs each model machine with a deployment service (compose-manager) that keeps a log of every container it has started, and binds the log to the machine's quote. That log is the only record of which serving code a machine ran. Since Nov 13 the service prunes the log to seven days, and NEAR's own pull request says a verifier "has to keep its own copy". Authenticated history is whatever somebody fetched with their own nonce on the day. Git tags, which name many of the images, are not a transparency log either, since a tag can be moved. So the observatory now keeps one raw record per NEAR machine per day: the quote, the deployment log, the TLS certificate fingerprint and the TCB status. That costs about 70 MB a year for the fleet.</p>
+<p>TCB status is the clearest case of a reference value that changes with time. Whether a firmware level is acceptable depends on the date: a level that is current in May is out of date once Intel publishes a newer one. Because we kept every NEAR gateway quote from April onward, we could rate each one against Intel's dated TCB history afterwards. Every quote from April to October was out of date.</p>
+
+<figure>
+  <div class="fig-scroll">
+  <svg viewBox="0 0 740 168" width="740" role="img" aria-label="NEAR gateway TCB level by date, April to December 2026">
+    <g stroke="var(--rule)" stroke-width="1">
+      <line x1="90" y1="44" x2="712" y2="44"/><line x1="90" y1="80" x2="712" y2="80"/><line x1="90" y1="116" x2="712" y2="116"/>
+    </g>
+    <text class="lab" x="8" y="48">0b0102</text><text x="8" y="60" style="font-size:9.5px">OutOfDate·9</text>
+    <text class="lab" x="8" y="84">0b0103</text><text x="8" y="96" style="font-size:9.5px">OutOfDate·4</text>
+    <text class="lab" x="8" y="120">090308</text><text x="8" y="132" style="font-size:9.5px">UpToDate</text>
+    <g fill="var(--warn)">
+      <circle cx="146.4" cy="44" r="5"/><circle cx="170.9" cy="44" r="5"/><circle cx="261.5" cy="44" r="5"/><circle cx="484.5" cy="44" r="5"/>
+      <circle cx="308" cy="80" r="5"/><circle cx="486.9" cy="80" r="5"/><circle cx="555.5" cy="80" r="5"/>
+      <rect x="565.3" y="76" width="27" height="8" rx="2"/>
+    </g>
+    <rect x="594.7" y="112" width="76" height="8" rx="2" fill="var(--ok)"/>
+    <g stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 3">
+      <line x1="592.3" y1="24" x2="592.3" y2="140"/><line x1="700" y1="24" x2="700" y2="140"/>
+    </g>
+    <text x="586" y="18" text-anchor="end" style="fill:var(--accent)">our client moves to Direct, Oct 23</text>
+    <text x="712" y="18" text-anchor="end" style="fill:var(--accent)">Dec 6</text>
+    <text x="712" y="30" text-anchor="end" style="fill:var(--accent);font-size:9.5px">Direct ends</text>
+    <g>
+      <text x="90" y="158">Apr</text><text x="163.5" y="158">May</text><text x="239.5" y="158">Jun</text><text x="313" y="158">Jul</text>
+      <text x="388.9" y="158">Aug</text><text x="464.9" y="158">Sep</text><text x="538.4" y="158">Oct</text><text x="614.3" y="158">Nov</text><text x="687.8" y="158">Dec</text>
+    </g>
+  </svg>
+  </div>
+  <figcaption>NEAR gateway TCB level in each retained quote, rated with dcap-qvl against Intel's dated TCB evaluation data (9 and 4 are the advisory counts). Dots are saved captures, bars are daily checks. The two old levels alternate, which points to two gateway hosts. New firmware arrived Oct 24, the day after our Abalone client stopped trusting the gateway and pinned a model machine directly.</figcaption>
+</figure>
+
+<p>Whose minimum applies is a reference value too. Tinfoil's router reports AMD SEV-SNP firmware <code>0x17</code> and <code>0x1B</code>. AMD's November bulletin sets <code>0x1D</code> as the minimum, while teep and tinfoil-go accept anything from <code>0x0E</code>. All of these are reasonable to publish, and a client should know which one it is applying.</p>
+
+<h2>How an image is named decides whether an outsider can derive its reference value</h2>
+<p>A compose file names each container image, and the measurement covers the name, not the image's contents. To say anything about the code, someone has to resolve the name to bytes. Auditing five NEAR model machines this month, we found that each way of naming an image takes a different amount of work to resolve:</p>
+<div class="tbl"><table>
+  <thead><tr><th>Image named by</th><th>What resolving it took</th><th>Machine</th></tr></thead>
+  <tbody>
+    <tr><td>Digest</td><td>The deployment log alone</td><td class="m">gpu02, gpu04</td></tr>
+    <tr><td>Tag</td><td>NVIDIA's catalog shows the tag was pushed Feb 12 and never moved</td><td class="m">gpu03</td></tr>
+    <tr><td>Unpinned pip build</td><td>Replaying PyPI's history at the build date, plus Docker's cache rules</td><td class="m">gpu23</td></tr>
+    <tr><td>Source build</td><td>An offline rebuild</td><td class="m">gpu23</td></tr>
+    <tr><td>Private image</td><td>Nothing works from outside</td><td class="m">gpu13</td></tr>
+  </tbody>
+</table></div>
+<p>The pip case shows that a public package index can serve as a reference anchor. The build inside the VM installed unpinned packages, but PyPI keeps a public, dated record of every upload and removal. Given the package names and the build date, the set that pip would have resolved is determined. One of them, fastapi 0.162.0, had been uploaded 3 minutes 18 seconds before the build ran. A scan of 3.5 million PyPI changelog events found that no file the build could have used was later removed. That leaves a reviewer with 61 distributions to read, 177 MB compressed. Following this standard, we reached a positive opinion on three of the five machines and not on the other two, which means a client following the same standard would route to some NEAR machines and avoid others.</p>
+<p>Some expected values can also be derived without the provider's help. Our dstack-mr derivation computes the boot measurements of a dstack OS image without starting a VM. Where we have not done the derivation yet, as for the NEAR gateway's RTMR0, the missing check is our gap and not the provider's fault, and the observatory reports it as our unfinished work.</p>
+
+<h2>The observatory has five goals</h2>
+<ol class="goals">
+  <li><b>Keep the record.</b> Retain published, observed and accepted reference values with their dates and raw evidence, per machine where the provider exposes machines, so that a later question about what ran can still be answered.</li>
+  <li><b>Make transparency policies practical.</b> Export observed values with first-seen times so clients can diff their allowlists and require a waiting period. Archive the things that are not logs today, like git tags and pruned deployment logs.</li>
+  <li><b>Derive expected values independently.</b> Rebuild or compute measurements from source, resolve image names to bytes, and record which values nobody outside the provider can derive.</li>
+  <li><b>Assess routes against stated criteria.</b> The Private Inference Beat tab applies proposed stage criteria to each request path, in the manner of L2Beat. The Awesome Private Inference tab tracks every third-party verifier and what it actually checks.</li>
+  <li><b>Let clients act on it.</b> A client should be able to choose a provider or a machine based on what the observatory has seen, and switch when the evidence changes. Our own client's Oct 23 move to a single directly attested NEAR machine is the first case.</li>
+</ol>
+<p>NEAR's Direct endpoints, which let a client choose a machine, close on Dec 6. After that the audit data stays available, but it can no longer steer a request, and nobody outside NEAR can confirm the machine list is complete. Recording changes like this as they happen, while they can still be checked, is the reason to run the observatory continuously rather than auditing once.</p>
+<p>The rest of the work is described in the companion brochure: a per-machine archive for every fleet, funded API access for credentialed tests, an independent heartbeat, reader testing, and a tamper-evident log. Throughout, we assume the CPU vendors' hardware roots of trust are sound.</p>
+
+<p class="page-foot">Private Inference Observatory · github.com/amiller/awesome-private-inference · evidence as of 2026-11-24</p>
+</div>
