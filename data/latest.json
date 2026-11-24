@@ -13,19 +13,19 @@
             "reasons": []
           },
           "catalog_serving_tested": false,
-          "compose_hash": "261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a",
+          "compose_hash": "f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1",
           "event_payloads_bound": true,
           "identity_continuity": "not available in deployed ACI draft",
-          "models": 44,
+          "models": 33,
           "os_archive_metadata_status": "checked",
           "os_image": "dstack-0.5.12",
           "os_image_event_bound": true,
           "quote_report_data_bound": true,
           "raw_evidence_completeness": "complete",
-          "raw_evidence_ref": "observations/evidence/sha256/0a2054d5d2cb26a8ec95a0900bfcde23298af3070746c2d5357b7cfc62b3caf7.json",
-          "raw_evidence_sha256": "0a2054d5d2cb26a8ec95a0900bfcde23298af3070746c2d5357b7cfc62b3caf7",
-          "repo_commit": "3147f87151bb1960349a30022187108b2cbdfc70",
-          "sessions": "91/91 with evidence",
+          "raw_evidence_ref": "observations/evidence/sha256/0d101fa4028d27d301b3149601a8321d287ea1029e7d85c2c8b7dc187ef0ccb4.json",
+          "raw_evidence_sha256": "0d101fa4028d27d301b3149601a8321d287ea1029e7d85c2c8b7dc187ef0ccb4",
+          "repo_commit": "9f3e693befca172c0672fc3af551cab253570540",
+          "sessions": "84/84 with evidence",
           "tcb_status": "UpToDate",
           "tee_only_domains": [
             "tee.redpill.ai",
@@ -34,20 +34,20 @@
           "verification_reason": "failed: attested serving for this hostname",
           "verification_status": "rejected",
           "workload_identity_endorsed": null,
-          "workload_keyset_digest": "sha256:b7f84d538c1f7763171fd24e7b340c06a06c863c7a638fcac7bb88fd58976301"
+          "workload_keyset_digest": "sha256:c34f925a1a15d98bc9c3a192289a89153b05f79726828b54d87782e871879253"
         },
         "error": null,
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:49:57Z",
-          "last_capture_at": "2026-11-24T00:49:57Z",
+          "last_attempt_at": "2026-11-24T21:57:17Z",
+          "last_capture_at": "2026-11-24T21:57:17Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
         "latency_s": 0.0,
         "model": "api.redpill.ai",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/00d71b240a1e65dce0fd7c79",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/00d71b240a1e65dce0fd7c79",
         "outcome": "rejected",
         "outcome_reason": "unspecified",
         "outcome_reason_detail": "failed: attested serving for this hostname",
@@ -87,7 +87,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "",
         "valid": false,
-        "verified_at": "2026-11-24T00:49:57Z"
+        "verified_at": "2026-11-24T21:57:17Z"
       },
       {
         "attestation_type": "aci-gateway",
@@ -101,7 +101,7 @@
             "reasons": []
           },
           "catalog_serving_tested": false,
-          "compose_hash": "261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a",
+          "compose_hash": "f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1",
           "event_payloads_bound": true,
           "identity_continuity": "not available in deployed ACI draft",
           "models": 33,
@@ -110,10 +110,10 @@
           "os_image_event_bound": true,
           "quote_report_data_bound": true,
           "raw_evidence_completeness": "complete",
-          "raw_evidence_ref": "observations/evidence/sha256/dee8a3feaa1707ec0e3a20980751afcfa05f6fe3bfdc8c5f47190fb0f4f36dfa.json",
-          "raw_evidence_sha256": "dee8a3feaa1707ec0e3a20980751afcfa05f6fe3bfdc8c5f47190fb0f4f36dfa",
-          "repo_commit": "3147f87151bb1960349a30022187108b2cbdfc70",
-          "sessions": "91/91 with evidence",
+          "raw_evidence_ref": "observations/evidence/sha256/a278d93798506d383798deeb3d5b0e8969facaaf47ee0752e47683b79a0d48df.json",
+          "raw_evidence_sha256": "a278d93798506d383798deeb3d5b0e8969facaaf47ee0752e47683b79a0d48df",
+          "repo_commit": "9f3e693befca172c0672fc3af551cab253570540",
+          "sessions": "84/84 with evidence",
           "tcb_status": "UpToDate",
           "tee_only_domains": [
             "tee.redpill.ai",
@@ -122,20 +122,20 @@
           "verification_reason": "quote, event log, compose, keyset, pinned boot registers and production image archive all verified; upstream model CVMs and the paid request path remain unverified",
           "verification_status": "verified",
           "workload_identity_endorsed": null,
-          "workload_keyset_digest": "sha256:b7f84d538c1f7763171fd24e7b340c06a06c863c7a638fcac7bb88fd58976301"
+          "workload_keyset_digest": "sha256:c34f925a1a15d98bc9c3a192289a89153b05f79726828b54d87782e871879253"
         },
         "error": null,
         "freshness": {
-          "last_adapter_verified_at": "2026-11-24T00:49:56Z",
-          "last_attempt_at": "2026-11-24T00:49:56Z",
-          "last_capture_at": "2026-11-24T00:49:56Z",
+          "last_adapter_verified_at": "2026-11-24T21:57:17Z",
+          "last_attempt_at": "2026-11-24T21:57:17Z",
+          "last_capture_at": "2026-11-24T21:57:17Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
         "latency_s": 0.0,
         "model": "inference.phala.com",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/4437789d9406a763a912f52a",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/4437789d9406a763a912f52a",
         "outcome": "verified",
         "outcome_reason": "unspecified",
         "outcome_reason_detail": "quote, event log, compose, keyset, pinned boot registers and production image archive all verified; upstream model CVMs and the paid request path remain unverified",
@@ -175,7 +175,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "",
         "valid": true,
-        "verified_at": "2026-11-24T00:49:56Z"
+        "verified_at": "2026-11-24T21:57:17Z"
       },
       {
         "attestation_type": "aci-gateway",
@@ -189,7 +189,7 @@
             "reasons": []
           },
           "catalog_serving_tested": false,
-          "compose_hash": "261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a",
+          "compose_hash": "f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1",
           "event_payloads_bound": true,
           "identity_continuity": "not available in deployed ACI draft",
           "models": 33,
@@ -198,10 +198,10 @@
           "os_image_event_bound": true,
           "quote_report_data_bound": true,
           "raw_evidence_completeness": "complete",
-          "raw_evidence_ref": "observations/evidence/sha256/10934109283cc30d7f654f7479f88494efd59eef666622398cb11e53801cd905.json",
-          "raw_evidence_sha256": "10934109283cc30d7f654f7479f88494efd59eef666622398cb11e53801cd905",
-          "repo_commit": "3147f87151bb1960349a30022187108b2cbdfc70",
-          "sessions": "91/91 with evidence",
+          "raw_evidence_ref": "observations/evidence/sha256/84dc49bc9425f826bf101f1f823430527fbdcf408fa478f90ca4d4e92c6517cc.json",
+          "raw_evidence_sha256": "84dc49bc9425f826bf101f1f823430527fbdcf408fa478f90ca4d4e92c6517cc",
+          "repo_commit": "9f3e693befca172c0672fc3af551cab253570540",
+          "sessions": "84/84 with evidence",
           "tcb_status": "UpToDate",
           "tee_only_domains": [
             "tee.redpill.ai",
@@ -210,20 +210,20 @@
           "verification_reason": "quote, event log, compose, keyset, pinned boot registers and production image archive all verified; upstream model CVMs and the paid request path remain unverified",
           "verification_status": "verified",
           "workload_identity_endorsed": null,
-          "workload_keyset_digest": "sha256:b7f84d538c1f7763171fd24e7b340c06a06c863c7a638fcac7bb88fd58976301"
+          "workload_keyset_digest": "sha256:c34f925a1a15d98bc9c3a192289a89153b05f79726828b54d87782e871879253"
         },
         "error": null,
         "freshness": {
-          "last_adapter_verified_at": "2026-11-24T00:49:56Z",
-          "last_attempt_at": "2026-11-24T00:49:56Z",
-          "last_capture_at": "2026-11-24T00:49:56Z",
+          "last_adapter_verified_at": "2026-11-24T21:57:17Z",
+          "last_attempt_at": "2026-11-24T21:57:17Z",
+          "last_capture_at": "2026-11-24T21:57:17Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": "2026-10-14T01:46:15.925973Z"
         },
         "latency_s": 0.0,
         "model": "tee.redpill.ai",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/3ffbae04915bf04dfe8f6ba0",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/3ffbae04915bf04dfe8f6ba0",
         "outcome": "verified",
         "outcome_reason": "unspecified",
         "outcome_reason_detail": "quote, event log, compose, keyset, pinned boot registers and production image archive all verified; upstream model CVMs and the paid request path remain unverified",
@@ -263,7 +263,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "",
         "valid": true,
-        "verified_at": "2026-11-24T00:49:56Z"
+        "verified_at": "2026-11-24T21:57:17Z"
       }
     ],
     "chutes": [
@@ -275,26 +275,16 @@
               "advisory_ids": [],
               "gpu_attested": true,
               "gpu_reason": null,
-              "instance_id": "cf6d2531-9dab-414e-ab30-50265e6a9fac",
+              "instance_id": "53fa6a80-e0ae-42ec-85ef-cf1cbb26c78e",
               "matched_rows": [
                 {
                   "expected_gpus": [
                     "h200"
                   ],
-                  "fingerprint": "5cc3777496109c1c989989a4ab8b2034b1f9e7bafa647632d26b29e9fb3429de",
+                  "fingerprint": "10767e27ad390eefa76198b17671809cd21a940cee24dd28bf26d1ed438d8cd9",
                   "gpu_count": 8,
                   "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
-                  "version": "1.5.0"
-                },
-                {
-                  "expected_gpus": [
-                    "h200"
-                  ],
-                  "fingerprint": "96441690f18f413c47ab190b94f3f0bba61345750f5cb5811659ef6abcdc482c",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
+                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node0]",
                   "version": "1.5.0"
                 }
               ],
@@ -302,7 +292,7 @@
               "no_match_reason": null,
               "outcome": "verified_core",
               "reason": null,
-              "rtmr0": "ba81dbf034d968fd4be0975c031cbe6451295d63cb509cd857372fc915dada1b24fc4e1b0486db4a276a9efb49d415e6",
+              "rtmr0": "052183ad6cca5ad4aef7e31dc3f6c47be2ba90c288a55420bf432301374f1bd9932ea7d6b5da999c4fecf578c4b0a21a",
               "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
               "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
               "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
@@ -371,23 +361,77 @@
               "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
               "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
               "tcb_status": "UpToDate"
+            },
+            {
+              "advisory_ids": [],
+              "gpu_attested": true,
+              "gpu_reason": null,
+              "instance_id": "a17a8441-143d-4ff2-9dd9-152523dc59b3",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "h200"
+                  ],
+                  "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
+                  "version": "1.4.0"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "verified_core",
+              "reason": null,
+              "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "8feee49b83c0f912f9ab9366a7423f65417bb60223c1871a5d55e84d92d741c80017b3f856317c45295255db70f8dc3e",
+              "rtmr3": "7e7adbc834a3e746278f28c607a94ba93407a7b25055daca4836cc6003e9bfb5f48836fa0e1d6ab6637c187dd142e5f6",
+              "tcb_status": "UpToDate"
+            },
+            {
+              "advisory_ids": [],
+              "gpu_attested": true,
+              "gpu_reason": null,
+              "instance_id": "d0df5ec0-2792-49ea-aa1c-3998b7deb232",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "h200"
+                  ],
+                  "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
+                  "version": "1.4.1"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "verified_core",
+              "reason": null,
+              "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+              "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+              "tcb_status": "UpToDate"
             }
           ],
           "fleet_all_instances_pass": true,
-          "fleet_size": 3,
+          "fleet_size": 5,
           "fleet_size_semantics": "count of instances listed by /e2e/instances at verification time; the response carries no pagination or total-fleet field, so a listing cap cannot be ruled out from the response alone",
           "golden_publication": {
-            "canonical_json_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
-            "captured_at": "2026-11-24T00:50:10Z",
-            "rows": 63,
+            "canonical_json_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
+            "captured_at": "2026-11-24T21:57:37Z",
+            "rows": 64,
             "url": "https://api.chutes.ai/servers/tee/measurements"
           },
-          "golden_set_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
+          "golden_set_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
           "gpu_evidence_count": 8,
-          "instance_id": "cf6d2531-9dab-414e-ab30-50265e6a9fac",
+          "instance_id": "53fa6a80-e0ae-42ec-85ef-cf1cbb26c78e",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-          "raw_evidence_ref": "observations/evidence/sha256/ef68b8370ba189bf3edddc9760d45c3cebd891b9bfe1fd91b5172c9934597c66.json",
-          "raw_evidence_sha256": "ef68b8370ba189bf3edddc9760d45c3cebd891b9bfe1fd91b5172c9934597c66",
+          "raw_evidence_ref": "observations/evidence/sha256/1f4c2b2f6e4bbe0ec4eab9af2f795dc239158eb07e82cae70ef591ef69c09f81.json",
+          "raw_evidence_sha256": "1f4c2b2f6e4bbe0ec4eab9af2f795dc239158eb07e82cae70ef591ef69c09f81",
           "shape": "chutes-tee",
           "verification_reason": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
           "verification_status": "not_checked"
@@ -395,15 +439,15 @@
         "error": null,
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:50:29Z",
-          "last_capture_at": "2026-11-24T00:50:29Z",
+          "last_attempt_at": "2026-11-24T21:58:08Z",
+          "last_capture_at": "2026-11-24T21:58:08Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 19.99,
+        "latency_s": 31.86,
         "model": "DeepSeek-V3.2-TEE",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/a0b09435b8e2f51056367ab9",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/a0b09435b8e2f51056367ab9",
         "outcome": "not_checked",
         "outcome_reason": "verification_incomplete",
         "outcome_reason_detail": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
@@ -439,11 +483,11 @@
           "tee_hardware_config": null,
           "tls_pubkey_pinned": null
         },
-        "signing_address": "cf6d2531-9dab-414e-ab30-50265e6a9fac",
+        "signing_address": "53fa6a80-e0ae-42ec-85ef-cf1cbb26c78e",
         "signing_algo": "ecdsa",
-        "signing_public_key": "YCacmICL7Wosoix51heZw2Ul3nbOUJYxo2GGVgRKB6xxLbAP4lK33tOzbnfAYgSGP6aaNMV03UuTq7C55PGJhbi7cRMUOEBq5caS3JsYBckZoGiNIbV5wFKcqrBwjCozADcS1TeIZpCsy5IS5dkAtEkfccZSvWy7RQcwZxRzfwG5tKAFGeKgnjQr7KgKN0NqHwa4pXxKclcO48HNvwyogNB24/o13Fcu1yJQ2QquwYLDzeeoTMtB67AUeVDNvSNsxZWlJQeLKfPA8xjMBdzBw8BCC7q8eCoUk2lO2cMF6aFzz5ok6rin2PSDCDhQSJZ+XwtPl1q6pyZSvXGrZ8siB3c1AqhslaqZR/K7QUGQ6KiidPfPuCN0poTGDod5Q7MuYZai2lxC6tWDemR51OQicrOGe4kxFuF6jxgA6wW7pki2HPI+lnScyMG8QOWpXTBklEGFjtw2CdgGDnsiyGQbmFIVrBC3wLlPxadvguMSMJFUkFBUILvJytKD6dUeAcsu07OHmpYliSA43VErvhBrw4RbmLiJYxnI4ssb2ZIZg7HKyGiWIBlRVWzI6SyFiJU+iMIc6xuOrDe+C2F3s+C9uRS9s+YoYMRkSHhjCGq6WIt9htrGJeWI5gJMZNWF+suGZsKmNtnARWQGUHMVVve3jIgjILJmyKNUbQJU32CYElCkGQGKFYR5H/XHvBDJiQh1PoMTeaWCW7xnrZtEJyCOWXdyf/bGjlMd1twwbkYTdDabGhWUIPRdpiiidxZMzWolPLlZ/ApyW8wwZGES7VIi6Tyk+rIqT7FwAipnUXJjVzQNDFh/B2Sb4OeGsxVSKGcjcBhKgGxggfY79KFfhhAledGVP8XEptMlDZGUyMgbVtGTULpqzpDG1AsyUNaRlXY3MVkvBaKq+SIkiZdD+6gqv/bKpWm3e0V/EOu6siY8OLkgpTu5EGi0mtOFzlxvl0M2tLJWZMqh9kR9ddutVXpglVsXIcPM6SGCNey175FxmmAPUSheKQYUBwSjKTmodOA4n+kDGWO6JSKqkMKTH1vJR2B/sExuJ2cIkMIiwcxmarR/rJIkRNQ2t3kstJO2vQMjZXPLAia+QZu6s+yvmlFY1BDGc5Gmn9cgDYmgQNWymCNpUcdx8ERdYCkjgrC6KuRzI2g2ubpOmNB3o9F3BsKTA2wmNZFre5Klz+gCSAhvUYK4mkhP12Br0gqWeuNX/hCEnXJnaKmLkzVafeNVBsqeIrVVTLgvLPSy08tx3Fy02YsyjFwilpK2xjh7xdY2jZVdB1UoNsIztHi0G7t48ae3lxO8ySAI8wJngpQXhcMThnx5COlhOhRmgsJvdjFIjMdMPKQBd8sPrGXP5egkxLyaJiJit1x5a1Bj/ORW3LfNjfiVTjlC7cXLA0oHxWZhb0EPoloK/EZBMRaJIhMAcYA71ucafWOrORxalUNg0sVyR0VkZ/cqjQMPR/KelRdgSoTIGCtJZ4UJvwB9V6Qg7js3kfwxWceRB5wEiJZrPpFCdxFpltgbNoOVF8Ve3GShpZtM2AJ1R1cAnEXlEhoIrwgtmLg2qliXcvPCeWJn+HHSBjw=",
+        "signing_public_key": "yKqnEOnO22BcBgJXpMk2XCXJPwc3AuEpCcRhLOXDG+qxGTUchKtrfmu4G5sjfeczwuDPoqgOo7lxtcZOyPGNDlfKHYCn+Rdwl9bP6wmAC9OeirS1XJWNEWeKtyzI3OB5+hjK7yUAW+lR5iRAnZEEjVSxfehOSfa30tOHbZxBHHbMffsDWgYxxfxM8FQBHYaxw7uqiZWQ1QONMHUWWOI42TeCFHUClxapbok+zviygBSOJsFxpYgaqHZuI3ivXXeufYZl8YiJWYy8SegNqOJmV7HHmYq6PpGsxcZM/yAkFoIUhWKvPSZpO4Zd6lYPVCauEzgm6PBCTsA6kuVbZ8cITzbKOvQlDNBmNly5uZatqWNoOxo4zdAYxxNPq5y3b3dHDNuS9rGL1diJmLOtVKZKrXIUmWOPvRYPEEsf8glgBjAx8FtnyaGGxAqNhKkXaLRQ03JKJUy9LwhKURFOWFOGt7GJf4q5YZiy8vuDvsIMUPIv2Tg4nMzIQbpmsTcvDlC5ElZAORE8qUR1eOiWjkGXPjTFcLUQ4PvLZYXJobV2iWxF65ygnIDP2PSaJsnNnnGrSwM4VQkUDguRrGLFdqVOsNGQRWJ3t5EvD5XNZNMtnjwLdmmjtwKeJwPLjuCmyMwcRgliuiEgyBKHYYLELquYLntwyDLKredzzCc3SwV2/hKrRDEb/AmfhQe8uUYoc/KIjJesPwtdCNogRCBJjwFssgIsDlwYgxBehZxd47UwXhezvAACP7o0VBwipQdBGrLDuONkJhpfiKIFKaaAU2pLODs+0QoZdMMsOTpmrcJu5hqF/hkiarizN5I2VnrAKDsDgkSp3/yzkNmUNwul+QrHBDelAueW3epTRZcm6jOd36MOK/m+gSB6YWwuA6GVFYlOlfGDtLrNoThnasiWcocF67wmduR0D+wlZ3vKrOhAJyJc0MNLlxETJfMHc0FSWsh/VQcgUOpVPyq+VmgabJChlggzl7ld2zRXhrEjlDKyzjaxyXm8v8Vvq6qjD+amYTXOZvnBfcABpEQNHdi4GYElM7OubyQnOWW1U+A7kFVA2RKwSNTK3hbNHcOHxbuPN1pu4kC4CkpbzoEvKrd74nhS6iIn10QmylU8a1kk6quYMaA+2ZRsIvQe06TFATnH24k4n2i43fiTjvClQncEL2w9KuA9GuCHf0iH7+lgJPsrJZyqMwhR1rkQ4dYSAYxcFtzIK5NSz4CFGAywUWdNsMmpIAN0HGgIeTVem/osBBqdhWN6nAa+oonPJPUT62aU6vmD6WSzk9Qx/uR2wDKg+YhwR4SXLPe2yziKxeJCxxnAAehoinwGS1EoEWlnf9eaRdAMPnRfVAG2+cvPzrE2EUaK3ekw5rlzo3y3yUJA8yqZ7DYAbgxZGhS5yrmc0jMOYANvhUBrOcOeGCYGH9Ub9oxnpLCRJIRRx8Kg3kSkPWxoyuekPxlvaTt+XFRmL9vKP7gCswhPBSnJ9qxqcCYEuDmnlTK1GrGMGdJ60snJacZF5iV3xLFsCzsqMmtluZZtQmOzYD/fBTG/V7+SJda8tmOvdOE7wGbudbTW9gn9ma9y7iY=",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:29Z"
+        "verified_at": "2026-11-24T21:58:08Z"
       },
       {
         "attestation_type": "chutes-tee",
@@ -453,26 +497,16 @@
               "advisory_ids": [],
               "gpu_attested": true,
               "gpu_reason": null,
-              "instance_id": "5fb4bf27-55de-452c-9575-9c686c27abf7",
+              "instance_id": "c0bb5723-ea84-4c79-866a-3fb743b34f8e",
               "matched_rows": [
                 {
                   "expected_gpus": [
                     "h200"
                   ],
-                  "fingerprint": "113584a6e4c217ab275b4ae0e6bcb06a6d29e348d10e6c3cf54f2974afa3d7fb",
+                  "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
                   "gpu_count": 8,
                   "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, flat-188c-1128g-nvsw4]",
-                  "version": "1.4.1"
-                },
-                {
-                  "expected_gpus": [
-                    "h200"
-                  ],
-                  "fingerprint": "087841b9447a25322515d5d0c47e7c5610004c8b5c9d5a04d420a1b1776a0dbc",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, flat-188c-1128g-nvsw4]",
+                  "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
                   "version": "1.4.1"
                 }
               ],
@@ -480,7 +514,7 @@
               "no_match_reason": null,
               "outcome": "verified_core",
               "reason": null,
-              "rtmr0": "b72208e4b39593a82bbdbc394569bd6f8395f76bdcff5bce2bc72f4e2ca0b3202238d3b78952b497d725e04999e45435",
+              "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
               "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
               "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
               "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
@@ -544,6 +578,43 @@
               "advisory_ids": [],
               "gpu_attested": true,
               "gpu_reason": null,
+              "instance_id": "5fb4bf27-55de-452c-9575-9c686c27abf7",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "h200"
+                  ],
+                  "fingerprint": "113584a6e4c217ab275b4ae0e6bcb06a6d29e348d10e6c3cf54f2974afa3d7fb",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xh200 [10.2.1, flat-188c-1128g-nvsw4]",
+                  "version": "1.4.1"
+                },
+                {
+                  "expected_gpus": [
+                    "h200"
+                  ],
+                  "fingerprint": "087841b9447a25322515d5d0c47e7c5610004c8b5c9d5a04d420a1b1776a0dbc",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xh200 [10.2.1, flat-188c-1128g-nvsw4]",
+                  "version": "1.4.1"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "verified_core",
+              "reason": null,
+              "rtmr0": "b72208e4b39593a82bbdbc394569bd6f8395f76bdcff5bce2bc72f4e2ca0b3202238d3b78952b497d725e04999e45435",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+              "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+              "tcb_status": "UpToDate"
+            },
+            {
+              "advisory_ids": [],
+              "gpu_attested": true,
+              "gpu_reason": null,
               "instance_id": "a42996b9-95ab-47cd-9899-aa19b2529faa",
               "matched_rows": [
                 {
@@ -566,60 +637,23 @@
               "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
               "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
               "tcb_status": "UpToDate"
-            },
-            {
-              "advisory_ids": [],
-              "gpu_attested": true,
-              "gpu_reason": null,
-              "instance_id": "c1d36d87-aec3-4eb3-83e5-27c8606b61e6",
-              "matched_rows": [
-                {
-                  "expected_gpus": [
-                    "h200"
-                  ],
-                  "fingerprint": "5cc3777496109c1c989989a4ab8b2034b1f9e7bafa647632d26b29e9fb3429de",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
-                  "version": "1.5.0"
-                },
-                {
-                  "expected_gpus": [
-                    "h200"
-                  ],
-                  "fingerprint": "96441690f18f413c47ab190b94f3f0bba61345750f5cb5811659ef6abcdc482c",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
-                  "version": "1.5.0"
-                }
-              ],
-              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-              "no_match_reason": null,
-              "outcome": "verified_core",
-              "reason": null,
-              "rtmr0": "ba81dbf034d968fd4be0975c031cbe6451295d63cb509cd857372fc915dada1b24fc4e1b0486db4a276a9efb49d415e6",
-              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
-              "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
-              "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
-              "tcb_status": "UpToDate"
             }
           ],
           "fleet_all_instances_pass": true,
           "fleet_size": 5,
           "fleet_size_semantics": "count of instances listed by /e2e/instances at verification time; the response carries no pagination or total-fleet field, so a listing cap cannot be ruled out from the response alone",
           "golden_publication": {
-            "canonical_json_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
-            "captured_at": "2026-11-24T00:50:09Z",
-            "rows": 63,
+            "canonical_json_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
+            "captured_at": "2026-11-24T21:57:37Z",
+            "rows": 64,
             "url": "https://api.chutes.ai/servers/tee/measurements"
           },
-          "golden_set_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
+          "golden_set_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
           "gpu_evidence_count": 8,
-          "instance_id": "5fb4bf27-55de-452c-9575-9c686c27abf7",
+          "instance_id": "c0bb5723-ea84-4c79-866a-3fb743b34f8e",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-          "raw_evidence_ref": "observations/evidence/sha256/56e7b19adf7f78589746a03f1cc3dc7b50c85facc3591c9e65b9ef48a309e054.json",
-          "raw_evidence_sha256": "56e7b19adf7f78589746a03f1cc3dc7b50c85facc3591c9e65b9ef48a309e054",
+          "raw_evidence_ref": "observations/evidence/sha256/abe9e0ef86ba60052c33a4753232284c18c137572775c2167e2d515324f9e40f.json",
+          "raw_evidence_sha256": "abe9e0ef86ba60052c33a4753232284c18c137572775c2167e2d515324f9e40f",
           "shape": "chutes-tee",
           "verification_reason": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
           "verification_status": "not_checked"
@@ -627,15 +661,15 @@
         "error": null,
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:50:40Z",
-          "last_capture_at": "2026-11-24T00:50:40Z",
+          "last_attempt_at": "2026-11-24T21:58:09Z",
+          "last_capture_at": "2026-11-24T21:58:09Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 30.84,
+        "latency_s": 32.79,
         "model": "GLM-5.1-TEE",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/b235d29e0611a47a6545e128",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/b235d29e0611a47a6545e128",
         "outcome": "not_checked",
         "outcome_reason": "verification_incomplete",
         "outcome_reason_detail": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
@@ -671,11 +705,11 @@
           "tee_hardware_config": null,
           "tls_pubkey_pinned": null
         },
-        "signing_address": "5fb4bf27-55de-452c-9575-9c686c27abf7",
+        "signing_address": "c0bb5723-ea84-4c79-866a-3fb743b34f8e",
         "signing_algo": "ecdsa",
-        "signing_public_key": "HZR5n4qSDTICcYsuyhqFPWI17HAFA9UgczsRZsjMtoF+7XCnOBARNgGSCnuzPfcUjrUX7URNFqR7AKO5cso3r/ebTwJVT7NXheqLBZGIMNWM5Zu15pdTWase7DPGCdyq9QR4x4uF1TwF4qsyHzSbrQRWn9gmeYOh8PkVg/tYCOk4tdAGzoJUCToJ6wwEGCSNBLowjfkyAaMxfriv5zdMsNA6sQhaT7VK6zMfkkLDJlRyaJpRwfFH5yxNDgvA1kdWRbVnIkw/h/JEpmcFFcV1fmCtoOx7QKwrCPJs9ZMIkqoiu1K41HYR4BXGXNOdkdTHkHN30OybojSMrQqP1/OHk2g2dcMRbaGVCLFM1is5giB8wNYba/pMDEaBGYSW6+BwhlUGmoq5ItwrjfZaKVUd4eGdleckafkU+qSoYDt2bCYtfZJaUGLIU9uPXIqnWdAKrsM9lisgvdTLx3dW15rA2nMhsfquQ7xjiGQNa3Bn7mxM4jCAh5XGbApX1jjPM9jJP9CltRGolKC8u+gPnfFDCYIpa4cuFsVlUiHBRHXKHmm+AqN4mCsNw9TISAG4qAJ2d0CiZfBLCNBFk5yqtvZx0PUoL/U5cOGr4EcjN2euoXdi8mmGHtbJaqZV2BR2vWlsZMsWN5qxxJmbpOto1yhrzosE+GpnaaRNXnGJtNh+BElQvmyaFaOYyjuW5TZ9xUR4juWCd/JdTZo0stdp/KKC51o4BSHG1WYs9bQnD4uZl/I9HJi615e+OJAGIWCMmvEFMMSKCgScAEgjb/VJh/dWZ/IoxeFfNJOvN7I8mEl7t5t4EoY0bdu9+NW4ITEvjeaO9eiITdk714VBYgkZu5jOsgsm0lI7AUfAhYilp6NSvxFR1EO/cjHLWEiLeNCsfQm4i0ywANI6M7myCfe9QXhF5EJzFCWjWVXDV+UJvkgargszEhGhzlIeUhQwvqRF0KoGv5WZsTa5eFEFaYRQXYdnKVWSv+QQTsITWMYlx6wv+sdYL/bOojqms8o2sZtTSXCeaMyW6Og+T1OCcWvAQbgLTCUngkR8blcbcuyEU9Qwl+Q+IIqy/cM6mdpSMGLEySysAHRXEYQmyEc9kHtu2ahn9/kH7LmfJBrE8fs3QgFdu0YD2od3VSkCkug8baek7XvIbnQprelfZ8kDyrZ6ZJJYocRTzhdOl0O/kRuHobN7pfG0mXGeTCZaBJeYYUms+JZHX0CdD5FyVnBD4SwcyNYG9eoFNpDN7AbIESE2VTZ4GVPCLlpHd7NUnpltAthsZIYlePt71wTMuwW4abRxGcg49EBEn1nJcFBwzlw7fxSbFuihlrAFh+Ks/Xue+pMUpCM+osg7WHqQ6AiTN8x0m2vJCAt97VMQDWNP5jd8soC4jxa9pgKMARNAKMa52wJvg1W+iMTMTtCKsoO+eKacDSZ2m/rBUxWu4bJZRwNp2kEiEseGnAiwBIZx5vBti/s7atLNSVmX+DFJamYGLqgvITQo5rIejtOqcZd2UJmK2Bo2jEx2I8y28Hy4hmBYaKaP4StVf46pnzHBHE9GWVo3IRdst+UF2iRKYGON95Cxvbs64BM=",
+        "signing_public_key": "dEcqqwlkx4BFytnLs4CgwuHBc+F29nvGUPiMXfVlPupLHDSz4ad06zeF04xM9Kit8piBKwSjF4lS5ZUmLkoClpGEm4NuWGbBp0MAoTdVKBWHjsJy4dYsubbBCHyDFHGIQxOaR2PCSDJSGpI+y9yJnrU8aysLrfmdl7E/0jNrD2ieoXqaCAFRqbijtsjJ9tBc7EqCHQd9jXKNPxx7o7K7KfCRLHucV4JQZicyB8acnfLPo0II92bMExZf5eFYQLSwSkSnQTmWL1eP8gZHI5xPi1RBrsbNc+ySrtSGC4lFTPI0TQweG9igdVBe8utBogcPZ5CoCRy60vGFEUOI2+lLiLilp7BFG1MSlHx9deOrHFzM89xnxlySzcVMFPjKp7hzzZc2AhDDgdYlrDR5+bBqlleVnlWAuUK9ECglnlRwGRDB0MFSYeKNOewe24pu8GyR+dxlvUseDlxTDMBfUQAD5ThGp7mAsme6daPAavtsRlC4ZBgvWmzKTpWz+HsVEnk/jELFqAx8mgR+sMeprNyYhKF0uyuXJYuoYWAkQbREuWouS+EfyeEKgtWcJ6zCz5AxWUVtzgHAdVEeh1AggwNvOXS6XDwONcia6WA+ZBiUqYw+QiekZdKI1ILEWGqh3GZrvIxhZGWQFOfGDNolJYRdREawYroDcqY+homoN/OFoIyESzDGsxd8quI6R+zDgjtR1Cc7XyLE7Xo2XpkW9xALitZOwdOGykFn+zSuH1yyjxhzfDfCbwwkGVWYDnoXrcXPz4FfQwChRBSJQGxLzCsZyBSv2QwI0uWNvQYkxBcW5PN+utmTnzB33GYm+gweJsc+bthtyms+khQ0gWpEUAy35DHN5tYryJgyOeetsyStunbJOGpOl7QrBxiDDhLOqnE3AYiPK8KHhVvN5AhfSimjupgqFKp1+kufiowCaQEqY3pRDkbGDcgjxzOv7uaJYlxg0hiiswg9yYUc8isr4mKLEnKi20hTs3Kr3TNq4ibGQBKyPuo/09mNwXcbCzkb63vMJ7UvK/MvTxKxGqqh7loFWkPAmVRHXAhUfzJ7SmQ7lkNMvfKGZaMglSUecQq9sgoiYydEdBuw9UiwJutXIICUj1EZQRCQrRnBNIGbTwGDPICGjUmBE+w94CQa7idqs0SqyElS4WcU4mK//klA8UoDZlsNS/s+8zFpsNsiq0NcAZVN1eROW1YdB/i9SAWxO9uHbjOemcJGyrNwYnMsEoFxKlbCiLgG5qF9l1MRgVB9IMOaBLzFnSIuK9sHO6BeWKgN/8F0YwrMHyF9PiBTWYCzVmSUTLdpQEuSiOkqi9NJZosokSSixgYSMZefa8x0+vSLmYt8q7nDUBtM2byyebYHDtg6EIR11fs8AZOxeuG4uekXCCsc6rzH/dJRgcyoeVwrspGQumCpcXlgPvRNSIBcQFdVjpSUlHxCV2tQCZlu4cJHlSMEr0y8XzQhxxNCovVK1MxcudyLm2mv4kZgqXYddQCtZXV4KtExdRs1oTxeSxFsR2jKzsEZZhFVAXSoMDWGLOBb8Y8d/e0dk/lbr7mYI9udCkwSFNrk/hBj1/VIXxo=",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:40Z"
+        "verified_at": "2026-11-24T21:58:09Z"
       },
       {
         "attestation_type": "chutes-tee",
@@ -712,7 +746,7 @@
               "advisory_ids": [],
               "gpu_attested": true,
               "gpu_reason": null,
-              "instance_id": "1806bbf5-9a3b-4238-a924-9b59bd460555",
+              "instance_id": "f27664c0-7ff7-46ee-8f50-b589ef4a1476",
               "matched_rows": [
                 {
                   "expected_gpus": [
@@ -739,7 +773,7 @@
               "advisory_ids": [],
               "gpu_attested": true,
               "gpu_reason": null,
-              "instance_id": "b94fa6fb-c27d-4183-8c96-4b2ed98dfb6c",
+              "instance_id": "1806bbf5-9a3b-4238-a924-9b59bd460555",
               "matched_rows": [
                 {
                   "expected_gpus": [
@@ -794,17 +828,17 @@
           "fleet_size": 4,
           "fleet_size_semantics": "count of instances listed by /e2e/instances at verification time; the response carries no pagination or total-fleet field, so a listing cap cannot be ruled out from the response alone",
           "golden_publication": {
-            "canonical_json_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
-            "captured_at": "2026-11-24T00:50:10Z",
-            "rows": 63,
+            "canonical_json_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
+            "captured_at": "2026-11-24T21:57:37Z",
+            "rows": 64,
             "url": "https://api.chutes.ai/servers/tee/measurements"
           },
-          "golden_set_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
+          "golden_set_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
           "gpu_evidence_count": 8,
           "instance_id": "86b7a1b1-d910-4c7d-8120-92a9fb4c6470",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-          "raw_evidence_ref": "observations/evidence/sha256/7986e4c487063b7e8b8b13d3b7653dcf20871cd4913f86e890fd41aff8821169.json",
-          "raw_evidence_sha256": "7986e4c487063b7e8b8b13d3b7653dcf20871cd4913f86e890fd41aff8821169",
+          "raw_evidence_ref": "observations/evidence/sha256/a54a198ef431bb4026a75ce85cc010da853466ba97202977b9b136b99ef00fa7.json",
+          "raw_evidence_sha256": "a54a198ef431bb4026a75ce85cc010da853466ba97202977b9b136b99ef00fa7",
           "shape": "chutes-tee",
           "verification_reason": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
           "verification_status": "not_checked"
@@ -812,15 +846,15 @@
         "error": null,
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:50:36Z",
-          "last_capture_at": "2026-11-24T00:50:36Z",
+          "last_attempt_at": "2026-11-24T21:58:03Z",
+          "last_capture_at": "2026-11-24T21:58:03Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 26.82,
+        "latency_s": 26.91,
         "model": "GLM-5.2-TEE",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/741aa5a30354216131743478",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/741aa5a30354216131743478",
         "outcome": "not_checked",
         "outcome_reason": "verification_incomplete",
         "outcome_reason_detail": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
@@ -860,12 +894,93 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "fGVBLXWbaZwRXbKLXMCnQsZa1rERJ2BfvPwTqcG/NEtsZjJNO4sr0Zs4sKQFcJhHc6ijpgVc+eNXL/V06qIIMqJEatlYbGFxEEKXLLMTZDQWVAqUZSnJJulWrsU1ncqsoJO+ZJV5WOWUvGfG0oZtoItlkpglfuZglOKYbmaxDxod/fttaAW9BkUjcVsYtaoECpJi03gDTwaWX/qiitkb9kSbDzW3YVFH/vJYkLGQG+k5hto6XbPMohcJ+abM7iVmCrQvo2kDP+liWjlYegAiohEkxMOOjddkvpV+37wirhp24gtbe7urssxx1sdhpBQ+m3YcOxeutEw5ZEo2cAClxJWzIqFhbsEXeLy8AvI+rwVU7bpKwPoq2ptKH7HES0epWuMJJDNebKVAx3rAg5ZjcAUNRdzCYJqOsFkNr/Z/usUr2sK/pDRDpVlrm7Oro8fHs4BVIkUqpfOPKjYwTKwGx9ZcjGCW1JxiTcRxOLQ9FlsFmaQEMrDAh5cxsvSz6ul9h5SpAPg1fldVlBAQ7guDm5s0pTZJghx7j+LFzyiHs1yyiuBtO8y545NGWJjHwwMk7LtuRrStyXErIkdfcJM28DrGAdJltuF7UiRhk5lUB3Ul3PorX0NKz8jLdlqHaylyKoAGK8QKwbaA0ziMSNd3Ndu+belwXzy5tgiVTdNSL1Fr6BlqhkgiPIxKYmVg16mOjWN2Epi6NxwgreuAjbcktaLNm4a88RSD57eq5hB0pJRbkLRtP1wHPzQDnLhaOPeZAIhSyiYR86OIVFBI25kXWmS/zKsqURCI7ka9C0uxW4krV8l5mWEur6xZUAZNJcGZ3AFp4AJuJ8m5/fsjHeoWnshFXbQiomMFuTnFiVLDl+it+9Uy4LQNQgE44li/7ZxFPnO0ukpSNAAu4jd/5wiNl3IEe2OjuasMxeQhjRWoBPU5TNLBwKQ6XVozqfTI46ULFkdIGEkbBzg3rwkcoPMn1WGU28vN9KZn3/uov6xSSdiOLxoQwYrNwIgmPmY5W8kZhbUNIlDCK+JsxTLPd2SKsVIWXTCEbQQgz3tjGKoCBxho7BybncYzTGaZVjs5YCTLMAuGv9mnEOYXcbtBZoIjdtI0EmdbbFZvHYDDRgkABsBH37u0vMQXQGxGNwoqbcdEbQcraVNVJeOS+SDKDQUT2EVni6tT8vsc7KtljPsCueW+ZlGSGDw9zpyDJLYh1jqwIYltriq5qmANL+OqglBUiCNww6Ky8NErIRM8t9aSIRuDWjOmyRy4yynK1hpNCFLMhdVIMglgvPR7HFK2aUW26hZiB9qMxNW0vwQfs3LB3qvGlvt0+ey9oKU5TLdVQiwnLFcMgih2MjpKaMhyFlc4DfsUZ8ud1PkW/+cyODuJpQIq4KBSDYCTrYFkxFMOEwiHYdK+jbq1bhKmDeC9xFO7YWF1evEaFANrM9Je2dxF9+onqJHNVicp7GkXVlRoRBJEGUB+35tUrSaVrOeOMvkYSTF68is6cnIqGUV80kVJ35OhSAlnG5Br5EBhyzWaBmfGWVcBdXswjQLaQAuZvgOJD2KY+KRpZsB0TH/gGupFWc0=",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:36Z"
+        "verified_at": "2026-11-24T21:58:03Z"
       },
       {
         "attestation_type": "chutes-tee",
         "details": {
           "fleet": [
+            {
+              "advisory_ids": [],
+              "gpu_attested": true,
+              "gpu_reason": null,
+              "instance_id": "9a1ed4ac-404f-48a3-a4fb-7c8d2d59d38c",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "h200"
+                  ],
+                  "fingerprint": "5cc3777496109c1c989989a4ab8b2034b1f9e7bafa647632d26b29e9fb3429de",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
+                  "version": "1.4.1"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "verified_core",
+              "reason": null,
+              "rtmr0": "ba81dbf034d968fd4be0975c031cbe6451295d63cb509cd857372fc915dada1b24fc4e1b0486db4a276a9efb49d415e6",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+              "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+              "tcb_status": "UpToDate"
+            },
+            {
+              "advisory_ids": [],
+              "gpu_attested": true,
+              "gpu_reason": null,
+              "instance_id": "010f28b7-db59-4d8c-80b5-8a65b6146d19",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "h200"
+                  ],
+                  "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
+                  "version": "1.4.1"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "verified_core",
+              "reason": null,
+              "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+              "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+              "tcb_status": "UpToDate"
+            },
+            {
+              "advisory_ids": [],
+              "gpu_attested": true,
+              "gpu_reason": null,
+              "instance_id": "f1b1919d-2a17-4299-bec6-bf21ae22e5ba",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "h200"
+                  ],
+                  "fingerprint": "5cc3777496109c1c989989a4ab8b2034b1f9e7bafa647632d26b29e9fb3429de",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
+                  "version": "1.4.1"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "verified_core",
+              "reason": null,
+              "rtmr0": "ba81dbf034d968fd4be0975c031cbe6451295d63cb509cd857372fc915dada1b24fc4e1b0486db4a276a9efb49d415e6",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+              "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+              "tcb_status": "UpToDate"
+            },
             {
               "advisory_ids": [],
               "gpu_attested": true,
@@ -901,87 +1016,6 @@
               "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
               "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
               "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
-              "tcb_status": "UpToDate"
-            },
-            {
-              "advisory_ids": [],
-              "gpu_attested": true,
-              "gpu_reason": null,
-              "instance_id": "f1b1919d-2a17-4299-bec6-bf21ae22e5ba",
-              "matched_rows": [
-                {
-                  "expected_gpus": [
-                    "h200"
-                  ],
-                  "fingerprint": "5cc3777496109c1c989989a4ab8b2034b1f9e7bafa647632d26b29e9fb3429de",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
-                  "version": "1.4.1"
-                }
-              ],
-              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-              "no_match_reason": null,
-              "outcome": "verified_core",
-              "reason": null,
-              "rtmr0": "ba81dbf034d968fd4be0975c031cbe6451295d63cb509cd857372fc915dada1b24fc4e1b0486db4a276a9efb49d415e6",
-              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
-              "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
-              "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
-              "tcb_status": "UpToDate"
-            },
-            {
-              "advisory_ids": [],
-              "gpu_attested": true,
-              "gpu_reason": null,
-              "instance_id": "9a1ed4ac-404f-48a3-a4fb-7c8d2d59d38c",
-              "matched_rows": [
-                {
-                  "expected_gpus": [
-                    "h200"
-                  ],
-                  "fingerprint": "5cc3777496109c1c989989a4ab8b2034b1f9e7bafa647632d26b29e9fb3429de",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
-                  "version": "1.4.1"
-                }
-              ],
-              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-              "no_match_reason": null,
-              "outcome": "verified_core",
-              "reason": null,
-              "rtmr0": "ba81dbf034d968fd4be0975c031cbe6451295d63cb509cd857372fc915dada1b24fc4e1b0486db4a276a9efb49d415e6",
-              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
-              "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
-              "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
-              "tcb_status": "UpToDate"
-            },
-            {
-              "advisory_ids": [],
-              "gpu_attested": true,
-              "gpu_reason": null,
-              "instance_id": "ef626f9d-70dc-4983-8353-7591139db70b",
-              "matched_rows": [
-                {
-                  "expected_gpus": [
-                    "h200"
-                  ],
-                  "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
-                  "version": "1.4.0"
-                }
-              ],
-              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-              "no_match_reason": null,
-              "outcome": "verified_core",
-              "reason": null,
-              "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
-              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
-              "rtmr2": "8feee49b83c0f912f9ab9366a7423f65417bb60223c1871a5d55e84d92d741c80017b3f856317c45295255db70f8dc3e",
-              "rtmr3": "7e7adbc834a3e746278f28c607a94ba93407a7b25055daca4836cc6003e9bfb5f48836fa0e1d6ab6637c187dd142e5f6",
               "tcb_status": "UpToDate"
             },
             {
@@ -1026,17 +1060,17 @@
           "fleet_size": 5,
           "fleet_size_semantics": "count of instances listed by /e2e/instances at verification time; the response carries no pagination or total-fleet field, so a listing cap cannot be ruled out from the response alone",
           "golden_publication": {
-            "canonical_json_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
-            "captured_at": "2026-11-24T00:50:30Z",
-            "rows": 63,
+            "canonical_json_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
+            "captured_at": "2026-11-24T21:58:04Z",
+            "rows": 64,
             "url": "https://api.chutes.ai/servers/tee/measurements"
           },
-          "golden_set_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
+          "golden_set_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
           "gpu_evidence_count": 8,
-          "instance_id": "075eea5b-f014-497d-affd-bfdd8155f601",
+          "instance_id": "9a1ed4ac-404f-48a3-a4fb-7c8d2d59d38c",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-          "raw_evidence_ref": "observations/evidence/sha256/2d3f13a926b92397c78633aee104a7beb1dc219c22585b97bbb547e7c5d9a788.json",
-          "raw_evidence_sha256": "2d3f13a926b92397c78633aee104a7beb1dc219c22585b97bbb547e7c5d9a788",
+          "raw_evidence_ref": "observations/evidence/sha256/8fce356bce742a27eb1d9428f4390182a7c6d4e9697d9b128477afd3ccc16ec0.json",
+          "raw_evidence_sha256": "8fce356bce742a27eb1d9428f4390182a7c6d4e9697d9b128477afd3ccc16ec0",
           "shape": "chutes-tee",
           "verification_reason": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
           "verification_status": "not_checked"
@@ -1044,15 +1078,15 @@
         "error": null,
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:50:56Z",
-          "last_capture_at": "2026-11-24T00:50:56Z",
+          "last_attempt_at": "2026-11-24T21:58:37Z",
+          "last_capture_at": "2026-11-24T21:58:37Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 27.43,
+        "latency_s": 33.65,
         "model": "Kimi-K2.6-TEE",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/5c27791fdcd8f01aa06a6ee2",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/5c27791fdcd8f01aa06a6ee2",
         "outcome": "not_checked",
         "outcome_reason": "verification_incomplete",
         "outcome_reason_detail": "all sampled instances pass the crypto core, but serving code and selected model are not measured or verified",
@@ -1088,11 +1122,11 @@
           "tee_hardware_config": null,
           "tls_pubkey_pinned": null
         },
-        "signing_address": "075eea5b-f014-497d-affd-bfdd8155f601",
+        "signing_address": "9a1ed4ac-404f-48a3-a4fb-7c8d2d59d38c",
         "signing_algo": "ecdsa",
-        "signing_public_key": "iKSR5iNa8SAScCMSWquMkKp7wFkVidtwhLqJ43V2YgxHS0hu5BmwYCqce1U9C5KoB0DKoFs3wXZPnkSmAWiDbjijv1kkNXVz9vB7hQcSkKXCw9mMG2WzneI3LVWYApUq9wrHWEwrSVAHKKMQ5/cLzekB+TmpxRXBIYuG/hGuL1cuQ8OMdUsCGVYtUCyF+/U9b4VWnLyO2zoHSyu20GYNpPYcDMZw2CnNIzZAFeSWkqB5qjcwFHWqR4kzfEuQsDJxIkocXvwY5MVMqYw/m4iSxzEUJwtWWHA5/9YKeawhF4IwuXw0AjWKhXcu0Fq1fVaxaDCHUnIeHHCJCnsTXCFlbjlMAPRR0RhVp4B3a2Rwf0OV4cN3kdAb7oWm0+JQeemrVwRVRxPOWrVkJ0KK97Awj8MWRuMtT9V6gnSSeVlkB3jP3dlSc1gr57tXKIdCcfU0wQYP2xp7j2Uaobxe/RRZNmte9gWpT4ICqxuRFBa9o/GAysqJqJKO57zJOySrqCKdfHpMIzE69yyi8gK4HBvHEpQNvsoc7bTGiHdfWoQiXzYoyDWd3TY7XRirpas2coWyoMzHQhFrYDhQzqKvnbCVg/W53wAMK3B736BnfCZhpRolOlIUY7QA+bLG0YdriiqfE1huElOB/4mSzGYal6kab2uIwOA6TYZqTJeVFmAuhjBhaud/NBNB37Cx+Ug1ODMEefYlk0uzzXBIQ0plwreTSdl0v2eHWeUg4LpguadRB/cD37KnYgUwLWchFlquDhU0jfKLlTEwFHulYId+//IlGLChjbGKxAAP4ncFIphW/kselnmBKeqXa1poyOF26ZZ9QoVa5dw4MJgUpYgksLAGSEpS6+OwL8BSlFkHi4eAkqM1UjAVkPp0vbSRg4zCL8LFt/KyUBsMYxlEupVtvwwRbHnGNpbPdWBKAXMca4uyFTWMT/KDneQ2u0bPtigFiiufIiQITFJlb8Aagoe3EHBqpSm0CvIkWixbXQhNSwIKfQmAD4tQiFJaOZRaa4qEdOw05jQAWjGYWnEcREOB13Bqm3UAGkoFAzFT/fIzo/lzUnBfFgzEHnF8hjswkjLPavsT60FKaUPIKWB+clGyZ+WVr3VeRuoEidKNL8QJSJYlVmvEzNZZFVCP0CaYKwDHF1y6Zbuo7vup/NpLE0Msg/RYqjt8buKZOKrDeqE4ufI0NrqZusxrJ2eeFuIxqxQ1t3SM0hkIFqnC3NlSLvx1IPQ1H4mPyZuOSBGndwPNuIc4Joq4MxLHZaS2cMWGwbQrLeRIIjEKs9ppoWMFpDM9CRSQzCHMaww/VbdAOJMH08ViCbMOIAu4KVxYtmVIEOIEAJaaOkJjPjl9p8MY+WiInyEcCxlbxgkYfpoV5dWPqDYYj4AMOBwaAAKLnsy8l8Vod1tMIfWLBDNCQKg0yIMhy+bJt4QSMsFC3vm59vJmqVM4Kbi7+DxYW/o7NDVDd9efKumoeHGB89u2Y/dvSodIRitZoIMI4aqHJeYGqgB/5BwbgZBy34RWXNKk4jIBNMDGJcQSl7S821fQV2f/TUtss1KxwQ7ufg8r/HiUiC6N6G/ygNU=",
+        "signing_public_key": "Z2sUqsKq9aXOocOve5h4g0grRPdDKUoRECd+YQQ2Rac0ctpd3BeiSISnOQYZMtdkx3GWtTHMl6YnqfrNG7w/lDazwCO3QcK1doBcpKadWiE5TLmgNKR9Z4IOAIwrKeTLR9p7Mhx0+nZvEmN3iWeGpvoiqSwzinuv6MGHMgC2I1p7p8QyQniSSEho90ssk5pLWVsMNcmlCHQtCEWBTpamjvuF6GebRSg3nBG9oBggZGg0ECoWg6gjeLlP8KiXe9tHuJOvmolSDwxKRVU2HLdGFrM49cgeVia7EIOwh6U7alYajoggTBpiEqe+/bCj2SNGzTsKphcH2VmQ3vkVJwE9/3OcuwayhTZDqOA+nywPjfQBTbJF+wJ7OMwxWxvNOHe/G0Jzhdhr29qMo/pCgRLJYQZyduRcpKoF13URW0Cf/KoeWyVdjpt+ABdsuRbI9ZM0LygTHHywwqclTzZeKlQHmjucymQXPPVl7+SK5UaTXLY4GzRaZIiqNPZEw3AZv0ZEFKbFQHSnVnt6AtJoj0NeC8FXCgA9ZoCo7eRb2jiR3zdYQ9FFlBdxo7kjoaGo8/RlVfKz25c77/dXD2F9uvFgqjIvKdS9OFNnAUy/PzlO6VKT8kZ/4FLJGTydgupkDgCEUFUqviKTq1N06xdRkehQ27BjZiZdnjw971JJf5cVrkYX5KHCgteRz3NIM+lzGjoS6OHOeqmYBxcos6hsrJoWvSS7qAZaecyYFbjFOjoonMpVJqqNO1Y7LbRAdvikFCY98rusPno7bCM0NHkP6XYas1Usx2pPVYBjJZqId7uI3kEzITKcwwoqM6sQaEQNLbYeyxBEXKMWWPVP3bKjmJBaN6WTtoCc5ccVQETMUPDMx6F99nW653OIDfCAfJQLXLcpdZRKB8g/FQuvqeRuF5hASeen7csyDgBDcdes+hXJMxjIIrmuo0pK3EAiFeIyHfCywPR0LuKpu+yRaczBdgSy2dIFjajN8kafgrK9/bGoIxOqQ0BWmotZRBjMhRoJ7oiYrRZoZoCyN7pcV/yBNpAL4JwHtgK7p1uZpsiLOCPCwuGbx9iDhUQAyQATrcF5DywO4IgUcJFzAFNjfIK+AWRlGcJmy/gkmWVjFZVygTwRA1Sj2ncX+tcpa4IYgXQwWCc3t/aV11phhlVrwxxm0QuNeiU9veWhJ4U1/Ohmv+epHSVJCudnuaHL8WpFHZM/p+xIDgoA57KYXCepGqOSoLavrGtMYUxk8aS+lzoUT3x6DAJ4NKu6DJmOMnlAr/FJNIUWp3FAQtAhdmJ9C5kMXmdzPQQCKFcRtUU7uFGJfndt/EMyRAa5S/hwdWcMb7xZH+a3Box82za1WxsJ9tbL8KIvcEGkIMnB4NdbldZyNbFsWiVH2TJCWnSnrLvE0pd6GLTH5dxh/MMnvxBewje/1PrMHfQUqPa5CVO41zW+t3VYe/gBE+OZPjV0JctRbFurHzceFshRnbyeWgZCdCG8/nKM93Ns9Mp6tztYj0OupSWIsIWrBwE7oTQEWxALH6ivOwcf4J/QOTCk1OTmvbEPG+V+EnPMuf74yHME+D0jFbyL1ck=",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:56Z"
+        "verified_at": "2026-11-24T21:58:37Z"
       },
       {
         "attestation_type": "retired",
@@ -1130,34 +1164,7 @@
               "advisory_ids": [],
               "gpu_attested": false,
               "gpu_reason": null,
-              "instance_id": "ef2cf68a-513b-4fb5-ad1a-2577d49baa05",
-              "matched_rows": [
-                {
-                  "expected_gpus": [
-                    "pro_6000"
-                  ],
-                  "fingerprint": "58443435b208cd1f2da3984a692ffec6b621ce64bdf24267dcce1f6abe080483",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xpro_6000 [10.2.1, numa-124c-768g] (58443435b208)",
-                  "version": "1.5.0"
-                }
-              ],
-              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-              "no_match_reason": null,
-              "outcome": "rejected",
-              "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
-              "rtmr0": "bacb4abf7b19aba4a8307ebc7244706745de4fa627e669e7f06fd35c3303eea1903f58dc143d27b557da1a986e0e95f6",
-              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
-              "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
-              "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
-              "tcb_status": "UpToDate"
-            },
-            {
-              "advisory_ids": [],
-              "gpu_attested": false,
-              "gpu_reason": null,
-              "instance_id": "f5da2413-a9e2-4e5c-8c80-cb9eac255ab0",
+              "instance_id": "7b54c273-e4b6-40c2-babe-a8dd48064cac",
               "matched_rows": [
                 {
                   "expected_gpus": [
@@ -1184,34 +1191,7 @@
               "advisory_ids": [],
               "gpu_attested": false,
               "gpu_reason": null,
-              "instance_id": "ba139da5-0d57-41b0-b05c-9e1eb950d6f4",
-              "matched_rows": [
-                {
-                  "expected_gpus": [
-                    "pro_6000"
-                  ],
-                  "fingerprint": "f682063b2d580002b98bc8860e575d71d0002c7e399e70d0f514b227ae57509b",
-                  "gpu_count": 8,
-                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
-                  "name": "8xpro_6000 [10.2.1, numa-204c-768g]",
-                  "version": "1.5.0"
-                }
-              ],
-              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-              "no_match_reason": null,
-              "outcome": "rejected",
-              "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
-              "rtmr0": "a5488b5f4cf1484da23001e013a5ad3ff177836bf2cfdbde55dacded21b3eece5de43d4c4a2d5279f8ed8d24b9e072d6",
-              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
-              "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
-              "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
-              "tcb_status": "UpToDate"
-            },
-            {
-              "advisory_ids": [],
-              "gpu_attested": false,
-              "gpu_reason": null,
-              "instance_id": "ebc0fefc-2727-4630-8f4b-0067e61b4349",
+              "instance_id": "f990b089-6bec-46f7-9c22-3ccbcfcaaac0",
               "matched_rows": [
                 {
                   "expected_gpus": [
@@ -1238,7 +1218,61 @@
               "advisory_ids": [],
               "gpu_attested": false,
               "gpu_reason": null,
-              "instance_id": "9c1fdfef-72ab-48f0-8a94-26b68d28293a",
+              "instance_id": "a8ff7807-8f8c-4727-ad3c-fa316904293d",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "pro_6000"
+                  ],
+                  "fingerprint": "58443435b208cd1f2da3984a692ffec6b621ce64bdf24267dcce1f6abe080483",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xpro_6000 [10.2.1, numa-124c-768g] (58443435b208)",
+                  "version": "1.5.0"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "rejected",
+              "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+              "rtmr0": "bacb4abf7b19aba4a8307ebc7244706745de4fa627e669e7f06fd35c3303eea1903f58dc143d27b557da1a986e0e95f6",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+              "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+              "tcb_status": "UpToDate"
+            },
+            {
+              "advisory_ids": [],
+              "gpu_attested": false,
+              "gpu_reason": null,
+              "instance_id": "c3b111a9-7487-492a-a2af-a80346c8911a",
+              "matched_rows": [
+                {
+                  "expected_gpus": [
+                    "pro_6000"
+                  ],
+                  "fingerprint": "f682063b2d580002b98bc8860e575d71d0002c7e399e70d0f514b227ae57509b",
+                  "gpu_count": 8,
+                  "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                  "name": "8xpro_6000 [10.2.1, numa-204c-768g]",
+                  "version": "1.5.0"
+                }
+              ],
+              "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+              "no_match_reason": null,
+              "outcome": "rejected",
+              "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+              "rtmr0": "a5488b5f4cf1484da23001e013a5ad3ff177836bf2cfdbde55dacded21b3eece5de43d4c4a2d5279f8ed8d24b9e072d6",
+              "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+              "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+              "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+              "tcb_status": "UpToDate"
+            },
+            {
+              "advisory_ids": [],
+              "gpu_attested": false,
+              "gpu_reason": null,
+              "instance_id": "890f08ac-f294-431a-9a6a-91553d5c4a71",
               "matched_rows": [
                 {
                   "expected_gpus": [
@@ -1266,36 +1300,36 @@
           "fleet_size": 5,
           "fleet_size_semantics": "count of instances listed by /e2e/instances at verification time; the response carries no pagination or total-fleet field, so a listing cap cannot be ruled out from the response alone",
           "golden_publication": {
-            "canonical_json_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
-            "captured_at": "2026-11-24T00:50:10Z",
-            "rows": 63,
+            "canonical_json_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
+            "captured_at": "2026-11-24T21:57:37Z",
+            "rows": 64,
             "url": "https://api.chutes.ai/servers/tee/measurements"
           },
-          "golden_set_sha256": "30d02938a4d43cbb660531b8f7836faf75818e65ccc7ee9cd575211990981f51",
+          "golden_set_sha256": "70adcde976124c6d42cec239df3d96228cff88c56a58684803a55a899fb535d1",
           "gpu_evidence_count": 1,
-          "instance_id": "ef2cf68a-513b-4fb5-ad1a-2577d49baa05",
+          "instance_id": "7b54c273-e4b6-40c2-babe-a8dd48064cac",
           "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
-          "raw_evidence_ref": "observations/evidence/sha256/cc5feaadfbe6977ffc616717eb1318d9d148e6bf78cc7433a0ab10630bd1e4f2.json",
-          "raw_evidence_sha256": "cc5feaadfbe6977ffc616717eb1318d9d148e6bf78cc7433a0ab10630bd1e4f2",
+          "raw_evidence_ref": "observations/evidence/sha256/007668f698f6fc68c7fa84855b1496857f8b2cde11de573097fcc17b2133827a.json",
+          "raw_evidence_sha256": "007668f698f6fc68c7fa84855b1496857f8b2cde11de573097fcc17b2133827a",
           "shape": "chutes-tee",
-          "verification_reason": "instance(s) failed appraisal or evidence unavailable \u2014 ef2cf68a-513b-4fb5-ad1a-2577d49baa05: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; f5da2413-a9e2-4e5c-8c80-cb9eac255ab0: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; ba139da5-0d57-41b0-b05c-9e1eb950d6f4: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; ebc0fefc-2727-4630-8f4b-0067e61b4349: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 9c1fdfef-72ab-48f0-8a94-26b68d28293a: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+          "verification_reason": "instance(s) failed appraisal or evidence unavailable \u2014 7b54c273-e4b6-40c2-babe-a8dd48064cac: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; f990b089-6bec-46f7-9c22-3ccbcfcaaac0: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; a8ff7807-8f8c-4727-ad3c-fa316904293d: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; c3b111a9-7487-492a-a2af-a80346c8911a: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 890f08ac-f294-431a-9a6a-91553d5c4a71: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
           "verification_status": "rejected"
         },
         "error": null,
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:50:48Z",
-          "last_capture_at": "2026-11-24T00:50:48Z",
+          "last_attempt_at": "2026-11-24T21:58:22Z",
+          "last_capture_at": "2026-11-24T21:58:22Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 38.67,
+        "latency_s": 45.69,
         "model": "gemma-4-31B-TEE",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/bec27c693c1b775b82d4b459",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/bec27c693c1b775b82d4b459",
         "outcome": "rejected",
         "outcome_reason": "unspecified",
-        "outcome_reason_detail": "instance(s) failed appraisal or evidence unavailable \u2014 ef2cf68a-513b-4fb5-ad1a-2577d49baa05: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; f5da2413-a9e2-4e5c-8c80-cb9eac255ab0: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; ba139da5-0d57-41b0-b05c-9e1eb950d6f4: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; ebc0fefc-2727-4630-8f4b-0067e61b4349: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 9c1fdfef-72ab-48f0-8a94-26b68d28293a: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+        "outcome_reason_detail": "instance(s) failed appraisal or evidence unavailable \u2014 7b54c273-e4b6-40c2-babe-a8dd48064cac: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; f990b089-6bec-46f7-9c22-3ccbcfcaaac0: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; a8ff7807-8f8c-4727-ad3c-fa316904293d: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; c3b111a9-7487-492a-a2af-a80346c8911a: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 890f08ac-f294-431a-9a6a-91553d5c4a71: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
         "provider": "chutes",
         "row_status": "unknown",
         "scorecard": {
@@ -1328,11 +1362,11 @@
           "tee_hardware_config": null,
           "tls_pubkey_pinned": null
         },
-        "signing_address": "ef2cf68a-513b-4fb5-ad1a-2577d49baa05",
+        "signing_address": "7b54c273-e4b6-40c2-babe-a8dd48064cac",
         "signing_algo": "ecdsa",
-        "signing_public_key": "Q9yEKTPPmIIE+FF/5pofFZWVvDZjq0rBApcq48m+3rC2Jco/PudwSoxgElbF9aiF4ewRTmUUa4uQsEw4+akhSwUSA0dpEFeikeNxT0CYmDuoK5gZ3FMjajxIzQwfiZp3vTc5J1makelqjyCSqMHBeCk+e7ZUW1t6v8cCkQfDIkoYDSoRz1Q60tFOOzECCBJ3gFeIchxk8rAVrmhD67gw4bEP1tGM9zWFyTnE2Jo7YxIaCby+tKmAo7x1S6JBY0CfIeKayGotNBqpdHJi8/RSDAAqTJmiVgvQPbOYjAQkI0C68Lg0B/ueDEBIinwSv8TBdlwXLAwxbNNRYPFEmnqEkwBu4fWXxthMzfAa6IFNNAsyuAZJxoYr0hdP6FI2tBml3sxe92mCHvNMM2lG/hfO/bMUYyIpUROma5Nn52EQTZYTcHdH71AoE3tpsGUjgSAVULwCc1sXksukdVaPtWtbQoFfErpCD0t+VyYa7PFg30AzXKhKsnQhismqInTLkdKB8ZwSNJEpDCBuIHu2j9ydGgeWo0RnKNrAK0udg+EHFfYf7ru5iHmZ50crOGgbfWKe1hkYJxqhy9yOkkXGZlyjW9edWyl+EVOmv/CPMSig5VcOfZch+VyzO3zEcCTCV+cpA0y1A6Sck1uSpnc7ViA9C1omxJEfacKRboUS1shPhQkgouMnBqAsL/enaycP6YTNfMsLetyw9gIR77aMWXwn0cEbuoahOViH4OQSWQFY+KPNKkBtY3q0wtMc58IYdtq5oWld9muEWGMuylBMIFtqlBK2CCZcDsMHQZTGM8NIQ0qpp1A1wescsDldZOWidAm03tlbtdhKZqU0XpETNxMyfDB/DksY1dyiB1yw5/cOyuO0f0pZQqUWZcy+hIm6AAMDAREgCwGD79K5NChtxGKWsZC3/ZaoxqcRXsbKG4dVDxIKUTx29knFVqOoUuBbrMq2sBUZ5sFPI4CRbzU/rzaNMMaiQKFEqyHP/JQoyvonmWg9egE3FoR13MagzFopi3rOXTOm0NhAvLB1nmVAUjVdCrCYbjpM2QyE1cEYSFqYdMMr2qzP5JdE9mbPB7KrJ7BvCTUX7MUlH4bHfzIUT2gMKpSl/MEg39qYa2w1JsIGcckeXkyY79QdolOq3lBWLts1cYmbVWuDVPN7mjelM8wUXNjCcVqouJHAEGkmdtbEKpWM4SaTSFSjKzeAd/c05Vpbm6ENrOVjTjC0ttYw8jKPufqINsyTOMS2qJgscXDNNwDDu7kq3CtmV9UV1Rcoe7eboaViY1INiJa9k6DL67qMdFUksmVj1SnIyquqfdF+jpkTudzIzJZ6hfpvzRSIufqtImSC0JGoQ5yxmTBoayy34HUbv6qJbzxSTIBn9WYpzAGsraYeOcwlNLMIuCpG2EaVPqoAPRQKlDsxs4qlnmQ1mxui3IWBxNEYN1Z72aIkQCJKDGlIX3qa7FEVPicWqQC9VvYgPbpVpCdqpUd845yZm+NSU3QhyOSeyxCpUZZosyC/8KLBEGOwagoELvbPyySkJ2qZ92PkPydniIZay3+4wW2o5Fy1x3RX/u2LTs/68Uw=",
+        "signing_public_key": "DuKqyTG3xRW/U7IjBbLJCApcm9Khxiw6trVgJRXN9YIN76BCfOKcubx8JgmHp2VfLEtXtvQ86LZ1Rjk3jGkcUkqrxXJ615xEdIm2C7kwJrdNjWNbscSXJVodC7oH0OfLxxmGzHlZf+qNQCeHMJAmf7oGdTzFe7YkKIYeLkWHUkTIMjfBb8KjUKQ8wzR/nym72AK89NsWgGs3q8MKTeR8Xgydfdaj1TY81tCb0kIuS4iHARs2kngi18V3pBt+ggxlx+tvZDquUMZDZ2INNAGACZKzsBB5ews4tJBGCCcTLBXI9zl3ZEKVA8BACrBy6OF9oTfKYKAzgpqta+iX7YZmItaaX+MwNGFi2cxx9YBI3zA51ahqbGmAH/mmhNoTh3ilDBkQlehxd8fFqrxuC4ZBM/m8Bjl4/vWvGmGV12OOy8imaTg/ljcsIoQdLvGL3AQaR1Gmhchg6gieMrSnx8qz0uqQEXfBDcgRUjG/fUTOV9wbh/LODZFXQoIfWsqts/GfLTRtOksYnSUq4feDMEyJBjCpL9pUeCEY8HBZHuwY7Kl2Kdkt3Bkr6gaIHeiOtDEp62yPEja0yDqy47YXT4uE2zxVxje1YZhGbDO3DYQEvzwEe1tEtYRHJWUopoy1diVdGOMUxrRCZCdbAiF13LEGtIxwyECi4DSDTtSYO5LAi8MT0DePjUmZAIlY0beAq9pscvAijTxxlSOUCWIypwJH5BYJTzwFNRp6ssB0eBUuuWopDlwQ14arQ1E4QUtNfxguFNdIHLsxA2REKDFU8bLKSnxeHhxjyYNndroTxGRM6UIYPzmXM2Wr2BzM/UiuRUqq77hPnEdqpki9QQkeIuFAuihJPHOvKqCcVmVOZ5GFf6G4ndiXHsaW35p0+hmSnrzN9ZatQIYVPNBSfxk1UhnLatU/yJKKinsm5ydQFYWuRZE+RdqbCfBcHuEOpnAN21CvBZtZdxMWdwOjyPIgxpVicxZRJ6a6wWhxV1i2MzbAveVDOule0jk5VOcqgsAkDQQDjMYy/cjMw1QfjHzIEUwMOWPCYIYpX6AjjwwWplU/mEpo4KuW2bKp91Zc4hZXTmkNt7cVHNQMD/BMzBMlKbNLzaCpZxh6LKKlQmC1Rah48HZK9kYLF0ivONA+WbIMfWnINoPM77CfYdGTvjVcF/xKoLDMfBcxr5EOlAUOxvwDCCesnIuV+Se9BZukPwMn7gYK9Jy6W8EOf8xoVesYQwcPFPSXnyJEgqqlwAyTVfCefbG5PYaOQ/ioGFdEuiERA6d7mzIUiQLFyKyQCnWQTQEoLLAuVZp5QMyfD+GesRs6xlW8VNW8aCc9iYxrA7SkO7RiseuDiZhlntuWeoERJIOpCyMFfRfLxQZNbwxjZIeMQuF4U1ZLPaIFdPF9qmwLddF5piKkNtUP15aaKLU1PvQaYwYhsBsDrKdmt6Fqpee1akx2QQp819hRwptAjwoFJyyKYmF81MaoKpYHqLimn+BSOhC35cO5p/FigSpkDVu62wWUNPBFciXLA/OP9KiA2oJI3SezhYI077lCiu/JrlO3MAXUmh32xkXgN25bHxPYD80=",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:48Z"
+        "verified_at": "2026-11-24T21:58:22Z"
       }
     ],
     "near-ai": [
@@ -1342,9 +1376,9 @@
           "audit_key": null,
           "chain_authorized": true,
           "chain_snapshot": {
-            "block_hash": "0x0e1e451f44e47bb044e048ac31573275ab1f824def32bd6d408c248ff376d2fb",
+            "block_hash": "0x63114477b9a62f63745ce78143ede984aeb13d894021b9badd0728b76afaf5b7",
             "block_hash_rechecked": true,
-            "block_number": 61455112,
+            "block_number": 61835314,
             "chain_id": 8453
           },
           "cloud_api_image_digest": "d996bb08f36f0cc913ed7763f7c42bf4124e386a679e397a9acd8a3e69f3a704",
@@ -1354,13 +1388,13 @@
           },
           "gateway_chain_query": {
             "authorized": true,
-            "block_hash": "0x0e1e451f44e47bb044e048ac31573275ab1f824def32bd6d408c248ff376d2fb",
-            "block_number": 61455112,
+            "block_hash": "0x63114477b9a62f63745ce78143ede984aeb13d894021b9badd0728b76afaf5b7",
+            "block_number": 61835314,
             "chain_id": 8453,
-            "compose_hash": "1787a4af87eaf4bb139b555c3148ea6cffb01442b9fd7db4304e23b24f4db993",
+            "compose_hash": "a1c3d2e1455ea32d3434722f8867398a5e85e0dbd441f81e552a81641a09c424",
             "contract": "0xf550fdfb4eb8ad787c1bcd423f091cbb4a4431ae"
           },
-          "gateway_compose_hash": "1787a4af87eaf4bb139b555c3148ea6cffb01442b9fd7db4304e23b24f4db993",
+          "gateway_compose_hash": "a1c3d2e1455ea32d3434722f8867398a5e85e0dbd441f81e552a81641a09c424",
           "gateway_contract": {
             "code_sha256": "9e718734f9a4c65af468ed039c530c3cd94b7f107fa6a9d38e47184825a3b2eb",
             "contract": "0xf550fdfb4eb8ad787c1bcd423f091cbb4a4431ae",
@@ -1399,8 +1433,8 @@
               "app_id": "2c0a0c96cb6dbd659bf1446e2f3fce58172ff91b",
               "app_matches": true,
               "chain_authorized": true,
-              "chain_block_hash": "0x0e1e451f44e47bb044e048ac31573275ab1f824def32bd6d408c248ff376d2fb",
-              "chain_block_number": 61455112,
+              "chain_block_hash": "0x63114477b9a62f63745ce78143ede984aeb13d894021b9badd0728b76afaf5b7",
+              "chain_block_number": 61835314,
               "compose_hash": "e4b83d924284eece9b972d8e18bd88dac4dd529031b00311ef5044eaa60ba8d9",
               "deployments": {
                 "checks": {
@@ -1429,9 +1463,6 @@
                       "model-sg-qwen38-27b-fp8-tp1-coloc",
                       "nginx-qwen38",
                       "proxy-qwen38-27b-abliterated",
-                      "proxy-glm53",
-                      "model-sg-glm53-w4afp8-tp2-r1",
-                      "model-sg-glm53-w4afp8-tp2-r2",
                       "glm53-ghost-aggregator",
                       "proxy-flux2-klein-4b",
                       "model-sg-flux2-klein-4b-tp1",
@@ -1449,7 +1480,6 @@
                       "dcgm-qwen36-35b-a3b",
                       "dcgm-glm53",
                       "dcgm-shared-gpu3",
-                      "otelcol-contrib",
                       "model-downloader",
                       "model-downloader-qwen36",
                       "model-downloader-qwen38",
@@ -1465,6 +1495,25 @@
                       "qwen38-abliterated-registrar"
                     ],
                     "tag": "v0.0.615"
+                  },
+                  {
+                    "aged": false,
+                    "commit": "debab944ccf1f6556267998b9ce337505c03a8e7",
+                    "file": "prod/pack-small-models.yaml",
+                    "file_sha256": "6007cb4df8847563ed335ed0eb1a015ddf60f88e3b5aa4de215b9e036ef54c69",
+                    "first_seen": null,
+                    "public_sha256_matches": true,
+                    "services": [
+                      "otelcol-contrib",
+                      "sidecar-glm53-netns-a",
+                      "model-vllm-glm53-a-prefill0",
+                      "model-vllm-glm53-a-prefill1",
+                      "model-vllm-glm53-a-decode0",
+                      "model-vllm-glm53-a-decode1",
+                      "pd-router-glm53-a",
+                      "proxy-glm53"
+                    ],
+                    "tag": "v0.0.642"
                   }
                 ],
                 "min_age_s": 86400,
@@ -1486,8 +1535,8 @@
           "model_names_match_request": true,
           "policy_revision": "b7cb59fb74dc3eead8a20875f1a88b64fa21d94da4c5af4fe9ef09f60733a8cb",
           "raw_evidence_completeness": "complete",
-          "raw_evidence_ref": "observations/evidence/sha256/469bb110769e204ccccdb250fe2fe30ddaa6138f06c0da179774715ca8157982.json",
-          "raw_evidence_sha256": "469bb110769e204ccccdb250fe2fe30ddaa6138f06c0da179774715ca8157982",
+          "raw_evidence_ref": "observations/evidence/sha256/363d15743b63b24dc722ea7d482a9ef92baf42857fa95d9e372b1f369039a1f6.json",
+          "raw_evidence_sha256": "363d15743b63b24dc722ea7d482a9ef92baf42857fa95d9e372b1f369039a1f6",
           "request_path_verified": false,
           "signing_key_shared": true,
           "tcb_policy": {
@@ -1506,7 +1555,7 @@
             "gateway": {
               "advisory_ids": [],
               "debug_disabled": true,
-              "intel_quote": "040002008100000000000000939a7233f79c4ca9940a0db3957f060730f525e4ad5a007feff2f0a1ed5869f700000000090308000000000000000000000000002d2de102461684f14c8d0984a09d895e3e9e15944ce020a03b977e1f114d5e1ed32ef666a47fd19a5851b3800eda3afa00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000e7020600000000007fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c1409173011787a4af87eaf4bb139b555c3148ea6cffb01442b9fd7db4304e23b24f4db993000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d090162bff4b1d1dc74dc59dc548838efc4b811b173da8536efa8e2a9c045da70ee092301293ad90afebee448bcd02114ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d0ad6a91dc19494d2c3dfebae66e0574f9d054b3f549876df206eb4c128c96018e963c01deb4d924bf2a83461c1b0f875573ac99c056c17a173d626fc7bb211bd07ae78eb79380a9faa155548ba72c9f9a47d031b1552639ad2b297b19f424d2ccb751445020da6ba2ec2d819dea6179ecc100000be44c697a3ed5350eab6bbfc0bdb142285fbc97084bd575bb8d1c032e18d04c480c3242ced69e09b5511e8eeb06d3a6c359b82d4f2ede790d42f3a6e74ca2f696b5bd57e4815790285e1faa21bf0181d1d65daf6b8c27c9d1a0aea336f83d21e51dfa16e0e48d906945ec776025f50848c0db830c016ee35cd11ba7b5383d89106004610000008080b0b07ff0002000000000000000000000000000000000000000000000000000000000000000000000000000000001500000000000000e700000000000000e5a3a7b5d830c2953b98534c6c59a3a34fdc34e933f7f5898f0a85cf08846bca0000000000000000000000000000000000000000000000000000000000000000dc9e2a7c6f948f17474e34a7fc43ed030f7c1563f1babddf6340c82e0e54a8c5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020006000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006505f185a69efdad0c25dfc598908d1fa39e34e277d36133e08e253f5b1aa1760000000000000000000000000000000000000000000000000000000000000000dfe6c8dde1a636be39ca900d04dfc85bd7ee2a8ff390d9935bb566572241a691006c60bb5a5ace65323ec9121478f10c50fa2f293ef6f21c87914b4aaf54156e2000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f05005e0e00002d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d494945377a4343424a616741774942416749554463617636433832653137755a6643674a4f346b4255334d42767777436759494b6f5a497a6a3045417749770a634445694d434147413155454177775a535735305a577767553064594946424453794251624746305a6d397962534244515445614d42674741315545436777520a535735305a577767513239796347397959585270623234784644415342674e564241634d43314e68626e526849454e7359584a684d51737743515944565151490a44414a445154454c4d416b474131554542684d4356564d774868634e4d6a59784d5449774d4441304e5441325768634e4d7a4d784d5449774d4441304e5441320a576a42774d534977494159445651514444426c4a626e526c624342545231676755454e4c49454e6c636e52705a6d6c6a5958526c4d526f77474159445651514b0a4442464a626e526c6243424462334a7762334a6864476c76626a45554d424947413155454277774c553246756447456751327868636d4578437a414a42674e560a4241674d416b4e424d517377435159445651514745774a56557a425a4d424d4742797147534d34394167454743437147534d34394177454841304941424757300a6d73616b6d6d483344316d2f755345494d7879796c48534661646f6b5a7a6b7251777873547453473649783558536f37476939657a4f31445758626777396f7a0a4e7348782f68486c4d59633074454a44346a476a67674d4d4d4949444344416642674e5648534d4547444157674253566231334e765276683655424a796454300a4d383442567776655644427242674e56485238455a4442694d47436758714263686c706f64485277637a6f764c32467761533530636e567a6447566b633256790a646d6c6a5a584d75615735305a577775593239744c334e6e6543396a5a584a3061575a7059324630615739754c3359304c33426a61324e796244396a595431770a624746305a6d397962535a6c626d4e765a476c755a7a316b5a584977485159445652304f42425945464462746b68674c6f6e647841566a67542b646e734b77430a4f4b52414d41344741315564447745422f775145417749477744414d42674e5648524d4241663845416a41414d4949434f51594a4b6f5a496876684e415130420a424949434b6a4343416959774867594b4b6f5a496876684e415130424151515169454b776750366f4d492b5052564d66324239467554434341574d47436971470a534962345451454e41514977676746544d42414743797147534962345451454e41514942416745494d42414743797147534962345451454e41514943416745490a4d42414743797147534962345451454e41514944416745434d42414743797147534962345451454e41514945416745434d42414743797147534962345451454e0a41514946416745484d42414743797147534962345451454e41514947416745424d42414743797147534962345451454e41514948416745414d424147437971470a534962345451454e41514949416745434d42414743797147534962345451454e4151494a416745414d42414743797147534962345451454e4151494b416745410a4d42414743797147534962345451454e4151494c416745414d42414743797147534962345451454e4151494d416745414d42414743797147534962345451454e0a4151494e416745414d42414743797147534962345451454e4151494f416745414d42414743797147534962345451454e41514950416745414d424147437971470a534962345451454e41514951416745414d42414743797147534962345451454e415149524167454e4d42384743797147534962345451454e41514953424241490a43414943427745414167414141414141414141414d42414743697147534962345451454e41514d45416741414d42514743697147534962345451454e415151450a426e4367625163414144415042676f71686b69472b45304244514546436745424d42344743697147534962345451454e41515945454a2b316b4e42476b3566330a5050656d52796a6d444d38775241594b4b6f5a496876684e41513042427a41324d42414743797147534962345451454e415163424151482f4d424147437971470a534962345451454e415163434151482f4d42414743797147534962345451454e415163444151482f4d416f4743437147534d343942414d43413063414d4551430a49453374656e41744b324c46414761642b706534356a31384d44794335594664553274586a664c6e742b7a3541694163584e312b374f7938656f4859306a57760a315a5a644746306c5564474e5537515273752f5650356b336c773d3d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436c6a4343416a32674177494241674956414a567658633239472b487051456e4a3150517a7a674658433935554d416f4743437147534d343942414d430a4d476778476a415942674e5642414d4d45556c756447567349464e48574342536232393049454e424d526f77474159445651514b4442464a626e526c624342440a62334a7762334a6864476c76626a45554d424947413155454277774c553246756447456751327868636d4578437a414a42674e564241674d416b4e424d5173770a435159445651514745774a56557a4165467730784f4441314d6a45784d4455774d5442614677307a4d7a41314d6a45784d4455774d5442614d484178496a41670a42674e5642414d4d47556c756447567349464e4857434251513073675547786864475a76636d306751304578476a415942674e5642416f4d45556c75644756730a49454e76636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b474131554543417743513045780a437a414a42674e5642415954416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a304441516344516741454e53422f377432316c58534f0a3243757a7078773734654a423732457944476757357258437478327456544c7136684b6b367a2b5569525a436e71523770734f766771466553786c6d546c4a6c0a65546d693257597a33714f42757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f536347724442530a42674e5648523845537a424a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b633256790a646d6c6a5a584d75615735305a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e5648513445466751556c5739640a7a62306234656c4153636e553944504f4156634c336c517744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159420a4166384341514177436759494b6f5a497a6a30454177494452774177524149675873566b6930772b6936565947573355462f32327561586530594a446a3155650a6e412b546a44316169356343494359623153416d4435786b66545670766f34556f79695359787244574c6d5552344349394e4b7966504e2b0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436a7a4343416a53674177494241674955496d554d316c71644e496e7a6737535655723951477a6b6e42717777436759494b6f5a497a6a3045417749770a614445614d4267474131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e760a636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a0a42674e5642415954416c56544d423458445445344d4455794d5445774e4455784d466f58445451354d54497a4d54497a4e546b314f566f77614445614d4267470a4131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e76636e4276636d46300a615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a42674e56424159540a416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a3044415163445167414543366e45774d4449595a4f6a2f69505773437a61454b69370a314f694f534c52466857476a626e42564a66566e6b59347533496a6b4459594c304d784f346d717379596a6c42616c54565978465032734a424b357a6c4b4f420a757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f5363477244425342674e5648523845537a424a0a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b63325679646d6c6a5a584d75615735300a5a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e564851344546675155496d554d316c71644e496e7a673753560a55723951477a6b6e4271777744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159424166384341514577436759490a4b6f5a497a6a3045417749445351417752674968414f572f35516b522b533943695344634e6f6f774c7550524c735747662f59693747535839344267775477670a41694541344a306c72486f4d732b586f356f2f7358364f39515778485241765a55474f6452513763767152586171493d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "intel_quote": "040002008100000000000000939a7233f79c4ca9940a0db3957f06071b21ad0c51a228d6a195702eba9d346800000000090308000000000000000000000000002d2de102461684f14c8d0984a09d895e3e9e15944ce020a03b977e1f114d5e1ed32ef666a47fd19a5851b3800eda3afa00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000e7020600000000007fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c140917301a1c3d2e1455ea32d3434722f8867398a5e85e0dbd441f81e552a81641a09c424000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000d090162bff4b1d1dc74dc59dc548838efc4b811b173da8536efa8e2a9c045da70ee092301293ad90afebee448bcd02114ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d0cefe2176f6fc26e2f7d544e1fdbe1131381b41f19a7fa566f3f60bb176998264293efd3bab9dc15b51af137da5d1395573ac99c056c17a173d626fc7bb211bd07ae78eb79380a9faa155548ba72c9f903ddfc5c5e6af90b3ac47bef43bac8b97fbc7d0a7a26c4e28e529e6424d23747d01000003d6170f7df381c68c7e14c50893c1ba3d14eff9f53bd6e965f9bac8f480ce9aeacc66e035f16f3ddf7e89aadcbdc3a0c7dfedf525d71dd03c10b5756e4f1ae91c9fa7ea1cd3da9b8bcaf029d47667ae3ad1b59f6a794adf8717cfa10dbd68aed86795e128317a4193f6a89140d1c07cdaf0cfccc35911bda1e6dffe8f5cd83bb06004a10000008080b0b07ff0002000000000000000000000000000000000000000000000000000000000000000000000000000000001500000000000000e700000000000000e5a3a7b5d830c2953b98534c6c59a3a34fdc34e933f7f5898f0a85cf08846bca0000000000000000000000000000000000000000000000000000000000000000dc9e2a7c6f948f17474e34a7fc43ed030f7c1563f1babddf6340c82e0e54a8c500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000cdbc2d42e6f6e0a96462f59bedfc5e2ff73f2a6ce0d9ea5dc2617a03775d52de0000000000000000000000000000000000000000000000000000000000000000580153111f7623b15d9cae01794045c7432729b79d67f536ae46d8fdaeb4152b5634d73fe66966379dc3a150646f6e2da8e877bdea951eebaa843c328a68575e2000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0500620e00002d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d494945386a4343424a65674177494241674956414e5549494249727a367a74495345327754746f6a6d7652497765324d416f4743437147534d343942414d430a4d484178496a416742674e5642414d4d47556c756447567349464e4857434251513073675547786864475a76636d306751304578476a415942674e5642416f4d0a45556c756447567349454e76636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155450a4341774351304578437a414a42674e5642415954416c56544d423458445449324d5445794d5441774e4455774e316f5844544d7a4d5445794d5441774e4455770a4e316f77634445694d434147413155454177775a535735305a5777675530645949464244537942445a584a3061575a70593246305a5445614d426747413155450a43677752535735305a577767513239796347397959585270623234784644415342674e564241634d43314e68626e526849454e7359584a684d517377435159440a5651514944414a445154454c4d416b474131554542684d4356564d775754415442676371686b6a4f5051494242676771686b6a4f50514d4242774e43414154620a7955574e304b7a35653970377a6e72455a6a6d582b6b6d39334762494630756e434f646c617942565543534a383546464c6648534f6669476f566453694673550a584a545073374c6a4573376c6c484546474462636f3449444444434341776777487759445652306a42426777466f41556c5739647a62306234656c4153636e550a3944504f4156634c336c5177617759445652306642475177596a42676f46366758495a616148523063484d364c79396863476b7564484a316333526c5a484e6c0a636e5a705932567a4c6d6c75644756734c6d4e766253397a5a3367765932567964476c6d61574e6864476c76626939324e4339775932746a636d772f593245390a6347786864475a76636d306d5a57356a62325270626d63395a4756794d42304741315564446751574242512f4557596a6a342b2f506378324b5078706b4750720a2b384a595454414f42674e56485138424166384542414d434273417744415944565230544151482f4241497741444343416a6b4743537147534962345451454e0a4151534341696f776767496d4d42344743697147534962345451454e41514545454d78664342546e33394e3559734456304149722f7573776767466a42676f710a686b69472b453042445145434d494942557a415142677371686b69472b45304244514543415149424344415142677371686b69472b45304244514543416749420a4344415142677371686b69472b4530424451454341774942416a415142677371686b69472b4530424451454342414942416a415142677371686b69472b4530420a4451454342514942427a415142677371686b69472b45304244514543426749424154415142677371686b69472b453042445145434277494241444151426773710a686b69472b4530424451454343414942416a415142677371686b69472b45304244514543435149424144415142677371686b69472b45304244514543436749420a4144415142677371686b69472b45304244514543437749424144415142677371686b69472b45304244514543444149424144415142677371686b69472b4530420a44514543445149424144415142677371686b69472b45304244514543446749424144415142677371686b69472b453042445145434477494241444151426773710a686b69472b45304244514543454149424144415142677371686b69472b45304244514543455149424454416642677371686b69472b45304244514543456751510a43416743416763424141494141414141414141414144415142676f71686b69472b45304244514544424149414144415542676f71686b69472b453042445145450a42415a776f473048414141774477594b4b6f5a496876684e4151304242516f424154416542676f71686b69472b453042445145474242436a4d377a54336334710a342b6a6e6f3032577875414c4d45514743697147534962345451454e415163774e6a415142677371686b69472b45304244514548415145422f7a4151426773710a686b69472b45304244514548416745422f7a415142677371686b69472b45304244514548417745422f7a414b42676771686b6a4f5051514441674e4a414442470a416945413557444146494b71516a707755354171774a612b322b46415571445a5a6e335773435432544a6741316f38434951434663544c76727872333666392b0a395166452b674d6b504d484a454e39524f7a78694159577633466c3439513d3d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436c6a4343416a32674177494241674956414a567658633239472b487051456e4a3150517a7a674658433935554d416f4743437147534d343942414d430a4d476778476a415942674e5642414d4d45556c756447567349464e48574342536232393049454e424d526f77474159445651514b4442464a626e526c624342440a62334a7762334a6864476c76626a45554d424947413155454277774c553246756447456751327868636d4578437a414a42674e564241674d416b4e424d5173770a435159445651514745774a56557a4165467730784f4441314d6a45784d4455774d5442614677307a4d7a41314d6a45784d4455774d5442614d484178496a41670a42674e5642414d4d47556c756447567349464e4857434251513073675547786864475a76636d306751304578476a415942674e5642416f4d45556c75644756730a49454e76636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b474131554543417743513045780a437a414a42674e5642415954416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a304441516344516741454e53422f377432316c58534f0a3243757a7078773734654a423732457944476757357258437478327456544c7136684b6b367a2b5569525a436e71523770734f766771466553786c6d546c4a6c0a65546d693257597a33714f42757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f536347724442530a42674e5648523845537a424a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b633256790a646d6c6a5a584d75615735305a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e5648513445466751556c5739640a7a62306234656c4153636e553944504f4156634c336c517744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159420a4166384341514177436759494b6f5a497a6a30454177494452774177524149675873566b6930772b6936565947573355462f32327561586530594a446a3155650a6e412b546a44316169356343494359623153416d4435786b66545670766f34556f79695359787244574c6d5552344349394e4b7966504e2b0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436a7a4343416a53674177494241674955496d554d316c71644e496e7a6737535655723951477a6b6e42717777436759494b6f5a497a6a3045417749770a614445614d4267474131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e760a636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a0a42674e5642415954416c56544d423458445445344d4455794d5445774e4455784d466f58445451354d54497a4d54497a4e546b314f566f77614445614d4267470a4131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e76636e4276636d46300a615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a42674e56424159540a416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a3044415163445167414543366e45774d4449595a4f6a2f69505773437a61454b69370a314f694f534c52466857476a626e42564a66566e6b59347533496a6b4459594c304d784f346d717379596a6c42616c54565978465032734a424b357a6c4b4f420a757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f5363477244425342674e5648523845537a424a0a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b63325679646d6c6a5a584d75615735300a5a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e564851344546675155496d554d316c71644e496e7a673753560a55723951477a6b6e4271777744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159424166384341514577436759490a4b6f5a497a6a3045417749445351417752674968414f572f35516b522b533943695344634e6f6f774c7550524c735747662f59693747535839344267775477670a41694541344a306c72486f4d732b586f356f2f7358364f39515778485241765a55474f6452513763767152586171493d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
               "measurements": {
                 "boot_registers": {
                   "boot_config": true,
@@ -1518,7 +1567,7 @@
                 },
                 "detached_json_disagreements": {},
                 "log_app_id": "f550fdfb4eb8ad787c1bcd423f091cbb4a4431ae",
-                "log_compose_hash": "1787a4af87eaf4bb139b555c3148ea6cffb01442b9fd7db4304e23b24f4db993",
+                "log_compose_hash": "a1c3d2e1455ea32d3434722f8867398a5e85e0dbd441f81e552a81641a09c424",
                 "log_os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
                 "ok": true,
                 "registers": {
@@ -1526,7 +1575,7 @@
                   "rtmr0": "d090162bff4b1d1dc74dc59dc548838efc4b811b173da8536efa8e2a9c045da70ee092301293ad90afebee448bcd0211",
                   "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
                   "rtmr2": "764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d",
-                  "rtmr3": "0ad6a91dc19494d2c3dfebae66e0574f9d054b3f549876df206eb4c128c96018e963c01deb4d924bf2a83461c1b0f875"
+                  "rtmr3": "0cefe2176f6fc26e2f7d544e1fdbe1131381b41f19a7fa566f3f60bb176998264293efd3bab9dc15b51af137da5d1395"
                 },
                 "replay_matches_quote": true
               },
@@ -1537,7 +1586,7 @@
                 "advisory_ids": [],
                 "debug_disabled": true,
                 "instance_id": "a8a25faab3ef437d2da809382e05e59e3c55a0f5",
-                "intel_quote": "040002008100000000000000939a7233f79c4ca9940a0db3957f0607dfa097081ec466b45bbdfe5e73706750000000000d010400000000000000000000000000489e585f1c54bc5a02066c8c6ec21619ff0334ec6f21e07e2a35202c59183789c8057e7d97dd591bb08314b185819e7200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000e702060000000000e107136c99ae1745ab299e9462927890b7b1c984d5ef53fa5830584ad4246db663fdf96563b913e9e2471906b26f7aae01e4b83d924284eece9b972d8e18bd88dac4dd529031b00311ef5044eaa60ba8d9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000bc122d143ab768565ba5c3774ff5f03a63c89a4df7c1f5ea38d3bd173409d14f8cbdcc36d40e703cccb996a9d9687590786417fa26b5d90d1289025506055e511ff09fd608f4727bb3cf159279a52af23117b6248024d0b186aceabebf6f86ec41800152afda682372d33b484e357002e2b179f64b7882e0f0529ad2373ad93898a3b4d3ffb9a433f406b986d4f4f291d5970872501b2684001d4724208d2acce09603e43014fa8bd0984ba70b53685d69ee3c2b78345d510720b31c8a1f81672bed1a1bab9a6ffc2ab5d18b3836a3e802c0634f20ab8ac19c6ece377fd05e96a47d031b1552639ad2b297b19f424d2ccb751445020da6ba2ec2d819dea6179ed0100000d3019a5dfe39aee3403283de927c70452e601b8cc15726605bef84a5de27ca8c7ccef0a17c3905193ae3f50ab90cc9f73eae8a8fc2e4563416ce326c7e4172f3695dd91bebbca4a446bd3bddb1780fb0aae1f0490f9c0cdfb028eb6ee64de80f44584cd94efe890050225c018f2b4119a1d8a5128aac7d3519c970a4e629bb6206004a1000000404191b04ff0006000000000000000000000000000000000000000000000000000000000000000000000000000000001500000000000000e700000000000000e5a3a7b5d830c2953b98534c6c59a3a34fdc34e933f7f5898f0a85cf08846bca0000000000000000000000000000000000000000000000000000000000000000dc9e2a7c6f948f17474e34a7fc43ed030f7c1563f1babddf6340c82e0e54a8c500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000464ff491dd51db05e9e8e5e80c1663b3261f7a60eccc47f04d08e86b323efee200000000000000000000000000000000000000000000000000000000000000005aa49b7d4b59e58dfd48540059885d0b060fa973fb1d6af0ef17ed22316275204fc2d343c3a78be900dfd850495f2bfabf97bcb3afab52708c7772bac2a8203e2000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0500620e00002d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d494945386a4343424a65674177494241674956414f47354d45783757634c65437037366670386474494f7a534b51464d416f4743437147534d343942414d430a4d484178496a416742674e5642414d4d47556c756447567349464e4857434251513073675547786864475a76636d306751304578476a415942674e5642416f4d0a45556c756447567349454e76636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155450a4341774351304578437a414a42674e5642415954416c56544d423458445449324d5445784f4441774e4455774e566f5844544d7a4d5445784f4441774e4455770a4e566f77634445694d434147413155454177775a535735305a5777675530645949464244537942445a584a3061575a70593246305a5445614d426747413155450a43677752535735305a577767513239796347397959585270623234784644415342674e564241634d43314e68626e526849454e7359584a684d517377435159440a5651514944414a445154454c4d416b474131554542684d4356564d775754415442676371686b6a4f5051494242676771686b6a4f50514d4242774e43414153560a32747870534a4d7055644864776e5a2f355366704834704250303148613833526c7a74702f762b454844765654757a364a726f5a583935756e2b786a666d65620a654c466c6f36733956324565425362787a3759486f3449444444434341776777487759445652306a42426777466f41556c5739647a62306234656c4153636e550a3944504f4156634c336c5177617759445652306642475177596a42676f46366758495a616148523063484d364c79396863476b7564484a316333526c5a484e6c0a636e5a705932567a4c6d6c75644756734c6d4e766253397a5a3367765932567964476c6d61574e6864476c76626939324e4339775932746a636d772f593245390a6347786864475a76636d306d5a57356a62325270626d63395a4756794d4230474131556444675157424253596e45613562443231787a4c34454c4279564f72790a5852424f7954414f42674e56485138424166384542414d434273417744415944565230544151482f4241497741444343416a6b4743537147534962345451454e0a4151534341696f776767496d4d42344743697147534962345451454e41514545454b6277723938307678343177646765616a4e48486577776767466a42676f710a686b69472b453042445145434d494942557a415142677371686b69472b45304244514543415149424244415142677371686b69472b45304244514543416749420a4244415142677371686b69472b4530424451454341774942416a415142677371686b69472b4530424451454342414942416a415142677371686b69472b4530420a44514543425149424244415142677371686b69472b45304244514543426749424154415142677371686b69472b453042445145434277494241444151426773710a686b69472b45304244514543434149424254415142677371686b69472b45304244514543435149424144415142677371686b69472b45304244514543436749420a4144415142677371686b69472b45304244514543437749424144415142677371686b69472b45304244514543444149424144415142677371686b69472b4530420a44514543445149424144415142677371686b69472b45304244514543446749424144415142677371686b69472b453042445145434477494241444151426773710a686b69472b45304244514543454149424144415142677371686b69472b45304244514543455149424454416642677371686b69472b45304244514543456751510a42415143416751424141554141414141414141414144415142676f71686b69472b45304244514544424149414144415542676f71686b69472b453042445145450a4241615177473841414141774477594b4b6f5a496876684e4151304242516f424154416542676f71686b69472b453042445145474242437077575155775869690a4d67535551646c424d3959634d45514743697147534962345451454e415163774e6a415142677371686b69472b45304244514548415145422f7a4151426773710a686b69472b45304244514548416745422f7a415142677371686b69472b45304244514548417745422f7a414b42676771686b6a4f5051514441674e4a414442470a4169454137334b626a516a463743536236665536375451424374433457514d6a544d4263326c70385561687945343043495144516768374f4b7367795a43557a0a644d694a50394b7858457165347a393844314b7143624d70452b513147513d3d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436c6a4343416a32674177494241674956414a567658633239472b487051456e4a3150517a7a674658433935554d416f4743437147534d343942414d430a4d476778476a415942674e5642414d4d45556c756447567349464e48574342536232393049454e424d526f77474159445651514b4442464a626e526c624342440a62334a7762334a6864476c76626a45554d424947413155454277774c553246756447456751327868636d4578437a414a42674e564241674d416b4e424d5173770a435159445651514745774a56557a4165467730784f4441314d6a45784d4455774d5442614677307a4d7a41314d6a45784d4455774d5442614d484178496a41670a42674e5642414d4d47556c756447567349464e4857434251513073675547786864475a76636d306751304578476a415942674e5642416f4d45556c75644756730a49454e76636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b474131554543417743513045780a437a414a42674e5642415954416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a304441516344516741454e53422f377432316c58534f0a3243757a7078773734654a423732457944476757357258437478327456544c7136684b6b367a2b5569525a436e71523770734f766771466553786c6d546c4a6c0a65546d693257597a33714f42757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f536347724442530a42674e5648523845537a424a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b633256790a646d6c6a5a584d75615735305a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e5648513445466751556c5739640a7a62306234656c4153636e553944504f4156634c336c517744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159420a4166384341514177436759494b6f5a497a6a30454177494452774177524149675873566b6930772b6936565947573355462f32327561586530594a446a3155650a6e412b546a44316169356343494359623153416d4435786b66545670766f34556f79695359787244574c6d5552344349394e4b7966504e2b0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436a7a4343416a53674177494241674955496d554d316c71644e496e7a6737535655723951477a6b6e42717777436759494b6f5a497a6a3045417749770a614445614d4267474131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e760a636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a0a42674e5642415954416c56544d423458445445344d4455794d5445774e4455784d466f58445451354d54497a4d54497a4e546b314f566f77614445614d4267470a4131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e76636e4276636d46300a615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a42674e56424159540a416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a3044415163445167414543366e45774d4449595a4f6a2f69505773437a61454b69370a314f694f534c52466857476a626e42564a66566e6b59347533496a6b4459594c304d784f346d717379596a6c42616c54565978465032734a424b357a6c4b4f420a757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f5363477244425342674e5648523845537a424a0a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b63325679646d6c6a5a584d75615735300a5a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e564851344546675155496d554d316c71644e496e7a673753560a55723951477a6b6e4271777744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159424166384341514577436759490a4b6f5a497a6a3045417749445351417752674968414f572f35516b522b533943695344634e6f6f774c7550524c735747662f59693747535839344267775477670a41694541344a306c72486f4d732b586f356f2f7358364f39515778485241765a55474f6452513763767152586171493d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "intel_quote": "040002008100000000000000939a7233f79c4ca9940a0db3957f0607dfa097081ec466b45bbdfe5e73706750000000000d010400000000000000000000000000489e585f1c54bc5a02066c8c6ec21619ff0334ec6f21e07e2a35202c59183789c8057e7d97dd591bb08314b185819e7200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000e702060000000000e107136c99ae1745ab299e9462927890b7b1c984d5ef53fa5830584ad4246db663fdf96563b913e9e2471906b26f7aae01e4b83d924284eece9b972d8e18bd88dac4dd529031b00311ef5044eaa60ba8d9000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000bc122d143ab768565ba5c3774ff5f03a63c89a4df7c1f5ea38d3bd173409d14f8cbdcc36d40e703cccb996a9d9687590786417fa26b5d90d1289025506055e511ff09fd608f4727bb3cf159279a52af23117b6248024d0b186aceabebf6f86ec41800152afda682372d33b484e357002e2b179f64b7882e0f0529ad2373ad93898a3b4d3ffb9a433f406b986d4f4f291d5970872501b2684001d4724208d2acce09603e43014fa8bd0984ba70b53685d69ee3c2b78345d510720b31c8a1f81672bed1a1bab9a6ffc2ab5d18b3836a3e802c0634f20ab8ac19c6ece377fd05e9603ddfc5c5e6af90b3ac47bef43bac8b97fbc7d0a7a26c4e28e529e6424d23747d0100000132ab4abdc3266f9f89ba5ed28055f9c455f6739335058337b007964461956490800171798124cd99088df4c515a844906fbbdf3d00923f56492063071bc03b2695dd91bebbca4a446bd3bddb1780fb0aae1f0490f9c0cdfb028eb6ee64de80f44584cd94efe890050225c018f2b4119a1d8a5128aac7d3519c970a4e629bb6206004a1000000404191b04ff0006000000000000000000000000000000000000000000000000000000000000000000000000000000001500000000000000e700000000000000e5a3a7b5d830c2953b98534c6c59a3a34fdc34e933f7f5898f0a85cf08846bca0000000000000000000000000000000000000000000000000000000000000000dc9e2a7c6f948f17474e34a7fc43ed030f7c1563f1babddf6340c82e0e54a8c500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000464ff491dd51db05e9e8e5e80c1663b3261f7a60eccc47f04d08e86b323efee20000000000000000000000000000000000000000000000000000000000000000724b2bfe3497637caca62517c3aa0c81943b53a2be4705e204ecb8e8e1d99dd04b007e7aaf1cca25aeea9177a2ea4993f154953e0f1da3960632b8b2ad0f1c4a2000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f0500620e00002d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d494945386a4343424a65674177494241674956414f47354d45783757634c65437037366670386474494f7a534b51464d416f4743437147534d343942414d430a4d484178496a416742674e5642414d4d47556c756447567349464e4857434251513073675547786864475a76636d306751304578476a415942674e5642416f4d0a45556c756447567349454e76636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155450a4341774351304578437a414a42674e5642415954416c56544d423458445449324d5445784f4441774e4455774e566f5844544d7a4d5445784f4441774e4455770a4e566f77634445694d434147413155454177775a535735305a5777675530645949464244537942445a584a3061575a70593246305a5445614d426747413155450a43677752535735305a577767513239796347397959585270623234784644415342674e564241634d43314e68626e526849454e7359584a684d517377435159440a5651514944414a445154454c4d416b474131554542684d4356564d775754415442676371686b6a4f5051494242676771686b6a4f50514d4242774e43414153560a32747870534a4d7055644864776e5a2f355366704834704250303148613833526c7a74702f762b454844765654757a364a726f5a583935756e2b786a666d65620a654c466c6f36733956324565425362787a3759486f3449444444434341776777487759445652306a42426777466f41556c5739647a62306234656c4153636e550a3944504f4156634c336c5177617759445652306642475177596a42676f46366758495a616148523063484d364c79396863476b7564484a316333526c5a484e6c0a636e5a705932567a4c6d6c75644756734c6d4e766253397a5a3367765932567964476c6d61574e6864476c76626939324e4339775932746a636d772f593245390a6347786864475a76636d306d5a57356a62325270626d63395a4756794d4230474131556444675157424253596e45613562443231787a4c34454c4279564f72790a5852424f7954414f42674e56485138424166384542414d434273417744415944565230544151482f4241497741444343416a6b4743537147534962345451454e0a4151534341696f776767496d4d42344743697147534962345451454e41514545454b6277723938307678343177646765616a4e48486577776767466a42676f710a686b69472b453042445145434d494942557a415142677371686b69472b45304244514543415149424244415142677371686b69472b45304244514543416749420a4244415142677371686b69472b4530424451454341774942416a415142677371686b69472b4530424451454342414942416a415142677371686b69472b4530420a44514543425149424244415142677371686b69472b45304244514543426749424154415142677371686b69472b453042445145434277494241444151426773710a686b69472b45304244514543434149424254415142677371686b69472b45304244514543435149424144415142677371686b69472b45304244514543436749420a4144415142677371686b69472b45304244514543437749424144415142677371686b69472b45304244514543444149424144415142677371686b69472b4530420a44514543445149424144415142677371686b69472b45304244514543446749424144415142677371686b69472b453042445145434477494241444151426773710a686b69472b45304244514543454149424144415142677371686b69472b45304244514543455149424454416642677371686b69472b45304244514543456751510a42415143416751424141554141414141414141414144415142676f71686b69472b45304244514544424149414144415542676f71686b69472b453042445145450a4241615177473841414141774477594b4b6f5a496876684e4151304242516f424154416542676f71686b69472b453042445145474242437077575155775869690a4d67535551646c424d3959634d45514743697147534962345451454e415163774e6a415142677371686b69472b45304244514548415145422f7a4151426773710a686b69472b45304244514548416745422f7a415142677371686b69472b45304244514548417745422f7a414b42676771686b6a4f5051514441674e4a414442470a4169454137334b626a516a463743536236665536375451424374433457514d6a544d4263326c70385561687945343043495144516768374f4b7367795a43557a0a644d694a50394b7858457165347a393844314b7143624d70452b513147513d3d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436c6a4343416a32674177494241674956414a567658633239472b487051456e4a3150517a7a674658433935554d416f4743437147534d343942414d430a4d476778476a415942674e5642414d4d45556c756447567349464e48574342536232393049454e424d526f77474159445651514b4442464a626e526c624342440a62334a7762334a6864476c76626a45554d424947413155454277774c553246756447456751327868636d4578437a414a42674e564241674d416b4e424d5173770a435159445651514745774a56557a4165467730784f4441314d6a45784d4455774d5442614677307a4d7a41314d6a45784d4455774d5442614d484178496a41670a42674e5642414d4d47556c756447567349464e4857434251513073675547786864475a76636d306751304578476a415942674e5642416f4d45556c75644756730a49454e76636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b474131554543417743513045780a437a414a42674e5642415954416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a304441516344516741454e53422f377432316c58534f0a3243757a7078773734654a423732457944476757357258437478327456544c7136684b6b367a2b5569525a436e71523770734f766771466553786c6d546c4a6c0a65546d693257597a33714f42757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f536347724442530a42674e5648523845537a424a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b633256790a646d6c6a5a584d75615735305a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e5648513445466751556c5739640a7a62306234656c4153636e553944504f4156634c336c517744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159420a4166384341514177436759494b6f5a497a6a30454177494452774177524149675873566b6930772b6936565947573355462f32327561586530594a446a3155650a6e412b546a44316169356343494359623153416d4435786b66545670766f34556f79695359787244574c6d5552344349394e4b7966504e2b0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a2d2d2d2d2d424547494e2043455254494649434154452d2d2d2d2d0a4d4949436a7a4343416a53674177494241674955496d554d316c71644e496e7a6737535655723951477a6b6e42717777436759494b6f5a497a6a3045417749770a614445614d4267474131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e760a636e4276636d4630615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a0a42674e5642415954416c56544d423458445445344d4455794d5445774e4455784d466f58445451354d54497a4d54497a4e546b314f566f77614445614d4267470a4131554541777752535735305a5777675530645949464a766233516751304578476a415942674e5642416f4d45556c756447567349454e76636e4276636d46300a615739754d5251774567594456515148444174545957353059534244624746795954454c4d416b47413155454341774351304578437a414a42674e56424159540a416c56544d466b77457759484b6f5a497a6a3043415159494b6f5a497a6a3044415163445167414543366e45774d4449595a4f6a2f69505773437a61454b69370a314f694f534c52466857476a626e42564a66566e6b59347533496a6b4459594c304d784f346d717379596a6c42616c54565978465032734a424b357a6c4b4f420a757a43427544416642674e5648534d4547444157674251695a517a575770303069664f44744a5653763141624f5363477244425342674e5648523845537a424a0a4d45656752614244686b466f64485277637a6f764c324e6c636e52705a6d6c6a5958526c63793530636e567a6447566b63325679646d6c6a5a584d75615735300a5a577775593239744c306c756447567355306459556d397664454e424c6d526c636a416442674e564851344546675155496d554d316c71644e496e7a673753560a55723951477a6b6e4271777744675944565230504151482f42415144416745474d42494741315564457745422f7751494d4159424166384341514577436759490a4b6f5a497a6a3045417749445351417752674968414f572f35516b522b533943695344634e6f6f774c7550524c735747662f59693747535839344267775477670a41694541344a306c72486f4d732b586f356f2f7358364f39515778485241765a55474f6452513763767152586171493d0a2d2d2d2d2d454e442043455254494649434154452d2d2d2d2d0a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
                 "measurements": {
                   "boot_registers": {
                     "boot_config": false,
@@ -1571,15 +1620,15 @@
         "error": null,
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:49:59Z",
-          "last_capture_at": "2026-11-24T00:49:59Z",
+          "last_attempt_at": "2026-11-24T21:57:19Z",
+          "last_capture_at": "2026-11-24T21:57:19Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 2.58,
+        "latency_s": 1.87,
         "model": "Qwen/Qwen3.8-27B",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/dfb43c43177f843aa81b4884",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/dfb43c43177f843aa81b4884",
         "outcome": "rejected",
         "outcome_reason": "unspecified",
         "outcome_reason_detail": "quote, model mapping, compose, key, GPU, TCB currency, debug-bit, event-log, boot-config or chain-policy check failed",
@@ -1619,7 +1668,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "db10f54ceab867043a1528a1958f69602499a5518a5dc3f2252259d738322c407b1b9990c7dea6073f7380242ac574b7540a9ae224f51057de8aa2766ecf372a",
         "valid": false,
-        "verified_at": "2026-11-24T00:49:59Z"
+        "verified_at": "2026-11-24T21:57:19Z"
       },
       {
         "attestation_type": "retired",
@@ -1658,21 +1707,21 @@
             "a8a25faab3ef437d2da809382e05e59e3c55a0f5",
             "cc796618bcd5a6b22907d8de7ac414a968d6a1aa"
           ],
-          "raw_evidence_ref": "observations/evidence/sha256/2ca9798d1dc54122816c2cd56ded9fae81b7d4fd7e6037527b213efd70b09c82.json",
-          "raw_evidence_sha256": "2ca9798d1dc54122816c2cd56ded9fae81b7d4fd7e6037527b213efd70b09c82"
+          "raw_evidence_ref": "observations/evidence/sha256/29234c27fc78addf0423e191018aed1383f0566f8a9745fc0ab6bc64413af58d.json",
+          "raw_evidence_sha256": "29234c27fc78addf0423e191018aed1383f0566f8a9745fc0ab6bc64413af58d"
         },
         "error": "model_attestations entries need distinct instance ids",
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:49:58Z",
+          "last_attempt_at": "2026-11-24T21:57:18Z",
           "last_capture_at": "2026-11-20T21:04:39Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 0.74,
+        "latency_s": 0.45,
         "model": "z-ai/glm-5.3-flash",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/c6c0aa8db6389321c609e8e4",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/c6c0aa8db6389321c609e8e4",
         "outcome": "unavailable",
         "outcome_reason": "transport_error",
         "outcome_reason_detail": null,
@@ -1712,7 +1761,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "",
         "valid": false,
-        "verified_at": "2026-11-24T00:49:58Z"
+        "verified_at": "2026-11-24T21:57:18Z"
       },
       {
         "attestation_type": "retired",
@@ -1853,15 +1902,15 @@
         "error": "TCB below AMD-published minimum: {'snp': '0x1b < 0x1d'}",
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:50:00Z",
-          "last_capture_at": "2026-11-24T00:50:00Z",
+          "last_attempt_at": "2026-11-24T21:57:19Z",
+          "last_capture_at": "2026-11-24T21:57:19Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
         "latency_s": 0.01,
         "model": "router",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/fbec6b27aeb17348d9938dcb",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/fbec6b27aeb17348d9938dcb",
         "outcome": "rejected",
         "outcome_reason": "unspecified",
         "outcome_reason_detail": "TCB below AMD-published minimum: {'snp': '0x1b < 0x1d'}",
@@ -1901,7 +1950,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:00Z"
+        "verified_at": "2026-11-24T21:57:19Z"
       }
     ],
     "venice": [
@@ -1911,15 +1960,15 @@
         "error": "no TEE attestation available for this model (404)",
         "freshness": {
           "last_adapter_verified_at": null,
-          "last_attempt_at": "2026-11-24T00:50:03Z",
+          "last_attempt_at": "2026-11-24T21:57:28Z",
           "last_capture_at": "2026-10-13T19:51:41Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 0.12,
+        "latency_s": 0.08,
         "model": "e2ee-gemma-4-31b",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/016d51929979d7ad52446170",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/016d51929979d7ad52446170",
         "outcome": "unavailable",
         "outcome_reason": "evidence_missing",
         "outcome_reason_detail": null,
@@ -1959,127 +2008,63 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:03Z"
+        "verified_at": "2026-11-24T21:57:28Z"
       },
       {
         "attestation_type": "venice",
-        "details": {
-          "api_version": "aci/1",
-          "candidates_available": 1,
-          "candidates_evaluated": 1,
-          "dcap_appraisal": {
-            "advisory_ids": [],
-            "tcb_status": "UpToDate"
-          },
-          "downstream_tls_binding": {
-            "domain": "api.redpill.ai",
-            "spki_sha256": "08ef73dce9d18eeec450dc0e5dabe1a3da2b1d8f06be83e9f8329574fe507e59"
-          },
-          "gpu_evidence_omitted": true,
-          "keyset_binding": {
-            "keyset_digest_recomputes": true,
-            "report_data_echo_matches_quote": true,
-            "signing_key_in_keyset": true
-          },
-          "measurements": {
-            "boot_registers": {
-              "boot_config": true,
-              "hardware_config": true,
-              "policy_revision": "2026-11-15.1",
-              "reasons": []
-            },
-            "detached_json_disagreements": {},
-            "log_app_id": "89c51ab856bee41efe78c40309a4deb277a02a0f",
-            "log_compose_hash": "261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a",
-            "log_os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
-            "mrconfigid": "01261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a000000000000000000000000000000",
-            "ok": true,
-            "registers": {
-              "mrtd": "7fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c1409173",
-              "rtmr0": "d6118f0eeb30e9d9178d2b9106dddd002d979b6fa79bdec415051afae2021384c29a32d2f6454fa369617598378ffb5e",
-              "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
-              "rtmr2": "764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d",
-              "rtmr3": "ca00969a016f278d18a9e2e0859ce41e086078b75b5d5e93bab008b9ae54a1ae80b19e5c1d581015eff9f055ce046658"
-            },
-            "replay_matches_quote": true
-          },
-          "model_name": null,
-          "nonce_source": "client",
-          "phala_tcb_status": null,
-          "serving": "aggregator",
-          "source_repo": "https://github.com/Dstack-TEE/private-ai-gateway.git",
-          "tee_hardware": "intel-tdx",
-          "tee_provider": "phala",
-          "upstream_model": "z-ai/glm-5.2",
-          "verification_reason": "gateway attestation does not cover the model host",
-          "vm_config": {
-            "cpu_count": 16,
-            "host_share_mode": "9p",
-            "hotplug_off": false,
-            "hugepages": false,
-            "image": "dstack-0.5.12",
-            "memory_size": 34359738368,
-            "num_gpus": 0,
-            "num_nvswitches": 0,
-            "os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
-            "ovmf_variant": "pre202505",
-            "pci_hole64_size": 0,
-            "qemu_version": "8.2.2",
-            "spec_version": 1
-          }
-        },
-        "error": null,
+        "details": {},
+        "error": "HTTP 502: {\"instance_id\":\"f27664c0-7ff7-46ee-8f50-b589ef4a1476\",\"nonce\":\"f0d30e78e9a9d3e95f7e4d2c4686660dd2d9418fd5d7bce8fa4fc7bcf755969d\",\"e2e_pubkey\":\"8VEkLEW1osAFbJGXWbKxtKp610gSsYeWi2SMdpQm6Du1Q2nOpSNZLNQuf",
         "freshness": {
           "last_adapter_verified_at": "2026-11-15T19:22:05Z",
-          "last_attempt_at": "2026-11-24T00:50:01Z",
+          "last_attempt_at": "2026-11-24T21:57:27Z",
           "last_capture_at": "2026-11-24T00:50:01Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 1.0,
+        "latency_s": 6.78,
         "model": "e2ee-glm-5-1",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/3f403121a4cef3606894d7fe",
-        "outcome": "rejected",
-        "outcome_reason": "adapter_rejected",
-        "outcome_reason_detail": "gateway attestation does not cover the model host",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/3f403121a4cef3606894d7fe",
+        "outcome": "unavailable",
+        "outcome_reason": "transport_error",
+        "outcome_reason_detail": null,
         "provider": "venice",
         "row_status": "unknown",
         "scorecard": {
           "attested_serving_enforced": null,
-          "backend_attested": false,
+          "backend_attested": null,
           "catalog_nonempty": null,
           "catalog_serves": null,
           "client_nonce_supported": null,
           "code_measurement_reproducible": null,
-          "compose_hash_committed": true,
-          "event_log_replayed": true,
+          "compose_hash_committed": null,
+          "event_log_replayed": null,
           "gateway_reference_audited": null,
           "gpu_attested": null,
           "hardware_signature_verified": null,
           "hpke_pubkey_attested": null,
-          "key_derives_to_address": true,
+          "key_derives_to_address": null,
           "measurement_matches_release": null,
-          "nonce_bound": true,
+          "nonce_bound": null,
           "os_image_archive_declares_production": null,
           "prod_os_image": null,
           "release_provenance_verified": null,
-          "report_data_binds_key": true,
+          "report_data_binds_key": null,
           "runtime_config_fully_attested": null,
           "serving_code_attested": null,
           "sessions_publish_evidence_digests": null,
-          "tcb_current": true,
-          "tdx_verified": true,
-          "tee_boot_config": true,
-          "tee_debug_disabled": true,
-          "tee_hardware_config": true,
+          "tcb_current": null,
+          "tdx_verified": null,
+          "tee_boot_config": null,
+          "tee_debug_disabled": null,
+          "tee_hardware_config": null,
           "tls_pubkey_pinned": null
         },
-        "signing_address": "0x4d308a959c1ba1989fcf6953293d5820bc74e40a",
+        "signing_address": "",
         "signing_algo": "ecdsa",
-        "signing_public_key": "04c4201704005a835ae62f8bffea2100cdb059a5a5bd0e79e5306bd3fd1358b7ab854994006c40b075724b3681b5ddd3ac455a2e7ec5d8e57a28b90f97a2f99c1f",
+        "signing_public_key": "",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:01Z"
+        "verified_at": "2026-11-24T21:57:27Z"
       },
       {
         "attestation_type": "venice",
@@ -2110,16 +2095,16 @@
             },
             "detached_json_disagreements": {},
             "log_app_id": "89c51ab856bee41efe78c40309a4deb277a02a0f",
-            "log_compose_hash": "261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a",
+            "log_compose_hash": "f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1",
             "log_os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
-            "mrconfigid": "01261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a000000000000000000000000000000",
+            "mrconfigid": "01f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1000000000000000000000000000000",
             "ok": true,
             "registers": {
               "mrtd": "7fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c1409173",
               "rtmr0": "d6118f0eeb30e9d9178d2b9106dddd002d979b6fa79bdec415051afae2021384c29a32d2f6454fa369617598378ffb5e",
               "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
               "rtmr2": "764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d",
-              "rtmr3": "ca00969a016f278d18a9e2e0859ce41e086078b75b5d5e93bab008b9ae54a1ae80b19e5c1d581015eff9f055ce046658"
+              "rtmr3": "6e49a9f9ee815f32f547da6e3c11047409a85afb1a793cfc1bb9f97a5072feba1202c4a04fb8a3fca3ed97b204cac9e3"
             },
             "replay_matches_quote": true
           },
@@ -2151,15 +2136,15 @@
         "error": null,
         "freshness": {
           "last_adapter_verified_at": "2026-11-15T19:22:08Z",
-          "last_attempt_at": "2026-11-24T00:50:04Z",
-          "last_capture_at": "2026-11-24T00:50:04Z",
+          "last_attempt_at": "2026-11-24T21:57:29Z",
+          "last_capture_at": "2026-11-24T21:57:29Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 0.89,
+        "latency_s": 1.18,
         "model": "e2ee-gpt-oss-120b-p",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/7f665a507cb4da42f39d662c",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/7f665a507cb4da42f39d662c",
         "outcome": "rejected",
         "outcome_reason": "adapter_rejected",
         "outcome_reason_detail": "gateway attestation does not cover the model host",
@@ -2199,7 +2184,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "04c4201704005a835ae62f8bffea2100cdb059a5a5bd0e79e5306bd3fd1358b7ab854994006c40b075724b3681b5ddd3ac455a2e7ec5d8e57a28b90f97a2f99c1f",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:04Z"
+        "verified_at": "2026-11-24T21:57:29Z"
       },
       {
         "attestation_type": "venice",
@@ -2218,8 +2203,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "97a5312cfc3780229b68b82bc6ba37f5ac1b7de8cac0475c84cf67413fa1e1ef",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "416e09a671aca4545dad9487bd5ad6f91e195e2db44e4c1a5b8cd69c3eda1513",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2230,8 +2215,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "25c02f48cbf0bbf1314f900c0e43d22912231c3383762392b2a7ff06c6dd363f",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "f49555e4fa2d80265768731dc78292833f354e3dc469033d6f81b1f15169d66a",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2242,8 +2227,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "1fe3fbfd28518722a6f09c603eeec5d577393d67c8e856476edecb9b218caee1",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "3f16454bf01f7c018ca46eea4213efc11350c813f9c571a81325b1eeb8d17348",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2254,8 +2239,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "8b62d3408354638684d3fc50dc928f37b47283314b5e5eef5cb172421b4c4708",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "f990748a7bb8d3e659fd6ee26e3fdbdb859eb9581eb5baa2484afbd38627fd43",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2266,8 +2251,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "8ceee1a6efe9120049181732cb0063709dd79def43813def0c200a85dfe23f40",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "aefa179756751b95a9b6d0b7920d38a35fa2e0de7d9b54ff9dfa183d5f143406",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2278,8 +2263,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "bf4b67392acda9c0c6c69dd0140bae4ceefb813669083c7134ee3daa16ed14cc",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "a43529d4df77cf35f5e33d468ffac0787213fafb441ce9c002d5894ed6463088",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2290,8 +2275,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "406c8bb3fc33b519874ca14939000000b86696bc9b6291b3fd538206f26baf2e",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "6ae7706747728e98926d530aeb6ae01ed7f72ddbee4733fe281781ce495f4f20",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2302,8 +2287,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "54cb404b562d001f24fa2860d5e80eba4f7c0ecae7dd2fa0b5ee5b2f4a981c2f",
-                "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+                "jwt_sha256": "a6e147965a917cc7fafeef6bf8f7070ea5847425202e05a8de24809a2f9b28d8",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2313,8 +2298,8 @@
             },
             "platform": {
               "iss": "https://nras.attestation.nvidia.com",
-              "jwt_sha256": "082a2f4468a89f1abad52b1de30bd3dc1c2ffb2256d20718a13e41712dc17daa",
-              "kid": "nv-eat-kid-prod-20261123205552692-dc1b0736-969e-4c44-837f-84ad7e21b69b",
+              "jwt_sha256": "f6a9298cde3e02e54abcdd86eb66a332366aa1546f94e69f67e25924eaea0da1",
+              "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
               "nonce_bound": true,
               "ok": true,
               "signature_verified": true,
@@ -2337,16 +2322,16 @@
         },
         "error": null,
         "freshness": {
-          "last_adapter_verified_at": "2026-11-24T00:50:03Z",
-          "last_attempt_at": "2026-11-24T00:50:03Z",
-          "last_capture_at": "2026-11-24T00:50:03Z",
+          "last_adapter_verified_at": "2026-11-24T21:57:28Z",
+          "last_attempt_at": "2026-11-24T21:57:28Z",
+          "last_capture_at": "2026-11-24T21:57:28Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 1.47,
+        "latency_s": 1.43,
         "model": "e2ee-qwen3-6-35b-a3b",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/4f3fb84ea047d1d01d3bfbd4",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/4f3fb84ea047d1d01d3bfbd4",
         "outcome": "verified",
         "outcome_reason": "adapter_accepted",
         "outcome_reason_detail": null,
@@ -2386,7 +2371,7 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "046da5019dcc34e836adcf1d542cceee52f223fcd2359425f3b4b7c29bf31f2ecab8c4534912b038b75b0066816adb7680641f931dd67bbaef7a1e510a8e72510d",
         "valid": true,
-        "verified_at": "2026-11-24T00:50:03Z"
+        "verified_at": "2026-11-24T21:57:28Z"
       },
       {
         "attestation_type": "venice",
@@ -2409,8 +2394,8 @@
                 "dbgstat": "disabled",
                 "hwmodel": "GH100",
                 "iss": "https://nras.attestation.nvidia.com",
-                "jwt_sha256": "f8737a12bdb39b4c186cef7aad36be0afd0b967d7d9debf32ede3c20f754c92a",
-                "kid": "nv-eat-kid-prod-20261123204442774-6cfd51bd-f2de-4c14-b27e-66fc7a767d77",
+                "jwt_sha256": "c69a790c002f82d935e2a14760ac16b06a7cf02636b0412c9eafbb8a8d4900d9",
+                "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
                 "nonce_bound": true,
                 "ok": true,
                 "signature_verified": true,
@@ -2420,8 +2405,8 @@
             },
             "platform": {
               "iss": "https://nras.attestation.nvidia.com",
-              "jwt_sha256": "c1bf772c4e164c98a7a2171a7a81149c7a6f8575f7aff5579110c81f147181ef",
-              "kid": "nv-eat-kid-prod-20261123204442774-6cfd51bd-f2de-4c14-b27e-66fc7a767d77",
+              "jwt_sha256": "44065d247f65d98dc5b9dee413fc4be1bfab306cc75df7f6a3791be7115344cf",
+              "kid": "nv-eat-kid-prod-20261124203529424-15edcdc4-55e7-4d14-bfeb-c704a9146c1c",
               "nonce_bound": true,
               "ok": true,
               "signature_verified": true,
@@ -2445,16 +2430,16 @@
             },
             "detached_json_disagreements": {},
             "log_app_id": "89c51ab856bee41efe78c40309a4deb277a02a0f",
-            "log_compose_hash": "261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a",
+            "log_compose_hash": "f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1",
             "log_os_image_hash": "8db40cb23008d6213668b5816702d100b37b859a8a5bfd18d938ae3a1b3715bd",
-            "mrconfigid": "01261760d004c92eab0b6bed59a55cf3214c65d2cb543a1bed6dff371cd2650a7a000000000000000000000000000000",
+            "mrconfigid": "01f7136328f40a78a102ecebf9ccdbfd5cdf7f446fb42ddfe0b41e3dc8ddd7ace1000000000000000000000000000000",
             "ok": true,
             "registers": {
               "mrtd": "7fe60787222bd394cb516abca2435f22f035ab2cc9c0a4b4b3b148e46297f3d931a237b72f359052c6e657d8c1409173",
               "rtmr0": "d6118f0eeb30e9d9178d2b9106dddd002d979b6fa79bdec415051afae2021384c29a32d2f6454fa369617598378ffb5e",
               "rtmr1": "4ae609807c765916a31d724786ed74bcb97e168a9d937b04936aeef2015c907eba5ac352c6bcd749c246fd62ffb659ec",
               "rtmr2": "764489f277a8540189761e72b4238ba36d4d647e11bd958d8ab5522af2a4867b0ff63e06b0c4967f1857236244040a5d",
-              "rtmr3": "ca00969a016f278d18a9e2e0859ce41e086078b75b5d5e93bab008b9ae54a1ae80b19e5c1d581015eff9f055ce046658"
+              "rtmr3": "6e49a9f9ee815f32f547da6e3c11047409a85afb1a793cfc1bb9f97a5072feba1202c4a04fb8a3fca3ed97b204cac9e3"
             },
             "replay_matches_quote": true
           },
@@ -2486,15 +2471,15 @@
         "error": null,
         "freshness": {
           "last_adapter_verified_at": "2026-11-15T19:22:09Z",
-          "last_attempt_at": "2026-11-24T00:50:09Z",
-          "last_capture_at": "2026-11-24T00:50:09Z",
+          "last_attempt_at": "2026-11-24T21:57:37Z",
+          "last_capture_at": "2026-11-24T21:57:37Z",
           "last_cryptographic_verification_at": null,
           "last_policy_review_at": null,
           "last_triage_at": null
         },
-        "latency_s": 5.2,
+        "latency_s": 7.19,
         "model": "e2ee-qwen3-6-35b-a3b-uncensored-p",
-        "observation_id": "20261124T004953.292109Z-0736a6ca9299/66573e9817f2d95025f0dec4",
+        "observation_id": "20261124T215713.401219Z-a822a83547d9/66573e9817f2d95025f0dec4",
         "outcome": "rejected",
         "outcome_reason": "adapter_rejected",
         "outcome_reason_detail": "gateway attestation does not cover the model host",
@@ -2534,52 +2519,52 @@
         "signing_algo": "ecdsa",
         "signing_public_key": "04c4201704005a835ae62f8bffea2100cdb059a5a5bd0e79e5306bd3fd1358b7ab854994006c40b075724b3681b5ddd3ac455a2e7ec5d8e57a28b90f97a2f99c1f",
         "valid": false,
-        "verified_at": "2026-11-24T00:50:09Z"
+        "verified_at": "2026-11-24T21:57:37Z"
       }
     ]
   },
-  "generated_at": "2026-11-24T00:49:53.292155Z",
-  "git_sha": "aa7f0ed77814e79a878ca95f560e3a2e59dfa6a0",
+  "generated_at": "2026-11-24T21:57:13.401271Z",
+  "git_sha": "6d253fe061be86a2b40ab0d385b95a7ba634e947",
   "pricing": {},
   "route_observations": {
     "aci-gateway/api.redpill.ai": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:49:57Z",
-        "last_capture_at": "2026-11-24T00:49:57Z",
+        "last_attempt_at": "2026-11-24T21:57:17Z",
+        "last_capture_at": "2026-11-24T21:57:17Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/00d71b240a1e65dce0fd7c79",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/00d71b240a1e65dce0fd7c79",
       "outcome": "rejected",
       "reason": "unspecified",
       "row_status": "unknown"
     },
     "aci-gateway/inference.phala.com": {
       "freshness": {
-        "last_adapter_verified_at": "2026-11-24T00:49:56Z",
-        "last_attempt_at": "2026-11-24T00:49:56Z",
-        "last_capture_at": "2026-11-24T00:49:56Z",
+        "last_adapter_verified_at": "2026-11-24T21:57:17Z",
+        "last_attempt_at": "2026-11-24T21:57:17Z",
+        "last_capture_at": "2026-11-24T21:57:17Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/4437789d9406a763a912f52a",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/4437789d9406a763a912f52a",
       "outcome": "verified",
       "reason": "unspecified",
       "row_status": "current"
     },
     "aci-gateway/tee.redpill.ai": {
       "freshness": {
-        "last_adapter_verified_at": "2026-11-24T00:49:56Z",
-        "last_attempt_at": "2026-11-24T00:49:56Z",
-        "last_capture_at": "2026-11-24T00:49:56Z",
+        "last_adapter_verified_at": "2026-11-24T21:57:17Z",
+        "last_attempt_at": "2026-11-24T21:57:17Z",
+        "last_capture_at": "2026-11-24T21:57:17Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": "2026-10-14T01:46:15.925973Z"
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/3ffbae04915bf04dfe8f6ba0",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/3ffbae04915bf04dfe8f6ba0",
       "outcome": "verified",
       "reason": "unspecified",
       "row_status": "current"
@@ -2587,13 +2572,13 @@
     "chutes/DeepSeek-V3.2-TEE": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:50:29Z",
-        "last_capture_at": "2026-11-24T00:50:29Z",
+        "last_attempt_at": "2026-11-24T21:58:08Z",
+        "last_capture_at": "2026-11-24T21:58:08Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/a0b09435b8e2f51056367ab9",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/a0b09435b8e2f51056367ab9",
       "outcome": "not_checked",
       "reason": "verification_incomplete",
       "row_status": "unknown"
@@ -2601,13 +2586,13 @@
     "chutes/GLM-5.1-TEE": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:50:40Z",
-        "last_capture_at": "2026-11-24T00:50:40Z",
+        "last_attempt_at": "2026-11-24T21:58:09Z",
+        "last_capture_at": "2026-11-24T21:58:09Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/b235d29e0611a47a6545e128",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/b235d29e0611a47a6545e128",
       "outcome": "not_checked",
       "reason": "verification_incomplete",
       "row_status": "unknown"
@@ -2615,13 +2600,13 @@
     "chutes/GLM-5.2-TEE": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:50:36Z",
-        "last_capture_at": "2026-11-24T00:50:36Z",
+        "last_attempt_at": "2026-11-24T21:58:03Z",
+        "last_capture_at": "2026-11-24T21:58:03Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/741aa5a30354216131743478",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/741aa5a30354216131743478",
       "outcome": "not_checked",
       "reason": "verification_incomplete",
       "row_status": "unknown"
@@ -2629,13 +2614,13 @@
     "chutes/Kimi-K2.6-TEE": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:50:56Z",
-        "last_capture_at": "2026-11-24T00:50:56Z",
+        "last_attempt_at": "2026-11-24T21:58:37Z",
+        "last_capture_at": "2026-11-24T21:58:37Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/5c27791fdcd8f01aa06a6ee2",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/5c27791fdcd8f01aa06a6ee2",
       "outcome": "not_checked",
       "reason": "verification_incomplete",
       "row_status": "unknown"
@@ -2657,13 +2642,13 @@
     "chutes/gemma-4-31B-TEE": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:50:48Z",
-        "last_capture_at": "2026-11-24T00:50:48Z",
+        "last_attempt_at": "2026-11-24T21:58:22Z",
+        "last_capture_at": "2026-11-24T21:58:22Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/bec27c693c1b775b82d4b459",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/bec27c693c1b775b82d4b459",
       "outcome": "rejected",
       "reason": "unspecified",
       "row_status": "unknown"
@@ -2671,13 +2656,13 @@
     "near-ai/Qwen/Qwen3.8-27B": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:49:59Z",
-        "last_capture_at": "2026-11-24T00:49:59Z",
+        "last_attempt_at": "2026-11-24T21:57:19Z",
+        "last_capture_at": "2026-11-24T21:57:19Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/dfb43c43177f843aa81b4884",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/dfb43c43177f843aa81b4884",
       "outcome": "rejected",
       "reason": "unspecified",
       "row_status": "unknown"
@@ -2699,13 +2684,13 @@
     "near-ai/z-ai/glm-5.3-flash": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:49:58Z",
+        "last_attempt_at": "2026-11-24T21:57:18Z",
         "last_capture_at": "2026-11-20T21:04:39Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/c6c0aa8db6389321c609e8e4",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/c6c0aa8db6389321c609e8e4",
       "outcome": "unavailable",
       "reason": "transport_error",
       "row_status": "unknown"
@@ -2727,13 +2712,13 @@
     "tinfoil/router": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:50:00Z",
-        "last_capture_at": "2026-11-24T00:50:00Z",
+        "last_attempt_at": "2026-11-24T21:57:19Z",
+        "last_capture_at": "2026-11-24T21:57:19Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/fbec6b27aeb17348d9938dcb",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/fbec6b27aeb17348d9938dcb",
       "outcome": "rejected",
       "reason": "unspecified",
       "row_status": "unknown"
@@ -2741,13 +2726,13 @@
     "venice/e2ee-gemma-4-31b": {
       "freshness": {
         "last_adapter_verified_at": null,
-        "last_attempt_at": "2026-11-24T00:50:03Z",
+        "last_attempt_at": "2026-11-24T21:57:28Z",
         "last_capture_at": "2026-10-13T19:51:41Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/016d51929979d7ad52446170",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/016d51929979d7ad52446170",
       "outcome": "unavailable",
       "reason": "evidence_missing",
       "row_status": "unknown"
@@ -2755,41 +2740,41 @@
     "venice/e2ee-glm-5-1": {
       "freshness": {
         "last_adapter_verified_at": "2026-11-15T19:22:05Z",
-        "last_attempt_at": "2026-11-24T00:50:01Z",
+        "last_attempt_at": "2026-11-24T21:57:27Z",
         "last_capture_at": "2026-11-24T00:50:01Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/3f403121a4cef3606894d7fe",
-      "outcome": "rejected",
-      "reason": "adapter_rejected",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/3f403121a4cef3606894d7fe",
+      "outcome": "unavailable",
+      "reason": "transport_error",
       "row_status": "unknown"
     },
     "venice/e2ee-gpt-oss-120b-p": {
       "freshness": {
         "last_adapter_verified_at": "2026-11-15T19:22:08Z",
-        "last_attempt_at": "2026-11-24T00:50:04Z",
-        "last_capture_at": "2026-11-24T00:50:04Z",
+        "last_attempt_at": "2026-11-24T21:57:29Z",
+        "last_capture_at": "2026-11-24T21:57:29Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/7f665a507cb4da42f39d662c",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/7f665a507cb4da42f39d662c",
       "outcome": "rejected",
       "reason": "adapter_rejected",
       "row_status": "unknown"
     },
     "venice/e2ee-qwen3-6-35b-a3b": {
       "freshness": {
-        "last_adapter_verified_at": "2026-11-24T00:50:03Z",
-        "last_attempt_at": "2026-11-24T00:50:03Z",
-        "last_capture_at": "2026-11-24T00:50:03Z",
+        "last_adapter_verified_at": "2026-11-24T21:57:28Z",
+        "last_attempt_at": "2026-11-24T21:57:28Z",
+        "last_capture_at": "2026-11-24T21:57:28Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/4f3fb84ea047d1d01d3bfbd4",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/4f3fb84ea047d1d01d3bfbd4",
       "outcome": "verified",
       "reason": "adapter_accepted",
       "row_status": "current"
@@ -2797,19 +2782,19 @@
     "venice/e2ee-qwen3-6-35b-a3b-uncensored-p": {
       "freshness": {
         "last_adapter_verified_at": "2026-11-15T19:22:09Z",
-        "last_attempt_at": "2026-11-24T00:50:09Z",
-        "last_capture_at": "2026-11-24T00:50:09Z",
+        "last_attempt_at": "2026-11-24T21:57:37Z",
+        "last_capture_at": "2026-11-24T21:57:37Z",
         "last_cryptographic_verification_at": null,
         "last_policy_review_at": null,
         "last_triage_at": null
       },
-      "observation_id": "20261124T004953.292109Z-0736a6ca9299/66573e9817f2d95025f0dec4",
+      "observation_id": "20261124T215713.401219Z-a822a83547d9/66573e9817f2d95025f0dec4",
       "outcome": "rejected",
       "reason": "adapter_rejected",
       "row_status": "unknown"
     }
   },
-  "run_id": "20261124T004953.292109Z-0736a6ca9299",
+  "run_id": "20261124T215713.401219Z-a822a83547d9",
   "schema_version": "0.2",
   "view_completeness": "complete"
 }
