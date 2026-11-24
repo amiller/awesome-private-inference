@@ -85,3 +85,11 @@ Fit with issues: #35 keeps the RTMR0 derivation; #36 gets model-CVM boot-registe
 5. Backfill souk's corpus including logs without a quote, or only quote-bearing captures?
 6. Logbook home: souk reading the archive, or a `docs/` page in the observatory?
 7. Ask NEAR why `cc796618` is listed twice for GLM?
+
+## 9. Implementation notes (2026-11-24, branch `near-machines`)
+
+- Q2 is still open: the `near-machines` job does not stage `data/near-deployments-seen.json`, and `near_ai.appraise_report` no longer writes it (only `verify` records deployments, as before).
+- Follow-up (wanted, deferred): record the Chutes/Tinfoil-routed attested models (`deepseek/deepseek-v3.2`, `moonshotai/kimi-*`, `z-ai/glm-5.3`) as "not a NEAR machine". Run records already list them under `not_nearai` with their `ownedBy`.
+- Raw retention: a repeat entry of a machine already archived in full this run drops `nvidia_payload` and the bulky `info`; a repeat compose-manager log (same `actions_hash`) keeps only its quote, `report_data`, nonce and hash. Captures reference the raw document instead of copying quotes. Measured on 11-24: 1.7 MB/day gateway raw (0.4 MB gzipped), 2.4 MB/day while Direct runs.
+- Direct entries and backfilled captures get the offline checks only (quote registers, `actions_hash` recomputation, `report_data` binding, same CVM); only live gateway reports go through `appraise_report`. A log counts as `bound` only against a nonce we chose; the 11-22 `fresh/` and `neardirect/` captures carry only an echoed nonce and are archived `bound: false`.
+- `actions_missing_within_retention` uses the action's own (host-supplied) timestamp for the 6-day window.
