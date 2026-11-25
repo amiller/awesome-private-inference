@@ -18,6 +18,7 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
+import urllib3
 
 from probes.observations import _replace, _write_new, digest, new_run_id, utc_now
 from verifiers import darkbloom
@@ -28,7 +29,7 @@ EVIDENCE = ROOT / "data" / "observations" / "evidence" / "sha256"
 API = "https://api.darkbloom.dev"
 HEADERS = {"User-Agent": "awesome-private-inference-reference-observatory/1.0"}
 COORDINATOR_PATHS = ("/v1/coordinator/attestation", "/.well-known/attestation", "/health", "/v1/encryption-key")
-FETCH_ERRORS = (requests.RequestException, ValueError, tarfile.TarError)
+FETCH_ERRORS = (requests.RequestException, urllib3.exceptions.HTTPError, ValueError, tarfile.TarError)
 
 
 class HTTPStatusError(ValueError):
@@ -144,11 +145,9 @@ def collect() -> dict:
         return {**obs, "status": "fetch_failed", "error": f"{type(exc).__name__}: {exc.args[0] if exc.args else exc}"}
 
     try:
-        env, rec["steps"]["providers"] = observe("/v1/providers/attestation", True)
+        feed, rec["steps"]["providers"] = observe("/v1/providers/attestation", True)
     except FETCH_ERRORS as exc:
-        env, rec["steps"]["providers"] = None, failed(exc)
-    if env:
-        rec["providers"] = summarize_providers(env["body"], datetime.fromisoformat(rec["steps"]["providers"]["fetched_at"]))
+        feed, rec["steps"]["providers"] = None, failed(exc)
 
     try:
         env, rec["steps"]["release"] = observe("/v1/releases/latest", True)
@@ -177,6 +176,9 @@ def collect() -> dict:
             rec["coordinator"][path] = {**obs, "verification": "not_checked"}
         except FETCH_ERRORS as exc:
             rec["coordinator"][path] = failed(exc)
+
+    if feed:
+        rec["providers"] = summarize_providers(feed["body"], datetime.fromisoformat(rec["steps"]["providers"]["fetched_at"]))
 
     statuses = {**rec["steps"], **rec["coordinator"]}
     rec["failed"] = sorted(k for k, v in statuses.items() if v["status"] != "ok")

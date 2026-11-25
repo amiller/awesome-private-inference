@@ -159,3 +159,35 @@ def test_non_200_feed_is_a_fetch_failure_with_body_archived(monkeypatch, tmp_pat
     assert run["failed"] == ["providers", "release"]
     assert run["steps"]["providers"]["http_status"] == 503 and run["providers"] is None
     assert json.loads((tmp_path / run["steps"]["providers"]["raw_ref"]).read_text())["body"] == {"error": "down"}
+
+
+def test_bundle_dropped_mid_stream_fails_run_but_keeps_release_and_feed(monkeypatch, tmp_path):
+    import urllib3
+    monkeypatch.setattr(dbp, "ROOT", tmp_path)
+    monkeypatch.setattr(dbp, "OUT", tmp_path / "darkbloom")
+    monkeypatch.setattr(dbp, "EVIDENCE", tmp_path / "evidence")
+    class Broken(io.BytesIO):
+        def read(self, n=-1):
+            if self.tell() > 100:
+                raise urllib3.exceptions.ProtocolError("Connection broken")
+            return super().read(min(n, 64))
+    class Stream:
+        status_code, raw = 200, Broken(tarball({"./bin/darkbloom": bytes(4096)}))
+        def __enter__(self): return self
+        def __exit__(self, *a): pass
+        def raise_for_status(self): pass
+    def get(url, stream=False, **kw):
+        if stream:
+            return Stream()
+        if url.endswith("/v1/releases/latest"):
+            return Resp(200, RELEASE)
+        if url.endswith("/v1/providers/attestation"):
+            return Resp(200, FIXTURE["2026-11-24"])
+        return Resp(404, {"error": {}})
+    monkeypatch.setattr(dbp.requests, "get", get)
+    assert dbp.main([]) == 1
+    run = json.loads(next((tmp_path / "darkbloom/runs").glob("*.json")).read_text())
+    assert run["failed"] == ["bundle"] and "Connection broken" in run["steps"]["bundle"]["error"]
+    assert run["providers"]["providers"] == 3 and run["release"]["verification"] == "not_checked"
+    [row] = [json.loads(x) for x in (tmp_path / "darkbloom/releases.jsonl").read_text().splitlines()]
+    assert row["version"] == "1.0.0" and row["verification"] == "not_checked" and row["bundle_bytes"] is None
