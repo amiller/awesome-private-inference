@@ -1,0 +1,280 @@
+{
+  "api": "https://api.darkbloom.dev",
+  "coordinator": {
+    "/.well-known/attestation": {
+      "body_sha256": "b16e15764b8bc06c5c3f9f19bc8b99fa48e7894aa5a6ccdad65da49bbf564793",
+      "bytes": 19,
+      "fetched_at": "2026-11-25T01:34:28.387477Z",
+      "http_status": 404,
+      "raw_ref": "data/observations/evidence/sha256/528979910315b868ce90e8ab7bfbf9f3d871a8df542d045ef7c138a095f8b435.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    },
+    "/health": {
+      "body_sha256": "b54304ee7b1d846aa321cdcbca32f3ef125d62518ab48e943f2edcef8f8f9990",
+      "bytes": 147,
+      "fetched_at": "2026-11-25T01:34:28.551664Z",
+      "http_status": 200,
+      "raw_ref": "data/observations/evidence/sha256/532d9d4677e52709194470bee21431b5908ef96fb05e505327928717da434e0a.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    },
+    "/v1/coordinator/attestation": {
+      "body_sha256": "219c3a59ed4c1924746ef72438eecdda59d4660166f7cfbf92b8b40b7c0685c3",
+      "bytes": 146,
+      "fetched_at": "2026-11-25T01:34:28.206912Z",
+      "http_status": 404,
+      "raw_ref": "data/observations/evidence/sha256/42f5fefa3c5068909b8c628555430e216ab86319ecc989b0af8b1da2c4b0c4d6.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    },
+    "/v1/encryption-key": {
+      "body_sha256": "28cd2f47cf511dabd49bc655e6f292609c165637d193c7d2e185cfdc81df065a",
+      "bytes": 117,
+      "fetched_at": "2026-11-25T01:34:28.739293Z",
+      "http_status": 200,
+      "raw_ref": "data/observations/evidence/sha256/a24d351ad13df1b6a9e140ce6b1e5673683f47e0c3dd89dc22855676a051151d.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    }
+  },
+  "failed": [],
+  "finished_at": "2026-11-25T01:34:28.911498Z",
+  "providers": {
+    "app_attest_authorized": {
+      "false": 134,
+      "true": 989
+    },
+    "app_attest_state": {
+      "pending": 129,
+      "revoked": 2,
+      "unsupported": 3,
+      "verified": 989
+    },
+    "by_chip": {
+      "Apple M1 Max": 148,
+      "Apple M1 Pro": 14,
+      "Apple M1 Ultra": 32,
+      "Apple M2": 2,
+      "Apple M2 Max": 57,
+      "Apple M2 Pro": 11,
+      "Apple M2 Ultra": 29,
+      "Apple M3 Max": 38,
+      "Apple M3 Pro": 7,
+      "Apple M3 Ultra": 128,
+      "Apple M4": 37,
+      "Apple M4 Max": 116,
+      "Apple M4 Pro": 126,
+      "Apple M5": 12,
+      "Apple M5 Max": 155,
+      "Apple M5 Pro": 87,
+      "Apple M5 Ultra": 118,
+      "Apple M6": 6
+    },
+    "by_model": {
+      "EigenLabs/Qwen3.8-27B-4bit-mtp": 148,
+      "EigenLabs/Ternary-Bonsai-2-9B-MLX-2bit": 147,
+      "Qwen3.5-9B": 288,
+      "gemma-4-26b-8bit": 10,
+      "gemma-4-26b-qat-4bit": 587,
+      "glm-5.3-flash": 10,
+      "gpt-oss-20b": 424,
+      "mimo-v2.6-flash-mopd": 27,
+      "nvidia-nemotron-3.5-lightning": 160,
+      "nvidia-nemotron-3.5-super": 52,
+      "qwen3.5-35b-a3b": 263,
+      "qwen3.6-35b-a3b-vl-mtp-mxfp8": 535,
+      "ternary-bonsai-2-27b": 219
+    },
+    "by_status": {
+      "online": 983,
+      "serving": 138,
+      "untrusted": 2
+    },
+    "by_trust_level": {
+      "none": 2,
+      "self_signed": 1121
+    },
+    "legacy_state": {
+      "expired": 3,
+      "pending": 1118,
+      "revoked": 2
+    },
+    "mda_binding": {
+      "not_checked:no_chain_published": 1123
+    },
+    "mda_binding_checked": {},
+    "mda_verified": {
+      "false": 1123
+    },
+    "providers": 1123
+  },
+  "release": {
+    "active": true,
+    "binary_hash": "3b8df3b1c41c803a8c29a050a298037e7b65e899518b4ffbdd3055ef3c9354f7",
+    "bundle_files": {
+      "Darkbloom.app/Contents/CodeResources": {
+        "sha256": "22288808285b70312a2c9082e172dcbc3067cff5bc49ee6e8d408539fe789029",
+        "size": 1779
+      },
+      "Darkbloom.app/Contents/Helpers/._mlx.metallib": {
+        "sha256": "2fdc889ec5eaee3c30f72604a62d99dcd90a66ba60237b1e485c76669d7fd91d",
+        "size": 9553
+      },
+      "Darkbloom.app/Contents/Helpers/._pagedattention.metal": {
+        "sha256": "4e55ecd9baff7bf65303f558128f706ba7cea9d8e733323494a81246aa089370",
+        "size": 9576
+      },
+      "Darkbloom.app/Contents/Helpers/darkbloom-cluster-plan": {
+        "sha256": "0d01e412269696219653ac00eb3dfb91767d822662da4572df4439d7db194a24",
+        "size": 94920320
+      },
+      "Darkbloom.app/Contents/Helpers/darkbloom-cluster-worker": {
+        "sha256": "b7d0c91257cafa0e7944196065a3c0da29772921c6d41f0a070cc0d9dc294ec7",
+        "size": 96125776
+      },
+      "Darkbloom.app/Contents/Helpers/darkbloom-fan-helper": {
+        "sha256": "f654196cbe83eab566ea77530c10cc9a6988d9fdeaac10dfae5fcfa10536c310",
+        "size": 1156624
+      },
+      "Darkbloom.app/Contents/Helpers/mlx.metallib": {
+        "sha256": "5b97893cc20e6e9651edf3284d970488af9a9bdd64820231e95fee760eec70ac",
+        "size": 223603840
+      },
+      "Darkbloom.app/Contents/Helpers/pagedattention.metal": {
+        "sha256": "d99096e5c6fc2b0bb0be802a34986d90ff1287416cd57a360d0980ac2ce95a65",
+        "size": 27838
+      },
+      "Darkbloom.app/Contents/Info.plist": {
+        "sha256": "00a65d4e30f17e389d24bb5814d4eb3d76095d3fb2c58752bcd8485b2741493c",
+        "size": 817
+      },
+      "Darkbloom.app/Contents/MacOS/._mlx.metallib": {
+        "sha256": "3408a7077c4c09bfe7f26f6f1ffc7bf602b2404af20458bc13bfd4601443d216",
+        "size": 9553
+      },
+      "Darkbloom.app/Contents/MacOS/darkbloom": {
+        "sha256": "3b8df3b1c41c803a8c29a050a298037e7b65e899518b4ffbdd3055ef3c9354f7",
+        "size": 167558672
+      },
+      "Darkbloom.app/Contents/MacOS/darkbloom-enclave": {
+        "sha256": "84e9465a7d79c6ecf2b484b83537c2520c0d6d6fec849c0f738603152688de26",
+        "size": 155617744
+      },
+      "Darkbloom.app/Contents/MacOS/mlx.metallib": {
+        "sha256": "5b97893cc20e6e9651edf3284d970488af9a9bdd64820231e95fee760eec70ac",
+        "size": 223603840
+      },
+      "Darkbloom.app/Contents/Resources/darkbloom-runtime-capabilities/app-attest-callback-v1": {
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+        "size": 2
+      },
+      "Darkbloom.app/Contents/Resources/darkbloom-runtime-capabilities/fan-helper-v1": {
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+        "size": 2
+      },
+      "Darkbloom.app/Contents/Resources/darkbloom-runtime-capabilities/paged-kernel-v1": {
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+        "size": 2
+      },
+      "Darkbloom.app/Contents/Resources/mlx-swift-lm_MLXLMCommon.bundle/Qwen4Metal/LICENSE": {
+        "sha256": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+        "size": 1066
+      },
+      "Darkbloom.app/Contents/Resources/mlx-swift-lm_MLXLMCommon.bundle/Qwen4Metal/gemm.metal": {
+        "sha256": "cc2597fad25939505da77537ff15e78eba2fccbdf14a0e636fb2d2ac0bb4bb6c",
+        "size": 57347
+      },
+      "Darkbloom.app/Contents/Resources/mlx-swift-lm_MLXLMCommon.bundle/Qwen4Metal/quantized.metal": {
+        "sha256": "d39dae2a27d0352facbe0e07c97af1ba0782a923698ce3931a92417d9e527162",
+        "size": 99331
+      },
+      "Darkbloom.app/Contents/Resources/mlx-swift-lm_MLXLMCommon.bundle/Qwen4Metal/quantized_utils.metal": {
+        "sha256": "36893d020956fec4b63f37855035dfebc317bd06a966de14c6372c9a2971ef28",
+        "size": 2785
+      },
+      "Darkbloom.app/Contents/Resources/mlx-swift-lm_MLXLMCommon.bundle/pagedattention.metal": {
+        "sha256": "d99096e5c6fc2b0bb0be802a34986d90ff1287416cd57a360d0980ac2ce95a65",
+        "size": 27838
+      },
+      "Darkbloom.app/Contents/Resources/swift-crypto_Crypto.bundle/PrivacyInfo.xcprivacy": {
+        "sha256": "42fb8a30dd8d7ba0900e1bf17fe64ed8c12cfdb8a9c791ab6b4e1eceb0f299c0",
+        "size": 398
+      },
+      "Darkbloom.app/Contents/Resources/swift-nio_NIOPosix.bundle/PrivacyInfo.xcprivacy": {
+        "sha256": "982f20d820bc4460acc9d4116c3e6c8ec837f717dc82edbb7308f7400515c909",
+        "size": 599
+      },
+      "Darkbloom.app/Contents/Resources/swift-transformers_Hub.bundle/gpt2_tokenizer_config.json": {
+        "sha256": "551e26ec611d8d0c8edc3ef72e518a38418cb71f40de1347dd486a595e1557d7",
+        "size": 234
+      },
+      "Darkbloom.app/Contents/Resources/swift-transformers_Hub.bundle/t5_tokenizer_config.json": {
+        "sha256": "e0aff0b1de9071e30d9a60a199303b6abe916a64a19932bd1c46992279b41a1f",
+        "size": 20746
+      },
+      "Darkbloom.app/Contents/_CodeSignature/CodeResources": {
+        "sha256": "e2cd974231a38789a4ce9bfcc5e3b778b661ff7fe5b70ec0bfce658eeb7cb77a",
+        "size": 8966
+      },
+      "Darkbloom.app/Contents/embedded.provisionprofile": {
+        "sha256": "3ea2b36b931b6e91d43df4d7047de6e146c5ecdc5b9b14aa2a01989118155d19",
+        "size": 12697
+      },
+      "bin/._mlx.metallib": {
+        "sha256": "3408a7077c4c09bfe7f26f6f1ffc7bf602b2404af20458bc13bfd4601443d216",
+        "size": 9553
+      },
+      "bin/darkbloom": {
+        "sha256": "3b8df3b1c41c803a8c29a050a298037e7b65e899518b4ffbdd3055ef3c9354f7",
+        "size": 167558672
+      },
+      "bin/darkbloom-enclave": {
+        "sha256": "84e9465a7d79c6ecf2b484b83537c2520c0d6d6fec849c0f738603152688de26",
+        "size": 155617744
+      },
+      "bin/mlx.metallib": {
+        "sha256": "5b97893cc20e6e9651edf3284d970488af9a9bdd64820231e95fee760eec70ac",
+        "size": 223603840
+      }
+    },
+    "bundle_hash": "5504e83af400eb42276bdd675081aca9369c56cef728685679e3e02bf53b6e39",
+    "created_at": "2026-11-21T20:39:41.613741Z",
+    "history_entry": true,
+    "metallib_hash": "5b97893cc20e6e9651edf3284d970488af9a9bdd64820231e95fee760eec70ac",
+    "url": "https://pub-3d1cb668259340eeb2276e1d375c846d.r2.dev/releases/v0.10.17/artifacts/5504e83af400eb42276bdd675081aca9369c56cef728685679e3e02bf53b6e39/darkbloom-bundle-macos-arm64.tar.gz",
+    "verification": {
+      "binary_hash_matches": true,
+      "bundle_hash_matches": true,
+      "code_signature": "not_checked",
+      "metallib_hash_matches": true
+    },
+    "version": "0.10.17"
+  },
+  "run_id": "20261125T013403.835650Z-6ab9cabe544a",
+  "started_at": "2026-11-25T01:34:03.835727Z",
+  "status": "ok",
+  "steps": {
+    "bundle": {
+      "bytes": 444483067,
+      "sha256": "5504e83af400eb42276bdd675081aca9369c56cef728685679e3e02bf53b6e39",
+      "status": "ok"
+    },
+    "providers": {
+      "body_sha256": "ac5333f74199c3cb42180684038c8ee35238ac4024941387228a0ce2e686d0ee",
+      "bytes": 932369,
+      "fetched_at": "2026-11-25T01:34:03.835748Z",
+      "http_status": 200,
+      "raw_ref": "data/observations/evidence/sha256/9699d6450a6febe36c82c837f9c9d52a9036e5bc721d3d5e7b6ecc287874e8a8.json.gz",
+      "status": "ok"
+    },
+    "release": {
+      "body_sha256": "49779ec6edc3905813e751ac33fa6ca8c79b72823e9a1519011b05110fce24e1",
+      "bytes": 837,
+      "fetched_at": "2026-11-25T01:34:04.289595Z",
+      "http_status": 200,
+      "raw_ref": "data/observations/evidence/sha256/04a0ae9069dd1e77744218e3512273b1076ed54ce16c716d71b1ba08d070604f.json.gz",
+      "status": "ok"
+    }
+  }
+}
