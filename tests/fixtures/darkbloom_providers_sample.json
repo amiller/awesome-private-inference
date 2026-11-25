@@ -1,0 +1,278 @@
+{
+  "source": {
+    "2026-08-22": {
+      "captured_at": "2026-08-22T20:38:00Z",
+      "url": "https://api.darkbloom.dev/v1/providers/attestation",
+      "file": "devproof-audits-guide local checkout (untracked), case-studies/darkbloom-d-inference/verify/2026-08-22/evidence/providers-attestation.json",
+      "file_sha256": "0214261b33b5e1a0c01711ec64a4bfd6559f236a8038558ec435b71d66ad9c87",
+      "selection": "the one failing binding (415c509f), the first three holding, the first without a chain"
+    },
+    "2026-11-24": {
+      "captured_at": "2026-11-25T01:16:00Z",
+      "url": "https://api.darkbloom.dev/v1/providers/attestation",
+      "file_sha256": "7841e8b37fca9b0bcf655827a688e48bb384b7abda41685021ff550090cd6101",
+      "selection": "first three providers"
+    }
+  },
+  "2026-08-22": {
+    "providers": [
+      {
+        "provider_id": "415c509f-c994-42a5-9006-2fd89574749a",
+        "chip_name": "Apple M5 Max",
+        "hardware_model": "Mac17,6",
+        "serial_number": "JYKJDQ7WW3",
+        "trust_level": "hardware",
+        "status": "online",
+        "memory_gb": 128,
+        "gpu_cores": 40,
+        "models": [
+          "gpt-oss-20b",
+          "gemma-4-26b-qat-4bit",
+          "qwen3.6-35b-a3b-vl-mtp-mxfp8"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "5B92CE4BA1034457A0921532291F4A4AD939CBE48D3A1381163A9AD3687D5694",
+        "se_public_key": "C1g3yFmesAlgSNUL+Cqu4qPNfgStfTtjnbn1z9a/uL1jiE9gG5U13a+ms8RJmTZC/0Xr3yvnNK7F8NxWeqo9Bw==",
+        "mdm_verified": true,
+        "acme_verified": false,
+        "mda_verified": true,
+        "mda_cert_chain_b64": [
+          "MIIDXzCCAuSgAwIBAgIGAaAolKEKMAoGCCqGSM49BAMDMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTI2MDgyMTA4MjcwNFoXDTI2MTEyMDA4MjcwNFowgZExSTBHBgNVBAMMQDk2MzJhZWY0NDQwYjlmNTEwYWJlNDdjNWE4ZDRlYmI4MGUwZmM1ODViMTJhNWQ1NmExNDI0OWFiNWU1MWQ3ZDIxGjAYBgNVBAsMEUFBQSBDZXJ0aWZpY2F0aW9uMRMwEQYDVQQKDApBcHBsZSBJbmMuMRMwEQYDVQQIDApDYWxpZm9ybmlhMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEZHzvYQqf+cO3SHdJGpRvoP3GadxCyYgORSULki38sKqhh8uTnuuM1943obNgCZlaPi1m2jg5PgMDLWP+MQpcOEKK74mwz4sN9/sYxwpiUqTq9295tS8lciYClCLFb/BDo4IBRzCCAUMwDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCBPAwFAYDVR0lBA0wCwYJKoZIhvdjZAQYMBQGCiqGSIb3Y2QICgIEBjI2LjUuMjAUBgoqhkiG92NkCAoDBAYyNi41LjIwFAYKKoZIhvdjZAgKAQQGMjYuNS4yMBUGCiqGSIb3Y2QICQQEB0o3MTZjQVAwGwYKKoZIhvdjZAgNAgQNRnVsbCBTZWN1cml0eTARBgoqhkiG92NkCA0BBAMCAQAwEQYKKoZIhvdjZAgNAwQDAgEAMBgGCiqGSIb3Y2QICQEECkpZS0pEUTdXVzMwJwYKKoZIhvdjZAgJAgQZMDAwMDYwNTAtMDAwRTY5Q0MwMkY5NDAxQzAuBgoqhkiG92NkCAsBBCAdRAIdPxq7HYvbRb1tkaWCfkjQyEnmp341o4r81aPW3DAKBggqhkjOPQQDAwNpADBmAjEA/nultRotX0p2lU0fOVbcjMt0OsBQbrG29FN2xvhLZRUp0TMn5454iXqGCYZAWub9AjEAjMeFsqo+VNjvJG8qKAAVP9VwmCs6roet89jnz/jHp8xf73WQRR1vaCn5D4SNKAZD",
+          "MIICSTCCAc6gAwIBAgIUcDHgQKbmtGvw4vNNVWqEVNBCXnEwCgYIKoZIzj0EAwMwUTEtMCsGA1UEAwwkQXBwbGUgRW50ZXJwcmlzZSBBdHRlc3RhdGlvbiBSb290IENBMRMwEQYDVQQKDApBcHBsZSBJbmMuMQswCQYDVQQGEwJVUzAeFw0yMjAyMTYxOTA0NDdaFw0zMjAyMTgwMDAwMDBaMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAELD9SH+vxdWuu2MC0jxWqWJfNlaTsLjcHWrPrwRLtfuu7fIZvq1BJsghG0hUye+eFaREW6wU9vcGmW/7hOs8kKxSW+6V3hIa0B65xDMmpIJ4zxFrnWYND9OYi1Mlo4Pogo2YwZDASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFPNqTQGd8muBpV5du+UIbVbi+d66MB0GA1UdDgQWBBQZhdvPeG+lsso4rGZLRFp1YWRlZjAOBgNVHQ8BAf8EBAMCAQYwCgYIKoZIzj0EAwMDaQAwZgIxAJv1w5ut/tCAppUampokf1wrBuf9qYaysozgmQ7Le1Kwna8K99nPwJjYkOS/I1jb+gIxAPKMQ31xweb9ODxmRVpshvxeQLf6/j8yIc7HNemhg7PAYxrfQRFkUUFLcpAdowjtGA=="
+        ],
+        "mda_serial": "JYKJDQ7WW3",
+        "mda_udid": "00006050-000E69CC02F9401C",
+        "mda_os_version": "26.5.2",
+        "mda_sepos_version": "26.5.2"
+      },
+      {
+        "provider_id": "35ad2fcb-13d9-4827-b014-c607e35d8ad6",
+        "chip_name": "Apple M1 Pro",
+        "hardware_model": "MacBookPro18,3",
+        "serial_number": "GHX7K6G00X",
+        "trust_level": "hardware",
+        "status": "online",
+        "memory_gb": 32,
+        "gpu_cores": 16,
+        "models": [
+          "gemma-4-26b-qat-4bit"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "AAD61DF03944D7ECCF4925A8608C939B82777C3FD7B744DAE9A7F5E4CDF32B72",
+        "se_public_key": "sTvMoVvpYkp0Mw+TSeTwhPYBb0MFCEYfr0+ZbrtmOYxC2kT2LD3vx+D9op1DFaTstaG5eWxOYae3PTALiR+PXw==",
+        "mdm_verified": true,
+        "acme_verified": false,
+        "mda_verified": true,
+        "mda_cert_chain_b64": [
+          "MIIDXjCCAuSgAwIBAgIGAZ7M9NJXMAoGCCqGSM49BAMDMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTI2MDYxNDIwMjQxN1oXDTI2MDkxMzIwMjQxN1owgZExSTBHBgNVBAMMQGM3NGM4NzFmODgzMjg4ZGIyNWUwNjZkNzEzMWMxMmI3NzhjNTEzNTgyMWM5YWE5OTA4MjNkZGRhMmNkMGQzZjIxGjAYBgNVBAsMEUFBQSBDZXJ0aWZpY2F0aW9uMRMwEQYDVQQKDApBcHBsZSBJbmMuMRMwEQYDVQQIDApDYWxpZm9ybmlhMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEyGk0b948fRf0MLZbxGFFvD929bjAw2tBwrhuiYt/4SDqI9xHwp/eVHEwJbWJVvFhNfs/VxU03JLzDM0/FjYOLLdhuekg/RLGhK1VPu8ftclw4Cltc9B5yK+LSd/ZEk/Po4IBRzCCAUMwDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCBPAwFAYDVR0lBA0wCwYJKoZIhvdjZAQYMBQGCiqGSIb3Y2QICgIEBjI2LjUuMTAUBgoqhkiG92NkCAoDBAYyNi41LjEwFAYKKoZIhvdjZAgKAQQGMjYuNS4xMBUGCiqGSIb3Y2QICQQEB0ozMTRzQVAwGwYKKoZIhvdjZAgNAgQNRnVsbCBTZWN1cml0eTARBgoqhkiG92NkCA0BBAMCAQAwEQYKKoZIhvdjZAgNAwQDAgEAMBgGCiqGSIb3Y2QICQEECkdIWDdLNkcwMFgwJwYKKoZIhvdjZAgJAgQZMDAwMDYwMDAtMDAxQzc5QUMxQUUyODAxRTAuBgoqhkiG92NkCAsBBCA7y4/8wWqy3h87jrWjarU2WCcWbezzEFU14HNr03IEFzAKBggqhkjOPQQDAwNoADBlAjAOCTwbRgCG3kId0eewiZQxrGJMTdNkBjkVbjN21J6Ec14Ozfy8my1TkmaMFuyEQj0CMQCqjiJHij4d1sSnVLDJggSBj28jrBdMMRey01m2BAO2pc+AlGrL9ZzjaaJxTTH9A24=",
+          "MIICSTCCAc6gAwIBAgIUcDHgQKbmtGvw4vNNVWqEVNBCXnEwCgYIKoZIzj0EAwMwUTEtMCsGA1UEAwwkQXBwbGUgRW50ZXJwcmlzZSBBdHRlc3RhdGlvbiBSb290IENBMRMwEQYDVQQKDApBcHBsZSBJbmMuMQswCQYDVQQGEwJVUzAeFw0yMjAyMTYxOTA0NDdaFw0zMjAyMTgwMDAwMDBaMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAELD9SH+vxdWuu2MC0jxWqWJfNlaTsLjcHWrPrwRLtfuu7fIZvq1BJsghG0hUye+eFaREW6wU9vcGmW/7hOs8kKxSW+6V3hIa0B65xDMmpIJ4zxFrnWYND9OYi1Mlo4Pogo2YwZDASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFPNqTQGd8muBpV5du+UIbVbi+d66MB0GA1UdDgQWBBQZhdvPeG+lsso4rGZLRFp1YWRlZjAOBgNVHQ8BAf8EBAMCAQYwCgYIKoZIzj0EAwMDaQAwZgIxAJv1w5ut/tCAppUampokf1wrBuf9qYaysozgmQ7Le1Kwna8K99nPwJjYkOS/I1jb+gIxAPKMQ31xweb9ODxmRVpshvxeQLf6/j8yIc7HNemhg7PAYxrfQRFkUUFLcpAdowjtGA=="
+        ],
+        "mda_serial": "GHX7K6G00X",
+        "mda_udid": "00006000-001C79AC1AE2801E",
+        "mda_os_version": "26.5.1",
+        "mda_sepos_version": "26.5.1"
+      },
+      {
+        "provider_id": "e9ae3fdd-671a-4c41-bf26-8b03fa3cce92",
+        "chip_name": "Apple M2 Pro",
+        "hardware_model": "Mac14,9",
+        "serial_number": "M5Y42N7VVT",
+        "trust_level": "hardware",
+        "status": "online",
+        "memory_gb": 32,
+        "gpu_cores": 19,
+        "models": [
+          "gpt-oss-20b",
+          "gemma-4-26b-qat-4bit",
+          "qwen3.6-35b-a3b-vl-mtp-mxfp8"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "6089F13356F8D483C8F0189F0FF5A85520E1C92B712A1A2D1223B299E42F1F57",
+        "se_public_key": "LD6IKYU34rzUleMy9/xAnvf97U//zkOF6AA+kKrT6SgvDrTPi5uWZfSqbQqpVRVpKPyc86PKLHWv/An0FruvMA==",
+        "mdm_verified": true,
+        "acme_verified": false,
+        "mda_verified": true,
+        "mda_cert_chain_b64": [
+          "MIIDWDCCAt6gAwIBAgIGAaAlo4YLMAoGCCqGSM49BAMDMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTI2MDgyMDE4NDQyOFoXDTI2MTExOTE4NDQyOFowgZExSTBHBgNVBAMMQGE1MzNlMmQ3YjA4MzdmOGI3YWViZWZmMTZhOTM4ZDNmYjI4N2MxYzY2ZDRkNGIzMjY2NzlhYTVmZTI5NDE0NzAxGjAYBgNVBAsMEUFBQSBDZXJ0aWZpY2F0aW9uMRMwEQYDVQQKDApBcHBsZSBJbmMuMRMwEQYDVQQIDApDYWxpZm9ybmlhMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEf3CZf05KzX/D97muEXiaBs+Z08c6YaCMY+9ZxbJ/YH8sbyYz9WImbazqzDtD+bg5S9WEYTA3yv9+0ybD5NARy1JWvOGM8xYGDd2VUZttsKJ/WEpDklU9/chej1AxT6KUo4IBQTCCAT0wDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCBPAwFAYDVR0lBA0wCwYJKoZIhvdjZAQYMBIGCiqGSIb3Y2QICgIEBDI2LjIwEgYKKoZIhvdjZAgKAwQEMjYuMjASBgoqhkiG92NkCAoBBAQyNi4yMBUGCiqGSIb3Y2QICQQEB0o0MTRzQVAwGwYKKoZIhvdjZAgNAgQNRnVsbCBTZWN1cml0eTARBgoqhkiG92NkCA0BBAMCAQAwEQYKKoZIhvdjZAgNAwQDAgEAMBgGCiqGSIb3Y2QICQEECk01WTQyTjdWVlQwJwYKKoZIhvdjZAgJAgQZMDAwMDYwMjAtMDAxNjA5MkUzNDMzQzAxRTAuBgoqhkiG92NkCAsBBCAI0TpDJRD4hI0QbXHX2srUYWsDc1UX3caTL7BPncyceTAKBggqhkjOPQQDAwNoADBlAjAL8g/uMlGlLEDyiJzpC6VQd310HsffiX8KF5Gs9A4m5GxkLRszF4wtZSrMLcDwESYCMQCoCjluwUCvdSh355355aJdwYco2jdAyrOhygcNqSjDc/RvdvQJLSHHfI/KOurcB7g=",
+          "MIICSTCCAc6gAwIBAgIUcDHgQKbmtGvw4vNNVWqEVNBCXnEwCgYIKoZIzj0EAwMwUTEtMCsGA1UEAwwkQXBwbGUgRW50ZXJwcmlzZSBBdHRlc3RhdGlvbiBSb290IENBMRMwEQYDVQQKDApBcHBsZSBJbmMuMQswCQYDVQQGEwJVUzAeFw0yMjAyMTYxOTA0NDdaFw0zMjAyMTgwMDAwMDBaMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAELD9SH+vxdWuu2MC0jxWqWJfNlaTsLjcHWrPrwRLtfuu7fIZvq1BJsghG0hUye+eFaREW6wU9vcGmW/7hOs8kKxSW+6V3hIa0B65xDMmpIJ4zxFrnWYND9OYi1Mlo4Pogo2YwZDASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFPNqTQGd8muBpV5du+UIbVbi+d66MB0GA1UdDgQWBBQZhdvPeG+lsso4rGZLRFp1YWRlZjAOBgNVHQ8BAf8EBAMCAQYwCgYIKoZIzj0EAwMDaQAwZgIxAJv1w5ut/tCAppUampokf1wrBuf9qYaysozgmQ7Le1Kwna8K99nPwJjYkOS/I1jb+gIxAPKMQ31xweb9ODxmRVpshvxeQLf6/j8yIc7HNemhg7PAYxrfQRFkUUFLcpAdowjtGA=="
+        ],
+        "mda_serial": "M5Y42N7VVT",
+        "mda_udid": "00006020-0016092E3433C01E",
+        "mda_os_version": "26.2",
+        "mda_sepos_version": "26.2"
+      },
+      {
+        "provider_id": "176afaaf-30ba-4288-a741-cacc17fac9b9",
+        "chip_name": "Apple M3 Max",
+        "hardware_model": "Mac15,11",
+        "serial_number": "T6HXLJT792",
+        "trust_level": "hardware",
+        "status": "online",
+        "memory_gb": 36,
+        "gpu_cores": 30,
+        "models": [
+          "gemma-4-26b-qat-4bit",
+          "gpt-oss-20b"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "60587424F5399FC05D957DF05B4D2F65543462495C77AEF520F790FBB57CB212",
+        "se_public_key": "YWSNHGMVekkOATX/F9Wxim2ygnBxe4OxXgnS4ncXrJyhBmZ/z94Zc7CzgCA1eilrPeQWQGIE+RanVzgDJ/5iSA==",
+        "mdm_verified": true,
+        "acme_verified": false,
+        "mda_verified": true,
+        "mda_cert_chain_b64": [
+          "MIIDXjCCAuSgAwIBAgIGAZ99S+3LMAoGCCqGSM49BAMDMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTI2MDcxOTAyMTIzNVoXDTI2MTAxODAyMTIzNVowgZExSTBHBgNVBAMMQDU0YzhkMGI0NmE2MzUzYzc3MzI3MmFlMTg1MDhlMTRjZWQwODQ0ZGVmY2M4NjIyNDI5MzBmYjY1Njk5NDJjY2IxGjAYBgNVBAsMEUFBQSBDZXJ0aWZpY2F0aW9uMRMwEQYDVQQKDApBcHBsZSBJbmMuMRMwEQYDVQQIDApDYWxpZm9ybmlhMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE4WCSy+25Jk7HzfgvQ9y4aHEcxOcAqR2doluYB2LA587wcepzijZSLRorgTWcqQ94U0fLSeYTfs5YKiu0NcYrexgjDnZXhx17+md+VmJNtKAeDKdKLuHOha1iMj9zUHMNo4IBRzCCAUMwDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCBPAwFAYDVR0lBA0wCwYJKoZIhvdjZAQYMBQGCiqGSIb3Y2QICgIEBjI2LjUuMjAUBgoqhkiG92NkCAoDBAYyNi41LjIwFAYKKoZIhvdjZAgKAQQGMjYuNS4yMBUGCiqGSIb3Y2QICQQEB0o1MTZtQVAwGwYKKoZIhvdjZAgNAgQNRnVsbCBTZWN1cml0eTARBgoqhkiG92NkCA0BBAMCAQAwEQYKKoZIhvdjZAgNAwQDAgEAMBgGCiqGSIb3Y2QICQEEClQ2SFhMSlQ3OTIwJwYKKoZIhvdjZAgJAgQZMDAwMDYwMzQtMDAwODUwQTAzQzY4MDAxQzAuBgoqhkiG92NkCAsBBCB66ubBEWifWJdUqfMZdFTKmGPT8heorZx7NMv0yQqXTjAKBggqhkjOPQQDAwNoADBlAjEA+VPvhSsuoPq6OQoS9MrJs957CBQLwNvfT9GTC+WK41JYvQw1RK22zfR+zfVpBGdcAjBSPnP3G00zdETLZrIzQmMexa60s5v4ueD9AvqbJKWFu1htNEBriTU0dLMqo1uphU4=",
+          "MIICSTCCAc6gAwIBAgIUcDHgQKbmtGvw4vNNVWqEVNBCXnEwCgYIKoZIzj0EAwMwUTEtMCsGA1UEAwwkQXBwbGUgRW50ZXJwcmlzZSBBdHRlc3RhdGlvbiBSb290IENBMRMwEQYDVQQKDApBcHBsZSBJbmMuMQswCQYDVQQGEwJVUzAeFw0yMjAyMTYxOTA0NDdaFw0zMjAyMTgwMDAwMDBaMFIxLjAsBgNVBAMMJUFwcGxlIEVudGVycHJpc2UgQXR0ZXN0YXRpb24gU3ViIENBIDExEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAELD9SH+vxdWuu2MC0jxWqWJfNlaTsLjcHWrPrwRLtfuu7fIZvq1BJsghG0hUye+eFaREW6wU9vcGmW/7hOs8kKxSW+6V3hIa0B65xDMmpIJ4zxFrnWYND9OYi1Mlo4Pogo2YwZDASBgNVHRMBAf8ECDAGAQH/AgEAMB8GA1UdIwQYMBaAFPNqTQGd8muBpV5du+UIbVbi+d66MB0GA1UdDgQWBBQZhdvPeG+lsso4rGZLRFp1YWRlZjAOBgNVHQ8BAf8EBAMCAQYwCgYIKoZIzj0EAwMDaQAwZgIxAJv1w5ut/tCAppUampokf1wrBuf9qYaysozgmQ7Le1Kwna8K99nPwJjYkOS/I1jb+gIxAPKMQ31xweb9ODxmRVpshvxeQLf6/j8yIc7HNemhg7PAYxrfQRFkUUFLcpAdowjtGA=="
+        ],
+        "mda_serial": "T6HXLJT792",
+        "mda_udid": "00006034-000850A03C68001C",
+        "mda_os_version": "26.5.2",
+        "mda_sepos_version": "26.5.2"
+      },
+      {
+        "provider_id": "46be7df0-3bd6-4884-a537-890fe9f714f1",
+        "chip_name": "Apple M2 Ultra",
+        "hardware_model": "Mac14,14",
+        "serial_number": "YV9H10WTYF",
+        "trust_level": "self_signed",
+        "status": "untrusted",
+        "memory_gb": 192,
+        "gpu_cores": 76,
+        "models": [
+          "qwen3.6-35b-a3b-vl-mtp-mxfp8",
+          "gemma-4-26b-qat-4bit",
+          "gpt-oss-20b"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "60587424F5399FC05D957DF05B4D2F65543462495C77AEF520F790FBB57CB212",
+        "se_public_key": "9KNlENYlNVhdw5BdLAAsmGotHN4Z0lWAO3S8lZx9S76GC5CF1wVpNs6m93+21Tb8NSKgau7sIbcER7bzlmanPg==",
+        "mdm_verified": false,
+        "acme_verified": false,
+        "mda_verified": false
+      }
+    ]
+  },
+  "2026-11-24": {
+    "providers": [
+      {
+        "provider_id": "80fe409d-3998-4c7f-971f-13586f3d4aa5",
+        "chip_name": "Apple M2 Max",
+        "hardware_model": "Mac14,6",
+        "trust_level": "self_signed",
+        "status": "online",
+        "verification": {
+          "observed_at": 1795569364,
+          "app_attest": {
+            "state": "verified",
+            "verified_at": 1795569097,
+            "expires_at": 1795569628
+          },
+          "legacy": {
+            "state": "pending"
+          }
+        },
+        "app_attest_authorized": true,
+        "authorization_expires_at": 1795569628,
+        "memory_gb": 64,
+        "gpu_cores": 38,
+        "models": [
+          "qwen3.6-35b-a3b-vl-mtp-mxfp8"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "9A91EDBD140271063B786C536C3AC26E58AD0E7C7F07601D5628E11CD66CC339",
+        "se_public_key": "yZXHkZU+gmi/rO4iHQquiNt39BR02QnEjn5614RlmRTucUeKsfmnXnDHzZGj/SQEsl8eIxq9IRAqvpl0iM+XAA==",
+        "mdm_verified": false,
+        "acme_verified": false,
+        "mda_verified": false
+      },
+      {
+        "provider_id": "76763058-fdc8-4141-ad47-bb9e797c66b5",
+        "chip_name": "Apple M5 Max",
+        "hardware_model": "Mac17,6",
+        "trust_level": "self_signed",
+        "status": "online",
+        "verification": {
+          "observed_at": 1795569364,
+          "app_attest": {
+            "state": "verified",
+            "verified_at": 1795569146,
+            "expires_at": 1795569628
+          },
+          "legacy": {
+            "state": "pending"
+          }
+        },
+        "app_attest_authorized": true,
+        "authorization_expires_at": 1795569628,
+        "memory_gb": 64,
+        "gpu_cores": 40,
+        "models": [
+          "qwen3.5-35b-a3b"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "5EAEB3CC027918533FF72C50AB959F1FB19B7F17D4D1B9C09329E5C04E193F54",
+        "se_public_key": "dFltIGvki1rS7kUy3WXsPdaYlwfrSGbXg0SYd6OPzobxsGH2PmqhDLedndQGPs8JPegPJ8HuqsPxVbYG1rjoYg==",
+        "mdm_verified": false,
+        "acme_verified": false,
+        "mda_verified": false
+      },
+      {
+        "provider_id": "b8ace857-1aa4-4c09-b2e2-94487479db73",
+        "chip_name": "Apple M2 Max",
+        "hardware_model": "Mac14,5",
+        "trust_level": "self_signed",
+        "status": "online",
+        "verification": {
+          "observed_at": 1795569364,
+          "app_attest": {
+            "state": "verified",
+            "verified_at": 1795569108,
+            "expires_at": 1795569628
+          },
+          "legacy": {
+            "state": "pending"
+          }
+        },
+        "app_attest_authorized": true,
+        "authorization_expires_at": 1795569628,
+        "memory_gb": 64,
+        "gpu_cores": 38,
+        "models": [
+          "gpt-oss-20b",
+          "gemma-4-26b-qat-4bit",
+          "qwen3.6-35b-a3b-vl-mtp-mxfp8"
+        ],
+        "secure_enclave": true,
+        "sip_enabled": true,
+        "secure_boot_enabled": true,
+        "authenticated_root_enabled": true,
+        "system_volume_hash": "9A91EDBD140271063B786C536C3AC26E58AD0E7C7F07601D5628E11CD66CC339",
+        "se_public_key": "Y2EryzlibDOzsty6nHCwrS7jzQm7LdqosfYa4RKdIONeJBSRd5haWF1Dscmchwlzf9WpwLYe5Gfv4Mu4uyNatw==",
+        "mdm_verified": false,
+        "acme_verified": false,
+        "mda_verified": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "file_sha256": "ebc09b46eb539872f18d33a42557d6b824236148ad5da244823e6fdcd8fb6e5d",
+  "der_sha256": "ccf59ef8fcb3017d97f8b5fa6fa90e7a3f9283f76b55ac6cf6eda8b8b949f05b",
+  "subject": "CN=Apple Enterprise Attestation Root CA, O=Apple Inc., C=US",
+  "copied_from": "https://github.com/amiller/devproof-audits-guide/blob/d51ad2eb5ea1225114922c8384ad09f11410a8d7/case-studies/darkbloom-d-inference/verify/apple-root.pem",
+  "original_source": "Extracted from Layr-Labs/d-inference coordinator/internal/attestation/mda.go (CHAIN-OF-TRUST.md, 'Reproducing this analysis'). Apple does not list this root on apple.com/certificateauthority; it was not fetched from Apple.",
+  "copied_utc": "2026-11-24",
+  "note": "Trust anchor for Darkbloom provider MDA certificate chains. Loading raises if the stored certificate does not hash to der_sha256."
+}

@@ -44,3 +44,13 @@ def test_weekly_catalog_and_daily_reference_have_distinct_deadlines():
         {"source_id": "catalog", "kind": "model_catalog", "status": "observed", "observed_at": old},
         {"source_id": "policy", "kind": "pcr_publication", "status": "observed", "observed_at": old}]}
     assert [r["source_id"] for r in check(FRESH, references=refs, now=NOW)] == ["policy"]
+
+
+def test_darkbloom_missing_stale_and_failed_runs_are_findings():
+    assert [r["kind"] for r in check(FRESH, darkbloom={}, now=NOW)] == ["stale_darkbloom_collection"]
+    old = {"run_id": "r", "finished_at": "2026-10-12T12:00:00Z", "status": "ok", "failed": []}
+    assert [r["kind"] for r in check(FRESH, darkbloom={"last_run": old}, now=NOW)] == ["stale_darkbloom_collection"]
+    failed = old | {"finished_at": NOW.isoformat(), "status": "failed", "failed": ["bundle"]}
+    assert check(FRESH, darkbloom={"last_run": failed}, now=NOW) == [
+        {"kind": "darkbloom_collection_failed", "run_id": "r", "failed": ["bundle"]}]
+    assert check(FRESH, darkbloom={"last_run": failed | {"status": "ok", "failed": []}}, now=NOW) == []
