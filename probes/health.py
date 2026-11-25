@@ -7,7 +7,8 @@ import sys
 from .review_queue import parse, utcnow, ROOT
 
 
-def check(data, queue=None, *, references=None, now=None, max_age_hours=26, queue_age_hours=4):
+def check(data, queue=None, *, references=None, darkbloom=None, now=None, max_age_hours=26,
+          queue_age_hours=4):
     now = now or utcnow()
     findings = []
     def age(value):
@@ -56,6 +57,12 @@ def check(data, queue=None, *, references=None, now=None, max_age_hours=26, queu
         for name, agrees in references.get("mirror_agreements", {}).items():
             if agrees is False:
                 findings.append({"kind": "reference_mirror_mismatch", "mirror": name})
+    if darkbloom is not None:
+        last = darkbloom.get("last_run") or {}
+        if stale(last.get("finished_at"), max_age_hours):
+            findings.append({"kind": "stale_darkbloom_collection", "last": last.get("finished_at")})
+        if last and last["status"] != "ok":
+            findings.append({"kind": "darkbloom_collection_failed", "run_id": last["run_id"], "failed": last["failed"]})
     return findings
 
 
@@ -64,13 +71,15 @@ def main(argv=None):
     ap.add_argument("--latest", type=Path, default=ROOT / "data/latest.json")
     ap.add_argument("--queue-status", type=Path)
     ap.add_argument("--references", type=Path, default=ROOT / "data/references/latest.json")
+    ap.add_argument("--darkbloom", type=Path, default=ROOT / "data/darkbloom/latest.json")
     args = ap.parse_args(argv)
     data = json.loads(args.latest.read_text()) if args.latest.exists() else None
     queue = None
     if args.queue_status:
         queue = json.loads(args.queue_status.read_text()) if args.queue_status.exists() else {}
     references = json.loads(args.references.read_text()) if args.references.exists() else {}
-    findings = check(data, queue, references=references)
+    darkbloom = json.loads(args.darkbloom.read_text()) if args.darkbloom.exists() else {}
+    findings = check(data, queue, references=references, darkbloom=darkbloom)
     print(json.dumps({"checked_at": utcnow().isoformat(), "findings": findings}, indent=2))
     return 1 if findings else 0
 

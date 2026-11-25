@@ -1,0 +1,45 @@
+{
+  "runs": [
+    {
+      "coordinator": {
+        "/.well-known/attestation": 404,
+        "/health": 200,
+        "/v1/coordinator/attestation": 404,
+        "/v1/encryption-key": 200
+      },
+      "failed": [],
+      "providers": {
+        "app_attest_authorized": {
+          "false": 134,
+          "true": 989
+        },
+        "by_status": {
+          "online": 983,
+          "serving": 138,
+          "untrusted": 2
+        },
+        "by_trust_level": {
+          "none": 2,
+          "self_signed": 1121
+        },
+        "mda_binding": {
+          "not_checked:no_chain_published": 1123
+        },
+        "providers": 1123
+      },
+      "release": {
+        "bundle_hash": "5504e83af400eb42276bdd675081aca9369c56cef728685679e3e02bf53b6e39",
+        "verification": {
+          "binary_hash_matches": true,
+          "bundle_hash_matches": true,
+          "code_signature": "not_checked",
+          "metallib_hash_matches": true
+        },
+        "version": "0.10.17"
+      },
+      "run_id": "20261125T013403.835650Z-6ab9cabe544a",
+      "started_at": "2026-11-25T01:34:03.835727Z",
+      "status": "ok"
+    }
+  ]
+}

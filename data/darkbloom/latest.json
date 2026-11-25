@@ -1,0 +1,133 @@
+{
+  "coordinator": {
+    "/.well-known/attestation": {
+      "body_sha256": "b16e15764b8bc06c5c3f9f19bc8b99fa48e7894aa5a6ccdad65da49bbf564793",
+      "bytes": 19,
+      "fetched_at": "2026-11-25T01:34:28.387477Z",
+      "http_status": 404,
+      "raw_ref": "data/observations/evidence/sha256/528979910315b868ce90e8ab7bfbf9f3d871a8df542d045ef7c138a095f8b435.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    },
+    "/health": {
+      "body_sha256": "b54304ee7b1d846aa321cdcbca32f3ef125d62518ab48e943f2edcef8f8f9990",
+      "bytes": 147,
+      "fetched_at": "2026-11-25T01:34:28.551664Z",
+      "http_status": 200,
+      "raw_ref": "data/observations/evidence/sha256/532d9d4677e52709194470bee21431b5908ef96fb05e505327928717da434e0a.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    },
+    "/v1/coordinator/attestation": {
+      "body_sha256": "219c3a59ed4c1924746ef72438eecdda59d4660166f7cfbf92b8b40b7c0685c3",
+      "bytes": 146,
+      "fetched_at": "2026-11-25T01:34:28.206912Z",
+      "http_status": 404,
+      "raw_ref": "data/observations/evidence/sha256/42f5fefa3c5068909b8c628555430e216ab86319ecc989b0af8b1da2c4b0c4d6.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    },
+    "/v1/encryption-key": {
+      "body_sha256": "28cd2f47cf511dabd49bc655e6f292609c165637d193c7d2e185cfdc81df065a",
+      "bytes": 117,
+      "fetched_at": "2026-11-25T01:34:28.739293Z",
+      "http_status": 200,
+      "raw_ref": "data/observations/evidence/sha256/a24d351ad13df1b6a9e140ce6b1e5673683f47e0c3dd89dc22855676a051151d.json.gz",
+      "status": "ok",
+      "verification": "not_checked"
+    }
+  },
+  "last_run": {
+    "failed": [],
+    "finished_at": "2026-11-25T01:34:28.911498Z",
+    "run_id": "20261125T013403.835650Z-6ab9cabe544a",
+    "started_at": "2026-11-25T01:34:03.835727Z",
+    "status": "ok"
+  },
+  "meaning": "Coordinator-published feed and release metadata as observed; the MDA binding is our check, everything marked not_checked was not verified.",
+  "providers": {
+    "app_attest_authorized": {
+      "false": 134,
+      "true": 989
+    },
+    "app_attest_state": {
+      "pending": 129,
+      "revoked": 2,
+      "unsupported": 3,
+      "verified": 989
+    },
+    "by_chip": {
+      "Apple M1 Max": 148,
+      "Apple M1 Pro": 14,
+      "Apple M1 Ultra": 32,
+      "Apple M2": 2,
+      "Apple M2 Max": 57,
+      "Apple M2 Pro": 11,
+      "Apple M2 Ultra": 29,
+      "Apple M3 Max": 38,
+      "Apple M3 Pro": 7,
+      "Apple M3 Ultra": 128,
+      "Apple M4": 37,
+      "Apple M4 Max": 116,
+      "Apple M4 Pro": 126,
+      "Apple M5": 12,
+      "Apple M5 Max": 155,
+      "Apple M5 Pro": 87,
+      "Apple M5 Ultra": 118,
+      "Apple M6": 6
+    },
+    "by_model": {
+      "EigenLabs/Qwen3.8-27B-4bit-mtp": 148,
+      "EigenLabs/Ternary-Bonsai-2-9B-MLX-2bit": 147,
+      "Qwen3.5-9B": 288,
+      "gemma-4-26b-8bit": 10,
+      "gemma-4-26b-qat-4bit": 587,
+      "glm-5.3-flash": 10,
+      "gpt-oss-20b": 424,
+      "mimo-v2.6-flash-mopd": 27,
+      "nvidia-nemotron-3.5-lightning": 160,
+      "nvidia-nemotron-3.5-super": 52,
+      "qwen3.5-35b-a3b": 263,
+      "qwen3.6-35b-a3b-vl-mtp-mxfp8": 535,
+      "ternary-bonsai-2-27b": 219
+    },
+    "by_status": {
+      "online": 983,
+      "serving": 138,
+      "untrusted": 2
+    },
+    "by_trust_level": {
+      "none": 2,
+      "self_signed": 1121
+    },
+    "legacy_state": {
+      "expired": 3,
+      "pending": 1118,
+      "revoked": 2
+    },
+    "mda_binding": {
+      "not_checked:no_chain_published": 1123
+    },
+    "mda_verified": {
+      "false": 1123
+    },
+    "providers": 1123
+  },
+  "release": {
+    "active": true,
+    "binary_hash": "3b8df3b1c41c803a8c29a050a298037e7b65e899518b4ffbdd3055ef3c9354f7",
+    "bundle_hash": "5504e83af400eb42276bdd675081aca9369c56cef728685679e3e02bf53b6e39",
+    "created_at": "2026-11-21T20:39:41.613741Z",
+    "history_entry": true,
+    "metallib_hash": "5b97893cc20e6e9651edf3284d970488af9a9bdd64820231e95fee760eec70ac",
+    "url": "https://pub-3d1cb668259340eeb2276e1d375c846d.r2.dev/releases/v0.10.17/artifacts/5504e83af400eb42276bdd675081aca9369c56cef728685679e3e02bf53b6e39/darkbloom-bundle-macos-arm64.tar.gz",
+    "verification": {
+      "binary_hash_matches": true,
+      "bundle_hash_matches": true,
+      "code_signature": "not_checked",
+      "metallib_hash_matches": true
+    },
+    "version": "0.10.17"
+  },
+  "releases_seen": 1
+}
