@@ -139,11 +139,11 @@ def test_fetch_failure_exits_nonzero_after_writing_captures(monkeypatch, tmp_pat
     assert run["release"] is None and not (tmp_path / "darkbloom/releases.jsonl").exists()
     assert run["providers"]["providers"] == 3
     assert run["providers"]["mda_binding"] == {"not_checked:no_chain_published": 3}
-    raw = json.loads((tmp_path / run["steps"]["providers"]["raw_ref"]).read_text())
+    raw = dbp.load(run["steps"]["providers"]["raw_ref"], tmp_path)
     assert raw["body"] == FIXTURE["2026-11-24"] and raw["status"] == 200
     wk = run["coordinator"]["/.well-known/attestation"]
     assert wk["status"] == "ok" and wk["http_status"] == 404 and wk["verification"] == "not_checked"
-    assert json.loads((tmp_path / wk["raw_ref"]).read_text())["body"] == "404 page not found\n"
+    assert dbp.load(wk["raw_ref"], tmp_path)["body"] == "404 page not found\n"
     latest = json.loads((tmp_path / "darkbloom/latest.json").read_text())
     assert latest["last_run"]["status"] == "failed" and latest["release"] is None
 
@@ -158,7 +158,7 @@ def test_non_200_feed_is_a_fetch_failure_with_body_archived(monkeypatch, tmp_pat
     run = json.loads(next((tmp_path / "darkbloom/runs").glob("*.json")).read_text())
     assert run["failed"] == ["providers", "release"]
     assert run["steps"]["providers"]["http_status"] == 503 and run["providers"] is None
-    assert json.loads((tmp_path / run["steps"]["providers"]["raw_ref"]).read_text())["body"] == {"error": "down"}
+    assert dbp.load(run["steps"]["providers"]["raw_ref"], tmp_path)["body"] == {"error": "down"}
 
 
 def test_bundle_dropped_mid_stream_fails_run_but_keeps_release_and_feed(monkeypatch, tmp_path):

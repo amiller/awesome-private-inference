@@ -9,6 +9,7 @@ timeline.json are regenerated from the run records.
 """
 from __future__ import annotations
 
+import gzip
 import hashlib
 import json
 import sys
@@ -37,10 +38,16 @@ class HTTPStatusError(ValueError):
 
 
 def store(value) -> str:
-    path = EVIDENCE / f"{digest(value)}.json"
+    path = EVIDENCE / f"{digest(value)}.json.gz"
     if not path.exists():
-        _write_new(path, value)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("xb") as f:
+            f.write(gzip.compress(json.dumps(value, sort_keys=True, separators=(",", ":")).encode(), mtime=0))
     return str(path.relative_to(ROOT))
+
+
+def load(ref: str, root: Path = ROOT):
+    return json.loads(gzip.decompress((root / ref).read_bytes()))
 
 
 def fetch(path: str) -> dict:
