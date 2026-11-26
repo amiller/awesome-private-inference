@@ -1,0 +1,348 @@
+{
+  "captured_at": "2026-11-26T22:21:03Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "event_log_replayed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tcb_current": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_boot_config": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tee_debug_disabled": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tee_hardware_config": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "chutes-tee",
+      "details": {
+        "fleet": [
+          {
+            "advisory_ids": null,
+            "gpu_attested": null,
+            "gpu_reason": null,
+            "instance_id": "8e8196b8-fbfc-4075-8c86-0900ee9d010b",
+            "matched_rows": null,
+            "mrtd": null,
+            "no_match_reason": null,
+            "outcome": "unavailable",
+            "reason": "RuntimeError: HTTP 502 on /instances/8e8196b8-fbfc-4075-8c86-0900ee9d010b/evidence?nonce=0aa266b92a8b7efbb6bd10b61ce2b32af2457ba1b5c0be2bd2ff521855355139: {\"detail\":\"Attestation service unavailable. The instance's attestation proxy could not be reached or returned an error; the instance may have gone away, so refr",
+            "rtmr0": null,
+            "rtmr1": null,
+            "rtmr2": null,
+            "rtmr3": null,
+            "tcb_status": null
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": true,
+            "gpu_reason": null,
+            "instance_id": "44fc199e-eb67-4801-a40b-281bedd9a5cc",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "h200"
+                ],
+                "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
+                "version": "1.5.0"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "verified_core",
+            "reason": null,
+            "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+            "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+            "tcb_status": "UpToDate"
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": true,
+            "gpu_reason": null,
+            "instance_id": "a42996b9-95ab-47cd-9899-aa19b2529faa",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "h200"
+                ],
+                "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
+                "version": "1.4.1"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "verified_core",
+            "reason": null,
+            "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+            "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+            "tcb_status": "UpToDate"
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": true,
+            "gpu_reason": null,
+            "instance_id": "c0bb5723-ea84-4c79-866a-3fb743b34f8e",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "h200"
+                ],
+                "fingerprint": "44b568b6d16d07520c7a29cd489fe0df89765986ea255a27498f7c7c6b62306e",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xh200 [10.2.1, numa-124c-1128g-nvsw-node1]",
+                "version": "1.4.1"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "verified_core",
+            "reason": null,
+            "rtmr0": "5b509103a3bf3c10dbf27a7da030a3d7ba93a81c0c8844de20e5dfee77611644a39cc7236313e9d0a99a8a8a703bbfc9",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+            "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+            "tcb_status": "UpToDate"
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": true,
+            "gpu_reason": null,
+            "instance_id": "f5833603-04f4-45cf-bc6e-d80f5cd9e6d1",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "h200"
+                ],
+                "fingerprint": "5cc3777496109c1c989989a4ab8b2034b1f9e7bafa647632d26b29e9fb3429de",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
+                "version": "1.5.0"
+              },
+              {
+                "expected_gpus": [
+                  "h200"
+                ],
+                "fingerprint": "96441690f18f413c47ab190b94f3f0bba61345750f5cb5811659ef6abcdc482c",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xh200 [10.2.1, numa-188c-1128g-nvsw-node1]",
+                "version": "1.5.0"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "verified_core",
+            "reason": null,
+            "rtmr0": "ba81dbf034d968fd4be0975c031cbe6451295d63cb509cd857372fc915dada1b24fc4e1b0486db4a276a9efb49d415e6",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+            "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+            "tcb_status": "UpToDate"
+          }
+        ],
+        "fleet_all_instances_pass": false,
+        "fleet_size": 5,
+        "fleet_size_semantics": "count of instances listed by /e2e/instances at verification time; the response carries no pagination or total-fleet field, so a listing cap cannot be ruled out from the response alone",
+        "golden_publication": {
+          "canonical_json_sha256": "14e783eabea22e427bcf30a9a3f1471f0a4a15c16f64cfac7f3b7c1241254dde",
+          "captured_at": "2026-11-26T22:20:30Z",
+          "rows": 45,
+          "url": "https://api.chutes.ai/servers/tee/measurements"
+        },
+        "golden_set_sha256": "14e783eabea22e427bcf30a9a3f1471f0a4a15c16f64cfac7f3b7c1241254dde",
+        "gpu_evidence_count": 0,
+        "instance_id": "8e8196b8-fbfc-4075-8c86-0900ee9d010b",
+        "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+        "raw_evidence_ref": "observations/evidence/sha256/420c61937f4dd51612a8d1091690341b8b92c32867eecd8871cbf8846909aeae.json",
+        "raw_evidence_sha256": "420c61937f4dd51612a8d1091690341b8b92c32867eecd8871cbf8846909aeae",
+        "shape": "chutes-tee",
+        "verification_reason": "instance(s) failed appraisal or evidence unavailable \u2014 8e8196b8-fbfc-4075-8c86-0900ee9d010b: RuntimeError: HTTP 502 on /instances/8e8196b8-fbfc-4075-8c86-0900ee9d010b/evidence?nonce=0aa266b92a8b7efbb6bd10b61ce2b32af2457ba1b5c0be2bd2ff521855355139: {\"detail\":\"Attestation service unavailable. The instance's attestation proxy could not be reached or returned an error; the instance may have gone away, so refr",
+        "verification_status": "rejected"
+      },
+      "error": null,
+      "latency_s": 33.46,
+      "model": "GLM-5.1-TEE",
+      "provider": "chutes",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": null,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": null,
+        "event_log_replayed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": true,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": null,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": false,
+        "sessions_publish_evidence_digests": null,
+        "tcb_current": null,
+        "tdx_verified": true,
+        "tee_boot_config": null,
+        "tee_debug_disabled": null,
+        "tee_hardware_config": null,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "8e8196b8-fbfc-4075-8c86-0900ee9d010b",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "ImUJznAVnmcL34dWouS4HUatZfAOaDcUjYwSgdGdbRqojwNKVGybQcKMIImg6Hd+H6BUVAHEteirE6KD2Nilb1cKoZO0nFccXviF+lsnkLgM3Ks6YWBxHOxzTXZq5RdnnqJNqOa0EsMkN/h2l2JeRVrLm1afM+Vx+yUWo0bHPEijzIltDiSCwbasjUqq6jJO+1qTNheCeKt2u3BqCjMESOpkiIx/KWkwtrmaXzs4S/d9uAZ+QvqEmHqH4hS1vihbMpKerIUUvrE4nfA3byK5V1yFrtZOEoENW2kaJHABcas6XcpVXYajIIKwcFEdf9u9aEub3vR8S1nEjuk1K1YF13UJz1AVwIHHrqsJ01SDrbBr+NALYHZ1r4ah75GDcAA/LvKAK5g4nDqY7meq8hRkBOqB2Dme8WmjXdk30WDCVrErRWBPfkYwGkjO+lzLIbWf4GGHLHBt32egsZekuRgYOztKnDk3hGuXrfGwLuBPw/g4QdObCJFsMujLjld0BWQBLLFJIPSqDWwnkXZLviY8+aep2ZU0XqWcHzFo6TVyjttrSlZMpGaVOuRkOBIZ48NO2XeElwRB+IrPl/zMWGkOFTKE/TejroxoBqY7SimQwUhrXaaAagkdk0MPlHQt95tMmhqu07xZYuxWRzaPskpq73w0qXnBGGu+V6UzwfExl5sWxPxBN4DDvWA+0lNxvQug9Vyx6avDo2JOcuYSWcrEd3ZvKeBKWfxjh4GNa2pHTZoYDdt2qDub4BaC1pwGdWoV0wxPQ3uEb1s29ZZFJCiSUnSjtaQ2tkVCIlZGpLNo+RCtRgtmLthXhtaXXLGG6QM7g3xutcS3JRZL+mK0oRccT+pBKzWNK+VKcYsuhsvKsGDKXEWufEeO6zgclsiRUwU/PmNGzQO80qklpmZEs1VKO2oCQFtSxLFldIuUcSpJZhhwWFpSEruzcFJw8SSJeWwXDOJdO3KPW/K8UGABMSFn9VJ3+XW5nFBLQ2ddIWS3pjdc3mt7XrtZSsOXMptKadmSznIIw3dWasGmBzp/rmt6NOyq2xMkjdIT4uYgJ7Kp2xYlk/jIcEsr6PsM48bKMkSWTyEBf1JD2ZibtrJW1lw7EdO8DGOqYDOjkaM2/gxp79pHEnNYbkxsOPHMQ5WaHiViVlC9hIJMPbA+N9c3tkerpddEegGcmAiuE4Q8u2cas4c49TNsEIKVerQnJTxjbUiOZsXFPsSkNAYVbewGfFjN+pwPtyVtACcb4YmsbYqLYRdKZdSBiYIcPXqaW6QbMVgwe1JfO4seq8Ykx/ZB/oBE/nEIS8MQmEMunXSlgeJ5W4DJB1KGa/xBKTI+9zqhhUadRoQ0ftUHeWREevKPdokvPIexf5Q/RTVezGBBEnIFmLx+GSVxFeFcHpEe//QFEPuTeGyVMhFFe4uT75SgdkJdfPDGdFM4cCBel8yW6Dmz+JiiUYswJ5PHMWm7yhQbhixeoYie0JJndEyBj5tqWIAccZWlXmw+x3Ja5zpGfAYoTUWDDfsnNGM1IGp1roOL+RBM7bUgATI5ZfzHYJcaW2+PgozqCJEL46rlhNpb6bVXe+k=",
+      "valid": false,
+      "verified_at": "2026-11-26T22:21:03Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "13d168a87f23139171820ba774f9587fe594046c5033b2e1f03d62aff64bc9cb",
+    "raw_evidence_ref": "observations/evidence/sha256/420c61937f4dd51612a8d1091690341b8b92c32867eecd8871cbf8846909aeae.json",
+    "raw_evidence_sha256": "420c61937f4dd51612a8d1091690341b8b92c32867eecd8871cbf8846909aeae",
+    "raw_evidence_status": "stored_separately",
+    "stored_report_sha256": "b7660f1c17f70ece2643760012904f948833d0d889c558109b59a1499779e138"
+  },
+  "identities": [
+    {
+      "component_id": "chutes/instance",
+      "kind": "mrtd",
+      "model_scope": "GLM-5.1-TEE",
+      "value": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
+    }
+  ],
+  "identity_trust": "untrusted_report",
+  "instance_id": "8e8196b8-fbfc-4075-8c86-0900ee9d010b",
+  "legacy": false,
+  "model": "GLM-5.1-TEE",
+  "observation_id": "20261126T222016.982256Z-2bc1656587bb/b235d29e0611a47a6545e128",
+  "observer": "daily-probe",
+  "outcome": "rejected",
+  "policy_revision": "unknown",
+  "provider": "chutes",
+  "reason": "unspecified",
+  "reason_detail": "instance(s) failed appraisal or evidence unavailable \u2014 8e8196b8-fbfc-4075-8c86-0900ee9d010b: RuntimeError: HTTP 502 on /instances/8e8196b8-fbfc-4075-8c86-0900ee9d010b/evidence?nonce=0aa266b92a8b7efbb6bd10b61ce2b32af2457ba1b5c0be2bd2ff521855355139: {\"detail\":\"Attestation service unavailable. The instance's attestation proxy could not be reached or returned an error; the instance may have gone away, so refr",
+  "route_id": "chutes/GLM-5.1-TEE",
+  "run_id": "20261126T222016.982256Z-2bc1656587bb",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "fbbacae251f699bc9a1a890984a310fb9a92ccb1c36db56182431c7bac964975"
+}
