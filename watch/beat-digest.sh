@@ -59,6 +59,19 @@ with pathlib.Path(sys.argv[1]).open("w") as out:
     if len(stat) > 100000:
         out.write("\nTRUNCATED at 100000 characters.\n")
 PYTHON
+# X posts (tee_inference, private_inference) pushed hourly from Andrew's laptop browser collector.
+X_POSTS="$ARCHIVE/evidence/$RUN_ID-x-posts.txt"
+python3 - "$X_POSTS" <<'PYTHON'
+import datetime, json, pathlib, sys
+rows = {r["id"]: r for f in sorted((pathlib.Path.home() / ".local/share/beat-x").glob("*.json")) for r in json.loads(f.read_text())}
+since = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(hours=26)).strftime("%Y-%m-%dT%H:%M:%S")
+recent = sorted((r for r in rows.values() if r["created_utc"] >= since), key=lambda r: r["created_utc"])
+with pathlib.Path(sys.argv[1]).open("w") as out:
+    out.write(f"X POSTS created >= {since}Z ({len(recent)}), from searches tee_inference and private_inference. "
+              f"Newest post collected: {max(r['created_utc'] for r in rows.values())}. Columns: created | likes | replies | link | text\n")
+    for r in recent:
+        out.write(f"{r['created_utc']} | {r['score']} | {r['num_comments']} | https://x.com/i/status/{r['id']} | {r['title'][:300]}\n")
+PYTHON
 BASE_TOOLS="Read,Write,Glob,Grep,WebSearch,WebFetch"
 TOOLS="$BASE_TOOLS"
 MODE_FLAGS=()
@@ -75,10 +88,10 @@ else
 fi
 # --tools restricts the base tool inventory as well as the approval allowlist;
 # no generic network shell or MCP discovery tools are exposed by the dry runner.
-python3 - "$DATE" "$ARCHIVE" "$HISTORY" "$MODE" "$THREAD_ACTIVITY" "$REFERENCE_ACTIVITY" "$FIRMWARE" "$PUBLISH_INSTRUCTION" "$PROMPT" <<'PYTHON' |
+python3 - "$DATE" "$ARCHIVE" "$HISTORY" "$MODE" "$THREAD_ACTIVITY" "$REFERENCE_ACTIVITY" "$FIRMWARE" "$X_POSTS" "$PUBLISH_INSTRUCTION" "$PROMPT" <<'PYTHON' |
 import pathlib, sys
 text = pathlib.Path(sys.argv[-1]).read_text()
-for key, value in zip(["DATE", "ARCHIVE", "HISTORY", "MODE", "THREAD_ACTIVITY", "REFERENCE_ACTIVITY", "FIRMWARE", "PUBLISH_INSTRUCTION"], sys.argv[1:-1]):
+for key, value in zip(["DATE", "ARCHIVE", "HISTORY", "MODE", "THREAD_ACTIVITY", "REFERENCE_ACTIVITY", "FIRMWARE", "X_POSTS", "PUBLISH_INSTRUCTION"], sys.argv[1:-1]):
     text = text.replace("{{" + key + "}}", value)
 print(text)
 PYTHON
