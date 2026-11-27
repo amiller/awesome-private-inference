@@ -1,0 +1,349 @@
+{
+  "captured_at": "2026-11-27T21:59:02Z",
+  "checks": {
+    "attested_serving_enforced": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "backend_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_nonempty": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "catalog_serves": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "client_nonce_supported": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "code_measurement_reproducible": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "compose_hash_committed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "event_log_replayed": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gateway_reference_audited": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "gpu_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "hardware_signature_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "hpke_pubkey_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "key_derives_to_address": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "measurement_matches_release": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "nonce_bound": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "os_image_archive_declares_production": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "prod_os_image": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "release_provenance_verified": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "report_data_binds_key": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "runtime_config_fully_attested": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "serving_code_attested": {
+      "outcome": "rejected",
+      "reason": "adapter_claim"
+    },
+    "sessions_publish_evidence_digests": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tcb_current": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tdx_verified": {
+      "outcome": "verified",
+      "reason": "adapter_claim"
+    },
+    "tee_boot_config": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tee_debug_disabled": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tee_hardware_config": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    },
+    "tls_pubkey_pinned": {
+      "outcome": "not_checked",
+      "reason": "adapter_not_evaluated"
+    }
+  },
+  "evidence": {
+    "adapter_report": {
+      "attestation_type": "chutes-tee",
+      "details": {
+        "fleet": [
+          {
+            "advisory_ids": [],
+            "gpu_attested": false,
+            "gpu_reason": null,
+            "instance_id": "2266bd25-a1da-4acf-8211-d2bcef2e4aee",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "pro_6000"
+                ],
+                "fingerprint": "58443435b208cd1f2da3984a692ffec6b621ce64bdf24267dcce1f6abe080483",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xpro_6000 [10.2.1, numa-124c-768g] (58443435b208)",
+                "version": "1.4.1"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "rejected",
+            "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+            "rtmr0": "bacb4abf7b19aba4a8307ebc7244706745de4fa627e669e7f06fd35c3303eea1903f58dc143d27b557da1a986e0e95f6",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "da23f73e0fddeb8128f706ecfbecbcf8cee34af7e4907d8fbc85e9b216acee27bf6cc3655eaf4d33cab76adea79fa153",
+            "rtmr3": "d9dc4c6079fb12a21ad2aa8e329d8bfa61aaa13d3ffd10a93a2c4e82f0e35efbf28f5cf3bed0c0c1b517a7c327a25226",
+            "tcb_status": "UpToDate"
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": false,
+            "gpu_reason": null,
+            "instance_id": "606f2385-7ddb-4a6a-a29a-06aaa8bcfac8",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "pro_6000"
+                ],
+                "fingerprint": "f682063b2d580002b98bc8860e575d71d0002c7e399e70d0f514b227ae57509b",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xpro_6000 [10.2.1, numa-204c-768g]",
+                "version": "1.5.0"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "rejected",
+            "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+            "rtmr0": "a5488b5f4cf1484da23001e013a5ad3ff177836bf2cfdbde55dacded21b3eece5de43d4c4a2d5279f8ed8d24b9e072d6",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+            "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+            "tcb_status": "UpToDate"
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": false,
+            "gpu_reason": null,
+            "instance_id": "a1c29b47-3f89-4904-807e-bcc0b7e8b076",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "pro_6000"
+                ],
+                "fingerprint": "58443435b208cd1f2da3984a692ffec6b621ce64bdf24267dcce1f6abe080483",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xpro_6000 [10.2.1, numa-124c-768g] (58443435b208)",
+                "version": "1.5.0"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "rejected",
+            "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+            "rtmr0": "bacb4abf7b19aba4a8307ebc7244706745de4fa627e669e7f06fd35c3303eea1903f58dc143d27b557da1a986e0e95f6",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+            "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+            "tcb_status": "UpToDate"
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": false,
+            "gpu_reason": null,
+            "instance_id": "9d1566cb-0b7d-4f0b-badc-89d957db1291",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "pro_6000"
+                ],
+                "fingerprint": "58443435b208cd1f2da3984a692ffec6b621ce64bdf24267dcce1f6abe080483",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xpro_6000 [10.2.1, numa-124c-768g] (58443435b208)",
+                "version": "1.5.0"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "rejected",
+            "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+            "rtmr0": "bacb4abf7b19aba4a8307ebc7244706745de4fa627e669e7f06fd35c3303eea1903f58dc143d27b557da1a986e0e95f6",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+            "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+            "tcb_status": "UpToDate"
+          },
+          {
+            "advisory_ids": [],
+            "gpu_attested": false,
+            "gpu_reason": null,
+            "instance_id": "2efd9556-9272-4730-9a5f-5ad43a96221c",
+            "matched_rows": [
+              {
+                "expected_gpus": [
+                  "pro_6000"
+                ],
+                "fingerprint": "58443435b208cd1f2da3984a692ffec6b621ce64bdf24267dcce1f6abe080483",
+                "gpu_count": 8,
+                "mrtd": "261CE538B435E2D0E85FC97E254BC99154C507B7A8E13D59B69F8532384F1D0BFAADFDDF3FCCC6E0A411203840BBEE8D",
+                "name": "8xpro_6000 [10.2.1, numa-124c-768g] (58443435b208)",
+                "version": "1.5.0"
+              }
+            ],
+            "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+            "no_match_reason": null,
+            "outcome": "rejected",
+            "reason": "gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+            "rtmr0": "bacb4abf7b19aba4a8307ebc7244706745de4fa627e669e7f06fd35c3303eea1903f58dc143d27b557da1a986e0e95f6",
+            "rtmr1": "d3a862ff47357f374fc72c7f02a480a13790d1805e24aaa8de1f03994256625ce0f593ae35ea8f0c24d09f7df36cb0ed",
+            "rtmr2": "e1de99043052f3e1ab5a4463d3310b5680e851631adf10e071b15cbd8b4d664ea435b0ec33e7f18e908dda60734056f7",
+            "rtmr3": "9617be835beac8c62093a9db424f015f3e12651235d0101c112729e7225b7a70836a184dee0b45f28cd190f1871afe6e",
+            "tcb_status": "UpToDate"
+          }
+        ],
+        "fleet_all_instances_pass": false,
+        "fleet_size": 5,
+        "fleet_size_semantics": "count of instances listed by /e2e/instances at verification time; the response carries no pagination or total-fleet field, so a listing cap cannot be ruled out from the response alone",
+        "golden_publication": {
+          "canonical_json_sha256": "14e783eabea22e427bcf30a9a3f1471f0a4a15c16f64cfac7f3b7c1241254dde",
+          "captured_at": "2026-11-27T21:57:45Z",
+          "rows": 45,
+          "url": "https://api.chutes.ai/servers/tee/measurements"
+        },
+        "golden_set_sha256": "14e783eabea22e427bcf30a9a3f1471f0a4a15c16f64cfac7f3b7c1241254dde",
+        "gpu_evidence_count": 1,
+        "instance_id": "2266bd25-a1da-4acf-8211-d2bcef2e4aee",
+        "mrtd": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d",
+        "raw_evidence_ref": "observations/evidence/sha256/0f9f5daa58be367a1101f2af033754669db304bb4abddcac036a2560bb0ad47b.json",
+        "raw_evidence_sha256": "0f9f5daa58be367a1101f2af033754669db304bb4abddcac036a2560bb0ad47b",
+        "shape": "chutes-tee",
+        "verification_reason": "instance(s) failed appraisal or evidence unavailable \u2014 2266bd25-a1da-4acf-8211-d2bcef2e4aee: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 606f2385-7ddb-4a6a-a29a-06aaa8bcfac8: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; a1c29b47-3f89-4904-807e-bcc0b7e8b076: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 9d1566cb-0b7d-4f0b-badc-89d957db1291: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 2efd9556-9272-4730-9a5f-5ad43a96221c: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+        "verification_status": "rejected"
+      },
+      "error": null,
+      "latency_s": 77.61,
+      "model": "gemma-4-31B-TEE",
+      "provider": "chutes",
+      "scorecard": {
+        "attested_serving_enforced": null,
+        "backend_attested": null,
+        "catalog_nonempty": null,
+        "catalog_serves": null,
+        "client_nonce_supported": null,
+        "code_measurement_reproducible": null,
+        "compose_hash_committed": null,
+        "event_log_replayed": null,
+        "gateway_reference_audited": null,
+        "gpu_attested": false,
+        "hardware_signature_verified": null,
+        "hpke_pubkey_attested": null,
+        "key_derives_to_address": null,
+        "measurement_matches_release": null,
+        "nonce_bound": true,
+        "os_image_archive_declares_production": null,
+        "prod_os_image": null,
+        "release_provenance_verified": null,
+        "report_data_binds_key": true,
+        "runtime_config_fully_attested": null,
+        "serving_code_attested": false,
+        "sessions_publish_evidence_digests": null,
+        "tcb_current": null,
+        "tdx_verified": true,
+        "tee_boot_config": null,
+        "tee_debug_disabled": null,
+        "tee_hardware_config": null,
+        "tls_pubkey_pinned": null
+      },
+      "signing_address": "2266bd25-a1da-4acf-8211-d2bcef2e4aee",
+      "signing_algo": "ecdsa",
+      "signing_public_key": "WYKnHCsM9yykvSiB/NcTrbSGlGHA87PJBWwONBo+ymB7ovhvHasd5cqUeXBkp5BFVlpJU9eTbkKyH8NRnpdMPlc9QgpaNoJyGquGy0iVsHMUeKgoyzEYNXM2+eRZ0RNMhAdjMNGptnEvXyq9gaOvCsA+GIUg4oC9veVZdpknjtYRtCxrkSldVTqLcvgsMyZs/gFBLDgV9BZbnNcDjWHGFsUQAluoB2YX80sgdhMK1aQ8tQi2KGQuKPxDv3wBT5icodEJw9gzmYZL5NkV1noc3XJqJ1UKC9a1dnaeWUQZ9zEKLBlRHFG1E6tXC8xJhyKiQPMbHIZhTaBdVXOxDyekW7rBHoQjaHSHEAJaSgqz13MdSHYtiuYBdBOQggRyKUcjDSabdWltoVpecwzMVbaMh8G6GelxOqGUb5WvMMDOTSY1hoy1P4uZc5NJI7VrdOOoSXvBggWZE2rLnVYZwDdkwLWFtPcWmgRgDBCFBCZ8fvZFxCDINDhu6fArG5YdIPQKFXQ8PEWk0ObEiBokJUm768uLbVpHCUsMTXK3xygtDYkquKpNUgUxscotBBGfuFShmSMQYxgg6GE+G6ovCMmztDNGf+OAXJkPrKU3eAAwlkV4h0C3HKBVZZMGzZS7CIRpkVc/+wxEXUwSxwJbN4FoE4kPxqAi/Iwy3Dlv7tiZX8rHfCVbkEC9pGRXz0Zqf4leujF75odXayGLF4eOhPdE58KQvzeGzhkKR8QjdgdzIdGEaZtCThAp3qxgBPhHLBJhJ+O6P8gdYdWoylEB4ExilfxftjiKlnN6awyh3AYk86kqc8RawMYu9BeWYjsixzqcp4iHTfaqUsIdhkjPR6BK9udjo6Ehasq26eeitEufWwy+x1hQ+lxz8/F46wmpjElbTOd4+3XJGVm6pIKpyhZXYGUdb5l6EOIUTfWpe0uOyUFmWwJ+bJUoUJWvMtYPXgm4ZMJWhyhK9rNpwQUx1IOlB9mhvNZWKoygarVlbAF0uEQcWKqifRs1y1FpsOtfJtFu8SuFYbAW/3PBzTwHgBwnmYgxiJKVRsyECexhFCB3FGB3HFo/x4SzW4LGRRJxoWu6tNVNCDdxIpxPKLyh7ZSITeBQhlpPmlk95ghJFsvFKekTeVdAXXmthSVQMBoDKsyQKTI1eQdY5heSA2SaIQC46uVnarDHQYycESaw7LJHISUEe1SLY/Aw/gZq91TLoDU2AOgLfrhZIowxfxdeBQsrutN4sDF/WNYKq4aq3Zq44QpHIYKVFQKULsykCZNOtQtGBCMWr3yz52YW25AOAmS6guGnUbJAE0efsLh9f9MU6LJBRZe8kDB2lIEAFzkF8mSKXuSQrUqfjpDDnEAVzBG01AwQPfAtbMjFLKycrLbB4kVe0hiMNyl7FYTFWUB+wUKIgVaH84isSylPFoQVPCKszokOtHy7EYwZOFKpZDU4XFMQXzKlYfN4beJoifBNCpEsgAsbRVFXIni9JQk8UJGcN2eESwqpPSQbHXU4poJOEMsOkIS1ccuUkxSFHnA6WYoV4zAfTUVc6KxJmAz5oy+LWJLmcvY5MM9j40T5XbsHD10=",
+      "valid": false,
+      "verified_at": "2026-11-27T21:59:02Z"
+    },
+    "adapter_report_ref": null,
+    "adapter_report_sha256": "6b59274a86099d8c553aac3ff05244b4ce8b5bd6a21ae0f0d36d9fbb0e7dcb53",
+    "raw_evidence_ref": "observations/evidence/sha256/0f9f5daa58be367a1101f2af033754669db304bb4abddcac036a2560bb0ad47b.json",
+    "raw_evidence_sha256": "0f9f5daa58be367a1101f2af033754669db304bb4abddcac036a2560bb0ad47b",
+    "raw_evidence_status": "stored_separately",
+    "stored_report_sha256": "2eb2fd252f6c3dfa706b5bb7d61999d011d3da24c08b8bedc099173dcc11f1e0"
+  },
+  "identities": [
+    {
+      "component_id": "chutes/instance",
+      "kind": "mrtd",
+      "model_scope": "gemma-4-31B-TEE",
+      "value": "261ce538b435e2d0e85fc97e254bc99154c507b7a8e13d59b69f8532384f1d0bfaadfddf3fccc6e0a411203840bbee8d"
+    }
+  ],
+  "identity_trust": "untrusted_report",
+  "instance_id": "2266bd25-a1da-4acf-8211-d2bcef2e4aee",
+  "legacy": false,
+  "model": "gemma-4-31B-TEE",
+  "observation_id": "20261127T215728.585581Z-1a3a955cf2b5/bec27c693c1b775b82d4b459",
+  "observer": "daily-probe",
+  "outcome": "rejected",
+  "policy_revision": "unknown",
+  "provider": "chutes",
+  "reason": "unspecified",
+  "reason_detail": "instance(s) failed appraisal or evidence unavailable \u2014 2266bd25-a1da-4acf-8211-d2bcef2e4aee: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 606f2385-7ddb-4a6a-a29a-06aaa8bcfac8: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; a1c29b47-3f89-4904-807e-bcc0b7e8b076: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 9d1566cb-0b7d-4f0b-badc-89d957db1291: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8; 2efd9556-9272-4730-9a5f-5ad43a96221c: gpu_appraisal_rejected: gpu_count_mismatch: 1 verified per-GPU tokens vs gpu_count 8",
+  "route_id": "chutes/gemma-4-31B-TEE",
+  "run_id": "20261127T215728.585581Z-1a3a955cf2b5",
+  "schema_version": "1",
+  "source_snapshot": null,
+  "verification_scope": "current_adapter_result",
+  "verifier_revision": "fbbacae251f699bc9a1a890984a310fb9a92ccb1c36db56182431c7bac964975"
+}
