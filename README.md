@@ -2,6 +2,64 @@
 
 **Compare private inference routes and explore the reference values behind them.**
 
+This README is also a loosely curated index of private-inference links, from the
+point of view of what a client can check: who can read a prompt, what evidence
+limits that, and who can change the software. The observatory itself is described
+[below](#the-observatory).
+
+## Index
+
+### Providers and routes
+- **NEAR AI** — [route notes](providers/near-ai.md) · [cloud-api](https://github.com/nearai/cloud-api) (gateway) · [inference-proxy](https://github.com/nearai/inference-proxy) (decrypts in the model machine) · [cvm-compose-files](https://github.com/nearai/cvm-compose-files) (deployed configs, digest-pinned)
+- **Phala / RedPill** — [Phala](providers/phala.md) · [RedPill](providers/redpill.md) · [private-ai-gateway](https://github.com/Dstack-TEE/private-ai-gateway) (open-source gateway; releases list values to pin) · [dstack](https://github.com/Dstack-TEE/dstack)
+- **Venice** — [route notes](providers/venice.md) · [api-docs](https://github.com/veniceai/api-docs). A reseller: its own unattested API sits in front of Phala's and NEAR AI's enclaves
+- **Tinfoil** — [route notes](providers/tinfoil.md) · [tinfoilsh](https://github.com/tinfoilsh)
+- **Chutes** — [route notes](providers/chutes.md)
+- **Maple** — [route notes](providers/maple.md)
+- **Privatemode** — [route notes](providers/privatemode.md)
+- **Confidential AI** — [route notes](providers/confidential-ai.md)
+- **Private Inference** — [route notes](providers/privateinference.md)
+- **Resellers in front of attested gateways** — Venice, [NanoGPT](https://nano-gpt.com) (no route notes yet), [OpenRouter](https://openrouter.ai/provider/venice) (lists TEE providers among others; delisted Phala in November 2026)
+
+### Verifiers and clients
+- [teep](https://github.com/13rac1/teep) — verifying proxy for NEAR AI, Phala, Venice, Chutes, Tinfoil and NanoGPT, with per-provider [attestation gap analyses](https://github.com/13rac1/teep/tree/main/docs/attestation_gaps)
+- [venice-e2ee](https://github.com/elkimek/venice-e2ee) — Venice E2EE client library
+- [venice-e2ee-proxy](https://github.com/jooray/venice-e2ee-proxy) — local proxy built on venice-e2ee
+- [teemoon](https://github.com/teemoonai) — mobile client for NEAR AI with published image reviews
+- [near-verifier](https://github.com/brave/near-verifier) (Brave) · [nearai-cloud-verifier](https://github.com/nearai/nearai-cloud-verifier) (NEAR AI)
+- [Verifier directory](https://amiller.github.io/awesome-private-inference/verifiers.html) — every third-party verifying client we found, graded per provider at a pinned commit
+
+### Audits and reviews
+[docs/audits.md](docs/audits.md) lists each public review with its version, scope and what later happened inside that scope:
+- [zkSecurity's dstack audit](https://reports.zksecurity.xyz/reports/phala-dstack/) (2025) — the one public firm audit of this stack
+- [Bluethroat Labs, CVE-2026-22696](https://bluethroatlabs.com/reveries/cve-2026-22696-fetching-collateral-is-not-enough) — dcap-qvl quote verification
+- [teemoon audits](https://github.com/teemoonai/audits) — per-digest reviews of NEAR AI images, including [what they missed](https://github.com/teemoonai/audits/blob/main/incidents/2026-11-06-nearai-sglang.md)
+- [DevProof case studies](https://github.com/amiller/devproof-audits-guide) — volunteer audits of Venice, Tinfoil, Phala, NEAR AI, Chutes and others
+- Volunteer and automated reviews by Juraj Bednar, teep, KTibow and David Gobaud
+
+### Reports, responses and incidents
+- [docs/disclosure-timeline.md](docs/disclosure-timeline.md) — each report and its first response, plus incidents and fixes ([data](data/disclosure-timeline.json))
+- Incident reports: [NEAR AI, SGLang](https://near.ai/blog/security-incident-report-sglang-vulnerability) · [Phala, November](https://phala.com/posts/phala-november-detailed-incident-report) · [Phala, guest-agent](https://phala.com/posts/2026-10-post-mortem-dstack-guest-agent-vulnerability)
+
+### Protocols and specifications
+- [docs/e2ee-formats.md](docs/e2ee-formats.md) — how the NEAR AI, Phala and Venice E2EE formats descend from one scheme, and when each bound the reply key
+- [ACI/1](https://github.com/Dstack-TEE/private-ai-gateway/blob/main/spec/aci.md) and [E2EE v2](https://github.com/Dstack-TEE/private-ai-gateway/blob/main/spec/e2ee-v2.md) (Phala) · [NEAR AI E2EE v3](https://github.com/nearai/cloud-api/pull/1296) · [EHBP](https://github.com/tinfoilsh/encrypted-http-body-protocol) (Tinfoil) · [Oblivious HTTP, RFC 9458](https://www.rfc-editor.org/rfc/rfc9458)
+
+### Independent research and commentary
+- [KTibow](https://kendell.dev/) — "wrapper" posts tracing where provider traffic goes ([Venice](https://kendell.dev/blog/venicewrapper/), [Phala](https://kendell.dev/blog/phalawrapper/)) and the [Venice E2EE write-up](https://kendell.dev/_astro/_e2ee-interception.3SX09GMt.md)
+- [Mike Perry on Tinfoil direct billing](https://github.com/tinfoilsh/cvmimage/issues/337)
+- [Cloud Security Alliance on the NEAR AI breach](https://labs.cloudsecurityalliance.org/research/csa-research-note-near-ai-sglang-confidential-inference-brea/)
+- [TEE.fail](https://tee.fail/) — physical memory-bus attacks on TDX and SEV-SNP
+
+### Observatories and data
+- [Private Inference Observatory](https://amiller.github.io/awesome-private-inference/) — this repository's dated route assessments and reference values
+- [provider-mappings](https://github.com/KTibow/provider-mappings) — which API host serves which model, synced hourly
+
+### DevProof background
+- [ERC-733 draft](https://draftv4.erc733.org) · [devproof-apps-guide](https://github.com/amiller/devproof-apps-guide) · [devproof-audits-guide](https://github.com/amiller/devproof-audits-guide)
+
+## The observatory
+
 For a particular client, model and request path: **who can read protected data,
 what evidence limits that access, and who can change the software the client
 accepts?** We retain observations, audit what they cover, and critically test the

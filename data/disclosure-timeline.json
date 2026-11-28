@@ -1,0 +1,312 @@
+{
+ "schema_version": 1,
+ "curated_at": "2026-11-27",
+ "scope": "Reports of flaws in private-inference providers and clients, the responses to them, incidents, and protocol changes. A response points at the report it answers. Dates are UTC days. No entry rates a provider; each links the primary source.",
+ "kinds": {
+  "report": "a flaw reported or published by someone other than the party responsible",
+  "response": "the responsible party's first public reply or action on a report",
+  "fix": "a shipped or proposed change that closes or narrows a flaw",
+  "incident": "a provider-reported compromise, with its exposure window",
+  "launch": "a format or feature entering service",
+  "audit": "a security review with a stated scope"
+ },
+ "events": [
+  {
+   "id": "zksecurity-dstack",
+   "date": "2025-05-26",
+   "end": "2025-06-13",
+   "lane": "audits",
+   "kind": "audit",
+   "actor": "zkSecurity",
+   "title": "dstack audit at be9d0476 (guest-agent, ra-tls, dstack-util, image recipes); KMS, gateway, VMM and dcap-qvl out of scope",
+   "url": "https://reports.zksecurity.xyz/reports/phala-dstack/"
+  },
+  {
+   "id": "near-e2ee-v1",
+   "date": "2025-12-23",
+   "lane": "near",
+   "kind": "launch",
+   "actor": "NEAR AI",
+   "title": "Field-level E2EE in vllm-proxy; reply key sent as a plain X-Client-Pub-Key header",
+   "url": "https://github.com/nearai/vllm-proxy/pull/7"
+  },
+  {
+   "id": "venice-e2ee-launch",
+   "date": "2026-03-11",
+   "lane": "venice",
+   "kind": "launch",
+   "actor": "Venice",
+   "title": "TEE/E2EE guide: the same scheme with X-Venice-TEE-* headers, signing algo always ecdsa",
+   "url": "https://github.com/veniceai/api-docs/commit/b7b1e26"
+  },
+  {
+   "id": "near-573",
+   "date": "2026-05-06",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "Andrew Miller",
+   "target": "NEAR AI",
+   "title": "Silent model substitution in the model catalog",
+   "url": "https://github.com/nearai/cloud-api/issues/573"
+  },
+  {
+   "id": "near-573-reply",
+   "date": "2026-05-11",
+   "lane": "near",
+   "kind": "response",
+   "answers": "near-573",
+   "actor": "NEAR AI",
+   "title": "Maintainer reply; closed 2026-06-09",
+   "url": "https://github.com/nearai/cloud-api/issues/573"
+  },
+  {
+   "id": "devproof-venice",
+   "date": "2026-04-24",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "Andrew Miller",
+   "target": "Venice",
+   "title": "DevProof audit: agent skills teach no attestation checks; concluded the gateway path was not a re-encryption backdoor (missed the reply key)",
+   "url": "https://github.com/amiller/devproof-audits-guide/blob/main/case-studies/venice-private-inference/DEVPROOF-REPORT.md"
+  },
+  {
+   "id": "devproof-venice-shared",
+   "date": "2026-08-10",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "Andrew Miller",
+   "target": "Venice",
+   "title": "Report linked in a public thread tagging @VeniceAI",
+   "url": "https://x.com/socrates1024/status/2086936800258388123"
+  },
+  {
+   "id": "venice-skills-fix",
+   "date": "2026-09-30",
+   "lane": "venice",
+   "kind": "response",
+   "answers": "devproof-venice",
+   "actor": "Venice",
+   "title": "Skills synced with the live API: protocol named, headers listed, attestation fetch added",
+   "url": "https://github.com/veniceai/skills/commit/c02361f"
+  },
+  {
+   "id": "jooray-audit",
+   "date": "2026-08-06",
+   "lane": "audits",
+   "kind": "audit",
+   "actor": "Juraj Bednar",
+   "title": "Automated (Qwen) audit of venice-e2ee-proxy and the Venice/Phala stack; found nothing breaking E2EE confidentiality",
+   "url": "https://github.com/jooray/venice-e2ee-proxy/blob/main/docs/SECURITY-AUDIT.md"
+  },
+  {
+   "id": "teemoon-engine-open",
+   "date": "2026-08-03",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "teemoon",
+   "target": "NEAR AI",
+   "title": "Published review: SGLang engines run with no API key; /configure_logging unauthenticated (CRITICAL)",
+   "url": "https://github.com/teemoonai/audits/tree/main/images/docker.io/nearaidev/sglang"
+  },
+  {
+   "id": "near-1061",
+   "date": "2026-09-14",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "hanakannzashi",
+   "target": "NEAR AI",
+   "title": "E2EE: the client response key is not authenticated in the request",
+   "url": "https://github.com/nearai/cloud-api/issues/1061"
+  },
+  {
+   "id": "phala-guest-agent",
+   "date": "2026-10-08",
+   "end": "2026-10-12",
+   "lane": "phala",
+   "kind": "incident",
+   "actor": "Phala",
+   "title": "dstack guest-agent /logs passed unvalidated container names to Docker; env vars of some apps read. Fixed in dstack v0.6.1/v0.5.12 on 10-13; post-mortem 10-19",
+   "url": "https://phala.com/posts/2026-10-post-mortem-dstack-guest-agent-vulnerability"
+  },
+  {
+   "id": "near-312",
+   "date": "2026-10-22",
+   "lane": "near",
+   "kind": "fix",
+   "answers": "near-1061",
+   "actor": "NEAR AI",
+   "title": "Proposal to bind the response public key to encrypted requests",
+   "url": "https://github.com/nearai/inference-proxy/issues/312"
+  },
+  {
+   "id": "near-v3",
+   "date": "2026-10-28",
+   "lane": "near",
+   "kind": "fix",
+   "answers": "near-1061",
+   "actor": "NEAR AI",
+   "title": "E2EE v3 binds the reply key; v1/v2 still accepted",
+   "url": "https://github.com/nearai/cloud-api/pull/1296"
+  },
+  {
+   "id": "phala-gpu3",
+   "date": "2026-10-21",
+   "end": "2026-11-01",
+   "lane": "phala",
+   "kind": "incident",
+   "actor": "Phala",
+   "title": "DeepSeek V4 Flash 0731 machine (OpenRouter route) compromised; development OS image, attestation not checked by the gateway",
+   "url": "https://phala.com/posts/phala-november-detailed-incident-report"
+  },
+  {
+   "id": "phala-kms-root",
+   "date": "2026-11-05",
+   "lane": "phala",
+   "kind": "incident",
+   "actor": "Phala",
+   "title": "Legacy KMS root key handed to an attacker-controlled replica; rotation does not revoke the copy",
+   "url": "https://phala.com/posts/phala-november-detailed-incident-report"
+  },
+  {
+   "id": "phala-gateway-onchain-kms",
+   "date": "2026-11-06",
+   "lane": "phala",
+   "kind": "fix",
+   "actor": "Phala",
+   "title": "AI gateway moves to a new app on the on-chain KMS, not announced in advance",
+   "url": "https://github.com/Dstack-TEE/private-ai-gateway/releases/tag/gateway-prod-2026-11-05"
+  },
+  {
+   "id": "near-sglang",
+   "date": "2026-11-06",
+   "end": "2026-11-08",
+   "lane": "near",
+   "kind": "incident",
+   "actor": "NEAR AI",
+   "title": "Unauthenticated SGLang /update_weights_from_tensor reached through the proxy's OHTTP SSRF; report 11-09",
+   "url": "https://near.ai/blog/security-incident-report-sglang-vulnerability"
+  },
+  {
+   "id": "near-ohttp-fix",
+   "date": "2026-11-08",
+   "lane": "near",
+   "kind": "fix",
+   "actor": "NEAR AI",
+   "title": "Proxy restricts OHTTP inner requests to inference routes",
+   "url": "https://github.com/nearai/inference-proxy/commit/7924418"
+  },
+  {
+   "id": "near-engine-fix",
+   "date": "2026-11-09",
+   "lane": "near",
+   "kind": "fix",
+   "actor": "NEAR AI",
+   "title": "Engine image v13: admin auth and credential redaction (names the attack chain)",
+   "url": "https://github.com/nearai/cvm-compose-files/commit/ab7eeee"
+  },
+  {
+   "id": "phala-prelim",
+   "date": "2026-11-10",
+   "lane": "phala",
+   "kind": "response",
+   "actor": "Phala",
+   "title": "Preliminary incident report; detailed report 11-23",
+   "url": "https://phala.com/posts/phala-november-preliminary-incident-report"
+  },
+  {
+   "id": "venice-874",
+   "date": "2026-11-15",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "Austin-Williams",
+   "target": "Venice",
+   "title": "Signed receipt hashes match neither the request nor the response bytes (Phala route)",
+   "url": "https://github.com/veniceai/api-docs/issues/874"
+  },
+  {
+   "id": "near-85",
+   "date": "2026-11-15",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "Andrew Miller",
+   "target": "NEAR AI",
+   "title": "compose-manager's attested log does not establish what runs",
+   "url": "https://github.com/nearai/compose-manager/issues/85"
+  },
+  {
+   "id": "ktibow",
+   "date": "2026-11-25",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "KTibow",
+   "target": "Venice",
+   "title": "Venice's server can swap the unbound reply key, read replies and inject messages (with video, 26 Nov)",
+   "url": "https://kendell.dev/blog/venicewrapper/"
+  },
+  {
+   "id": "ktibow-phala",
+   "date": "2026-11-25",
+   "lane": "reports",
+   "kind": "report",
+   "actor": "KTibow",
+   "target": "Phala",
+   "title": "Phala is a Chutes+ wrapper: most catalog models are served by other providers",
+   "url": "https://kendell.dev/blog/phalawrapper/"
+  },
+  {
+   "id": "venice-docs",
+   "date": "2026-11-26",
+   "lane": "venice",
+   "kind": "response",
+   "answers": "ktibow",
+   "actor": "Venice",
+   "title": "Documentation wording only (#937, #938, #939); format unchanged",
+   "url": "https://github.com/veniceai/api-docs/pull/939"
+  },
+  {
+   "id": "gobaud",
+   "date": "2026-11-26",
+   "lane": "audits",
+   "kind": "audit",
+   "actor": "David Gobaud",
+   "title": "AI-agent audits of Venice, Phala, NEAR AI and others, scored against Tinfoil",
+   "url": "https://gist.github.com/dgobaud/ecfbff2a9a14d4ad43062845bc0beee7"
+  },
+  {
+   "id": "phala-v21",
+   "date": "2026-11-27",
+   "lane": "phala",
+   "kind": "fix",
+   "answers": "ktibow",
+   "actor": "Phala",
+   "title": "E2EE v2.1 proposed: binds the client key, with a migration guide for APIs in front of the gateway",
+   "url": "https://github.com/Dstack-TEE/private-ai-gateway/pull/657"
+  },
+  {
+   "id": "near-retire",
+   "date": "2026-11-27",
+   "lane": "near",
+   "kind": "fix",
+   "answers": "ktibow",
+   "actor": "NEAR AI",
+   "title": "Proposal to retire E2EE v1/v2 (HTTP 400)",
+   "url": "https://github.com/nearai/inference-proxy/pull/394"
+  },
+  {
+   "id": "jooray-7",
+   "date": "2026-11-27",
+   "lane": "audits",
+   "kind": "response",
+   "answers": "ktibow",
+   "actor": "Juraj Bednar",
+   "title": "venice-e2ee-proxy README: the reply key is not bound to the client",
+   "url": "https://github.com/jooray/venice-e2ee-proxy/issues/7"
+  }
+ ],
+ "open_without_reply": [
+  "near-1061",
+  "venice-874",
+  "near-85"
+ ],
+ "note": "'answers' links a response to a report only where the responder cites it or the change targets exactly that flaw; NEAR's 11-09 engine fix followed its incident and cites no report."
+}
